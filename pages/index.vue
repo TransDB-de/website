@@ -15,14 +15,14 @@ export default {
 </script>
 
 <style>
-.nuxt-content.homepage {
+.homepage {
     padding: 20px;
     max-width: 750px;
     text-align: center;
     position: initial;
 }
 
-.nuxt-content.homepage a[href="/submit"] {
+.homepage a[href="/submit"] {
     font-weight: 900;
     text-decoration: none;
     font-size: 18px;
@@ -32,7 +32,7 @@ export default {
     background: linear-gradient(90deg, #3eb9e9, #dd788b);
 }
 
-.nuxt-content.homepage p {
+.homepage p {
     margin: 20px 0 50px 0;
 }
 </style>
