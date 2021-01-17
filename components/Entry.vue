@@ -1,0 +1,140 @@
+<template>
+
+    <div class="entry">
+    
+        <h1>{{ entry.name }}</h1>
+        
+        <p class="inline-content">
+            <b>{{ entry.firstName }} {{ entry.lastName }}</b>
+            <span v-if="entry.type === 'therapist'">{{ subjectMapping[entry.meta.subject] }}</span>
+            <span v-else>{{ typeMapping[entry.type] }}</span>
+        </p>
+        
+        <p>
+            <a :href="`mailto:${entry.email}`">
+                <mail-icon />{{ entry.email }}
+            </a>
+            
+            <a v-if="entry.website" :href="entry.website" target="_blank">
+                <globe-icon />{{ website }}
+            </a>
+            
+            <span v-if="entry.telephone">
+                <phone-icon />{{ entry.telephone }}
+            </span>
+            
+            <a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
+                <map-icon />{{ address }}
+            </a>
+        </p>
+        
+        <p v-if="entry.meta.offers">
+            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers">{{ offerMapping[offer] }}</Tag>
+        </p>
+        
+        <p v-if="entry.meta.attributes">
+            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes">{{ attributeMapping[attr] }}</Tag>
+        </p>
+        
+        <p v-if="entry.meta.specials">
+            <b>Besonderheiten:</b>{{ entry.meta.specials }}
+        </p>
+        
+        <p v-if="entry.distance">
+            <span>
+                <navigation-icon></navigation-icon><b>{{ Math.round(entry.distance) }} km</b>
+            </span>
+        </p>
+        
+    </div>
+    
+</template>
+
+<script>
+import Tag from "@/components/utils/Tag";
+import EntryMixin from "@/mixins/entry";
+import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon } from "vue-feather-icons";
+
+export default {
+    name: "FullEntry",
+    components: {Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon},
+    mixins: [EntryMixin],
+    props: {
+        entry: Object
+    },
+    computed: {
+        address: function () {
+            return `${this.entry.address.street} ${this.entry.address.house}, ${this.entry.address.plz} ${this.entry.address.city}`;
+        },
+        website: function () {
+            return new URL(this.entry.website).host;
+        }
+    }
+}
+</script>
+
+<style scoped>
+
+.entry {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.entry > h1 {
+    font-size: 26px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.entry > p {
+    font-size: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+.entry > p:last-child {
+    margin-bottom: 5px;
+}
+
+.entry > p > span:not(.tag), .entry > p > a {
+    color: #2d3c46;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.entry > p > span.tag {
+    margin-right: 5px;
+}
+
+.entry > p > span:last-child, .entry > p > span.tag:last-child {
+    margin-right: 0;
+}
+
+.entry > p > b {
+    margin-right: 5px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.entry > p.inline-content > span {
+    margin-left: 5px;
+}
+
+.entry > p > span .feather, .entry > p > a .feather {
+    margin-right: 5px;
+    height: 18px;
+    width: 18px;
+}
+
+.entry > p > a:hover {
+    text-decoration: underline solid rgba(51, 68, 80, 0.7);
+}
+</style>
