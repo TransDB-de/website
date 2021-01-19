@@ -24,14 +24,15 @@ export default {
     components: {SearchFilter, Entry},
     data() {
         return {
-            entries: []
+            entries: [],
+            locationName: null
         }
     },
     watchQuery: ["location", "lat", "long", "type"],
     async asyncData({ $axios, query }) {
         
         let res = await $axios.$get("entries", { params: query  });
-        return { entries: res }
+        return { entries: res.entries, locationName: res.locationName }
         
     },
     methods: {
