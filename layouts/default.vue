@@ -58,6 +58,7 @@ html {
     --color-red-accent: #ac4256;
     --color-grey: #888;
     --color-grey-accent: #777;
+    --image-background: url("/banner.jpg");
 }
 
 body {
