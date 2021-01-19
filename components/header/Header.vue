@@ -6,8 +6,6 @@
     
             <h1 @click="reload">TransDB.de</h1>
             
-            <span class="spacer"></span>
-    
             <nav :class="{ expand }">
                 <nuxt-link to="/">Startseite</nuxt-link>
                 <nuxt-link to="/search">Suche</nuxt-link>
@@ -131,7 +129,8 @@ export default {
 }
 
 .header > .navbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     width: 100%;
     color: white;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
@@ -164,6 +163,7 @@ export default {
 }
 
 .header > .navbar > h1 {
+    grid-column: 1;
     margin: 0;
     font-size: 24px;
     padding: 10px;
@@ -175,6 +175,7 @@ export default {
 }
 
 .header > .navbar > nav {
+    grid-column: 3;
     display: flex;
 }
 
