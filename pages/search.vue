@@ -6,7 +6,7 @@
         
         <div class="entry-container">
             
-            <Entry v-for="entry of entries" :entry="entry"></Entry>
+            <Entry v-for="entry of entries" :entry="entry" :key="entry._id"></Entry>
             
             <h3 v-if="entries.length < 1">Leider sind unter deinem Filter keine Einträge vorhanden</h3>
             

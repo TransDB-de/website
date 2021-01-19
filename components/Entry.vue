@@ -29,11 +29,11 @@
         </p>
         
         <p v-if="entry.meta.offers">
-            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers">{{ offerMapping[offer] }}</Tag>
+            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers" :key="offer">{{ offerMapping[offer] }}</Tag>
         </p>
         
         <p v-if="entry.meta.attributes">
-            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes">{{ attributeMapping[attr] }}</Tag>
+            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes" :key="attr">{{ attributeMapping[attr] }}</Tag>
         </p>
         
         <p v-if="entry.meta.specials">
