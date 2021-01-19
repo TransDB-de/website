@@ -1,0 +1,24 @@
+name: Build Site
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout Repo
+
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+
+      - run: npm install
+        name: Install Dependencies
+
+      - run: npm run build
+        name: Build Site
