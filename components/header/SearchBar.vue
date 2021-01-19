@@ -22,7 +22,7 @@ export default {
     components: {Button, MapPinIcon},
     data() {
         return {
-            isMobile: Boolean
+            isMobile: false
         }
     },
     props: {
@@ -32,6 +32,8 @@ export default {
     },
     mounted() {
         window.addEventListener("resize", this.resized);
+
+        this.resized();
     },
 
     methods: {
