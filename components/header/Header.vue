@@ -102,6 +102,19 @@ export default {
 
 .header.hide {
     height: 56px;
+    animation-name: hide-shaow;
+    animation-delay: 0.4s;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hide-shadow {
+    0% {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 9px rgba(0, 0, 0, 0);
+    }
 }
 
 .header > h1, .header > h2, .header > .search-bar {
@@ -148,14 +161,14 @@ export default {
     background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
     /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);*/
     animation-name: show-shadow;
-    animation-duration: 0s;
-    animation-delay: 0.3s;
+    animation-duration: 0.8s;
+    animation-delay: 0.4s;
     animation-fill-mode: forwards;
 }
 
 @keyframes show-shadow {
     0% {
-        box-shadow: none;
+        box-shadow: 0 0 9px rgba(0, 0, 0, 0);
     }
     100% {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
