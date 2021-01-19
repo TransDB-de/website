@@ -57,9 +57,9 @@ export default {
                 this.isMobile = true;
             } else {
                 this.isMobile = false;
+            }
+
         }
-        
-    }
         
     }
 }
@@ -71,12 +71,17 @@ export default {
     background-color: white;
     border-radius: 4px;
     padding: 5px;
-    display: flex;
+    display: grid;
+    width: calc(100% - 80px);
+    max-width: 650px;
+    min-width: min(240px, 100vw);
+    grid-template-columns: 1fr auto;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar > button {
     transition: 0.2s ease all;
+    width: fit-content;
 }
 
 .search-bar > input {
@@ -85,8 +90,8 @@ export default {
     margin: 0;
     font-size: 18px;
     outline: 0;
-    width: 320px;
-    padding-left: 10px;
+    padding: 0px 10px;
+    min-width: 0;
     font-family: 'Poppins', sans-serif;
     color: #334450;
 }
@@ -105,9 +110,9 @@ export default {
     .hide-on-mobile {
         display: none;
     }
-    
-    .search-bar > input {
-        width: 200px;
+
+    .search-bar {
+        max-width: 400px;
     }
     
 }
