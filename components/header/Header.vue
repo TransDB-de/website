@@ -25,7 +25,7 @@
         
         <h2 ref="subtitle">Deine Anlaufstelle für Transgender-Unterstützung</h2>
         
-        <SearchBar ref="searchbar" placeholder="Suche nach Postleitzahl oder Ort" @search="search"></SearchBar>
+        <SearchBar ref="searchbar" placeholder="Suche nach Postleitzahl oder Ort" mobilePlaceholder="Suche nach PLZ oder Ort" @search="search"></SearchBar>
         
     </div>
     
