@@ -91,7 +91,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(90deg, #3eb9e9, #dd788b);
+    background: var(--image-background) top / 150vw 325px fixed;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     padding: 40px 0 0 0;
     height: 325px;
@@ -153,13 +153,12 @@ export default {
 }
 
 .header > .navbar.background {
-    background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
+    background: var(--image-background) top / 150vw 325px fixed;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header.hide > .navbar {
-    background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
-    /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);*/
+    background: var(--image-background) top / 150vw 325px fixed;
     animation-name: show-shadow;
     animation-duration: 0.8s;
     animation-delay: 0.4s;
