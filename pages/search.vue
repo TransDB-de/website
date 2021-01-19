@@ -58,12 +58,11 @@ export default {
 <style>
 .search-container {
     padding: 20px;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: minmax(auto, 1fr) auto 1fr;
 }
 
 .search-container > .entry-container {
-    margin-left: 20px;
+    margin: 0px 20px;
 }
 </style>
