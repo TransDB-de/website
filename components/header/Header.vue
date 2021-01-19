@@ -170,10 +170,6 @@ export default {
     cursor: pointer;
 }
 
-.header > .navbar > .spacer {
-    flex-grow: 1;
-}
-
 .header > .navbar > nav {
     grid-column: 3;
     display: flex;
