@@ -22,7 +22,8 @@ export default {
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
-        "~/plugins/auth-redirect.js"
+        "~/plugins/auth-redirect.js",
+        "~/plugins/ackee.client.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -48,5 +49,16 @@ export default {
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
+    },
+
+    // Env config for plugins
+    env: {
+        // Ackee tracking configuration (https://github.com/bdrtsky/nuxt-ackee)
+        ackee: {
+            server: 'https://analytics.hamsterlabs.de',
+            domainId: '84fbbfc3-ebc7-4faf-bf7c-018d1d0d2bd0',
+            ignoreLocalhost: false, // ONLY FOR DEBUG! Set to true in production.
+            detailed: true
+        }
     }
 }
