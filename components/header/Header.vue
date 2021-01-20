@@ -216,6 +216,11 @@ export default {
     width: 100%;
 }
 
+.header > .navbar  .nuxt-link-exact-active:after {
+    opacity: 1;
+    width: 70%;
+}
+
 .mobile {
     display: none;
     padding: 0 10px;

@@ -14,14 +14,14 @@
             <option value="logopedics">Logopäd*in</option>
         </select>
         
-        <input name="name" v-if="type" :placeholder="namePlaceholderDescriptions[type]" type="text" required />
+        <input name="name" v-if="type" :placeholder="namePlaceholderDescriptions[type]" type="text" required minlength="1" maxlength="50" />
         
         <h2>Adresse</h2>
         
         <input name="city" type="text" placeholder="Stadt / Ort" required />
-        <input name="plz" type="number" placeholder="Postleitzahl" required />
+        <input name="plz" type="text" placeholder="Postleitzahl" required />
         <input name="street" type="text" placeholder="Straße" required />
-        <input name="house" type="text" placeholder="Hausnummer" required />
+        <input name="house" type="text" placeholder="Hausnummer" required minlength="1" maxlength="10" />
         
         <h2>Ansprechpartner</h2>
         
@@ -31,8 +31,8 @@
         <h2>Kontaktdaten</h2>
         
         <input name="email" type="email" placeholder="E-Mail Adresse" required />
-        <input name="telephone" type="text" placeholder="Telefonnummer" />
-        <input name="website" type="url" placeholder="Webseite" />
+        <input name="telephone" type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" />
+        <input name="website" type="url" placeholder="Webseite" minlength="3" maxlength="500" />
         
         <div v-if="type === 'group'">
         
