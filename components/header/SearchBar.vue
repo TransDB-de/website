@@ -2,7 +2,7 @@
     
     <div :class="{ 'search-bar': true, hide: hide }" >
     
-        <input type="text" :placeholder="placeholder" @keypress.enter="search" :value="this.$route.query.location" />
+        <input type="text" :placeholder="isMobile ? mobilePlaceholder : placeholder" @keypress.enter="search" :value="this.$route.query.location" />
         
         <Button light @click="distanceSearch">
             <map-pin-icon></map-pin-icon>
@@ -20,15 +20,27 @@ import {MapPinIcon} from "vue-feather-icons";
 export default {
     name: "SearchBar",
     components: {Button, MapPinIcon},
+    data() {
+        return {
+            isMobile: false
+        }
+    },
     props: {
         placeholder: String,
+        mobilePlaceholder: String,
         hide: Boolean
     },
+    mounted() {
+        window.addEventListener("resize", this.resized);
+
+        this.resized();
+    },
+
     methods: {
         
         search: function(event) {
             
-            if(event.target.value.length < 2) return;
+            if (event.target.value.length < 2) return;
             
             this.$emit("search", { location: event.target.value });
         },
@@ -39,6 +51,16 @@ export default {
                 this.$emit("search", { lat: pos.coords.latitude, long: pos.coords.longitude });
             });
             
+        },
+
+        resized() {
+
+            if (window.innerWidth < 720) {
+                this.isMobile = true;
+            } else {
+                this.isMobile = false;
+            }
+
         }
         
     }
@@ -51,12 +73,17 @@ export default {
     background-color: white;
     border-radius: 4px;
     padding: 5px;
-    display: flex;
+    display: grid;
+    width: calc(100% - 80px);
+    max-width: 650px;
+    min-width: min(240px, 100vw);
+    grid-template-columns: 1fr auto;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-bar > button {
     transition: 0.2s ease all;
+    width: fit-content;
 }
 
 .search-bar > input {
@@ -65,8 +92,8 @@ export default {
     margin: 0;
     font-size: 18px;
     outline: 0;
-    width: 320px;
-    padding-left: 10px;
+    padding: 0px 10px;
+    min-width: 0;
     font-family: 'Poppins', sans-serif;
     color: #334450;
 }
@@ -85,9 +112,9 @@ export default {
     .hide-on-mobile {
         display: none;
     }
-    
-    .search-bar > input {
-        width: 200px;
+
+    .search-bar {
+        max-width: 400px;
     }
     
 }

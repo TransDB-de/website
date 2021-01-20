@@ -6,8 +6,6 @@
     
             <h1 @click="reload">TransDB.de</h1>
             
-            <span class="spacer"></span>
-    
             <nav :class="{ expand }">
                 <nuxt-link to="/">Startseite</nuxt-link>
                 <nuxt-link to="/search">Suche</nuxt-link>
@@ -27,7 +25,7 @@
         
         <h2 ref="subtitle">Deine Anlaufstelle für Transgender-Unterstützung</h2>
         
-        <SearchBar ref="searchbar" placeholder="Suche nach Postleitzahl oder Ort" @search="search"></SearchBar>
+        <SearchBar ref="searchbar" placeholder="Suche nach Postleitzahl oder Ort" mobilePlaceholder="Suche nach PLZ oder Ort" @search="search"></SearchBar>
         
     </div>
     
@@ -93,7 +91,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(90deg, #3eb9e9, #dd788b);
+    background: var(--image-background) top / 150vw 325px fixed;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     padding: 40px 0 0 0;
     height: 325px;
@@ -104,6 +102,19 @@ export default {
 
 .header.hide {
     height: 56px;
+    animation-name: hide-shaow;
+    animation-delay: 0.4s;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hide-shadow {
+    0% {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 9px rgba(0, 0, 0, 0);
+    }
 }
 
 .header > h1, .header > h2, .header > .search-bar {
@@ -131,7 +142,8 @@ export default {
 }
 
 .header > .navbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     width: 100%;
     color: white;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
@@ -141,22 +153,21 @@ export default {
 }
 
 .header > .navbar.background {
-    background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
+    background: var(--image-background) top / 150vw 325px fixed;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header.hide > .navbar {
-    background: linear-gradient(90deg, var(--color-blue), var(--color-pink));
-    /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);*/
+    background: var(--image-background) top / 150vw 325px fixed;
     animation-name: show-shadow;
-    animation-duration: 0s;
-    animation-delay: 0.3s;
+    animation-duration: 0.8s;
+    animation-delay: 0.4s;
     animation-fill-mode: forwards;
 }
 
 @keyframes show-shadow {
     0% {
-        box-shadow: none;
+        box-shadow: 0 0 9px rgba(0, 0, 0, 0);
     }
     100% {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
@@ -164,17 +175,15 @@ export default {
 }
 
 .header > .navbar > h1 {
+    grid-column: 1;
     margin: 0;
     font-size: 24px;
     padding: 10px;
     cursor: pointer;
 }
 
-.header > .navbar > .spacer {
-    flex-grow: 1;
-}
-
 .header > .navbar > nav {
+    grid-column: 3;
     display: flex;
 }
 

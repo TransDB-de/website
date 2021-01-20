@@ -29,11 +29,11 @@
         </p>
         
         <p v-if="entry.meta.offers">
-            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers">{{ offerMapping[offer] }}</Tag>
+            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers" :key="offer">{{ offerMapping[offer] }}</Tag>
         </p>
         
         <p v-if="entry.meta.attributes">
-            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes">{{ attributeMapping[attr] }}</Tag>
+            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes" :key="attr">{{ attributeMapping[attr] }}</Tag>
         </p>
         
         <p v-if="entry.meta.specials">
@@ -105,13 +105,13 @@ export default {
 .entry > p > span:not(.tag), .entry > p > a {
     color: #2d3c46;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin-right: 20px;
     text-decoration: none;
 }
 
 .entry > p > span.tag {
-    margin-right: 5px;
+    margin: 2.5px;
 }
 
 .entry > p > span:last-child, .entry > p > span.tag:last-child {
@@ -130,8 +130,10 @@ export default {
 
 .entry > p > span .feather, .entry > p > a .feather {
     margin-right: 5px;
+    margin-top: 3px;
     height: 18px;
     width: 18px;
+    min-width: 18px;
 }
 
 .entry > p > a:hover {

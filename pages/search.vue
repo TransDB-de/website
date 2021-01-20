@@ -6,7 +6,7 @@
         
         <div class="entry-container">
             
-            <Entry v-for="entry of entries" :entry="entry"></Entry>
+            <Entry v-for="entry of entries" :entry="entry" :key="entry._id"></Entry>
             
             <h3 v-if="entries.length < 1">Leider sind unter deinem Filter keine Einträge vorhanden</h3>
             
@@ -24,14 +24,15 @@ export default {
     components: {SearchFilter, Entry},
     data() {
         return {
-            entries: []
+            entries: [],
+            locationName: null
         }
     },
     watchQuery: ["location", "lat", "long", "type"],
     async asyncData({ $axios, query }) {
         
         let res = await $axios.$get("entries", { params: query  });
-        return { entries: res }
+        return { entries: res.entries, locationName: res.locationName }
         
     },
     methods: {
@@ -58,12 +59,11 @@ export default {
 <style>
 .search-container {
     padding: 20px;
-    display: flex;
-    align-items: stretch;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: minmax(auto, 1fr) auto 1fr;
 }
 
 .search-container > .entry-container {
-    margin-left: 20px;
+    margin: 0px 20px;
 }
 </style>
