@@ -66,6 +66,10 @@ export default {
     margin: 0 0 20px 0;
     display: flex;
     flex-direction: column;
+    position: sticky;
+    height: auto;
+    align-self: start;
+    top: 72px;
 }
 
 .search-filter > .bar {
@@ -80,8 +84,24 @@ export default {
     overflow: hidden;
 }
 
+.search-filter:not(.expand) > .filter {
+    animation: collapse-filters;
+    animation-fill-mode: forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes collapse-filters {
+    0% {
+        height: auto;
+    }
+    100% {
+        height: 0;
+    }
+}
+
 .search-filter.expand > .filter {
     opacity: 1;
+    height: auto;
 }
 
 .search-filter .feather {
@@ -92,4 +112,18 @@ export default {
 .search-filter.expand .feather {
     transform: rotate(90deg);
 }
+
+@media only screen and (max-width: 720px) {
+    .search-filter button {
+        align-self: center;
+        width: 80%;
+        min-width: min-content;
+    }
+
+    .search-filter {
+        position: relative;
+        top: 0;
+    }
+}
+
 </style>

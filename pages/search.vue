@@ -66,4 +66,15 @@ export default {
 .search-container > .entry-container {
     margin: 0px 20px;
 }
+
+@media only screen and (max-width: 720px) {
+    .search-container {
+        grid-template-columns: 100%;
+        align-self: stretch;
+    }
+
+    .search-container > .entry-container {
+        margin: 0;
+    }
+}
 </style>
