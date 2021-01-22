@@ -43,32 +43,17 @@ export default {
         }
     },
     mounted() {
-      
-        document.addEventListener("scroll", (event) => {
-            
-            let scroll = Math.round(window.scrollY);
-            let percent = (scroll / (this.$el.scrollHeight - (this.$refs.navbar.scrollHeight * 2)));
-            
-            let opacity = (1 - percent).toFixed(2);
-            opacity = opacity > 0 ? opacity: 0;
-            
-            this.$refs.title.style.opacity = opacity;
-            this.$refs.subtitle.style.opacity = opacity;
-            this.$refs.searchbar.$el.style.opacity= opacity;
-            
-            if(percent > 1.25) {
-                this.$refs.navbar.classList.add("background");
-            } else {
-                this.$refs.navbar.classList.remove("background");
-            }
-            
-        })
-        
+        this.$addScrollEvent(this.scrollEvent);
+    },
+    beforeDestroy() {
+       this.$removeScrollEvent(this.scrollEvent);
     },
     watch: {
+
         $route: function(to, from) {
             this.hide = !["/","/search"].includes(to.path);
         }
+        
     },
     
     methods: {
@@ -79,6 +64,25 @@ export default {
         
         search: function (query) {
             this.$router.push({ name: "search", query });
+        },
+
+        scrollEvent(scroll) {
+
+            let percent = (scroll / (this.$el.scrollHeight - (this.$refs.navbar.scrollHeight * 2)));
+            
+            let opacity = (1 - percent).toFixed(2);
+            opacity = opacity > 0 ? opacity: 0;
+            
+            this.$refs.title.style.opacity = opacity;
+            this.$refs.subtitle.style.opacity = opacity;
+            this.$refs.searchbar.$el.style.opacity= opacity;
+            
+            if (percent > 1.25) {
+                this.$refs.navbar.classList.add("background");
+            } else {
+                this.$refs.navbar.classList.remove("background");
+            }
+
         }
         
     }

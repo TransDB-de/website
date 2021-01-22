@@ -25,6 +25,7 @@ export default {
         "~/plugins/auth-redirect.js",
         "~/plugins/ackee.client.js",
         "~/plugins/responsive.client.js",
+        "~/plugins/smoothScroll.client.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
