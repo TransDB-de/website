@@ -1,6 +1,14 @@
 <template>
 
-    <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" @click="click">
+    <label v-if="radio">
+        <input type="radio" :value="value" :name="radio" />
+        <span :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" class="button">
+            <slot v-if="!loading" />
+            <Loader v-else />
+        </span>
+    </label>
+
+    <button v-else :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" :value="value" @click="click" class="button">
         <slot v-if="!loading" />
         <Loader v-else />
     </button>
@@ -19,7 +27,9 @@ export default {
         color: String,
         loading: Boolean,
         icononly: Boolean,
-        active: Boolean
+        active: Boolean,
+        radio: String,
+        value: String,
     },
     methods: {
         
@@ -33,7 +43,16 @@ export default {
 
 <style scoped>
 
-button {
+label, button {
+    display: flex;
+    align-items: center;
+}
+
+span {
+    width: 100%;
+}
+
+.button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
@@ -41,60 +60,80 @@ button {
     cursor: pointer;
     font-size: 16px;
     display: flex;
-    align-items: center;
     font-weight: 600;
     padding: 8px 10px;
     border-radius: 4px;
     outline: 0;
-    transition: 0.1s ease background-color;
+    transition: 0.12s ease background-color;
     font-family: 'Poppins', sans-serif;
 }
 
-button:not(.light) {
+.button:not(.light) {
     height: 40px;
 }
 
-button:hover {
+.button:hover, .button:focus {
     background-color: var(--color-dark-accent);
 }
 
-button.red {
+.button:active {
+    background-color: var(--color-dark-active);
+}
+
+input[type=radio]:checked + .button {
+    background-color: var(--color-radio-selected);
+}
+
+label > input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.red {
     background-color: var(--color-red);
 }
 
-button.red:hover {
+.red:hover, .red:focus {
     background-color: var(--color-red-accent);
 }
 
-button .feather {
+.red:active {
+    background-color: var(--color-red-active);
+}
+
+.feather {
     stroke-width: 3;
     margin-right: 5px;
     width: 18px;
     height: 18px;
 }
 
-button.icon-only .feather {
+.icon-only .feather {
     margin: 0;
 }
 
-button.light {
-    color: #334450;
-    background: rgba(51, 68, 80, 0.15);
-    padding: 5px 10px;
+.light {
+    background-color: var(--color-light);
     box-shadow: none;
+    color: #334450;
 }
 
-button.light:hover {
-    background: rgba(51, 68, 80, 0.20);
+.light:hover, .light:focus {
+    background-color: var(--color-light-accent);
 }
 
-button.center {
+.light:active {
+    background-color: var(--color-light-active);
+}
+
+.center {
     justify-content: center;
 }
 
 @media only screen and (max-width: 720px) {
     
-    button.light .feather {
+    .light .feather {
         margin: 0;
     }
     
