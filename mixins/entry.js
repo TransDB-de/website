@@ -3,6 +3,7 @@ export default {
     data() {
         return {
             typeMapping: {
+                "": "Alle Kategorien",
                 group: "Gruppe/Verein",
                 therapist: "Therapeut*in/Psychiater*in",
                 endocrinologist: "Endokrinologische Praxis",
