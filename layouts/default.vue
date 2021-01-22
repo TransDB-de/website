@@ -50,14 +50,25 @@ html {
     --color-blue: #3eb9e9;
     --color-pink: #dd788b;
     --color-background: #F6F6F6;
+
     --color-light: #e1e3e5;
     --color-light-accent: #d6dadc;
+    --color-light-active: #c8d1d4;
+
     --color-dark: #334450;
-    --color-dark-accent: #2d3c46;
+    --color-dark-accent: #2a3b47;
+    --color-dark-active: #202f3a;
+
     --color-red: #bd465d;
     --color-red-accent: #ac4256;
+    --color-red-active: #b4203b;
+
     --color-grey: #888;
     --color-grey-accent: #777;
+    --color-grey-active: #414141;
+
+    --color-radio-selected: #5ca3f0;
+
     --image-background: url("/banner.jpg");
 }
 
