@@ -17,22 +17,22 @@ export default {
         
         submit: function() {
             
-            let fields = this.$el.querySelectorAll("input[name], select");
+            let fields = this.$el.querySelectorAll("input, select");
             
             let data = {};
             
             // Map input fields to object
-            for(let input of fields) {
-                
+            for (let input of fields) {
+ 
                 let value = this.getValueFromInput(input);
                 
                 // Continue if input has no value
-                if(value === null || value === undefined || value.length < 1) {
+                if (value === null || value === undefined || value.length < 1) {
                     continue;
                 }
                 
                 // Format to array
-                if(input.name.endsWith("[]")) {
+                if (input.name.endsWith("[]")) {
                     
                     let realname = input.name.slice(0, -2);
                     
@@ -59,11 +59,11 @@ export default {
         
         getValueFromInput: function (input) {
     
-            if(input.type === "checkbox" || input.type === "radio") {
+            if (input.type === "checkbox") {
         
-                if(input.value.length > 0) {
+                if (input.value.length > 0) {
             
-                    if(input.checked) {
+                    if (input.checked) {
                         return input.value;
                     }
             
@@ -71,11 +71,19 @@ export default {
                     return input.checked;
                 }
         
-            } else if(input.type === "number") {
+            } else if (input.type === "radio") {
+
+                if (input.checked) {
+                    return input.value;
+                }
+
+            } else if (input.type === "number") {
                 return parseFloat(input.value);
             } else {
                 return input.value;
             }
+
+            return null;
             
         }
         
