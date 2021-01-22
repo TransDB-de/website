@@ -23,7 +23,8 @@ export default {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         "~/plugins/auth-redirect.js",
-        "~/plugins/ackee.client.js"
+        "~/plugins/ackee.client.js",
+        "~/plugins/responsive.client.js",
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

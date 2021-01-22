@@ -2,7 +2,7 @@
     
     <div :class="{ 'search-bar': true, hide: hide }" >
     
-        <input type="text" :placeholder="isMobile ? mobilePlaceholder : placeholder" @keypress.enter="search" :value="this.$route.query.location" />
+        <input type="text" :placeholder="$store.state.isMobile ? mobilePlaceholder : placeholder" @keypress.enter="search" :value="this.$route.query.location" />
         
         <Button light @click="distanceSearch">
             <map-pin-icon></map-pin-icon>
@@ -20,22 +20,11 @@ import {MapPinIcon} from "vue-feather-icons";
 export default {
     name: "SearchBar",
     components: {Button, MapPinIcon},
-    data() {
-        return {
-            isMobile: false
-        }
-    },
     props: {
         placeholder: String,
         mobilePlaceholder: String,
         hide: Boolean
     },
-    mounted() {
-        window.addEventListener("resize", this.resized);
-
-        this.resized();
-    },
-
     methods: {
         
         search: function(event) {
@@ -51,16 +40,6 @@ export default {
                 this.$emit("search", { lat: pos.coords.latitude, long: pos.coords.longitude });
             });
             
-        },
-
-        resized() {
-
-            if (window.innerWidth < 720) {
-                this.isMobile = true;
-            } else {
-                this.isMobile = false;
-            }
-
         }
         
     }
