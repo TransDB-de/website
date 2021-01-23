@@ -13,8 +13,15 @@
         </div>
         
         <div class="filter">
+            
+            <h2 v-if="location">Standort</h2>
+            <p v-if="location">
+                <MapPinIcon></MapPinIcon> <span>{{ location }}</span>
+            </p>
         
             <Form @submit="apply">
+                
+                <h2>Kategorien</h2>
                 
                 <select v-if="$store.state.isMobile" name="type" v-on: >
                     <option value="">Alle Kategorien</option>
@@ -27,7 +34,6 @@
                 </select>
 
                 <fieldset class="radio-buttons" v-else>
-                    <legend>Kategorien</legend>
 
                     <RadioButton name="type" value="">Alle Kategorien</RadioButton>
                     <RadioButton name="type" value="group">Gruppe/Verein</RadioButton>
@@ -60,6 +66,9 @@ export default {
     name: "SearchFilter",
     components: {Button, Form, ChevronRightIcon, MapPinIcon},
     mixins: [EntryMixin],
+    props: {
+        location: String
+    },
     data() {
         return {
             expand: true,
@@ -205,6 +214,21 @@ export default {
     animation-delay: 0.2s;
 }
 
+.filter {
+    padding: 0 10px;
+}
+
+.filter p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.filter p .feather {
+    height: 21px;
+    width: 21px;
+}
+
 @keyframes collapse-filters {
     0% {
         height: auto;
@@ -215,26 +239,16 @@ export default {
 }
 
 fieldset {
-    margin: 4px;
+    margin: 0 0 10px 0;
+    padding: 0;
     border: 0;
 }
 
-.radio-buttons > legend {
+.filter h2 {
     font-weight: 500;
     font-size: 18px;
     font-family: 'Poppins', sans-serif;
-}
-
-.radio-buttons >>> .button {
-    border-radius: 0px;
-}
-
-.radio-buttons label:first-of-type >>> .button {
-    border-radius: 8px 8px 0 0;
-}
-
-.radio-buttons label:last-of-type >>> .button {
-    border-radius: 0 0 8px 8px;
+    margin: 10px 0 10px 0;
 }
 
 .search-filter.expand > .filter {
@@ -247,7 +261,7 @@ fieldset {
     margin-right: 5px;
 }
 
-.search-filter.expand .feather {
+.search-filter.expand > .bar .feather {
     transform: rotate(90deg);
 }
 

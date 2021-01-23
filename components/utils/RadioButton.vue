@@ -24,7 +24,7 @@ label {
     display: flex;
     font-weight: 400;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 5px 0;
 }
 
 label > span:hover {

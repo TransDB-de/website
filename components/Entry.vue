@@ -120,11 +120,14 @@ export default {
     margin-right: 0;
 }
 
+.entry b {
+    font-weight: 500;
+}
+
 .entry > p > b {
     margin-right: 5px;
     display: inline-flex;
     align-items: center;
-    font-weight: 500;
 }
 
 .entry > p.inline-content > span {
