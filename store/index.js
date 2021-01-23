@@ -4,7 +4,7 @@
 
 export const state = () => ({
     user: null,
-    isMobile: false
+    isMobile: true
 });
 
 export const getters = {
