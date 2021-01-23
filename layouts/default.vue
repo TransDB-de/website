@@ -78,9 +78,13 @@ body {
     color: #334450;
     display: flex;
     flex-direction: column;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Fira Sans", sans-serif;
     overflow: auto;
     min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
 }
 
 .app {

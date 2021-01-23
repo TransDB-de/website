@@ -16,7 +16,7 @@
             </nav>
             
             <span @click="expand = !expand" class="mobile">
-                <i data-feather="menu"></i>
+                <MenuIcon />
             </span>
             
         </div>
@@ -33,9 +33,11 @@
 
 <script>
 import SearchBar from "@/components/header/SearchBar";
+import { MenuIcon } from "vue-feather-icons";
+
 export default {
     name: "Header",
-    components: {SearchBar},
+    components: {SearchBar, MenuIcon},
     data() {
         return {
             hide: !["/","/search"].includes(this.$route.path),
@@ -102,6 +104,7 @@ export default {
     width: 100%;
     transition: 0.4s ease all;
     overflow: hidden;
+    font-family: "Poppins", sans-serif;
 }
 
 .header.hide {
@@ -230,6 +233,8 @@ export default {
     padding: 0 10px;
     align-items: center;
     cursor: pointer;
+    grid-column: 3;
+    grid-row: 1;
 }
 
 .mobile > .feather {
