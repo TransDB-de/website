@@ -16,30 +16,27 @@
         
             <Form @submit="apply">
                 
-                <select v-if="$store.state.isMobile" name="type" v-on: >
-                    <option value="">Alle Kategorien</option>
-                    <option value="group">Gruppe/Verein</option>
-                    <option value="therapist">Therapeut*in/Psychiater*in</option>
-                    <option value="endocrinologist">Endokrinologische Praxis</option>
-                    <option value="surgeon">Operateur*in</option>
-                    <option value="logopedics">Logopäd*in</option>
-                    <option value="hairremoval">Haarentfernungsstudio</option>
+                <select v-if="$store.state.isMobile" name="type" v-on:click="updateType">
+                    
+                    <option v-for="(val, key) in typeMapping" :key="key" :value="key">{{ val }}</option>
+
                 </select>
 
-                <fieldset class="radio-buttons" v-else>
+                <fieldset v-else class="radio-buttons" v-on:click="updateType">
                     <legend>Kategorien</legend>
 
-                    <Button light center radio="type" value="">Alle Kategorien</Button>
-                    <Button light center radio="type" value="group">Gruppe/Verein</Button>
-                    <Button light center radio="type" value="therapist">Therapeut*in/Psychiater*in</Button>
-                    <Button light center radio="type" value="endocrinologist">Endokrinologische Praxis</Button>
-                    <Button light center radio="type" value="surgeon">Operateur*in</Button>
-                    <Button light center radio="type" value="logopedics">Logopäd*in</Button>
-                    <Button light center radio="type" value="hairremoval">Haarentfernungsstudio</Button>
+                    <Button v-for="(val, key) in typeMapping" :key="key" :value="key" light center radio name="type">{{ val }}</Button>
                     
                 </fieldset>
                 
-                <Button center>
+                <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" >
+                    <legend>Angebote</legend>
+
+                    <Button v-for="(val, key) in offerMapping[selectedType]" :key="key" :value="key" name="offers" light center checkbox compact>{{ val }}</Button>
+                    <Button v-for="(val, key) in attributeMapping[selectedType]" :key="key" :value="key" name="attributes" light checkbox compact>{{ val }}</Button>
+                </fieldset>
+
+                <Button center v-on:click="highlightButton = false" class="applyButton" :class="highlightButton ? 'highlight' : ''">
                     Anwenden
                 </Button>
             </Form>
@@ -64,7 +61,9 @@ export default {
         return {
             expand: true,
             offset: 56,
-            listenerActive: false
+            listenerActive: false,
+            selectedType: "",
+            highlightButton: false
         }
     },
     mounted() {
@@ -83,13 +82,18 @@ export default {
     watch: {
 
         isMobile (mobile) {
-            this.updateFormValues();
+            this.updateFormVisual();
+            
 
             if (mobile) {
                 this.deactivateListener();
             } else {
                 this.activateListener();
             }
+        },
+
+        $route() {
+            this.updateType();
         }
 
     },
@@ -102,38 +106,54 @@ export default {
             this.$emit("apply", form);
         },
 
-        async updateFormValues() {
+        updateFormValues() {
             let typeVal = this.$route.query.type;
 
+            // XSS safeguard
+            if (this.typeMapping[typeVal ?? ""] === undefined) return;
+
+            this.selectedType = typeVal;
+            this.highlightButton = false;
+
+            this.updateFormVisual();
+        },
+
+        async updateFormVisual() {
             await this.$nextTick();
 
             let typeInput = this.$el.querySelector("select, fieldset");
 
             if (!typeInput) return;
 
-            // XSS safeguard
-            if (this.typeMapping[typeVal ?? ""] === undefined) return;
-
             if (typeInput.tagName === "SELECT") {
-                typeInput.value = typeVal ?? "";
+                typeInput.value = this.selectedType ?? "";
             } else {
-                let btn = typeInput.querySelector(`input${typeVal ? `[value=${typeVal}]` : '' }`);
+                let btn = typeInput.querySelector(`input${this.selectedType ? `[value=${this.selectedType}]` : '' }`);
 
                 if (btn) {
                     btn.checked = true;
                 }
 
             }
+        },
 
+        async updateType() {
+            this.selectedType = document.querySelector('input[name=type]:checked, select[name=type]')?.value ?? "";
+
+            if (this.selectedType !== (this.$route.query.type ?? "")) {
+                this.highlightButton = true;
+            } else {
+                this.highlightButton = false;
+            }
         },
 
         activateListener() {
 
             if (!this.listenerActive) {
-                this.$addScrollEvent(this.scroll);              
+                this.$addScrollEvent(this.scrollEvent);              
                 this.listenerActive = true;
                 this.lastScroll = pageYOffset;
-                scroll();
+                this.scrollEvent(window.scrollY, 0);
 
                 console.log("Listener activated");
             }
@@ -142,7 +162,7 @@ export default {
 
         deactivateListener() {
 
-            this.$removeScrollEvent(this.scroll);
+            this.$removeScrollEvent(this.scrollEvent);
             this.listenerActive = false;
             this.$el.style.top = '';
 
@@ -152,7 +172,7 @@ export default {
 
         // if the browser window is too short, we might overflow
         // to counter this, allow the user to scroll an overflowing SearchFilter
-        scroll(pos, dist) {
+        scrollEvent(pos, dist) {
 
             const offsetHeight = this.$el.offsetHeight;
 
@@ -220,6 +240,16 @@ fieldset {
     border: 0;
 }
 
+.offers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.offers >>> .button {
+    margin: 2px;
+}
+
 .radio-buttons >>> .button {
     border-radius: 0px;
 }
@@ -244,6 +274,15 @@ fieldset {
 
 .search-filter.expand .feather {
     transform: rotate(90deg);
+}
+
+.highlight {
+    background-color: var(--color-highlight);
+    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.1);
+}
+
+.highlight:hover {
+    background-color: var(--color-highlight-accent);
 }
 
 @media only screen and (max-width: 720px) {
