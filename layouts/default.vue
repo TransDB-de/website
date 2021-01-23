@@ -67,7 +67,7 @@ html {
     --color-grey-accent: #777;
     --color-grey-active: #414141;
 
-    --color-radio-selected: #5ca3f0;
+    --color-radio-selected: #4897ec;
 
     --image-background: url("/banner.jpg");
 }

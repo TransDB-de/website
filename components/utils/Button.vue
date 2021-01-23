@@ -1,14 +1,6 @@
 <template>
 
-    <label v-if="radio">
-        <input type="radio" :value="value" :name="radio" />
-        <span :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" class="button">
-            <slot v-if="!loading" />
-            <Loader v-else />
-        </span>
-    </label>
-
-    <button v-else :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" :value="value" @click="click" class="button">
+    <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" @click="click">
         <slot v-if="!loading" />
         <Loader v-else />
     </button>
@@ -27,9 +19,6 @@ export default {
         color: String,
         loading: Boolean,
         icononly: Boolean,
-        active: Boolean,
-        radio: String,
-        value: String,
     },
     methods: {
         
@@ -43,7 +32,7 @@ export default {
 
 <style scoped>
 
-label, button {
+button {
     display: flex;
     align-items: center;
 }
@@ -52,7 +41,7 @@ span {
     width: 100%;
 }
 
-.button {
+button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
@@ -68,27 +57,18 @@ span {
     font-family: 'Poppins', sans-serif;
 }
 
-.button:not(.light) {
+button:not(.light) {
     height: 40px;
 }
 
-.button:hover, .button:focus {
+button:hover, button:focus {
     background-color: var(--color-dark-accent);
 }
 
-.button:active {
+button:active {
     background-color: var(--color-dark-active);
 }
 
-input[type=radio]:checked + .button {
-    background-color: var(--color-radio-selected);
-}
-
-label > input {
-    opacity: 0;
-    position: absolute;
-    cursor: pointer;
-}
 
 .red {
     background-color: var(--color-red);
@@ -117,6 +97,7 @@ label > input {
     background-color: var(--color-light);
     box-shadow: none;
     color: #334450;
+    padding: 5px 10px;
 }
 
 .light:hover, .light:focus {

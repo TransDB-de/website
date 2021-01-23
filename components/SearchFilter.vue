@@ -29,13 +29,13 @@
                 <fieldset class="radio-buttons" v-else>
                     <legend>Kategorien</legend>
 
-                    <Button light center radio="type" value="">Alle Kategorien</Button>
-                    <Button light center radio="type" value="group">Gruppe/Verein</Button>
-                    <Button light center radio="type" value="therapist">Therapeut*in/Psychiater*in</Button>
-                    <Button light center radio="type" value="endocrinologist">Endokrinologische Praxis</Button>
-                    <Button light center radio="type" value="surgeon">Operateur*in</Button>
-                    <Button light center radio="type" value="logopedics">Logopäd*in</Button>
-                    <Button light center radio="type" value="hairremoval">Haarentfernungsstudio</Button>
+                    <RadioButton name="type" value="">Alle Kategorien</RadioButton>
+                    <RadioButton name="type" value="group">Gruppe/Verein</RadioButton>
+                    <RadioButton name="type" value="therapist">Therapeut*in/Psychiater*in</RadioButton>
+                    <RadioButton name="type" value="endocrinologist">Endokrinologische Praxis</RadioButton>
+                    <RadioButton name="type" value="surgeon">Operateur*in</RadioButton>
+                    <RadioButton name="type" value="logopedics">Logopäd*in</RadioButton>
+                    <RadioButton name="type" value="hairremoval">Haarentfernungsstudio</RadioButton>
                     
                 </fieldset>
                 
@@ -190,6 +190,7 @@ export default {
     display: flex;
     cursor: pointer;
     user-select: none;
+    font-family: "Poppins", sans-serif;
 }
 
 .search-filter > .filter {
@@ -216,6 +217,12 @@ export default {
 fieldset {
     margin: 4px;
     border: 0;
+}
+
+.radio-buttons > legend {
+    font-weight: 500;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .radio-buttons >>> .button {
