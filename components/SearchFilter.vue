@@ -179,11 +179,14 @@ export default {
 
 .search-filter {
     padding: 16px 0;
+    width: min(320px, 30vw);
+    min-width: min-content;
     display: flex;
     flex-direction: column;
     height: auto;
     align-self: start;
     position: sticky;
+    justify-self: end;
 }
 
 .search-filter > .bar {
@@ -195,7 +198,6 @@ export default {
 .search-filter > .filter {
     opacity: 0;
     transition: 0.2s ease all;
-    overflow: hidden;
 }
 
 .search-filter:not(.expand) > .filter {
@@ -252,6 +254,8 @@ fieldset {
     }
 
     .search-filter {
+        width: 100%;
+        min-width: 0;
         position: relative;
         top: 0;
     }

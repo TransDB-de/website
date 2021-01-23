@@ -72,7 +72,7 @@ span {
     height: 40px;
 }
 
-.button:hover, .button:focus {
+.button:hover, .button:focus, input:hover + .button {
     background-color: var(--color-dark-accent);
 }
 
@@ -80,8 +80,12 @@ span {
     background-color: var(--color-dark-active);
 }
 
-input[type=radio]:checked + .button {
-    background-color: var(--color-radio-selected);
+input:checked + .button {
+    background-color: var(--color-input-selected);
+}
+
+input:checked:hover + .button {
+    background-color: var(--color-selected-hover);
 }
 
 label > input {
@@ -94,7 +98,7 @@ label > input {
     background-color: var(--color-red);
 }
 
-.red:hover, .red:focus {
+.red:hover, .red:focus, input:hover + .red {
     background-color: var(--color-red-accent);
 }
 
@@ -119,7 +123,7 @@ label > input {
     color: #334450;
 }
 
-.light:hover, .light:focus {
+.light:hover, .light:focus, input:hover + .light {
     background-color: var(--color-light-accent);
 }
 

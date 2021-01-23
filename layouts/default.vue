@@ -67,7 +67,11 @@ html {
     --color-grey-accent: #777;
     --color-grey-active: #414141;
 
-    --color-radio-selected: #5ca3f0;
+    --color-input-selected: #5ca3f0;
+    --color-selected-hover: #72b0f1;
+
+    --color-highlight: #5ca3f0;
+    --color-highlight-accent: #72b0f1;
 
     --image-background: url("/banner.jpg");
 }

@@ -54,7 +54,7 @@ export default {
     padding: 5px;
     display: grid;
     width: calc(100% - 80px);
-    max-width: 650px;
+    max-width: 560px;
     min-width: min(240px, 100vw);
     grid-template-columns: 1fr auto;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
