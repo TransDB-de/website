@@ -42,7 +42,7 @@ export const mutations = {
         }
     },
     
-    setMobile(state, isMobile) {
+    SET_MOBILE(state, isMobile) {
 		state.isMobile = isMobile;
 	}
 

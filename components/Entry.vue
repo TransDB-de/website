@@ -11,6 +11,15 @@
         </p>
         
         <p>
+            
+            <a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
+                <map-icon />{{ address }}
+            </a>
+    
+            <span v-if="entry.telephone">
+                <phone-icon />{{ entry.telephone }}
+            </span>
+            
             <a :href="`mailto:${entry.email}`">
                 <mail-icon />{{ entry.email }}
             </a>
@@ -19,13 +28,6 @@
                 <globe-icon />{{ website }}
             </a>
             
-            <span v-if="entry.telephone">
-                <phone-icon />{{ entry.telephone }}
-            </span>
-            
-            <a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
-                <map-icon />{{ address }}
-            </a>
         </p>
         
         <p v-if="entry.meta.offers">
@@ -122,6 +124,7 @@ export default {
     margin-right: 5px;
     display: inline-flex;
     align-items: center;
+    font-weight: 500;
 }
 
 .entry > p.inline-content > span {
@@ -130,7 +133,6 @@ export default {
 
 .entry > p > span .feather, .entry > p > a .feather {
     margin-right: 5px;
-    margin-top: 3px;
     height: 18px;
     width: 18px;
     min-width: 18px;
