@@ -60,7 +60,8 @@ export default {
 .search-container {
     padding: 20px;
     display: grid;
-    grid-template-columns: minmax(auto, 1fr) auto 1fr;
+    width: 100%;
+    grid-template-columns: minmax(auto, 1fr) minmax(auto, 860px) 1fr;
 }
 
 .search-container > .entry-container {
