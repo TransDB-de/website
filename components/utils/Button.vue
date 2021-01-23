@@ -1,14 +1,14 @@
 <template>
 
-    <label v-if="radio">
-        <input type="radio" :value="value" :name="radio" />
-        <span :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" class="button">
+    <label v-if="radio || checkbox">
+        <input :type="radio ? 'radio' : checkbox ? 'checkbox' : ''" :value="value" :name="name" />
+        <span :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '', compact ? 'compact' : '']" class="button">
             <slot v-if="!loading" />
             <Loader v-else />
         </span>
     </label>
 
-    <button v-else :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" :value="value" @click="click" class="button">
+    <button v-else :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '', compact ? 'compact' : '']" :value="value" @click="click" class="button">
         <slot v-if="!loading" />
         <Loader v-else />
     </button>
@@ -28,8 +28,11 @@ export default {
         loading: Boolean,
         icononly: Boolean,
         active: Boolean,
-        radio: String,
+        radio: Boolean,
+        checkbox: Boolean,
         value: String,
+        name: String,
+        compact: Boolean
     },
     methods: {
         
@@ -66,6 +69,12 @@ span {
     outline: 0;
     transition: 0.12s ease background-color;
     font-family: 'Poppins', sans-serif;
+}
+
+.compact {
+    font-weight: normal;
+    font-size: 15px;
+    padding: 2px 6px;
 }
 
 .button:not(.light) {
