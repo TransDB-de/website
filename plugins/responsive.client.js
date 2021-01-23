@@ -1,19 +1,7 @@
 export default ({ store }) => {
-    let isMobile = false;
+    let mediaQuery = window.matchMedia('(max-width: 720px)');
 
-    window.addEventListener("resize", () => {
-
-        if (window.innerWidth < 720 && !isMobile) {
-
-            isMobile = true;
-            store.commit("setMobile", isMobile);
-
-        } else if (window.innerWidth >= 720 && isMobile) {
-
-            isMobile = false;
-            store.commit("setMobile", isMobile);
-
-        }
-
-    })
+    mediaQuery.addEventListener("change", (e) => {
+        store.commit("setMobile", e.matches);
+    });
 }
