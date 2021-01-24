@@ -97,8 +97,8 @@ export default {
         return {
             expand: true,
             selectedType: "",
-            selectedAttributes: [],
-            selectedOffers: [],
+            selectedAttributes: Set,
+            selectedOffers: Set,
             highlightButton: false,
             scrollOffset: 0
         }
@@ -142,21 +142,16 @@ export default {
             let offers = newRoute.query.offers ?? [];
             let attributes = newRoute.query.attributes ?? [];
 
-            if (!Array.isArray(offers)) {
-                offers = [offers];
-            }
-
-            if (!Array.isArray(attributes)) {
-                attributes = [attributes];
-            }
+            offers = (Array.isArray(offers)) ? offers : [offers];
+            attributes = (Array.isArray(attributes)) ? attributes : [attributes];
 
             if (this.typeMapping[type] === undefined) return;
             offers = offers.filter(val => this.offerMapping[type]?.[val] !== undefined);
             attributes = attributes.filter(val => this.attributeMapping[type]?.[val] !== undefined);
 
             this.selectedType = type;
-            this.selectedOffers = offers;
-            this.selectedAttributes = attributes;
+            this.selectedOffers = new Set(offers);
+            this.selectedAttributes = new Set(attributes);
         },
         
         apply(form) {

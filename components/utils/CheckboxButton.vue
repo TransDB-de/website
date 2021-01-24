@@ -14,27 +14,23 @@ export default {
         checked: Boolean,
         name: String,
         value: String,
-        model: Array
+        model: Set
     },
     computed: {
         checkboxModel: {
             get() {
-                return this.model.includes(this.value);
+                return this.model.has(this.value);
             },
 
             set(checked) {
-                let index = this.model.indexOf(this.value);
-                let valueArr = [...this.model];
+                let set = new Set(this.model);
 
-                if (checked && index === -1) {
-                    valueArr.push(this.value);
+                if (checked) {
+                    set.add(this.value);
+                } else {
+                    set.delete(this.value);
                 }
-
-                if (!checked && index !== -1) {
-                    valueArr.splice(index, 1);
-                }
-
-                this.$emit("change", valueArr);
+                this.$emit("change", set);
             }
         }
     }
