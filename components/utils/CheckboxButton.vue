@@ -34,7 +34,7 @@ export default {
                     valueArr.splice(index, 1);
                 }
 
-                this.$emit("change", { value: valueArr, name: this.name });
+                this.$emit("change", valueArr);
             }
         }
     }

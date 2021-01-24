@@ -30,19 +30,34 @@
                 </select>
 
                 <fieldset v-show="!$store.state.isMobile" class="radio-buttons" v-on:click="updateApplyButton" >
-                    <RadioButton v-for="(val, key) in typeMapping" :key="key" :value="key" name="type" :model="selectedType" @change="valueChanged">{{ val }}</RadioButton>
+
+                    <RadioButton name="type"
+                        v-for="(val, key) in typeMapping" :key="key"
+                        :value="key"
+                        :model="selectedType"
+                        @change="(newVal) => selectedType = newVal"
+                    > {{ val }} </RadioButton>
+
                 </fieldset>
                 
                 <h2 v-if="offerMapping[selectedType] || attributeMapping[selectedType]">Angebote</h2>
 
                 <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton">
-                    <CheckboxButton v-for="(val, key) in offerMapping[selectedType]" :key="key" :value="key" name="offers[]" :model="selectedOffers" @change="valueChanged">
-                        {{ val }}
-                    </CheckboxButton>
 
-                    <CheckboxButton v-for="(val, key) in attributeMapping[selectedType]" :key="key" :value="key" name="attributes[]" :model="selectedAttributes" @change="valueChanged">
-                        {{ val }}
-                    </CheckboxButton>
+                    <CheckboxButton name="offers[]"
+                        v-for="(val, key) in offerMapping[selectedType]" :key="key"
+                        :value="key"
+                        :model="selectedOffers"
+                        @change="(newVal) => selectedOffers = newVal"
+                    > {{ val }} </CheckboxButton>
+
+                    <CheckboxButton name="attributes[]"
+                        v-for="(val, key) in attributeMapping[selectedType]" :key="key"
+                        :value="key"
+                        :model="selectedAttributes"
+                        @change="(newVal) => selectedAttributes = newVal"
+                    > {{ val }} </CheckboxButton>
+
                 </fieldset>
 
                 <Button center v-on:click="highlightButton = false" class="applyButton" :class="highlightButton ? 'highlight' : ''">
@@ -127,8 +142,6 @@ export default {
             let offers = newRoute.query.offers ?? [];
             let attributes = newRoute.query.attributes ?? [];
 
-            console.log(Array.isArray(offers));
-
             if (!Array.isArray(offers)) {
                 offers = [offers];
             }
@@ -144,19 +157,6 @@ export default {
             this.selectedType = type;
             this.selectedOffers = offers;
             this.selectedAttributes = attributes;
-        },
-
-        // v-model binding for sub components
-        valueChanged(event) {
-
-            if (event.name === "type") {
-                this.selectedType = event.value;
-            } else if (event.name === "attributes") {
-                this.selectedAttributes = event.value;
-            } else if (event.name === "offers") {
-                this.selectedOffers = event.value;
-            }
-
         },
         
         apply(form) {

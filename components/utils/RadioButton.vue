@@ -23,7 +23,7 @@ export default {
             },
 
             set() {
-                this.$emit("change", { value: this.value, name: this.name });
+                this.$emit("change", this.value);
             }
         }
     }
