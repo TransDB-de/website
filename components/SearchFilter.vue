@@ -1,6 +1,6 @@
 <template>
 
-    <div :class="{ 'search-filter': true, expand }">
+    <div :class="{ 'search-filter': true, expand }" :style="$store.state.isMobile ? '' : `top: ${scrollOffset}px`">
     
         <div class="bar" @click="expand = !expand">
             
@@ -13,27 +13,36 @@
         </div>
         
         <div class="filter">
+            
+            <h2 v-if="location">Standort</h2>
+            <p v-if="location">
+                <MapPinIcon></MapPinIcon> <span>{{ location }}</span>
+            </p>
         
             <Form @submit="apply">
                 
-                <select v-if="$store.state.isMobile" name="type" v-on:click="updateType">
+                <h2>Kategorien</h2>
+
+                <select v-show="$store.state.isMobile" name="type" v-model="selectedType" v-on:click="updateApplyButton" >
                     
                     <option v-for="(val, key) in typeMapping" :key="key" :value="key">{{ val }}</option>
 
                 </select>
 
-                <fieldset v-else class="radio-buttons" v-on:click="updateType">
-                    <legend>Kategorien</legend>
-
-                    <Button v-for="(val, key) in typeMapping" :key="key" :value="key" light center radio name="type">{{ val }}</Button>
-                    
+                <fieldset v-show="!$store.state.isMobile" class="radio-buttons" v-on:click="updateApplyButton" >
+                    <RadioButton v-for="(val, key) in typeMapping" :key="key" :value="key" name="type" :model="selectedType" @change="valueChanged">{{ val }}</RadioButton>
                 </fieldset>
                 
-                <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" >
-                    <legend>Angebote</legend>
+                <h2 v-if="offerMapping[selectedType] || attributeMapping[selectedType]">Angebote</h2>
 
-                    <Button v-for="(val, key) in offerMapping[selectedType]" :key="key" :value="key" name="offers" light center checkbox compact>{{ val }}</Button>
-                    <Button v-for="(val, key) in attributeMapping[selectedType]" :key="key" :value="key" name="attributes" light checkbox compact>{{ val }}</Button>
+                <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton">
+                    <CheckboxButton v-for="(val, key) in offerMapping[selectedType]" :key="key" :value="key" name="offers[]" :model="selectedOffers" @change="valueChanged">
+                        {{ val }}
+                    </CheckboxButton>
+
+                    <CheckboxButton v-for="(val, key) in attributeMapping[selectedType]" :key="key" :value="key" name="attributes[]" :model="selectedAttributes" @change="valueChanged">
+                        {{ val }}
+                    </CheckboxButton>
                 </fieldset>
 
                 <Button center v-on:click="highlightButton = false" class="applyButton" :class="highlightButton ? 'highlight' : ''">
@@ -50,26 +59,41 @@
 <script>
 import Form from "@/components/utils/Form";
 import Button from "@/components/utils/Button";
+import RadioButton from "@/components/utils/RadioButton";
+import CheckboxButton from "@/components/utils/CheckboxButton";
 import {ChevronRightIcon, MapPinIcon} from "vue-feather-icons";
 import EntryMixin from "@/mixins/entry";
 
 export default {
     name: "SearchFilter",
-    components: {Button, Form, ChevronRightIcon, MapPinIcon},
+    components: {
+        Button,
+        Form,
+        ChevronRightIcon,
+        MapPinIcon,
+        RadioButton,
+        CheckboxButton
+    },
     mixins: [EntryMixin],
+    props: {
+        location: String
+    },
     data() {
         return {
             expand: true,
-            offset: 56,
-            listenerActive: false,
             selectedType: "",
-            highlightButton: false
+            selectedAttributes: [],
+            selectedOffers: [],
+            highlightButton: false,
+            scrollOffset: 0
         }
     },
     mounted() {
-        this.updateFormValues();
+        this.routeUpdated(this.$route);
 
-        this.activateListener();
+        if (!this.$store.state.isMobile) {
+            this.$addScrollEvent(this.scrollEvent);
+        }
     },
     computed: {
 
@@ -81,93 +105,66 @@ export default {
     },
     watch: {
 
-        isMobile (mobile) {
-            this.updateFormVisual();
-            
-
+        isMobile(mobile) {
             if (mobile) {
-                this.deactivateListener();
+                this.$removeScrollEvent(this.scrollEvent);
             } else {
-                this.activateListener();
+                this.$addScrollEvent(this.scrollEvent);
             }
         },
 
-        $route() {
-            this.updateType();
+        $route(newRoute) {
+            this.routeUpdated(newRoute);
         }
 
     },
     destroyed() {
-        this.deactivateListener();
+        this.$removeScrollEvent(this.scrollEvent);
     },
     methods: {
+        routeUpdated(newRoute) {
+            let type = newRoute.query.type ?? "";
+            let offers = newRoute.query.offers ?? [];
+            let attributes = newRoute.query.attributes ?? [];
+
+            console.log(Array.isArray(offers));
+
+            if (!Array.isArray(offers)) {
+                offers = [offers];
+            }
+
+            if (!Array.isArray(attributes)) {
+                attributes = [attributes];
+            }
+
+            if (this.typeMapping[type] === undefined) return;
+            offers = offers.filter(val => this.offerMapping[type]?.[val] !== undefined);
+            attributes = attributes.filter(val => this.attributeMapping[type]?.[val] !== undefined);
+
+            this.selectedType = type;
+            this.selectedOffers = offers;
+            this.selectedAttributes = attributes;
+        },
+
+        // v-model binding for sub components
+        valueChanged(event) {
+
+            if (event.name === "type") {
+                this.selectedType = event.value;
+            } else if (event.name === "attributes") {
+                this.selectedAttributes = event.value;
+            } else if (event.name === "offers") {
+                this.selectedOffers = event.value;
+            }
+
+        },
         
-        apply: function(form) {
+        apply(form) {
             this.$emit("apply", form);
         },
 
-        updateFormValues() {
-            let typeVal = this.$route.query.type;
-
-            // XSS safeguard
-            if (this.typeMapping[typeVal ?? ""] === undefined) return;
-
-            this.selectedType = typeVal;
-            this.highlightButton = false;
-
-            this.updateFormVisual();
-        },
-
-        async updateFormVisual() {
-            await this.$nextTick();
-
-            let typeInput = this.$el.querySelector("select, fieldset");
-
-            if (!typeInput) return;
-
-            if (typeInput.tagName === "SELECT") {
-                typeInput.value = this.selectedType ?? "";
-            } else {
-                let btn = typeInput.querySelector(`input${this.selectedType ? `[value=${this.selectedType}]` : '' }`);
-
-                if (btn) {
-                    btn.checked = true;
-                }
-
-            }
-        },
-
-        async updateType() {
-            this.selectedType = document.querySelector('input[name=type]:checked, select[name=type]')?.value ?? "";
-
-            if (this.selectedType !== (this.$route.query.type ?? "")) {
-                this.highlightButton = true;
-            } else {
-                this.highlightButton = false;
-            }
-        },
-
-        activateListener() {
-
-            if (!this.listenerActive) {
-                this.$addScrollEvent(this.scrollEvent);              
-                this.listenerActive = true;
-                this.lastScroll = pageYOffset;
-                this.scrollEvent(window.scrollY, 0);
-
-                console.log("Listener activated");
-            }
-
-        },
-
-        deactivateListener() {
-
-            this.$removeScrollEvent(this.scrollEvent);
-            this.listenerActive = false;
-            this.$el.style.top = '';
-
-            console.log("Listener deactivated");
-
+        updateApplyButton() {
+            this.highlightButton = true;            
         },
 
         // if the browser window is too short, we might overflow
@@ -181,13 +178,11 @@ export default {
             let botOffset = window.innerHeight - offsetHeight;
             if (botOffset > topOffset) botOffset = topOffset;
 
-            let newOffset = this.offset - dist;
+            let newOffset = this.scrollOffset - dist;
             if (newOffset > topOffset) newOffset = topOffset;
             if (newOffset < botOffset) newOffset = botOffset;
 
-            this.offset = newOffset;
-
-            this.$el.style.top = newOffset + "px";
+            this.scrollOffset = newOffset;
 
         }
         
@@ -213,6 +208,7 @@ export default {
     display: flex;
     cursor: pointer;
     user-select: none;
+    font-family: "Poppins", sans-serif;
 }
 
 .search-filter > .filter {
@@ -226,6 +222,21 @@ export default {
     animation-delay: 0.2s;
 }
 
+.filter {
+    padding: 0 10px;
+}
+
+.filter p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.filter p .feather {
+    height: 21px;
+    width: 21px;
+}
+
 @keyframes collapse-filters {
     0% {
         height: auto;
@@ -236,7 +247,8 @@ export default {
 }
 
 fieldset {
-    margin: 4px;
+    margin: 0 0 10px 0;
+    padding: 0;
     border: 0;
 }
 
@@ -246,20 +258,11 @@ fieldset {
     justify-content: flex-start;
 }
 
-.offers >>> .button {
-    margin: 2px;
-}
-
-.radio-buttons >>> .button {
-    border-radius: 0px;
-}
-
-.radio-buttons label:first-of-type >>> .button {
-    border-radius: 8px 8px 0 0;
-}
-
-.radio-buttons label:last-of-type >>> .button {
-    border-radius: 0 0 8px 8px;
+.filter h2 {
+    font-weight: 500;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    margin: 10px 0 10px 0;
 }
 
 .search-filter.expand > .filter {
@@ -272,7 +275,7 @@ fieldset {
     margin-right: 5px;
 }
 
-.search-filter.expand .feather {
+.search-filter.expand > .bar .feather {
     transform: rotate(90deg);
 }
 

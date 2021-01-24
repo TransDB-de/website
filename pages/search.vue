@@ -2,7 +2,7 @@
     
     <div class="search-container">
         
-        <SearchFilter @apply="applyFilter"></SearchFilter>
+        <SearchFilter @apply="applyFilter" :location="locationName"></SearchFilter>
         
         <div class="entry-container">
             
@@ -65,7 +65,7 @@ export default {
 }
 
 .search-container > .entry-container {
-    margin: 0px 20px;
+    margin: 0 20px;
 }
 
 @media only screen and (max-width: 720px) {

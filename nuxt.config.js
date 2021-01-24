@@ -9,7 +9,8 @@ export default {
         ],
         link: [
             { rel: "shortcut icon", type: "image/png", href: "favicon.png" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" }
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" },
+            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap" }
         ],
         htmlAttrs: {
             lang: "de"
@@ -46,7 +47,7 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: "https://transdb-preview.hamsterlabs.de/api/"
+        baseURL: "http://localhost:1300"
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)

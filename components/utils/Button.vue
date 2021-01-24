@@ -1,14 +1,6 @@
 <template>
 
-    <label v-if="radio || checkbox">
-        <input :type="radio ? 'radio' : checkbox ? 'checkbox' : ''" :value="value" :name="name" />
-        <span :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '', compact ? 'compact' : '']" class="button">
-            <slot v-if="!loading" />
-            <Loader v-else />
-        </span>
-    </label>
-
-    <button v-else :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '', compact ? 'compact' : '']" :value="value" @click="click" class="button">
+    <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" @click="click">
         <slot v-if="!loading" />
         <Loader v-else />
     </button>
@@ -27,7 +19,6 @@ export default {
         color: String,
         loading: Boolean,
         icononly: Boolean,
-        active: Boolean,
         radio: Boolean,
         checkbox: Boolean,
         value: String,
@@ -46,16 +37,7 @@ export default {
 
 <style scoped>
 
-label, button {
-    display: flex;
-    align-items: center;
-}
-
-span {
-    width: 100%;
-}
-
-.button {
+button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
@@ -63,6 +45,7 @@ span {
     cursor: pointer;
     font-size: 16px;
     display: flex;
+    align-items: center;
     font-weight: 600;
     padding: 8px 10px;
     border-radius: 4px;
@@ -71,43 +54,23 @@ span {
     font-family: 'Poppins', sans-serif;
 }
 
-.compact {
-    font-weight: normal;
-    font-size: 15px;
-    padding: 2px 6px;
-}
-
-.button:not(.light) {
+button:not(.light) {
     height: 40px;
 }
 
-.button:hover, .button:focus, input:hover + .button {
+button:hover, button:focus {
     background-color: var(--color-dark-accent);
 }
 
-.button:active {
+button:active {
     background-color: var(--color-dark-active);
-}
-
-input:checked + .button {
-    background-color: var(--color-input-selected);
-}
-
-input:checked:hover + .button {
-    background-color: var(--color-selected-hover);
-}
-
-label > input {
-    opacity: 0;
-    position: absolute;
-    cursor: pointer;
 }
 
 .red {
     background-color: var(--color-red);
 }
 
-.red:hover, .red:focus, input:hover + .red {
+.red:hover, .red:focus {
     background-color: var(--color-red-accent);
 }
 
@@ -130,9 +93,10 @@ label > input {
     background-color: var(--color-light);
     box-shadow: none;
     color: #334450;
+    padding: 5px 10px;
 }
 
-.light:hover, .light:focus, input:hover + .light {
+.light:hover, .light:focus {
     background-color: var(--color-light-accent);
 }
 

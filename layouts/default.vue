@@ -67,12 +67,14 @@ html {
     --color-grey-accent: #777;
     --color-grey-active: #414141;
 
-    --color-input-selected: #5ca3f0;
+    --color-radio-selected: #4897ec;
+
+    --color-checkbox-selected: #5ca3f0;
     --color-selected-hover: #72b0f1;
 
     --color-highlight: #5ca3f0;
     --color-highlight-accent: #72b0f1;
-
+    
     --image-background: url("/banner.jpg");
 }
 
@@ -82,9 +84,13 @@ body {
     color: #334450;
     display: flex;
     flex-direction: column;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Fira Sans", sans-serif;
     overflow: auto;
     min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", sans-serif;
 }
 
 .app {

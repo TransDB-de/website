@@ -17,11 +17,17 @@ export default ({}, inject) => {
     let lastScroll = 0;
 
     /**
-     * Adds an scroll event handler
+     * Adds an scroll event handler.
+     * If this handler is allready added, it will not be added twice
      * @param {(scrollYPosition, scrollYDistance) => void} callback 
      */
     const addScrollEvent = (callback) => {
+        if (events.includes(callback)) return;
+
         events.push(callback);
+
+        // Fire once
+        callback(window.scrollY, 0);
     }
 
     /**
