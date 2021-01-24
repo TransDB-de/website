@@ -110,7 +110,7 @@ export default {
             
             if(this.entry.meta.offers) {
                 
-                return this.entry.meta.offers.map((a) => this.offerMapping[entry.type][a]).join(", ");
+                return this.entry.meta.offers.map((a) => this.offerMapping[this.entry.type][a]).join(", ");
                 
             } else {
                 return "Nicht angegeben";
