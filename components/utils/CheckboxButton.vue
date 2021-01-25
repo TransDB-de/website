@@ -46,7 +46,7 @@ label {
 span {
     display: inline-flex;
     background-color: var(--color-light);
-    padding: 2px 8px;
+    padding: 3px 8px;
     border-radius: 4px;
 	cursor: pointer;
 }
@@ -57,6 +57,7 @@ span:hover, input:hover ~ span {
 
 input:checked ~ span {
 	background-color: var(--color-checkbox-selected);
+    color: white;
 }
 
 input:checked ~ span:hover, input:checked:hover ~ span {

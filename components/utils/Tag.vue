@@ -16,8 +16,8 @@ name: "Tag"
 
 .tag {
     display: inline-flex;
-    background-color: rgba(51, 68, 80, 0.15);
-    padding: 2px 8px;
+    background-color: var(--color-light);
+    padding: 3px 8px;
     border-radius: 4px;
 }
 
