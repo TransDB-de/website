@@ -9,8 +9,8 @@ export default {
         ],
         link: [
             { rel: "shortcut icon", type: "image/png", href: "favicon.png" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&display=swap" }
+            { rel: "stylesheet", href: "/fonts/fira_sans.css" },
+            { rel: "stylesheet", href: "/fonts/poppins.css" }
         ],
         htmlAttrs: {
             lang: "de"
