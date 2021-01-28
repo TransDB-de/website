@@ -18,12 +18,7 @@ export default {
         center: Boolean,
         color: String,
         loading: Boolean,
-        icononly: Boolean,
-        radio: Boolean,
-        checkbox: Boolean,
-        value: String,
-        name: String,
-        compact: Boolean
+        icononly: Boolean
     },
     methods: {
         
