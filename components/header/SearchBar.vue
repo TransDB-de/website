@@ -15,13 +15,13 @@
 
 <script>
 import Button from "@/components/utils/Button";
-import {MapPinIcon} from "vue-feather-icons";
+import { MapPinIcon } from "vue-feather-icons";
 import MouseoverMixin from "@/mixins/mouseover";
 
 export default {
     name: "SearchBar",
-    components: {Button, MapPinIcon},
-    mixins: [MouseoverMixin],
+    components: { Button, MapPinIcon },
+    mixins: [ MouseoverMixin ],
     props: {
         placeholder: String,
         mobilePlaceholder: String,
@@ -40,6 +40,8 @@ export default {
     
             navigator.geolocation.getCurrentPosition((pos) => {
                 this.$emit("search", { lat: pos.coords.latitude, long: pos.coords.longitude });
+            }, (error) => {
+                this.$router.push("/search");
             });
             
         }
