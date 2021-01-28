@@ -39,12 +39,12 @@ export default {
         
         applyFilter: function (filter) {
             
-            if(this.$route.query.lat && this.$route.query.long) {
+            if (this.$route.query.lat && this.$route.query.long) {
                 filter.lat = this.$route.query.lat;
                 filter.long = this.$route.query.long;
             }
             
-            if(this.$route.query.location) {
+            if (this.$route.query.location) {
                 filter.locaton = this.$route.query.location;
             }
             

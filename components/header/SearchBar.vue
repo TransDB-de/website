@@ -4,8 +4,7 @@
     
         <input type="text" :placeholder="$store.state.isMobile ? mobilePlaceholder : placeholder" @keypress.enter="search" :value="this.$route.query.location" />
         
-        <Button light @click="distanceSearch">
-            <map-pin-icon></map-pin-icon>
+            <MapPinIcon />
             <span class="hide-on-mobile">Umgebungssuche</span>
         </Button>
         

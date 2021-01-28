@@ -49,7 +49,7 @@ export default {
                 
             }
             
-            if(this.clear) {
+            if (this.clear) {
                 this.$el.reset();
             }
             

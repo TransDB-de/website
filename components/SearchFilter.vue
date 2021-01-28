@@ -5,7 +5,7 @@
         <div class="bar" @click="expand = !expand">
             
             <span>
-                <ChevronRightIcon></ChevronRightIcon>
+                <ChevronRightIcon />
             </span>
             
             <b>Spezifische Filter</b>
@@ -15,8 +15,8 @@
         <div class="filter">
             
             <h2 v-if="location">Standort</h2>
-            <p v-if="location">
-                <MapPinIcon></MapPinIcon> <span>{{ location }}</span>
+                <MapPinIcon />
+                <span>{{ location }}</span>
             </p>
         
             <Form @submit="apply">
@@ -42,7 +42,7 @@
                 
                 <h2 v-if="offerMapping[selectedType] || attributeMapping[selectedType]">Angebote</h2>
 
-                <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton">
+                <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton" >
 
                     <CheckboxButton name="offers[]"
                         v-for="(val, key) in offerMapping[selectedType]" :key="key"
@@ -284,7 +284,7 @@ fieldset {
 }
 
 @media only screen and (max-width: 720px) {
-    .search-filter button {
+    .search-filter > button {
         align-self: center;
         width: 80%;
         min-width: min-content;
