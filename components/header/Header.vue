@@ -2,11 +2,11 @@
     
     <div :class="{ header: true, hide: hide }">
     
-        <div class="navbar" ref="navbar">
+        <div :class="{navbar: true, expand, background}" ref="navbar">
     
             <h1 @click="reload">TransDB.de</h1>
             
-            <nav :class="{ expand }">
+            <nav @click="expand = !expand">
                 <nuxt-link to="/">Startseite</nuxt-link>
                 <nuxt-link to="/search">Suche</nuxt-link>
                 
@@ -41,7 +41,8 @@ export default {
     data() {
         return {
             hide: !["/","/search"].includes(this.$route.path),
-            expand: false
+            expand: false,
+            background: false
         }
     },
     mounted() {
@@ -79,11 +80,7 @@ export default {
             this.$refs.subtitle.style.opacity = opacity;
             this.$refs.searchbar.$el.style.opacity= opacity;
             
-            if (percent > 1.25) {
-                this.$refs.navbar.classList.add("background");
-            } else {
-                this.$refs.navbar.classList.remove("background");
-            }
+            this.background = percent > 1.25;
 
         }
         
@@ -139,6 +136,7 @@ export default {
     font-size: 56px;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
     margin: 20px 0;
+    user-select: none;
 }
 
 .header > h2 {
@@ -261,6 +259,29 @@ export default {
         width: 0;
         height: 0;
         overflow: hidden;
+    }
+    
+    .navbar.expand {
+        background: var(--color-radio-selected) !important;
+    }
+    
+    .navbar.expand > nav {
+        position: absolute;
+        grid-column: none;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        top: 53px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-radio-selected);
+    }
+    
+    .navbar.expand > nav > a {
+        font-size: 24px;
+        padding: 5px;
     }
     
 }
