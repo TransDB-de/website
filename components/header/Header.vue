@@ -7,7 +7,7 @@
             <h1 @click="reload">TransDB.de</h1>
             
             <nav @click="expand = !expand">
-                <nuxt-link to="/">Startseite</nuxt-link>
+                <nuxt-link to="/" class="index">Startseite</nuxt-link>
                 <nuxt-link to="/search">Suche</nuxt-link>
                 
                 <nuxt-link to="/manage" v-if="$store.state.user">Management</nuxt-link>
@@ -16,12 +16,12 @@
             </nav>
             
             <span @click="expand = !expand" class="mobile">
-                <MenuIcon />
+                <MenuIcon :expand="expand" />
             </span>
             
         </div>
         
-        <h1 ref="title">Trans*DB</h1>
+        <h1 ref="title" v-on:click="$router.push('/search')">Trans*DB</h1>
         
         <h2 ref="subtitle">Deine Anlaufstelle für Transgender-Unterstützung</h2>
         
@@ -33,7 +33,7 @@
 
 <script>
 import SearchBar from "@/components/header/SearchBar";
-import { MenuIcon } from "vue-feather-icons";
+import { MenuIcon } from "@/components/header/MenuIcon";
 
 export default {
     name: "Header",
@@ -136,6 +136,7 @@ export default {
     font-size: 56px;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
     margin: 20px 0;
+    cursor: pointer;
     user-select: none;
 }
 
@@ -221,7 +222,8 @@ export default {
     width: 100%;
 }
 
-.header > .navbar  .nuxt-link-exact-active:after {
+.header > .navbar .nuxt-link-active:not( .index ):after,
+.header > .navbar .nuxt-link-exact-active:after {
     opacity: 1;
     width: 70%;
 }
