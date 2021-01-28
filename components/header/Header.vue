@@ -71,7 +71,7 @@ export default {
 
         scrollEvent(scroll) {
 
-            let percent = (scroll / (this.$el.scrollHeight - (this.$refs.navbar.scrollHeight * 2)));
+            let percent = (scroll / (this.$el.scrollHeight - this.$refs.navbar.scrollHeight ));
             
             let opacity = (1 - percent).toFixed(2);
             opacity = opacity > 0 ? opacity: 0;
@@ -80,7 +80,7 @@ export default {
             this.$refs.subtitle.style.opacity = opacity;
             this.$refs.searchbar.$el.style.opacity= opacity;
             
-            this.background = percent > 1.25;
+            this.background = percent > 1;
 
         }
         
