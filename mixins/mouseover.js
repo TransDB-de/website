@@ -1,13 +1,14 @@
 const mouseOverTexts = {
     ffs: "Gesichtsfeminisierende OP's",
-    proximitySearch: "Gebe deinen Standort ein, oder clicke hier um ihm automatisch zu ermitteln",
-    location: "Dein Standort"
+    proximitySearch: "Standort ermitteln",
+    location: "Dein Standort",
+    locationSearch: "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
+    locationSearchButton: "Suche starten",
+    distance: "Entfergnung zu deinem Standort"
 }
 
 export default {
-    methods: {
-        getMouseover(id) {
-            return mouseOverTexts[id] ?? null;
-        }
+    created() {
+        this.mouseOverTexts = mouseOverTexts;
     }
 }

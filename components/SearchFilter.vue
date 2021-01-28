@@ -15,7 +15,7 @@
         <div class="filter">
             
             <h2 v-if="location">Standort</h2>
-            <p v-if="location" class="location" :title="getMouseover('location')">
+            <p v-if="location" class="location" :title="mouseOverTexts['location']">
                 <MapPinIcon />
                 <span>{{ location }}</span>
             </p>
@@ -49,7 +49,7 @@
                         v-for="(val, key) in offerMapping[selectedType]" :key="key"
                         :value="key"
                         :model="selectedOffers"
-                        :title="getMouseover(key)"
+                        :title="mouseOverTexts[key]"
                         @change="(newVal) => selectedOffers = newVal"
                     > {{ val }} </CheckboxButton>
 
@@ -57,7 +57,7 @@
                         v-for="(val, key) in attributeMapping[selectedType]" :key="key"
                         :value="key"
                         :model="selectedAttributes"
-                        :title="getMouseover(key)"
+                        :title="mouseOverTexts[key]"
                         @change="(newVal) => selectedAttributes = newVal"
                     > {{ val }} </CheckboxButton>
 
