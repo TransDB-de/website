@@ -3,8 +3,8 @@ const mouseOverTexts = {
     proximitySearch: "Standort ermitteln",
     location: "Dein Standort",
     locationSearch: "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
-    locationSearchButton: "Suche starten",
-    distance: "Entfergnung zu deinem Standort"
+    locationSearchButton: "Suchen",
+    distance: "Entfernung zu deinem Standort"
 }
 
 export default {
