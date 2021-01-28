@@ -33,7 +33,7 @@
 
 <script>
 import SearchBar from "@/components/header/SearchBar";
-import { MenuIcon } from "@/components/header/MenuIcon";
+import MenuIcon from "@/components/header/MenuIcon";
 
 export default {
     name: "Header",

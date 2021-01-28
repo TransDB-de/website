@@ -6,6 +6,7 @@
 
 <script>
 export default {
+	name: "MenuIcon",
 	props: {
 		expand: Boolean
 	}
