@@ -15,6 +15,7 @@
         <div class="filter">
             
             <h2 v-if="location">Standort</h2>
+            <p v-if="location" class="location" :title="getMouseover('location')">
                 <MapPinIcon />
                 <span>{{ location }}</span>
             </p>
@@ -48,6 +49,7 @@
                         v-for="(val, key) in offerMapping[selectedType]" :key="key"
                         :value="key"
                         :model="selectedOffers"
+                        :title="getMouseover(key)"
                         @change="(newVal) => selectedOffers = newVal"
                     > {{ val }} </CheckboxButton>
 
@@ -55,6 +57,7 @@
                         v-for="(val, key) in attributeMapping[selectedType]" :key="key"
                         :value="key"
                         :model="selectedAttributes"
+                        :title="getMouseover(key)"
                         @change="(newVal) => selectedAttributes = newVal"
                     > {{ val }} </CheckboxButton>
 
@@ -78,6 +81,7 @@ import RadioButton from "@/components/utils/RadioButton";
 import CheckboxButton from "@/components/utils/CheckboxButton";
 import {ChevronRightIcon, MapPinIcon} from "vue-feather-icons";
 import EntryMixin from "@/mixins/entry";
+import MouseoverMixin from "@/mixins/mouseover";
 
 export default {
     name: "SearchFilter",
@@ -89,7 +93,7 @@ export default {
         RadioButton,
         CheckboxButton
     },
-    mixins: [EntryMixin],
+    mixins: [ EntryMixin, MouseoverMixin ],
     props: {
         location: String
     },
@@ -156,6 +160,7 @@ export default {
         
         apply(form) {
             this.$emit("apply", form);
+            this.highlightButton = false;
         },
 
         updateApplyButton() {
@@ -215,6 +220,10 @@ export default {
     animation: collapse-filters;
     animation-fill-mode: forwards;
     animation-delay: 0.2s;
+}
+
+.location > .feather {
+    color: var(--color-radio-selected);
 }
 
 .filter {

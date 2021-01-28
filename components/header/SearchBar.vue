@@ -4,6 +4,7 @@
     
         <input type="text" :placeholder="$store.state.isMobile ? mobilePlaceholder : placeholder" @keypress.enter="search" :value="this.$route.query.location" />
         
+        <Button light @click="distanceSearch" :title="getMouseover('proximitySearch')" >
             <MapPinIcon />
             <span class="hide-on-mobile">Umgebungssuche</span>
         </Button>
@@ -15,10 +16,12 @@
 <script>
 import Button from "@/components/utils/Button";
 import {MapPinIcon} from "vue-feather-icons";
+import MouseoverMixin from "@/mixins/mouseover";
 
 export default {
     name: "SearchBar",
     components: {Button, MapPinIcon},
+    mixins: [MouseoverMixin],
     props: {
         placeholder: String,
         mobilePlaceholder: String,
