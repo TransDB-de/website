@@ -224,6 +224,7 @@ export default {
 
 .location > .feather {
     color: var(--color-radio-selected);
+    stroke-width: 2.5px;
 }
 
 .filter {

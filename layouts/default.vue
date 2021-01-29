@@ -112,6 +112,7 @@ body > #__nuxt, #__layout, .app {
 
 .footer {
     padding: 10px;
+    margin-top: auto;
 }
 
 .footer > a {
