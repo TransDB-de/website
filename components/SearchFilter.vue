@@ -41,6 +41,16 @@
 
                 </fieldset>
                 
+                <h2>Textsuche</h2>
+                
+                <input name="text"
+                       v-model="textSearch"
+                       @keyup="highlightButton = true"
+                       type="text"
+                       minlength="2"
+                       maxlength="120"
+                       placeholder="Suche Namen oder Personen"/>
+                
                 <h2 v-if="offerMapping[selectedType] || attributeMapping[selectedType]">Angebote</h2>
 
                 <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton" >
@@ -103,6 +113,7 @@ export default {
             selectedType: "",
             selectedAttributes: Set,
             selectedOffers: Set,
+            textSearch: "",
             highlightButton: false,
             scrollOffset: 0
         }
@@ -142,6 +153,7 @@ export default {
     },
     methods: {
         routeUpdated(newRoute) {
+            let text = newRoute.query.text ?? "";
             let type = newRoute.query.type ?? "";
             let offers = newRoute.query.offers ?? [];
             let attributes = newRoute.query.attributes ?? [];
@@ -153,6 +165,7 @@ export default {
             offers = offers.filter(val => this.offerMapping[type]?.[val] !== undefined);
             attributes = attributes.filter(val => this.attributeMapping[type]?.[val] !== undefined);
 
+            this.textSearch = text;
             this.selectedType = type;
             this.selectedOffers = new Set(offers);
             this.selectedAttributes = new Set(attributes);
@@ -235,6 +248,10 @@ export default {
     margin: 0;
     display: flex;
     align-items: center;
+}
+
+.filter input[type=text] {
+    margin-bottom: 10px;
 }
 
 .filter p .feather {

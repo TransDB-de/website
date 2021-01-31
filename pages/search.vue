@@ -34,7 +34,7 @@ export default {
             more: true
         }
     },
-    watchQuery: ["location", "lat", "long", "type", "offers", "attributes", "page"],
+    watchQuery: ["location", "lat", "long", "type", "offers", "attributes", "page", "text"],
     async asyncData({ $axios, query }) {
         
         let res = await $axios.$get("entries", { params: query });
