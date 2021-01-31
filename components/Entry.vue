@@ -6,11 +6,20 @@
         
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
-            <span v-if="entry.type === 'therapist'">{{ subjectMapping[entry.meta.subject] }}</span>
-            <span v-else>{{ typeMapping[entry.type] }}</span>
+            <span v-if="entry.type === 'therapist'" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.meta.subject] }}</span>
+            <span v-else :title="mouseOverTexts[entry.type]">{{ typeMapping[entry.type] }}</span>
         </p>
         
         <p>
+            
+            <a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
+                <map-icon />{{ address }}
+            </a>
+    
+            <span v-if="entry.telephone">
+                <phone-icon />{{ entry.telephone }}
+            </span>
+            
             <a :href="`mailto:${entry.email}`">
                 <mail-icon />{{ entry.email }}
             </a>
@@ -19,30 +28,23 @@
                 <globe-icon />{{ website }}
             </a>
             
-            <span v-if="entry.telephone">
-                <phone-icon />{{ entry.telephone }}
-            </span>
-            
-            <a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
-                <map-icon />{{ address }}
-            </a>
         </p>
         
         <p v-if="entry.meta.offers">
-            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers" :key="offer">{{ offerMapping[offer] }}</Tag>
+            <b>Angebote:</b> <Tag v-for="offer of entry.meta.offers" :key="offer" :title="mouseOverTexts[offer]">{{ offerMapping[entry.type][offer] }}</Tag>
         </p>
         
         <p v-if="entry.meta.attributes">
-            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes" :key="attr">{{ attributeMapping[attr] }}</Tag>
+            <b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes" :key="attr" :title="mouseOverTexts[attr]">{{ attributeMapping[entry.type][attr] }}</Tag>
         </p>
         
         <p v-if="entry.meta.specials">
             <b>Besonderheiten:</b>{{ entry.meta.specials }}
         </p>
         
-        <p v-if="entry.distance">
+        <p v-if="entry.distance" class="nav" :title="mouseOverTexts['distance']">
             <span>
-                <navigation-icon></navigation-icon><b>{{ Math.round(entry.distance) }} km</b>
+                <NavigationIcon /> <b>{{ Math.round(entry.distance) }} km</b>
             </span>
         </p>
         
@@ -53,12 +55,13 @@
 <script>
 import Tag from "@/components/utils/Tag";
 import EntryMixin from "@/mixins/entry";
+import MouseoverMixin from "@/mixins/mouseover";
 import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon } from "vue-feather-icons";
 
 export default {
     name: "FullEntry",
-    components: {Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon},
-    mixins: [EntryMixin],
+    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon },
+    mixins: [ EntryMixin, MouseoverMixin ],
     props: {
         entry: Object
     },
@@ -118,6 +121,10 @@ export default {
     margin-right: 0;
 }
 
+.entry b {
+    font-weight: 500;
+}
+
 .entry > p > b {
     margin-right: 5px;
     display: inline-flex;
@@ -130,7 +137,6 @@ export default {
 
 .entry > p > span .feather, .entry > p > a .feather {
     margin-right: 5px;
-    margin-top: 3px;
     height: 18px;
     width: 18px;
     min-width: 18px;
@@ -139,4 +145,9 @@ export default {
 .entry > p > a:hover {
     text-decoration: underline solid rgba(51, 68, 80, 0.7);
 }
+
+.entry > .nav {
+    user-select: none;
+}
+
 </style>

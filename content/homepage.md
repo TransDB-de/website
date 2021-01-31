@@ -7,7 +7,8 @@ verarbeitet und in Form dieser Website übersichtlich bereitstellt.
 Falls du für deine Transition also noch nach geeigneten Arztpersonen, Therapeut\*innen oder anderen Anlaufstellen suchst,
 bist du bei uns genau richtig!
 
-# Wie kann ich helfen?
+## Wie kann ich helfen?
+
 Das Projekt Trans\*db lebt von der Community und allen trans\* Personen, die ihre Erfahrungen mit anderen teilen.
 Wir hoffen darauf, in Zukunft möglichst viele gute Angebote präsentieren zu können,
 um trans\* Personen aus ganz Deutschland eine mögliche Transition zu erleichtern.

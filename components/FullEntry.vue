@@ -99,7 +99,7 @@ export default {
             
             if(this.entry.meta.attributes) {
                 
-                return this.entry.meta.attributes.map((a) => this.attributeMapping[a]).join(", ");
+                return this.entry.meta.attributes.map((a) => this.attributeMapping[entry.type][a]).join(", ");
                 
             } else {
                 return "Nicht angegeben";
@@ -110,7 +110,7 @@ export default {
             
             if(this.entry.meta.offers) {
                 
-                return this.entry.meta.offers.map((a) => this.offerMapping[a]).join(", ");
+                return this.entry.meta.offers.map((a) => this.offerMapping[this.entry.type][a]).join(", ");
                 
             } else {
                 return "Nicht angegeben";

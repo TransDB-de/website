@@ -20,6 +20,7 @@ export default {
     max-width: 750px;
     text-align: center;
     position: initial;
+    font-size: 20px;
 }
 
 .homepage a[href="/submit"] {

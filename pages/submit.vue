@@ -98,7 +98,7 @@
     
             <h3>Weitere Infos:</h3>
             <Checkbox name="attributes[]" value="insurancePay" placeholder="Haben Krankenkassen hier Kosten übernommen?" />
-            <Checkbox name="attributes[]" value="transfrendly" placeholder="Ist das Studio Trans*freundlich?" />
+            <Checkbox name="attributes[]" value="transfriendly" placeholder="Ist das Studio Trans*freundlich?" />
             <Checkbox name="attributes[]" value="hasDoctor" placeholder="Wird das Studio von einer Arztperson geleitet?" />
             
         </div>

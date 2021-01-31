@@ -2,12 +2,12 @@
     
     <div :class="{ header: true, hide: hide }">
     
-        <div class="navbar" ref="navbar">
+        <div :class="{navbar: true, expand, background}" ref="navbar">
     
             <h1 @click="reload">TransDB.de</h1>
             
-            <nav :class="{ expand }">
-                <nuxt-link to="/">Startseite</nuxt-link>
+            <nav @click="expand = !expand">
+                <nuxt-link to="/" class="index">Startseite</nuxt-link>
                 <nuxt-link to="/search">Suche</nuxt-link>
                 
                 <nuxt-link to="/manage" v-if="$store.state.user">Management</nuxt-link>
@@ -16,12 +16,12 @@
             </nav>
             
             <span @click="expand = !expand" class="mobile">
-                <i data-feather="menu"></i>
+                <MenuIcon :expand="expand" />
             </span>
             
         </div>
         
-        <h1 ref="title">Trans*DB</h1>
+        <h1 ref="title" v-on:click="$router.push('/search')">Trans*DB</h1>
         
         <h2 ref="subtitle">Deine Anlaufstelle für Transgender-Unterstützung</h2>
         
@@ -33,42 +33,30 @@
 
 <script>
 import SearchBar from "@/components/header/SearchBar";
+import MenuIcon from "@/components/header/MenuIcon";
+
 export default {
     name: "Header",
-    components: {SearchBar},
+    components: {SearchBar, MenuIcon},
     data() {
         return {
             hide: !["/","/search"].includes(this.$route.path),
-            expand: false
+            expand: false,
+            background: false
         }
     },
     mounted() {
-      
-        document.addEventListener("scroll", (event) => {
-            
-            let scroll = Math.round(window.scrollY);
-            let percent = (scroll / (this.$el.scrollHeight - (this.$refs.navbar.scrollHeight * 2)));
-            
-            let opacity = (1 - percent).toFixed(2);
-            opacity = opacity > 0 ? opacity: 0;
-            
-            this.$refs.title.style.opacity = opacity;
-            this.$refs.subtitle.style.opacity = opacity;
-            this.$refs.searchbar.$el.style.opacity= opacity;
-            
-            if(percent > 1.25) {
-                this.$refs.navbar.classList.add("background");
-            } else {
-                this.$refs.navbar.classList.remove("background");
-            }
-            
-        })
-        
+        this.$addScrollEvent(this.scrollEvent);
+    },
+    beforeDestroy() {
+       this.$removeScrollEvent(this.scrollEvent);
     },
     watch: {
+
         $route: function(to, from) {
             this.hide = !["/","/search"].includes(to.path);
         }
+        
     },
     
     methods: {
@@ -79,6 +67,21 @@ export default {
         
         search: function (query) {
             this.$router.push({ name: "search", query });
+        },
+
+        scrollEvent(scroll) {
+
+            let percent = (scroll / (this.$el.scrollHeight - this.$refs.navbar.scrollHeight ));
+            
+            let opacity = (1 - percent).toFixed(2);
+            opacity = opacity > 0 ? opacity: 0;
+            
+            this.$refs.title.style.opacity = opacity;
+            this.$refs.subtitle.style.opacity = opacity;
+            this.$refs.searchbar.$el.style.opacity= opacity;
+            
+            this.background = percent > 1;
+
         }
         
     }
@@ -98,6 +101,7 @@ export default {
     width: 100%;
     transition: 0.4s ease all;
     overflow: hidden;
+    font-family: "Poppins", sans-serif;
 }
 
 .header.hide {
@@ -132,6 +136,8 @@ export default {
     font-size: 56px;
     text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
     margin: 20px 0;
+    cursor: pointer;
+    user-select: none;
 }
 
 .header > h2 {
@@ -216,7 +222,8 @@ export default {
     width: 100%;
 }
 
-.header > .navbar  .nuxt-link-exact-active:after {
+.header > .navbar .nuxt-link-active:not( .index ):after,
+.header > .navbar .nuxt-link-exact-active:after {
     opacity: 1;
     width: 70%;
 }
@@ -226,6 +233,8 @@ export default {
     padding: 0 10px;
     align-items: center;
     cursor: pointer;
+    grid-column: 3;
+    grid-row: 1;
 }
 
 .mobile > .feather {
@@ -252,6 +261,29 @@ export default {
         width: 0;
         height: 0;
         overflow: hidden;
+    }
+    
+    .navbar.expand {
+        background: var(--color-radio-selected) !important;
+    }
+    
+    .navbar.expand > nav {
+        position: absolute;
+        grid-column: none;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        top: 53px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--color-radio-selected);
+    }
+    
+    .navbar.expand > nav > a {
+        font-size: 24px;
+        padding: 5px;
     }
     
 }

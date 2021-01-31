@@ -5,11 +5,16 @@ export default {
         meta: [
             { charset: "utf-8" },
             { name: "viewport", content: "width=device-width, initial-scale=1" },
-            { hid: "description", name: "description", content: "" }
+            { hid: "description", name: "description", content: "Deine Anlaufstelle für Transgender-Unterstützung" },
+            { hid: "og:locale", name: "og:locale", content: "de_DE" },
+            { hid: "og:title", name: "og:title", content: "Trans*db" },
+            { hid: "og:description", name: "og:description", content: "Deine Anlaufstelle für Transgender-Unterstützung" },
+            { hid: "og:image", name: "og:image", content: "/logo.png" }
         ],
         link: [
             { rel: "shortcut icon", type: "image/png", href: "favicon.png" },
-            { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" }
+            { rel: "stylesheet", href: "/fonts/fira_sans.css" },
+            { rel: "stylesheet", href: "/fonts/poppins.css" }
         ],
         htmlAttrs: {
             lang: "de"
@@ -23,7 +28,9 @@ export default {
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
         "~/plugins/auth-redirect.js",
-        "~/plugins/ackee.client.js"
+        "~/plugins/ackee.client.js",
+        "~/plugins/responsive.client.js",
+        "~/plugins/smoothScroll.client.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -44,11 +51,16 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: "https://transdb-preview.hamsterlabs.de/api/"
+        baseURL: "http://localhost:1300"
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
+        extend(config, ctx) {
+            if (ctx.isDev) {
+                config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+            }
+        }
     },
 
     // Env config for plugins

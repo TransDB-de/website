@@ -3,7 +3,8 @@
 * */
 
 export const state = () => ({
-    user: null
+    user: null,
+    isMobile: true
 });
 
 export const getters = {
@@ -39,7 +40,11 @@ export const mutations = {
             localStorage.removeItem("user");
             state.user = null;
         }
-    }
+    },
+    
+    SET_MOBILE(state, isMobile) {
+		state.isMobile = isMobile;
+	}
 
 };
 

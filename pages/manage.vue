@@ -6,7 +6,9 @@
     
         <h2>Ausstehende Einträge</h2>
         
-        <FullEntry v-for="entry of entries" :entry="entry" @removed="loadEntries"></FullEntry>
+        <ul>
+            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries"></FullEntry>
+        </ul>
         
         <h2 v-if="isAdmin">Benutzer</h2>
         
@@ -17,7 +19,9 @@
             <Button> Anlegen</Button>
         </Form>
         
-        <UserItem v-if="isAdmin" v-for="user of users" :key="user._id" :user="user" @removed="loadUsers"/>
+        <ul v-if="isAdmin">
+            <UserItem v-for="user of users" :key="user._id" :user="user" @removed="loadUsers"/>
+        </ul>
         
     </div>
     
@@ -107,5 +111,12 @@ export default {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    padding: 0;
 }
 </style>
