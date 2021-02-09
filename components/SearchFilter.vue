@@ -73,7 +73,12 @@
 
                 </fieldset>
 
-                <Button center v-on:click="highlightButton = false" class="applyButton" :class="highlightButton ? 'highlight' : ''">
+                <Button
+                    center
+                    v-on:click="highlightButton = false"
+                    class="applyButton"
+                    :class="highlightButton ? 'highlight' : ''"
+                    :loading="loading">
                     Anwenden
                 </Button>
             </Form>
@@ -105,7 +110,8 @@ export default {
     },
     mixins: [ EntryMixin, MouseoverMixin ],
     props: {
-        location: String
+        location: String,
+        loading: Boolean
     },
     data() {
         return {

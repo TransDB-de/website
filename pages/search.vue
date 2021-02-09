@@ -2,7 +2,7 @@
     
     <div class="search-container">
         
-        <SearchFilter @apply="applyFilter" :location="locationName"></SearchFilter>
+        <SearchFilter @apply="applyFilter" :location="locationName" :loading="loading"></SearchFilter>
         
         <div class="entry-container">
             
@@ -11,7 +11,7 @@
             <h3 v-if="entries.length < 1">Leider sind unter deinem Filter keine Einträge vorhanden</h3>
             
             <div class="centered">
-                <Button v-if="more" center light @click="loadNextPage">Mehr anzeigen</Button>
+                <Button v-if="more" center light @click="loadNextPage" :loading="loadingNextPage">Mehr anzeigen</Button>
             </div>
             
         </div>
@@ -31,7 +31,9 @@ export default {
             entries: [],
             locationName: null,
             page: 0,
-            more: true
+            more: true,
+            loading: false,
+            loadingNextPage: false
         }
     },
     watchQuery: ["location", "lat", "long", "type", "offers", "attributes", "page", "text"],
@@ -39,7 +41,7 @@ export default {
         
         let res = await $axios.$get("entries", { params: query });
         
-        return { entries: res.entries, locationName: res.locationName, more: res.more }
+        return { entries: res.entries, locationName: res.locationName, more: res.more, loading: false }
         
     },
     mounted() {
@@ -51,6 +53,8 @@ export default {
     methods: {
         
         applyFilter: function (filter) {
+            
+            this.loading = true
             
             if (this.$route.query.lat && this.$route.query.long) {
                 filter.lat = this.$route.query.lat;
@@ -67,6 +71,8 @@ export default {
         
         loadNextPage: async function () {
     
+            this.loadingNextPage = true;
+            
             let page = this.page + 1;
             let query = { page, ...this.$route.query };
             
@@ -75,6 +81,8 @@ export default {
             this.entries = this.entries.concat(res.entries);
             this.more = res.more;
             this.page = page;
+            
+            this.loadingNextPage = false;
             
         },
         
