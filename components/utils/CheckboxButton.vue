@@ -30,6 +30,7 @@ export default {
                 } else {
                     set.delete(this.value);
                 }
+
                 this.$emit("change", set);
             }
         }

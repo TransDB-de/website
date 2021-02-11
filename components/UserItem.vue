@@ -75,7 +75,8 @@ export default {
 .user-item h1 {
     font-size: 24px;
     margin: 0;
-    font-weight: 700;
+    font-weight: 500;
+    text-align: left;
 }
 
 .user-item > div {

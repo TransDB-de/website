@@ -1,4 +1,4 @@
-const typeMapping = {
+export const typeMapping = {
     "": "Alle Kategorien",
     group: "Gruppe/Verein",
     therapist: "Therapeut*in/Psychiater*in",
@@ -8,7 +8,7 @@ const typeMapping = {
     hairremoval: "Haarentfernungsstudio"
 }
 
-const attributeMapping = {
+export const attributeMapping = {
     group: {
         trans: "Transfokus",
         regularMeetings: "Regelmäßige Treffen",
@@ -22,7 +22,7 @@ const attributeMapping = {
     }
 }
 
-const offerMapping = {
+export const offerMapping = {
     therapist: {
         indication: "Indikationen",
         therapy: "Begleittherapie",
@@ -42,10 +42,16 @@ const offerMapping = {
     }
 }
 
-const subjectMapping = {
-    therapist: "Psychologische*r Psychotherapeut*in",
-    psychologist: "Psychiater (Facharzt für Psychiatrie)"
+export const subjectMapping = {
+    therapist: {    
+        therapist: "Psychologische*r Psychotherapeut*in",
+        psychologist: "Psychiater (Facharzt für Psychiatrie)"
+    }
 }
+
+/** for using the mappings as data key references */
+let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
+export const typeMappingData = _typeMappingData;
 
 export default {
 
@@ -54,6 +60,7 @@ export default {
         this.attributeMapping = attributeMapping;
         this.offerMapping = offerMapping;
         this.subjectMapping = subjectMapping;
+        this.typeMappingData = typeMappingData;
     }
 
 }

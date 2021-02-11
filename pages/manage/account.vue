@@ -2,7 +2,7 @@
 
     <div class="account">
     
-        <h1>Accountverwaltung</h1>
+        <h1>Account Einstellungen</h1>
         
         <Form @submit="changeUsername">
             <h2>Benutzername ändern</h2>
@@ -29,8 +29,8 @@
         
         <h2>Abmelden</h2>
 
-        <Button icon="log-out" color="red" @click="logout" center>
-            <log-out-icon></log-out-icon>
+        <Button color="red" @click="logout" center>
+            <LogOutIcon />
             Abmelden
         </Button>
         
@@ -44,8 +44,11 @@ import Button from "@/components/utils/Button";
 import { LogOutIcon } from "vue-feather-icons";
 
 export default {
-name: "account",
+    name: "account",
     components: {Button, Form, LogOutIcon},
+    meta: {
+        authRequired: true
+    },
     computed: {
         username: function () {
             
@@ -145,11 +148,10 @@ name: "account",
 <style scoped>
 
 .account {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    align-items: stretch;
-    justify-content: center;
+    align-self: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 40px;
 }
 
 .account h1, .account h2, .account p {
@@ -158,6 +160,13 @@ name: "account",
 
 .account p {
     margin-top: 0;
+}
+
+button {
+    margin-bottom: 20px;
+    min-width: min-content;
+    width: 70%;
+    align-self: center;
 }
 
 </style>

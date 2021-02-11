@@ -6,7 +6,7 @@
         
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
-            <span v-if="entry.type === 'therapist'" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.meta.subject] }}</span>
+            <span v-if="subjectMapping[entry.type]" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.type][entry.meta.subject] }}</span>
             <span v-else :title="mouseOverTexts[entry.type]">{{ typeMapping[entry.type] }}</span>
         </p>
         
@@ -91,7 +91,7 @@ export default {
 .entry > h1 {
     font-size: 26px;
     margin: 0;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .entry > p {

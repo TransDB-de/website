@@ -10,7 +10,7 @@
             
             <h3 v-if="entries.length < 1">Leider sind unter deinem Filter keine Einträge vorhanden</h3>
             
-            <div class="centered">
+            <div class="load-more">
                 <Button v-if="more" center light @click="loadNextPage">Mehr anzeigen</Button>
             </div>
             
@@ -66,7 +66,9 @@ export default {
         },
         
         loadNextPage: async function () {
-    
+            
+            if (!this.more) return;
+
             let page = this.page + 1;
             let query = { page, ...this.$route.query };
             
@@ -93,6 +95,8 @@ export default {
 </script>
 
 <style>
+@import "@/css/load-more-button.css";
+
 .search-container {
     padding: 20px;
     display: grid;
@@ -102,30 +106,6 @@ export default {
 
 .search-container > .entry-container {
     margin: 0 20px;
-}
-
-.entry-container > .centered {
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-.entry-container > .centered > button:after, .entry-container > .centered > button:before {
-    content: "";
-    display: flex;
-    position: absolute;
-    width: calc(50% - 85px);
-    height: 2px;
-    background-color: var(--color-light);
-    border-radius: 2px;
-}
-
-.entry-container > .centered > button:before {
-    left: 0;
-}
-
-.entry-container > .centered > button:after {
-    right: 0;
 }
 
 @media only screen and (max-width: 720px) {

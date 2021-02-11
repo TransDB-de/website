@@ -92,6 +92,7 @@ import CheckboxButton from "@/components/utils/CheckboxButton";
 import {ChevronRightIcon, MapPinIcon} from "vue-feather-icons";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
+import MathMixin from "@/mixins/math";
 
 export default {
     name: "SearchFilter",
@@ -103,7 +104,7 @@ export default {
         RadioButton,
         CheckboxButton
     },
-    mixins: [ EntryMixin, MouseoverMixin ],
+    mixins: [ EntryMixin, MouseoverMixin, MathMixin ],
     props: {
         location: String
     },
@@ -183,20 +184,13 @@ export default {
         // if the browser window is too short, we might overflow
         // to counter this, allow the user to scroll an overflowing SearchFilter
         scrollEvent(pos, dist) {
-
             const offsetHeight = this.$el.offsetHeight;
-
             const topOffset = 56;
 
-            let botOffset = window.innerHeight - offsetHeight;
-            if (botOffset > topOffset) botOffset = topOffset;
-
-            let newOffset = this.scrollOffset - dist;
-            if (newOffset > topOffset) newOffset = topOffset;
-            if (newOffset < botOffset) newOffset = botOffset;
+            let botOffset = Math.min(window.innerHeight - offsetHeight, topOffset);
+            let newOffset = this.clamp(this.scrollOffset - dist, botOffset, topOffset);
 
             this.scrollOffset = newOffset;
-
         }
         
     }
@@ -252,6 +246,7 @@ export default {
 
 .filter input[type=text] {
     margin-bottom: 10px;
+    width: 100%;
 }
 
 .filter p .feather {

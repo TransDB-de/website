@@ -1,111 +1,95 @@
 <template>
+    <div class="manage">
+        <div class="header">
+            <h2>{{username}}</h2>
 
-    <div class="management">
-    
-        <h1>Management für Teammitglieder</h1>
-    
-        <h2>Ausstehende Einträge</h2>
-        
-        <ul>
-            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries"></FullEntry>
-        </ul>
-        
-        <h2 v-if="isAdmin">Benutzer</h2>
-        
-        <Form @submit="addUser" inline style="margin-bottom: 20px;" v-if="isAdmin">
-            <input name="username" type="text" placeholder="Benutzername" required />
-            <input name="email" type="email" placeholder="E-Mail" required />
-            <Checkbox name="admin" placeholder="Admin" />
-            <Button> Anlegen</Button>
-        </Form>
-        
-        <ul v-if="isAdmin">
-            <UserItem v-for="user of users" :key="user._id" :user="user" @removed="loadUsers"/>
-        </ul>
-        
+            <span v-if="loggedIn">
+                <Button class="settings-button" :title="mouseOverTexts['accountSettings']" center v-on:click="$router.push('/manage/account')">
+                    <SettingsIcon />
+                    Account
+                </Button>
+
+                <Button color="red" :title="mouseOverTexts['logout']" @click="logout" center>
+                    <LogOutIcon />
+                    Abmelden
+                </Button>
+            </span>
+            <span v-else>
+                <Button center v-on:click="$router.push('/login')">
+                    <LogInIcon />
+                    Anmelden
+                </Button>
+            </span>
+
+            <div class="links" v-if="isAdmin">
+                <nuxt-link to="/manage" class="index" center>
+                    Ausstehende Einträge
+                </nuxt-link>
+
+                <nuxt-link to="/manage/database" center>
+                    Datenbank Verwaltung
+                </nuxt-link>
+
+                <nuxt-link to="/manage/users" center>
+                    Nutzer Verwaltung
+                </nuxt-link>
+            </div>
+
+        </div>
+        <NuxtChild class="content" />
     </div>
-    
 </template>
 
 <script>
-
-import Form from "@/components/utils/Form";
-import Checkbox from "@/components/utils/Checkbox";
 import Button from "@/components/utils/Button";
-import UserItem from "@/components/UserItem";
-import FullEntry from "@/components/FullEntry";
+import { LogInIcon, LogOutIcon, SettingsIcon } from 'vue-feather-icons';
+
+import AccountMixin from "@/mixins/account";
+import MouseoverMixin from "@/mixins/mouseover";
 
 export default {
     name: "manage",
-    components: {FullEntry, UserItem, Button, Checkbox, Form},
-    meta: {
-        authRequired: true
-    },
-    data() {
-        return {
-            users: [],
-            entries: []
-        }
-    },
-    created() {
-        this.loadEntries();
-        this.loadUsers();
-    },
+    components: { Button, LogInIcon, LogOutIcon, SettingsIcon },
+    mixins: [ AccountMixin, MouseoverMixin ],
     computed: {
-        isAdmin: function() {
-            return this.$store.state.user && this.$store.state.user.admin;
-        }
-    },
-    methods: {
-        
-        loadUsers: async function() {
-            try {
-                this.users = await this.$axios.$get("users");
-            } catch (e) {
-                return;
+        username() {
+            
+            if (this.$store.state.user) {
+                return this.$store.state.user.username;
+            } else {
+                return "Bitte melde dich an";
             }
+            
         },
-        
-        loadEntries: async function() {
-            try {
-                this.entries = await this.$axios.$get("entries/unapproved");
-            } catch (e) {
-                return;
-            }
-        },
-        
-        addUser: async function (form) {
-            
-            let res;
-            
-            try {
-                res = await this.$axios.$post("users", form);
-            } catch (e) {
-                
-                if(e.response.status === 422) {
-                    alert("Fehler: Invalide Formulardaten")
-                } else if(e.response.status === 409) {
-                    alert("Fehler: Dieser Benutzer existiert bereits");
-                } else {
-                    alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
-                }
-                
-                return;
-                
-            }
-    
-            await navigator.clipboard.writeText(res.password);
-            alert("Der Benutzer wurde angelegt und das temporäre Password in die Zwischenablage kopiert");
-            this.loadUsers();
-            
+
+        loggedIn() {
+            return this.$store.state.user ? true : false;
         }
-        
     }
 }
 </script>
 
 <style scoped>
-.management {
+.manage {
+    padding: 0 40px;
+    width: 100%;
+    max-width: 1600px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: minmax(0, 100px) auto 1fr auto;
+    grid-template-areas: "line1 name line2 buttons"
+                         "links links links links";
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+}
+
+.content {
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -113,10 +97,99 @@ export default {
     justify-content: center;
 }
 
-ul {
+.content >>> h1 {
+    text-align: center;
+}
+
+.links {
+    grid-area: links;
     display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    padding: 0;
+    flex-direction: row;
+}
+
+.header > span {
+    display: flex;
+    flex-direction: row;
+    grid-area: buttons;
+    margin-right: 20px;
+}
+
+.settings-button {
+    margin-right: 10px;
+}
+
+h2 {
+    grid-area: name;
+}
+
+.header:before, .header:after{
+    content: "";
+    display: block;
+    width: calc(100% - 40px);
+    height: 2px;
+    background-color: var(--color-light);
+    border-radius: 2px;
+    top: 50%
+}
+
+.header:before {
+    left: 0;
+    grid-area: line1;
+}
+
+.header:after {
+    right: 0;
+    grid-area: line2;
+}
+
+.links > a {
+    color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 10px 10px;
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    min-height: 36px;
+}
+
+.links a:after {
+    transition: 0.2s ease width, 0.2s ease opacity;
+    display: inline-block;
+    width: 0;
+    content: "";
+    opacity: 0;
+    border-bottom: 3px solid var(--color-dark);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 0px;
+}
+
+.links a:hover:after {
+    opacity: 1;
+    width: 100%;
+}
+
+.links .nuxt-link-active:not( .index ):after,
+.links .nuxt-link-exact-active:after {
+    opacity: 1;
+    width: 70%;
+}
+
+@media only screen and (max-width: 720px) {
+    .header {
+        grid-template-columns: 1fr auto 1fr;
+        grid-template-areas: "line1 name line2"
+                             "buttons buttons buttons"
+                             "links links links";
+    }
+
+    .links {
+        margin-top: 20px;
+    }
 }
 </style>

@@ -11,8 +11,11 @@
                 <nuxt-link to="/search">Suche</nuxt-link>
                 
                 <nuxt-link to="/manage" v-if="$store.state.user">Management</nuxt-link>
-                <nuxt-link to="/account" v-if="$store.state.user">Account</nuxt-link>
                 <nuxt-link to="/submit" class="highlight">Neuer Eintrag</nuxt-link>
+                <a @click="logout" v-if="$store.state.user" class="logout" :title="mouseOverTexts['logout']">
+                    <span v-if="$store.state.isMobile">Abmelden</span>
+                    <LogOutIcon v-else />
+                </a>
             </nav>
             
             <span @click="expand = !expand" class="mobile">
@@ -34,10 +37,14 @@
 <script>
 import SearchBar from "@/components/header/SearchBar";
 import MenuIcon from "@/components/header/MenuIcon";
+import AccountMixin from "@/mixins/account";
+import MouseoverMixin from "@/mixins/mouseover";
+import { LogOutIcon } from 'vue-feather-icons';
 
 export default {
     name: "Header",
-    components: {SearchBar, MenuIcon},
+    components: { SearchBar, MenuIcon, LogOutIcon },
+    mixins: [ AccountMixin, MouseoverMixin ],
     data() {
         return {
             hide: !["/","/search"].includes(this.$route.path),
@@ -203,6 +210,7 @@ export default {
     font-size: 20px;
     margin: 10px 10px;
     position: relative;
+    cursor: pointer;
 }
 
 .header > .navbar > nav > a:after {
