@@ -1,9 +1,9 @@
 <template>
     <div class="inline-field">
         {{ heading }}
-        <label class="checkbox" :class="editable ? 'editable' : ''" @change="$emit('input', !value)">
-            <input v-if="editable" type="checkbox" :value="value">
-            <div class="mark" :class="value ? 'selected' : ''"></div>
+        <label class="checkbox" :class="editable ? 'editable' : ''" @change="val = !val; $emit('input', val)">
+            <input v-if="editable" type="checkbox" :value="val">
+            <div class="mark" :class="val ? 'selected' : ''"></div>
         </label>
     </div>
 </template>
@@ -15,9 +15,17 @@ export default {
         editable: Boolean,
         heading: ""
     },
-    methods: {
-        change(e) {
-            this.$emit("input", !this.value);
+    data() {
+        return {
+            val: Boolean
+        }
+    },
+    created() {
+        this.val = this.value;
+    },
+    watch: {
+        value(newVal) {
+            this.val = newVal;
         }
     }
 }
