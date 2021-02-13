@@ -28,7 +28,7 @@ const generalFields = {
 	"website": "website",
 	"telefon": "telephone",
 
-	"Besonderheiten": "meta.specials",
+	"Spezialangebote": "meta.specials",
 	"Thema": "meta.subject"
 }
 
