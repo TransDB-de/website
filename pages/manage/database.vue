@@ -79,6 +79,7 @@ export default {
         
         filter(query) {
             this.query = query;
+            this.page = 0;
             this.loadEntries();
         },
 
@@ -124,7 +125,7 @@ export default {
 </script>
 
 <style scoped>
-@import "@/css/load-more-button.css";
+@import "../../css/load-more-button.css";
 
 .database > .text-filter {
     align-self: center;

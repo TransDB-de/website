@@ -150,7 +150,6 @@ export default {
 .account {
     align-self: center;
     max-width: 600px;
-    width: 100%;
     margin: 0 40px;
 }
 

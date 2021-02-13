@@ -174,7 +174,6 @@ h2 {
     width: 100%;
 }
 
-.links .nuxt-link-active:not( .index ):after,
 .links .nuxt-link-exact-active:after {
     opacity: 1;
     width: 70%;

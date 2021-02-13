@@ -27,7 +27,7 @@
 
         </div>
 
-        <Button :title="mouseOverTexts['filter']">Filtern</Button>
+        <Button :title="mouseOverTexts['filter']" @click="submit">Filtern</Button>
     </div>
 
 </template>

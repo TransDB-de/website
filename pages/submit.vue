@@ -8,6 +8,7 @@
             <option value="" disabled>*Art wählen*</option>
             <option value="group">Gruppe/Verein</option>
             <option value="therapist">Therapeut*in/Psychiater*in</option>
+            <option value="surveyor">Gutachter*in</option>
             <option value="endocrinologist">Endokrinologische Praxis</option>
             <option value="surgeon">Operateur*in</option>
             <option value="hairremoval">Haarentfernungsstudio</option>
@@ -63,7 +64,14 @@
             
             <Checkbox name="offers[]" value="indication" placeholder="Indikation" />
             <Checkbox name="offers[]" value="therapy" placeholder="Begleittherapie" />
-            <Checkbox name="offers[]" value="expertise" placeholder="Gutachten" />
+            
+        </div>
+        
+        <div v-if="type === 'surveyor'">
+    
+            <h2>Spezifische Angaben</h2>
+    
+            <Checkbox name="attributes[]" value="enby" placeholder="Non-Binary freundlich" />
             
         </div>
         
@@ -132,6 +140,7 @@ export default {
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
                 therapist: "Name der Praxis",
+                surveyor: "Name der Praxis / der Gutachter*in",
                 endocrinologist: "Name der Praxis",
                 surgeon: "Name des Arztes / der Klinik",
                 hairremoval: "Name des Studios",

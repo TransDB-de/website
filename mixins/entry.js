@@ -2,6 +2,7 @@ export const typeMapping = {
     "": "Alle Kategorien",
     group: "Gruppe/Verein",
     therapist: "Therapeut*in/Psychiater*in",
+    surveyor: "Gutachter*in",
     endocrinologist: "Endokrinologische Praxis",
     surgeon: "Operateur*in",
     logopedics: "Logopäd*in",
@@ -19,14 +20,16 @@ export const attributeMapping = {
         insurancePay: "Kostenübernahme",
         transfriendly: "Transfreundlich",
         hasDoctor: "Ärztlich"
+    },
+    surveyor: {
+        enby: "Non-Binary freundlich"
     }
 }
 
 export const offerMapping = {
     therapist: {
         indication: "Indikationen",
-        therapy: "Begleittherapie",
-        expertise: "Gutachten"
+        therapy: "Begleittherapie"
     },
     surgeon: {
         mastectomy: "Mastektomie",

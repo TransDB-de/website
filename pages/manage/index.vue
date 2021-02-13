@@ -48,7 +48,7 @@ export default {
         
         async loadEntries(append = false) {
             try {
-                this.res = await this.$axios.$get("entries/unapproved");
+                let res = await this.$axios.$get("entries/unapproved");
                 this.more = res.more;
 
                 if (append) {
@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style scoped>
-@import "@/css/load-more-button.css";
+@import "../../css/load-more-button.css";
 
 ul {
     display: flex;
