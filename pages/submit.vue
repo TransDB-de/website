@@ -136,7 +136,6 @@ export default {
         return {
             type: "",
             loading: false,
-            entry: null,
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
                 therapist: "Name der Praxis",
@@ -147,21 +146,6 @@ export default {
                 logopedics: "Name der Praxis"
             }
         }
-    },
-    async created() {
-    
-        let entryId = this.$route.query.entry;
-    
-        if(!entryId) {
-            return;
-        }
-        
-        try {
-            this.entry = await this.$axios.$get("entries/" + entryId);
-        } catch (e) {
-            return;
-        }
-    
     },
     methods: {
     
@@ -178,6 +162,8 @@ export default {
             }
             
             this.loading = false;
+            
+            this.$router.push("/");
             
         }
     

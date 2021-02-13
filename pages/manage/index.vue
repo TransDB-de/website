@@ -5,7 +5,7 @@
         <h1>Ausstehende Einträge</h1>
         
         <ul>
-            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries"></FullEntry>
+            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries()"></FullEntry>
         </ul>
         
         <div class="load-more">
@@ -55,6 +55,7 @@ export default {
                     this.entries = this.entries.concat(res.entries);
                 } else {
                     this.entries = res.entries;
+                    this.page = 0;
                 }
             } catch (e) {
                 return;
