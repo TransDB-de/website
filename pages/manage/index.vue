@@ -5,7 +5,7 @@
         <h1>Ausstehende Einträge</h1>
         
         <ul>
-            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries"></FullEntry>
+            <FullEntry v-for="entry of entries" :entry="entry" :key="entry._id" @removed="loadEntries()"></FullEntry>
         </ul>
         
         <div class="load-more">
@@ -48,13 +48,14 @@ export default {
         
         async loadEntries(append = false) {
             try {
-                this.res = await this.$axios.$get("entries/unapproved");
+                let res = await this.$axios.$get("entries/unapproved");
                 this.more = res.more;
 
                 if (append) {
                     this.entries = this.entries.concat(res.entries);
                 } else {
                     this.entries = res.entries;
+                    this.page = 0;
                 }
             } catch (e) {
                 return;
@@ -86,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-@import "@/css/load-more-button.css";
+@import "../../css/load-more-button.css";
 
 ul {
     display: flex;
