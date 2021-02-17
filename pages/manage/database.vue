@@ -3,7 +3,7 @@
         <div class="heading">
             <h1>Datenbank Verwaltung</h1>
             
-            <Button class="backup-button" light @click="downloadBackup" >
+            <Button class="backup-button" :title="mouseOverTexts['backup']" light @click="downloadBackup" >
                 <DownloadIcon />
                 Backup herunterladen
             </Button>
@@ -31,6 +31,7 @@
 
 <script>
 import AccountMixin from "@/mixins/account";
+import MouseoverMixin from "@/mixins/mouseover";
 
 import TextFilter from "@/components/manage/TextFilter";
 import EditableEntry from '@/components/manage/EditableEntry';
@@ -40,7 +41,7 @@ import { HelpCircleIcon, DownloadIcon } from 'vue-feather-icons';
 export default {
     name: "database",
     components: { TextFilter, EditableEntry, HelpCircleIcon, DownloadIcon },
-    mixins: [ AccountMixin ],
+    mixins: [ AccountMixin, MouseoverMixin ],
     meta: {
         authRequired: true
     },

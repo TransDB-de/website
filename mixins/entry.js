@@ -6,7 +6,7 @@ export const typeMapping = {
     endocrinologist: "Endokrinologische Praxis",
     surgeon: "Operateur*in",
     logopedics: "Logopäd*in",
-    hairremoval: "Haarentfernungsstudio"
+    hairremoval: "Haarentfernung"
 }
 
 export const attributeMapping = {
@@ -22,7 +22,7 @@ export const attributeMapping = {
         hasDoctor: "Ärztlich"
     },
     surveyor: {
-        enby: "Non-Binary freundlich"
+        enby: "NB Gutachen"
     }
 }
 
@@ -42,6 +42,12 @@ export const offerMapping = {
         orch: "Orchiektomie",
         clitPI: "Klitorispenoid / Metoidioplastik",
         bodyfem: "Körperfemininisierende OP's"
+    },
+    hairremoval: {
+        laser: "Laserepilation",
+        ipl: "IPL",
+        electro: "Elektroepilation",
+        electroAE: "Elektroepilation mit Lokalanästhesie"
     }
 }
 
