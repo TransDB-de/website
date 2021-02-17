@@ -1,6 +1,13 @@
 <template>
     <div class="database" v-if="isAdmin">
-        <h1>Datenbank Verwaltung</h1>
+        <div class="heading">
+            <h1>Datenbank Verwaltung</h1>
+            
+            <Button class="backup-button" light @click="downloadBackup" >
+                <DownloadIcon />
+                Backup herunterladen
+            </Button>
+        </div>
 
         <nuxt-link to="/manage/help" class="help">
             <HelpCircleIcon />
@@ -28,11 +35,11 @@ import AccountMixin from "@/mixins/account";
 import TextFilter from "@/components/manage/TextFilter";
 import EditableEntry from '@/components/manage/EditableEntry';
 
-import { HelpCircleIcon } from 'vue-feather-icons';
+import { HelpCircleIcon, DownloadIcon } from 'vue-feather-icons';
 
 export default {
     name: "database",
-    components: { TextFilter, EditableEntry, HelpCircleIcon },
+    components: { TextFilter, EditableEntry, HelpCircleIcon, DownloadIcon },
     mixins: [ AccountMixin ],
     meta: {
         authRequired: true
@@ -119,6 +126,30 @@ export default {
                 this.loadNextPage();
             }
             
+        },
+
+        async downloadBackup() {
+            try {
+                const res = await this.$axios.$get(`entries/backup`);
+                const data = new Blob([JSON.stringify(res)], { type: "application/json" });
+
+                const url = window.URL.createObjectURL(data);
+                const link = document.createElement("a");
+
+                const date = new Date();
+                const fileStr = `transdb_backup_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}h${date.getMinutes()}.json`;
+
+                link.href = url;
+                link.setAttribute("download", fileStr);    
+                
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } catch(e) {
+                console.error(e);
+                // TODO: user feedback
+            }
+            
         }
     }
 }
@@ -134,6 +165,21 @@ export default {
     width: 100%;
 }
 
+.heading {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+}
+
+.heading > h1 {
+    grid-column: 2 / 3;
+    margin: 0;
+}
+
+.heading > button {
+    align-self: center;
+    justify-self: end;
+}
+
 .help {
     align-self: center;
     font-family: "Poppins", sans-serif;
@@ -141,8 +187,7 @@ export default {
     text-decoration: none;
     font-weight: 500;
     font-size: 1.2em;
-    margin-top: -28px;
-    margin-bottom: 12px;
+    margin-bottom: 0.6em;
 }
 
 .help > .feather {
@@ -154,5 +199,17 @@ export default {
 
 ul {
     padding: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+    .heading {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .heading > h1 {
+        grid-column: 2 / 3;
+        margin: 0;
+    }
 }
 </style>

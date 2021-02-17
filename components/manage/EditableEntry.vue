@@ -2,7 +2,7 @@
     <div class="entry" :class="editable ? 'edit' : ''">
         <InlineTextField v-model="_entry.name" :editable="editable" heading="Name" class="col-1-2"/>
         <InlineSelectField v-model="_entry.type" :mapping="typeMappingData" :editable="editable" heading="Art" class="col-2-2"/>
-        <InlineBooleanField v-model="_entry.approved" :editable="editable" heading="Freigeschaltet" class="no-border col-last"/>
+        <InlineBooleanField v-model="_entry.approved" :editable="editable" heading="Freigeschaltet" class="no-border col-last row-first"/>
 
         <div class="segment col-1-2">
             <span>Adresse</span>
@@ -277,5 +277,48 @@ export default {
 .buttons > .single > .feather {
     width: 22px;
     height: 22px;
+}
+
+@media only screen and (max-width: 740px) {
+    .entry {
+        grid-template-columns: 1fr auto;
+    }
+
+    .col-1-2 {
+        grid-column: 1 / 2;
+    }
+
+    .col-2-2 {
+        grid-column: 1 / 2;
+    }
+
+    .segment > .col-2-2 {
+        grid-column: 1 / 3;
+    }
+
+    .col-last {
+        grid-column: 2 / 3;
+    }
+
+    .col-1-3 {
+        grid-column: 1 / 2;
+    }
+
+    .col-2-3 {
+        grid-column: 1 / 2;
+    }
+
+    .col-3-3 {
+        grid-column: 1 / 2;
+    }
+
+    .row-first {
+        grid-row: 1 / 2;
+    }
+
+    .buttons {
+        grid-column: 2 / 3;
+        grid-row: 7 / 8;
+    }
 }
 </style>

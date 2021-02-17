@@ -36,6 +36,7 @@
             </div>
 
         </div>
+
         <NuxtChild class="content" />
     </div>
 </template>
@@ -71,7 +72,7 @@ export default {
 
 <style scoped>
 .manage {
-    padding: 0 40px;
+    padding: 0 min(calc(100% - 740px), 40px);
     width: 100%;
     max-width: 1600px;
     display: flex;
@@ -97,8 +98,10 @@ export default {
     justify-content: center;
 }
 
-.content >>> h1 {
+.content >>> .heading, .content >>> h1 {
     text-align: center;
+    margin-top: 18px;
+    margin-bottom: 12px;
 }
 
 .links {
@@ -177,6 +180,10 @@ h2 {
 .links .nuxt-link-exact-active:after {
     opacity: 1;
     width: 70%;
+}
+
+.backup-button {
+    align-self: center;
 }
 
 @media only screen and (max-width: 720px) {
