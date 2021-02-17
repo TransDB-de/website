@@ -31,7 +31,7 @@
         
         <h2>Kontaktdaten</h2>
         
-        <input name="email" type="email" placeholder="E-Mail Adresse" required />
+        <input name="email" type="email" placeholder="E-Mail Adresse" minlength="5" maxlength="320" />
         <input name="telephone" type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" />
         <input name="website" type="url" placeholder="Webseite" minlength="3" maxlength="500" />
         
