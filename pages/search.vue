@@ -41,7 +41,7 @@ export default {
         
         let res = await $axios.$get("entries", { params: query });
         
-        return { entries: res.entries, locationName: res.locationName, more: res.more, loading: false }
+        return { entries: res.entries, locationName: res.locationName, more: res.more }
         
     },
     mounted() {
@@ -54,7 +54,7 @@ export default {
         
         applyFilter: function (filter) {
             
-            this.loading = true
+            this.loading = true;
             
             if (this.$route.query.lat && this.$route.query.long) {
                 filter.lat = this.$route.query.lat;
@@ -65,8 +65,14 @@ export default {
                 filter.locaton = this.$route.query.location;
             }
             
-            this.$router.push({ name: "search", query: filter });
-            
+            this.$router.push({ name: "search", query: filter }, () => {
+                // on sucess
+                this.loading = false;
+            }, () => {
+                // on abort
+                this.loading = false;
+            });
+
         },
         
         loadNextPage: async function () {
