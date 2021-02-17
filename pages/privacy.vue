@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="privacy">
         <nuxt-content :document="privacyPage"></nuxt-content>
         <nuxt-content :document="disclaimerPage"></nuxt-content>
         <nuxt-content :document="entryRemovalPolicyPage"></nuxt-content>
@@ -26,7 +26,13 @@ export default {
     position: initial;
 }
 
-.nuxt-content p {
-    margin: 20px 0 50px 0;
+.privacy >>> p {
+    line-height: 1.4em;
+    padding: 0 1em;
 }
+
+.privacy >>> h2, .privacy >>> h3, .privacy >>> h4 {
+    margin-top: 2em;
+}
+    
 </style>

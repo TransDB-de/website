@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="imprint">
         <nuxt-content :document="imprintPage"></nuxt-content>
         <nuxt-content :document="disclaimerPage"></nuxt-content>
         <nuxt-content :document="entryRemovalPolicyPage"></nuxt-content>
@@ -25,8 +25,13 @@ export default {
     max-width: 750px;
     position: initial;
 }
+.imprint >>> p {
+    line-height: 1.4em;
+    padding: 0 1em;
+}
 
-.nuxt-content p {
-    margin: 20px 0 50px 0;
+.imprint >>> h2, .imprint >>> h3, .imprint >>> h4 {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
 }
 </style>

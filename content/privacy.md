@@ -26,13 +26,13 @@ Diese Software läuft direkt auf unserem Server, und wird nicht extern gehostet.
 
 Ackee speichert unter anderem folgende Daten:
 
-* Name und Art eueres Browsers
+* Welchen Browser ihr verwendet
 * Referal Link (von wo ihr auf unsere Website gekommen seid)
-* Name und Art eures Gerätes
+* Art eures Gerätes
 
 Die Daten welche von Ackee gespeichert werden, sind nicht personenbezogen.
 
-Die Daten werden von uns ausschließlich dazu verwendet, besser zu verstehen wer unsere Seite nutzt, und uns dementsprechend zu verbessern.
+Die Daten werden von uns ausschließlich dazu verwendet, besser zu verstehen wie unsere Seite genutzt wird, und uns dementsprechend zu verbessern.
 
 Es wird keine IP Adresse gespeichert.
 

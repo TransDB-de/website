@@ -1,5 +1,7 @@
 <template>
-    <nuxt-content :document="helpPage" />
+    <div class="help">
+        <nuxt-content class="help" :document="helpPage" />
+    </div>
 </template>
 
 <script>
@@ -12,13 +14,13 @@ export default {
 }
 </script>
 
-<style>
-.nuxt-content {
+<style scoped>
+.help {
     max-width: 980px;
     align-self: center;
 }
 
-.nuxt-content code {
+.help >>> code {
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     font-weight: 500;
@@ -27,7 +29,7 @@ export default {
     margin: 0 4px;
 }
 
-.nuxt-content code:before {
+.help >>> code:before {
     content: "";
     position: absolute;
     display: block;
@@ -41,17 +43,17 @@ export default {
     background-color: var(--color-important-text);
 }
 
-.nuxt-content p {
+.help >>> p {
     line-height: 1.4em;
     padding: 0 1em;
 }
 
-.nuxt-content h2, .nuxt-content h3, .nuxt-content h4 {
+.help >>> h2, .help >>> h3, .help >>> h4 {
     margin-top: 2em;
     margin-bottom: 0.8em;
 }
 
-.nuxt-content em {
+.help >>> em {
     color: var(--color-grey);
 }
 </style>
