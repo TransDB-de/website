@@ -1,6 +1,9 @@
 <template>
-    
-    <nuxt-content :document="privacyPage"></nuxt-content>
+    <div>
+        <nuxt-content :document="privacyPage"></nuxt-content>
+        <nuxt-content :document="disclaimerPage"></nuxt-content>
+        <nuxt-content :document="entryRemovalPolicyPage"></nuxt-content>
+    </div>
 
 </template>
 
@@ -9,7 +12,9 @@ export default {
     name: "privacy",
     async asyncData({ $content }) {
         const privacyPage = await $content("privacy").fetch();
-        return { privacyPage }
+        const disclaimerPage = await $content("disclaimer").fetch();
+        const entryRemovalPolicyPage = await $content("entryRemovalPolicy").fetch();
+        return { privacyPage, disclaimerPage, entryRemovalPolicyPage }
     }
 }
 </script>
