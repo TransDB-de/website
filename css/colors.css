@@ -1,0 +1,67 @@
+html {
+	/* misc */
+    --color-blue: #64A4FB;
+    --color-pink: #E88FC8;
+
+	--color-loader: white;
+
+	/* body */
+    --color-background: #F6F6F6;
+	--color-text: #334450;
+
+	--color-text-shadow: rgba(0, 0, 0, 0.2);
+	--color-box-shadow: rgba(0, 0, 0, 0.1);
+
+	/* inputs */
+	--color-input-background: white;
+
+	--color-input-outline: #e1e3e5;
+	--color-input-outline-focus: #adb4b9;
+	--color-input-placeholder: #919191;
+
+	--color-radio: #d6dadc;
+    --color-radio-selected: #4897ec;
+
+    --color-checkbox-selected: #5ca3f0;
+	--color-checkbox-selected-text: white;
+    --color-selected-hover: #72b0f1;
+
+	/* button colors */
+    --color-light: #e1e3e5;
+    --color-light-accent: #d6dadc;
+    --color-light-active: #c8d1d4;
+
+    --color-dark: #334450;
+    --color-dark-accent: #2a3b47;
+    --color-dark-active: #202f3a;
+
+    --color-red: #bd465d;
+    --color-red-accent: #ac4256;
+    --color-red-active: #b4203b;
+
+    --color-grey: #888;
+    --color-grey-accent: #777;
+    --color-grey-active: #414141;
+
+	/* highlighting colors */
+    --color-highlight: #5ca3f0;
+    --color-highlight-accent: #72b0f1;
+
+	--color-important-text: #ffcbdb;
+
+	--color-error: #de506b;
+    
+	/* header */
+	--color-nav-link: white;
+	--color-mobile-nav: #4897ec;
+	--color-search-bar: white;
+
+    --image-background: url("/banner.jpg");
+
+	/* entry */
+	--color-entry: white;
+	--color-entry-details: #2d3c46;
+	--color-entry-link-underline: #334450b3;
+
+	--color-warn: #e29b00;
+}

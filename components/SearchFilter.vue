@@ -253,6 +253,7 @@ export default {
 .filter input[type=text] {
     margin-bottom: 10px;
     width: 100%;
+    background-color: var(--color-input-background);
 }
 
 .filter p .feather {
@@ -304,7 +305,7 @@ fieldset {
 
 .highlight {
     background-color: var(--color-highlight);
-    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 3px 2px var(--color-box-shadow);
 }
 
 .highlight:hover {

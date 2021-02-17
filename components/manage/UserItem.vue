@@ -64,8 +64,8 @@ export default {
 <style scoped>
 .user-item {
     display: flex;
-    background-color: white;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-input-background);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
     padding: 10px 10px 10px 20px;
     margin-bottom: 20px;

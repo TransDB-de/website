@@ -102,7 +102,7 @@ export default {
     flex-direction: column;
     align-items: center;
     background: var(--image-background) top / 150vw 325px fixed;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
     padding: 40px 0 0 0;
     height: 325px;
     width: 100%;
@@ -121,7 +121,7 @@ export default {
 
 @keyframes hide-shadow {
     0% {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 6px var(--color-box-shadow);
     }
     100% {
         box-shadow: 0 0 9px rgba(0, 0, 0, 0);
@@ -141,7 +141,7 @@ export default {
 .header > h1 {
     color: #fff;
     font-size: 56px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 0 var(--color-text-shadow);
     margin: 20px 0;
     cursor: pointer;
     user-select: none;
@@ -150,7 +150,7 @@ export default {
 .header > h2 {
     margin: 0 0 40px;
     color: white;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 0 var(--color-text-shadow);
     text-align: center;
 }
 
@@ -159,7 +159,7 @@ export default {
     grid-template-columns: auto 1fr auto;
     width: 100%;
     color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 0 var(--color-text-shadow);
     position: fixed;
     z-index: 1;
     top: 0;
@@ -167,7 +167,7 @@ export default {
 
 .header > .navbar.background {
     background: var(--image-background) top / 150vw 325px fixed;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
 }
 
 .header.hide > .navbar {
@@ -183,7 +183,7 @@ export default {
         box-shadow: 0 0 9px rgba(0, 0, 0, 0);
     }
     100% {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 6px var(--color-box-shadow);
     }
 }
 
@@ -201,7 +201,7 @@ export default {
 }
 
 .header > .navbar > nav > a {
-    color: white;
+    color: var(--color-nav-link);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,8 +219,8 @@ export default {
     width: 0;
     content: "";
     opacity: 0;
-    border-bottom: 3px solid white;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--color-nav-link);
+    box-shadow: 0 1px 0 var(--color-box-shadow);
     position: absolute;
     bottom: 0px;
 }
@@ -272,7 +272,7 @@ export default {
     }
     
     .navbar.expand {
-        background: var(--color-radio-selected) !important;
+        background: var(--color-mobile-nav) !important;
     }
     
     .navbar.expand > nav {
@@ -286,7 +286,7 @@ export default {
         left: 0;
         display: flex;
         flex-direction: column;
-        background-color: var(--color-radio-selected);
+        background-color: var(--color-mobile-nav);
     }
     
     .navbar.expand > nav > a {

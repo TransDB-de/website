@@ -167,7 +167,7 @@ h2 {
     content: "";
     opacity: 0;
     border-bottom: 3px solid var(--color-dark);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 var(--color-box-shadow);
     position: absolute;
     bottom: 0px;
 }

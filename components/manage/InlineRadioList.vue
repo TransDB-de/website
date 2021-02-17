@@ -89,8 +89,8 @@ ul {
 
 .show-list > li {
     display: inline-block;
-    background-color: var(--color-light);
-    color: var(--color-dark);
+    background-color: var(--color-radio);
+    color: var(--color-text);
     font-size: 15px;
     padding: 3px 8px;
     border-radius: 4px;

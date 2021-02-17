@@ -170,8 +170,8 @@ export default {
 <style scoped>
 .full-entry {
     display: flex;
-    background-color: white;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-entry-background);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
     padding: 0 0 0 10px;
     margin-bottom: 20px;

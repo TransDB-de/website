@@ -70,7 +70,8 @@ export default {
     width: calc(100% - 4px);
     height: calc(100% - 4px);
     border-radius: 4px;
-    border: 2px solid #e1e3e5;
+    background-color: var(--color-input-background);
+    border: 2px solid var(--color-input-outline);
 }
 
 .checkbox > .mark:before, .checkbox > .mark:after {

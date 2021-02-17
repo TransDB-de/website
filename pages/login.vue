@@ -88,7 +88,7 @@ export default {
 }
 
 .login > .error {
-    color: #de506b;
+    color: var(--color-error);
     margin-top: 0;
 }
 

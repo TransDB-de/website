@@ -38,7 +38,7 @@ export default {
     z-index: -1;
     padding: 2px 4px;
     border-radius: 4px;
-    background-color: rgb(255, 203, 219);
+    background-color: var(--color-important-text);
 }
 
 .nuxt-content p {

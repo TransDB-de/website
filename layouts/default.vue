@@ -41,47 +41,20 @@ export default {
 </script>
 
 <style>
+@import url("../css/colors.css");
+
 * {
     box-sizing: border-box;
 }
 
 html {
     min-height: 100vh;
-    --color-blue: #3eb9e9;
-    --color-pink: #dd788b;
-    --color-background: #F6F6F6;
-
-    --color-light: #e1e3e5;
-    --color-light-accent: #d6dadc;
-    --color-light-active: #c8d1d4;
-
-    --color-dark: #334450;
-    --color-dark-accent: #2a3b47;
-    --color-dark-active: #202f3a;
-
-    --color-red: #bd465d;
-    --color-red-accent: #ac4256;
-    --color-red-active: #b4203b;
-
-    --color-grey: #888;
-    --color-grey-accent: #777;
-    --color-grey-active: #414141;
-
-    --color-radio-selected: #4897ec;
-
-    --color-checkbox-selected: #5ca3f0;
-    --color-selected-hover: #72b0f1;
-
-    --color-highlight: #5ca3f0;
-    --color-highlight-accent: #72b0f1;
-    
-    --image-background: url("/banner.jpg");
 }
 
 body {
     margin: 0;
-    background-color: #F6F6F6;
-    color: #334450;
+    background-color: var(--color-background);
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
     font-family: "Fira Sans", sans-serif;

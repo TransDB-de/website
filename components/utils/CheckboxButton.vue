@@ -58,7 +58,7 @@ span:hover, input:hover ~ span {
 
 input:checked ~ span {
 	background-color: var(--color-checkbox-selected);
-    color: white;
+    color: var(--color-checkbox-selected-text);
 }
 
 input:checked ~ span:hover, input:checked:hover ~ span {

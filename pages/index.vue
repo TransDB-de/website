@@ -27,10 +27,10 @@ export default {
     font-weight: 900;
     text-decoration: none;
     font-size: 18px;
-    color: white;
+    color: var(--color-background);
     padding: 8px 10px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #3eb9e9, #dd788b);
+    background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
 }
 
 .homepage p {

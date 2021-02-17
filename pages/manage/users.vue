@@ -23,7 +23,7 @@
 import Form from "@/components/utils/Form";
 import Checkbox from "@/components/utils/Checkbox";
 import Button from "@/components/utils/Button";
-import UserItem from "@/components/UserItem";
+import UserItem from "@/components/manage/UserItem";
 import AccountMixin from "@/mixins/account";
 
 export default {

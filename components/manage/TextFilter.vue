@@ -213,12 +213,14 @@ li.selected > .suggestion {
 }
 
 input {
+    background-color: var(--color-input-background);
+
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    color: #334450;
+    color: var(--text-color);
     outline: 0;
     border-radius: 4px;
-    border: 2px solid #e1e3e5;
+    border: 2px solid var(--color-input-outline);
 
     padding: 6px 12px;
     margin-bottom: 20px;
@@ -227,16 +229,16 @@ input {
 }
 
 input:focus {
-    border: 2px solid #adb4b9;
+    border: 2px solid var(--color-input-outline-focus);
 }
 
 input:focus ~ .dropdown {
-    border: 2px solid #adb4b9;
+    border: 2px solid var(--color-input-outline-focus);
     border-top: 0;
 }
 
 input::placeholder {
-    color: #0000004C;
+    color: var(--color-input-placeholder);
     font-weight: 500;
 }
 

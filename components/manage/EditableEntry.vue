@@ -141,8 +141,8 @@ export default {
 <style scoped>
 .entry {
     display: grid;
-    background-color: white;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-entry);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
     padding: 5px 10px;
     margin-bottom: 20px;
@@ -176,7 +176,7 @@ export default {
 }
 
 .entry > * {
-    box-shadow: 0 0 4px 0 rgb(221, 221, 221);
+    box-shadow: 0 0 4px 0 var(--color-box-shadow);
     border-radius: 4px;
     
     padding: 2px 4px;
@@ -213,7 +213,7 @@ export default {
 .warn {
     font-weight: 500;
     font-size: 15px;
-    color: #e29b00;
+    color: var(--color-warn);
     margin-top: auto;
     text-align: center;
     user-select: none;
@@ -232,10 +232,10 @@ export default {
 
 .warn > button {
     display: inline-flex;
-    color: white;
+    color: var(--color-entry);
     font-weight: 500;
     font-size: 13px;
-    background-color: #e29b00;
+    background-color: var(--color-warn);
     height: auto;
     padding: 0 6px;
 }
