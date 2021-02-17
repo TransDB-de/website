@@ -7,7 +7,7 @@ oder andere auf der Seite vermerkte Leistungen von den entsprechenden Anbietern 
 Des weiteren können wir, trotz sorgfältiger Prüfung, keine Haftung für verlinkte Inhalte anderer Websites übernehmen.
 
 Das Projekt TransDB soll es trans* Personen erleichtern, Zugang zu adäquater medizinischer Versorgung zu bekommen und Anschluss an die Community zu finden.
-TransDB ist Community-based, es steht jedem offen bei dem Projekt mitzuhelfen.
+TransDB ist Community-basiert. Es steht jedem offen bei dem Projekt mitzuhelfen.
 Das bedeutet, dass Menschen, die selbst gute Erfahrungen mit Angeboten gemacht haben, diese weitergeben um Anderen die Suche zu erleichtern.
 Das Projekt basiert ausschließlich auf unentgeltlicher Arbeit und Spenden.
 Wir sind also explizit nicht kommerziell.

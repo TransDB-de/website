@@ -1,6 +1,6 @@
 # Hilfe zur Datenbank Verwaltung
 
-Auf dieser Hilfe-Seite findest du Infos über die Datanbank Verwaltung, und wie man diese effektiv verwendet.
+Auf dieser Hilfe-Seite findest du Infos über die Datenbank Verwaltung, und wie man diese effektiv verwendet.
 
 ## Einträge Bearbeiten
 
@@ -18,16 +18,16 @@ oder
 "Dieser Eintrag hat keine Geodaten!"
 
 Diese Warnung weißt darauf hin, dass der Beitrag freigeschaltet wurde,
-aber keine Coordianten für die Distanzsuche ermittelt wurden.
+aber keine Koordinaten für die Distanzsuche ermittelt wurden.
 Der Eintrag wird somit nicht bei Umgebungssuchen erscheinen können.
 
 Das kann folgende Auslöser haben:
 
-1. Zeit: Die Geodaten werden über einen Api ermittelt, und das kann manchmal etwas dauern. Warte ein wenig und lade die Seite neu.
+1. Zeit: Die Geodaten werden über einen API ermittelt, und das kann manchmal etwas dauern. Warte ein wenig und lade die Seite neu.
 
 2. Falsche Adresse: Die Geodaten konnten nicht gefunden werden, weil ein Schreibfehler vorliegt, oder es die Adresse nicht gibt. Korrigiere die Adresse.
 
-3. Api Down: Der Geo Api war grade down. Dürcke unten links auf den Stift, und dann auf "erneut versuchen" neben dem Fehler. Warte ein wenig. Du musst keine Felder im Beitrag bearbeiten.
+3. API Down: Der Geo-API war grade down. Drücke unten links auf den Stift, und dann auf "erneut versuchen" neben dem Fehler. Warte ein wenig. Du musst keine Felder im Beitrag bearbeiten.
 
 4. Backend Fehler: Falls alles oben nichts gebracht hat, ist vielleicht unser Backend kaputt. Kontaktiere die Developer.
 
@@ -38,7 +38,7 @@ Groß- / Kleinschreibung wird beim Filtern nicht berücksichtigt.
 
 ### Freitext
 
-Der Filter ist in erster Linie eine freitext Suche. Gebe in die Leiste beliebige Begriffe ein, und drücke auf Filtern.
+Der Filter ist in erster Linie eine Freitext Suche. Gebe in die Leiste beliebige Begriffe ein, und drücke auf Filtern.
 Die Werte welche bei den Einträgen durchsucht werden, sind die Werte aus allen Feldern welche Nutzer frei ausfüllen können.
 Das heißt von Name, Adresse, Telefonnummer, ... bis hin zu Spezialangeboten. Werte mit vorgegebener Auswahl (wie 'Art', 'Attribute' oder 'Angebote') werden dabei nicht berücksichtigt.
 
@@ -51,8 +51,8 @@ Als Filter wird alles erkannt, was mit einem Doppelpunk (`:`) endet.
 Alles was hinter einem Filter steht, ist der Wert welcher verglichen wird. Manche Filter (wie `hat:`) können nach mehreren Werten gleichzeitig filtern.
 Um das zu tun, kannst du den gleichen Filter mehrere male verwenden, oder ein Komma (`,`) zwischen die Werte schreiben.
 
-Falls du nach Phrasen oder anderen Dingen welche Lücken beinhalten Filtern willst, kannst du diese in Anfürhungszeichen (`"Suchbegriff mit Lücke"`) setzen.
-Alles zwischen den Anfürhungszeichen wird dann wie ein einzielenes Wort behandelt.
+Falls du nach Phrasen oder anderen Dingen, welche Lücken beinhalten, filtern möchtest, kannst du diese in Anführungszeichen (`"Suchbegriff mit Lücke"`) setzen.
+Alles zwischen den Anführungszeichen wird dann wie ein einzelnes Wort behandelt.
 
 __Filter lassen sich beliebig miteinander, und mit Freitext kombinieren.__
 
@@ -64,15 +64,15 @@ Filtert nach Umkreis.
 
 Gebe dazu hinter `umgebung:` eine Postleitzahl oder einen Ortsnamen ein.
 Die angezeigten Einträge werden sich in einen 10km Umkreis von dem gesuchten Ort befinden.
-Um diesen Umkries zu verändern, kannst du zusätzlich eine Distanz, mit `km` angeben.
+Um diesen Umkreis zu verändern, kannst du zusätzlich eine Distanz, mit `km` angeben.
 
 Beispiele:
 
 `umgebung: 100km, berlin` _zeige alle Einträge im 100km Umkreis von Berlin_
 
-`umgebung: "Mülheim an der Ruhr"` _zeige alle Eintraäge im 10km Umkreis von Mülheim an der Ruhr_
+`umgebung: "Mülheim an der Ruhr"` _zeige alle Einträge im 10km Umkreis von Mülheim an der Ruhr_
 
-Hinweis: Man kann nur einen Umgebungs Filter gleichzeitig anwenden. Umgebungsfilter funktionieren nur auf Einträgen welche schon einmal freigegeben waren.
+Hinweis: Man kann nur einen Umgebungs-Filter gleichzeitig anwenden. Umgebungsfilter funktionieren nur auf Einträgen welche schon einmal freigegeben waren.
 
 #### ist: Art / freigeschaltet
 
@@ -81,7 +81,7 @@ Dieser Filter lässt sich mit `-nicht` umkehren.
 
 Beispiele:
 
-`ist: Gruppe/Verein, freigeschaltet` _zeige alle freigeschlateten Gruppen / Vereinen_
+`ist: Gruppe/Verein, freigeschaltet` _zeige alle freigeschalteten Gruppen / Vereinen_
 
 `ist-nicht: freigeschaltet ist: Logopäd*in` _zeige alle nicht freigeschalteten Logopäd*innen_
 
@@ -93,7 +93,7 @@ Filtert nach Einträgen, welche ein bestimmtes Feld haben. Dieser Filter lässt 
 
 Beispiele:
 
-`hat: Spezialangebote` _zeige alle Eintraäge mit Spezialangeboten_
+`hat: Spezialangebote` _zeige alle Einträge mit Spezialangeboten_
 
 `ist: freigeschaltet hat-nicht: geodaten` _zeige alle Einträge welche freigeschaltet sind, aber keine Positionsdaten für die Umgebungssuche haben_
 
@@ -112,7 +112,7 @@ Beispiele:
 
 #### freigeschaltet-von: Nutzer
 
-Filtert anhand des Nutzernamens, nach allen beiträgen welche ein Nutzer freigeschaltet hat.
+Filtert anhand des Nutzernamens, nach allen Beiträgen welche ein Nutzer freigeschaltet hat.
 
 Beispiel:
 
@@ -149,7 +149,7 @@ Um mehrere Worte anzugeben, trenne sie mit Kommas. Dieser Filter funktioniert nu
 
 Beispiel:
 
-`gruppe nicht: Hamburg, Str, Straße, Gruppe, owo` _zeigt alle Einträge, welche den text "gruppe", aber nicht die Texte "Hamburg", "Str", "Straße", "Gruppe" oder "owo" enthalten_
+`gruppe nicht: Hamburg, Str, Straße, Gruppe, owo` _zeigt alle Einträge, welche den Text "gruppe", aber nicht die Texte "Hamburg", "Str", "Straße", "Gruppe" oder "owo" enthalten_
 
 #### [feldfilter]: Wert
 
@@ -158,8 +158,8 @@ Der Inhalt des Feldes wird hierbei auf Übereinstimmung überprüft. Wenn mehrer
 
 Beispiele:
 
-`stadt: Hamburg, Berlin, München` _zeigt alle Einträge in welchem die Stadt in dem Adressfeld als "Hamburg", "Berlin" oder "München" angegebn wurde_
+`stadt: Hamburg, Berlin, München` _zeigt alle Einträge in welchem die Stadt in dem Adressfeld als "Hamburg", "Berlin" oder "München" angegeben wurde_
 
-`straße: schulstraße` _zeigt alle Einträge mit der straße "schulstraße" in der Adresse_
+`straße: schulstraße` _zeigt alle Einträge mit der Straße "schulstraße" in der Adresse_
 
 Anders als Textfelder, lässt sich das Zahlenfeld Mindestalter mit `mindestalter-unter:` und `mindestalter-über:`, ähnlich wie Datumfilter einschränken.
