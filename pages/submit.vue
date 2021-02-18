@@ -24,7 +24,7 @@
         <input name="street" type="text" placeholder="Straße" required />
         <input name="house" type="text" placeholder="Hausnummer" required minlength="1" maxlength="10" />
         
-        <h2>Ansprechpartner</h2>
+        <h2>Ansprechpartner*in</h2>
         
         <input name="firstName" type="text" placeholder="Vorname" />
         <input name="lastName" type="text" placeholder="Nachname" />
@@ -71,7 +71,7 @@
     
             <h2>Spezifische Angaben</h2>
     
-            <Checkbox name="attributes[]" value="enby" placeholder="Non-Binary freundlich" />
+            <Checkbox name="attributes[]" value="enby" placeholder="Nicht-binäre Gutachten" />
             
         </div>
         

@@ -98,7 +98,7 @@ export default {
             let scrolledHeight = Math.ceil(pos + window.innerHeight);
 
             // Check if user has scrolled to the bottom of the page
-            if(scrolledHeight >= document.body.offsetHeight && pos > 0) {
+            if(scrolledHeight >= document.body.offsetHeight && pos > 0 && !this.loadingNextPage) {
                 this.loadNextPage();
             }
             

@@ -170,7 +170,7 @@ export default {
 <style scoped>
 .full-entry {
     display: flex;
-    background-color: var(--color-entry-background);
+    background-color: var(--color-entry);
     box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
     padding: 0 0 0 10px;

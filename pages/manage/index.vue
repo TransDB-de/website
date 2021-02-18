@@ -48,7 +48,7 @@ export default {
         
         async loadEntries(append = false) {
             try {
-                let res = await this.$axios.$get("entries/unapproved");
+                let res = await this.$axios.$get("entries/unapproved", { params: { page: this.page } });
                 this.more = res.more;
 
                 if (append) {
