@@ -155,8 +155,8 @@ export default {
 }
 
 .header > .navbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     color: white;
     text-shadow: 1px 1px 0 var(--color-text-shadow);
