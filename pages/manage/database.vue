@@ -48,14 +48,7 @@ export default {
     data() {
         return {
             entries: [],
-            query: {
-                wildcard: [],
-                include: [],
-                exclude: [],
-                arrayIncludes: [],
-                arrayExcludes: [],
-                compare: {}
-            },
+            query: {},
             page: 0,
             more: true
         }

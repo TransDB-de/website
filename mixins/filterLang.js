@@ -44,7 +44,7 @@ const langDef = [
 	{
 		name: "ist",
 		negationSuffix: "nicht",
-		type: "include",
+		type: "boolean",
 		mappings: {
 			"Freigeschaltet": "approved"
 		}
