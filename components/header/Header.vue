@@ -106,7 +106,7 @@ export default {
     padding: 40px 0 0 0;
     height: 325px;
     width: 100%;
-    transition: 0.4s ease all;
+    transition: 0.4s ease opacity, 0.4s ease height;
     overflow: hidden;
     font-family: "Poppins", sans-serif;
 }
