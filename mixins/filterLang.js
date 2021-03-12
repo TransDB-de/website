@@ -1,4 +1,4 @@
-import * as filterLang from "filter-lang";
+import * as filterLang from "@transdb-de/filter-lang";
 import * as entry from "./entry.js";
 
 // this mixin sets a langauge definition for FilterLang and creates a new Language instance,

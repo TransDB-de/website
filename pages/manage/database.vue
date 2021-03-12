@@ -35,12 +35,13 @@ import MouseoverMixin from "@/mixins/mouseover";
 
 import TextFilter from "@/components/manage/TextFilter";
 import EditableEntry from '@/components/manage/EditableEntry';
+import Button from "@/components/utils/Button";
 
 import { HelpCircleIcon, DownloadIcon } from 'vue-feather-icons';
 
 export default {
     name: "database",
-    components: { TextFilter, EditableEntry, HelpCircleIcon, DownloadIcon },
+    components: { TextFilter, EditableEntry, HelpCircleIcon, DownloadIcon, Button },
     mixins: [ AccountMixin, MouseoverMixin ],
     meta: {
         authRequired: true
@@ -169,7 +170,7 @@ export default {
     margin: 0;
 }
 
-.heading > button {
+.backup-button {
     align-self: center;
     justify-self: end;
 }
