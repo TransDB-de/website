@@ -51,26 +51,64 @@ export default {
             return this.locText.length > 0;
         }
     },
+    watch: {
+
+        // When location text is set by user, but not used in query, emit a search event, appending the location
+        $route(to, from) {
+            
+            console.log(this.locText);
+            console.log(to.name);
+            console.log(from.name);
+
+            if (this.locText !== ""
+                && to.name === "search"
+                && from.name !== "search"
+            ) {
+                this.$emit("search", { location: this.locText });
+            }
+        }
+
+    },
     methods: {
         
-        search: function() {
+        search() {
             
             if ( this.locText.length < 2) {
-                this.$router.push("/search");
+                this.resetLocaction();
                 return;
             };
             
             this.$emit("search", { location: this.locText });
         },
         
-        distanceSearch: function () {
+        distanceSearch() {
     
             navigator.geolocation.getCurrentPosition((pos) => {
                 this.$emit("search", { lat: pos.coords.latitude, long: pos.coords.longitude });
             }, (error) => {
-                this.$router.push("/search");
+                this.resetLocaction();
             });
             
+        },
+
+        /** Resets the location, and routes to the search page */
+        resetLocaction() {
+
+            let query = {};
+
+            if (this.$route.name === "search") {
+
+                query = {...this.$route.query};
+
+                delete query.location;
+                delete query.lat;
+                delete query.long;
+
+                console.log(query);
+            }
+
+            this.$router.push({ name: "search", query });
+
         }
         
     }

@@ -60,7 +60,7 @@ export default {
     },
     watch: {
 
-        $route: function(to, from) {
+        $route(to, from) {
             this.hide = !["/","/search"].includes(to.path);
         }
         
@@ -68,12 +68,12 @@ export default {
     
     methods: {
         
-        reload: async function () {
+        async reload() {
             window.location.href = "/";
         },
         
-        search: function (query) {
-            this.$router.push({ name: "search", query });
+        search(newQuery) {
+            this.$router.push({ name: "search", query: {...this.$route.query, ...newQuery} });
         },
 
         scrollEvent(scroll) {

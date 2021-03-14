@@ -62,7 +62,7 @@ export default {
             }
             
             if (this.$route.query.location) {
-                filter.locaton = this.$route.query.location;
+                filter.location = this.$route.query.location;
             }
             
             this.$router.push({ name: "search", query: filter }, () => {
