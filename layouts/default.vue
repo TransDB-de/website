@@ -11,7 +11,7 @@
         <div class="footer">
             <nuxt-link to="/imprint">Impressum</nuxt-link>
             <nuxt-link to="/privacy">Datenschutz</nuxt-link>
-            <nuxt-link to="/contact">Kontakt</nuxt-link>
+            <!--nuxt-link to="/contact">Kontakt</nuxt-link-->
             <a href="https://github.com/TransDB-de" target="_blank">GitHub</a>
         </div>
         
