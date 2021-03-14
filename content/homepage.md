@@ -1,11 +1,18 @@
 # Über Trans\*db
 
-Trans\*db ist eine Community,
-die Informationen zur lokalen Verfügbarkeit trans\*relevanter medizinischer Leistungen und Communityangebote aus ganz Deutschland sammelt,
-verarbeitet und in Form dieser Website übersichtlich bereitstellt.
+Trans\*db ist eine Website, mit der du nach trans\*relevanten medizinischen Leistungen und Communityangeboten aus deiner Umgebung suchen kannst.
 
-Falls du für deine Transition also noch nach geeigneten Arztpersonen, Therapeut\*innen oder anderen Anlaufstellen suchst,
-bist du bei uns genau richtig!
+Falls du also noch nach:
+
+- [Gruppen / Vereinen](/search?type=group)
+- [Therapeut\*innen / Psychiater\*innen](/search?type=therapist)
+- [Gutachter\*innen](/search?type=surveyor)
+- [Endokrinologische Praxen](/search?type=endocrinologist)
+- [Operateur\*innen](/search?type=surgeon)
+- [Logopäd\*innen](/search?type=logopedics)
+- [Haarentfernung](/search?type=hairremoval)
+
+für deine Transition suchst, bist du bei uns genau richtig!
 
 ## Wie kann ich helfen?
 
