@@ -21,7 +21,7 @@ const mouseOverTexts = {
     enby: "Stellt Gutachten für nicht-binäre Personen aus",
 
     // Offers
-    indication: "Schreibt Indikationen (für zB. Hormon Therapie)",
+    indication: "Schreibt Indikationen (für z.B. Hormon Therapie)",
     therapy: "Bietet Begleittherapie für trans* Personen",
 
     laser: "Epilation mit Hilfe eines Lasers",
@@ -41,7 +41,7 @@ const mouseOverTexts = {
 
     // Management
     logout: "Abmelden",
-    accountSettings: "Account Einstellungen",
+    accountSettings: "Account-Einstellungen",
     editEntry: "Eintrag bearbeiten",
     deleteEntry: "Eintrag löschen",
     approveEntry: "Eintrag freischalten",

@@ -22,7 +22,7 @@ export const attributeMapping = {
         hasDoctor: "Ärztlich"
     },
     surveyor: {
-        enby: "NB Gutachen"
+        enby: "NB Gutachten"
     }
 }
 
