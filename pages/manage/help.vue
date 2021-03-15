@@ -27,18 +27,18 @@ export default {
     line-height: 0.5em;
     position: relative;
     margin: 0 4px;
+    display: inline-block;
 }
 
 .help >>> code:before {
     content: "";
     position: absolute;
     display: block;
-    top: -2px;
+    top: -8px;
     left: -4px;
-    width: 100%;
-    height: 100%;
+    width: calc(100% + 8px);
+    height: calc(100% + 16px);
     z-index: -1;
-    padding: 2px 4px;
     border-radius: 4px;
     background-color: var(--color-important-text);
 }
