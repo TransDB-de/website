@@ -13,6 +13,8 @@
             <div class="load-more">
                 <Button v-if="more" center light @click="loadNextPage" :loading="loadingNextPage">Mehr anzeigen</Button>
             </div>
+
+            <nuxt-link v-if="!more" to="/submit">Einen neuen Eintrag einreichen</nuxt-link>
             
         </div>
         
@@ -23,9 +25,10 @@
 <script>
 import Entry from "@/components/Entry";
 import SearchFilter from "@/components/SearchFilter";
+import Button from "@/components/utils/Button";
 
 export default {
-    components: {SearchFilter, Entry},
+    components: {SearchFilter, Entry, Button},
     data() {
         return {
             entries: [],
@@ -108,7 +111,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import "@/css/load-more-button.css";
 
 .search-container {
@@ -120,6 +123,23 @@ export default {
 
 .search-container > .entry-container {
     margin: 0 20px;
+}
+
+a[href="/submit"] {
+    font-weight: 900;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    margin: 10px auto;
+    width: max-content;
+    color: var(--color-background);
+    padding: 8px 10px;
+    border-radius: 4px;
+    background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
+}
+
+h3 {
+    text-align: center;
 }
 
 @media only screen and (max-width: 720px) {
