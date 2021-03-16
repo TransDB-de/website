@@ -4,7 +4,7 @@
 		
 		<h2>Neuen Benutzer Anlegen</h2>
 
-		<Form @submit="addUser" inline class="form">
+		<Form @submit="addUser" inline class="form" reset>
 			<input name="username" type="text" placeholder="Benutzername" required />
 			<input name="email" type="email" placeholder="E-Mail" required />
 			<Checkbox name="admin" placeholder="Admin" />
