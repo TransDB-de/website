@@ -12,10 +12,6 @@
                 
                 <nuxt-link to="/manage" v-if="$store.state.user">Management</nuxt-link>
                 <nuxt-link to="/submit" >Neuer Eintrag</nuxt-link>
-                <a @click="logout" v-if="$store.state.user" class="logout" :title="mouseOverTexts['logout']">
-                    <span v-if="$store.state.isMobile">Abmelden</span>
-                    <LogOutIcon v-else />
-                </a>
             </nav>
             
             <span @click="expand = !expand" class="mobile">
@@ -265,14 +261,14 @@ export default {
     border-bottom: 3px solid var(--color-nav-link);
     box-shadow: 0 1px 0 var(--color-box-shadow);
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
 .header > .navbar > nav > a:not( .highlight ):hover:after {
-    opacity: 1;
-    width: 100%;
+    width: 100%!important;
 }
 
+.header > .navbar > nav > a:not( .highlight ):hover:after,
 .header > .navbar .nuxt-link-active:not( .index ):not( .highlight ):after,
 .header > .navbar .nuxt-link-exact-active:not( .highlight ):after {
     opacity: 1;
