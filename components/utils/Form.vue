@@ -50,7 +50,7 @@ export default {
             }
             
             if (this.reset) {
-                this.$el.reset();
+                this.resetForm();
             }
             
             this.$emit("submit", data);
@@ -85,6 +85,10 @@ export default {
 
             return null;
             
+        },
+        
+        resetForm: function () {
+            this.$el.reset();
         }
         
     }

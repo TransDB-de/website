@@ -1,8 +1,10 @@
 <template>
 
-    <Form @submit="submit" class="submit-form" reset>
+    <Form @submit="submit" class="submit-form" ref="form">
     
         <h1>Einen neuen Eintrag einreichen</h1>
+        
+        <h2 class="error" v-if="error && !loading">{{ error }}</h2>
         
         <select name="type" v-model="type" required>
             <option value="" disabled>*Art wählen*</option>
@@ -136,6 +138,7 @@ export default {
         return {
             type: "",
             loading: false,
+            error: null,
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
                 therapist: "Name der Praxis",
@@ -158,12 +161,27 @@ export default {
             try {
                 res = await this.$axios.$post("entries", form);
             } catch (e) {
-            
+                
+                if(e.response.status === 422) {
+                    window.scroll(0, 0);
+                    this.error = "Ein oder mehrere Felder wurden nicht richtig ausgefüllt!";
+                } else if(e.response.status === 429) {
+                    window.scroll(0, 0);
+                    this.error = "Du stellst zu viele Anfragen!";
+                } else {
+                    window.scroll(0, 0);
+                    this.error = "Ein unbekannter Fehler ist aufgetreten!";
+                }
+                
+                this.loading = false;
+                return;
+                
             }
             
             this.loading = false;
+            this.$refs.form.resetForm();
             
-            this.$router.push("/");
+            this.$router.push("/submitted");
             
         }
     
@@ -179,6 +197,13 @@ export default {
     justify-content: center;
     padding: 20px;
     flex-grow: 1;
+    text-align: center;
+}
+
+.submit-form > .error {
+    color: var(--color-error);
+    margin-top: 0;
+    max-width: 500px;
     text-align: center;
 }
 </style>
