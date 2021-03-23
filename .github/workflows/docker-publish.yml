@@ -11,7 +11,7 @@ on:
       - v*
 
 env:
-  IMAGE_NAME: transdb-backend
+  IMAGE_NAME: transdb-website
 
 jobs:
   # Push image to GitHub Packages.
