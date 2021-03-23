@@ -2,7 +2,7 @@
 
     <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" @click="click">
         <slot v-if="!loading" />
-        <Loader v-else />
+        <Loader v-else :dark="light" />
     </button>
     
 </template>
@@ -36,7 +36,7 @@ button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
     cursor: pointer;
     font-size: 16px;
     display: flex;

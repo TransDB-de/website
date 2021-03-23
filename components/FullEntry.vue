@@ -39,7 +39,7 @@
             </span>
             
             <span>
-                <b>Fachrichtung:</b> {{ entry.meta.subject ? subjectMapping[entry.meta.subject] : 'Nicht angegeben' }}
+                <b>Fachrichtung:</b> {{ entry.meta.subject ? subjectMapping[entry.type][entry.meta.subject] : 'Nicht angegeben' }}
             </span>
             
             <span>
@@ -99,7 +99,7 @@ export default {
             
             if(this.entry.meta.attributes) {
                 
-                return this.entry.meta.attributes.map((a) => this.attributeMapping[entry.type][a]).join(", ");
+                return this.entry.meta.attributes.map((a) => this.attributeMapping[this.entry.type]?.[a]).join(", ");
                 
             } else {
                 return "Nicht angegeben";
@@ -110,7 +110,7 @@ export default {
             
             if(this.entry.meta.offers) {
                 
-                return this.entry.meta.offers.map((a) => this.offerMapping[this.entry.type][a]).join(", ");
+                return this.entry.meta.offers.map((a) => this.offerMapping[this.entry.type]?.[a]).join(", ");
                 
             } else {
                 return "Nicht angegeben";
@@ -170,10 +170,10 @@ export default {
 <style scoped>
 .full-entry {
     display: flex;
-    background-color: white;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-entry);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
-    padding: 10px 10px 10px 20px;
+    padding: 0 0 0 10px;
     margin-bottom: 20px;
     word-break: break-word;
 }
@@ -181,12 +181,14 @@ export default {
 .full-entry h1 {
     font-size: 24px;
     margin: 0;
-    font-weight: 700;
+    font-weight: 500;
+    text-align: left;
 }
 
 .full-entry > div {
     display: flex;
     flex-direction: column;
+    margin: 10px;
 }
 .full-entry > div:first-child {
     flex-grow: 1;
@@ -194,5 +196,7 @@ export default {
 
 .full-entry > div button {
     margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
 }
 </style>

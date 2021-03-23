@@ -46,7 +46,7 @@ label > span {
     padding: 5px 7px 5px 7px;
     border-left: 3px solid var(--color-light);
     transition: 0.1s all;
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 1px var(--color-text-shadow);
 }
 
 label > input:checked ~ span {

@@ -11,8 +11,7 @@
                 <nuxt-link to="/search">Suche</nuxt-link>
                 
                 <nuxt-link to="/manage" v-if="$store.state.user">Management</nuxt-link>
-                <nuxt-link to="/account" v-if="$store.state.user">Account</nuxt-link>
-                <nuxt-link to="/submit" class="highlight">Neuer Eintrag</nuxt-link>
+                <nuxt-link to="/submit" >Neuer Eintrag</nuxt-link>
             </nav>
             
             <span @click="expand = !expand" class="mobile">
@@ -34,10 +33,14 @@
 <script>
 import SearchBar from "@/components/header/SearchBar";
 import MenuIcon from "@/components/header/MenuIcon";
+import AccountMixin from "@/mixins/account";
+import MouseoverMixin from "@/mixins/mouseover";
+import { LogOutIcon } from 'vue-feather-icons';
 
 export default {
     name: "Header",
-    components: {SearchBar, MenuIcon},
+    components: { SearchBar, MenuIcon, LogOutIcon },
+    mixins: [ AccountMixin, MouseoverMixin ],
     data() {
         return {
             hide: !["/","/search"].includes(this.$route.path),
@@ -53,7 +56,7 @@ export default {
     },
     watch: {
 
-        $route: function(to, from) {
+        $route(to, from) {
             this.hide = !["/","/search"].includes(to.path);
         }
         
@@ -61,12 +64,12 @@ export default {
     
     methods: {
         
-        reload: async function () {
+        async reload() {
             window.location.href = "/";
         },
         
-        search: function (query) {
-            this.$router.push({ name: "search", query });
+        search(newQuery) {
+            this.$router.push({ name: "search", query: {...this.$route.query, ...newQuery} });
         },
 
         scrollEvent(scroll) {
@@ -95,11 +98,11 @@ export default {
     flex-direction: column;
     align-items: center;
     background: var(--image-background) top / 150vw 325px fixed;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
     padding: 40px 0 0 0;
     height: 325px;
     width: 100%;
-    transition: 0.4s ease all;
+    transition: 0.4s ease opacity, 0.4s ease height;
     overflow: hidden;
     font-family: "Poppins", sans-serif;
 }
@@ -114,7 +117,7 @@ export default {
 
 @keyframes hide-shadow {
     0% {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 6px var(--color-box-shadow);
     }
     100% {
         box-shadow: 0 0 9px rgba(0, 0, 0, 0);
@@ -134,7 +137,7 @@ export default {
 .header > h1 {
     color: #fff;
     font-size: 56px;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 0 var(--color-text-shadow);
     margin: 20px 0;
     cursor: pointer;
     user-select: none;
@@ -143,28 +146,46 @@ export default {
 .header > h2 {
     margin: 0 0 40px;
     color: white;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 0 var(--color-text-shadow);
     text-align: center;
 }
 
+/** make all children of header appear in front of background */
+.header > * {
+    z-index: 10;
+}
+
 .header > .navbar {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     color: white;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 0 var(--color-text-shadow);
     position: fixed;
-    z-index: 1;
     top: 0;
+
+    /** z-index higher than other children of .header, for mouse event priority */
+    z-index: 100;
+}
+
+/** fixed background strip, which is always visible */
+.header:after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    position: fixed;
+    content: " ";
+    z-index: 1;
+
+    background: var(--image-background) top / 150vw 325px fixed;
 }
 
 .header > .navbar.background {
-    background: var(--image-background) top / 150vw 325px fixed;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
 }
 
 .header.hide > .navbar {
-    background: var(--image-background) top / 150vw 325px fixed;
     animation-name: show-shadow;
     animation-duration: 0.8s;
     animation-delay: 0.4s;
@@ -176,7 +197,7 @@ export default {
         box-shadow: 0 0 9px rgba(0, 0, 0, 0);
     }
     100% {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 3px 6px var(--color-box-shadow);
     }
 }
 
@@ -194,7 +215,7 @@ export default {
 }
 
 .header > .navbar > nav > a {
-    color: white;
+    color: var(--color-nav-link);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,27 +224,53 @@ export default {
     font-size: 20px;
     margin: 10px 10px;
     position: relative;
+    cursor: pointer;
 }
 
-.header > .navbar > nav > a:after {
+/** makes .hightlight nav links look like a knockout button */
+/*
+.header > .navbar > nav > .highlight {
+    background: var(--image-background) top / 150vw 325px fixed;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+.header > .navbar > nav > .highlight:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--color-nav-link);
+    box-shadow: 0 3px 6px var(--color-box-shadow);
+    border-radius: 4px;
+}*/
+
+.header > .navbar > nav > a:not( .highlight ):after {
     transition: 0.2s ease width, 0.2s ease opacity;
     display: inline-block;
     width: 0;
     content: "";
     opacity: 0;
-    border-bottom: 3px solid white;
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--color-nav-link);
+    box-shadow: 0 1px 0 var(--color-box-shadow);
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
 }
 
-.header > .navbar > nav > a:hover:after {
-    opacity: 1;
-    width: 100%;
+.header > .navbar > nav > a:not( .highlight ):hover:after {
+    width: 100%!important;
 }
 
-.header > .navbar .nuxt-link-active:not( .index ):after,
-.header > .navbar .nuxt-link-exact-active:after {
+.header > .navbar > nav > a:not( .highlight ):hover:after,
+.header > .navbar .nuxt-link-active:not( .index ):not( .highlight ):after,
+.header > .navbar .nuxt-link-exact-active:not( .highlight ):after {
     opacity: 1;
     width: 70%;
 }
@@ -264,7 +311,13 @@ export default {
     }
     
     .navbar.expand {
-        background: var(--color-radio-selected) !important;
+        background: var(--color-mobile-nav) !important;
+        
+        z-index: 100;
+    }
+
+    .navbar.expand:after {
+        display: none;
     }
     
     .navbar.expand > nav {
@@ -278,7 +331,9 @@ export default {
         left: 0;
         display: flex;
         flex-direction: column;
-        background-color: var(--color-radio-selected);
+        background-color: var(--color-mobile-nav);
+
+        z-index: 100;
     }
     
     .navbar.expand > nav > a {

@@ -14,8 +14,8 @@ export default {
 }
 </script>
 
-<style>
-.homepage {
+<style scoped>
+.nuxt-content-container {
     padding: 20px;
     max-width: 750px;
     text-align: center;
@@ -23,17 +23,25 @@ export default {
     font-size: 20px;
 }
 
-.homepage a[href="/submit"] {
+.nuxt-content-container >>> p {
+    line-height: 1.4em;
+    margin: 30px 0;
+}
+
+.nuxt-content-container >>> h2 {
+    margin-top: 50px;
+}
+
+.nuxt-content-container >>> a[href="/submit"] {
     font-weight: 900;
     text-decoration: none;
     font-size: 18px;
-    color: white;
+    display: block;
+    margin: auto;
+    width: max-content;
+    color: var(--color-background);
     padding: 8px 10px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #3eb9e9, #dd788b);
-}
-
-.homepage p {
-    margin: 20px 0 50px 0;
+    background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
 }
 </style>

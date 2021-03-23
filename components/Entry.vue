@@ -6,7 +6,7 @@
         
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
-            <span v-if="entry.type === 'therapist'" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.meta.subject] }}</span>
+            <span v-if="subjectMapping[entry.type]" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.type][entry.meta.subject] }}</span>
             <span v-else :title="mouseOverTexts[entry.type]">{{ typeMapping[entry.type] }}</span>
         </p>
         
@@ -81,8 +81,8 @@ export default {
 .entry {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-entry);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     border-radius: 4px;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -91,7 +91,7 @@ export default {
 .entry > h1 {
     font-size: 26px;
     margin: 0;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .entry > p {
@@ -106,7 +106,7 @@ export default {
 }
 
 .entry > p > span:not(.tag), .entry > p > a {
-    color: #2d3c46;
+    color: var(--color-entry-details);
     display: flex;
     align-items: flex-start;
     margin-right: 20px;
@@ -143,7 +143,7 @@ export default {
 }
 
 .entry > p > a:hover {
-    text-decoration: underline solid rgba(51, 68, 80, 0.7);
+    text-decoration: underline solid var(--color-entry-link-underline);
 }
 
 .entry > .nav {

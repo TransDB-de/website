@@ -41,6 +41,16 @@
 
                 </fieldset>
                 
+                <h2>Textsuche</h2>
+                
+                <input name="text"
+                       v-model="textSearch"
+                       @keyup="highlightButton = true"
+                       type="text"
+                       minlength="2"
+                       maxlength="120"
+                       placeholder="Suche Namen oder Personen"/>
+                
                 <h2 v-if="offerMapping[selectedType] || attributeMapping[selectedType]">Angebote</h2>
 
                 <fieldset v-if="offerMapping[selectedType] || attributeMapping[selectedType]" class="offers" v-on:click="updateApplyButton" >
@@ -63,7 +73,12 @@
 
                 </fieldset>
 
-                <Button center v-on:click="highlightButton = false" class="applyButton" :class="highlightButton ? 'highlight' : ''">
+                <Button
+                    center
+                    v-on:click="highlightButton = false"
+                    class="applyButton"
+                    :class="highlightButton ? 'highlight' : ''"
+                    :loading="loading">
                     Anwenden
                 </Button>
             </Form>
@@ -82,6 +97,7 @@ import CheckboxButton from "@/components/utils/CheckboxButton";
 import {ChevronRightIcon, MapPinIcon} from "vue-feather-icons";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
+import MathMixin from "@/mixins/math";
 
 export default {
     name: "SearchFilter",
@@ -93,9 +109,10 @@ export default {
         RadioButton,
         CheckboxButton
     },
-    mixins: [ EntryMixin, MouseoverMixin ],
+    mixins: [ EntryMixin, MouseoverMixin, MathMixin ],
     props: {
-        location: String
+        location: String,
+        loading: Boolean
     },
     data() {
         return {
@@ -103,6 +120,7 @@ export default {
             selectedType: "",
             selectedAttributes: Set,
             selectedOffers: Set,
+            textSearch: "",
             highlightButton: false,
             scrollOffset: 0
         }
@@ -142,6 +160,7 @@ export default {
     },
     methods: {
         routeUpdated(newRoute) {
+            let text = newRoute.query.text ?? "";
             let type = newRoute.query.type ?? "";
             let offers = newRoute.query.offers ?? [];
             let attributes = newRoute.query.attributes ?? [];
@@ -153,6 +172,7 @@ export default {
             offers = offers.filter(val => this.offerMapping[type]?.[val] !== undefined);
             attributes = attributes.filter(val => this.attributeMapping[type]?.[val] !== undefined);
 
+            this.textSearch = text;
             this.selectedType = type;
             this.selectedOffers = new Set(offers);
             this.selectedAttributes = new Set(attributes);
@@ -170,20 +190,13 @@ export default {
         // if the browser window is too short, we might overflow
         // to counter this, allow the user to scroll an overflowing SearchFilter
         scrollEvent(pos, dist) {
-
             const offsetHeight = this.$el.offsetHeight;
-
             const topOffset = 56;
 
-            let botOffset = window.innerHeight - offsetHeight;
-            if (botOffset > topOffset) botOffset = topOffset;
-
-            let newOffset = this.scrollOffset - dist;
-            if (newOffset > topOffset) newOffset = topOffset;
-            if (newOffset < botOffset) newOffset = botOffset;
+            let botOffset = Math.min(window.innerHeight - offsetHeight, topOffset);
+            let newOffset = this.clamp(this.scrollOffset - dist, botOffset, topOffset);
 
             this.scrollOffset = newOffset;
-
         }
         
     }
@@ -237,6 +250,12 @@ export default {
     align-items: center;
 }
 
+.filter input[type=text] {
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: var(--color-input-background);
+}
+
 .filter p .feather {
     height: 21px;
     width: 21px;
@@ -286,7 +305,7 @@ fieldset {
 
 .highlight {
     background-color: var(--color-highlight);
-    box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 3px 2px var(--color-box-shadow);
 }
 
 .highlight:hover {

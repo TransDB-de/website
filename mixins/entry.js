@@ -1,14 +1,15 @@
-const typeMapping = {
+export const typeMapping = {
     "": "Alle Kategorien",
     group: "Gruppe/Verein",
     therapist: "Therapeut*in/Psychiater*in",
+    surveyor: "Gutachter*in",
     endocrinologist: "Endokrinologische Praxis",
     surgeon: "Operateur*in",
     logopedics: "Logopäd*in",
-    hairremoval: "Haarentfernungsstudio"
+    hairremoval: "Haarentfernung"
 }
 
-const attributeMapping = {
+export const attributeMapping = {
     group: {
         trans: "Transfokus",
         regularMeetings: "Regelmäßige Treffen",
@@ -19,14 +20,16 @@ const attributeMapping = {
         insurancePay: "Kostenübernahme",
         transfriendly: "Transfreundlich",
         hasDoctor: "Ärztlich"
+    },
+    surveyor: {
+        enby: "NB Gutachten"
     }
 }
 
-const offerMapping = {
+export const offerMapping = {
     therapist: {
         indication: "Indikationen",
-        therapy: "Begleittherapie",
-        expertise: "Gutachten"
+        therapy: "Begleittherapie"
     },
     surgeon: {
         mastectomy: "Mastektomie",
@@ -39,13 +42,25 @@ const offerMapping = {
         orch: "Orchiektomie",
         clitPI: "Klitorispenoid / Metoidioplastik",
         bodyfem: "Körperfemininisierende OP's"
+    },
+    hairremoval: {
+        laser: "Laserepilation",
+        ipl: "IPL",
+        electro: "Elektroepilation",
+        electroAE: "Elektroepilation mit Lokalanästhesie"
     }
 }
 
-const subjectMapping = {
-    therapist: "Psychologische*r Psychotherapeut*in",
-    psychologist: "Psychiater (Facharzt für Psychiatrie)"
+export const subjectMapping = {
+    therapist: {    
+        therapist: "Psychologische*r Psychotherapeut*in",
+        psychologist: "Psychiater (Facharzt für Psychiatrie)"
+    }
 }
+
+/** for using the mappings as data key references */
+let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
+export const typeMappingData = _typeMappingData;
 
 export default {
 
@@ -54,6 +69,7 @@ export default {
         this.attributeMapping = attributeMapping;
         this.offerMapping = offerMapping;
         this.subjectMapping = subjectMapping;
+        this.typeMappingData = typeMappingData;
     }
 
 }

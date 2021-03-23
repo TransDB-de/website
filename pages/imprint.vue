@@ -1,6 +1,9 @@
 <template>
-    
-    <nuxt-content :document="imprintPage"></nuxt-content>
+    <div class="imprint">
+        <nuxt-content :document="imprintPage"></nuxt-content>
+        <nuxt-content :document="disclaimerPage"></nuxt-content>
+        <nuxt-content :document="entryRemovalPolicyPage"></nuxt-content>
+    </div>
 
 </template>
 
@@ -9,7 +12,9 @@ export default {
     name: "imprint",
     async asyncData({ $content }) {
         const imprintPage = await $content("imprint").fetch();
-        return { imprintPage }
+        const disclaimerPage = await $content("disclaimer").fetch();
+        const entryRemovalPolicyPage = await $content("entryRemovalPolicy").fetch();
+        return { imprintPage, disclaimerPage, entryRemovalPolicyPage }
     }
 }
 </script>
@@ -20,8 +25,13 @@ export default {
     max-width: 750px;
     position: initial;
 }
+.imprint >>> p {
+    line-height: 1.4em;
+    padding: 0 1em;
+}
 
-.nuxt-content p {
-    margin: 20px 0 50px 0;
+.imprint >>> h2, .imprint >>> h3, .imprint >>> h4 {
+    margin-top: 2em;
+    margin-bottom: 0.8em;
 }
 </style>

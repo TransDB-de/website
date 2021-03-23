@@ -25,7 +25,7 @@ export default {
 }
 
 .line {
-	background-color: white;
+	background-color: var(--color-nav-link);
 	width: 100%;
 	height: 4px;
 	transition: background-color 0.4s;
@@ -38,7 +38,7 @@ export default {
 	left: 0;
 	width: 100%;
 	height: 4px;
-	background-color: white;
+	background-color: var(--color-nav-link);
 	content: "";
 	transition: transform 0.4s;
 	border-radius: 2px;

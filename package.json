@@ -9,11 +9,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxt/content": "^1.11.1",
-    "@nuxtjs/axios": "^5.12.2",
+    "@nuxt/content": "^1.14.0",
+    "@nuxtjs/axios": "^5.13.1",
+    "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
     "ackee-tracker": "^4.2.0",
-    "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
+    "core-js": "^3.9.1",
+    "nuxt": "^2.15.3",
     "vue-feather-icons": "^5.1.0"
   },
   "devDependencies": {}

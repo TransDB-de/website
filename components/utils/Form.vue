@@ -49,8 +49,8 @@ export default {
                 
             }
             
-            if (this.clear) {
-                this.$el.reset();
+            if (this.reset) {
+                this.resetForm();
             }
             
             this.$emit("submit", data);
@@ -85,6 +85,10 @@ export default {
 
             return null;
             
+        },
+        
+        resetForm: function () {
+            this.$el.reset();
         }
         
     }
@@ -115,17 +119,18 @@ form.inline {
 form input, form select {
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
-    color: #334450;
+    color: var(--color-text);
+    background-color: var(--color-input-background);
     outline: 0;
     border-radius: 4px;
-    border: 2px solid rgba(51, 68, 80, 0.15);
+    border: 2px solid var(--color-input-outline);
     padding: 6px 12px;
     margin-bottom: 20px;
     transition: 0.2s ease border;
 }
 
 form input:focus {
-    border: 2px solid rgba(51, 68, 80, 0.4);
+    border: 2px solid var(--color-input-outline-focus);
 }
 
 form.inline input, form.inline select {
@@ -147,7 +152,7 @@ form.inline *:last-child {
 }
 
 form input::placeholder {
-    color: #0000004C;
+    color: var(--color-input-placeholder);
     font-weight: 500;
 }
 

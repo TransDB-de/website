@@ -1,0 +1,55 @@
+.inline-field > * {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	font-size: 17px;
+	margin: 0;
+	border-radius: 4px;
+	color: var(--color-text);
+	width: 100%;
+	outline: 0;
+	height: 30px;
+	display: inline-flex;
+	align-items: center;
+}
+
+.inline-field > input, .inline-field > select {
+    font-family: 'Poppins', sans-serif;
+	font-weight: 600;
+	font-size: 17px;
+    color: var(--color-text);
+    outline: 0;
+    border-radius: 4px;
+    border: 2px solid var(--color-input-outline);
+    transition: 0.2s ease border;
+}
+
+.inline-field > input:focus, .inline-field > select:focus {
+    border: 2px solid var(--color-input-outline-focus);
+}
+
+.inline-field > input {
+	padding: 2px 4px;
+}
+
+.inline-field > select > option {
+	padding: 2px 4px;
+}
+
+.inline-field > span {
+	padding: 4px 6px;
+	overflow: hidden;
+	word-break: keep-all;
+	white-space: nowrap;
+}
+
+.inline-field {
+	font-family: 'Fira Sans', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: var(--color-grey);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	line-height: 0.95em;
+	width: 100%;
+}

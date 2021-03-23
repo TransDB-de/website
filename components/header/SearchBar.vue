@@ -51,26 +51,64 @@ export default {
             return this.locText.length > 0;
         }
     },
+    watch: {
+
+        // When location text is set by user, but not used in query, emit a search event, appending the location
+        $route(to, from) {
+            
+            console.log(this.locText);
+            console.log(to.name);
+            console.log(from.name);
+
+            if (this.locText !== ""
+                && to.name === "search"
+                && from.name !== "search"
+            ) {
+                this.$emit("search", { location: this.locText });
+            }
+        }
+
+    },
     methods: {
         
-        search: function() {
+        search() {
             
             if ( this.locText.length < 2) {
-                this.$router.push("/search");
+                this.resetLocaction();
                 return;
             };
             
             this.$emit("search", { location: this.locText });
         },
         
-        distanceSearch: function () {
+        distanceSearch() {
     
             navigator.geolocation.getCurrentPosition((pos) => {
                 this.$emit("search", { lat: pos.coords.latitude, long: pos.coords.longitude });
             }, (error) => {
-                this.$router.push("/search");
+                this.resetLocaction();
             });
             
+        },
+
+        /** Resets the location, and routes to the search page */
+        resetLocaction() {
+
+            let query = {};
+
+            if (this.$route.name === "search") {
+
+                query = {...this.$route.query};
+
+                delete query.location;
+                delete query.lat;
+                delete query.long;
+
+                console.log(query);
+            }
+
+            this.$router.push({ name: "search", query });
+
         }
         
     }
@@ -84,7 +122,7 @@ export default {
 }
 
 .search-bar {
-    background-color: white;
+    background-color: var(--color-search-bar);
     border-radius: 4px;
     padding: 5px;
     display: grid;
@@ -92,7 +130,7 @@ export default {
     max-width: 560px;
     min-width: min(240px, 100vw);
     overflow: hidden;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 6px var(--color-box-shadow);
     grid-template-columns: 1fr auto 0;
     transition: 0.4s ease grid-template-columns;
 }
@@ -107,7 +145,7 @@ export default {
 }
 
 .search-bar > input {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: transparent;
     border: 0;
     margin: 0;
     font-size: 18px;
@@ -115,11 +153,11 @@ export default {
     padding: 0 0 0 10px;
     min-width: 0;
     font-family: 'Poppins', sans-serif;
-    color: #334450;
+    color: var(--color-text);
 }
 
 .search-bar > input::placeholder {
-    color: #0000004C;
+    color: var(--color-input-placeholder);
     font-weight: 500;
 }
 

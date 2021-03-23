@@ -44,11 +44,11 @@ export default {
 .checkmark {
     position: absolute;
     border-radius: 4px;
-    border: 2px solid rgba(51, 68, 80, 0.15);
+    border: 2px solid var(--color-input-outline);
     left: 0;
     height: 28px;
     width: 28px;
-    background-color: white;
+    background-color: var(--color-input-background);
     transition: 0.2s ease border;
 }
 
@@ -70,7 +70,7 @@ export default {
     top: 3px;
     width: 6px;
     height: 12px;
-    border: solid #3eb9e9;
+    border: solid var(--color-radio-selected);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

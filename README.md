@@ -1,15 +1,19 @@
 # Trans*db Website
+
 The official Trans*db website based on Nuxtjs.
 
 ## Dependencies
+
 - [Nuxtjs](https://nuxtjs.org/) Framework based on [Vuejs](https://vuejs.org/).
 - [vue-feather-icons](https://vue-feather-icons.egoist.sh/) Vue icon components based on open source [feather icons](https://feathericons.com/).
 - [@nuxtjs/axios](https://axios.nuxtjs.org/) Axios (web request) plugin for nuxt.
 - [@nuxt/content](https://content.nuxtjs.org/) Nuxt plugin to manage content *acting as headless cms*. Used for text content (markdown) like the startpage or privacy page.
 
 ## UI Design
+
 ### Colors
-All colors are stored in global variables in */layouts/default.vue*
+
+All colors are stored in global variables in */css/colors.css*
 
 ## Build Setup
 

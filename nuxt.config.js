@@ -27,10 +27,10 @@ export default {
 
     // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
     plugins: [
-        "~/plugins/auth-redirect.js",
         "~/plugins/ackee.client.js",
         "~/plugins/responsive.client.js",
-        "~/plugins/smoothScroll.client.js"
+        "~/plugins/smoothScroll.client.js",
+        "~/plugins/axios.client.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -51,7 +51,7 @@ export default {
 
     // Axios module configuration (https://go.nuxtjs.dev/config-axios)
     axios: {
-        baseURL: "http://localhost:1300"
+        baseURL: "http://localhost:1300/"
     },
 
     // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -69,7 +69,7 @@ export default {
         ackee: {
             server: 'https://analytics.hamsterlabs.de',
             domainId: '84fbbfc3-ebc7-4faf-bf7c-018d1d0d2bd0',
-            ignoreLocalhost: false, // ONLY FOR DEBUG! Set to true in production.
+            ignoreLocalhost: true, // ONLY FOR DEBUG! Set to true in production.
             detailed: true
         }
     }
