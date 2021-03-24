@@ -49,11 +49,6 @@ export default {
         "@nuxt/content"
     ],
 
-    // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-    axios: {
-        baseURL: "http://localhost:1300/"
-    },
-
     // Build Configuration (https://go.nuxtjs.dev/config-build)
     build: {
         extend(config, ctx) {
@@ -63,14 +58,44 @@ export default {
         }
     },
 
-    // Env config for plugins
-    env: {
+    // global config
+    publicRuntimeConfig: {
         // Ackee tracking configuration (https://github.com/bdrtsky/nuxt-ackee)
         ackee: {
-            server: 'https://analytics.hamsterlabs.de',
-            domainId: '84fbbfc3-ebc7-4faf-bf7c-018d1d0d2bd0',
-            ignoreLocalhost: true, // ONLY FOR DEBUG! Set to true in production.
-            detailed: true
+            server: process.env.ACKEE_BRWOSER_URL ?? 'http://localhost:3000',
+            domainId: process.env.ACKEE_DOMAIN_ID ?? '84fbbfc3-ebc7-4faf-bf7c-018d1d0d2bd0',
+            ignoreLocalhost: process.env.ACKEE_IGNORE_LOCALHOST ?? true, // ONLY FOR DEBUG! Set to true in production.
+            detailed: process.env.ACKEE_DETAILED ?? true
+        },
+
+        head: {
+            title: process.env.HEAD_TITLE ?? "Trans*db",
+            meta: [
+                { hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Deine Anlaufstelle für Transgender-Unterstützung" },
+                { hid: "og:locale", name: "og:locale", content: process.env.HEAD_META_LOCALE ?? "de_DE" },
+                { hid: "og:title", name: "og:title", content: process.env.HEAD_TITLE ?? "Trans*db" },
+                { hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Deine Anlaufstelle für Transgender-Unterstützung" },
+            ],
+            htmlAttrs: {
+                lang: process.env.HEAD_LANG ?? "de"
+            }
+        },
+
+        // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+        axios: {
+            baseURL: process.env.API_BRWOSER_URL ?? "http://localhost:1300/"
+        }
+    },
+
+    // server-side config
+    privateRuntimeConfig: {
+        ackee: {
+            server: process.env.ACKEE_URL ?? 'http://localhost:3000'
+        },
+
+        // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+        axios: {
+            baseURL: process.env.API_URL ?? "http://localhost:1300/"
         }
     }
 }
