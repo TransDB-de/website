@@ -21,6 +21,10 @@ export default {
         }
     },
 
+    content: {
+        liveEdit: false
+    },
+
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
     ],
@@ -89,10 +93,6 @@ export default {
 
     // server-side config
     privateRuntimeConfig: {
-        ackee: {
-            server: process.env.ACKEE_URL ?? 'http://localhost:3000'
-        },
-
         // Axios module configuration (https://go.nuxtjs.dev/config-axios)
         axios: {
             baseURL: process.env.API_URL ?? "http://localhost:1300/"

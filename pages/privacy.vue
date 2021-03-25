@@ -19,20 +19,28 @@ export default {
 }
 </script>
 
-<style scoped>
-.nuxt-content-container {
+<style>
+.privacy > .nuxt-content {
     padding: 20px;
     max-width: 750px;
     position: initial;
+    
+    font-size: unset;
+    text-align: unset;
 }
 
-.privacy >>> p {
+.privacy p {
     line-height: 1.4em;
     padding: 0 1em;
+
+    margin: unset;
 }
 
-.privacy >>> h2, .privacy >>> h3, .privacy >>> h4 {
+.privacy h2, .privacy h3, .privacy h4 {
     margin-top: 2em;
+
+    padding: unset;
+    margin-bottom: unset;
 }
     
 </style>

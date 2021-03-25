@@ -55,11 +55,6 @@ export default {
 
         // When location text is set by user, but not used in query, emit a search event, appending the location
         $route(to, from) {
-            
-            console.log(this.locText);
-            console.log(to.name);
-            console.log(from.name);
-
             if (this.locText !== ""
                 && to.name === "search"
                 && from.name !== "search"
@@ -103,8 +98,6 @@ export default {
                 delete query.location;
                 delete query.lat;
                 delete query.long;
-
-                console.log(query);
             }
 
             this.$router.push({ name: "search", query });
