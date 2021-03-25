@@ -87,7 +87,7 @@ export default {
 
         // Axios module configuration (https://go.nuxtjs.dev/config-axios)
         axios: {
-            baseURL: process.env.API_BRWOSER_URL ?? "http://localhost:1300/"
+            browserBaseURL: process.env.API_BRWOSER_URL ?? "http://localhost:1300/"
         }
     },
 
