@@ -21,6 +21,10 @@ export default {
         }
     },
 
+    content: {
+        liveEdit: false
+    },
+
     // Global CSS (https://go.nuxtjs.dev/config-css)
     css: [
     ],
