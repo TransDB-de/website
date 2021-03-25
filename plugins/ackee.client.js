@@ -1,18 +1,18 @@
 import * as ackeeTracker from "ackee-tracker";
 
-export default ({app, env}) => {
+export default ({app, $config}) => {
 
     let instance = ackeeTracker.create({
-        server: env.ackee.server,
-        domainId: env.ackee.domainId
+        server: $config.ackee.server,
+        domainId: $config.ackee.domainId
     }, {
-        detailed: env.ackee.detailed,
-        ignoreLocalhost: env.ackee.ignoreLocalhost
+        detailed: $config.ackee.detailed,
+        ignoreLocalhost: $config.ackee.ignoreLocalhost
     });
 
     app.router.afterEach(() => {
 
-        let attributes = ackeeTracker.attributes(env.ackee.detailed);
+        let attributes = ackeeTracker.attributes($config.ackee.detailed);
         attributes.siteLocation = window.location.origin + window.location.pathname
         instance.record(attributes);
 

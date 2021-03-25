@@ -14,8 +14,8 @@ export default {
 }
 </script>
 
-<style scoped>
-.nuxt-content-container {
+<style>
+.homepage {
     padding: 20px;
     max-width: 750px;
     text-align: center;
@@ -23,16 +23,21 @@ export default {
     font-size: 20px;
 }
 
-.nuxt-content-container >>> p {
+.homepage p {
     line-height: 1.4em;
     margin: 30px 0;
+
+    padding: unset;
 }
 
-.nuxt-content-container >>> h2 {
+.homepage h2 {
     margin-top: 50px;
+
+    padding: unset;
+    margin-bottom: unset;
 }
 
-.nuxt-content-container >>> a[href="/submit"] {
+.homepage a[href="/submit"] {
     font-weight: 900;
     text-decoration: none;
     font-size: 18px;

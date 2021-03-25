@@ -19,18 +19,23 @@ export default {
 }
 </script>
 
-<style scoped>
-.nuxt-content-container {
+<style>
+.imprint > .nuxt-content {
     padding: 20px;
     max-width: 750px;
     position: initial;
+
+    font-size: unset;
+    text-align: unset;
 }
-.imprint >>> p {
+.imprint p {
     line-height: 1.4em;
     padding: 0 1em;
+
+    margin: unset;
 }
 
-.imprint >>> h2, .imprint >>> h3, .imprint >>> h4 {
+.imprint h2, .imprint h3, .imprint h4 {
     margin-top: 2em;
     margin-bottom: 0.8em;
 }
