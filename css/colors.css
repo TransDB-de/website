@@ -9,8 +9,18 @@ html {
     --color-background: #F6F6F6;
     --color-text: #334450;
 
-    --color-text-shadow: rgba(0, 0, 0, 0.2);
-    --color-box-shadow: rgba(0, 0, 0, 0.1);
+    /* shadows */
+    --color-text-shadow: rgba(15, 4, 44, 0.1);
+    --color-box-shadow: rgba(15, 4, 44, 0.1);
+
+    /* layered shadows */
+    --color-text-shadow-strong  : rgba(15, 4, 44, 0.34);
+    --color-text-shadow-rim     : rgba(9, 6, 54, 0.2);
+    --color-text-shadow-glow    : rgba(22, 29, 95, 0.1);
+
+    --color-box-shadow-strong   : rgba(15, 4, 44, 0.15);
+    --color-box-shadow-rim      : rgba(9, 6, 54, 0.1);
+    --color-box-shadow-glow     : rgba(22, 29, 95, 0.08);
 
     /* inputs */
     --color-input-background: white;
@@ -56,7 +66,8 @@ html {
     --color-mobile-nav: #4897ec;
     --color-search-bar: white;
 
-    --image-background: url("/banner.jpg");
+    --banner-overlay: url("/banner-overlay.png");
+    --banner-gradient: linear-gradient(to right, #EA8BBA 0%, #B57FB7 7.5%, #947BB8 15%, #719FD4 35%,#64A8DC 50%, #719FD4 65%, #947BB8 85%, #B57FB7 92.5%, #EA8BBA 100%);
 
     /* entry */
     --color-entry: white;
