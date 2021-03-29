@@ -42,7 +42,7 @@ button {
     display: flex;
     align-items: center;
     font-weight: 600;
-    padding: 8px 10px;
+    padding: 8px 16px;
     border-radius: 4px;
     outline: 0;
     transition: 0.12s ease background-color;
