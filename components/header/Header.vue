@@ -97,7 +97,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: var(--image-background) top / 150vw 325px fixed;
+
     box-shadow: 0 3px 6px var(--color-box-shadow);
     padding: 40px 0 0 0;
     height: 325px;
@@ -105,6 +105,21 @@ export default {
     transition: 0.4s ease opacity, 0.4s ease height;
     overflow: hidden;
     font-family: "Poppins", sans-serif;
+}
+
+/** Background Image */
+.header, .header:after {
+    background-image: var(--banner-overlay), var(--banner-gradient);
+    background-position: top left;
+    background-attachment: fixed;
+    background-size: calc(min(200vw, 1625px)) auto, calc(min(200vw, 1625px));
+}
+
+@media only screen and (min-width: 1625px) {
+    .header, .header:after {
+        background-position: top;
+        background-size: auto 325px, cover;
+    }
 }
 
 .header.hide {
@@ -137,7 +152,7 @@ export default {
 .header > h1 {
     color: #fff;
     font-size: 56px;
-    text-shadow: 2px 2px 0 var(--color-text-shadow);
+    text-shadow: 1px 1px 3px var(--color-text-shadow-strong), 2px 3px 8px var(--color-text-shadow-rim), 0 0 24px var(--color-text-shadow-glow);
     margin: 20px 0;
     cursor: pointer;
     user-select: none;
@@ -146,7 +161,7 @@ export default {
 .header > h2 {
     margin: 0 0 40px;
     color: white;
-    text-shadow: 2px 2px 0 var(--color-text-shadow);
+    text-shadow: 0.3px 0.8px 2.5px var(--color-text-shadow-strong), 1px 2px 6px var(--color-text-shadow-rim), 0 0 18px var(--color-text-shadow-glow);
     text-align: center;
 }
 
@@ -160,7 +175,7 @@ export default {
     justify-content: space-between;
     width: 100%;
     color: white;
-    text-shadow: 1px 1px 0 var(--color-text-shadow);
+    text-shadow: 0.5px 0.5px 2px var(--color-text-shadow-strong), 0.5px 1px 3px var(--color-text-shadow-rim), 0 0 8px var(--color-text-shadow-glow);
     position: fixed;
     top: 0;
 
@@ -177,8 +192,6 @@ export default {
     position: fixed;
     content: " ";
     z-index: 1;
-
-    background: var(--image-background) top / 150vw 325px fixed;
 }
 
 .header > .navbar.background {
@@ -259,7 +272,7 @@ export default {
     content: "";
     opacity: 0;
     border-bottom: 3px solid var(--color-nav-link);
-    box-shadow: 0 1px 0 var(--color-box-shadow);
+    box-shadow: 0.2px 0.5px 2px var(--color-box-shadow-strong), 0.5px 1.5px 4px var(--color-box-shadow-rim), 0 0 8px var(--color-box-shadow-glow);
     position: absolute;
     bottom: 0;
 }

@@ -123,7 +123,7 @@ export default {
     max-width: 560px;
     min-width: min(240px, 100vw);
     overflow: hidden;
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 1px 1.2px 4px var(--color-box-shadow-strong), 2px 2.5px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
     grid-template-columns: 1fr auto 0;
     transition: 0.4s ease grid-template-columns;
 }
