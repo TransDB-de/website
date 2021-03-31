@@ -129,7 +129,7 @@ export default {
     margin-top: -158px;
 
     height: 256px;
-    width: calc(100% - 24px);
+    width: 100%;
 }
 
 .homepage .skyline img {
