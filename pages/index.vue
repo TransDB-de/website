@@ -101,7 +101,7 @@ export default {
 
 .homepage .section:not(.one) {
     display: grid;
-    column-gap: 24px;
+    column-gap: 48px;
     align-items: center;
 }
 
