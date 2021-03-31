@@ -14,33 +14,45 @@ export default {
         const privacyPage = await $content("privacy").fetch();
         const disclaimerPage = await $content("disclaimer").fetch();
         const entryRemovalPolicyPage = await $content("entryRemovalPolicy").fetch();
+
         return { privacyPage, disclaimerPage, entryRemovalPolicyPage }
     }
 }
 </script>
 
 <style>
+.privacy {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
 .privacy > .nuxt-content {
     padding: 20px;
     max-width: 750px;
     position: initial;
-    
-    font-size: unset;
-    text-align: unset;
 }
 
 .privacy p {
     line-height: 1.4em;
     padding: 0 1em;
-
-    margin: unset;
 }
 
 .privacy h2, .privacy h3, .privacy h4 {
     margin-top: 2em;
-
-    padding: unset;
-    margin-bottom: unset;
 }
-    
+
+@media only screen and (max-width: 420px) {
+    .privacy > .nuxt-content {
+        padding: 8px;
+    }
+
+    .privacy p {
+        line-height: 1.4em;
+        padding: 0 0.2em;
+    }
+
+    .privacy h1 {
+        font-size: 1.8em;
+    }
+}
 </style>
