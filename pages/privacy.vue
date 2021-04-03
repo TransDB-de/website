@@ -21,15 +21,12 @@ export default {
 </script>
 
 <style>
-.privacy {
-    width: 100%;
-    overflow-wrap: break-word;
-}
-
 .privacy > .nuxt-content {
     padding: 20px;
     max-width: 750px;
     position: initial;
+
+    overflow-wrap: break-word;
 }
 
 .privacy p {
