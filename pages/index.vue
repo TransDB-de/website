@@ -46,8 +46,8 @@ export default {
     name: "index",
     components: {Button},
     async asyncData({ $content }) {
-        const sections = await $content("homepage").limit(3).fetch();
-
+        let sections = await $content("homepage").limit(3).sortBy("slug").fetch();
+        
         return { section_1: sections[0], section_2: sections[1], section_3: sections[2] };
     }
 }
