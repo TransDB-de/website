@@ -16,11 +16,11 @@
                 <map-icon />{{ address }}
             </a>
     
-            <span v-if="entry.telephone">
+            <a v-if="entry.telephone" :href="`tel:${entry.telephone}`">
                 <phone-icon />{{ entry.telephone }}
-            </span>
+            </a>
             
-            <a :href="`mailto:${entry.email}`">
+            <a v-if="entry.email" :href="`mailto:${entry.email}`">
                 <mail-icon />{{ entry.email }}
             </a>
             
@@ -111,6 +111,7 @@ export default {
     align-items: flex-start;
     margin-right: 20px;
     text-decoration: none;
+    padding: 5px 0;
 }
 
 .entry > p > span.tag {
