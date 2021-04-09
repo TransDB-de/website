@@ -13,6 +13,10 @@
         </div>
 
         <div class="stripe">
+            <Button center @click="$router.push('/submit')" class="button_submit">
+                Einen neuen Eintrag einreichen
+            </Button>
+
             <div class="section two">
                 <h2> Wie kann ich helfen? </h2>
 
@@ -20,10 +24,6 @@
                 <img src="~/assets/index/contribute_small.svg" class="contribute small" >
 
                 <nuxt-content :document="section_2" />
-
-                <Button center @click="$router.push('/submit')" class="button_submit">
-                    Einen neuen Eintrag einreichen
-                </Button>
             </div>
         </div>
 
@@ -97,6 +97,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    position: relative;
 }
 
 .homepage .section:not(.one) {
@@ -230,6 +232,8 @@ export default {
     left: 0;
     right: 0;
     margin: auto;
+
+    max-width: max-content;
 }
 
 .homepage .button_submit:hover {
