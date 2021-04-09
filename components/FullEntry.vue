@@ -23,7 +23,7 @@
             </span>
             
             <span>
-                <b>Webseite:</b> <a>{{ entry.webseite ? entry.website : 'Nicht angegeben' }}</a>
+                <b>Webseite:</b> <a>{{ entry.website ? entry.website : 'Nicht angegeben' }}</a>
             </span>
             
             <span>
