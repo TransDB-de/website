@@ -85,14 +85,19 @@ body > #__nuxt, #__layout, .app {
 }
 
 .footer {
-    padding: 10px;
+    padding: 15px;
     margin-top: auto;
+    background-color: rgba(0, 0, 0, 0.05);
+    width: 100%;
+    text-align: center;
 }
 
 .footer > a {
     color: var(--color-grey);
-    margin: 0 5px;
+    margin: 0 10px;
     display: inline-block;
+    text-decoration: none;
+    font-weight: 500;
 }
 .footer > a:hover {
     color: var(--color-grey-accent);

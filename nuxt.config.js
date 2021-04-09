@@ -34,7 +34,8 @@ export default {
         "~/plugins/ackee.client.js",
         "~/plugins/responsive.client.js",
         "~/plugins/smoothScroll.client.js",
-        "~/plugins/axios.client.js"
+        "~/plugins/axios.client.js",
+        "~/plugins/aos.client.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -87,7 +88,14 @@ export default {
 
         // Axios module configuration (https://go.nuxtjs.dev/config-axios)
         axios: {
-            browserBaseURL: process.env.API_BROWSER_URL ?? "http://localhost:1300/"
+            browserBaseURL: process.env.API_BROWSER_URL ?? "https://transdb-preview.hamsterlabs.de/api"
+        },
+
+        aos: {
+            startEvent: "load",
+            duration: 500,
+            offset: 50,
+            once: true
         }
     },
 

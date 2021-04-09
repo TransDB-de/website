@@ -206,4 +206,11 @@ export default {
     max-width: 500px;
     text-align: center;
 }
+
+.submit-form h1, .submit-form h2 {
+    margin: 20px 0;
+    text-align: left;
+    padding-bottom: 5px;
+    border-bottom: 3px solid var(--color-light);
+}
 </style>
