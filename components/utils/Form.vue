@@ -127,6 +127,7 @@ form input, form select {
     padding: 6px 12px;
     margin-bottom: 20px;
     transition: 0.2s ease border;
+    width: 100%;
 }
 
 form input:focus {
