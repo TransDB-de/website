@@ -214,7 +214,7 @@ export default {
 .homepage .button_submit {
     font-weight: 900;
     font-size: 18px;
-    height: 45px;
+    min-height: 45px;
     color: var(--color-background);
     padding: 12px;
     background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
