@@ -101,6 +101,7 @@ button:active {
 
 .center {
     justify-content: center;
+    align-items: center;
 }
 
 @media only screen and (max-width: 720px) {
