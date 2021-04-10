@@ -228,6 +228,7 @@ export default {
 
     position: absolute;
     top: -17.188px;
+    z-index: 10;
     
     left: 0;
     right: 0;
