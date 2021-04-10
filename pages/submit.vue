@@ -195,7 +195,7 @@ export default {
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    padding: 20px;
+    margin: 20px;
     flex-grow: 1;
     text-align: center;
 }
