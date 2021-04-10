@@ -13,7 +13,7 @@
         </div>
 
         <div class="stripe">
-            <Button center @click="$router.push('/submit')" class="button_submit">
+            <Button center light @click="$router.push('/submit')" class="button_submit">
                 Einen neuen Eintrag einreichen
             </Button>
 
@@ -88,6 +88,8 @@ export default {
     width: 100%;
 
     max-width: 1100px;
+
+    pointer-events: none;
 }
 
 .homepage .stripe {
@@ -216,7 +218,7 @@ export default {
     font-size: 18px;
     min-height: 45px;
     color: var(--color-background);
-    padding: 12px;
+    padding: 9px 12px;
     background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
 
     box-shadow: 1px 1.2px 4px var(--color-box-shadow-strong),
@@ -228,13 +230,14 @@ export default {
 
     position: absolute;
     top: -17.188px;
-    z-index: 10;
     
     left: 0;
     right: 0;
     margin: auto;
 
+    min-width: min-content;
     max-width: max-content;
+    width: 75%;
 }
 
 .homepage .button_submit:hover {
