@@ -82,6 +82,9 @@ button:active {
 
 .icon-only .feather {
     margin: 0;
+
+    min-width: 18px;
+    min-height: 18px;
 }
 
 .light {
