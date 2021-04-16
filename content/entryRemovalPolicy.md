@@ -2,7 +2,7 @@
 
 Falls Sie als Fachperson / Verein, mit Ihrem Eintrag nicht einverstanden sein sollten, etwas korrigieren oder löschen lassen möchten, kontaktieren Sie uns bitte unter folgender E-Mail Adresse:
 
-kontakt@transbd.de
+kontakt@transdb.de
 
 Wir werden Ihren Wunsch berücksichtigen und Ihre Daten bearbeiten oder binnen 14 Tagen löschen.
 
