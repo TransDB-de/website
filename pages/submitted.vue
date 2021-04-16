@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style scoped>
-.nuxt-content-container {
+.nuxt-content {
     padding: 20px;
     max-width: 750px;
     text-align: center;
@@ -23,16 +23,17 @@ export default {
     font-size: 20px;
 }
 
-.nuxt-content-container >>> p {
+.nuxt-content >>> p {
     line-height: 1.4em;
     margin: 30px 0;
+    text-align: center;
 }
 
-.nuxt-content-container >>> h2 {
+.nuxt-content >>> h2 {
     margin-top: 50px;
 }
 
-.nuxt-content-container >>> a[href="/"] {
+.nuxt-content >>> a[href="/"] {
     border: 0;
     text-decoration: none;
     color: white;
@@ -50,11 +51,11 @@ export default {
     font-family: 'Poppins', sans-serif;
 }
 
-.nuxt-content-container >>> a[href="/"]:hover, .nuxt-content-container >>> a[href="/"]:focus {
+.nuxt-content >>> a[href="/"]:hover, .nuxt-content >>> a[href="/"]:focus {
     background-color: var(--color-dark-accent);
 }
 
-.nuxt-content-container >>> a[href="/"]:active {
+.nuxt-content >>> a[href="/"]:active {
     background-color: var(--color-dark-active);
 }
 </style>
