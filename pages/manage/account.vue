@@ -52,7 +52,7 @@ export default {
     computed: {
         username: function () {
             
-            if(this.$store.state.user) {
+            if (this.$store.state.user) {
                 return this.$store.state.user.username;
             } else {
                 return "";
@@ -61,7 +61,7 @@ export default {
         },
         email: function () {
     
-            if(this.$store.state.user) {
+            if (this.$store.state.user) {
                 return this.$store.state.user.email;
             } else {
                 return "";
@@ -83,64 +83,88 @@ export default {
         
         changeUsername: async function (form) {
             
-            let res;
-            
             try {
-                res = await this.$axios.$put("users/me/username", form);
+
+                await this.$axios.$put("users/me/username", form);
                 alert("Benutzername erfolgreich geändert");
+
+                let userData = this.$store.state.user;
+                userData = {
+                    ...userData,
+                    username: form.username
+                };
+
+                this.$store.commit("SET_USER_DATA", userData);
+
             } catch (e) {
-                if(e.response.status === 409) {
+
+                if (e.response.status === 409) {
                     alert("Fehler: Es gibt bereits einen Benutzer mit diesem Namen");
                 } else {
                     alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
                 }
+
             }
             
         },
         
         changePassword: async function (form) {
-            
-            let res;
-            
-            if(form.new !== form.check) {
+                        
+            if (form.new !== form.check) {
                 alert("Die neuen Passwörter stimmen nicht überein");
                 return;
             }
             
             try {
-                
-                res = await this.$axios.$put("users/me/password", form);
-                alert("Passwort erfolgreich geändert");
+
+                await this.$axios.$put("users/me/password", form);
+                alert("Passwort erfolgreich geändert.\nBitte logge dich neu ein");
+
+                // the old token is still valid, and poses a mild security risk. logging out deletes the token
+                this.logout();
                 
             } catch (e) {
-                if(e.response.status === 400) {
+
+                if (e.response.status === 400) {
                     alert("Fehler: Das alte passwort ist falsch");
-                } else if(e.response.status === 422) {
+                } else if (e.response.status === 422) {
                     alert("Fehler: Das Passwort muss mindestens 8 Zeichen lang sein");
                 } else {
                     alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
                 }
+
             }
             
         },
         
         changeEmail: async function (form) {
             
-            let res;
-    
             try {
-                res = await this.$axios.$put("users/me/email", form);
-                alert("E-Mail erfolgreich geändert");
+
+                await this.$axios.$put("users/me/email", form);
+                alert("Email erfolgreich geändert");
+
+                let userData = this.$store.state.user;
+                userData = {
+                    ...userData,
+                    email: form.email
+                };
+
+                this.$store.commit("SET_USER_DATA", userData);
+
             } catch (e) {
-                if(e.response.status === 409) {
+
+                if (e.response.status === 409) {
                     alert("Fehler: Es gibt bereits einen Benutzer mit dieser E-Mail Adresse");
+                } else if (e.response.status === 422) {
+                    alert("Fehler: Keine valide E-Mail Adresse");
                 } else {
                     alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
                 }
+
             }
             
         }
-    
     }
 }
 </script>
