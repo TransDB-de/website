@@ -79,6 +79,8 @@ export default {
 
             } else if (input.type === "number") {
                 return parseFloat(input.value);
+            } else if (typeof input.value === "string" && input.type !== "password") {
+                return input.value.trim();
             } else {
                 return input.value;
             }

@@ -6,7 +6,7 @@
             :title="mouseOverTexts['locationSearch']"
             :placeholder="$store.state.isMobile ? mobilePlaceholder : placeholder"
             @keypress.enter="search"
-            v-model="locText"
+            v-model.trim="locText"
         />
         
 

@@ -44,7 +44,7 @@
                 <h2>Textsuche</h2>
                 
                 <input name="text"
-                       v-model="textSearch"
+                       v-model.trim="textSearch"
                        @keyup="highlightButton = true"
                        type="text"
                        minlength="2"

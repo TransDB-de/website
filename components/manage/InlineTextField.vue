@@ -1,7 +1,7 @@
 <template>
     <div class="inline-field">
         {{ heading }}
-        <input v-if="editable" :type="number ? 'number' : 'text'" :value="value" @input="$emit('input', $event.target.value)">
+        <input v-if="editable" :type="number ? 'number' : 'text'" :value="value" @input="$emit('input', $event.target.value.trim())">
         <span v-else>{{ value }}</span>
     </div>
 </template>
