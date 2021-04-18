@@ -39,6 +39,18 @@ export default {
             loadingNextPage: false
         }
     },
+    head() {
+        return {
+            title: "Suche",
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "Durchsuche unsere Liste für trans*relevante Angebote. Finde über deine Postleitzahl oder die Umgebungsuche Angebote in deiner Nähe."
+                }
+            ]
+        }
+    },
     watchQuery: ["location", "lat", "long", "type", "offers", "attributes", "page", "text"],
     async asyncData({ $axios, query }) {
         

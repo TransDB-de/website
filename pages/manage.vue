@@ -52,6 +52,18 @@ export default {
     name: "manage",
     components: { Button, LogInIcon, LogOutIcon, SettingsIcon },
     mixins: [ AccountMixin, MouseoverMixin ],
+    head() {
+        return {
+            title: "Management",
+            meta: [
+                {
+                    hid: "robots",
+                    name: "robots",
+                    content: "noindex, nofollow"
+                }
+            ]
+        }
+    },
     computed: {
         username() {
             

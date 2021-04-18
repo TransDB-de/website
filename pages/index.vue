@@ -45,6 +45,17 @@ import Button from "@/components/utils/Button";
 export default {
     name: "index",
     components: {Button},
+    head() {
+        return {
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "Eine öffentliche Liste für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, Therapeut*innen oder anderen Anlaufstellen."
+                }
+            ]
+        }
+    },
     async asyncData({ $content }) {
         let sections = await $content("homepage").limit(3).sortBy("slug").fetch();
         

@@ -24,19 +24,19 @@ export const getters = {
 export const mutations = {
 
     SET_LOGIN_TOKEN(state, token) {
-        if(token){
+        if (token) {
             localStorage.setItem("loginToken", token);
-        }else{
+        } else {
             localStorage.removeItem("loginToken");
         }
 
     },
 
     SET_USER_DATA(state, data) {
-        if(data){
+        if (data) {
             localStorage.setItem("user", JSON.stringify(data));
             state.user = data;
-        }else{
+        } else {
             localStorage.removeItem("user");
             state.user = null;
         }

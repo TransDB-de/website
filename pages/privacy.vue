@@ -10,6 +10,18 @@
 <script>
 export default {
     name: "privacy",
+    head() {
+        return {
+            title: "Datenschutz",
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "Informationen zum Datenschutz. TransDB.de verwendet keine Tracking-Cookies und nutzt keine externen Skripte, welche Tracking-Cookies verwenden."
+                }
+            ]
+        }
+    },
     async asyncData({ $content }) {
         const privacyPage = await $content("privacy").fetch();
         const disclaimerPage = await $content("disclaimer").fetch();
