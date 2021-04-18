@@ -1,15 +1,12 @@
 export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
-        title: "Trans*db",
+        titleTemplate: (titleChunk) => {
+            return titleChunk ? `${titleChunk} - Trans*db` : "Trans*db";
+        },          
         meta: [
             { charset: "utf-8" },
             { name: "viewport", content: "width=device-width, initial-scale=1" },
-            { hid: "global_description", name: "description", content: "Finde Angebote für trans* Personen in deiner Umgebung" },
-            { hid: "global_og:locale", name: "og:locale", content: "de_DE" },
-            { hid: "global_og:title", name: "og:title", content: "Trans*db" },
-            { hid: "global_og:description", name: "og:description", content: "Finde Angebote für trans* Personen in deiner Umgebung" },
-            { hid: "global_og:image", name: "og:image", content: "/logo.png" }
         ],
         link: [
             { rel: "shortcut icon", type: "image/png", href: "favicon.png" },
@@ -74,12 +71,12 @@ export default {
         },
 
         head: {
-            title: process.env.HEAD_TITLE ?? "Trans*db",
             meta: [
-                { hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Deine Anlaufstelle für Transgender-Unterstützung" },
+                { hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
+
                 { hid: "og:locale", name: "og:locale", content: process.env.HEAD_META_LOCALE ?? "de_DE" },
                 { hid: "og:title", name: "og:title", content: process.env.HEAD_TITLE ?? "Trans*db" },
-                { hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Deine Anlaufstelle für Transgender-Unterstützung" },
+                { hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
             ],
             htmlAttrs: {
                 lang: process.env.HEAD_LANG ?? "de"

@@ -7,6 +7,18 @@
 <script>
 export default {
     name: "submitted",
+    head() {
+        return {
+            title: "Eintrag eingereicht",
+            meta: [
+                {
+                    hid: "robots",
+                    name: "robots",
+                    content: "noindex"
+                }
+            ]
+        }
+    },
     async asyncData({ $content }) {
         const submittedPage = await $content("submitted").fetch();
         return { submittedPage }

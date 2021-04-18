@@ -150,6 +150,18 @@ export default {
             }
         }
     },
+    head() {
+        return {
+            title: "Neuer Eintrag",
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "Reiche einen neuen Eintrag nach Trans*DB ein und teile deine Erfahrung, um anderen Leuten zu helfen."
+                }
+            ]
+        }
+    },
     methods: {
     
         submit: async function(form) {

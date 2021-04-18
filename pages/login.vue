@@ -30,6 +30,18 @@ import { LogInIcon } from "vue-feather-icons";
 export default {
     name: "login.vue",
     components: {Button, Form, LogInIcon},
+    head() {
+        return {
+            title: "Login",
+            meta: [
+                {
+                    hid: "robots",
+                    name: "robots",
+                    content: "noindex"
+                }
+            ]
+        }
+    },
     data() {
         return {
             error: null,

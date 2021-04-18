@@ -10,6 +10,18 @@
 <script>
 export default {
     name: "imprint",
+    head() {
+        return {
+            title: "Impressum",
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "Kotaktmöglichkeiten zu unserem Team und Informationen dazu, wie man einen Eintrag löschen oder bearbeiten lassen kann."
+                }
+            ]
+        }
+    },
     async asyncData({ $content }) {
         const imprintPage = await $content("imprint").fetch();
         const disclaimerPage = await $content("disclaimer").fetch();
