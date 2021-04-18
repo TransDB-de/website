@@ -5,11 +5,11 @@ export default {
         meta: [
             { charset: "utf-8" },
             { name: "viewport", content: "width=device-width, initial-scale=1" },
-            { hid: "description", name: "description", content: "Deine Anlaufstelle für Transgender-Unterstützung" },
-            { hid: "og:locale", name: "og:locale", content: "de_DE" },
-            { hid: "og:title", name: "og:title", content: "Trans*db" },
-            { hid: "og:description", name: "og:description", content: "Deine Anlaufstelle für Transgender-Unterstützung" },
-            { hid: "og:image", name: "og:image", content: "/logo.png" }
+            { hid: "global_description", name: "description", content: "Finde Angebote für trans* Personen in deiner Umgebung" },
+            { hid: "global_og:locale", name: "og:locale", content: "de_DE" },
+            { hid: "global_og:title", name: "og:title", content: "Trans*db" },
+            { hid: "global_og:description", name: "og:description", content: "Finde Angebote für trans* Personen in deiner Umgebung" },
+            { hid: "global_og:image", name: "og:image", content: "/logo.png" }
         ],
         link: [
             { rel: "shortcut icon", type: "image/png", href: "favicon.png" },
