@@ -50,10 +50,6 @@
                 <b>Mindestalter:</b> {{ entry.meta.minAge ? entry.meta.minAge : 'Nicht angegeben' }}
             </span>
             
-            <span>
-                <b>Geodaten:</b> {{ entry.location ? 'Ja' : 'Nein' }}
-            </span>
-            
         </div>
         
         <div>
