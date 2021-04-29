@@ -1,5 +1,5 @@
-# Über Trans\*db
+# Über Trans\*DB
 
-Trans\*db ist eine Website, mit der du nach trans\*relevanten medizinischen Leistungen und Communityangeboten aus deiner Umgebung suchen kannst.
+Trans\*DB ist eine Website, mit der du nach trans\*relevanten medizinischen Leistungen und Communityangeboten aus deiner Umgebung suchen kannst.
 
 Falls du für deine Transition also noch nach geeigneten Arztpersonen, Therapeut*innen oder anderen Anlaufstellen suchst, bist du bei uns genau richtig!

@@ -2,7 +2,7 @@ export default {
     // Global page headers (https://go.nuxtjs.dev/config-head)
     head: {
         titleTemplate: (titleChunk) => {
-            return titleChunk ? `${titleChunk} - Trans*db` : "Trans*db";
+            return titleChunk ? `${titleChunk} - Trans*DB` : "Trans*DB";
         },          
         meta: [
             { charset: "utf-8" },
@@ -75,7 +75,7 @@ export default {
                 { hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
 
                 { hid: "og:locale", name: "og:locale", content: process.env.HEAD_META_LOCALE ?? "de_DE" },
-                { hid: "og:title", name: "og:title", content: process.env.HEAD_TITLE ?? "Trans*db" },
+                { hid: "og:title", name: "og:title", content: process.env.HEAD_TITLE ?? "Trans*DB" },
                 { hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
             ],
             htmlAttrs: {
