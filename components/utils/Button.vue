@@ -80,6 +80,10 @@ button:active {
     height: 18px;
 }
 
+.icon-only {
+    padding: 8px;
+}
+
 .icon-only .feather {
     margin: 0;
 
