@@ -23,7 +23,12 @@
         </div>
         
         <div>
-            <Button color="red" @click="deleteUser">Löschen</Button>
+            <Button color="red" @click="deleteUser" title="Benutzer löschen" icononly center>
+                <trash-icon></trash-icon>
+            </Button>
+            <Button @click="resetPassword" title="Passwort zurücksetzen" icononly center>
+                <key-icon></key-icon>
+            </Button>
         </div>
     
     </div>
@@ -32,15 +37,36 @@
 
 <script>
 import Button from "@/components/utils/Button";
+import {TrashIcon, KeyIcon} from "vue-feather-icons";
+
 export default {
     name: "UserItem",
-    components: {Button},
+    components: {Button, TrashIcon, KeyIcon},
     props: {
         user: Object
     },
     methods: {
         formatDate: function (date) {
             return new Date(date).toLocaleDateString('de-DE', { year: 'numeric', day: '2-digit', month: '2-digit' })
+        },
+        resetPassword: async function() {
+    
+            let sure = confirm("Soll das Passwort dieses Benutzers wirklich zurückgesetzt werden?");
+    
+            if(!sure) return;
+    
+            let res = null;
+            
+            try {
+                res = await this.$axios.$put("users/" + this.user._id + "/password");
+            } catch (e) {
+                alert("Fehler beim zurücksetzen: " + e.response.status);
+                return;
+            }
+    
+            await navigator.clipboard.writeText(res.password);
+            alert("Das neue Passwort wurde in deine Zwischenablage kopiert")
+            
         },
         deleteUser: async function() {
         
@@ -85,6 +111,12 @@ export default {
 }
 .user-item > div:first-child {
     flex-grow: 1;
+}
+
+.user-item button {
+    margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
 }
 
 </style>
