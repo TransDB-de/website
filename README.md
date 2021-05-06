@@ -1,6 +1,6 @@
-# Trans*db Website
+# Trans*DB Website
 
-The official Trans*db website based on Nuxtjs.
+The official Trans*DB website based on Nuxtjs.
 
 ## Dependencies
 

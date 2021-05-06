@@ -50,10 +50,6 @@
                 <b>Mindestalter:</b> {{ entry.meta.minAge ? entry.meta.minAge : 'Nicht angegeben' }}
             </span>
             
-            <span>
-                <b>Geodaten:</b> {{ entry.location ? 'Ja' : 'Nein' }}
-            </span>
-            
         </div>
         
         <div>
@@ -152,14 +148,14 @@ export default {
             this.deleteLoading = true;
         
             try {
-                await this.$axios.$delete("entries/" + this.user._id);
+                await this.$axios.$delete("entries/" + this.entry._id);
             } catch (e) {
                 return;
             }
         
             this.deleteLoading = false;
             
-            this.$emit("removed", this.user._id);
+            this.$emit("removed", this.entry._id);
         
         }
         

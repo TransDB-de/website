@@ -217,6 +217,7 @@ export default {
     margin-top: 0;
     max-width: 500px;
     text-align: center;
+    border-bottom: none;
 }
 
 .submit-form h1, .submit-form h2 {

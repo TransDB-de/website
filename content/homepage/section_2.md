@@ -1,4 +1,4 @@
-Das Projekt Trans\*db lebt von der Community und allen trans\* Personen, die ihre Erfahrungen mit anderen teilen.
+Das Projekt Trans\*DB lebt von der Community und allen trans\* Personen, die ihre Erfahrungen mit anderen teilen.
 
 Wir hoffen darauf, in Zukunft möglichst viele gute Angebote präsentieren zu können,
 um trans\* Personen aus ganz Deutschland eine mögliche Transition zu erleichtern.
