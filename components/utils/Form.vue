@@ -144,6 +144,7 @@ form.inline input, form.inline select {
 
 form h3 {
     margin-top: 0;
+    text-align: left;
 }
 
 form.inline * {
