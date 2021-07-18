@@ -68,10 +68,10 @@ export default {
         
         search() {
             
-            if ( this.locText.length < 2) {
+            if (this.locText.length < 2) {
                 this.resetLocaction();
                 return;
-            };
+            }
             
             this.$emit("search", { location: this.locText });
         },

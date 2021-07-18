@@ -46,7 +46,7 @@ export default {
                 {
                     hid: "description",
                     name: "description",
-                    content: "Durchsuche unsere Liste für trans*relevante Angebote. Finde über deine Postleitzahl oder die Umgebungsuche Angebote in deiner Nähe."
+                    content: "Durchsuche unsere Liste für trans*relevante Angebote. Finde über deine Postleitzahl oder die Umgebungssuche Angebote in deiner Nähe."
                 }
             ]
         }

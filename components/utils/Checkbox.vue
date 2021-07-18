@@ -27,6 +27,7 @@ export default {
     position: relative;
     margin-bottom: 20px;
     cursor: pointer;
+    text-align: left;
     font-size: 18px;
     padding-left: 35px;
 }

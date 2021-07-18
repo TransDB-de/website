@@ -51,7 +51,7 @@ export default {
                 {
                     hid: "description",
                     name: "description",
-                    content: "Eine öffentliche Liste für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, Therapeut*innen oder anderen Anlaufstellen."
+                    content: "Eine öffentliche Liste für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, TherapeutInnen oder anderen Anlaufstellen."
                 }
             ]
         }
