@@ -36,7 +36,7 @@ button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
-    box-shadow: 0 3px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
     cursor: pointer;
     font-size: 16px;
     display: flex;
@@ -55,6 +55,7 @@ button:not(.light) {
 
 button:hover, button:focus {
     background-color: var(--color-dark-accent);
+    box-shadow: 0px 0px 4px var(--color-box-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 }
 
 button:active {

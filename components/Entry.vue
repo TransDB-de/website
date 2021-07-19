@@ -1,9 +1,21 @@
 <template>
 
     <div class="entry">
-    
-        <h1>{{ entry.name }}</h1>
-        
+
+        <p class="no-margin">
+            <span class="heading">
+                <h1>{{ entry.name }}</h1>
+            </span>
+
+            <span v-if="entry.accessible === 'true'" class="special highlight">
+                <CheckCircleIcon /> Barrierefrei
+            </span>
+
+            <span v-if="entry.accessible === 'false'" class="special warn">
+                <AlertTriangleIcon /> Nicht Barrierefrei
+            </span>
+        </p>
+
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
             <span v-if="subjectMapping[entry.type]" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.type][entry.meta.subject] }}</span>
@@ -56,11 +68,11 @@
 import Tag from "@/components/utils/Tag";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
-import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon } from "vue-feather-icons";
+import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon } from "vue-feather-icons";
 
 export default {
     name: "FullEntry",
-    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon },
+    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon },
     mixins: [ EntryMixin, MouseoverMixin ],
     props: {
         entry: Object
@@ -82,13 +94,13 @@ export default {
     display: flex;
     flex-direction: column;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 10px 20px;
     margin-bottom: 20px;
 }
 
-.entry > h1 {
+.entry h1 {
     font-size: 26px;
     margin: 0;
     font-weight: 600;
@@ -101,11 +113,15 @@ export default {
     margin-top: 0;
 }
 
+.entry > p.no-margin {
+    margin: 0;
+}
+
 .entry > p:last-child {
     margin-bottom: 5px;
 }
 
-.entry > p > span:not(.tag), .entry > p > a {
+.entry > p > span:not(.tag):not(.heading), .entry > p > a {
     color: var(--color-entry-details);
     display: flex;
     align-items: flex-start;
@@ -120,6 +136,10 @@ export default {
 
 .entry > p > span:last-child, .entry > p > span.tag:last-child {
     margin-right: 0;
+}
+
+.entry > p > span.heading {
+    margin-right: 10px;
 }
 
 .entry b {
@@ -149,6 +169,28 @@ export default {
 
 .entry > .nav {
     user-select: none;
+}
+
+.entry > p > .special {
+    padding: 4px 6px 4px 4px !important;
+    font-size: 13px;
+    border-radius: 4px;
+    height: min-content;
+    align-self: center;
+}
+
+.entry > p > .special .feather {
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
+}
+
+.entry > p > .highlight {
+    background-color: var(--color-special-highlight);
+}
+
+.entry > p > .warn {
+    background-color: var(--color-special-warn);
 }
 
 </style>

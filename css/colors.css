@@ -19,8 +19,8 @@ html {
     --color-text-shadow-glow    : rgba(22, 29, 95, 0.1);
 
     --color-box-shadow-strong   : rgba(15, 4, 44, 0.15);
-    --color-box-shadow-rim      : rgba(9, 6, 54, 0.1);
-    --color-box-shadow-glow     : rgba(22, 29, 95, 0.08);
+    --color-box-shadow-rim      : rgba(9, 6, 54, 0.08);
+    --color-box-shadow-glow     : rgba(22, 29, 95, 0.04);
 
     /* inputs */
     --color-input-background: white;
@@ -60,6 +60,9 @@ html {
     --color-important-text: #ffcbdb;
 
     --color-error: #de506b;
+
+    --color-special-highlight: #d3ffd3;
+    --color-special-warn: #fff9c1;
     
     /* header */
     --color-nav-link: white;

@@ -49,6 +49,10 @@
             <span>
                 <b>Mindestalter:</b> {{ entry.meta.minAge ? entry.meta.minAge : 'Nicht angegeben' }}
             </span>
+
+            <span>
+                <b>Barrierefrei:</b> {{ entry.accessible ? accessibleMapping[entry.accessible] : 'Unbekannt' }}
+            </span>
             
         </div>
         
@@ -167,7 +171,7 @@ export default {
 .full-entry {
     display: flex;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 0 0 0 10px;
     margin-bottom: 20px;

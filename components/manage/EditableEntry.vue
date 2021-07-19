@@ -38,6 +38,7 @@
             <InlineTextField v-model="_entry.meta.specials" :editable="editable" heading="Spezialangebote" />
             <InlineTextField v-model="_entry.meta.minAge" number :editable="editable" heading="Mindestalter" />
             <InlineSelectField v-if="subjectMapping[_entry.type]" v-model="_entry.meta.subject" :mapping="subjectMapping[_entry.type]" :editable="editable" heading="Fachrichtung" class="col-2-2"/>
+            <InlineSelectField v-model="_entry.accessible" :mapping="accessibleMapping" :editable="editable" heading="Barrierefrei" />
         </div>
 
         <div class="buttons no-border">
@@ -92,6 +93,8 @@ export default {
     },
     created() {
         this._entry = JSON.parse(JSON.stringify(this.entry));
+        
+        if (this._entry.accessible === undefined) this._entry.accessible = "null";
     },
     methods: {
         edit() {
@@ -142,7 +145,7 @@ export default {
 .entry {
     display: grid;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 5px 10px;
     margin-bottom: 20px;
@@ -176,7 +179,7 @@ export default {
 }
 
 .entry > * {
-    box-shadow: 0 0 4px 0 var(--color-box-shadow);
+    box-shadow: 0 0 4px var(--color-box-shadow-rim);
     border-radius: 4px;
     
     padding: 2px 4px;
@@ -255,6 +258,10 @@ export default {
 
 .buttons > button {
     height: 40px;
+}
+
+.buttons > button:not(.icon-only) {
+    padding: 12px 8px;
 }
 
 .buttons > button:not(.double) {

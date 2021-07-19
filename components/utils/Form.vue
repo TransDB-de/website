@@ -58,10 +58,11 @@ export default {
         },
         
         getValueFromInput: function (input) {
-    
             if (input.type === "checkbox") {
         
-                if (input.value.length > 0) {
+                if (input.classList.contains("multistate")) {
+                    return input.value;
+                } else if (input.value.length > 0) {
             
                     if (input.checked) {
                         return input.value;

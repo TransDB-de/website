@@ -37,9 +37,9 @@
         <input name="telephone" type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" />
         <input name="website" type="url" placeholder="Webseite" minlength="3" maxlength="500" />
         
+        <h2>Spezifische Angaben</h2>
+
         <div v-if="type === 'group'">
-        
-            <h2>Spezifische Angaben</h2>
             
             <Checkbox name="attributes[]" value="trans" placeholder="Trans* Fokus" />
             <Checkbox name="attributes[]" value="regularMeetings" placeholder="Regelmäßige Gruppentreffen" />
@@ -53,8 +53,6 @@
         </div>
         
         <div v-if="type === 'therapist'">
-    
-            <h2>Spezifische Angaben</h2>
             
             <select name="subject">
                 <option value="" disabled selected>*Fachrichtung wählen*</option>
@@ -71,15 +69,11 @@
         
         <div v-if="type === 'surveyor'">
     
-            <h2>Spezifische Angaben</h2>
-    
             <Checkbox name="attributes[]" value="enby" placeholder="Nicht-binäre Gutachten" />
             
         </div>
         
         <div v-if="type === 'surgeon'">
-    
-            <h2>Spezifische Angaben</h2>
     
             <h3>Angebotene Operationen:</h3>
             
@@ -98,8 +92,6 @@
         
         <div v-if="type === 'hairremoval'">
     
-            <h2>Spezifische Angaben</h2>
-            
             <h3>Angebote:</h3>
             <Checkbox name="offers[]" value="laser" placeholder="Laser" />
             <Checkbox name="offers[]" value="ipl" placeholder="IPL" />
@@ -113,6 +105,10 @@
             
         </div>
         
+        <h3>Räumlichkeiten:</h3>
+
+        <ThreeStateCheckbox name="accessible" :v-model="accessible" placeholder="Sind Barrierefrei" />
+
         <p>
             Bitte beachte, dass dein Eintrag von unserem Team überprüft wird<br/>bevor er auf der Seite zu finden ist.
         </p>
@@ -130,15 +126,17 @@ import Form from "@/components/utils/Form";
 import Index from "@/pages/index";
 import Checkbox from "@/components/utils/Checkbox";
 import Button from "@/components/utils/Button";
+import ThreeStateCheckbox from "@/components/utils/ThreeStateCheckbox";
 
 export default {
     name: "submit.vue",
-    components: {Button, Checkbox, Index, Form},
+    components: {Button, Checkbox, Index, Form, ThreeStateCheckbox},
     data() {
         return {
             type: "",
             loading: false,
             error: null,
+            accessible: "null",
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
                 therapist: "Name der Praxis",

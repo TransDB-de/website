@@ -195,7 +195,7 @@ export default {
 }
 
 .header > .navbar.background {
-    box-shadow: 0 3px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
 }
 
 .header.hide > .navbar {
@@ -207,10 +207,10 @@ export default {
 
 @keyframes show-shadow {
     0% {
-        box-shadow: 0 0 9px rgba(0, 0, 0, 0);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
     }
     100% {
-        box-shadow: 0 3px 6px var(--color-box-shadow);
+        box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     }
 }
 

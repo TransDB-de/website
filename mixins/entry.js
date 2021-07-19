@@ -58,6 +58,12 @@ export const subjectMapping = {
     }
 }
 
+export const accessibleMapping = {
+    null: "Unbekannt",
+    true: "Barrierefrei",
+    false: "Nicht Barrierefrei"
+}
+
 /** for using the mappings as data key references */
 let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
 export const typeMappingData = _typeMappingData;
@@ -70,6 +76,7 @@ export default {
         this.offerMapping = offerMapping;
         this.subjectMapping = subjectMapping;
         this.typeMappingData = typeMappingData;
+        this.accessibleMapping = accessibleMapping
     }
 
 }
