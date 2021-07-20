@@ -17,7 +17,7 @@
             <option value="logopedics">Logopäd*in</option>
         </select>
         
-        <input name="name" v-if="type" :placeholder="namePlaceholderDescriptions[type]" type="text" required minlength="1" maxlength="50" />
+        <input name="name" v-show="type" :placeholder="namePlaceholderDescriptions[type]" type="text" required minlength="1" maxlength="50" />
         
         <h2>Adresse</h2>
         
