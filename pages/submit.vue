@@ -19,10 +19,10 @@
             <option value="logopedics">Logopäd*in</option>
         </Input>
         
-        <Input name="name" type="text" required="true" minlength="1" maxlength="50"
+        <Input name="name" v-show="type" type="text" required="true" minlength="1" maxlength="50"
             errorMSG="Muss zwischen 1 und 50 Buchstaben lang sein"
             :checkValid="checkValid" :invalid="errors['name']"
-            :placeholder="type ? namePlaceholderDescriptions[type] : 'Name'"
+            :placeholder="type ? namePlaceholderDescriptions[type] : ''"
         />
         
         <h2>Adresse</h2>
