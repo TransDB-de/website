@@ -52,6 +52,8 @@ const mouseOverTexts = {
     location: "Dein Standort",
     locationSearch: "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
     distance: "Entfernung zu deinem Standort",
+    barrierFree: "Räumlichkeiten sind Barrierefrei zugänglich",
+    notBarrierFree: "Räumlichkeiten nicht Barrierefrei zugänglich",
 
     // Management
     logout: "Abmelden",

@@ -19,6 +19,7 @@ name: "Tag"
     background-color: var(--color-light);
     padding: 3px 8px;
     border-radius: 4px;
+    cursor: default;
 }
 
 </style>

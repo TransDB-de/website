@@ -7,11 +7,11 @@
                 <h1>{{ entry.name }}</h1>
             </span>
 
-            <span v-if="entry.accessible === 'true'" class="special highlight">
+            <span v-if="entry.accessible === 'true'" class="special highlight" :title="mouseOverTexts['barrierFree']">
                 <CheckCircleIcon /> Barrierefrei
             </span>
 
-            <span v-if="entry.accessible === 'false'" class="special warn">
+            <span v-if="entry.accessible === 'false'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
                 <AlertTriangleIcon /> Nicht Barrierefrei
             </span>
         </p>
@@ -177,6 +177,7 @@ export default {
     border-radius: 4px;
     height: min-content;
     align-self: center;
+    cursor: default;
 }
 
 .entry > p > .special .feather {
