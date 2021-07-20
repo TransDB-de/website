@@ -1,6 +1,6 @@
 <template>
 
-    <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '']" @click="click">
+    <button :class="[color, light ? 'light' : '', center ? 'center' : '', icononly ? 'icon-only' : '', noshadow ? 'noshadow' : '']" @click="click">
         <slot v-if="!loading" />
         <Loader v-else :dark="light" />
     </button>
@@ -18,7 +18,8 @@ export default {
         center: Boolean,
         color: String,
         loading: Boolean,
-        icononly: Boolean
+        icononly: Boolean,
+        noshadow: Boolean,
     },
     methods: {
         
@@ -36,7 +37,6 @@ button {
     border: 0;
     color: white;
     background-color: var(--color-dark);
-    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
     cursor: pointer;
     font-size: 16px;
     display: flex;
@@ -49,12 +49,19 @@ button {
     font-family: 'Poppins', sans-serif;
 }
 
+button:not(.noshadow) {
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
+}
+
 button:not(.light) {
     height: 40px;
 }
 
 button:hover, button:focus {
     background-color: var(--color-dark-accent);
+}
+
+button:hover:not(.noshadow), button:focus:not(.noshadow) {
     box-shadow: 0px 0px 4px var(--color-box-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 }
 

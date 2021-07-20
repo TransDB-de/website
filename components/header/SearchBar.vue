@@ -11,12 +11,12 @@
         
 
 
-        <Button light @click="distanceSearch" :title="mouseOverTexts['proximitySearch']" class="proximity-button" >
+        <Button light noshadow @click="distanceSearch" :title="mouseOverTexts['proximitySearch']" class="proximity-button" >
             <MapPinIcon />
             <span class="hide-on-mobile">Umgebungssuche</span>
         </Button>
         
-        <Button light icononly @click="search" :title="mouseOverTexts['locationSearchButton']" class="search-button" :class="hasText ? '': 'collapsed'" >
+        <Button light noshadow icononly @click="search" :title="mouseOverTexts['locationSearchButton']" class="search-button" :class="hasText ? '': 'collapsed'" >
             <SearchIcon />
         </Button>
         
