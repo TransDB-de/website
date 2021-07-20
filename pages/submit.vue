@@ -87,6 +87,8 @@
             <Checkbox name="offers[]" value="orch" placeholder="Orchiektomie" />
             <Checkbox name="offers[]" value="clitPI" placeholder="Klitorispenoid / Metoidioplastik" />
             <Checkbox name="offers[]" value="bodyfem" placeholder="Körperfemininisierende Operationen" />
+            <Checkbox name="offers[]" value="glottoplasty" placeholder="Stimmband Operationen" />
+            <Checkbox name="offers[]" value="fms" placeholder="Gesichtsmaskulinisierende Operationen (FMS)" />
             
         </div>
         
@@ -103,6 +105,11 @@
             <Checkbox name="attributes[]" value="transfriendly" placeholder="Ist das Studio Trans*freundlich?" />
             <Checkbox name="attributes[]" value="hasDoctor" placeholder="Wird das Studio von einer Arztperson geleitet?" />
             
+        </div>
+
+        <div v-if="type === 'endocrinologist'">
+            <h3>Weitere Infos:</h3>
+            <Checkbox name="attributes[]" value="treatsNB" placeholder="Behandelt nicht-binäre Personen" />
         </div>
         
         <h3>Räumlichkeiten:</h3>

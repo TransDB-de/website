@@ -23,6 +23,9 @@ export const attributeMapping = {
     },
     surveyor: {
         enby: "NB Gutachten"
+    },
+    endocrinologist: {
+        treatsNB: "Behandelt NB Personen"
     }
 }
 
@@ -35,13 +38,15 @@ export const offerMapping = {
         mastectomy: "Mastektomie",
         vaginPI: "Vaginoplastie (penile Inversion)",
         vaginCombined: "Vaginoplastie (kombinierte Methode)",
-        ffs: "Gesichtsfeminisierende OP's (FFS)",
+        ffs: "Gesichtsfeminisierende OPs (FFS)",
         penoid: "Penoidaufbau",
         breast: "Brustaufbau",
         hyst: "Hysterektomie",
         orch: "Orchiektomie",
         clitPI: "Klitorispenoid / Metoidioplastik",
-        bodyfem: "Körperfemininisierende OP's"
+        bodyfem: "Körperfemininisierende OPs",
+        glottoplasty: "Stimmband OPs",
+        fms: "Gesichtsmaskulinisierende OPs (FMS)"
     },
     hairremoval: {
         laser: "Laserepilation",

@@ -20,9 +20,23 @@ const mouseOverTexts = {
 
     enby: "Stellt Gutachten für nicht-binäre Personen aus",
 
+    treatsNB: "Behandelt nicht-binäre Personen",
+
     // Offers
     indication: "Schreibt Indikationen (für z.B. Hormon Therapie)",
     therapy: "Bietet Begleittherapie für trans* Personen",
+
+    mastectomy: "Mastektomie",
+    vaginPI: "Vaginoplastie mit der Methode penile Inversion",
+    vaginCombined: "Vaginoplastie mit der kombinierten Methode",
+    ffs: "Gesichtsfeminisierende Operationen (Abkürzung: FFS)",
+    penoid: "Penoidaufbau",
+    breast: "Brustaufbau",
+    orch: "Orchiektomie",
+    clitPI: "Klitorispenoid / Metoidioplastik",
+    bodyfem: "Körperfemininisierende Operationen",
+    glottoplasty: "Stimmband Operationen, wie Stimmfeminisierung",
+    fms: "Gesichtsmaskulinisierende Operationen (Abkürzung: FMS)",
 
     laser: "Epilation mit Hilfe eines Lasers",
     ipl: "Epliation durch starke Lichtimpulse. Nicht dauerhaft",
