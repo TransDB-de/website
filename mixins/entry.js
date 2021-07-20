@@ -64,6 +64,26 @@ export const accessibleMapping = {
     false: "Nicht Barrierefrei"
 }
 
+export function typeHasSpecials(type) {
+    type = type.toLowerCase();
+    switch (type) {
+        case "group":
+            return true;
+        default:
+            return false;
+    }
+}
+
+export function typeHasMinAge(type) {
+    type = type.toLowerCase();
+    switch (type) {
+        case "group":
+            return true;
+        default:
+            return false;
+    }
+}
+
 /** for using the mappings as data key references */
 let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
 export const typeMappingData = _typeMappingData;
@@ -76,7 +96,9 @@ export default {
         this.offerMapping = offerMapping;
         this.subjectMapping = subjectMapping;
         this.typeMappingData = typeMappingData;
-        this.accessibleMapping = accessibleMapping
+        this.accessibleMapping = accessibleMapping;
+        this.typeHasSpecials = typeHasSpecials;
+        this.typeHasMinAge = typeHasMinAge;
     }
 
 }
