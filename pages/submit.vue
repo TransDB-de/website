@@ -56,7 +56,7 @@
 
         <div v-if="type === 'group'">
             
-            <Errorbox errorMSG="Wähle midnestens eins aus" :invalid="errors[type]['attributes']">
+            <Errorbox errorMSG="Wähle mindestens eins aus" :invalid="errors[type]['attributes']">
                 <Checkbox name="attributes[]" value="trans" placeholder="Trans* Fokus" />
                 <Checkbox name="attributes[]" value="regularMeetings" placeholder="Regelmäßige Gruppentreffen" />
                 <Checkbox name="attributes[]" value="consulting" placeholder="Beratungsangebot" />
@@ -172,7 +172,7 @@ export default {
             type: "",
             loading: false,
             error: null,
-            accessible: "null",
+            accessible: 0,
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
                 therapist: "Name der Praxis",

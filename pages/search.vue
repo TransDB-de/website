@@ -11,7 +11,7 @@
             <h3 v-if="entries.length < 1">Leider sind unter deinem Filter keine Einträge vorhanden</h3>
             
             <div class="load-more">
-                <Button v-if="more" center light @click="loadNextPage" :loading="loadingNextPage">Mehr anzeigen</Button>
+                <Button v-if="more" center light @click="loadNextPage" :loading="loadingNextPage" noshadow>Mehr anzeigen</Button>
             </div>
 
             <nuxt-link v-if="!more" to="/submit">Einen neuen Eintrag einreichen</nuxt-link>

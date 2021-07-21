@@ -2,19 +2,17 @@
 
     <div class="entry">
 
-        <p class="no-margin">
-            <span class="heading">
-                <h1>{{ entry.name }}</h1>
-            </span>
+        <div class="no-margin">
+            <h1>{{ entry.name }}</h1>
 
-            <span v-if="entry.accessible === 'true'" class="special highlight" :title="mouseOverTexts['barrierFree']">
+            <span v-if="entry.accessible === 2" class="special highlight" :title="mouseOverTexts['barrierFree']">
                 <CheckCircleIcon /> Barrierefrei
             </span>
 
-            <span v-if="entry.accessible === 'false'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
+            <span v-if="entry.accessible === 1" class="special warn" :title="mouseOverTexts['notBarrierFree']">
                 <AlertTriangleIcon /> Nicht Barrierefrei
             </span>
-        </p>
+        </div>
 
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
@@ -60,6 +58,10 @@
             </span>
         </p>
         
+        <button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
+            <EditIcon />
+        </button>
+        
     </div>
     
 </template>
@@ -68,11 +70,12 @@
 import Tag from "@/components/utils/Tag";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
-import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon } from "vue-feather-icons";
+import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon } from "vue-feather-icons";
+import entry from "@/mixins/entry";
 
 export default {
-    name: "FullEntry",
-    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon },
+    name: "Entry",
+    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon },
     mixins: [ EntryMixin, MouseoverMixin ],
     props: {
         entry: Object
@@ -84,6 +87,11 @@ export default {
         website: function () {
             return new URL(this.entry.website).host;
         }
+    },
+    methods: {
+        report() {
+            this.$router.push({ name: "report", query: { id: this.entry._id } })
+        }
     }
 }
 </script>
@@ -93,6 +101,7 @@ export default {
 .entry {
     display: flex;
     flex-direction: column;
+    position: relative;
     background-color: var(--color-entry);
     box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
@@ -106,14 +115,15 @@ export default {
     font-weight: 600;
 }
 
-.entry > p {
+.entry > p,
+.entry > div {
     font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 0;
 }
 
-.entry > p.no-margin {
+.entry > .no-margin {
     margin: 0;
 }
 
@@ -121,7 +131,9 @@ export default {
     margin-bottom: 5px;
 }
 
-.entry > p > span:not(.tag):not(.heading), .entry > p > a {
+.entry > p > span:not(.tag):not(.heading),
+.entry > p > a,
+.entry > div > span {
     color: var(--color-entry-details);
     display: flex;
     align-items: flex-start;
@@ -134,11 +146,13 @@ export default {
     margin: 2.5px;
 }
 
-.entry > p > span:last-child, .entry > p > span.tag:last-child {
+.entry > p > span:last-child,
+.entry > div > span:last-child,
+.entry > p > span.tag:last-child {
     margin-right: 0;
 }
 
-.entry > p > span.heading {
+.entry > div > h1 {
     margin-right: 10px;
 }
 
@@ -156,7 +170,8 @@ export default {
     margin-left: 5px;
 }
 
-.entry > p > span .feather, .entry > p > a .feather {
+.entry > p > span .feather,
+.entry > p > a .feather {
     margin-right: 5px;
     height: 18px;
     width: 18px;
@@ -171,7 +186,7 @@ export default {
     user-select: none;
 }
 
-.entry > p > .special {
+.entry > div > .special {
     padding: 4px 6px 4px 4px !important;
     font-size: 13px;
     border-radius: 4px;
@@ -180,18 +195,46 @@ export default {
     cursor: default;
 }
 
-.entry > p > .special .feather {
+.entry > div > .special .feather {
     width: 16px;
     height: 16px;
     margin-right: 2px;
 }
 
-.entry > p > .highlight {
+.entry > div > .highlight {
     background-color: var(--color-special-highlight);
 }
 
-.entry > p > .warn {
+.entry > div > .warn {
     background-color: var(--color-special-warn);
 }
 
+.entry .meta-button {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--color-light-accent);
+    transition: 0.2s ease color, 0.2s ease opacity;
+}
+
+.entry:hover .meta-button {
+    visibility: visible;
+    opacity: 1;
+}
+
+.entry .meta-button:hover {
+    color: var(--color-text);
+}
+
+@media only screen and (max-width: 720px) {
+    .entry:hover .meta-button {
+        color: var(--color-text);
+    }
+}
 </style>

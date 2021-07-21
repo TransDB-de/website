@@ -64,9 +64,9 @@ export const subjectMapping = {
 }
 
 export const accessibleMapping = {
-    null: "Unbekannt",
-    true: "Barrierefrei",
-    false: "Nicht Barrierefrei"
+    0: "Unbekannt",
+    2: "Barrierefrei",
+    1: "Nicht Barrierefrei"
 }
 
 export function typeHasSpecials(type) {

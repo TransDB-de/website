@@ -61,11 +61,11 @@ export default {
         getValue: function() {
             switch (this.stateCount) {
                 case 0:
-                    return "null";
+                    return 0;
                 case 1:
-                    return "true";
+                    return 2;
                 case 2:
-                    return "false";
+                    return 1;
             }
         }
     },

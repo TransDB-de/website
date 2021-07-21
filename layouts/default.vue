@@ -84,6 +84,13 @@ body > #__nuxt, #__layout, .app {
     opacity: 0;
 }
 
+.nuxt-content a, form > p a {
+    border: 0;
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-radio-selected);
+    color: var(--color-radio-selected);
+}
+
 .footer {
     padding: 15px;
     margin-top: auto;

@@ -52,12 +52,12 @@ const langDef = [
 
     {
         name: "barrierefrei",
-        type: "text",
+        type: "number",
         field: "accessible",
         mappings: {
-            "ja": "true",
-            "nein": "false",
-            "unbekannt": "null"
+            "ja": "2",
+            "nein": "1",
+            "unbekannt": "0"
         }
     },
 
@@ -136,6 +136,12 @@ const langDef = [
         name: "umgebung",
         type: "location",
         field: "location"
+    },
+
+    {
+        name: "id",
+        type: "text",
+        field: "_id"
     },
 
     {
