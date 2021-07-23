@@ -45,7 +45,8 @@
             <Button v-if="editable" class="double" :title="mouseOverTexts['deleteEntry']" color="red" @click="deleteEntry"> löschen</Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['discardChanges']" icononly light @click="cancelEdit"> <XIcon /> </Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['saveChanges']" icononly @click="save"> <SaveIcon /> </Button>
-            <Button v-if="!editable" class="single right" :title="mouseOverTexts['editEntry']" icononly light @click="edit"> <EditIcon /> </Button>
+            <Button v-if="!editable" class="single" :title="mouseOverTexts['copyLink']" icononly @click="copyLink"> <LinkIcon /> </Button>
+            <Button v-if="!editable" class="single" :title="mouseOverTexts['editEntry']" icononly light @click="edit"> <EditIcon /> </Button>
         </div>
     </div>	
 </template>
@@ -59,7 +60,7 @@ import InlineSelectField from "./InlineSelectField";
 import InlineBooleanField from "./InlineBooleanField";
 import InlineRadioList from "./InlineRadioList";
 
-import { AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon } from 'vue-feather-icons';
+import { AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon, LinkIcon } from 'vue-feather-icons';
 
 import Button from "@/components/utils/Button";
 
@@ -67,7 +68,7 @@ export default {
     name: "CompactEntry",
     mixins: [ EntryMixin, MouseoverMixin ],
     components: { InlineTextField, InlineSelectField, InlineBooleanField, InlineRadioList,
-        AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon,
+        AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon, LinkIcon,
         Button
     },
     data() {
@@ -124,6 +125,10 @@ export default {
             this.editable = false;
 
             this.$emit("save", this.entry._id, changes);
+        },
+
+        copyLink() {
+            navigator.clipboard.writeText(`${process.env.baseURL}manage/database?id=${this._entry._id}`);
         },
 
         getObjChanges(original, changed) {
@@ -261,7 +266,7 @@ export default {
 }
 
 .buttons > button:not(.icon-only) {
-    padding: 12px 8px;
+    padding: 12px;
 }
 
 .buttons > button:not(.double) {
@@ -284,6 +289,10 @@ export default {
 .buttons > .single > .feather {
     width: 22px;
     height: 22px;
+}
+
+.buttons .hidden {
+    display: none;
 }
 
 @media only screen and (max-width: 740px) {
