@@ -94,7 +94,7 @@ export default {
     created() {
         this._entry = JSON.parse(JSON.stringify(this.entry));
         
-        if (this._entry.accessible === undefined) this._entry.accessible = "null";
+        if (this._entry.accessible === undefined) this._entry.accessible = "unkown";
     },
     methods: {
         edit() {

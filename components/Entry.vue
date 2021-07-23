@@ -5,11 +5,11 @@
         <div class="no-margin">
             <h1>{{ entry.name }}</h1>
 
-            <span v-if="entry.accessible === 2" class="special highlight" :title="mouseOverTexts['barrierFree']">
+            <span v-if="entry.accessible === 'yes'" class="special highlight" :title="mouseOverTexts['barrierFree']">
                 <CheckCircleIcon /> Barrierefrei
             </span>
 
-            <span v-if="entry.accessible === 1" class="special warn" :title="mouseOverTexts['notBarrierFree']">
+            <span v-if="entry.accessible === 'no'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
                 <AlertTriangleIcon /> Nicht Barrierefrei
             </span>
         </div>
