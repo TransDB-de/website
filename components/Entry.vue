@@ -82,7 +82,15 @@ export default {
     },
     computed: {
         address: function () {
-            return `${this.entry.address.street} ${this.entry.address.house}, ${this.entry.address.plz} ${this.entry.address.city}`;
+            let addr = "";
+            
+            if (this.entry.address.street) addr += this.entry.address.street + " ";
+            if (this.entry.address.house) addr += this.entry.address.house + ", ";
+            if (this.entry.address.plz) addr += this.entry.address.plz + " ";
+            
+            addr += this.entry.address.city;
+            
+            return addr;
         },
         website: function () {
             return new URL(this.entry.website).host;
@@ -103,7 +111,7 @@ export default {
     flex-direction: column;
     position: relative;
     background-color: var(--color-entry);
-    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+    box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 10px 20px;
     margin-bottom: 20px;
