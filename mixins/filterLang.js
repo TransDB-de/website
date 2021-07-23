@@ -52,12 +52,12 @@ const langDef = [
 
     {
         name: "barrierefrei",
-        type: "number",
+        type: "string",
         field: "accessible",
         mappings: {
-            "ja": "2",
-            "nein": "1",
-            "unbekannt": "0"
+            "ja": "yes",
+            "nein": "no",
+            "unbekannt": "unkown"
         }
     },
 

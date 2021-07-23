@@ -61,11 +61,11 @@ export default {
         getValue: function() {
             switch (this.stateCount) {
                 case 0:
-                    return 0;
+                    return "unknown";
                 case 1:
-                    return 2;
+                    return "yes";
                 case 2:
-                    return 1;
+                    return "no";
             }
         }
     },
@@ -75,17 +75,17 @@ export default {
     computed: {
         checkboxModel: {
             get() {
-                return this.getValue()
+                return this.getValue();
             },
             set(val) {
                 switch (val) {
-                    case "null":
+                    case "unknown":
                         this.stateCount = 0;
                         break;
-                    case "true":
+                    case "yes":
                         this.stateCount = 1;
                         break;
-                    case "false":
+                    case "no":
                         this.stateCount = 2;
                         break;
                 }
