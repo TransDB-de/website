@@ -66,6 +66,12 @@ export default {
     created() {
         this.randomSuggestion = this.getRandomSuggestion();
     },
+    mounted() {
+        if (this.$route.query.id) {
+            this.userInput = `id: ${this.$route.query.id}`;
+            this.submit();
+        }
+    },
     methods: {
         getAutocompletion(input) {
             let details = this.language.liveParse(input);
