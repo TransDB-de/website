@@ -26,9 +26,9 @@
         </p>
         
         <p>
-            Bei sonstigen oder technischen Anliegen  melde dich bitte unter unserer
-            <nuxt-link to="/imprint">E-Mail</nuxt-link>
-            oder auf
+            Bei sonstigen Anliegen kontaktiere uns bitte über unsere
+            <nuxt-link to="/imprint">E-Mail</nuxt-link>,
+            oder für technische Anliegen auf
             <a href="https://github.com/TransDB-de" target="_blank" rel="noopener">GitHub</a>.
         </p>
         
@@ -80,6 +80,7 @@ export default {
     flex-grow: 1;
     text-align: center;
     max-width: 860px;
+    width: calc(100% - 40px);
 }
 
 .report-form > .error {
@@ -113,6 +114,12 @@ export default {
     color: var(--color-error);
     font-size: 12px;
     font-weight: 600;
+}
+
+.report-form button {
+    max-width: 320px;
+    width: 100%;
+    align-self: center;
 }
 
 .report-form >>> .entry .meta-button {
