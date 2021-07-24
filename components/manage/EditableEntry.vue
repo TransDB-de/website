@@ -45,7 +45,7 @@
             <Button v-if="editable" class="double" :title="mouseOverTexts['deleteEntry']" color="red" @click="deleteEntry"> löschen</Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['discardChanges']" icononly light @click="cancelEdit"> <XIcon /> </Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['saveChanges']" icononly @click="save"> <SaveIcon /> </Button>
-            <Button v-if="!editable" class="single" :title="mouseOverTexts['copyLink']" icononly @click="copyLink"> <LinkIcon /> </Button>
+            <Button v-if="!editable" class="single glow" :title="mouseOverTexts['copyLink']" icononly @click="copyLink"> <LinkIcon /> </Button>
             <Button v-if="!editable" class="single" :title="mouseOverTexts['editEntry']" icononly light @click="edit"> <EditIcon /> </Button>
         </div>
     </div>	
@@ -277,10 +277,6 @@ export default {
     grid-column: 1 / 3;
 }
 
-.buttons > .right {
-    grid-column: 2 / 3;
-}
-
 .buttons > .single {
     width: 40px;
     justify-content: center;
@@ -291,8 +287,14 @@ export default {
     height: 22px;
 }
 
-.buttons .hidden {
-    display: none;
+.buttons > .glow {
+    transition: background-color 0.6s;
+    transition-delay: 0.2s;
+}
+
+.buttons > .glow:active {
+    background-color: var(--color-radio-selected);
+    transition: background-color 0s;
 }
 
 @media only screen and (max-width: 740px) {

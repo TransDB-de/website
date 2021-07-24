@@ -63,7 +63,7 @@ const mouseOverTexts = {
     approveEntry: "Eintrag freischalten",
     saveChanges: "Änderungen speichern",
     discardChanges: "Änderungen verwerfen",
-    copyLink: "Link zum Eintrag kopieren",
+    copyLink: "Link zum Eintrag in Zwischenablage kopieren",
     filter: "Einträge filtern",
     help: "Hilfe",
     reloadGeo: "Versuche die Geodaten erneut beim Api abzurufen",
