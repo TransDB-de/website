@@ -20,8 +20,6 @@ export default {
 	},
 	computed: {
 		popup() {
-			this.id += 1;
-
 			if (this.$store.state.popup.text !== "") {
 				this.showPopup();
 			}
@@ -32,6 +30,8 @@ export default {
 	methods: {
 		showPopup() {
 			this.visible = true;
+
+			this.id += 1;
 			let id = this.id;
 
 			setTimeout(() => {
