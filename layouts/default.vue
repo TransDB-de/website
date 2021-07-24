@@ -14,16 +14,19 @@
             <!--nuxt-link to="/contact">Kontakt</nuxt-link-->
             <a href="https://github.com/TransDB-de" target="_blank">GitHub</a>
         </div>
-        
+
+        <Popup />
+
     </div>
     
 </template>
 
 <script>
 import Header from "@/components/header/Header";
+import Popup from "@/components/utils/Popup";
 
 export default {
-    components: {Header},
+    components: { Header, Popup },
     mounted() {
 
         // Set user data to state if user data is in local storage

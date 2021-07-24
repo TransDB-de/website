@@ -4,7 +4,11 @@
 
 export const state = () => ({
     user: null,
-    isMobile: true
+    isMobile: true,
+    popup: {
+        type: "ok",
+        text: ""
+    }
 });
 
 export const getters = {
@@ -44,7 +48,18 @@ export const mutations = {
     
     SET_MOBILE(state, isMobile) {
 		state.isMobile = isMobile;
-	}
+	},
+
+    SET_POPUP(state, data) {
+        if (data) {
+            state.popup = data
+        } else {
+            state.popup = {
+                type: "ok",
+                text: ""
+            }
+        }
+    }
 
 };
 

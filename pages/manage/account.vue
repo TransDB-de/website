@@ -86,7 +86,7 @@ export default {
             try {
 
                 await this.$axios.$put("users/me/username", form);
-                alert("Benutzername erfolgreich geändert");
+                this.$okMsg("Benutzername erfolgreich geändert");
 
                 let userData = this.$store.state.user;
                 userData = {
@@ -99,9 +99,9 @@ export default {
             } catch (e) {
 
                 if (e.response.status === 409) {
-                    alert("Fehler: Es gibt bereits einen Benutzer mit diesem Namen");
+                    this.$warnMsg("Es gibt bereits einen Benutzer mit diesem Namen");
                 } else {
-                    alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
+                    this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
                 }
 
             }
@@ -111,14 +111,14 @@ export default {
         changePassword: async function (form) {
                         
             if (form.new !== form.check) {
-                alert("Die neuen Passwörter stimmen nicht überein");
+                this.$warnMsg("Die neuen Passwörter stimmen nicht überein");
                 return;
             }
             
             try {
 
                 await this.$axios.$put("users/me/password", form);
-                alert("Passwort erfolgreich geändert.\nBitte logge dich neu ein");
+                this.$okMsg("Passwort erfolgreich geändert.\nBitte logge dich neu ein");
 
                 // the old token is still valid, and poses a mild security risk. logging out deletes the token
                 this.logout();
@@ -126,11 +126,11 @@ export default {
             } catch (e) {
 
                 if (e.response.status === 400) {
-                    alert("Fehler: Das alte passwort ist falsch");
+                    this.$errorMsg("Dein aktuelles Passwort ist falsch");
                 } else if (e.response.status === 422) {
-                    alert("Fehler: Das Passwort muss mindestens 8 Zeichen lang sein");
+                    this.$warnMsg("Das Passwort muss mindestens 8 Zeichen lang sein");
                 } else {
-                    alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
+                    this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
                 }
 
             }
@@ -142,7 +142,7 @@ export default {
             try {
 
                 await this.$axios.$put("users/me/email", form);
-                alert("Email erfolgreich geändert");
+                this.$okMsg("Email erfolgreich geändert");
 
                 let userData = this.$store.state.user;
                 userData = {
@@ -155,11 +155,11 @@ export default {
             } catch (e) {
 
                 if (e.response.status === 409) {
-                    alert("Fehler: Es gibt bereits einen Benutzer mit dieser E-Mail Adresse");
+                    this.$errorMsg("Es gibt bereits einen Benutzer mit dieser E-Mail Adresse");
                 } else if (e.response.status === 422) {
-                    alert("Fehler: Keine valide E-Mail Adresse");
+                    this.$warnMsg("Keine valide E-Mail Adresse");
                 } else {
-                    alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
+                    this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
                 }
 
             }

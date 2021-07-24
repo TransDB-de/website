@@ -78,4 +78,10 @@ html {
     --color-entry-link-underline: #334450b3;
 
     --color-warn: #e29b00;
+
+    /* popup */
+    --color-popup-default: #4897ec;
+    --color-popup-ok: #6ad16a;
+    --color-popup-warn: #e7af47;
+    --color-popup-error: #c7425a;
 }

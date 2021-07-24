@@ -133,7 +133,10 @@ export default {
             
             try {
                 await this.$axios.$patch("entries/" + this.entry._id + "/approve");
+
+                this.$okMsg("Eintrag freigeschaltet");
             } catch (e) {
+                this.$errorMsg("Fehler beim freischalten. Eintrag konnte nicht freigeschaltet werden");
                 return;
             }
             
@@ -153,7 +156,10 @@ export default {
         
             try {
                 await this.$axios.$delete("entries/" + this.entry._id);
+
+                this.$okMsg("Eintrag gelöscht");
             } catch (e) {
+                this.$errorMsg("Fehler beim löschen. Eintrag konnte nicht gelöscht werden");
                 return;
             }
         

@@ -129,6 +129,7 @@ export default {
 
         copyLink() {
             navigator.clipboard.writeText(`${process.env.baseURL}manage/database?id=${this._entry._id}`);
+            this.$okMsg("Link in die Zwischenablage kopiert!");
         },
 
         getObjChanges(original, changed) {
@@ -289,7 +290,6 @@ export default {
 
 .buttons > .glow {
     transition: background-color 0.6s;
-    transition-delay: 0.2s;
 }
 
 .buttons > .glow:active {

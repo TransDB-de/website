@@ -99,7 +99,11 @@ export default {
             let page = this.page + 1;
             let query = { page, ...this.$route.query };
             
-            let res = await this.$axios.$get("entries", { params: query });
+            try {
+                await this.$axios.$get("entries", { params: query });
+            } catch(e) {
+                this.$errorMsg("Fehler beim laden");
+            }
             
             this.entries = this.entries.concat(res.entries);
             this.more = res.more;

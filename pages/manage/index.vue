@@ -58,6 +58,7 @@ export default {
                     this.page = 0;
                 }
             } catch (e) {
+                this.$errorMsg("Fehler beim laden der Einträge");
                 return;
             }
         },

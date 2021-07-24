@@ -75,6 +75,7 @@ export default {
                     this.entries = res.entries;
                 }
             } catch (e) {
+                this.$errorMsg("Ein unbekannter Fehler ist aufgetreten");
                 return;
             }
         },
@@ -86,11 +87,21 @@ export default {
         },
 
         async fetchGeo(id) {
-            await this.$axios.$patch(`entries/${id}/updateGeo`);
+            try {
+                await this.$axios.$patch(`entries/${id}/updateGeo`);
+                this.$okMsg("Geo Update anfrage gesendet. Bitte warte ein wenig und lade die Seite dann neu");
+            } catch(e) {
+                this.$errorMsg("Ein unbekannter Fehler ist aufgetreten");
+            }
         },
 
         async deleteEntry(id) {
-            await this.$axios.$delete(`entries/${id}`);
+            try {
+                await this.$axios.$delete(`entries/${id}`);
+                this.$okMsg("Eintrag gelöscht");
+            } catch(e) {
+                this.$errorMsg("Unbekannter Fehler beim löschen");
+            }
             this.loadEntries();
         },
 
@@ -99,7 +110,12 @@ export default {
                 return;
             }
 
-            await this.$axios.$patch(`entries/${id}/edit`, changes);
+            try {
+                await this.$axios.$patch(`entries/${id}/edit`, changes);
+                this.$okMsg("Änderungen gespeichert");
+            } catch(e) {
+                this.$errorMsg("Unbekannter Fehler beim speichern");
+            }
             this.loadEntries();
         },
         
@@ -142,7 +158,7 @@ export default {
                 document.body.removeChild(link);
             } catch(e) {
                 console.error(e);
-                // TODO: user feedback
+                this.$errorMsg("Unbekannter Fehler! Datenbank konnte nicht heruntergeladen werden");
             }
             
         }

@@ -4,8 +4,6 @@
     
         <h1>Einen neuen Eintrag einreichen</h1>
         
-        <h2 class="error" v-if="error && !loading">{{ error }}</h2>
-        
         <Input type="select" name="type" errorMSG="Bitte wähle eins aus"
             :checkValid="checkValid" :invalid="errors['type']" v-model="type" required="true"
         >
@@ -171,7 +169,6 @@ export default {
         return {
             type: "",
             loading: false,
-            error: null,
             accessible: 0,
             namePlaceholderDescriptions: {
                 group: "Name der Gruppe",
@@ -212,21 +209,21 @@ export default {
             
             try {
                 res = await this.$axios.$post("entries", form);
+
+                this.$okMsg("Eintrag Eingereicht");
             } catch (e) {
                 
                 if(e.response.status === 422) {
-                    window.scroll(0, 0);
+
                     if (e.response.data.problems) {
                         this.parseErrors(e.response.data.problems);
                     }
 
-                    this.error = "Bitte überprüfe deine Eingaben";
+                    this.$warnMsg("Bitte überprüfe deine Eingaben");
                 } else if(e.response.status === 429) {
-                    window.scroll(0, 0);
-                    this.error = "Du stellst zu viele Anfragen";
+                    this.$errorMsg("Du stellst zu viele Anfragen");
                 } else {
-                    window.scroll(0, 0);
-                    this.error = "Ein unbekannter Fehler ist aufgetreten";
+                    this.$errorMsg("Ein unbekannter Fehler ist aufgetreten");
                 }
                 
                 this.loading = false;
