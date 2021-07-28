@@ -128,7 +128,7 @@ export default {
         },
 
         copyLink() {
-            navigator.clipboard.writeText(`${process.env.baseURL}manage/database?id=${this._entry._id}`);
+            navigator.clipboard.writeText(`${window.location.origin}/manage/database?id=${this._entry._id}`);
             this.$okMsg("Link in die Zwischenablage kopiert!");
         },
 
