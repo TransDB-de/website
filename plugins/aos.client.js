@@ -3,6 +3,6 @@ import "aos/dist/aos.css";
 
 export default ({ app, $config }) => {
 
-    app.AOS = new AOS.init($config.aos);
+	app.AOS = new AOS.init($config.aos);
 
 };

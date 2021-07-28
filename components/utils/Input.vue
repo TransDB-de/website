@@ -53,29 +53,29 @@ span.input {
 
 span input, span select {
 	font-family: 'Poppins', sans-serif;
-    font-size: 18px;
-    color: var(--color-text);
-    background-color: var(--color-input-background);
-    outline: 0;
-    border-radius: 4px;
-    border: 2px solid var(--color-input-outline);
-    padding: 6px 12px;
-    transition: 0.2s ease border;
-    width: 100%;
+	font-size: 18px;
+	color: var(--color-text);
+	background-color: var(--color-input-background);
+	outline: 0;
+	border-radius: 4px;
+	border: 2px solid var(--color-input-outline);
+	padding: 6px 12px;
+	transition: 0.2s ease border;
+	width: 100%;
 }
 
 span input:focus {
-    border: 2px solid var(--color-input-outline-focus);
+	border: 2px solid var(--color-input-outline-focus);
 }
 
 span input::placeholder {
-    color: var(--color-input-placeholder);
-    font-weight: 500;
+	color: var(--color-input-placeholder);
+	font-weight: 500;
 }
 
 span.invalid input,
 span.invalid select {
-    border: 2px solid var(--color-error);
+	border: 2px solid var(--color-error);
 }
 
 span .required {

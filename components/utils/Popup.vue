@@ -21,7 +21,7 @@ export default {
 	computed: {
 		popup() {
 			if (this.$store.state.popup.text !== "") {
-				this.showPopup();
+	this.showPopup();
 			}
 
 			return this.$store.state.popup;
@@ -36,7 +36,7 @@ export default {
 
 			setTimeout(() => {
 
-				if (id === this.id) this.visible = false;
+	if (id === this.id) this.visible = false;
 
 			}, 4000);
 		}

@@ -1,23 +1,23 @@
 .load-more {
-    display: flex;
-    justify-content: center;
-    position: relative;
+	display: flex;
+	justify-content: center;
+	position: relative;
 }
 
 .load-more > button:after, .load-more > button:before {
-    content: "";
-    display: flex;
-    position: absolute;
-    width: calc(50% - 85px);
-    height: 2px;
-    background-color: var(--color-light);
-    border-radius: 2px;
+	content: "";
+	display: flex;
+	position: absolute;
+	width: calc(50% - 85px);
+	height: 2px;
+	background-color: var(--color-light);
+	border-radius: 2px;
 }
 
 .load-more > button:before {
-    left: 0;
+	left: 0;
 }
 
 .load-more > button:after {
-    right: 0;
+	right: 0;
 }
