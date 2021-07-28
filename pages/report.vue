@@ -1,6 +1,6 @@
 <template>
 
-    <Form @submit="submit" class="report-form">
+    <Form @submit="submit" class="report-form" ref="form">
 
         <h1>Eintrag melden</h1>
         
@@ -64,7 +64,23 @@ export default {
     },
     methods: {
         async submit(data) {
-            // TODO: submit
+            try {
+                await this.$axios.post("/report", {entryId: this.entry._id , ...data});
+            } catch (e) {
+                if(e.response && e.response.status === 404) {
+                    this.$errorMsg("Gewählten Eintrag nicht gefunden");
+                } else if(e.response && e.response.status === 500) {
+                    this.$errorMsg("Report-Service momentan nicht verfügbar");
+                } else {
+                    this.$errorMsg("Unbekannter Fehler");
+                }
+                
+                return;
+            }
+    
+            this.$okMsg("Erfolgreich abgesendet");
+            
+            this.$refs.form.resetForm();
         }
     }
 }
