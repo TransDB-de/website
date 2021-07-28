@@ -5,146 +5,163 @@ import * as entry from "./entry.js";
 // which can them be used by components to parse user input, or provide feedback
 
 function flipDictrionay(dict) {
-	let newDict = {};
+    let newDict = {};
 
-	for (const [key, val] of Object.entries(dict)) {
-		newDict[val] = key;
-	}
+    for (const [key, val] of Object.entries(dict)) {
+        newDict[val] = key;
+    }
 
-	return newDict;
+    return newDict;
 }
 
 const generalFields = {
-	"Stadt": "address.city",
-	"Postleitzahl": "address.plz",
-	"PLZ": "address.plz",
-	"Straße": "address.street",
-	"Hausnummer": "address.house",
+    "Stadt": "address.city",
+    "Postleitzahl": "address.plz",
+    "PLZ": "address.plz",
+    "Straße": "address.street",
+    "Hausnummer": "address.house",
 
-	"Name": "name",
-	"Vorname": "firstName",
-	"Nachname": "lastName",
-	"email": "email",
-	"website": "website",
-	"telefon": "telephone",
+    "Name": "name",
+    "Vorname": "firstName",
+    "Nachname": "lastName",
+    "email": "email",
+    "website": "website",
+    "telefon": "telephone",
 
-	"Spezialangebote": "meta.specials",
-	"Thema": "meta.subject"
+    "Spezialangebote": "meta.specials",
+    "Thema": "meta.subject"
 }
 
 const langDef = [
-	{
-		name: "ist",
-		negationSuffix: "nicht",
-		type: "text",
-		field: "type",
-		mappings: flipDictrionay(entry.typeMappingData)
-	},
+    {
+        name: "ist",
+        negationSuffix: "nicht",
+        type: "text",
+        field: "type",
+        mappings: flipDictrionay(entry.typeMappingData)
+    },
 
-	{
-		name: "ist",
-		negationSuffix: "nicht",
-		type: "boolean",
-		mappings: {
-			"Freigeschaltet": "approved"
-		}
-	},
+    {
+        name: "ist",
+        negationSuffix: "nicht",
+        type: "boolean",
+        mappings: {
+            "Freigeschaltet": "approved"
+        }
+    },
 
-	{
-		name: "bietet",
-		negationSuffix: "nicht",
-		type: "array-contains",
-		fields: [ "meta.attributes", "meta.offers" ],
-		mappings: {
-			...flipDictrionay(entry.attributeMapping.group),
-			...flipDictrionay(entry.attributeMapping.hairremoval),
-			...flipDictrionay(entry.offerMapping.therapist),
-			...flipDictrionay(entry.offerMapping.surgeon)
-		}
-	},
+    {
+        name: "barrierefrei",
+        type: "string",
+        field: "accessible",
+        mappings: {
+            "ja": "yes",
+            "nein": "no",
+            "unbekannt": "unkown"
+        }
+    },
 
-	{
-		name: "angebote",
-		negationSuffix: "nicht",
-		type: "array-contains",
-		fields: [ "meta.attributes", "meta.offers" ],
-		mappings: {
-			...flipDictrionay(entry.offerMapping.therapist),
-			...flipDictrionay(entry.offerMapping.surgeon)
-		}
-	},
+    {
+        name: "bietet",
+        negationSuffix: "nicht",
+        type: "array-contains",
+        fields: [ "meta.attributes", "meta.offers" ],
+        mappings: {
+            ...flipDictrionay(entry.attributeMapping.group),
+            ...flipDictrionay(entry.attributeMapping.hairremoval),
+            ...flipDictrionay(entry.offerMapping.therapist),
+            ...flipDictrionay(entry.offerMapping.surgeon)
+        }
+    },
 
-	{
-		name: "attribute",
-		negationSuffix: "nicht",
-		type: "array-contains",
-		fields: [ "meta.attributes", "meta.offers" ],
-		mappings: {
-			...flipDictrionay(entry.attributeMapping.group),
-			...flipDictrionay(entry.attributeMapping.hairremoval)
-		}
-	},
+    {
+        name: "angebote",
+        negationSuffix: "nicht",
+        type: "array-contains",
+        fields: [ "meta.attributes", "meta.offers" ],
+        mappings: {
+            ...flipDictrionay(entry.offerMapping.therapist),
+            ...flipDictrionay(entry.offerMapping.surgeon)
+        }
+    },
 
-	{
-		name: "hat",
-		negationSuffix: "nicht",
-		type: "include",
-		mappings: {
-			...generalFields,
-			"Mindestalter": "meta.minAge",
-			"Geodaten": "location"
-		}
-	},
+    {
+        name: "attribute",
+        negationSuffix: "nicht",
+        type: "array-contains",
+        fields: [ "meta.attributes", "meta.offers" ],
+        mappings: {
+            ...flipDictrionay(entry.attributeMapping.group),
+            ...flipDictrionay(entry.attributeMapping.hairremoval)
+        }
+    },
 
-	{
-		type: "text",
-		mappings: generalFields
-	},
+    {
+        name: "hat",
+        negationSuffix: "nicht",
+        type: "include",
+        mappings: {
+            ...generalFields,
+            "Mindestalter": "meta.minAge",
+            "Geodaten": "location"
+        }
+    },
 
-	{
-		name: "eingereicht",
-		type: "date-compare",
-		suffixes: ["am", "vor", "nach"],
-		field: "submittedTimestamp"
-	},
+    {
+        type: "text",
+        mappings: generalFields
+    },
 
-	{
-		name: "freigeschaltet",
-		type: "date-compare",
-		suffixes: ["am", "vor", "nach"],
-		field: "approvedTimestamp"
-	},
+    {
+        name: "eingereicht",
+        type: "date-compare",
+        suffixes: ["am", "vor", "nach"],
+        field: "submittedTimestamp"
+    },
 
-	{
-		name: "freigeschaltet-von",
-		type: "text",
-		field: "approvedBy"
-	},
+    {
+        name: "freigeschaltet",
+        type: "date-compare",
+        suffixes: ["am", "vor", "nach"],
+        field: "approvedTimestamp"
+    },
 
-	{
-		name: "umgebung",
-		type: "location",
-		field: "location"
-	},
+    {
+        name: "freigeschaltet-von",
+        type: "text",
+        field: "approvedBy"
+    },
 
-	{
-		name: "mindestalter",
-		type: "number",
-		negationSuffix: "ist-nicht",
-		field: "meta.minAge",
-		suffixes: [ "ist", "unter", "über" ]
-	},
+    {
+        name: "umgebung",
+        type: "location",
+        field: "location"
+    },
 
-	{
-		name: "nicht",
-		type: "wildcard-not"
-	}
+    {
+        name: "id",
+        type: "text",
+        field: "_id"
+    },
+
+    {
+        name: "mindestalter",
+        type: "number",
+        negationSuffix: "ist-nicht",
+        field: "meta.minAge",
+        suffixes: [ "ist", "unter", "über" ]
+    },
+
+    {
+        name: "nicht",
+        type: "wildcard-not"
+    }
 ]
 
 export default {
 
     created() {
-		this.language = new filterLang.Language(langDef);
+        this.language = new filterLang.Language(langDef);
     }
 
 }

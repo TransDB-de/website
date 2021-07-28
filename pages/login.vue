@@ -4,8 +4,6 @@
         
         <h1>Anmeldung für Teammitglieder</h1>
         
-        <h2 class="error" v-if="error">{{ error }}</h2>
-        
         <Form @submit="login" reset>
             
             <input type="text" name="username" placeholder="Benutzername" required />
@@ -44,7 +42,6 @@ export default {
     },
     data() {
         return {
-            error: null,
             loading: false
         }
     },
@@ -61,7 +58,7 @@ export default {
 
                 if(e.response.status === 401) {
                     
-                    this.error = "Ungültige Anmeldedaten";
+                    this.$errorMsg("Ungültige Anmeldedaten");
                     
                     setTimeout(() => {
                         this.error = null;
@@ -97,11 +94,6 @@ export default {
     padding: 20px;
     flex-grow: 1;
     text-align: center;
-}
-
-.login > .error {
-    color: var(--color-error);
-    margin-top: 0;
 }
 
 </style>

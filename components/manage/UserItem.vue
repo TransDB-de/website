@@ -60,12 +60,12 @@ export default {
             try {
                 res = await this.$axios.$put("users/" + this.user._id + "/password");
             } catch (e) {
-                alert("Fehler beim zurücksetzen: " + e.response.status);
+                this.$errorMsg(`Fehler beim zurücksetzen (Fehler Code: ${e.response.status})`);
                 return;
             }
-    
+
             await navigator.clipboard.writeText(res.password);
-            alert("Das neue Passwort wurde in deine Zwischenablage kopiert")
+            this.$okMsg("Das neue Passwort wurde in deine Zwischenablage kopiert")
             
         },
         deleteUser: async function() {
@@ -76,7 +76,9 @@ export default {
             
             try {
                 await this.$axios.$delete("users/" + this.user._id);
+                this.$okMsg("Nutzer gelöscht");
             } catch (e) {
+                this.$errorMsg(`Fehler beim löschen (Fehler Code: ${e.response.status})`)
                 return;
             }
             

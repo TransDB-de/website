@@ -38,13 +38,15 @@
             <InlineTextField v-model="_entry.meta.specials" :editable="editable" heading="Spezialangebote" />
             <InlineTextField v-model="_entry.meta.minAge" number :editable="editable" heading="Mindestalter" />
             <InlineSelectField v-if="subjectMapping[_entry.type]" v-model="_entry.meta.subject" :mapping="subjectMapping[_entry.type]" :editable="editable" heading="Fachrichtung" class="col-2-2"/>
+            <InlineSelectField v-model="_entry.accessible" :mapping="accessibleMapping" :editable="editable" heading="Barrierefrei" />
         </div>
 
         <div class="buttons no-border">
             <Button v-if="editable" class="double" :title="mouseOverTexts['deleteEntry']" color="red" @click="deleteEntry"> löschen</Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['discardChanges']" icononly light @click="cancelEdit"> <XIcon /> </Button>
             <Button v-if="editable" class="single" :title="mouseOverTexts['saveChanges']" icononly @click="save"> <SaveIcon /> </Button>
-            <Button v-if="!editable" class="single right" :title="mouseOverTexts['editEntry']" icononly light @click="edit"> <EditIcon /> </Button>
+            <Button v-if="!editable" class="single glow" :title="mouseOverTexts['copyLink']" icononly @click="copyLink"> <LinkIcon /> </Button>
+            <Button v-if="!editable" class="single" :title="mouseOverTexts['editEntry']" icononly light @click="edit"> <EditIcon /> </Button>
         </div>
     </div>	
 </template>
@@ -58,7 +60,7 @@ import InlineSelectField from "./InlineSelectField";
 import InlineBooleanField from "./InlineBooleanField";
 import InlineRadioList from "./InlineRadioList";
 
-import { AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon } from 'vue-feather-icons';
+import { AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon, LinkIcon } from 'vue-feather-icons';
 
 import Button from "@/components/utils/Button";
 
@@ -66,7 +68,7 @@ export default {
     name: "CompactEntry",
     mixins: [ EntryMixin, MouseoverMixin ],
     components: { InlineTextField, InlineSelectField, InlineBooleanField, InlineRadioList,
-        AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon,
+        AlertTriangleIcon, Trash2Icon, EditIcon, SaveIcon, XIcon, LinkIcon,
         Button
     },
     data() {
@@ -92,6 +94,8 @@ export default {
     },
     created() {
         this._entry = JSON.parse(JSON.stringify(this.entry));
+        
+        if (this._entry.accessible === undefined) this._entry.accessible = "unkown";
     },
     methods: {
         edit() {
@@ -123,6 +127,11 @@ export default {
             this.$emit("save", this.entry._id, changes);
         },
 
+        copyLink() {
+            navigator.clipboard.writeText(`${window.location.origin}/manage/database?id=${this._entry._id}`);
+            this.$okMsg("Link in die Zwischenablage kopiert!");
+        },
+
         getObjChanges(original, changed) {
             let changes = {};
 
@@ -142,7 +151,7 @@ export default {
 .entry {
     display: grid;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 5px 10px;
     margin-bottom: 20px;
@@ -176,7 +185,7 @@ export default {
 }
 
 .entry > * {
-    box-shadow: 0 0 4px 0 var(--color-box-shadow);
+    box-shadow: 0 0 4px var(--color-box-shadow-rim);
     border-radius: 4px;
     
     padding: 2px 4px;
@@ -257,16 +266,16 @@ export default {
     height: 40px;
 }
 
+.buttons > button:not(.icon-only) {
+    padding: 12px;
+}
+
 .buttons > button:not(.double) {
     grid-row: 3 / 4;
 }
 
 .buttons > .double {
     grid-column: 1 / 3;
-}
-
-.buttons > .right {
-    grid-column: 2 / 3;
 }
 
 .buttons > .single {
@@ -277,6 +286,15 @@ export default {
 .buttons > .single > .feather {
     width: 22px;
     height: 22px;
+}
+
+.buttons > .glow {
+    transition: background-color 0.6s;
+}
+
+.buttons > .glow:active {
+    background-color: var(--color-radio-selected);
+    transition: background-color 0s;
 }
 
 @media only screen and (max-width: 740px) {

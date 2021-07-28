@@ -30,24 +30,28 @@
                 <b>Telefon:</b> {{ entry.telephone ? entry.telephone : 'Nicht angegeben' }}
             </span>
             
-            <span>
+            <span v-if="offerMapping[entry.type]">
                 <b>Angebote:</b> {{ offers }}
             </span>
             
-            <span>
+            <span v-if="attributeMapping[entry.type]">
                 <b>Attribute:</b> {{ attributes }}
             </span>
             
-            <span>
+            <span v-if="subjectMapping[entry.type]">
                 <b>Fachrichtung:</b> {{ entry.meta.subject ? subjectMapping[entry.type][entry.meta.subject] : 'Nicht angegeben' }}
             </span>
             
-            <span>
+            <span v-if="typeHasSpecials(entry.type)">
                 <b>Besonderheiten:</b> {{ entry.meta.specials ? entry.meta.specials : 'Nicht angegeben' }}
             </span>
             
-            <span>
+            <span v-if="typeHasMinAge(entry.type)">
                 <b>Mindestalter:</b> {{ entry.meta.minAge ? entry.meta.minAge : 'Nicht angegeben' }}
+            </span>
+
+            <span>
+                <b>Barrierefrei:</b> {{ entry.accessible ? accessibleMapping[entry.accessible] : 'Unbekannt' }}
             </span>
             
         </div>
@@ -129,7 +133,10 @@ export default {
             
             try {
                 await this.$axios.$patch("entries/" + this.entry._id + "/approve");
+
+                this.$okMsg("Eintrag freigeschaltet");
             } catch (e) {
+                this.$errorMsg("Fehler beim freischalten. Eintrag konnte nicht freigeschaltet werden");
                 return;
             }
             
@@ -149,7 +156,10 @@ export default {
         
             try {
                 await this.$axios.$delete("entries/" + this.entry._id);
+
+                this.$okMsg("Eintrag gelöscht");
             } catch (e) {
+                this.$errorMsg("Fehler beim löschen. Eintrag konnte nicht gelöscht werden");
                 return;
             }
         
@@ -167,7 +177,7 @@ export default {
 .full-entry {
     display: flex;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 0 0 0 10px;
     margin-bottom: 20px;

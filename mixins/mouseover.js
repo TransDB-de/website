@@ -20,9 +20,23 @@ const mouseOverTexts = {
 
     enby: "Stellt Gutachten für nicht-binäre Personen aus",
 
+    treatsNB: "Behandelt nicht-binäre Personen",
+
     // Offers
     indication: "Schreibt Indikationen (für z.B. Hormon Therapie)",
     therapy: "Bietet Begleittherapie für trans* Personen",
+
+    mastectomy: "Mastektomie",
+    vaginPI: "Vaginoplastie mit der Methode penile Inversion",
+    vaginCombined: "Vaginoplastie mit der kombinierten Methode",
+    ffs: "Gesichtsfeminisierende Operationen (Abkürzung: FFS)",
+    penoid: "Penoidaufbau",
+    breast: "Brustaufbau",
+    orch: "Orchiektomie",
+    clitPI: "Klitorispenoid / Metoidioplastik",
+    bodyfem: "Körperfemininisierende Operationen",
+    glottoplasty: "Stimmband Operationen, wie Stimmfeminisierung",
+    fms: "Gesichtsmaskulinisierende Operationen (Abkürzung: FMS)",
 
     laser: "Epilation mit Hilfe eines Lasers",
     ipl: "Epliation durch starke Lichtimpulse. Nicht dauerhaft",
@@ -38,6 +52,8 @@ const mouseOverTexts = {
     location: "Dein Standort",
     locationSearch: "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
     distance: "Entfernung zu deinem Standort",
+    barrierFree: "Räumlichkeiten sind Barrierefrei zugänglich",
+    notBarrierFree: "Räumlichkeiten nicht Barrierefrei zugänglich",
 
     // Management
     logout: "Abmelden",
@@ -47,6 +63,7 @@ const mouseOverTexts = {
     approveEntry: "Eintrag freischalten",
     saveChanges: "Änderungen speichern",
     discardChanges: "Änderungen verwerfen",
+    copyLink: "Link zum Eintrag in Zwischenablage kopieren",
     filter: "Einträge filtern",
     help: "Hilfe",
     reloadGeo: "Versuche die Geodaten erneut beim Api abzurufen",

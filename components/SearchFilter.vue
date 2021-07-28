@@ -305,7 +305,6 @@ fieldset {
 
 .highlight {
     background-color: var(--color-highlight);
-    box-shadow: 1px 3px 2px var(--color-box-shadow);
 }
 
 .highlight:hover {

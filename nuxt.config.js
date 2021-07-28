@@ -32,7 +32,8 @@ export default {
         "~/plugins/responsive.client.js",
         "~/plugins/smoothScroll.client.js",
         "~/plugins/axios.client.js",
-        "~/plugins/aos.client.js"
+        "~/plugins/aos.client.js",
+        "~/plugins/popup.js"
     ],
 
     // Auto import components (https://go.nuxtjs.dev/config-components)

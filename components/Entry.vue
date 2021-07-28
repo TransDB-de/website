@@ -1,9 +1,19 @@
 <template>
 
     <div class="entry">
-    
-        <h1>{{ entry.name }}</h1>
-        
+
+        <div class="no-margin">
+            <h1>{{ entry.name }}</h1>
+
+            <span v-if="entry.accessible === 'yes'" class="special highlight" :title="mouseOverTexts['barrierFree']">
+                <CheckCircleIcon /> Barrierefrei
+            </span>
+
+            <span v-if="entry.accessible === 'no'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
+                <AlertTriangleIcon /> Nicht Barrierefrei
+            </span>
+        </div>
+
         <p class="inline-content">
             <b>{{ entry.firstName }} {{ entry.lastName }}</b>
             <span v-if="subjectMapping[entry.type]" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.type][entry.meta.subject] }}</span>
@@ -48,6 +58,10 @@
             </span>
         </p>
         
+        <button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
+            <EditIcon />
+        </button>
+        
     </div>
     
 </template>
@@ -56,21 +70,35 @@
 import Tag from "@/components/utils/Tag";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
-import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon } from "vue-feather-icons";
+import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon } from "vue-feather-icons";
+import entry from "@/mixins/entry";
 
 export default {
-    name: "FullEntry",
-    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon },
+    name: "Entry",
+    components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon },
     mixins: [ EntryMixin, MouseoverMixin ],
     props: {
         entry: Object
     },
     computed: {
         address: function () {
-            return `${this.entry.address.street} ${this.entry.address.house}, ${this.entry.address.plz} ${this.entry.address.city}`;
+            let addr = "";
+            
+            if (this.entry.address.street) addr += this.entry.address.street + " ";
+            if (this.entry.address.house) addr += this.entry.address.house + ", ";
+            if (this.entry.address.plz) addr += this.entry.address.plz + " ";
+            
+            addr += this.entry.address.city;
+            
+            return addr;
         },
         website: function () {
             return new URL(this.entry.website).host;
+        }
+    },
+    methods: {
+        report() {
+            this.$router.push({ name: "report", query: { id: this.entry._id } })
         }
     }
 }
@@ -81,31 +109,39 @@ export default {
 .entry {
     display: flex;
     flex-direction: column;
+    position: relative;
     background-color: var(--color-entry);
-    box-shadow: 1px 1px 6px var(--color-box-shadow);
+    box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
     border-radius: 4px;
     padding: 10px 20px;
     margin-bottom: 20px;
 }
 
-.entry > h1 {
+.entry h1 {
     font-size: 26px;
     margin: 0;
     font-weight: 600;
 }
 
-.entry > p {
+.entry > p,
+.entry > div {
     font-size: 16px;
     display: flex;
     flex-wrap: wrap;
     margin-top: 0;
 }
 
+.entry > .no-margin {
+    margin: 0;
+}
+
 .entry > p:last-child {
     margin-bottom: 5px;
 }
 
-.entry > p > span:not(.tag), .entry > p > a {
+.entry > p > span:not(.tag):not(.heading),
+.entry > p > a,
+.entry > div > span {
     color: var(--color-entry-details);
     display: flex;
     align-items: flex-start;
@@ -118,8 +154,14 @@ export default {
     margin: 2.5px;
 }
 
-.entry > p > span:last-child, .entry > p > span.tag:last-child {
+.entry > p > span:last-child,
+.entry > div > span:last-child,
+.entry > p > span.tag:last-child {
     margin-right: 0;
+}
+
+.entry > div > h1 {
+    margin-right: 10px;
 }
 
 .entry b {
@@ -136,7 +178,8 @@ export default {
     margin-left: 5px;
 }
 
-.entry > p > span .feather, .entry > p > a .feather {
+.entry > p > span .feather,
+.entry > p > a .feather {
     margin-right: 5px;
     height: 18px;
     width: 18px;
@@ -151,4 +194,55 @@ export default {
     user-select: none;
 }
 
+.entry > div > .special {
+    padding: 4px 6px 4px 4px !important;
+    font-size: 13px;
+    border-radius: 4px;
+    height: min-content;
+    align-self: center;
+    cursor: default;
+}
+
+.entry > div > .special .feather {
+    width: 16px;
+    height: 16px;
+    margin-right: 2px;
+}
+
+.entry > div > .highlight {
+    background-color: var(--color-special-highlight);
+}
+
+.entry > div > .warn {
+    background-color: var(--color-special-warn);
+}
+
+.entry .meta-button {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--color-light-accent);
+    transition: 0.2s ease color, 0.2s ease opacity;
+}
+
+.entry:hover .meta-button {
+    visibility: visible;
+    opacity: 1;
+}
+
+.entry .meta-button:hover {
+    color: var(--color-text);
+}
+
+@media only screen and (max-width: 720px) {
+    .entry:hover .meta-button {
+        color: var(--color-text);
+    }
+}
 </style>

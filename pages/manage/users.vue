@@ -47,6 +47,7 @@ export default {
             try {
                 this.users = await this.$axios.$get("users");
             } catch (e) {
+                this.$errorMsg("Fehler beim laden der Nutzer");
                 return;
             }
         },
@@ -60,11 +61,11 @@ export default {
             } catch (e) {
                 
                 if(e.response.status === 422) {
-                    alert("Fehler: Invalide Formulardaten")
+                    this.$warnMsg("Ungültige Formulardaten")
                 } else if(e.response.status === 409) {
-                    alert("Fehler: Dieser Benutzer existiert bereits");
+                    this.$errorMsg("Dieser Benutzer existiert bereits");
                 } else {
-                    alert("Fehler: Ein unbekanntes Problem ist aufgetreten (" + e.response.status + ")");
+                    this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
                 }
                 
                 return;
@@ -72,7 +73,7 @@ export default {
             }
     
             await navigator.clipboard.writeText(res.password);
-            alert("Der Benutzer wurde angelegt und das temporäre Password in die Zwischenablage kopiert");
+            this.$okMsg("Der Benutzer wurde angelegt und das temporäre Password in die Zwischenablage kopiert");
             this.loadUsers();
             
         }

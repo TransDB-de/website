@@ -19,8 +19,8 @@ html {
     --color-text-shadow-glow    : rgba(22, 29, 95, 0.1);
 
     --color-box-shadow-strong   : rgba(15, 4, 44, 0.15);
-    --color-box-shadow-rim      : rgba(9, 6, 54, 0.1);
-    --color-box-shadow-glow     : rgba(22, 29, 95, 0.08);
+    --color-box-shadow-rim      : rgba(9, 6, 54, 0.08);
+    --color-box-shadow-glow     : rgba(22, 29, 95, 0.04);
 
     /* inputs */
     --color-input-background: white;
@@ -60,6 +60,9 @@ html {
     --color-important-text: #ffcbdb;
 
     --color-error: #de506b;
+
+    --color-special-highlight: #b7f1b7;
+    --color-special-warn: #ffe8a9;
     
     /* header */
     --color-nav-link: white;
@@ -75,4 +78,10 @@ html {
     --color-entry-link-underline: #334450b3;
 
     --color-warn: #e29b00;
+
+    /* popup */
+    --color-popup-default: #4897ec;
+    --color-popup-ok: #6ad16a;
+    --color-popup-warn: #e7af47;
+    --color-popup-error: #c7425a;
 }

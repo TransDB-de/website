@@ -17,7 +17,7 @@ export default {
         
         submit: function() {
             
-            let fields = this.$el.querySelectorAll("input, select");
+            let fields = this.$el.querySelectorAll("input, select, textarea");
             
             let data = {};
             
@@ -58,10 +58,11 @@ export default {
         },
         
         getValueFromInput: function (input) {
-    
             if (input.type === "checkbox") {
         
-                if (input.value.length > 0) {
+                if (input.classList.contains("multistate")) {
+                    return input.value;
+                } else if (input.value.length > 0) {
             
                     if (input.checked) {
                         return input.value;
@@ -118,7 +119,7 @@ form.inline {
     flex-wrap: wrap;
 }
 
-form input, form select {
+form input, form select, form textarea {
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     color: var(--color-text);
@@ -132,8 +133,12 @@ form input, form select {
     width: 100%;
 }
 
-form input:focus {
+form input:focus, form textarea:focus {
     border: 2px solid var(--color-input-outline-focus);
+}
+
+form textarea {
+    resize: vertical;
 }
 
 form.inline input, form.inline select {
