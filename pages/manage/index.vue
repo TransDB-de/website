@@ -58,7 +58,11 @@ export default {
                     this.page = 0;
                 }
             } catch (e) {
-                this.$errorMsg("Fehler beim laden der Einträge");
+                if (e.response.status === 401) {
+                    this.$errorMsg("Du bist nicht mehr eingeloggt");
+                } else {
+                    this.$errorMsg("Fehler beim laden der Einträge");
+                }
                 return;
             }
         },

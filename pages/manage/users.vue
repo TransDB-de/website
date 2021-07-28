@@ -47,7 +47,7 @@ export default {
             try {
                 this.users = await this.$axios.$get("users");
             } catch (e) {
-                this.$errorMsg("Fehler beim Laden der Nutzer");
+                this.$errorMsg("Fehler beim laden der Nutzer");
                 return;
             }
         },
