@@ -103,9 +103,5 @@ export default {
         axios: {
             baseURL: process.env.API_URL ?? "http://localhost:1300/"
         }
-    },
-
-    env: {
-        baseURL: "http://localhost:3000/"
     }
 }
