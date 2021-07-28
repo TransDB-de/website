@@ -17,7 +17,7 @@ export default {
 		
 		submit: function() {
 			
-			let fields = this.$el.querySelectorAll("input, select");
+			let fields = this.$el.querySelectorAll("input, select, textarea");
 			
 			let data = {};
 			
