@@ -100,17 +100,15 @@ export default {
 			let query = { page, ...this.$route.query };
 			
 			try {
-				await this.$axios.$get("entries", { params: query });
+				let res = await this.$axios.$get("entries", { params: query });
+				this.entries = this.entries.concat(res.entries);
+				this.more = res.more;
+				this.page = page;
 			} catch(e) {
 				this.$errorMsg("Fehler beim laden");
 			}
 			
-			this.entries = this.entries.concat(res.entries);
-			this.more = res.more;
-			this.page = page;
-			
 			this.loadingNextPage = false;
-			
 		},
 		
 		onScroll: function(pos) {
