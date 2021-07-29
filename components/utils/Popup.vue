@@ -92,7 +92,7 @@ export default {
 	pointer-events: unset;
 
 	visibility: visible;
-	opacity: 100%;
+	opacity: 1;
 	transition: visibility 0s linear 0s, opacity 300ms;
 }
 
