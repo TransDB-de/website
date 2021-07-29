@@ -31,7 +31,7 @@ export default {
 	components: { Form, Checkbox, Button, UserItem },
 	mixins: [ AccountMixin ],
 	meta: {
-        authRequired: true
+		authRequired: true
 	},
 	data() {
 		return {
@@ -42,104 +42,104 @@ export default {
 		this.loadUsers();
 	},
 	methods: {
-        
-        loadUsers: async function() {
-            try {
-                this.users = await this.$axios.$get("users");
-            } catch (e) {
-                this.$errorMsg("Fehler beim laden der Nutzer");
-                return;
-            }
-        },
-        
-        addUser: async function (form) {
-            
-            let res;
-            
-            try {
-                res = await this.$axios.$post("users", form);
-            } catch (e) {
-                
-                if(e.response.status === 422) {
-                    this.$warnMsg("Ungültige Formulardaten")
-                } else if(e.response.status === 409) {
-                    this.$errorMsg("Dieser Benutzer existiert bereits");
-                } else {
-                    this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
-                }
-                
-                return;
-                
-            }
-    
-            await navigator.clipboard.writeText(res.password);
-            this.$okMsg("Der Benutzer wurde angelegt und das temporäre Password in die Zwischenablage kopiert");
-            this.loadUsers();
-            
-        }
-        
-    }
+		
+		loadUsers: async function() {
+			try {
+				this.users = await this.$axios.$get("users");
+			} catch (e) {
+				this.$errorMsg("Fehler beim laden der Nutzer");
+				return;
+			}
+		},
+		
+		addUser: async function (form) {
+			
+			let res;
+			
+			try {
+				res = await this.$axios.$post("users", form);
+			} catch (e) {
+				
+				if(e.response.status === 422) {
+					this.$warnMsg("Ungültige Formulardaten")
+				} else if(e.response.status === 409) {
+					this.$errorMsg("Dieser Benutzer existiert bereits");
+				} else {
+					this.$errorMsg(`Ein unbekanntes Problem ist aufgetreten (Fehler Code: ${e.response.status})`);
+				}
+				
+				return;
+				
+			}
+	
+			await navigator.clipboard.writeText(res.password);
+			this.$okMsg("Der Benutzer wurde angelegt und das temporäre Password in die Zwischenablage kopiert");
+			this.loadUsers();
+			
+		}
+		
+	}
 	
 }
 </script>
 
 <style scoped>
 .users {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
 }
 
 ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	padding: 0;
 	margin-top: 0;
 }
 
 .form {
-    margin-bottom: 20px;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
-    grid-template-areas: "name mail admn make";
-    justify-items: stretch;
-    width: 100%;
-    column-gap: 10px;
-    row-gap: 12px;
+	margin-bottom: 20px;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
+	grid-template-areas: "name mail admn make";
+	justify-items: stretch;
+	width: 100%;
+	column-gap: 10px;
+	row-gap: 12px;
 }
 
 .form > input {
-    margin: 0;
+	margin: 0;
 }
 
 .form > input[type=text] {
-    grid-area: name;
-    min-width: none;
+	grid-area: name;
+	min-width: none;
 }
 
 .form > input[type=email] {
-    grid-area: mail;
-    min-width: none;
+	grid-area: mail;
+	min-width: none;
 }
 
 .form > input[type=checkbox] {
-    grid-area: admn;
+	grid-area: admn;
 }
 
 .form > button {
-    grid-area: make;
+	grid-area: make;
 }
 
 @media only screen and (max-width: 720px) {
-    .form {
-        grid-template-columns: auto 1fr;
-        grid-template-areas: "name name"
-                             "mail mail"
-                             "admn make";
-    }
+	.form {
+		grid-template-columns: auto 1fr;
+		grid-template-areas: "name name"
+							 "mail mail"
+							 "admn make";
+	}
 }
 
 </style>

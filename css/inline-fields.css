@@ -13,18 +13,18 @@
 }
 
 .inline-field > input, .inline-field > select {
-    font-family: 'Poppins', sans-serif;
+	font-family: 'Poppins', sans-serif;
 	font-weight: 600;
 	font-size: 17px;
-    color: var(--color-text);
-    outline: 0;
-    border-radius: 4px;
-    border: 2px solid var(--color-input-outline);
-    transition: 0.2s ease border;
+	color: var(--color-text);
+	outline: 0;
+	border-radius: 4px;
+	border: 2px solid var(--color-input-outline);
+	transition: 0.2s ease border;
 }
 
 .inline-field > input:focus, .inline-field > select:focus {
-    border: 2px solid var(--color-input-outline-focus);
+	border: 2px solid var(--color-input-outline-focus);
 }
 
 .inline-field > input {
