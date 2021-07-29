@@ -2,16 +2,22 @@
 
 	<div class="entry">
 
-		<div class="no-margin">
-			<h1>{{ entry.name }}</h1>
+		<div class="heading">
+			<div>
+				<h1>{{ entry.name }}</h1>
 
-			<span v-if="entry.accessible === 'yes'" class="special highlight" :title="mouseOverTexts['barrierFree']">
-				<CheckCircleIcon /> Barrierefrei
-			</span>
+				<span v-if="entry.accessible === 'yes'" class="special highlight" :title="mouseOverTexts['barrierFree']">
+					<CheckCircleIcon /> Barrierefrei
+				</span>
 
-			<span v-if="entry.accessible === 'no'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
-				<AlertTriangleIcon /> Nicht Barrierefrei
-			</span>
+				<span v-if="entry.accessible === 'no'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
+					<AlertTriangleIcon /> Nicht Barrierefrei
+				</span>
+			</div>
+
+			<button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
+				<EditIcon />
+			</button>
 		</div>
 
 		<p class="inline-content">
@@ -57,10 +63,6 @@
 				<NavigationIcon /> <b>{{ Math.round(entry.distance) }} km</b>
 			</span>
 		</p>
-		
-		<button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
-			<EditIcon />
-		</button>
 		
 	</div>
 	
@@ -124,24 +126,27 @@ export default {
 }
 
 .entry > p,
-.entry > div {
+.entry div {
 	font-size: 16px;
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 0;
 }
 
-.entry > .no-margin {
+.entry > .heading {
+	justify-content: space-between;
+	align-items: flex-start;
 	margin: 0;
+	flex-wrap: nowrap;
 }
 
 .entry > p:last-child {
 	margin-bottom: 5px;
 }
 
-.entry > p > span:not(.tag):not(.heading),
+.entry > p > span:not(.tag),
 .entry > p > a,
-.entry > div > span {
+.heading span {
 	color: var(--color-entry-details);
 	display: flex;
 	align-items: flex-start;
@@ -155,12 +160,12 @@ export default {
 }
 
 .entry > p > span:last-child,
-.entry > div > span:last-child,
+.entry div > span:last-child,
 .entry > p > span.tag:last-child {
 	margin-right: 0;
 }
 
-.entry > div > h1 {
+.heading h1 {
 	margin-right: 10px;
 }
 
@@ -194,7 +199,7 @@ export default {
 	user-select: none;
 }
 
-.entry > div > .special {
+.heading .special {
 	padding: 4px 6px 4px 4px !important;
 	font-size: 13px;
 	border-radius: 4px;
@@ -203,46 +208,44 @@ export default {
 	cursor: default;
 }
 
-.entry > div > .special .feather {
+.heading .special .feather {
 	width: 16px;
 	height: 16px;
 	margin-right: 2px;
 }
 
-.entry > div > .highlight {
+.heading .highlight {
 	background-color: var(--color-special-highlight);
 }
 
-.entry > div > .warn {
+.heading .warn {
 	background-color: var(--color-special-warn);
 }
 
 .entry .meta-button {
-	position: absolute;
-	opacity: 0;
-	visibility: hidden;
-	top: 15px;
-	right: 15px;
+	position: relative;
+	top: 5px;
+	margin-left: 5px;
 	background: none;
 	border: none;
 	cursor: pointer;
 	padding: 0;
 	color: var(--color-light-accent);
-	transition: 0.2s ease color, 0.2s ease opacity;
+	transition: 0.2s ease color;
+	justify-self: flex-end;
 }
 
 .entry:hover .meta-button {
-	visibility: visible;
-	opacity: 1;
-}
-
-.entry .meta-button:hover {
-	color: var(--color-text);
+	color: var(--color-light-active);
 }
 
 @media only screen and (max-width: 720px) {
 	.entry:hover .meta-button {
-		color: var(--color-text);
+		color: var(--color-light-accent);
 	}
+}
+
+.entry .meta-button:hover {
+	color: var(--color-text);
 }
 </style>
