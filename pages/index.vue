@@ -13,7 +13,7 @@
 		</div>
 
 		<div class="stripe">
-			<Button center @click="$router.push('/submit')" class="button_submit">
+			<Button center light @click="$router.push('/submit')" class="button_submit">
 				Einen neuen Eintrag einreichen
 			</Button>
 
@@ -229,7 +229,7 @@ export default {
 	font-size: 18px;
 	min-height: 45px;
 	color: var(--color-background);
-	padding: 9px 12px;
+	padding: 4px 12px;
 	background: linear-gradient(50deg, var(--color-blue) 5%, var(--color-pink) 90%);
 
 	text-shadow: 0.5px 1px 3px var(--color-text-shadow-rim),
