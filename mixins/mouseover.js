@@ -2,6 +2,7 @@ const mouseOverTexts = {
 	// Types
 	"": "Alle Kategorien von Einträgen",
 	group: "LGBT+ oder trans* Gruppen, Vereine und Stammtische",
+	therapist: "Therapeut*in mit trans* spezifischer Erfahrung",
 	surveyor: "TSG Gutachter*innen",
 	endocrinologist: "Endokrinologische Arztpraxis für Hormon-Therapie",
 	surgeon: "Operateur*innen / Chirurgen für trans-relevante OPs",
@@ -54,6 +55,7 @@ const mouseOverTexts = {
 	distance: "Entfernung zu deinem Standort",
 	barrierFree: "Räumlichkeiten sind Barrierefrei zugänglich",
 	notBarrierFree: "Räumlichkeiten nicht Barrierefrei zugänglich",
+	isBarrierFree: "Sind die Räumlichkeiten Barrierefrei zugänglich?",
 
 	// Management
 	logout: "Abmelden",

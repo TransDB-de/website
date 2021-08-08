@@ -26,7 +26,7 @@
 
 				<select v-show="$store.state.isMobile" name="type" v-model="selectedType" v-on:click="updateApplyButton" >
 					
-					<option v-for="(val, key) in typeMapping" :key="key" :value="key">{{ val }}</option>
+					<option v-for="(val, key) in typeMapping" :key="key" :value="key" :title="mouseOverTexts[key]">{{ val }}</option>
 
 				</select>
 
@@ -36,6 +36,7 @@
 						v-for="(val, key) in typeMapping" :key="key"
 						:value="key"
 						:model="selectedType"
+						:title="mouseOverTexts[key]"
 						@change="(newVal) => selectedType = newVal"
 					> {{ val }} </RadioButton>
 
