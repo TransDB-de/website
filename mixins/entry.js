@@ -29,6 +29,20 @@ export const attributeMapping = {
 	}
 }
 
+export const attributeDetails = {
+	hairremoval: {
+		insurancePay: "Haben Krankenkassen hier Kosten übernommen?",
+		transfriendly: "Ist die Praxis / das Studio trans*freundlich?",
+		hasDoctor: "Wird die Praxis / das Studio von einer Arztperson geführt, oder begleitet?"
+	},
+	endocrinologist: {
+		treatsNB: "Behandelt nicht-binäre Personen"
+	},
+	surveyor: {
+		enby: "Stellt Gutachten für nicht-binäre Personen aus"
+	}
+}
+
 export const offerMapping = {
 	therapist: {
 		indication: "Indikationen",
@@ -104,6 +118,7 @@ export default {
 		this.accessibleMapping = accessibleMapping;
 		this.typeHasSpecials = typeHasSpecials;
 		this.typeHasMinAge = typeHasMinAge;
+		this.attributeDetails = attributeDetails;
 	}
 
 }

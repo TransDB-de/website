@@ -2,63 +2,61 @@
 
 	<div class="entry">
 
-		<div class="heading">
-			<div>
-				<h1>{{ entry.name }}</h1>
+		<div class="flex medium-gap reverse no-bottom-gap">
+			<h1>{{ entry.name }}</h1>
 
-				<span v-if="entry.accessible === 'yes'" class="special highlight" :title="mouseOverTexts['barrierFree']">
-					<CheckCircleIcon /> Barrierefrei
-				</span>
+			<span v-if="entry.accessible === 'yes'" class="special highlight flex tiny-gap" :title="mouseOverTexts['barrierFree']">
+				<CheckCircleIcon /> Barrierefrei
+			</span>
 
-				<span v-if="entry.accessible === 'no'" class="special warn" :title="mouseOverTexts['notBarrierFree']">
-					<AlertTriangleIcon /> Nicht Barrierefrei
-				</span>
-			</div>
+			<span v-if="entry.accessible === 'no'" class="special warn flex tiny-gap" :title="mouseOverTexts['notBarrierFree']">
+				<AlertTriangleIcon /> Nicht Barrierefrei
+			</span>
 
 			<button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
 				<EditIcon />
 			</button>
 		</div>
 
-		<p class="inline-content">
+		<p class="flex small-gap tab">
 			<b>{{ entry.firstName }} {{ entry.lastName }}</b>
 			<span v-if="subjectMapping[entry.type]" :title="mouseOverTexts[entry.type]">{{ subjectMapping[entry.type][entry.meta.subject] }}</span>
 			<span v-else :title="mouseOverTexts[entry.type]">{{ typeMapping[entry.type] }}</span>
 		</p>
 		
-		<p>
+		<p class="flex large-gap">
 			
-			<a :href="`https://www.google.de/maps/search/${address}`" target="_blank">
-				<map-icon />{{ address }}
+			<a :href="`https://www.google.de/maps/search/${address}`" target="_blank" class="flex small-gap no-wrap">
+				<MapIcon />{{ address }}
 			</a>
 	
-			<a v-if="entry.telephone" :href="`tel:${entry.telephone}`">
-				<phone-icon />{{ entry.telephone }}
+			<a v-if="entry.telephone" :href="`tel:${entry.telephone}`" class="flex small-gap no-wrap">
+				<PhoneIcon />{{ entry.telephone }}
 			</a>
 			
-			<a v-if="entry.email" :href="`mailto:${entry.email}`">
-				<mail-icon />{{ entry.email }}
+			<a v-if="entry.email" :href="`mailto:${entry.email}`" class="flex small-gap no-wrap">
+				<MailIcon />{{ entry.email }}
 			</a>
 			
-			<a v-if="entry.website" :href="entry.website" target="_blank">
-				<globe-icon />{{ website }}
+			<a v-if="entry.website" :href="entry.website" target="_blank" class="flex small-gap no-wrap">
+				<GlobeIcon />{{ website }}
 			</a>
 			
 		</p>
 		
-		<p v-if="entry.meta.offers">
+		<p v-if="entry.meta.offers" class="flex small-gap">
 			<b>Angebote:</b> <Tag v-for="offer of entry.meta.offers" :key="offer" :title="mouseOverTexts[offer]">{{ offerMapping[entry.type][offer] }}</Tag>
 		</p>
 		
-		<p v-if="entry.meta.attributes">
+		<p v-if="entry.meta.attributes" class="flex small-gap">
 			<b>Bietet:</b> <Tag v-for="attr of entry.meta.attributes" :key="attr" :title="mouseOverTexts[attr]">{{ attributeMapping[entry.type][attr] }}</Tag>
 		</p>
 		
-		<p v-if="entry.meta.specials">
+		<p v-if="entry.meta.specials" class="flex small-gap">
 			<b>Besonderheiten:</b>{{ entry.meta.specials }}
 		</p>
 		
-		<p v-if="entry.distance" class="nav" :title="mouseOverTexts['distance']">
+		<p v-if="entry.distance" class="nav no-select" :title="mouseOverTexts['distance']">
 			<span>
 				<NavigationIcon /> <b>{{ Math.round(entry.distance) }} km</b>
 			</span>
@@ -107,100 +105,71 @@ export default {
 </script>
 
 <style scoped>
-
+/** --- General Looks --- */
 .entry {
-	display: flex;
-	flex-direction: column;
-	position: relative;
 	background-color: var(--color-entry);
 	box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 	border-radius: 4px;
 	padding: 10px 20px;
-	margin-bottom: 20px;
 }
 
 .entry h1 {
 	font-size: 26px;
-	margin: 0;
 	font-weight: 600;
 }
 
-.entry > p,
-.entry div {
-	font-size: 16px;
-	display: flex;
-	flex-wrap: wrap;
-	margin-top: 0;
-}
-
-.entry > .heading {
-	justify-content: space-between;
-	align-items: flex-start;
-	margin: 0;
-	flex-wrap: nowrap;
-}
-
-.entry > p:last-child {
-	margin-bottom: 5px;
-}
-
-.entry > p > span:not(.tag),
-.entry > p > a,
-.heading span {
+.entry a {
 	color: var(--color-entry-details);
-	display: flex;
-	align-items: flex-start;
-	margin-right: 20px;
 	text-decoration: none;
 	padding: 5px 0;
+	overflow-wrap: anywhere;
 }
 
-.entry > p > span.tag {
-	margin: 2.5px;
-}
-
-.entry > p > span:last-child,
-.entry div > span:last-child,
-.entry > p > span.tag:last-child {
-	margin-right: 0;
-}
-
-.heading h1 {
-	margin-right: 10px;
+.entry a:hover {
+	text-decoration: underline solid var(--color-entry-link-underline);
 }
 
 .entry b {
 	font-weight: 500;
 }
 
-.entry > p > b {
-	margin-right: 5px;
-	display: inline-flex;
-	align-items: center;
+.entry * {
+	overflow-wrap: break-word;
+	min-width: 0;
 }
 
-.entry > p.inline-content > span {
-	margin-left: 5px;
+/** --- General Layout --- */
+.entry h1,
+.entry p {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
-.entry > p > span .feather,
-.entry > p > a .feather {
-	margin-right: 5px;
+.entry {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	margin-bottom: 20px;
+}
+
+.entry > p,
+.entry > div {
+	margin-bottom: 1em;
+}
+
+.entry :last-child {
+	margin-bottom: 0;
+}
+
+.entry .feather {
 	height: 18px;
 	width: 18px;
 	min-width: 18px;
 }
 
-.entry > p > a:hover {
-	text-decoration: underline solid var(--color-entry-link-underline);
-}
-
-.entry > .nav {
-	user-select: none;
-}
-
-.heading .special {
-	padding: 4px 6px 4px 4px !important;
+/** --- Classes --- */
+.entry .special {
+	padding: 4px 6px 4px 4px;
 	font-size: 13px;
 	border-radius: 4px;
 	height: min-content;
@@ -208,44 +177,92 @@ export default {
 	cursor: default;
 }
 
-.heading .special .feather {
+.entry .special .feather {
 	width: 16px;
 	height: 16px;
-	margin-right: 2px;
 }
 
-.heading .highlight {
+.entry .highlight {
 	background-color: var(--color-special-highlight);
 }
 
-.heading .warn {
+.entry .warn {
 	background-color: var(--color-special-warn);
 }
 
-.entry .meta-button {
-	position: relative;
-	top: 5px;
+.entry .no-select {
+	user-select: none;
+}
+
+.entry .flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-start;
+	row-gap: 2.5px;
+}
+
+.entry .reverse {
+	flex-wrap: wrap-reverse;
+}
+
+.entry .large-gap {
+	column-gap: 20px;
+}
+
+.entry .medium-gap {
+	column-gap: 10px;
+}
+
+.entry .small-gap {
+	column-gap: 5px;
+}
+
+.entry .tiny-gap {
+	column-gap: 2.5px;
+}
+
+.entry .no-wrap {
+	flex-wrap: nowrap;
+}
+
+.entry .no-bottom-gap {
+	margin-bottom: 0;
+}
+
+.entry .tab {
 	margin-left: 5px;
+}
+
+/** --- Unique Class --- */
+.entry .meta-button {
+	margin-left: auto;
 	background: none;
 	border: none;
 	cursor: pointer;
 	padding: 0;
 	color: var(--color-light-accent);
 	transition: 0.2s ease color;
-	justify-self: flex-end;
+}
+
+.entry .meta-button .feather {
+	width: 1.8em;
+	height: 1.8em;
 }
 
 .entry:hover .meta-button {
 	color: var(--color-light-active);
 }
 
-@media only screen and (max-width: 720px) {
-	.entry:hover .meta-button {
-		color: var(--color-light-accent);
-	}
-}
-
 .entry .meta-button:hover {
 	color: var(--color-text);
 }
+
+/** --- Mobile Adjustments --- */
+@media only screen and (max-width: 360px) {
+	.entry {
+		padding: 6px 12px;
+	}
+}
+
 </style>

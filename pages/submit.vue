@@ -5,16 +5,10 @@
 		<h1>Einen neuen Eintrag einreichen</h1>
 		
 		<Input type="select" name="type" errorMSG="Bitte wähle eins aus"
-			:checkValid="checkValid" :invalid="errors['type']" v-model="type" required="true"
-		>
-			<option value="" disabled>*Art wählen*</option>
-			<option value="group">Gruppe/Verein</option>
-			<option value="therapist">Therapeut*in/Psychiater*in</option>
-			<option value="surveyor">Gutachter*in</option>
-			<option value="endocrinologist">Endokrinologische Praxis</option>
-			<option value="surgeon">Operateur*in</option>
-			<option value="hairremoval">Haarentfernungsstudio</option>
-			<option value="logopedics">Logopäd*in</option>
+			:checkValid="checkValid" :invalid="errors['type']" v-model="type" required="true">
+
+			<option v-for="(val, key) in typeMapping" :key="key" :value="key">{{ val }}</option>
+
 		</Input>
 		
 		<Input name="name" v-show="type" type="text" required="true" minlength="1" maxlength="50"
@@ -55,10 +49,7 @@
 		<div v-if="type === 'group'">
 			
 			<Errorbox errorMSG="Wähle mindestens eins aus" :invalid="errors[type]['attributes']">
-				<Checkbox name="attributes[]" value="trans" placeholder="Trans* Fokus" />
-				<Checkbox name="attributes[]" value="regularMeetings" placeholder="Regelmäßige Gruppentreffen" />
-				<Checkbox name="attributes[]" value="consulting" placeholder="Beratungsangebot" />
-				<Checkbox name="attributes[]" value="activities" placeholder="Freizeitangebote" />
+				<Checkbox name="attributes[]" v-for="(val, key) in attributeMapping.group" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 			</Errorbox>
 
 			<Input name="specials" type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280"
@@ -82,15 +73,14 @@
 			<h3>Angebote:</h3>
 			
 			<Errorbox errorMSG="Wähle midnestens eins aus" :invalid="errors[type]['offers']">
-				<Checkbox name="offers[]" value="indication" placeholder="Indikation" />
-				<Checkbox name="offers[]" value="therapy" placeholder="Begleittherapie" />
+				<Checkbox name="offers[]" v-for="(val, key) in offerMapping.therapist" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]"/>
 			</Errorbox>
 
 		</div>
 		
 		<div v-if="type === 'surveyor'">
 	
-			<Checkbox name="attributes[]" value="enby" placeholder="Nicht-binäre Gutachten" />
+			<Checkbox name="attributes[]" v-for="(val, key) in attributeDetails.surveyor" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 			
 		</div>
 		
@@ -99,18 +89,7 @@
 			<h3>Angebotene Operationen:</h3>
 			
 			<Errorbox errorMSG="Wähle midnestens eins aus" :invalid="errors[type]['offers']">
-				<Checkbox name="offers[]" value="mastectomy" placeholder="Mastektomie" />
-				<Checkbox name="offers[]" value="vaginPI" placeholder="Vaginoplastie (penile Inversion)" />
-				<Checkbox name="offers[]" value="vaginCombined" placeholder="Vaginoplastie (kombinierte Methode)" />
-				<Checkbox name="offers[]" value="ffs" placeholder="Gesichtsfeminisierende Operationen (FFS)" />
-				<Checkbox name="offers[]" value="penoid" placeholder="Penoidaufbau" />
-				<Checkbox name="offers[]" value="breast" placeholder="Brustaufbau" />
-				<Checkbox name="offers[]" value="hyst" placeholder="Hysterektomie" />
-				<Checkbox name="offers[]" value="orch" placeholder="Orchiektomie" />
-				<Checkbox name="offers[]" value="clitPI" placeholder="Klitorispenoid / Metoidioplastik" />
-				<Checkbox name="offers[]" value="bodyfem" placeholder="Körperfemininisierende Operationen" />
-				<Checkbox name="offers[]" value="glottoplasty" placeholder="Stimmband Operationen" />
-				<Checkbox name="offers[]" value="fms" placeholder="Gesichtsmaskulinisierende Operationen (FMS)" />
+				<Checkbox name="offers[]" v-for="(val, key) in offerMapping.surgeon" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 			</Errorbox>
 
 		</div>
@@ -119,27 +98,22 @@
 			
 			<h3>Angebote:</h3>
 			<Errorbox errorMSG="Wähle midnestens eins aus" :invalid="errors[type]['offers']">
-				<Checkbox name="offers[]" value="laser" placeholder="Laser" />
-				<Checkbox name="offers[]" value="ipl" placeholder="IPL" />
-				<Checkbox name="offers[]" value="electro" placeholder="Elektroepilation" />
-				<Checkbox name="offers[]" value="electroAE" placeholder="Elektroepilation mit Lokalanästhesie" />
+				<Checkbox name="offers[]" v-for="(val, key) in offerMapping.hairremoval" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 			</Errorbox>
 
 			<h3>Weitere Infos:</h3>
-			<Checkbox name="attributes[]" value="insurancePay" placeholder="Haben Krankenkassen hier Kosten übernommen?" />
-			<Checkbox name="attributes[]" value="transfriendly" placeholder="Ist das Studio Trans*freundlich?" />
-			<Checkbox name="attributes[]" value="hasDoctor" placeholder="Wird das Studio von einer Arztperson geleitet?" />
+			<Checkbox name="attributes[]" v-for="(val, key) in attributeDetails.hairremoval" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 			
 		</div>
 
 		<div v-if="type === 'endocrinologist'">
 			<h3>Weitere Infos:</h3>
-			<Checkbox name="attributes[]" value="treatsNB" placeholder="Behandelt nicht-binäre Personen" />
+			<Checkbox name="attributes[]" v-for="(val, key) in attributeDetails.endocrinologist" :key="key" :value="key" :placeholder="val" :title="mouseOverTexts[key]" />
 		</div>
 		
 		<h3>Räumlichkeiten:</h3>
 
-		<ThreeStateCheckbox name="accessible" :v-model="accessible" placeholder="Sind Barrierefrei" />
+		<ThreeStateCheckbox name="accessible" :v-model="accessible" placeholder="Sind Barrierefrei" :title="mouseOverTexts['isBarrierFree']" />
 
 		<p>
 			Bitte beachte, dass dein Eintrag von unserem Team überprüft wird<br/>bevor er auf der Seite zu finden ist.
@@ -160,11 +134,12 @@ import ThreeStateCheckbox from "@/components/utils/ThreeStateCheckbox";
 import Input from "@/components/utils/Input";
 import Errorbox from "@/components/utils/Errorbox";
 import EntryMixin from "@/mixins/entry";
+import MouseoverMixin from "@/mixins/mouseover";
 
 export default {
 	name: "submit.vue",
 	components: {Button, Checkbox, Index, Form, ThreeStateCheckbox, Input, Errorbox},
-	mixins: [EntryMixin],
+	mixins: [EntryMixin, MouseoverMixin],
 	data() {
 		return {
 			type: "",

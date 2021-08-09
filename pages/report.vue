@@ -51,7 +51,7 @@ export default {
 			entry: null,
 			loading: false,
 			error: null,
-			maxCharLength: 800,
+			maxCharLength: 1200,
 			message: ""
 		}
 	},

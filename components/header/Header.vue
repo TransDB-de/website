@@ -98,13 +98,15 @@ export default {
 	flex-direction: column;
 	align-items: center;
 
-	box-shadow: 0 3px 6px var(--color-box-shadow);
+	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
 	padding: 40px 0 0 0;
 	height: 325px;
 	width: 100%;
 	transition: 0.4s ease opacity, 0.4s ease height;
 	overflow: hidden;
 	font-family: "Poppins", sans-serif;
+
+	transition: box-shadow 0 ease 0;
 }
 
 /** Background Image */
@@ -124,19 +126,8 @@ export default {
 
 .header.hide {
 	height: 56px;
-	animation-name: hide-shaow;
-	animation-delay: 0.4s;
-	animation-duration: 0.8s;
-	animation-fill-mode: forwards;
-}
-
-@keyframes hide-shadow {
-	0% {
-		box-shadow: 0 3px 6px var(--color-box-shadow);
-	}
-	100% {
-		box-shadow: 0 0 9px rgba(0, 0, 0, 0);
-	}
+	transition: box-shadow 0.8s ease 0.2s;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
 }
 
 .header > h1, .header > h2, .header > .search-bar {
@@ -179,6 +170,8 @@ export default {
 	position: fixed;
 	top: 0;
 
+	transition: box-shadow 0 ease 0;
+
 	/** z-index higher than other children of .header, for mouse event priority */
 	z-index: 100;
 }
@@ -195,22 +188,25 @@ export default {
 }
 
 .header > .navbar.background {
-	box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
 }
 
+
 .header.hide > .navbar {
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
 	animation-name: show-shadow;
 	animation-duration: 0.8s;
-	animation-delay: 0.4s;
+	animation-delay: 0.2s;
+	animation-timing-function: ease;
 	animation-fill-mode: forwards;
 }
 
 @keyframes show-shadow {
 	0% {
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
 	}
 	100% {
-		box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+		box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
 	}
 }
 

@@ -166,4 +166,10 @@ h3 {
 		margin: 0;
 	}
 }
+
+@media only screen and (max-width: 480px) {
+	.search-container {
+		padding: 12px;
+	}
+}
 </style>
