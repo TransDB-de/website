@@ -4,7 +4,7 @@
 			<h2>{{username}}</h2>
 
 			<span v-if="loggedIn">
-				<Button class="settings-button" :title="mouseOverTexts['accountSettings']" center v-on:click="$router.push('/manage/account')">
+				<Button :title="mouseOverTexts['accountSettings']" center v-on:click="$router.push('/manage/account')">
 					<SettingsIcon />
 					Account
 				</Button>
@@ -119,18 +119,19 @@ export default {
 .links {
 	grid-area: links;
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
+	justify-content: center;
 }
 
 .header > span {
 	display: flex;
+	flex-wrap: wrap;
 	flex-direction: row;
+	justify-content: center;
+	gap: 5px 10px;
 	grid-area: buttons;
 	margin-right: 20px;
-}
-
-.settings-button {
-	margin-right: 10px;
 }
 
 h2 {
@@ -204,6 +205,10 @@ h2 {
 		grid-template-areas: "line1 name line2"
 							 "buttons buttons buttons"
 							 "links links links";
+	}
+
+	.header > span {
+		margin-right: 0;
 	}
 
 	.links {
