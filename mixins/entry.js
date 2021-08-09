@@ -32,8 +32,8 @@ export const attributeMapping = {
 export const attributeDetails = {
 	hairremoval: {
 		insurancePay: "Haben Krankenkassen hier Kosten übernommen?",
-		transfriendly: "Ist das Studio Trans*freundlich?",
-		hasDoctor: "Wird das Studio von einer Arztperson geleitet?"
+		transfriendly: "Ist die Praxis / das Studio trans*freundlich?",
+		hasDoctor: "Wird die Praxis / das Studio von einer Arztperson geführt, oder begleitet?"
 	},
 	endocrinologist: {
 		treatsNB: "Behandelt nicht-binäre Personen"
