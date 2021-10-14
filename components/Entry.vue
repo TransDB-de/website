@@ -12,10 +12,16 @@
 			<span v-if="entry.accessible === 'no'" class="special warn flex tiny-gap" :title="mouseOverTexts['notBarrierFree']">
 				<AlertTriangleIcon /> Nicht Barrierefrei
 			</span>
-
-			<button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
-				<EditIcon />
-			</button>
+            
+            <div class="meta-button-container medium-gap">
+                <button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
+                    <EditIcon />
+                </button>
+    
+                <button class="meta-button" @click="share" title="Teile den Link zu diesem Eintrag">
+                    <Share2Icon />
+                </button>
+            </div>
 		</div>
 
 		<p class="flex small-gap tab">
@@ -70,12 +76,11 @@
 import Tag from "@/components/utils/Tag";
 import EntryMixin from "@/mixins/entry";
 import MouseoverMixin from "@/mixins/mouseover";
-import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon } from "vue-feather-icons";
-import entry from "@/mixins/entry";
+import { MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon, Share2Icon } from "vue-feather-icons";
 
 export default {
 	name: "Entry",
-	components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon },
+	components: { Tag, MapIcon, MailIcon, GlobeIcon, PhoneIcon, NavigationIcon, CheckCircleIcon, AlertTriangleIcon, EditIcon, Share2Icon },
 	mixins: [ EntryMixin, MouseoverMixin ],
 	props: {
 		entry: Object
@@ -98,8 +103,18 @@ export default {
 	},
 	methods: {
 		report() {
-			this.$router.push({ name: "report", query: { id: this.entry._id } })
-		}
+			this.$router.push({ name: "report", query: { id: this.entry._id } });
+		},
+        share() {
+            let url = "/entry/" + this.entry._id;
+
+            if (navigator.share) {
+                navigator.share({ url });
+            } else {
+                navigator.clipboard.writeText(window.location.origin + url);
+                this.$okMsg("Link kopiert");
+            }
+        }
 	}
 }
 </script>
@@ -236,13 +251,17 @@ export default {
 
 /** --- Unique Class --- */
 .entry .meta-button {
-	margin-left: auto;
 	background: none;
 	border: none;
 	cursor: pointer;
 	padding: 0;
 	color: var(--color-light-accent);
 	transition: 0.2s ease color;
+}
+
+.entry .meta-button-container {
+    display: flex;
+    margin-left: auto;
 }
 
 .entry .meta-button .feather {
