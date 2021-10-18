@@ -12,16 +12,16 @@
 			<span v-if="entry.accessible === 'no'" class="special warn flex tiny-gap" :title="mouseOverTexts['notBarrierFree']">
 				<AlertTriangleIcon /> Nicht Barrierefrei
 			</span>
-            
-            <div class="meta-button-container medium-gap">
-                <button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
-                    <EditIcon />
-                </button>
-    
-                <button class="meta-button" @click="share" title="Teile den Link zu diesem Eintrag">
-                    <Share2Icon />
-                </button>
-            </div>
+			
+			<div class="meta-button-container medium-gap">
+				<button class="meta-button" @click="report" title="Eintrag melden oder Änderung vorschlagen">
+					<EditIcon />
+				</button>
+	
+				<button class="meta-button" @click="share" title="Teile den Link zu diesem Eintrag">
+					<Share2Icon />
+				</button>
+			</div>
 		</div>
 
 		<p class="flex small-gap tab">
@@ -105,16 +105,16 @@ export default {
 		report() {
 			this.$router.push({ name: "report", query: { id: this.entry._id } });
 		},
-        share() {
-            let url = "/entry/" + this.entry._id;
+		share() {
+			let url = "/entry/" + this.entry._id;
 
-            if (navigator.share) {
-                navigator.share({ url });
-            } else {
-                navigator.clipboard.writeText(window.location.origin + url);
-                this.$okMsg("Link kopiert");
-            }
-        }
+			if (navigator.share) {
+				navigator.share({ url });
+			} else {
+				navigator.clipboard.writeText(window.location.origin + url);
+				this.$okMsg("Link in die Zwischenablage kopiert!");
+			}
+		}
 	}
 }
 </script>
@@ -260,8 +260,8 @@ export default {
 }
 
 .entry .meta-button-container {
-    display: flex;
-    margin-left: auto;
+	display: flex;
+	margin-left: auto;
 }
 
 .entry .meta-button .feather {

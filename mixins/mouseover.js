@@ -48,6 +48,7 @@ const mouseOverTexts = {
 	applyFilter: "Suchfilter anwenden",
 	proximitySearch: "Standort ermitteln",
 	locationSearchButton: "Suchen",
+	searchNearbyButton: "Weitere Einträge in der Umgebung dieses Eintrags suchen",
 
 	// Info
 	location: "Dein Standort",

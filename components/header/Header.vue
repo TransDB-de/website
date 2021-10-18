@@ -43,7 +43,7 @@ export default {
 	mixins: [ AccountMixin, MouseoverMixin ],
 	data() {
 		return {
-			hide: !["/","/search"].includes(this.$route.path),
+			hide: !["index", "search", "entry-entry"].includes(this.$route.name),
 			expand: false,
 			background: false
 		}
