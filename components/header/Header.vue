@@ -22,7 +22,7 @@
 		
 		<h1 ref="title" v-on:click="$router.push('/search')">Trans*DB</h1>
 		
-		<h2 ref="subtitle">Finde Angebote für trans* Personen in deiner Umgebung</h2>
+		<h2 ref="subtitle">Die Suchmaschine für trans* relevante Angebote</h2>
 		
 		<SearchBar ref="searchbar" placeholder="Suche nach Postleitzahl oder Ort" mobilePlaceholder="Suche nach PLZ oder Ort" @search="search"></SearchBar>
 		

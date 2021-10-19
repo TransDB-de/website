@@ -169,7 +169,7 @@ export default {
 				{
 					hid: "description",
 					name: "description",
-					content: "Reiche einen neuen Eintrag nach Trans*DB ein und teile deine Erfahrung, um anderen Leuten zu helfen."
+					content: "Neuen Eintrag erstellen. Reiche einen neuen Eintrag nach Trans*DB ein und teile deine Erfahrung um anderen Leuten zu helfen."
 				}
 			]
 		}
