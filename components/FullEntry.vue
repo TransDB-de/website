@@ -177,7 +177,7 @@ export default {
 .full-entry {
 	display: flex;
 	background-color: var(--color-entry);
-	box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 	border-radius: 4px;
 	padding: 0 0 0 10px;
 	margin-bottom: 20px;

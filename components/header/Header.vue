@@ -1,9 +1,9 @@
 <template>
 	
 	<div :class="{ header: true, hide: hide }">
-	
+		
 		<div :class="{navbar: true, expand, background}" ref="navbar">
-	
+			
 			<h1 @click="reload">TransDB.de</h1>
 			
 			<nav @click="expand = !expand">
@@ -43,7 +43,6 @@ export default {
 	mixins: [ AccountMixin, MouseoverMixin ],
 	data() {
 		return {
-			hide: !["/","/search"].includes(this.$route.path),
 			expand: false,
 			background: false
 		}
@@ -52,16 +51,13 @@ export default {
 		this.$addScrollEvent(this.scrollEvent);
 	},
 	beforeDestroy() {
-	   this.$removeScrollEvent(this.scrollEvent);
+		this.$removeScrollEvent(this.scrollEvent);
 	},
-	watch: {
-
-		$route(to, from) {
-			this.hide = !["/","/search"].includes(to.path);
+	computed: {
+		hide() {
+			return !["index", "search", "entry-entry"].includes(this.$route.name);
 		}
-		
 	},
-	
 	methods: {
 		
 		async reload() {
@@ -69,11 +65,20 @@ export default {
 		},
 		
 		search(newQuery) {
-			this.$router.push({ name: "search", query: {...this.$route.query, ...newQuery} });
+			let currentQuery = this.$route.query;
+			
+			if ('location' in newQuery) {
+				delete currentQuery.lat;
+				delete currentQuery.long;
+			} else if ('lat' in newQuery) {
+				delete currentQuery.location;
+			}
+			
+			this.$router.push({ name: "search", query: {...currentQuery, ...newQuery} });
 		},
-
+		
 		scrollEvent(scroll) {
-
+			
 			let percent = (scroll / (this.$el.scrollHeight - this.$refs.navbar.scrollHeight ));
 			
 			let opacity = (1 - percent).toFixed(2);
@@ -84,7 +89,7 @@ export default {
 			this.$refs.searchbar.$el.style.opacity= opacity;
 			
 			this.background = percent > 1;
-
+			
 		}
 		
 	}
@@ -98,15 +103,13 @@ export default {
 	flex-direction: column;
 	align-items: center;
 
-	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 	padding: 40px 0 0 0;
 	height: 325px;
 	width: 100%;
-	transition: 0.4s ease opacity, 0.4s ease height;
+	transition: 0.4s ease opacity, 0.4s ease height, 0s ease box-shadow;
 	overflow: hidden;
 	font-family: "Poppins", sans-serif;
-
-	transition: box-shadow 0 ease 0;
 }
 
 /** Background Image */
@@ -126,8 +129,8 @@ export default {
 
 .header.hide {
 	height: 56px;
-	transition: box-shadow 0.8s ease 0.2s;
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
+	transition: 0.4s ease opacity, 0.4s ease height, 0.8s ease box-shadow 0.2s;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);
 }
 
 .header > h1, .header > h2, .header > .search-bar {
@@ -169,9 +172,9 @@ export default {
 	text-shadow: 0.5px 0.5px 2px var(--color-text-shadow-strong), 0.5px 1px 3px var(--color-text-shadow-rim), 0 0 8px var(--color-text-shadow-glow);
 	position: fixed;
 	top: 0;
-
-	transition: box-shadow 0 ease 0;
-
+	
+	transition: 0s ease box-shadow;
+	
 	/** z-index higher than other children of .header, for mouse event priority */
 	z-index: 100;
 }
@@ -188,12 +191,12 @@ export default {
 }
 
 .header > .navbar.background {
-	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 }
 
 
 .header.hide > .navbar {
-	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);
 	animation-name: show-shadow;
 	animation-duration: 0.8s;
 	animation-delay: 0.2s;
@@ -203,10 +206,10 @@ export default {
 
 @keyframes show-shadow {
 	0% {
-		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);
 	}
 	100% {
-		box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
+		box-shadow: 0 0 4px var(--color-text-shadow-strong), 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 	}
 }
 
@@ -324,7 +327,7 @@ export default {
 		
 		z-index: 100;
 	}
-
+	
 	.navbar.expand:after {
 		display: none;
 	}
@@ -341,7 +344,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		background-color: var(--color-mobile-nav);
-
+		
 		z-index: 100;
 	}
 	

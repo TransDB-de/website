@@ -17,7 +17,7 @@ export default {
 
 <style>
 span.invalid .checkbox-container:last-child {
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 </style>
 
