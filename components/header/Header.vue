@@ -43,7 +43,6 @@ export default {
 	mixins: [ AccountMixin, MouseoverMixin ],
 	data() {
 		return {
-			hide: !["index", "search", "entry-entry"].includes(this.$route.name),
 			expand: false,
 			background: false
 		}
@@ -54,14 +53,11 @@ export default {
 	beforeDestroy() {
 	   this.$removeScrollEvent(this.scrollEvent);
 	},
-	watch: {
-
-		$route(to, from) {
-			this.hide = !["/","/search"].includes(to.path);
-		}
-		
-	},
-	
+	computed: {
+        hide() {
+            return !["index", "search", "entry-entry"].includes(this.$route.name);
+        }
+    },
 	methods: {
 		
 		async reload() {
@@ -102,11 +98,9 @@ export default {
 	padding: 40px 0 0 0;
 	height: 325px;
 	width: 100%;
-	transition: 0.4s ease opacity, 0.4s ease height;
+	transition: 0.4s ease opacity, 0.4s ease height, 0s ease box-shadow;
 	overflow: hidden;
 	font-family: "Poppins", sans-serif;
-
-	transition: box-shadow 0 ease 0;
 }
 
 /** Background Image */
@@ -126,7 +120,7 @@ export default {
 
 .header.hide {
 	height: 56px;
-	transition: box-shadow 0.8s ease 0.2s;
+    transition: 0.4s ease opacity, 0.4s ease height, 0.8s ease box-shadow 0.2s;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
 }
 
@@ -170,7 +164,7 @@ export default {
 	position: fixed;
 	top: 0;
 
-	transition: box-shadow 0 ease 0;
+	transition: 0s ease box-shadow;
 
 	/** z-index higher than other children of .header, for mouse event priority */
 	z-index: 100;
