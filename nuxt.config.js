@@ -73,11 +73,11 @@ export default {
 
 		head: {
 			meta: [
-				{ hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
+				{ hid: "description", name: "description", content: process.env.HEAD_META_DESCRIPTION ?? "Die Suchmaschine für trans* relevante Angebote" },
 
 				{ hid: "og:locale", name: "og:locale", content: process.env.HEAD_META_LOCALE ?? "de_DE" },
 				{ hid: "og:title", name: "og:title", content: process.env.HEAD_TITLE ?? "Trans*DB" },
-				{ hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Finde Angebote für trans* Personen in deiner Umgebung" },
+				{ hid: "og:description", name: "og:description", content: process.env.HEAD_META_DESCRIPTION ?? "Die Suchmaschine für trans* relevante Angebote" },
 			],
 			htmlAttrs: {
 				lang: process.env.HEAD_LANG ?? "de"

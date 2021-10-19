@@ -45,8 +45,8 @@ export default {
 
 			if (this.entry) {
 				if (this.entry.location) {
-					query.lat = this.entry.location.coordinates[0];
-					query.long = this.entry.location.coordinates[1];
+					query.lat = this.entry.location.coordinates[1];
+					query.long = this.entry.location.coordinates[0];
 				} else if (this.entry.address.city) {
 					query.location = this.entry.address.city
 				}
