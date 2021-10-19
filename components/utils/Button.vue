@@ -50,7 +50,7 @@ button {
 }
 
 button:not(.noshadow) {
-	box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 }
 
 button:not(.light) {
@@ -62,7 +62,7 @@ button:hover, button:focus {
 }
 
 button:hover:not(.noshadow), button:focus:not(.noshadow) {
-	box-shadow: 0px 0px 4px var(--color-box-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 4px var(--color-box-shadow-strong), 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 }
 
 button:active {
