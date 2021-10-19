@@ -1,9 +1,9 @@
 <template>
 	
 	<div :class="{ header: true, hide: hide }">
-	
+		
 		<div :class="{navbar: true, expand, background}" ref="navbar">
-	
+			
 			<h1 @click="reload">TransDB.de</h1>
 			
 			<nav @click="expand = !expand">
@@ -51,13 +51,13 @@ export default {
 		this.$addScrollEvent(this.scrollEvent);
 	},
 	beforeDestroy() {
-	   this.$removeScrollEvent(this.scrollEvent);
+		this.$removeScrollEvent(this.scrollEvent);
 	},
 	computed: {
-        hide() {
-            return !["index", "search", "entry-entry"].includes(this.$route.name);
-        }
-    },
+		hide() {
+			return !["index", "search", "entry-entry"].includes(this.$route.name);
+		}
+	},
 	methods: {
 		
 		async reload() {
@@ -65,11 +65,20 @@ export default {
 		},
 		
 		search(newQuery) {
-			this.$router.push({ name: "search", query: {...this.$route.query, ...newQuery} });
+			let currentQuery = this.$route.query;
+			
+			if ('location' in newQuery) {
+				delete currentQuery.lat;
+				delete currentQuery.long;
+			} else if ('lat' in newQuery) {
+				delete currentQuery.location;
+			}
+			
+			this.$router.push({ name: "search", query: {...currentQuery, ...newQuery} });
 		},
-
+		
 		scrollEvent(scroll) {
-
+			
 			let percent = (scroll / (this.$el.scrollHeight - this.$refs.navbar.scrollHeight ));
 			
 			let opacity = (1 - percent).toFixed(2);
@@ -80,7 +89,7 @@ export default {
 			this.$refs.searchbar.$el.style.opacity= opacity;
 			
 			this.background = percent > 1;
-
+			
 		}
 		
 	}
@@ -93,7 +102,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-
+	
 	box-shadow: 0 0 4px var(--color-text-shadow-strong), 0px 0px 8px var(--color-box-shadow-rim), 0px 0px 16px var(--color-box-shadow-glow);
 	padding: 40px 0 0 0;
 	height: 325px;
@@ -120,7 +129,7 @@ export default {
 
 .header.hide {
 	height: 56px;
-    transition: 0.4s ease opacity, 0.4s ease height, 0.8s ease box-shadow 0.2s;
+	transition: 0.4s ease opacity, 0.4s ease height, 0.8s ease box-shadow 0.2s;
 	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0), 0px 0px 10px rgba(0, 0, 0, 0), 0px 0px 20px rgba(0, 0, 0, 0);
 }
 
@@ -163,9 +172,9 @@ export default {
 	text-shadow: 0.5px 0.5px 2px var(--color-text-shadow-strong), 0.5px 1px 3px var(--color-text-shadow-rim), 0 0 8px var(--color-text-shadow-glow);
 	position: fixed;
 	top: 0;
-
+	
 	transition: 0s ease box-shadow;
-
+	
 	/** z-index higher than other children of .header, for mouse event priority */
 	z-index: 100;
 }
@@ -318,7 +327,7 @@ export default {
 		
 		z-index: 100;
 	}
-
+	
 	.navbar.expand:after {
 		display: none;
 	}
@@ -335,7 +344,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		background-color: var(--color-mobile-nav);
-
+		
 		z-index: 100;
 	}
 	
