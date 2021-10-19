@@ -76,7 +76,7 @@ export default {
 		},
 
 		loggedIn() {
-			return this.$store.state.user ? true : false;
+			return !!this.$store.state.user;
 		}
 	}
 }
@@ -182,7 +182,7 @@ h2 {
 	border-bottom: 3px solid var(--color-dark);
 	box-shadow: 0 1px 0 var(--color-box-shadow);
 	position: absolute;
-	bottom: 0px;
+	bottom: 0;
 }
 
 .links a:hover:after {

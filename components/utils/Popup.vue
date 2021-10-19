@@ -64,12 +64,11 @@ export default {
 
 	padding: 10px 12px;
 	border-radius: 4px;
-	box-shadow: 0px 0px 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
+	box-shadow: 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
 	color: white;
 
 	visibility: hidden;
-	opacity: 0%;
-	transition: opacity 1.4s;
+	opacity: 0;
 	transition: visibility 0s linear 1.4s, opacity 1.4s;
 
 	font-family: 'Fira Sans', sans-serif;
