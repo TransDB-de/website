@@ -62,6 +62,10 @@
 			<b>Besonderheiten:</b>{{ entry.meta.specials }}
 		</p>
 		
+		<p v-if="entry.meta.minAge" class="flex small-gap">
+			<b>Mindestalter:</b>{{ entry.meta.minAge }}
+		</p>
+		
 		<p v-if="entry.distance" class="nav no-select" :title="mouseOverTexts['distance']">
 			<span>
 				<NavigationIcon /> <b>{{ Math.round(entry.distance) }} km</b>
