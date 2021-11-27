@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Section1 from "$content/index/section_1.md";
-	import Section2 from "$content/index/section_2.md";
-	import Section3 from "$content/index/section_3.md";
+	import Section1 from "$content/index/section-1.md";
+	import Section2 from "$content/index/section-2.md";
+	import Section3 from "$content/index/section-3.md";
 	
 	import SkylineLeft from "$assets/skyline_left.svg";
 	import SkylineRight from "$assets/skyline_right.svg";
