@@ -27,7 +27,8 @@
 	:global body {
 		margin: 0;
 		background-color: var(--color-background);
-		color: var(--color-text);
+		color: var(--color-edge);
+		font-size: 1.1em;
 		display: flex;
 		flex-direction: column;
 		font-family: "Fira Sans", sans-serif;
@@ -37,6 +38,12 @@
 	
 	:global(h1, h2, h3, h4, h5, h6) {
 		font-family: "Poppins", sans-serif;
+	}
+
+	:global(a) {
+		color: var(--color-edge-highlight);
+		text-decoration: none;
+		border-bottom: 2px solid var(--color-edge-highlight);
 	}
 	
 	.app {

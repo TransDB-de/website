@@ -1,7 +1,8 @@
 <script lang="ts">
 	import GitHubBrandIcon from "$components/icons/GitHubBrandIcon.svelte"
 	import InstagramBrandIcon from "$components/icons/InstagramBrandIcon.svelte"
-	
+	import DiscordBrandIcon from "$components/icons/DiscordBrandIcon.svelte"
+
 	import externalLinks from "$content/externalLinks.json"
 </script>
 
@@ -9,8 +10,8 @@
 	
 	<div>
 		<a href="/imprint">Impressum</a>
-		<a href="/pricavy">Datenschutz</a>
-		<a href="https://github.com/TransDB-de" target="_blank">GitHub</a>
+		<a href="/privacy">Datenschutz</a>
+		<a href="/about">Über uns</a>
 	</div>
 	
 	<div>
@@ -19,6 +20,9 @@
 		</a>
 		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" class="instagram low">
 			<InstagramBrandIcon />
+		</a>
+		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="discord low">
+			<DiscordBrandIcon />
 		</a>
 	</div>
 	
@@ -52,6 +56,7 @@
 		font-weight: 500;
 		position: relative;
 		text-align: center;
+		border: none;
 		
 		&:after {
 			transition: 0.2s ease width, 0.2s ease opacity;
@@ -59,7 +64,9 @@
 			width: 0;
 			content: "";
 			opacity: 0;
-			border-bottom: 2px solid var(--color-edge);
+			border-bottom-width: 2px;
+			border-bottom-style: solid;
+			border-color: var(--color-edge);
 			position: absolute;
 			bottom: -2px;
 		}
@@ -70,14 +77,14 @@
 		}
 		
 		&.low:after {
-			bottom: -8px;
+			bottom: -6px;
 		}
 		
 		&.github {
 			color: var(--color-brand-gh);
 			
 			&:after {
-				border-bottom: 3px solid var(--color-brand-gh);
+				border-color: var(--color-brand-gh);
 			}
 		}
 		
@@ -85,13 +92,21 @@
 			color: var(--color-brand-ig);
 			
 			&:after {
-				border-bottom: 3px solid var(--color-brand-ig);
+				border-color: var(--color-brand-ig);
+			}
+		}
+
+		&.discord {
+			color: var(--color-brand-discord);
+
+			&:after {
+				border-color: var(--color-brand-discord);
 			}
 		}
 		
 		:global(svg) {
-			height: 35px;
-			width: 35px;
+			height: 30px;
+			width: 30px;
 			fill: currentColor;
 		}
 	}

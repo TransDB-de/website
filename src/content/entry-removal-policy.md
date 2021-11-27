@@ -1,4 +1,4 @@
-# Eintrag löschen oder bearbeiten lassen
+## Eintrag löschen oder bearbeiten lassen
 
 Falls Sie als Fachperson / Verein, mit Ihrem Eintrag nicht einverstanden sein sollten, etwas korrigieren oder löschen lassen möchten, kontaktieren Sie uns bitte unter folgender E-Mail Adresse:
 
