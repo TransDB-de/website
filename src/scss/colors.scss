@@ -1,0 +1,69 @@
+:global(html) {
+	/* Document Colors */
+	
+	/*
+	* Color naming prefixes:
+	* Surface: Elements with an area that you can theoretically touch (Buttons, Labels, etc.)
+	*          These elements need lighter colors / less saturation, because they take more space than the edge ones.
+	*
+	* Edge: Elements that can't be theoretically touched areas (Text, Borders, etc.)
+	*       These elements need colors with more contrast, because they're usually thiner and less visible.
+	*/
+	
+	--color-background: #F6F6F6;
+	--color-background-bright: white;
+	--color-background-dimmed: #e9e9e9;
+	
+	/* Highlighting Colors for important elements. Links, Special Buttons, Checkboxes... */
+	
+	--color-edge-highlight: #4897ec;
+	
+	--color-edge-warn: #e29b00;
+	
+	--color-edge: #334450;
+	
+	/* Main Surface Colors */
+	
+	--color-surface-primary: #334450;
+	--color-surface-primary-hover: #2a3b47;
+	--color-surface-primary-active: #202f3a;
+	
+	--color-surface-secondary: #888;
+	--color-surface-secondary-hover: #777;
+	--color-surface-secondary-active: #414141;
+	
+	--color-surface-bright: #e1e3e5;
+	--color-surface-bright-hover: #d6dadc;
+	--color-surface-bright-active: #c8d1d4;
+	
+	--color-surface-warn: #bd465d;
+	--color-surface-warn-hover: #ac4256;
+	--color-surface-warn-active: #b4203b;
+	
+	--color-surface-highlight: #5ca3f0;
+	--color-surface-highlight-hover: #72b0f1;
+	--color-surface-highlight-active: #4ea4ef;
+	
+	/* Special Colors */
+	
+	--color-popup-default: #4897ec;
+	--color-popup-ok: #6ad16a;
+	--color-popup-warn: #e7af47;
+	--color-popup-error: #c7425a;
+	
+	--color-edge-shadow-strong  : rgba(15, 4, 44, 0.34);
+	--color-edge-shadow-rim     : rgba(9, 6, 54, 0.2);
+	--color-edge-shadow-glow    : rgba(22, 29, 95, 0.1);
+
+	--color-surface-shadow-strong   : rgba(15, 4, 44, 0.15);
+	--color-surface-shadow-rim      : rgba(9, 6, 54, 0.08);
+	--color-surface-shadow-glow     : rgba(22, 29, 95, 0.04);
+	
+	--color-brand-ig: #E4405F;
+	--color-brand-gh: #181717;
+	
+	//TODO: move to header
+	
+	--banner-overlay: url("/banner-overlay.png");
+	--banner-gradient: linear-gradient(to right, #EA8BBA 0%, #B57FB7 7.5%, #947BB8 15%, #719FD4 35%,#64A8DC 50%, #719FD4 65%, #947BB8 85%, #B57FB7 92.5%, #EA8BBA 100%);
+}
