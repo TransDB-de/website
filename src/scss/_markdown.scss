@@ -1,4 +1,5 @@
-@import "../scss/lengths";
+@import "lengths";
+@import "mixins";
 
 .md {
 	max-width: $conent-max-width;
@@ -42,7 +43,7 @@
 	
 }
 
-@media only screen and (max-width: $mobile-width) {
+@include media-mobile {
 	.md {
 		padding: 20px;
 		
@@ -53,7 +54,7 @@
 	}
 }
 
-@media only screen and (max-width: $mobile-width-small) {
+@include media-mobile-small {
 	.md {
 		padding: 10px;
 	}

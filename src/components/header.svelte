@@ -44,6 +44,7 @@
 <style lang="scss">
 	@import "../scss/shadows";
 	@import "../scss/lengths";
+	@import "../scss/mixins";
 	
 	$background-img-width: 1625px;
 	$header-height-expanded: 325px;
@@ -180,20 +181,12 @@
 				font-weight: 500;
 				font-size: 20px;
 				margin: 10px 10px;
-				position: relative;
 				cursor: pointer;
 				
-				&:after {
-					transition: 0.2s ease width, 0.2s ease opacity;
-					display: inline-block;
-					width: 0;
-					content: "";
-					opacity: 0;
-					border-bottom: 3px solid var(--color-nav-link);
-					box-shadow: 0.2px 0.5px 2px var(--color-box-shadow-strong), 0.5px 1.5px 4px var(--color-box-shadow-rim), 0 0 8px var(--color-box-shadow-glow);
-					position: absolute;
-					bottom: 0;
-				}
+				@include underline(
+					$color: var(--color-nav-link),
+					$shadow: $surface-shadow-small
+				);
 				
 				&:hover:after {
 					width: 100%!important;

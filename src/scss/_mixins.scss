@@ -1,0 +1,30 @@
+@import "lengths";
+
+@mixin media-mobile {
+	@media only screen and (max-width: $mobile-width) {
+		@content;
+	}
+}
+
+@mixin media-mobile-small {
+	@media only screen and (max-width: $mobile-width-small) {
+		@content;
+	}
+}
+
+@mixin underline($width: 0, $height: 3px, $offset: 0, $color: white, $shadow: none, $opacity: 0) {
+	position: relative;
+	
+	&:after {
+		width: $width;
+		border-bottom: $height solid $color;
+		bottom: $offset;
+		box-shadow: $shadow;
+		
+		transition: 0.2s ease width, 0.2s ease opacity;
+		display: inline-block;
+		content: "";
+		opacity: 0;
+		position: absolute;
+	}
+}

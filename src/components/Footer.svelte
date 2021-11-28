@@ -29,6 +29,8 @@
 </div>
 
 <style lang="scss">	
+	@import "../scss/mixins";
+	
 	.footer {
 		display: flex;
 		justify-content: space-around;
@@ -54,22 +56,14 @@
 		justify-content: center;
 		text-decoration: none;
 		font-weight: 500;
-		position: relative;
 		text-align: center;
 		border: none;
 		
-		&:after {
-			transition: 0.2s ease width, 0.2s ease opacity;
-			display: inline-block;
-			width: 0;
-			content: "";
-			opacity: 0;
-			border-bottom-width: 2px;
-			border-bottom-style: solid;
-			border-color: var(--color-edge);
-			position: absolute;
-			bottom: -2px;
-		}
+		@include underline(
+			$height: 2px,
+			$offset: -2px,
+			$color: var(--color-edge)
+		);
 		
 		&:hover:after{
 			width: 100%!important;
