@@ -1,12 +1,12 @@
 <script lang="ts">
-	import ImprintContent from "$content/imprint.md";
+	import PrivacyContent from "$content/privacy.md";
 	import DisclaimerContent from "$content/disclaimer.md";
 	import EntryRemovalContent from "$content/entry-removal-policy.md";
 </script>
 
 <template lang="pug">
 	div.md
-		ImprintContent
+		PrivacyContent
 		DisclaimerContent
 		EntryRemovalContent
 </template>

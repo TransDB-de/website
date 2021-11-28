@@ -1,4 +1,4 @@
 declare module "*.md" {
-	const content = HTMLElement;
+	const content = SvelteComponent;
 	export default content;
 }

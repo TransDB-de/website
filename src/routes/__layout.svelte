@@ -1,6 +1,6 @@
 <script>
 	import { fade } from "svelte/transition"
-	import Footer from "$components/Footer.svelte"
+	import Footer from "$components/footer.svelte"
 </script>
 
 <div class="app">
@@ -28,7 +28,7 @@
 		margin: 0;
 		background-color: var(--color-background);
 		color: var(--color-edge);
-		font-size: 1.1em;
+		font-size: 18px;
 		display: flex;
 		flex-direction: column;
 		font-family: "Fira Sans", sans-serif;
@@ -38,12 +38,7 @@
 	
 	:global(h1, h2, h3, h4, h5, h6) {
 		font-family: "Poppins", sans-serif;
-	}
-
-	:global(a) {
-		color: var(--color-edge-highlight);
-		text-decoration: none;
-		border-bottom: 2px solid var(--color-edge-highlight);
+		font-weight: 600;
 	}
 	
 	.app {
@@ -54,5 +49,8 @@
 	
 	.page {
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 </style>

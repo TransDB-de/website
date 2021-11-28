@@ -39,6 +39,7 @@ div.homepage
 				Section2
 	
 	div.section.three
+		h2 Vielen Dank!
 		div.content
 			Section3
 		
@@ -57,19 +58,16 @@ div.homepage
 		
 		:global(p) {
 			line-height: 1.4em;
-			font-size: 21px;
+			font-size: 1.17em;
 			text-align: left;
 			font-weight: 500;
 			
 			margin-top: 0;
 		}
 		
-		:global(h1) {
-			text-align: center;
-		}
-		
 		:global(h2) {
 			text-align: center;
+			font-size: 1.8em;
 			margin: 1.2em 0;
 		}
 	}
@@ -82,6 +80,12 @@ div.homepage
 		max-width: 1100px;
 		
 		pointer-events: none;
+		
+		&:not(.one) {
+			display: grid;
+			column-gap: 48px;
+			align-items: center;
+		}
 	}
 	
 	.stripe {
@@ -94,13 +98,6 @@ div.homepage
 		
 		position: relative;
 	}
-	
-	.section:not(.one) {
-		display: grid;
-		column-gap: 48px;
-		align-items: center;
-	}
-	
 	
 	$skyline-height: 256px;
 	
@@ -136,13 +133,12 @@ div.homepage
 					right: 0;
 				}
 			}
-		}
-		
-		@media only screen and (max-width: 950px) {
-			.skyline {
-				height: calc( min($skyline-height, calc(50vw - 24px)));
-				
-				margin-top: 0;
+			
+			@media only screen and (max-width: 950px) {
+				& {
+					height: calc( min($skyline-height, calc(50vw - 24px)));
+					margin-top: 0;
+				}
 			}
 		}
 	}
@@ -152,7 +148,7 @@ div.homepage
 		& {
 			grid-template-columns: 2fr 3fr;
 			grid-template-areas: "h2  h2 "
-									"img txt";
+			                     "img txt";
 		}
 		
 		:global(h2) {
@@ -176,8 +172,8 @@ div.homepage
 			& {
 				grid-template-columns: 100%;
 				grid-template-areas: "h2"
-										"img"
-										"txt";
+				                     "img"
+				                     "txt";
 			}
 			
 			.content {
@@ -209,7 +205,7 @@ div.homepage
 		& {
 			grid-template-columns: 3fr 2fr;
 			grid-template-areas: "h2  h2 "
-									"txt img";
+			                     "txt img";
 		}
 		
 		:global(h2) {
@@ -228,8 +224,8 @@ div.homepage
 			& {
 				grid-template-columns: 100%;
 				grid-template-areas: "h2"
-										"img"
-										"txt";
+				                     "img"
+				                     "txt";
 				
 				justify-items: center;
 			}

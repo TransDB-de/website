@@ -29,8 +29,7 @@ Ackee speichert unter anderem folgende Daten:
 * Referral Link (von wo aus ihr auf unsere Website gekommen seid)
 * Art eures Gerätes
 
-Die Daten, welche von Ackee gespeichert werden, sind nicht personenbezogen.
-
+Die Daten, welche von Ackee gespeichert werden, sind nicht personenbezogen.  
 Sie werden ausschließlich verwendet, um unsere Seite nutzerfreundlicher gestalten zu können.
 
 Es wird keine IP Adresse gespeichert.

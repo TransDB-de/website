@@ -8,11 +8,14 @@
 	*
 	* Edge: Elements that can't be theoretically touched areas (Text, Borders, etc.)
 	*       These elements need colors with more contrast, because they're usually thiner and less visible.
+	*
+	* Rim: The rim of a Surface. Used for shadows and outlines.
+	*      These need to be a slight contrast to surface colors.
 	*/
 	
 	--color-background: #F6F6F6;
 	--color-background-bright: white;
-	--color-background-dimmed: #e9e9e9;
+	--color-background-dimmed: #e5e5e5;
 	
 	/* Highlighting Colors for important elements. Links, Special Buttons, Checkboxes... */
 	
@@ -21,6 +24,8 @@
 	--color-edge-warn: #e29b00;
 	
 	--color-edge: #334450;
+	--color-edge-light: #dadada;
+	--color-edge-bright: white;
 	
 	/* Main Surface Colors */
 	
@@ -61,7 +66,7 @@
 	
 	--color-brand-ig: #E4405F;
 	--color-brand-gh: #181717;
-	--color-brand-discord: #5865F2;
+	--color-brand-discord: #7289da;
 
 	//TODO: move to header
 	

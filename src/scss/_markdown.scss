@@ -1,0 +1,60 @@
+@import "../scss/lengths";
+
+.md {
+	max-width: $conent-max-width;
+	padding: 30px;
+	display: flex;
+	flex-direction: column;
+	
+	:global(h2),
+	:global(h3) {
+		margin: 20px 0 20px 0;
+	}
+	
+	:global(p) {
+		margin: 0 0 20px 15px;
+		line-height: 1.3;
+	}
+	
+	:global(h1) {
+		font-size: 1.8em;
+		border-bottom: 2px solid var(--color-edge-light);
+	}
+	
+	:global(h2) {
+		font-size: 1.6em;
+		border-bottom: 2px solid var(--color-edge-light);
+	}
+	
+	:global(h3) {
+		font-size: 1.25em;
+	}
+	
+	:global(a) {
+		color: var(--color-edge-highlight);
+		text-decoration: none;
+		border-bottom: 2px solid var(--color-edge-highlight);
+	}
+	
+	:global(ul) {
+		margin: 0 0 20px;
+	}
+	
+}
+
+@media only screen and (max-width: $mobile-width) {
+	.md {
+		padding: 20px;
+		
+		:global(p) {
+			margin: 0 0 20px 0;
+			line-height: 1.3;
+		}
+	}
+}
+
+@media only screen and (max-width: $mobile-width-small) {
+	.md {
+		padding: 10px;
+	}
+}

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import GitHubBrandIcon from "$components/icons/GitHubBrandIcon.svelte"
-	import InstagramBrandIcon from "$components/icons/InstagramBrandIcon.svelte"
-	import DiscordBrandIcon from "$components/icons/DiscordBrandIcon.svelte"
+	import GitHubBrandIcon from "$components/icons/gitHubBrandIcon.svelte"
+	import InstagramBrandIcon from "$components/icons/instagramBrandIcon.svelte"
+	import DiscordBrandIcon from "$components/icons/discordBrandIcon.svelte"
 
-	import externalLinks from "$content/externalLinks.json"
+	import externalLinks from "$content/external-links.json"
 </script>
 
 <div class="footer">
@@ -15,13 +15,13 @@
 	</div>
 	
 	<div>
-		<a href={externalLinks.social.github} target="_blank" rel="noopener" class="github low">
-			<GitHubBrandIcon />
-		</a>
-		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" class="instagram low">
+		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" class="instagram low" title="Folge uns auf Instagram">
 			<InstagramBrandIcon />
 		</a>
-		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="discord low">
+		<a href={externalLinks.social.github} target="_blank" rel="noopener" class="github low" title="Besuche uns auf GitHub">
+			<GitHubBrandIcon />
+		</a>
+		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="discord low" title="Trete unserem Discord Server bei">
 			<DiscordBrandIcon />
 		</a>
 	</div>
@@ -78,30 +78,6 @@
 		
 		&.low:after {
 			bottom: -6px;
-		}
-		
-		&.github {
-			color: var(--color-brand-gh);
-			
-			&:after {
-				border-color: var(--color-brand-gh);
-			}
-		}
-		
-		&.instagram {
-			color: var(--color-brand-ig);
-			
-			&:after {
-				border-color: var(--color-brand-ig);
-			}
-		}
-
-		&.discord {
-			color: var(--color-brand-discord);
-
-			&:after {
-				border-color: var(--color-brand-discord);
-			}
 		}
 		
 		:global(svg) {
