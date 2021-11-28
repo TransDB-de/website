@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-	import { page } from "$app/stores"
+	import { goto } from "$app/navigation"
+	import NavLink from "./navLink.svelte"
+	import MenuIcon from "lucide-icons-svelte/menu.svelte"
+	import SearchBar from "$components/searchBar.svelte"
 	
 	export let hide = false;
 	export let mobileExpand = false;
@@ -10,26 +12,25 @@
 	let subtitle;
 	let searchbar;
 	
-	$: active = $page.path.startsWith($$props.href);
-	$: activeExact = $page.path === $$props.href;
-	
 	// toggles toe mobile nav menu
 	function toggleNav() { mobileExpand = !mobileExpand }
+	
+	function search() {}
 </script>
 
 <div class="header" class:hide>
-	<div class="navbar" class:mobileExpand class:collapsed>
+	<div class="navbar {mobileExpand ? 'expand' : ''}" class:collapsed>
 		<h1 class="title-mobile" on:click={() => goto("/")} > TransDB.de </h1>
 		
 		<nav on:click={toggleNav}>
-			<a href="/" class:activeExact>Startseit</a>
-			<a href="/search" class:active>Suche</a>
-			<a href="/manage" class:active>Management</a>
-			<a href="/submit" class:active>Neuer Eintrag</a>
+			<NavLink href="/" exact={true}>Startseit</NavLink>
+			<NavLink href="/search">Suche</NavLink>
+			<NavLink href="/manage">Management</NavLink>
+			<NavLink href="/submit">Neuer Eintrag</NavLink>
 		</nav>
 		
 		<span on:click={toggleNav} class="mobileNav">
-			<!--MenuIcon class:mobileExpand-->
+			<MenuIcon size="36px" class={mobileExpand ? "expand" : ""} />
 		</span>
 	</div>
 	
@@ -37,7 +38,7 @@
 	
 	<h2 class="subtitle" bind:this={subtitle}>Die Suchmaschine für trans* relevante Angebote</h2>
 	
-	<!--SearchBar class="searchbar" bind:this={searchbar} placeholder="Suche nach Postleitzahl oder Ort" mobilePlaceholder="Suche nach PLZ oder Ort" on:search={search}></SearchBar-->
+	<SearchBar bind:this={searchbar} on:search={search}></SearchBar>
 	
 </div>
 
@@ -60,7 +61,7 @@
 		width: 100%;
 		overflow: hidden;
 		
-		box-shadow: $rim-shadow-regular;
+		box-shadow: $rim-shadow-medium;
 		transition: 0.4s ease opacity, 0.4s ease height, 0s ease box-shadow;
 		font-family: "Poppins", sans-serif;
 		
@@ -93,20 +94,21 @@
 			transition: 0.4s ease opacity, 0.4s ease height, 0.8s ease box-shadow 0.2s;
 			box-shadow: $no-shadow;
 			
-			& .title, & .subtitle, & .search-bar {
+			& .title, & .subtitle, :global(& .search-bar) {
 				opacity: 0!important;
 				margin: 0;
 				padding: 0;
 			}
 		}
 		
-		.title, .subtitle, .search-bar {
+		.title, .subtitle, :global(.search-bar) {
 			transition: 0.3s ease-out all;
 		}
 		
 		.title {
 			color: #fff;
 			font-size: 56px;
+			font-weight: 700;
 			text-shadow: $edge-shaodw-large;
 			margin: 20px 0;
 			cursor: pointer;
@@ -118,10 +120,16 @@
 			color: white;
 			text-shadow: $edge-sahdow-medium;
 			text-align: center;
+			
+			@include media-mobile {
+				& {
+					display: none;
+				}
+			}
 		}
 		
 		/** make all children of header appear in front of background */
-		& > * {
+		& > :global(*) {
 			z-index: 10;
 		}
 	}
@@ -141,20 +149,21 @@
 		transition: 0s ease box-shadow;
 		
 		&.collapsed {
-			box-shadow: $rim-shadow-regular;
+			box-shadow: $rim-shadow-medium;
 		}
 		
 		.header.hide & {
 			@keyframes show-shadow {
 				0% {
-					box-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);
+					box-shadow: $no-shadow;
 				}
 				100% {
-					box-shadow: 0 0 4px var(--color-text-shadow-strong), 0 0 8px var(--color-box-shadow-rim), 0 0 16px var(--color-box-shadow-glow);
+					box-shadow: $rim-shadow-medium;
 				}
 			}
 			
-			box-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);
+			box-shadow: $no-shadow;
+			
 			animation-name: show-shadow;
 			animation-duration: 0.8s;
 			animation-delay: 0.2s;
@@ -171,32 +180,42 @@
 		
 		nav {
 			display: flex;
-			
-			a {
-				color: var(--color-edge-bright);
-				display: flex;
-				justify-content: center;
+		}
+		
+		@include media-mobile {	
+			.expand nav {
+				position: absolute;
 				align-items: center;
-				text-decoration: none;
-				font-weight: 500;
-				font-size: 20px;
-				margin: 10px 10px;
+				width: 100%;
+				height: auto;
+				opacity: 1;
+				top: 53px;
+				left: 0;
+				display: flex;
+				flex-direction: column;
+				background-color: var(--color-surface-highlight-active);
+				
+				z-index: 100;
+				
+				:global(.nav-link) {
+					font-size: 24px;
+					padding: 5px;
+				}
+			}
+		}
+	}
+	
+	
+	.mobileNav {
+		display: none;
+		
+		
+		@include media-mobile {
+			& {
+				display: flex;
+				padding: 0 10px;
+				align-items: center;
 				cursor: pointer;
-				
-				@include underline(
-					$color: var(--color-nav-link),
-					$shadow: $surface-shadow-small
-				);
-				
-				&:hover:after {
-					width: 100%!important;
-					opacity: 1;
-				}
-				
-				&.activeExact:after, &.active:after {
-					opacity: 1;
-					width: 70%;
-				}
 			}
 		}
 	}

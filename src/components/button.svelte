@@ -8,11 +8,11 @@
 	export let noShadow = false;
 </script>
 
-<button class={color} class:noShadow class:light class:iconOnly {...$$props}>
+<button on:click class={color} class:noShadow class:light class:iconOnly {...$$props}>
 	{#if loading}
 		<Loader dark={light} />
 	{:else}
-		<slot />
+		<slot></slot>
 	{/if}
 </button>
 
@@ -57,7 +57,7 @@
 		
 		/* icons */
 		
-		:global(.feather) {
+		:global(.lucide) {
 			stroke-width: 3;
 			margin-right: 5px;
 			width: 18px;
@@ -67,7 +67,7 @@
 		&.iconOnly {
 			padding: 8px;
 			
-			:global(.feather) {
+			:global(.lucide) {
 				margin: 0;
 			}
 		}

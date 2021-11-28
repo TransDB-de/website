@@ -26,6 +26,12 @@
 	--color-edge: #334450;
 	--color-edge-light: #dadada;
 	--color-edge-bright: white;
+	--color-edge-dimmed: #9f9f9f;
+	
+	/* Rim Colors */
+	
+	--color-rim: #e1e3e5;
+	--color-rim-active: #adb4b9;
 	
 	/* Main Surface Colors */
 	
@@ -70,6 +76,6 @@
 
 	//TODO: move to header
 	
-	--banner-overlay: url("/banner-overlay.png");
+	--banner-overlay: url("/img/banner-overlay.png");
 	--banner-gradient: linear-gradient(to right, #EA8BBA 0%, #B57FB7 7.5%, #947BB8 15%, #719FD4 35%,#64A8DC 50%, #719FD4 65%, #947BB8 85%, #B57FB7 92.5%, #EA8BBA 100%);
 }

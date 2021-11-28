@@ -12,6 +12,7 @@
 		<a href="/imprint">Impressum</a>
 		<a href="/privacy">Datenschutz</a>
 		<a href="/about">Über uns</a>
+		<a href="/faq">FAQ</a>
 	</div>
 	
 	<div>

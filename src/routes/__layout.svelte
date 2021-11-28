@@ -1,13 +1,14 @@
 <script>
 	import { fade } from "svelte/transition"
 	import Footer from "$components/footer.svelte"
+	import Header from "$components/header.svelte"
 </script>
 
 <div class="app">
-	<!--Header/-->
+	<Header />
 	
 	<div transition:fade={{ duration: 0.6 }} class="page">
-		<slot />
+		<slot></slot>
 	</div>
 	
 	<Footer />
