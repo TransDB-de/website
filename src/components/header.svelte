@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from "$app/navigation"
 	import NavLink from "./navLink.svelte"
-	import MenuIcon from "lucide-icons-svelte/menu.svelte"
+	import MenuIcon from "$components/icons/menuIcon.svelte"
 	import SearchBar from "$components/searchBar.svelte"
 	
 	export let hide = false;
@@ -30,7 +30,7 @@
 		</nav>
 		
 		<span on:click={toggleNav} class="mobileNav">
-			<MenuIcon size="36px" class={mobileExpand ? "expand" : ""} />
+			<MenuIcon expand={ mobileExpand } />
 		</span>
 	</div>
 	
@@ -50,6 +50,7 @@
 	$background-img-width: 1625px;
 	$header-height-expanded: 325px;
 	$header-height-collapsed: 56px;
+	
 	
 	.header {
 		display: flex;
@@ -183,7 +184,14 @@
 		}
 		
 		@include media-mobile {	
-			.expand nav {
+			nav {
+				opacity: 0;
+				width: 0;
+				height: 0;
+				overflow: hidden;
+			}
+			
+			&.expand nav {
 				position: absolute;
 				align-items: center;
 				width: 100%;
@@ -219,5 +227,4 @@
 			}
 		}
 	}
-	
 </style>
