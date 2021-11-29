@@ -49,6 +49,7 @@ div.homepage
 
 <style lang="scss">
 	@import "../scss/lengths";
+	@import "../scss/mixins";
 	
 	.homepage {
 		display: flex;
@@ -134,22 +135,18 @@ div.homepage
 				}
 			}
 			
-			@media only screen and (max-width: 950px) {
-				& {
-					height: calc( min($skyline-height, calc(50vw - 24px)));
-					margin-top: 0;
-				}
+			@include media-max-width(950px) {
+				height: calc( min($skyline-height, calc(50vw - 24px)));
+				margin-top: 0;
 			}
 		}
 	}
 	
 	
 	.section.two {
-		& {
-			grid-template-columns: 2fr 3fr;
-			grid-template-areas: "h2  h2 "
-			                     "img txt";
-		}
+		grid-template-columns: 2fr 3fr;
+		grid-template-areas: "h2  h2 "
+		                     "img txt";
 		
 		:global(h2) {
 			grid-area: h2;
@@ -168,13 +165,11 @@ div.homepage
 			width: 100%;
 		}
 		
-		@media only screen and (max-width: $mobile-width) {
-			& {
-				grid-template-columns: 100%;
-				grid-template-areas: "h2"
-				                     "img"
-				                     "txt";
-			}
+		@include media-mobile {
+			grid-template-columns: 100%;
+			grid-template-areas: "h2"
+			                     "img"
+			                     "txt";
 			
 			.content {
 				display: flex;
@@ -202,11 +197,9 @@ div.homepage
 	
 	
 	.section.three {
-		& {
-			grid-template-columns: 3fr 2fr;
-			grid-template-areas: "h2  h2 "
-			                     "txt img";
-		}
+		grid-template-columns: 3fr 2fr;
+		grid-template-areas: "h2  h2 "
+		                     "txt img";
 		
 		:global(h2) {
 			grid-area: h2;
@@ -220,15 +213,13 @@ div.homepage
 			grid-area: txt;
 		}
 		
-		@media only screen and (max-width: $mobile-width) {
-			& {
-				grid-template-columns: 100%;
-				grid-template-areas: "h2"
-				                     "img"
-				                     "txt";
-				
-				justify-items: center;
-			}
+		@include media-mobile {
+			grid-template-columns: 100%;
+			grid-template-areas: "h2"
+			                     "img"
+			                     "txt";
+			
+			justify-items: center;
 			
 			.heart {
 				max-height: 320px;

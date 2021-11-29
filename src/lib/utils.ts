@@ -15,7 +15,7 @@ export function isKey(key: string, callback: Function) {
  * @param options 
  * @returns 
  */
-export async function getGeoLocation(options: PositionOptions): Promise<GeolocationPosition> {
+export async function getGeoLocation(options?: PositionOptions): Promise<GeolocationPosition> {
 	return new Promise((resolve, reject) => {
 		navigator.geolocation.getCurrentPosition(resolve, reject, options);
 	});

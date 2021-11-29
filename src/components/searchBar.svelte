@@ -23,7 +23,7 @@
 			$page.query.delete("long");
 		}
 		
-		if ($page.query.keys().length > 0) {
+		if ( Array.from($page.query).length > 0 ) {
 			goto("/search?" + $page.query.toString());
 		} else {
 			goto("/search");
@@ -46,8 +46,8 @@
 				
 				try {
 					let pos = await getGeoLocation();
-					$page.query.set("lat", pos.coords.latitude);
-					$page.query.set("long",pos.coords.longitude);
+					$page.query.set("lat", pos.coords.latitude.toString());
+					$page.query.set("long",pos.coords.longitude.toString());
 				} catch(e) {
 					console.log(e);
 					resetLocaction();
@@ -61,7 +61,7 @@
 	}
 </script>
 
-<div class="search-bar" class:hide class:textSearch>
+<div class="search-bar" class:hide class:textSearch {...$$props}>
 	
 	<input type=text
 	       title={ mouseOverTexts.locationSearch }
@@ -73,7 +73,8 @@
 
 
 	<Button light
-	        noShadow 
+	        noShadow
+			iconOnly={ $isMobile }
 	        on:click={ () => search("distance") }
 	        title={ mouseOverTexts.proximitySearch }
 	        class="proximity-button">
