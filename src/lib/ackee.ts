@@ -16,8 +16,8 @@ if (browser) {
 
 async function onNavigate(path: string) {
 	if (browser) {
-		// `as true` avoids overload type error. see: https://github.com/microsoft/TypeScript/issues/24413
-		let attributes = ackeeTracker.attributes(ackee.detailed as true);
+		//@ts-ignore bad typedefs
+		let attributes = ackeeTracker.attributes(ackee.detailed);
 		attributes.siteLocation = window.location.origin + path;
 		instance.record(ackee.domainId, attributes);
 	}
