@@ -1,6 +1,7 @@
 <script context="module">
 	import Ackee from "$lib/ackee"
 	
+	// runs every time "page" changes
 	export async function load({ page }) {
 		Ackee(page.path);
 		return {};
