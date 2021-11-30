@@ -9,6 +9,9 @@ const config = {
 		domainId: import.meta.env.CLIENT_ACKEE_DOMAIN_ID as string,
 		ignoreLocalhost: import.meta.env.CLIENT_ACKEE_IGNORE_LOCALHOST as boolean,
 		detailed: import.meta.env.CLIENT_ACKEE_DETAILED as boolean
+	},
+	axios: {
+		baseURL: import.meta.env.CLIENT_AXIOS_BASE_URL as string,
 	}
 };
 

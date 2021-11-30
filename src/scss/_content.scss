@@ -1,12 +1,17 @@
 @import "lengths";
 @import "mixins";
 
-.md {
+.content {
 	max-width: $conent-max-width;
 	padding: 30px;
 	display: flex;
 	flex-direction: column;
 	
+	&.small {
+		max-width: $conent-max-width-smaller;
+	}
+	
+	:global(h1),
 	:global(h2),
 	:global(h3) {
 		margin: 20px 0 20px 0;
@@ -23,12 +28,13 @@
 	}
 	
 	:global(h2) {
-		font-size: 1.6em;
+		font-size: 1.5em;
 		border-bottom: 2px solid var(--color-edge-light);
 	}
 	
 	:global(h3) {
-		font-size: 1.25em;
+		font-size: 1.2em;
+		margin-top: 0;
 	}
 	
 	:global(a) {
@@ -44,7 +50,7 @@
 }
 
 @include media-mobile {
-	.md {
+	.content {
 		padding: 20px;
 		
 		:global(p) {
@@ -55,7 +61,7 @@
 }
 
 @include media-mobile-small {
-	.md {
+	.content {
 		padding: 10px;
 	}
 }

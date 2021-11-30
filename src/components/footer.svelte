@@ -49,6 +49,17 @@
 		}
 	}
 	
+	@include media-mobile {
+		.footer {
+			flex-direction: column;
+			gap: 20px;
+			
+			div {
+				flex-wrap: wrap;
+			}
+		}
+	}
+	
 	a {
 		font-size: 1.1em;
 		color: var(--color-edge);

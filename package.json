@@ -26,6 +26,7 @@
   },
   "type": "module",
   "dependencies": {
-    "ackee-tracker": "^5.1.0"
+    "ackee-tracker": "^5.1.0",
+    "axios": "^0.24.0"
   }
 }

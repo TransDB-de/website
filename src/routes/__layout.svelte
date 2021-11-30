@@ -1,5 +1,9 @@
 <script context="module">
 	import Ackee from "$lib/ackee"
+	import config from "$lib/config"
+	
+	import axios from "axios";
+	axios.defaults.baseURL = config.axios.baseURL;
 	
 	// runs every time "page" changes
 	export async function load({ page }) {

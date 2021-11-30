@@ -5,12 +5,12 @@
 </script>
 
 <template lang="pug">
-	div.md
+	div.content
 		ImprintContent
 		DisclaimerContent
 		EntryRemovalContent
 </template>
 
 <style lang="scss">
-	@import "../scss/_markdown.scss";
+	@import "../scss/content.scss";
 </style>
