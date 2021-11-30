@@ -1,3 +1,12 @@
+<script context="module">
+	import Ackee from "$lib/ackee"
+	
+	export async function load({ page }) {
+		Ackee(page.path);
+		return {};
+	}
+</script>
+
 <script>
 	import { fade } from "svelte/transition"
 	import Footer from "$components/footer.svelte"

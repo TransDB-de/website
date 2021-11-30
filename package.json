@@ -12,6 +12,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "@types/ackee-tracker": "^5.0.1",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
     "pug": "^3.0.2",
@@ -24,5 +25,7 @@
     "typescript": "^4.4.3"
   },
   "type": "module",
-  "dependencies": {}
+  "dependencies": {
+    "ackee-tracker": "^5.1.0"
+  }
 }

@@ -26,7 +26,8 @@ const config = {
 					$components: resolve('./src/components'),
 					$models: resolve('./src/models')
 				}
-			}
+			},
+			envPrefix: "CLIENT_"
 		}
 	},
 };
