@@ -35,10 +35,6 @@
 		box-sizing: border-box;
 	}
 	
-	:global html {
-		min-height: 100vh;
-	}
-	
 	:global body {
 		margin: 0;
 		background-color: var(--color-background);
@@ -60,6 +56,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		min-height: 100vh;
 	}
 	
 	.page {
