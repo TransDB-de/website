@@ -6,10 +6,10 @@
 	import { browser } from "$app/env"
 	import { page } from "$app/stores"
 	
-	let mobileExpand = false;
+	let expand = false;
 	let navbar;
 	
-	let windowY: number;
+	let scrollY: number;
 	let opacity = "1.0";
 	let component;
 	let collapsed = false;
@@ -28,7 +28,7 @@
 	
 	$: {
 		if (browser && component) {
-			let frac = (windowY / (component.scrollHeight - navbar.scrollHeight));
+			let frac = (scrollY / (component.scrollHeight - navbar.scrollHeight));
 			
 			let _opacity = (1 - frac);
 			_opacity = _opacity > 0 ? _opacity: 0;
@@ -39,30 +39,30 @@
 	}
 	
 	// toggles toe mobile nav menu
-	function toggleNav() { mobileExpand = !mobileExpand }
+	function toggleNav() { expand = !expand }
 </script>
 
-<svelte:window bind:scrollY={windowY}/>
+<svelte:window bind:scrollY={ scrollY }/>
 
-<div class="header" class:hide bind:this={ component } style="--opacity: {opacity}">
-	<div class="navbar {mobileExpand ? 'expand' : ''}" class:collapsed bind:this={ navbar } >
+<div class="header" class:hide bind:this={ component } style="--opacity: { opacity }">
+	<div class="navbar" class:expand class:collapsed bind:this={ navbar } >
 		<h1 class="title-mobile" on:click={() => goto("/")} > TransDB.de </h1>
 		
-		<nav on:click={toggleNav}>
-			<NavLink href="/" exact={true}>Startseite</NavLink>
-			<NavLink href="/search">Suche</NavLink>
-			<NavLink href="/manage">Management</NavLink>
-			<NavLink href="/submit">Neuer Eintrag</NavLink>
+		<nav on:click={ toggleNav }>
+			<NavLink href="/" exact={ true }> Startseite </NavLink>
+			<NavLink href="/search"> Suche </NavLink>
+			<NavLink href="/manage"> Management </NavLink>
+			<NavLink href="/submit"> Neuer Eintrag </NavLink>
 		</nav>
 		
-		<span on:click={toggleNav} class="mobileNav">
-			<MenuIcon expand={ mobileExpand } />
+		<span on:click={ toggleNav } class="mobileNav">
+			<MenuIcon { expand } />
 		</span>
 	</div>
 	
-	<h1 class="title" on:click={() => goto("/")}>Trans*DB</h1>
+	<h1 class="title" on:click={() => goto("/")}> Trans*DB </h1>
 	
-	<h2 class="subtitle">Die Suchmaschine für trans* relevante Angebote</h2>
+	<h2 class="subtitle"> Die Suchmaschine für trans* relevante Angebote </h2>
 	
 	<SearchBar />
 	
