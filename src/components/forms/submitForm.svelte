@@ -3,16 +3,16 @@
 	import Input from "$components/forms/elements/input.svelte"
 	import Select from "./elements/select.svelte"
 	import Checkbox from "./elements/checkbox.svelte"
-	import Button from "$components/button.svelte";
-	import ErrorBox from "$components/errorBox.svelte";
+	import Button from "$components/button.svelte"
+	import ErrorBox from "$components/errorBox.svelte"
 	
 	import { typeMapping, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
-	import type { Entry } from "$models/entry.model";
-	import mouseOverTexts from "$lib/mouseOverTexts";
-	import axios from "axios";
-	import { goto } from "$app/navigation";
-	import { parseValidationErrors } from "$lib/utils";
-	import type { ValidationErrorMap } from "$models/error";
+	import type { Entry } from "$models/entry.model"
+	import mouseOverTexts from "$lib/mouseOverTexts"
+	import axios from "axios"
+	import { goto } from "$app/navigation"
+	import { parseValidationErrors } from "$lib/utils"
+	import type { ValidationErrorMap } from "$models/error"
 	
 	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
 	

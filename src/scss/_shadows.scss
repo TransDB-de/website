@@ -10,4 +10,5 @@ $surface-shadow-small: 0.2px 0.5px 2px var(--color-surface-shadow-strong), 0.5px
 $surface-shadow-strong: 0 0 4px var(--color-surface-shadow-strong), 0 0 8px var(--color-surface-shadow-rim), 0 0 16px var(--color-surface-shadow-glow);
 $surface-shadow-soft: 0 0 8px var(--color-surface-shadow-rim), 0 0 16px var(--color-surface-shadow-glow);
 
+// used to toggle shadows with transition
 $no-shadow: 0 0 5px rgba(0, 0, 0, 0), 0 0 10px rgba(0, 0, 0, 0), 0 0 20px rgba(0, 0, 0, 0);

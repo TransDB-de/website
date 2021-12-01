@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Loader from "$components/loader.svelte";
+	import Loader from "$components/loader.svelte"
 	
 	export let color: string = "";
 	export let loading = false;

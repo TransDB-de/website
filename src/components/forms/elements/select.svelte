@@ -1,6 +1,6 @@
 <script lang="ts">
-	import InputWrapper from "./inputWrapper.svelte";
-	import ChevronDownIcon from "lucide-icons-svelte/chevronDown.svelte";
+	import InputWrapper from "./inputWrapper.svelte"
+	import ChevronDownIcon from "lucide-icons-svelte/chevronDown.svelte"
 	
 	export let error = "";
 	export let value = "";

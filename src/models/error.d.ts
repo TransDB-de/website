@@ -1,9 +1,11 @@
-export interface APIValidationError {
+/** Error object returned by the Api */
+export interface ApiValidationError {
 	constraints?: { [key: string]: string };
 	property: string;
-	children?: APIValidationError[];
+	children?: ApiValidationError[];
 }
 
+/** Transformed flat error map containing Api Valiadtion Errors as plaintext messages */
 export interface ValidationErrorMap {
 	[key: string]: string;
 }

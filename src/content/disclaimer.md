@@ -1,4 +1,4 @@
-## Disclaimer
+# Disclaimer
 
 Auch wenn wir die Einträge vor der Freischaltung sorgfältig prüfen, können wir keine Haftung für Fehler übernehmen.
 So können beispielsweise keine Ansprüche gegenüber TransDB geltend gemacht werden,

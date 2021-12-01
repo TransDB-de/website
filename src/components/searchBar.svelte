@@ -70,8 +70,8 @@
 	       bind:value={ locationText }
 	/>
 	
-
-
+	
+	
 	<Button light
 	        noShadow
 			iconOnly={ $isMobile }
@@ -141,7 +141,7 @@
 		:global button:not(.collapsed) {
 			margin-left: 4px;
 		}
-
+		
 		:global .collapsed {
 			opacity: 0;
 		}
