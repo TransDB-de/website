@@ -16,7 +16,7 @@ if (browser) {
 
 async function onNavigate(path: string) {
 	if (browser) {
-		let attributes = ackeeTracker.attributes(true);
+		let attributes = ackeeTracker.attributes(ackee.detailed);
 		attributes.siteLocation = window.location.origin + path;
 		instance.record(ackee.domainId, attributes);
 	}
