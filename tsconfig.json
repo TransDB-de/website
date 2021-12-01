@@ -33,6 +33,8 @@
 			"$components/*": ["src/components/*"],
 			"$models": ["src/models"],
 			"$models/*": ["src/models/*"],
+			"$formElements": ["src/components/forms/elements"],
+			"$formElements/*": ["src/components/forms/elements/*"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

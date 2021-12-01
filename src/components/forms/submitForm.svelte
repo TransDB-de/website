@@ -1,8 +1,9 @@
 <script lang="ts">
-	import Form from "$components/forms/elements/form.svelte"
-	import Input from "$components/forms/elements/input.svelte"
-	import Select from "./elements/select.svelte"
-	import Checkbox from "./elements/checkbox.svelte"
+	import Form from "$formElements/form.svelte"
+	import Input from "$formElements/input.svelte"
+	import Select from "$formElements/select.svelte"
+	import Checkbox from "$formElements/checkbox.svelte"
+	
 	import Button from "$components/button.svelte"
 	import ErrorBox from "$components/errorBox.svelte"
 	
