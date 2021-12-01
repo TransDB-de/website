@@ -3,10 +3,11 @@
 	import Input from "$components/forms/elements/input.svelte"
 	import Select from "./elements/select.svelte"
 	import Checkbox from "./elements/checkbox.svelte"
+	import Button from "$components/button.svelte";
+	import ErrorBox from "$components/errorBox.svelte";
 	
 	import { typeMapping, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model";
-	import Button from "$components/button.svelte";
 	import mouseOverTexts from "$lib/mouseOverTexts";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
@@ -14,11 +15,6 @@
 	import type { ValidationErrorMap } from "$models/error";
 	
 	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
-	
-	$: {
-		console.log(newEntry);
-		console.log(newEntry.meta.offers);
-	}
 	
 	let loading = false;
 	let errors: ValidationErrorMap = {};
@@ -105,27 +101,27 @@
 	<h2>Adresse</h2>
 	
 	<div>
-		<Input bind:value={newEntry.address.street} placeholder="Straße" required error={errors["name"]} />
-		<Input bind:value={newEntry.address.house} placeholder="Hausnummer" required error={errors["name"]} />
+		<Input bind:value={newEntry.address.street} placeholder="Straße" required error={errors["address.street"]} />
+		<Input bind:value={newEntry.address.house} placeholder="Hausnummer" required error={errors["address.house"]} />
 	</div>
 	
 	<div>
-		<Input bind:value={newEntry.address.city} placeholder="Stadt / Ort" required error={errors["name"]} />
-		<Input bind:value={newEntry.address.plz} placeholder="Postleitzahl" required error={errors["name"]} />
+		<Input bind:value={newEntry.address.city} placeholder="Stadt / Ort" required error={errors["address.city"]} />
+		<Input bind:value={newEntry.address.plz} placeholder="Postleitzahl" required error={errors["address.plz"]} />
 	</div>
 	
 	<h2>Ansprechpartner*in</h2>
 	
 	<div>
-		<Input bind:value={newEntry.firstName} placeholder="Vorname" minlength="2" maxlength="30" />
-		<Input bind:value={newEntry.lastName} placeholder="Nachname" minlength="2" maxlength="30" />		
+		<Input bind:value={newEntry.firstName} placeholder="Vorname" minlength="2" maxlength="30" error={errors["firstName"]} />
+		<Input bind:value={newEntry.lastName} placeholder="Nachname" minlength="2" maxlength="30" error={errors["lastName"]} />		
 	</div>
 	
 	<h2>Kontaktdaten</h2>
 	
-	<Input bind:value={newEntry.email} type="email" placeholder="E-Mail Adresse" minlength="5" maxlength="320" />
-	<Input bind:value={newEntry.telephone} type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" />
-	<Input bind:value={newEntry.website} type="url" placeholder="Webseite" minlength="3" maxlength="500" />
+	<Input bind:value={newEntry.email} type="email" placeholder="E-Mail Adresse" minlength="5" maxlength="320" error={errors["email"]} />
+	<Input bind:value={newEntry.telephone} type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" error={errors["telephone"]} />
+	<Input bind:value={newEntry.website} type="url" placeholder="Webseite" minlength="3" maxlength="500"  error={errors["website"]} />
 	
 	<h2>Spezifische Angaben</h2>
 	
@@ -147,10 +143,12 @@
 		</Select>
 
 		<h3>Angebote:</h3>
-			
-		{#each Object.entries(offerMapping.therapist) as [key, value]}
-			<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
-		{/each}
+		
+		<ErrorBox error={errors["meta.offers"]}>
+			{#each Object.entries(offerMapping.therapist) as [key, value]}
+				<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
+			{/each}
+		</ErrorBox>
 		
 	{:else if newEntry.type === "surveyor"}
 	
@@ -162,16 +160,21 @@
 	
 		<h3>Angebotene Operationen:</h3>
 		
-		{#each Object.entries(offerMapping.surgeon) as [key, value]}
-			<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
-		{/each}
+		<ErrorBox error={errors["meta.offers"]}>
+			{#each Object.entries(offerMapping.surgeon) as [key, value]}
+				<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
+			{/each}
+		</ErrorBox>
 		
 	{:else if newEntry.type === "hairremoval"}
 	
 		<h3>Angebote:</h3>
-		{#each Object.entries(offerMapping.hairremoval) as [key, value]}
-			<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
-		{/each}
+		
+		<ErrorBox error={errors["meta.offers"]}>
+			{#each Object.entries(offerMapping.hairremoval) as [key, value]}
+				<Checkbox bind:group={newEntry.meta.offers} value={key} title={mouseOverTexts[key]}>{value}</Checkbox>
+			{/each}
+		</ErrorBox>
 
 		<h3>Weitere Infos:</h3>
 		{#each Object.entries(attributeMapping.hairremoval) as [key, value]}

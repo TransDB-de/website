@@ -32,20 +32,19 @@ export function parseValidationErrors(errors: APIValidationError[]): ValidationE
 	let err: ValidationErrorMap = {};
 	
 	for (let error of errors) {
-		let key: string;
-		let value: string;
+		let constraintName: string;
 		
 		if (error.constraints) {
-			[key, value] =  Object.entries(error.constraints)[0];
+			constraintName = Object.keys(error.constraints)[0];
 		} else if (error.children.length > 0) {
 			let childErrors: ValidationErrorMap = parseValidationErrors(error.children);
-			for (let ce in childErrors) {
-				//TODO: Finish recursive call
+			for (let childConstraintName in childErrors) {
+				err[error.property + "." + childConstraintName] = childErrors[childConstraintName];
 			}
 		}
 		
-		if (key in errorMappings) {
-			err[error.property] = errorMappings[key];
+		if (constraintName in errorMappings) {
+			err[error.property] = errorMappings[constraintName];
 		}
 	}
 	

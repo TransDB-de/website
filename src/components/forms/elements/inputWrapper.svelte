@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let error = "";
 	
-	$: isError = error.length > 0;
+	$: isError = error && error.length > 0;
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -60,9 +60,10 @@
 	}
 
 	span.error {
+		position: absolute;
+		top: -18px;
 		font-size: 14px;
 		font-weight: 500;
-		margin: 0 0 3px 3px;
 		color: var(--color-edge-error);
 	}
 </style>

@@ -1,6 +1,6 @@
 export const errorMappings = {
-	isLength: "Inhalt zu lang oder zu kurz",
+	isLength: "Inhalt hat ungültige Länge",
 	isEmail: "Keine gültige E-Mail Adresse",
-	isURL: "Keine gültige URL",
+	isURL: "Keine gültige Webseiten-Adresse",
 	arrayNotEmpty: "Mindestens ein Element erforderlich",
 }
