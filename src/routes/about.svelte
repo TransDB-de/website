@@ -1,5 +1,9 @@
 <script lang="ts">
 	import MemberCardCollection from "$components/memberCardCollection.svelte"
+	import KofiButton from "$components/kofiButton.svelte"
+	
+	import DonationContent from "$content/about/donation.md"
+	import externalLinks from "$content/external-links.json"
 </script>
 
 <template lang="pug">
@@ -19,6 +23,8 @@
 	div.section
 		h2 Unterstütze uns mit einer Spende
 		div.inner
+			DonationContent
+			KofiButton(href="{externalLinks.donation}")
 
 </template>
 
@@ -55,6 +61,13 @@
 		.inner {
 			width: 100%;
 			max-width: 1100px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			
+			:global(p) {
+				text-align: center;
+			}
 		}
 	}
 	

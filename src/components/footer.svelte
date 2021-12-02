@@ -2,6 +2,7 @@
 	import GitHubBrandIcon from "$components/icons/gitHubBrandIcon.svelte"
 	import InstagramBrandIcon from "$components/icons/instagramBrandIcon.svelte"
 	import DiscordBrandIcon from "$components/icons/discordBrandIcon.svelte"
+	import KofiBrandIcon from "$components/icons/kofiBrandIcon.svelte"
 
 	import externalLinks from "$content/external-links.json"
 </script>
@@ -24,6 +25,9 @@
 		</a>
 		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="discord low" title="Trete unserem Discord Server bei">
 			<DiscordBrandIcon />
+		</a>
+		<a href={externalLinks.donation} target="_blank" rel="noopener" class="kofi low" title="Unterstütze uns auf Ko-fi">
+			<KofiBrandIcon />
 		</a>
 	</div>
 	
