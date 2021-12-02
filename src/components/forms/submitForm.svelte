@@ -7,7 +7,7 @@
 	import Button from "$components/button.svelte"
 	import ErrorBox from "$components/errorBox.svelte"
 	
-	import { typeMapping, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
+	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import axios from "axios"
@@ -76,14 +76,14 @@
 				}
 			}
 			
-		} finally {
 			loading = false;
+			return;
 		}
 		
-		console.log(errors);
 		
-		//formElement.reset();
-		//goto("/submitted");
+		loading = false;
+		formElement.reset();
+		goto("/submitted");
 	}
 </script>
 
@@ -93,25 +93,25 @@
 	<Select bind:value={newEntry.type} on:change={resetMeta}>
 		<option value="" disabled selected> Kategorie wählen </option>
 		
-		{#each Object.entries(typeMapping) as [key, value]}
+		{#each Object.entries(typeMappingData) as [key, value]}
 			<option value={ key }> { value } </option>
 		{/each}
 	</Select>
 	
 	{#if newEntry.type}
-		<Input bind:value={ newEntry.name } placeholder={ typePlaceholder } required minlength="100" maxlength="100" error={ errors["name"] } />
+		<Input bind:value={ newEntry.name } placeholder={ typePlaceholder } required minlength="1" maxlength="160" error={ errors["name"] } />
 	{/if}
 	
 	<h2> Adresse </h2>
 	
 	<div>
-		<Input bind:value={ newEntry.address.street } placeholder="Straße" required error={ errors["address.street"] } />
-		<Input bind:value={ newEntry.address.house } placeholder="Hausnummer" required error={ errors["address.house"] } />
+		<Input bind:value={ newEntry.address.street } placeholder="Straße" required minlength="0" maxlength="50" error={ errors["address.street"] } />
+		<Input bind:value={ newEntry.address.house } placeholder="Hausnummer" required minlength="0" maxlength="10" error={ errors["address.house"] } />
 	</div>
 	
 	<div>
-		<Input bind:value={ newEntry.address.city } placeholder="Stadt / Ort" required error={ errors["address.city"] } />
-		<Input bind:value={ newEntry.address.plz } placeholder="Postleitzahl" required error={ errors["address.plz"] } />
+		<Input bind:value={ newEntry.address.city } placeholder="Stadt / Ort" required minlength="2" maxlength="50" error={ errors["address.city"] } />
+		<Input bind:value={ newEntry.address.plz } placeholder="Postleitzahl" required minlength="0" maxlength="10" error={ errors["address.plz"] } />
 	</div>
 	
 	<h2> Ansprechpartner*in </h2>
@@ -150,7 +150,7 @@
 		
 		<ErrorBox error={ errors["meta.offers"] }>
 			{#each Object.entries(offerMapping.therapist) as [key, value]}
-				<Checkbox bind:group={ newEntry.meta.offers } value={key} title={ mouseOverTexts[key] }> { value } </Checkbox>
+				<Checkbox bind:group={ newEntry.meta.offers } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
 			{/each}
 		</ErrorBox>
 		

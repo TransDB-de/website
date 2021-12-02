@@ -5,3 +5,8 @@ export interface User {
 	lastLogin: null | Date,
 	admin: boolean
 }
+
+export interface LoginResponse {
+	user: User,
+	token: string
+}

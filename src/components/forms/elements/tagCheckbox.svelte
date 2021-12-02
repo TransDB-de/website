@@ -1,10 +1,26 @@
-<label>
-	<input type="checkbox" {...$$props} />
+<script lang="ts">
+	export let value: string = "";
+	export let group: string[] = [];
+	
+	function onChange({ target }) {
+		const { value, checked } = target;
+		if (checked) {
+			group = [...group, value]
+		} else {
+			group = group.filter((item) => item !== value);
+		}
+	}
+</script>
+
+<label {...$$props}>
+	<input type="checkbox"
+	       bind:value
+	       checked={ group.includes(value) }
+	       on:change={ onChange }/>
 	<span> <slot /> </span>
 </label>
 
 <style lang="scss">
-	@import "../../../scss/colors";
 	@import "../../../scss/mixins";
 	
 	label {
@@ -17,9 +33,9 @@
 		padding: 3px 8px;
 		border-radius: 4px;
 		cursor: pointer;
+		font-size: 0.9em;
 		
 		@include media-mobile {
-			font-size: 17px;
 			padding: 4px 8px;
 		}
 		

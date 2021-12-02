@@ -5,6 +5,6 @@
 	export let value: string | number | undefined;
 </script>
 
-<InputWrapper {error}>
+<InputWrapper { error }>
 	<input bind:value {...$$props} />
 </InputWrapper>

@@ -29,36 +29,36 @@
 				border: 2px solid var(--color-edge-error);
 			}
 		}
+		
+		:global(input),
+		:global(select),
+		:global(textarea) {
+			font-family: 'Poppins', sans-serif;
+			font-size: 18px;
+			color: var(--color-edge);
+			background-color: var(--color-background-bright);
+			outline: 0;
+			border-radius: 4px;
+			border: 2px solid var(--color-rim);
+			padding: 6px 12px;
+			transition: 0.2s ease border;
+			width: 100%;
+			
+			&:hover {
+				border: 2px solid var(--color-rim-hover);
+			}
+			
+			&:focus {
+				border: 2px solid var(--color-rim-active);
+			}
+			
+			&::placeholder {
+				color: var(--color-edge-dimmed);
+				font-weight: 500;
+			}
+		}
 	}
-
-	:global(input),
-	:global(select),
-	:global(textarea) {
-		font-family: 'Poppins', sans-serif;
-		font-size: 18px;
-		color: var(--color-edge);
-		background-color: var(--color-background-bright);
-		outline: 0;
-		border-radius: 4px;
-		border: 2px solid var(--color-rim);
-		padding: 6px 12px;
-		transition: 0.2s ease border;
-		width: 100%;
-		
-		&:hover {
-			border: 2px solid var(--color-rim-hover);
-		}
-		
-		&:focus {
-			border: 2px solid var(--color-rim-active);
-		}
-		
-		&::placeholder {
-			color: var(--color-edge-dimmed);
-			font-weight: 500;
-		}
-	}
-
+	
 	span.error {
 		position: absolute;
 		top: -18px;

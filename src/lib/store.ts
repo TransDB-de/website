@@ -2,9 +2,29 @@ import { readable, writable } from "svelte/store"
 import { browser } from '$app/env'
 import type { User } from "$models/user.model"
 
+let defaultUserData = browser ? JSON.parse(localStorage.getItem("userdata")) : null;
+let defaultToken = browser ? localStorage.getItem("token") : null;
 
-export const userdata = writable<User>(null);
+export const userdata = writable<User>(defaultUserData);
+export const token = writable<string>(defaultToken);
 
+if (browser) {
+	userdata.subscribe((user) => {
+		if (user) {
+			localStorage.setItem("userdata", JSON.stringify(user));
+		} else {
+			localStorage.removeItem("userdata");
+		}
+	});
+	
+	token.subscribe((token) => {
+		if (token) {
+			localStorage.setItem("token", token);
+		} else {
+			localStorage.removeItem("token");
+		}
+	});
+}
 
 /**
  * Media query driven value for mobile screen-width breakpoint

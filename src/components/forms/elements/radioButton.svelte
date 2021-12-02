@@ -1,15 +1,28 @@
-<label>
-	<input type="radio" {...$$props}>
+<script lang="ts">
+	export let value: string = "";
+	export let group: string = "";
+	
+	function onChange({ target }) {
+		const { value, checked } = target;
+		if (checked) {
+			group = value
+		}
+	}
+</script>
+
+<label {...$$props}>
+	<input type="radio"
+	       bind:value
+	       checked={ group === value }
+	       on:change={ onChange }/>
 	<span> <slot /> </span>
 </label>
 
 <style lang="scss">
-	@import "../../../scss/colors";
 	@import "../../../scss/shadows";
 	
 	label {
 		display: flex;
-		font-weight: 400;
 		cursor: pointer;
 	}
 	
@@ -18,6 +31,9 @@
 		border-left: 3px solid var(--color-rim);
 		transition: 0.1s all;
 		text-shadow: $edge-shadow-tiny;
+		
+		font-weight: 400;
+		font-size: 0.9em;
 		
 		&:hover, input:hover ~ & {
 			padding: 5px 2px 5px 12px;

@@ -1,4 +1,5 @@
 export const typeMapping = {
+	"": "Alle Kategorien",
 	group: "Gruppe/Verein",
 	therapist: "Therapeut*in/Psychiater*in",
 	surveyor: "Gutachter*in",
@@ -7,6 +8,10 @@ export const typeMapping = {
 	logopedics: "Logopäd*in",
 	hairremoval: "Haarentfernung"
 }
+
+// for using the mappings as data key references
+let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
+export const typeMappingData = _typeMappingData;
 
 export const typeDescriptions = {
 	group: "Name der Gruppe",

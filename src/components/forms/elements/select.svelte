@@ -6,7 +6,7 @@
 	export let value = "";
 </script>
 
-<InputWrapper {error}>
+<InputWrapper { error }>
 	<select bind:value {...$$props} on:change>
 		<slot />
 	</select>

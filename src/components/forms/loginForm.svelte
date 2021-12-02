@@ -1,0 +1,60 @@
+<script lang="ts">
+	import Form from "$formElements/form.svelte"
+	import Input from "$formElements/input.svelte"
+	import Button from "$components/button.svelte"
+
+	import axios from "axios"
+	import { goto } from "$app/navigation"
+	import type { LoginResponse } from "$models/user.model"
+	
+	import { token, userdata } from "$lib/store"
+	
+	let loading = false;
+	let formElement;
+	
+	let login = {
+		username: "",
+		password: ""
+	}
+	
+	async function submit() {
+		loading = true;
+		
+		//TODO: Replace console.log with actual error messages
+		try {
+			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("users/me/login", login)).data;
+			
+			$token = loginResponse.token;
+			$userdata = loginResponse.user;
+			
+			console.log("success")
+		} catch(e) {
+			switch(e.response.status) {
+				case 401: {
+					console.log("wrong credentials");
+					break;
+				}
+				default: {
+					console.log("unknown error");
+					break;
+				}
+			}
+			
+			loading = false;
+			return;
+		}
+		
+		loading = false;
+		formElement.reset();
+		goto("/manage");
+	}
+</script>
+
+<Form on:submit={ submit } bind:this={ formElement }>
+	<h1> Anmeldung für Teammitglieder </h1>
+	
+	<Input bind:value={ login.username } placeholder="Benutzername" required minlength="4" maxlength="16" />
+	<Input bind:value={ login.password } type="password" placeholder="Passwort" required minlength="8" maxlength="1024" />
+	
+	<Button { loading }> Anmelden </Button>
+</Form>

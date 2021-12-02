@@ -6,6 +6,8 @@
 	import { browser } from "$app/env"
 	import { page } from "$app/stores"
 	
+	import { token } from "$lib/store"
+	
 	let expand = false;
 	let navbar;
 	
@@ -18,7 +20,8 @@
 		"/manage",
 		"/submit",
 		"/imprint",
-		"/privacy"
+		"/privacy",
+		"/login"
 	];
 	
 	let hide = false;
@@ -51,7 +54,12 @@
 		<nav on:click={ toggleNav }>
 			<NavLink href="/" exact={ true }> Startseite </NavLink>
 			<NavLink href="/search"> Suche </NavLink>
-			<NavLink href="/manage"> Management </NavLink>
+			<NavLink href="/faq"> FAQ </NavLink>
+			
+			{#if $token}
+				<NavLink href="/manage"> Management </NavLink>
+			{/if}
+			
 			<NavLink href="/submit"> Neuer Eintrag </NavLink>
 		</nav>
 		
