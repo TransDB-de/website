@@ -34,7 +34,9 @@
 			"$models": ["src/models"],
 			"$models/*": ["src/models/*"],
 			"$formElements": ["src/components/forms/elements"],
-			"$formElements/*": ["src/components/forms/elements/*"]
+			"$formElements/*": ["src/components/forms/elements/*"],
+			"$brandIcons": ["src/components/icons/brands"],
+			"$brandIcons/*": ["src/components/icons/brands/*"]
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]

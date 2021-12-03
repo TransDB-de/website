@@ -6,5 +6,5 @@
 </script>
 
 <InputWrapper { error }>
-	<input bind:value {...$$props} />
+	<input bind:value on:change {...$$props} />
 </InputWrapper>

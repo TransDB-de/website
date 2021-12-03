@@ -12,6 +12,9 @@ const config = {
 	},
 	axios: {
 		baseURL: import.meta.env.CLIENT_AXIOS_BASE_URL as string,
+	},
+	client: {
+		filterApplyTimeout: parseFloat(import.meta.env.CLIENT_FILTER_APPLY_TIMEOUT as string) * 1000,
 	}
 };
 

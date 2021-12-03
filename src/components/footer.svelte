@@ -1,9 +1,9 @@
 <script lang="ts">
-	import GitHubBrandIcon from "$components/icons/gitHubBrandIcon.svelte"
-	import InstagramBrandIcon from "$components/icons/instagramBrandIcon.svelte"
-	import DiscordBrandIcon from "$components/icons/discordBrandIcon.svelte"
-	import KofiBrandIcon from "$components/icons/kofiBrandIcon.svelte"
-
+	import GitHubBrandIcon from "$brandIcons/gitHubBrandIcon.svelte"
+	import InstagramBrandIcon from "$brandIcons/instagramBrandIcon.svelte"
+	import DiscordBrandIcon from "$brandIcons/discordBrandIcon.svelte"
+	import KofiBrandIcon from "$brandIcons/kofiBrandIcon.svelte"
+	
 	import externalLinks from "$content/external-links.json"
 </script>
 
@@ -16,17 +16,17 @@
 		<a href="/faq">FAQ</a>
 	</div>
 	
-	<div>
-		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" class="instagram low" title="Folge uns auf Instagram">
+	<div class="low-hover-bar">
+		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title="Folge uns auf Instagram">
 			<InstagramBrandIcon />
 		</a>
-		<a href={externalLinks.social.github} target="_blank" rel="noopener" class="github low" title="Besuche uns auf GitHub">
+		<a href={externalLinks.social.github} target="_blank" rel="noopener" title="Besuche uns auf GitHub">
 			<GitHubBrandIcon />
 		</a>
-		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="discord low" title="Trete unserem Discord Server bei">
+		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title="Trete unserem Discord Server bei">
 			<DiscordBrandIcon />
 		</a>
-		<a href={externalLinks.donation} target="_blank" rel="noopener" class="kofi low" title="Unterstütze uns auf Ko-fi">
+		<a href={externalLinks.donation} target="_blank" rel="noopener" class="xl-icon" title="Unterstütze uns auf Ko-fi">
 			<KofiBrandIcon />
 		</a>
 	</div>
@@ -50,6 +50,12 @@
 			flex-direction: row;
 			align-items: center;
 			gap: 10px;
+			
+			&.low-hover-bar {
+				a:after {
+					bottom: -6px;
+				}
+			}
 		}
 	}
 	
@@ -60,6 +66,23 @@
 			
 			div {
 				flex-wrap: wrap;
+				
+				&:first-child {
+					flex-wrap: wrap;
+					justify-content: center;
+				}
+				
+				&:last-child {
+					justify-content: center;
+				}
+			}
+		}
+	}
+	
+	@include media-mobile-small {
+		div {
+			&:first-child {
+				flex-direction: column;
 			}
 		}
 	}
@@ -86,8 +109,18 @@
 			opacity: 1;
 		}
 		
-		&.low:after {
-			bottom: -6px;
+		&.l-icon {
+			:global(svg) {
+				height: 35px;
+				width: 35px;
+			}
+		}
+		
+		&.xl-icon {
+			:global(svg) {
+				height: 38px;
+				width: 38px;
+			}
 		}
 		
 		:global(svg) {

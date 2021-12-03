@@ -32,6 +32,7 @@ if (browser) {
 export const isMobile = readable<boolean>(true, (set) => {
 	// only run in browser
 	if (browser) {
+		// register event listener
 		let mediaQuery = window.matchMedia('(max-width: 720px)');
 		
 		const isMobileEventListener = function(e: MediaQueryListEvent) {
@@ -39,6 +40,9 @@ export const isMobile = readable<boolean>(true, (set) => {
 		}
 		
 		mediaQuery.addEventListener("change", isMobileEventListener);
+		
+		// set inital value
+		set(mediaQuery.matches);
 		
 		// store clean-up function
 		return () => {

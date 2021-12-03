@@ -1,8 +1,11 @@
 <script lang="ts">
 	import MemberCardCollection from "$components/memberCardCollection.svelte"
 	import KofiButton from "$components/kofiButton.svelte"
+	import TechStack from "$components/techStack.svelte"
 	
 	import DonationContent from "$content/about/donation.md"
+	import TechStackContent from "$content/about/tech-stack.md"
+	
 	import externalLinks from "$content/external-links.json"
 </script>
 
@@ -17,8 +20,14 @@
 		div.inner
 		
 	div.section
-		h2 Nicht-Kommerziell und Open Source
+		h2 Nicht-Kommerziell
 		p.inner
+		
+	div.section
+		h2 Unser Tech-Stack
+		div.inner
+			TechStackContent
+			TechStack
 		
 	div.section
 		h2 Unterstütze uns mit einer Spende
@@ -35,7 +44,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 45px 12px;
+		padding: 65px 12px;
 		width: 100%;
 		//pointer-events: none;
 		
@@ -51,7 +60,7 @@
 		:global(h2) {
 			text-align: center;
 			font-size: 1.8em;
-			margin: 1.2em 0;
+			margin: 0 0 1.2em 0;
 		}
 		
 		&:nth-child(2n) {

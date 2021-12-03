@@ -70,15 +70,13 @@
 	       bind:value={ locationText }
 	/>
 	
-	
-	
 	<Button light
 	        noShadow
-			iconOnly={ $isMobile }
+	        iconOnly={ $isMobile }
 	        on:click={ () => search("distance") }
 	        title={ mouseOverTexts.proximitySearch }
 	        class="proximity-button">
-			
+		
 		<MapPinIcon />
 		<span class="hide-on-mobile">Umgebungssuche</span>
 	</Button>

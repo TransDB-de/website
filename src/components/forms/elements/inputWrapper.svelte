@@ -5,7 +5,7 @@
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->
-<label class:isError>
+<label class:isError {...$$props}>
 	{#if isError}
 		<span class="error">{error}</span>
 	{/if}

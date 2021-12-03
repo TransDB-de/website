@@ -9,4 +9,12 @@
 
 <style lang="scss">
 	@import "../scss/content.scss";
+	
+	.content {
+		:global(h2) {
+			font-size: 1.2em;
+			margin-top: 0;
+			border-bottom: none;
+		}
+	}
 </style>

@@ -25,7 +25,8 @@ const config = {
 					$content: resolve('./src/content'),
 					$components: resolve('./src/components'),
 					$models: resolve('./src/models'),
-					$formElements: resolve('./src/components/forms/elements')
+					$formElements: resolve('./src/components/forms/elements'),
+					$brandIcons: resolve('./src/components/icons/brands')
 				}
 			},
 			envPrefix: "CLIENT_"

@@ -4,9 +4,12 @@
 	
 	export let error = "";
 	export let value = "";
+	
+	let customClass = "";
+	export { customClass as class };
 </script>
 
-<InputWrapper { error }>
+<InputWrapper { error } class={ customClass }>
 	<select bind:value {...$$props} on:change>
 		<slot />
 	</select>
