@@ -63,7 +63,7 @@
 		margin-right: auto;
 		left: 16px;
 		right: 16px;
-		bottom: 3em;
+		bottom: 82px;
 		
 		max-width: 380px;
 		width: fit-content;

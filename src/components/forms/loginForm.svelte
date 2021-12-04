@@ -8,7 +8,7 @@
 	import type { LoginResponse } from "$models/user.model"
 	
 	import { token, userdata } from "$lib/store"
-	import { popupError } from "$components/popup.svelte"
+	import { popupError, popupOk } from "$components/popup.svelte"
 	
 	let loading = false;
 	let formElement;
@@ -21,14 +21,13 @@
 	async function submit() {
 		loading = true;
 		
-		//TODO: Replace console.log with actual error messages
 		try {
 			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("users/me/login", login)).data;
 			
 			$token = loginResponse.token;
 			$userdata = loginResponse.user;
 			
-			console.log("success")
+			popupOk("Angemeldet");
 		} catch(e) {
 			switch(e.response.status) {
 				case 401: {
@@ -40,7 +39,7 @@
 					break;
 				}
 				default: {
-					popupError("Unbekannter Fehler");
+					popupError(`Unbekannter Fehler (${e.response.status})`);
 					break;
 				}
 			}

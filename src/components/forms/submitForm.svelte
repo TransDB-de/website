@@ -71,8 +71,8 @@
 			removePrefixRegex, ""
 		);
 		
-		// prefix http://
-		newEntry.website = "http://" + newEntry.website;
+		// prefix https://
+		newEntry.website = "https://" + newEntry.website;
 	}
 	
 	async function submit() {
@@ -214,7 +214,7 @@
 		
 	{/if}
 	
-	<h3> Räumlichkeiten: </h3>
+	<h3> Barrierefreiheit: </h3>
 	
 	<Select bind:value={ newEntry.accessible }>
 		<option value="unknown" selected> Barrierefreiheit unbekannt </option>
