@@ -9,8 +9,8 @@
 	export { customClass as class };
 </script>
 
-<InputWrapper { error } class={ customClass }>
-	<select bind:value {...$$props} on:change>
+<InputWrapper { error } class={ customClass } for="select">
+	<select bind:value {...$$props} on:change id="select">
 		<slot />
 	</select>
 	<ChevronDownIcon />
