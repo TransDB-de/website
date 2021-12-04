@@ -110,5 +110,10 @@
 		span {
 			margin-left: 8px;
 		}
+		
+		:global(.lucide) {
+			min-width: 22px;
+			min-height: 22px;
+		}
 	}
 </style>
