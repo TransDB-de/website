@@ -23,9 +23,9 @@
 		width: 100%;
 		
 		&.isError {
-			:global(input),
-			:global(select),
-			:global(textarea) {
+			:global input,
+			select,
+			textarea {
 				border: 2px solid var(--color-edge-error);
 			}
 		}

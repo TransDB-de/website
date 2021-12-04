@@ -25,7 +25,10 @@
 	--color-edge-error: #de506b;
 	
 	--color-edge: #334450;
+	
 	--color-edge-light: #dadada;
+	--color-edge-faded: #d6dadc;
+	
 	--color-edge-bright: white;
 	--color-edge-dimmed: #9f9f9f;
 	
@@ -64,6 +67,9 @@
 	--color-popup-warn: #e7af47;
 	--color-popup-error: #c7425a;
 	
+	--color-special-highlight: #b7f1b7;
+	--color-special-warn: #ffe8a9;
+	
 	--color-rim-shadow          : rgba(15, 4, 44, 0.1);
 	
 	--color-edge-shadow-strong  : rgba(15, 4, 44, 0.34);
@@ -78,8 +84,7 @@
 	--color-brand-gh: #181717;
 	--color-brand-discord: #7289da;
 	
-	//TODO: move to header
-	
 	--banner-overlay: url("/img/banner-overlay.png");
 	--banner-gradient: linear-gradient(to right, #EA8BBA 0%, #B57FB7 7.5%, #947BB8 15%, #719FD4 35%,#64A8DC 50%, #719FD4 65%, #947BB8 85%, #B57FB7 92.5%, #EA8BBA 100%);
+	--submit-button-gradient: linear-gradient(50deg, #64A4FB 5%, #E88FC8 90%);
 }

@@ -1,12 +1,20 @@
 <script lang="ts">
 	let form: HTMLFormElement;
 	
+	import { createEventDispatcher } from "svelte";
+	
+	const dispatch = createEventDispatcher();
+	
 	export function reset() {
 		form.reset();
 	}
+	
+	export function handleSubmit(e) {
+		dispatch("submit");
+	}
 </script>
 
-<form on:submit|preventDefault bind:this={form}>
+<form on:submit|preventDefault={ handleSubmit } bind:this={ form }>
 	<slot />
 </form>
 

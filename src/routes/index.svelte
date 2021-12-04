@@ -8,6 +8,8 @@
 	import ContributeLarge from "$assets/contribute_large.svg"
 	import ContributeSmall from "$assets/contribute_small.svg"
 	import Heart from "$assets/heart.svg"
+	
+	import Button from "$components/button.svelte"
 </script>
 
 <svelte:head>
@@ -29,6 +31,9 @@ div.homepage
 			img.right(src!="{SkylineRight}")
 	
 	div.stripe
+		a.submit(href="/submit")
+			Button Einen neuen Eintrag einreichen
+		
 		div.section.two
 			h2 Wie kann ich helfen?
 			
@@ -50,6 +55,7 @@ div.homepage
 <style lang="scss">
 	@import "../scss/lengths";
 	@import "../scss/mixins";
+	@import "../scss/shadows";
 	
 	.homepage {
 		display: flex;
@@ -87,17 +93,6 @@ div.homepage
 			column-gap: 48px;
 			align-items: center;
 		}
-	}
-	
-	.stripe {
-		width: 100%;
-		background-color: var(--color-background-bright);
-		
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		
-		position: relative;
 	}
 	
 	$skyline-height: 256px;
@@ -142,6 +137,30 @@ div.homepage
 		}
 	}
 	
+	.stripe {
+		width: 100%;
+		background-color: var(--color-background-bright);
+		
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		
+		position: relative;
+		
+		.submit {
+			text-decoration: none;
+			position: absolute;
+			top: -17.188px;
+			
+			:global(button) {
+				font-weight: 900;
+				font-size: 18px;
+				height: 45px;
+				text-shadow: $rim-shadow-soft;
+				background: var(--submit-button-gradient);
+			}
+		}
+	}
 	
 	.section.two {
 		grid-template-columns: 2fr 3fr;

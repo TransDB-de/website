@@ -1,4 +1,4 @@
-<span class="tag">
+<span class="tag" {...$$props}>
 	<slot />
 </span>
 

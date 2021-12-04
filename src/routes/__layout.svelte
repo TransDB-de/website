@@ -16,6 +16,7 @@
 	import { fade } from "svelte/transition"
 	import Footer from "$components/footer.svelte"
 	import Header from "$components/header.svelte"
+	import Popup from "$components/popup.svelte"
 </script>
 
 <div class="app">
@@ -26,6 +27,7 @@
 	</div>
 	
 	<Footer />
+	<Popup />
 </div>
 
 <style lang="scss">

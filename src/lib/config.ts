@@ -15,6 +15,7 @@ const config = {
 	},
 	client: {
 		filterApplyTimeout: parseFloat(import.meta.env.CLIENT_FILTER_APPLY_TIMEOUT as string) * 1000,
+		popupLinger: parseFloat(import.meta.env.CLIENT_POPUP_LINGER as string) * 1000
 	}
 };
 

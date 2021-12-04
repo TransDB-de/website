@@ -8,6 +8,7 @@
 	import type { LoginResponse } from "$models/user.model"
 	
 	import { token, userdata } from "$lib/store"
+	import { popupError } from "$components/popup.svelte"
 	
 	let loading = false;
 	let formElement;
@@ -31,11 +32,15 @@
 		} catch(e) {
 			switch(e.response.status) {
 				case 401: {
-					console.log("wrong credentials");
+					popupError("Ungültige Anmeldedaten");
+					break;
+				}
+				case 429: {
+					popupError("Zu viele Versuche");
 					break;
 				}
 				default: {
-					console.log("unknown error");
+					popupError("Unbekannter Fehler");
 					break;
 				}
 			}
