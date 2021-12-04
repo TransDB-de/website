@@ -6,6 +6,7 @@
 	
 	import Button from "$components/button.svelte"
 	import ErrorBox from "$components/errorBox.svelte"
+	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
@@ -53,25 +54,46 @@
 		}
 	}
 	
+	// Check and correct the contents of the Website field
+	function checkWebsite(val) {
+		const httpRegex = /^https?:\/\//gm;
+		const removePrefixRegex = /^[a-z]*:?\/?\//gmi;
+		
+		console.log(val)
+		console.log(newEntry.website)
+		
+		if (!newEntry.website) { return; }
+		
+		if (newEntry.website.match(httpRegex)) { return; }
+		
+		// clear possibly faulty website prefix
+		newEntry.website = newEntry.website.replace(
+			removePrefixRegex, ""
+		);
+		
+		// prefix http://
+		newEntry.website = "http://" + newEntry.website;
+	}
+	
 	async function submit() {
 		loading = true;
 		
-		//TODO: Replace console.log with actual error messages
 		try {
 			await axios.post("entries", newEntry);
-			console.log("success")
+			popupOk("Eintrag eingereicht")
 		} catch(e) {
 			switch(e.response.status) {
 				case 422: {
 					errors = parseValidationErrors(e.response.data.problems);
+					popupWarn("Bitte überprüfe deine Angaben");
 					break;
 				}
 				case 429: {
-					console.log("too many requests");
+					popupError("Zu oft eingereicht. Bitte warte einige Minuten bis zum nächsten Versuch");
 					break;
 				}
 				default: {
-					console.log("unknown error");
+					popupError(`Unbekannter Fehler (${e.response.status})`);
 					break;
 				}
 			}
@@ -79,7 +101,6 @@
 			loading = false;
 			return;
 		}
-		
 		
 		loading = false;
 		formElement.reset();
@@ -105,13 +126,13 @@
 	<h2> Adresse </h2>
 	
 	<div>
-		<Input bind:value={ newEntry.address.street } placeholder="Straße" required minlength="0" maxlength="50" error={ errors["address.street"] } />
-		<Input bind:value={ newEntry.address.house } placeholder="Hausnummer" required minlength="0" maxlength="10" error={ errors["address.house"] } />
+		<Input bind:value={ newEntry.address.street } placeholder="Straße" minlength="0" maxlength="50" error={ errors["address.street"] } />
+		<Input bind:value={ newEntry.address.house } placeholder="Hausnummer" minlength="0" maxlength="10" error={ errors["address.house"] } />
 	</div>
 	
 	<div>
 		<Input bind:value={ newEntry.address.city } placeholder="Stadt / Ort" required minlength="2" maxlength="50" error={ errors["address.city"] } />
-		<Input bind:value={ newEntry.address.plz } placeholder="Postleitzahl" required minlength="0" maxlength="10" error={ errors["address.plz"] } />
+		<Input bind:value={ newEntry.address.plz } placeholder="Postleitzahl" minlength="0" maxlength="10" error={ errors["address.plz"] } />
 	</div>
 	
 	<h2> Ansprechpartner*in </h2>
@@ -125,7 +146,7 @@
 	
 	<Input bind:value={ newEntry.email } type="email" placeholder="E-Mail Adresse" minlength="5" maxlength="320" error={ errors["email"] } />
 	<Input bind:value={ newEntry.telephone } type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" error={ errors["telephone"] } />
-	<Input bind:value={ newEntry.website } type="url" placeholder="Webseite" minlength="3" maxlength="500"  error={ errors["website"] } />
+	<Input bind:value={ newEntry.website } type="url" placeholder="Webseite" minlength="3" maxlength="500"  error={ errors["website"] } on:change={ checkWebsite } />
 	
 	<h2> Spezifische Angaben </h2>
 	
