@@ -24,6 +24,7 @@ Die Umgebungssuche filtert nicht nach einer Stadt, sondern sortiert die Einträg
 
 ## Warum sehe ich nur Einträge von Orten die ganz weit weg sind?
 
-Stelle sicher dass du deinen Standort richtig angegeben hast. Oben siehst du nach welchen Standort das System filtert. Du kannst auch die Umgebungssuche vom Browser aus verwenden.
+Stelle sicher dass du deinen Standort richtig angegeben hast. Oben siehst du nach welchen Standort das System filtert.
+Du kannst auch die Umgebungssuche vom Browser verwenden, indem du den "Umgebungssuche" Knopf verwendest.
 
 Es ist auch möglich dass es in deiner Nähe noch keine Einträge gibt.
