@@ -68,11 +68,12 @@
 			}
 		}
 		
+		/*
 		:global(input:invalid),
 		:global(select:invalid),
 		:global(textarea:invalid) {
 			border: 2px solid var(--color-edge-warn);
-		}
+		}*/
 	}
 	
 	span.error {
