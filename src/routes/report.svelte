@@ -1,17 +1,17 @@
 <script lang="ts">
-	import SubmitForm from "$components/forms/submitForm.svelte"
+	import ReportForm from "$components/forms/reportForm.svelte";
 </script>
 
 <svelte:head>
-	<title>Neuer Eintrag - Trans*DB</title>
+	<title>Eintrag Melden - Trans*DB</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 
 <template lang="pug">
 	div.content
-		SubmitForm
+		ReportForm
 </template>
 
 <style lang="scss">
-	@import "../scss/content-small";
+	@import "../scss/content";
 </style>

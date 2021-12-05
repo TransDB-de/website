@@ -34,7 +34,6 @@
 		div.inner
 			DonationContent
 			KofiButton(href="{externalLinks.donation}")
-
 </template>
 
 <style lang="scss">

@@ -1,7 +1,6 @@
 <script lang="ts">
 	export let group = [];
 	export let value = "";
-	export let checked = false;
 	
 	/*
 	* Group bindings on custom components with checkboxes has to be done manually
@@ -23,8 +22,8 @@
 		type="checkbox"
 		{...$$props}
 		{value}
-		checked={group.includes(value)}
-		on:change={onChange}
+		checked={ group.includes(value) }
+		on:change={ onChange }
 	/>
 	<span class="checkmark"></span>
 </label>

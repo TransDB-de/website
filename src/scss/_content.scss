@@ -3,65 +3,57 @@
 
 .content {
 	max-width: $conent-max-width;
-	padding: 30px;
 	display: flex;
 	flex-direction: column;
 	
-	&.small {
-		max-width: $conent-max-width-small;
+	padding: 30px;
+	
+	@include media-mobile {
+		padding: 20px;
 	}
 	
-	:global(h1),
-	:global(h2),
-	:global(h3) {
-		margin: 20px 0 20px 0;
+	@include media-mobile-small {
+		padding: 10px;
 	}
 	
-	:global(p) {
+	& > :global(p), & > :global(form > p) {
 		margin: 0 0 20px 15px;
 		line-height: 1.3;
+		
+		@include media-mobile {
+			margin: 0 0 20px 0;
+		}
 	}
 	
-	:global(h1) {
+	@mixin heading($tag) {
+		& > :global( #{$tag} ), & > :global(form > #{$tag}) {
+			margin: 20px 0 20px 0;
+			@content;
+		}
+	}
+	
+	@include heading(h1) {
 		font-size: 1.8em;
 		border-bottom: 2px solid var(--color-edge-light);
 	}
 	
-	:global(h2) {
+	@include heading(h2) {
 		font-size: 1.5em;
 		border-bottom: 2px solid var(--color-edge-light);
 	}
 	
-	:global(h3) {
+	@include heading(h3) {
 		font-size: 1.2em;
 		margin-top: 0;
 	}
 	
-	:global(a) {
+	& > :global(a), & > :global(p > a) , & > :global(form > p > a) {
 		color: var(--color-edge-highlight);
 		text-decoration: none;
 		border-bottom: 2px solid var(--color-edge-highlight);
 	}
 	
-	:global(ul) {
+	& > :global(ul) {
 		margin: 0 0 20px;
-	}
-	
-}
-
-@include media-mobile {
-	.content {
-		padding: 20px;
-		
-		:global(p) {
-			margin: 0 0 20px 0;
-			line-height: 1.3;
-		}
-	}
-}
-
-@include media-mobile-small {
-	.content {
-		padding: 10px;
 	}
 }

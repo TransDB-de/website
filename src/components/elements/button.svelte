@@ -33,6 +33,7 @@
 		outline: 0;
 		transition: 0.12s ease background-color;
 		font-family: "Poppins", sans-serif;
+		height: 40px;
 		
 		&:hover,
 		&:focus {
@@ -57,7 +58,7 @@
 		/* icons */
 		
 		:global(.lucide) {
-			stroke-width: 3;
+			stroke-width: 2.5;
 			margin-right: 5px;
 			width: 20px;
 			height: 20px;
@@ -76,15 +77,17 @@
 		&.light {
 			background-color: var(--color-surface-bright);
 			
-			&:not(.red) {
+			&:not(.red):not(.edge-error):not(.edge-highlight) {
 				color: var(--color-edge);
 			}
 			
 			padding: 5px 10px;
+			height: unset;
 			min-height: 35px;
 			
 			&.iconOnly {
-				padding: 7.5px;
+				padding: 5px;
+				min-width: 35px;
 			}
 			
 			&:hover,
@@ -109,6 +112,14 @@
 
 		&.red:active {
 			background-color: var(--color-surface-warn-active);
+		}
+		
+		&.edge-highlight {
+			color: var(--color-edge-highlight);
+		}
+		
+		&.edge-error {
+			color: var(--color-edge-error);
 		}
 	}
 </style>

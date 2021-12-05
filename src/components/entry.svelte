@@ -2,9 +2,16 @@
 	import type { Entry } from "$models/entry.model"
 	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
+	import axios from "axios"
+	
+	import { goto } from "$app/navigation"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
+	import Button from "$components/elements/button.svelte"
+	import { popupOk, popupError } from "$components/popup.svelte"
+	import { removeEntry } from "$components/entriesCollection.svelte"
+	import { timeout } from "$lib/utils";
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
 	import MapIcon from "lucide-icons-svelte/map.svelte"
@@ -13,12 +20,14 @@
 	import EditIcon from "lucide-icons-svelte/edit.svelte"
 	import Share2Icon from "lucide-icons-svelte/share2.svelte"
 	import NavigationIcon from "lucide-icons-svelte/navigation.svelte"
+	import CheckCircle from "lucide-icons-svelte/checkCircle.svelte"
+	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
 	
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
-	$: website = entry.website ? new URL(entry.website).host : null
+	$: website = entry.website ? new URL(entry.website).host : null;
 	
 	let addressText = "";
 	$: {
@@ -30,29 +39,57 @@
 		
 		addressText += entry.address.city;
 	}
+	
+	function share() {
+		let url = "/entry/" + entry._id;
+
+		if (navigator.share) {
+			navigator.share({ url });
+		} else {
+			navigator.clipboard.writeText(window.location.origin + url);
+			popupOk("Link in die Zwischenablage kopiert!");
+		}
+	}
+	
+	let approveLoading: boolean = false;
+	
+	async function approve() {
+		approveLoading = true;
+		try {
+			await axios.patch(`/entries/${entry._id}/approve`);
+			approveLoading = false;
+			popupOk("Eintrag freigeschaltet");
+			
+			await timeout(0);
+			removeEntry(entry);
+		} catch (e) {
+			popupError("Fehler beim Freischalten");
+		}
+		
+	}
 </script>
 
 <div class="entry">
 	<div class="data">
-		<h1>
-			{entry.name}
+		<div class="heading">
+			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
 				<span class="special-tag green"> Barrierefrei </span>
 			{:else if entry.accessible === "no"}
 				<span class="special-tag orange"> Nicht Barrierefrei </span>
 			{/if}
-		</h1>
+		</div>
 		
 		<p class="small-gap">
-			{#if entry.firstName || entry.lastName}
-				<b> {entry.firstName ?? ""} {entry.lastName ?? ""} </b>
+			{#if isWithSubject}
+				<b> { subjectName } </b>
+			{:else}
+				<b title={ mouseOverTexts[entry.type] }> { typeMapping[entry.type] } </b>
 			{/if}
 			
-			{#if isWithSubject}
-				<span> {subjectName} </span>
-			{:else}
-				<span title={mouseOverTexts[entry.type]}> {typeMapping[entry.type]} </span>
+			{#if entry.firstName || entry.lastName}
+				<span> { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
 			{/if}
 		</p>
 		
@@ -62,19 +99,19 @@
 			</a>
 	
 			{#if entry.telephone}
-				<a href={`tel:${entry.telephone}`}>
+				<a href={`tel:${ entry.telephone }`}>
 					<PhoneIcon />{ entry.telephone }
 				</a>
 			{/if}
 			
 			{#if entry.email}
-				<a href={`mailto:${entry.email}`}>
+				<a href={`mailto:${ entry.email }`}>
 					<MailIcon />{ entry.email }
 				</a>
 			{/if}
 			
 			{#if entry.website}
-				<a href={website} target="_blank" rel="noopener">
+				<a href={ entry.website } target="_blank" rel="noopener">
 					<GlobeIcon />{ website }
 				</a>
 			{/if}
@@ -85,7 +122,7 @@
 			<p class="small-gap small-margin">
 				<b> Angebote: </b>
 				{#each entry.meta.offers as offer}
-					<Tag title={mouseOverTexts[offer]}> {offerMapping[entry.type][offer]} </Tag>
+					<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
 				{/each}
 			</p>
 		{/if}
@@ -94,50 +131,74 @@
 			<p class="small-gap small-margin">
 				<b> Eigenschaften: </b>
 				{#each entry.meta.attributes as attribute}
-					<Tag title={mouseOverTexts[attribute]}> {attributeMapping[entry.type][attribute]} </Tag>
+					<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
 				{/each}
 			</p>
 		{/if}
 		
 		{#if entry.meta.specials}
 			<p class="small-gap small-margin">
-				<b> Besonderheiten: </b> {entry.meta.specials}
+				<b> Besonderheiten: </b> { entry.meta.specials }
 			</p>
 		{/if}
 		
 		{#if entry.meta.minAge}
 			<p class="small-gap small-margin">
-				<b> Mindestalter: </b> {entry.meta.minAge}
+				<b> Mindestalter: </b> { entry.meta.minAge }
 			</p>
 		{/if}
 		
 		{#if entry.distance}
-			<p class="small-gap distance">
-				<NavigationIcon /> <b> {entry.distance} km </b> 
+			<p class="small-gap distance" title={ mouseOverTexts["distance"] }>
+				<NavigationIcon /> <b> { entry.distance.toFixed(1) } km - { entry.address.city } </b> 
 			</p>
 		{/if}
 	</div>
 	
 	<div class="controls">
-		<EdgeButton>
-			<EditIcon />
-		</EdgeButton>
-		
-		<EdgeButton>
-			<Share2Icon />
-		</EdgeButton>
+		{#if entry.approved}
+			<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
+				<EditIcon />
+			</EdgeButton>
+			
+			<EdgeButton on:click={share} title={ mouseOverTexts["share"] }>
+				<Share2Icon />
+			</EdgeButton>
+		{:else}
+			<!--<EdgeButton title={ mouseOverTexts["approveEntry"] } color="highlight" on:click={ approve } loading={ approveLoading }>
+				<CheckCircle />
+			</EdgeButton>
+			
+			<EdgeButton title={ mouseOverTexts["report"] } color="warn">
+				<AlertTriangleIcon />
+			</EdgeButton>-->
+			<Button light iconOnly color="edge-highlight" title={ mouseOverTexts["approveEntry"] } on:click={ approve } loading={ approveLoading }>
+				<CheckCircle />
+			</Button>
+			
+			<Button light iconOnly color="edge-error">
+				<AlertTriangleIcon />
+			</Button>
+		{/if}
 	</div>
 </div>
 
 <style lang="scss">
 	@import "../scss/shadows";
+	@import "../scss/mixins";
 	
 	.entry {
 		display: flex;
 		background-color: var(--color-background-bright);
 		box-shadow: $surface-shadow-soft;
 		border-radius: 4px;
-		padding: 10px 20px;
+		padding: 10px 15px 10px 20px;
+		overflow-wrap: break-word;
+		gap: 5px;
+		
+		@include media-mobile-small {
+			padding: 10px;
+		}
 		
 		.data {
 			display: flex;
@@ -153,7 +214,7 @@
 				font-size: 0.9em;
 				
 				&:first-of-type{
-					margin: 0 0 20px 5px;
+					margin: 4px 0 20px 5px;
 				}
 				
 				&.small-gap {
@@ -165,7 +226,8 @@
 				}
 				
 				&.distance {
-					color: var(--color-edge-highlight)
+					color: var(--color-edge-highlight);
+					cursor: default;
 				}
 				
 				&:last-child {
@@ -177,28 +239,32 @@
 				font-weight: 500;
 			}
 			
-			h1 {
+			.heading {
 				display: flex;
 				flex-wrap: wrap;
 				align-items: center;
 				gap: 0 10px;
-				margin: 0;
-				font-size: 1.4em;
-				font-weight: 600;
-			}
-			
-			.special-tag {
-				padding: 0px 8px;
-				border-radius: 4px;
-				font-size: 0.6em;
-				font-weight: 400;
 				
-				&.green {
-					background-color: var(--color-special-highlight);
+				h1 {
+					font-size: 1.4em;
+					font-weight: 600;
+					margin: -4px 0;
 				}
 				
-				&.orange {
-					background-color: var(--color-special-warn);
+				.special-tag {
+					padding: 2px 8px;
+					border-radius: 4px;
+					font-size: 0.8em;
+					font-weight: 400;
+					cursor: default;
+					
+					&.green {
+						background-color: var(--color-special-highlight);
+					}
+					
+					&.orange {
+						background-color: var(--color-special-warn);
+					}
 				}
 			}
 			

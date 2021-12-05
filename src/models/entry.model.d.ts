@@ -1,6 +1,8 @@
 export interface Entry {
+	_id?: string;
 	type: string;
 	name: string;
+	approved ?: boolean;
 	firstName ?: string;
 	lastName ?: string;
 	email ?: string;

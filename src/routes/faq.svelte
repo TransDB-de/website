@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss">
-	@import "../scss/content.scss";
+	@import "../scss/content";
 	
 	.content {
 		:global(h2) {

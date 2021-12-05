@@ -1,3 +1,8 @@
+<script lang="ts" context="module">
+	import { writable } from "svelte/store"
+	let uid = writable<number>(0);
+</script>
+
 <script lang="ts">
 	import InputWrapper from "./inputWrapper.svelte"
 	import ChevronDownIcon from "lucide-icons-svelte/chevronDown.svelte"
@@ -7,10 +12,13 @@
 	
 	let customClass = "";
 	export { customClass as class };
+	
+	$uid += 1;
+	let id = "select" + $uid;
 </script>
 
-<InputWrapper { error } class={ customClass } for="select">
-	<select bind:value {...$$props} on:change id="select">
+<InputWrapper { error } class={ customClass } for={ id }>
+	<select bind:value {...$$props} on:change id={ id }>
 		<slot></slot>
 	</select>
 	<ChevronDownIcon />

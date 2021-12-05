@@ -49,6 +49,9 @@ const mouseOverTexts = {
 	proximitySearch: "Standort ermitteln",
 	locationSearchButton: "Suchen",
 	searchNearbyButton: "Weitere Einträge in der Umgebung dieses Eintrags suchen",
+	
+	report: "Eintrag melden oder Änderung vorschlagen",
+	share: "Teile den Link zu diesem Eintrag",
 
 	// Info
 	location: "Dein Standort",

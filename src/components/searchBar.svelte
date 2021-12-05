@@ -1,20 +1,37 @@
 <script lang="ts">
+	import { onDestroy } from "svelte"
+	
 	import Button from "$components/elements/button.svelte"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import SearchIcon from "lucide-icons-svelte/search.svelte"
 	import MapPinIcon from "lucide-icons-svelte/mapPin.svelte"
 
-	import { isMobile } from "$lib/store"
-	import { page } from "$app/stores"
+	import { isMobile, currentLocation } from "$lib/store"
+	import { page, navigating } from "$app/stores"
 	import { goto } from "$app/navigation"
 	
 	import { isKey, getGeoLocation } from "$lib/utils"
 	
 	export let hide = false;
-	let locationText = $page.query.has("location") ? $page.query.get("location") : "";
+	let locationText = $page.query.get("location") ?? "";
 	
-	$: textSearch = locationText.trim().length > 0
+	$: isTextSearch = locationText.trim().length > 0
+	
+	// React on navigating. Delete locationText if query is empty (resetted by user)
+	const unsubscribeNav = navigating.subscribe((nav) => {
+		if (!nav) return;
+		
+		if (nav.to.query.has("location")) {
+			locationText = nav.to.query.get("location");
+		}
+		
+		if (locationText && !nav.to.query.has("location")) {
+			locationText = "";
+		}
+	});
+	
+	onDestroy( unsubscribeNav );
 	
 	function resetLocaction() {
 		if ($page.path.includes("search")) {
@@ -23,7 +40,7 @@
 			$page.query.delete("long");
 		}
 		
-		if ( Array.from($page.query).length > 0 ) {
+		if ( $page.query.toString() ) {
 			goto("/search?" + $page.query.toString());
 		} else {
 			goto("/search");
@@ -40,6 +57,8 @@
 				}
 				
 				$page.query.set("location", locationText);
+				$page.query.delete("lat");
+				$page.query.delete("long");
 				break;
 			}
 			case "distance": {
@@ -47,7 +66,9 @@
 				try {
 					let pos = await getGeoLocation();
 					$page.query.set("lat", pos.coords.latitude.toString());
-					$page.query.set("long",pos.coords.longitude.toString());
+					$page.query.set("long", pos.coords.longitude.toString());
+					$page.query.delete("location");
+					locationText = "";
 				} catch(e) {
 					console.log(e);
 					resetLocaction();
@@ -56,12 +77,12 @@
 				break;
 			}
 		}
-
-		goto("/search?" + $page.query.toString())
+		
+		await goto("/search?" + $page.query.toString(), { keepfocus: true });
 	}
 </script>
 
-<div class="search-bar" class:hide class:textSearch {...$$props}>
+<div class="search-bar" class:hide class:isTextSearch {...$$props}>
 	
 	<input type=text
 	       title={ mouseOverTexts.locationSearch }
@@ -71,7 +92,6 @@
 	/>
 	
 	<Button light
-	        iconOnly={ $isMobile }
 	        on:click={ () => search("distance") }
 	        title={ mouseOverTexts.proximitySearch }
 	        class="proximity-button">
@@ -84,7 +104,7 @@
 	        iconOnly
 	        on:click={ () => search("text") }
 	        title={ mouseOverTexts.locationSearchButton }
-	        class="search-button {textSearch ? "" : "collapsed"}">
+	        class="search-button {isTextSearch ? "" : "collapsed"}">
 		
 		<SearchIcon />
 	</Button>
@@ -138,12 +158,22 @@
 			margin-left: 4px;
 		}
 		
-		:global .collapsed {
+		:global(.collapsed) {
 			opacity: 0;
 		}
 		
-		:global .proximity-button {
+		:global(.proximity-button) {
 			transition: 0.4s background-color;
+		}
+		
+		@include media-mobile {
+			:global(.proximity-button .lucide) {
+				margin: 0;
+			}
+			
+			:global(.proximity-button) {
+				padding: 7.5px;
+			}
 		}
 		
 		:global .search-button:not(.light) {
@@ -151,7 +181,7 @@
 		}
 	}
 	
-	.textSearch {
+	.isTextSearch {
 		grid-template-columns: 1fr auto calc(var(--button-icononly-width) + 4px);
 		
 		:global button.proximity-button {

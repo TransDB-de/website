@@ -1,5 +1,5 @@
 <script context="module">
-	import Ackee from "$lib/ackee"
+	import ackee from "$lib/ackee"
 	import config from "$lib/config"
 	
 	import axios from "axios";
@@ -7,7 +7,7 @@
 	
 	// runs every time "page" changes
 	export async function load({ page }) {
-		Ackee(page.path);
+		ackee(page.path);
 		return {};
 	}
 </script>
@@ -41,12 +41,7 @@
 		box-sizing: border-box;
 	}
 	
-	:global(html) {
-		overflow: -moz-scrollbars-vertical; 
-		overflow-y: scroll;
-	}
-	
-	:global body {
+	:global(body) {
 		margin: 0;
 		background-color: var(--color-background);
 		color: var(--color-edge);
@@ -54,8 +49,9 @@
 		display: flex;
 		flex-direction: column;
 		font-family: "Fira Sans", sans-serif;
-		overflow: auto;
 		min-height: 100vh;
+		overflow: -moz-scrollbars-vertical; 
+		overflow-y: scroll;
 	}
 	
 	:global(h1, h2, h3, h4, h5, h6) {

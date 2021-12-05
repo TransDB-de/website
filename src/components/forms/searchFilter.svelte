@@ -2,6 +2,7 @@
 	import ChevronRightIcon from "lucide-icons-svelte/chevronRight.svelte"
 	import MapPinIcon from "lucide-icons-svelte/mapPin.svelte"
 	import SearchIcon from "lucide-icons-svelte/search.svelte"
+	import XIcon from "lucide-icons-svelte/x.svelte"
 	
 	import RadioButton from "$formElements/radioButton.svelte"
 	import TagCheckbox from "$formElements/tagCheckbox.svelte"
@@ -12,21 +13,24 @@
 	
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import { attributeMapping, offerMapping, typeMapping } from "$lib/entryMappings"
-	import { getEntries } from "$lib/utils"
-	import { isMobile } from "$lib/store"
+	import { getEntries, clamp, timeout } from "$lib/utils"
+	import { isMobile, currentLocation } from "$lib/store"
 	import config from "$lib/config"
 	
 	import { browser } from "$app/env"
 	import { page } from "$app/stores"
+	import { goto } from "$app/navigation"
 	
 	let scrollY = 0;
 	let expand = true;
 	
 	let location = null;
-	let selectedType = "";
-	let selectedOffers = [];
-	let selectedAttributes = [];
-	let textFilter = "";
+	let selectedType = $page.query.get("type") ?? "";
+	let selectedOffers = $page.query.getAll("offers");
+	let selectedAttributes = $page.query.getAll("attributes");
+	let textFilter = $page.query.get("text") ?? "";
+	
+	let element;
 	
 	function toggleExpand() { expand = !expand }
 	
@@ -35,7 +39,7 @@
 	
 	// Automatic filter change handler
 	// Applies filters after a short delay, so that the changes don't stack
-	function filtersUpdated() {
+	async function filtersUpdated() {
 		// mobile changes are applied manually to save data
 		if ($isMobile) {
 			console.log("mobile")
@@ -45,43 +49,91 @@
 		if (!browser) {
 			applyFilters();
 		} else {
-			console.log(config.client.filterApplyTimeout);
-			
 			changeId += 1;
 			let thisChange = changeId;
 			
-			setTimeout(() => {
-				// if another change occured since the timer was started, do nothing
-				if (changeId === thisChange) {
-					applyFilters();
-				}
-			}, config.client.filterApplyTimeout)
+			await timeout(config.client.filterApplyTimeout);
+			
+			// if another change occured since the timer was started, do nothing
+			if (changeId === thisChange) {
+				applyFilters();
+			}
 		}
+	}
+	
+	function typeUpdated() {
+		selectedOffers = [];
+		selectedAttributes = [];
+		
+		filtersUpdated();
+	}
+	
+	function setQuery(field: string, value) {
+		if (value) {
+			if (Array.isArray(value)) {
+				
+				$page.query.delete(field);
+				
+				for (let e of value) {
+					$page.query.append(field, e);
+				}
+				
+			} else {
+				$page.query.set(field, value);
+			}
+		} else {
+			$page.query.delete(field);
+		}
+	}
+	
+	function resetLocation() {
+		$currentLocation = "";
+		
+		$page.query.delete("lat");
+		$page.query.delete("long");
+		$page.query.delete("location");
+		
+		applyFilters();
 	}
 	
 	function applyFilters() {
-		//TODO: implement api call, remove this test
-		console.log("Filter Applied");
-		console.log(" type: " + selectedType);
-		console.log(" offers: " + selectedOffers);
-		console.log(" attributes: " + selectedAttributes);
-		console.log(" string: " + textFilter)
-	}
-	
-	$: {
-		// apply filters when apply button dissapears on desktop
-		if (!isMobile) {
-			applyFilters()
+		setQuery("type", selectedType);
+		setQuery("offers", selectedOffers);
+		setQuery("attributes", selectedAttributes);
+		setQuery("text", textFilter);
+		
+		let searchString = "";
+		if ($page.query.toString()) {
+			searchString = "?" + $page.query.toString();
 		}
+		
+		goto("/search" + searchString, { keepfocus: true, noscroll: true });
 	}
 	
 	let hasMeta = false;
 	$: hasMeta = offerMapping[selectedType] || attributeMapping[selectedType];
+	
+	// scroll edge case
+	// this snippet ensures decives with small screens can sroll the sticky sidebar
+	const topOffset = 56;
+	let top = topOffset;
+	let prevY = scrollY;
+	$: {
+		if (browser && element) {
+			const scrollDist = scrollY - prevY;
+			const offsetHeight = element.offsetHeight;
+			
+			let botOffset = Math.min(window.innerHeight - offsetHeight, topOffset);
+			top = clamp(top - scrollDist, botOffset, topOffset);
+			
+			prevY = scrollY;
+		}
+	}
 </script>
 
 <svelte:window bind:scrollY={ scrollY }></svelte:window>
 
-<div class="search-filter" style="--window-scroll-y: { scrollY }">
+<div class="search-filter" style="--scroll-y: { top }px" bind:this={ element }>
 	<div class="bar mobile" class:expand on:click={ toggleExpand }>
 		<ChevronRightIcon class="chevron" size="24px" />
 		
@@ -89,18 +141,21 @@
 	</div>
 	
 	<div class="filter" class:expand>
-		{#if location}
-			<p class="sub-title"> Standort </p>
+		{#if $currentLocation}
+			<p class="sub-title">
+				Standort
+				<Button light class="reset-location" on:click={resetLocation}> löschen </Button>
+			</p>
 			
 			<p class="location" title={ mouseOverTexts[location] }>
 				<MapPinIcon />
-				<span> { location } </span>
+				<span> { $currentLocation } </span>
 			</p>
 		{/if}
 		
 		<p class="sub-title"> Kategorien </p>
 		
-		<Select class="mobile" bind:value={ selectedType }>
+		<Select class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
 			{#each Object.entries(typeMapping) as [key, value]}
 				<option name="type"
 				        value={ key }
@@ -110,7 +165,7 @@
 			{/each}
 		</Select>
 		
-		<fieldset class="desktop radio-buttons" on:input={ filtersUpdated }>
+		<fieldset class="desktop radio-buttons" on:input={ typeUpdated }>
 			{#each Object.entries(typeMapping) as [key, value]}
 				<RadioButton name="type"
 				             bind:group={ selectedType }
@@ -152,7 +207,8 @@
 			       bind:value={ textFilter }
 			       on:change={ filtersUpdated }
 			       placeholder="Suche Namen oder Personen"
-			       class="text-input { textFilter ? "has-text" : "" }"/>
+			       class="text-input { textFilter ? "has-text" : "" }"
+			       maxlength="120"/>
 			
 			<Button light
 			        iconOnly
@@ -187,6 +243,9 @@
 		align-self: start;
 		position: sticky;
 		justify-self: end;
+		
+		top: var(--scroll-y);
+		padding-bottom: 20px;
 		
 		@include media-mobile {
 			width: 100%;
@@ -267,12 +326,29 @@
 			font-family: 'Poppins', sans-serif;
 			margin: 10px 0 10px 0;
 			font-size: 1.1em;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		
+		:global(.reset-location) {
+			font-weight: 500;
+			padding: 0 8px;
+			min-height: unset;
+			font-size: 0.8em;
 		}
 		
 		.location{
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin: 0;
+			
 			:global(.lucide) {
 				color: var(--color-edge-highlight);
 				stroke-width: 2.5px;
+				height: 24px;
+				width: 24px;
 			}
 		}
 		
@@ -308,6 +384,7 @@
 				padding: 5.5px;
 				transition: opacity 0.2s ease, right 0.2s ease;
 				min-height: 0;
+				min-width: 0;
 			}
 			
 			:global(.search-button.collapsed) {

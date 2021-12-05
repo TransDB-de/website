@@ -64,3 +64,13 @@ export function getEntries<T = any>(obj?: Object): [string, T][] {
 		return [];
 	}
 }
+
+export function clamp(val: number, min: number, max: number): number {
+	return Math.min(Math.max(val, min), max);
+}
+
+export async function timeout(delay: number): Promise<void> {
+	return new Promise((resolve) => {
+		setTimeout(resolve, delay);
+	});
+}

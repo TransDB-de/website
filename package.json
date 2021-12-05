@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-node": "^1.0.0-next.55",
     "@sveltejs/kit": "next",
     "@types/ackee-tracker": "^5.0.2",
     "lucide-icons-svelte": "^0.1.0",
@@ -27,6 +28,7 @@
   "type": "module",
   "dependencies": {
     "ackee-tracker": "^5.1.0",
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "rehype-external-links": "^1.0.0"
   }
 }

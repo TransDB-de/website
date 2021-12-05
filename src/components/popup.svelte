@@ -1,6 +1,7 @@
 <script lang="ts" context="module">	
 	import { writable } from "svelte/store"
 	import config from "$lib/config"
+	import { timeout } from "$lib/utils"
 	
 	let visible = writable(false);
 	let type = writable("ok");
@@ -8,7 +9,7 @@
 	
 	let id = 0;
 	
-	function popup(message: string, _type: string) {
+	async function popup(message: string, _type: string) {
 		visible.set(true);
 		text.set(message);
 		type.set(_type);
@@ -16,12 +17,12 @@
 		id += 1;
 		let currentId = id;
 		
-		setTimeout(() => {
-			// only run, if no new popups were called since timer started
-			if (id === currentId) {
-				visible.set(false);
-			}
-		}, config.client.popupLinger);
+		await timeout(config.client.popupLinger);
+		
+		// only run, if no new popups were called since timer started
+		if (id === currentId) {
+			visible.set(false);
+		}
 	}
 	
 	export function popupOk(message: string) {

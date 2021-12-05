@@ -25,11 +25,6 @@
 		display: flex;
 		flex-direction: column;
 		
-		&.inline {
-			flex-direction: row;
-			flex-wrap: wrap;
-		}
-		
 		:global(div) {
 			display: flex;
 			justify-content: space-between;
@@ -44,6 +39,8 @@
 		
 		:global(button:last-child) {
 			margin-bottom: 20px;
+			align-self: center;
+			min-width: 200px;
 		}
 	}
 </style>

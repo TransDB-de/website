@@ -75,7 +75,7 @@ div.homepage
 		:global(h2) {
 			text-align: center;
 			font-size: 1.8em;
-			margin: 1.2em 0;
+			margin: 0.5em 0 1em;
 		}
 	}
 	
