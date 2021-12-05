@@ -1,0 +1,59 @@
+<script lang="ts">
+	import { browser } from "$app/env"
+	import { createEventDispatcher } from "svelte";
+	
+	import Button from "./elements/button.svelte";
+	
+	const dispatch = createEventDispatcher();
+	let scrollY: number;
+	let aboveThreshold = false;
+	
+	export let loading: boolean = false;
+	
+	$: {
+		if (browser) {
+			let scrolledHeight = Math.ceil(scrollY + window.innerHeight);
+			
+			// Check if user has scrolled to the bottom of the page
+			if (scrolledHeight >= document.body.offsetHeight - 10 && scrollY > 0 && aboveThreshold) {
+				aboveThreshold = false;
+				dispatch("click");
+			} else if ( scrolledHeight < document.body.offsetHeight - 10) {
+				aboveThreshold = true;
+			}
+		}
+	}
+</script>
+
+<svelte:window bind:scrollY={ scrollY }/>
+
+<div class="load-more">
+	<Button light on:click { loading }>Mehr anzeigen</Button>
+</div>
+
+<style lang="scss">
+	.load-more {
+		display: flex;
+		justify-content: center;
+		position: relative;
+		
+		:global(button:after),
+		:global(button:before) {
+			content: "";
+			display: flex;
+			position: absolute;
+			width: calc(50% - 85px);
+			height: 2px;
+			background-color: var(--color-edge-light);
+			border-radius: 2px;
+		}
+		
+		:global(button:before) {
+			left: 0;
+		}
+		
+		:global(button:after) {
+			right: 0;
+		}
+	}
+</style>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Form from "$formElements/form.svelte"
 	import Input from "$formElements/input.svelte"
-	import Button from "$components/button.svelte"
+	import Button from "$components/elements/button.svelte"
 
 	import axios from "axios"
 	import { goto } from "$app/navigation"

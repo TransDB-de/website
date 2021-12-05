@@ -18,7 +18,7 @@
 </script>
 
 <label class="checkbox-container">
-	<slot />
+	<slot></slot>
 	<input
 		type="checkbox"
 		{...$$props}

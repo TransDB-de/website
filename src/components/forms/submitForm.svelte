@@ -4,8 +4,8 @@
 	import Select from "$formElements/select.svelte"
 	import Checkbox from "$formElements/checkbox.svelte"
 	
-	import Button from "$components/button.svelte"
-	import ErrorBox from "$components/errorBox.svelte"
+	import Button from "$components/elements/button.svelte"
+	import ErrorBox from "$components/elements/errorBox.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"

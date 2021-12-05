@@ -11,7 +11,7 @@
 
 <InputWrapper { error } class={ customClass } for="select">
 	<select bind:value {...$$props} on:change id="select">
-		<slot />
+		<slot></slot>
 	</select>
 	<ChevronDownIcon />
 </InputWrapper>

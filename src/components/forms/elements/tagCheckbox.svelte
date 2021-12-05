@@ -17,7 +17,7 @@
 	       bind:value
 	       checked={ group.includes(value) }
 	       on:change={ onChange }/>
-	<span> <slot /> </span>
+	<span> <slot></slot> </span>
 </label>
 
 <style lang="scss">

@@ -9,7 +9,7 @@
 	import ContributeSmall from "$assets/contribute_small.svg"
 	import Heart from "$assets/heart.svg"
 	
-	import Button from "$components/button.svelte"
+	import Button from "$components/elements/button.svelte"
 </script>
 
 <svelte:head>

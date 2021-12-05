@@ -8,7 +8,7 @@
 	import Input from "$formElements/input.svelte"
 	import Select from "$formElements/select.svelte"
 	
-	import Button from "$components/button.svelte"
+	import Button from "$components/elements/button.svelte"
 	
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import { attributeMapping, offerMapping, typeMapping } from "$lib/entryMappings"
@@ -17,6 +17,7 @@
 	import config from "$lib/config"
 	
 	import { browser } from "$app/env"
+	import { page } from "$app/stores"
 	
 	let scrollY = 0;
 	let expand = true;
@@ -25,7 +26,7 @@
 	let selectedType = "";
 	let selectedOffers = [];
 	let selectedAttributes = [];
-	let filterString = "";
+	let textFilter = "";
 	
 	function toggleExpand() { expand = !expand }
 	
@@ -64,7 +65,7 @@
 		console.log(" type: " + selectedType);
 		console.log(" offers: " + selectedOffers);
 		console.log(" attributes: " + selectedAttributes);
-		console.log(" string: " + filterString)
+		console.log(" string: " + textFilter)
 	}
 	
 	$: {
@@ -148,17 +149,16 @@
 		
 		<div class="text-filter">
 			<Input type="text"
-			       bind:value={ filterString }
+			       bind:value={ textFilter }
 			       on:change={ filtersUpdated }
 			       placeholder="Suche Namen oder Personen"
-			       class="text-input { filterString ? "has-text" : "" }"/>
+			       class="text-input { textFilter ? "has-text" : "" }"/>
 			
 			<Button light
-			        noShadow
 			        iconOnly
 			        on:click={ applyFilters }
 			        title={ mouseOverTexts.filter }
-			        class="search-button { filterString ? "" : "collapsed"}">
+			        class="search-button { textFilter ? "" : "collapsed"}">
 				
 				<SearchIcon />
 			</Button>
@@ -266,6 +266,7 @@
 			font-weight: 500;
 			font-family: 'Poppins', sans-serif;
 			margin: 10px 0 10px 0;
+			font-size: 1.1em;
 		}
 		
 		.location{
@@ -304,8 +305,7 @@
 				position: absolute;
 				top: 6px;
 				right: 6px;
-				height: calc(100% - 12px);
-				padding: 0 7px;
+				padding: 5.5px;
 				transition: opacity 0.2s ease, right 0.2s ease;
 			}
 			

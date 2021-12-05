@@ -26,3 +26,9 @@ export interface Meta {
 	minAge ?: number;
 	subject ?: string;
 }
+
+export interface EntriesResponse {
+	entries: Entry[];
+	locationName?: string;
+	more: boolean;
+}

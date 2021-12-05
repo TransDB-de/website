@@ -9,7 +9,7 @@
 		<span class="error">{error}</span>
 	{/if}
 	
-	<slot />
+	<slot></slot>
 </span>
 
 <style lang="scss">

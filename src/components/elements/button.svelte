@@ -1,23 +1,22 @@
 <script lang="ts">
-	import Loader from "$components/loader.svelte"
+	import Loader from "$components/elements/loader.svelte"
 	
 	export let color: string = "";
 	export let loading = false;
 	export let light = false;
 	export let iconOnly = false;
-	export let noShadow = false;
 </script>
 
-<button on:click class={color} class:noShadow class:light class:iconOnly {...$$props}>
+<button on:click class={ color } class:light class:iconOnly {...$$props}>
 	{#if loading}
-		<Loader dark={light} />
+		<Loader dark={ light } />
 	{:else}
 		<slot></slot>
 	{/if}
 </button>
 
 <style lang="scss">
-	@import "../scss/shadows.scss";
+	@import "../../scss/shadows.scss";
 	
 	button {
 		border: 0;
@@ -46,12 +45,12 @@
 		
 		/* shadows */
 		
-		&:not(.noShadow) {
+		&:not(.light) {
 			box-shadow: $surface-shadow-soft;
 		}
 		
-		&:hover:not(.noShadow),
-		&:focus:not(.noShadow) {
+		&:hover:not(.light),
+		&:focus:not(.light) {
 			box-shadow: $surface-shadow-strong;
 		}
 		
@@ -60,8 +59,8 @@
 		:global(.lucide) {
 			stroke-width: 3;
 			margin-right: 5px;
-			width: 18px;
-			height: 18px;
+			width: 20px;
+			height: 20px;
 		}
 		
 		&.iconOnly {
@@ -76,9 +75,16 @@
 		
 		&.light {
 			background-color: var(--color-surface-bright);
-			box-shadow: none;
-			color: var(--color-edge);
+			
+			&:not(.red) {
+				color: var(--color-edge);
+			}
+			
 			padding: 5px 10px;
+			
+			&.iconOnly {
+				padding: 7.5px;
+			}
 			
 			&:hover,
 			&:focus {

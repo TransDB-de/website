@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Button from "$components/button.svelte"
+	import Button from "$components/elements/button.svelte"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import SearchIcon from "lucide-icons-svelte/search.svelte"
@@ -65,13 +65,12 @@
 	
 	<input type=text
 	       title={ mouseOverTexts.locationSearch }
-	       placeholder={ $isMobile ? "Suche nach Postleitzahl oder Ort" : "Suche nach PLZ oder Ort" }
+	       placeholder={ $isMobile ? "Suche nach PLZ oder Ort" : "Suche nach Postleitzahl oder Ort" }
 	       on:keydown={ isKey("Enter", () => search("text")) }
 	       bind:value={ locationText }
 	/>
 	
 	<Button light
-	        noShadow
 	        iconOnly={ $isMobile }
 	        on:click={ () => search("distance") }
 	        title={ mouseOverTexts.proximitySearch }
@@ -82,7 +81,6 @@
 	</Button>
 	
 	<Button light
-	        noShadow
 	        iconOnly
 	        on:click={ () => search("text") }
 	        title={ mouseOverTexts.locationSearchButton }

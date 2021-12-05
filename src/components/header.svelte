@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation"
-	import NavLink from "./navLink.svelte"
+	import NavLink from "$components/elements/navLink.svelte"
 	import MenuIcon from "$components/icons/menuIcon.svelte"
 	import SearchBar from "$components/searchBar.svelte"
 	import { browser } from "$app/env"
@@ -31,6 +31,8 @@
 	
 	$: {
 		if (browser && component) {
+			//console.log(scrollY);
+			
 			let frac = (scrollY / (component.scrollHeight - navbar.scrollHeight));
 			
 			let _opacity = (1 - frac);
@@ -99,6 +101,10 @@
 		box-shadow: $rim-shadow-medium;
 		transition: 0.4s ease height, 0s ease box-shadow;
 		font-family: "Poppins", sans-serif;
+		
+		h1 {
+			padding-right: 0 !important;
+		}
 		
 		&:after {
 			top: 0;

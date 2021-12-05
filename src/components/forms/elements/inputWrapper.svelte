@@ -12,7 +12,7 @@
 		<span class="error">{error}</span>
 	{/if}
 	
-	<slot />
+	<slot></slot>
 </label>
 
 

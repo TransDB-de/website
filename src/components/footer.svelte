@@ -5,15 +5,24 @@
 	import KofiBrandIcon from "$brandIcons/kofiBrandIcon.svelte"
 	
 	import externalLinks from "$content/external-links.json"
+	
+	import NavLink from "$components/elements/navLink.svelte"
+	
+	const linkOptions = {
+		lineHeight: "2px",
+		lineOffset: "-2px",
+		shadow: false,
+		color: "var(--color-edge)"
+	}
 </script>
 
 <div class="footer">
 	
 	<div>
-		<a href="/imprint">Impressum</a>
-		<a href="/privacy">Datenschutz</a>
-		<a href="/about">Über uns</a>
-		<a href="/faq">FAQ</a>
+		<NavLink {...linkOptions} href="/imprint">Impressum</NavLink>
+		<NavLink {...linkOptions} href="/privacy">Datenschutz</NavLink>
+		<NavLink {...linkOptions} href="/about">Über uns</NavLink>
+		<NavLink {...linkOptions} href="/faq">FAQ</NavLink>
 	</div>
 	
 	<div class="low-hover-bar">
@@ -93,9 +102,6 @@
 		margin: 0 10px;
 		display: inline-flex;
 		justify-content: center;
-		text-decoration: none;
-		font-weight: 500;
-		text-align: center;
 		border: none;
 		
 		@include underline(

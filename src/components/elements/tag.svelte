@@ -1,5 +1,5 @@
 <span class="tag" {...$$props}>
-	<slot />
+	<slot></slot>
 </span>
 
 <style lang="scss">

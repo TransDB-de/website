@@ -3,20 +3,26 @@
 	
 	export let exact = false;
 	export let href = "/";
-	export let color = "white";
+	export let color = "var(--color-edge-bright)";
 	export let shadow = true;
+	export let lineHeight = "3px";
+	export let lineOffset = "0";
 	
 	$: active = $page.path.startsWith($$props.href) ? "active" : "";
 	$: activeExact = $page.path === $$props.href ? "active" : "";
 </script>
 
-<a {...$$props} href={href} class="nav-link {exact ? activeExact : active}" class:shadow style="--color: {color}">
+<a {...$$props}
+   href={href} 
+   class="nav-link {exact ? activeExact : active}"
+   class:shadow
+   style="--color: { color }; --line-height: { lineHeight }; --line-offset: { lineOffset };">
 	<slot> </slot>
 </a>
 
 <style lang="scss">
-	@import "../scss/mixins";
-	@import "../scss/shadows";
+	@import "../../scss/mixins";
+	@import "../../scss/shadows";
 	
 	.nav-link {
 		color: var(--color);
@@ -30,7 +36,9 @@
 		cursor: pointer;
 		
 		@include underline(
-			$color: var(--color)
+			$color: var(--color),
+			$height: var(--line-height),
+			$offset: var(--line-offset)
 		);
 		
 		&:hover:after {

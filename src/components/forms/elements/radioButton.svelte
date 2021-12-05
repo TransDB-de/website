@@ -15,7 +15,7 @@
 	       bind:value
 	       checked={ group === value }
 	       on:change={ onChange }/>
-	<span> <slot /> </span>
+	<span> <slot></slot> </span>
 </label>
 
 <style lang="scss">
@@ -33,7 +33,7 @@
 		text-shadow: $edge-shadow-tiny;
 		
 		font-weight: 400;
-		font-size: 0.9em;
+		font-size: 1em;
 		
 		&:hover, input:hover ~ & {
 			padding: 5px 2px 5px 12px;

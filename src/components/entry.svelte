@@ -3,8 +3,8 @@
 	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
-	import Tag from "$components/tag.svelte"
-	import LightButton from "$components/lightButton.svelte"
+	import Tag from "$components/elements/tag.svelte"
+	import EdgeButton from "$components/elements/edgeButton.svelte"
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
 	import MapIcon from "lucide-icons-svelte/map.svelte"
@@ -20,6 +20,8 @@
 	
 	let addressText = "";
 	$: {
+		addressText = "";
+		
 		if (entry.address.street) addressText += entry.address.street + " ";
 		if (entry.address.house) addressText += entry.address.house + ", ";
 		if (entry.address.plz) addressText += entry.address.plz + " ";
@@ -41,7 +43,9 @@
 		</h1>
 		
 		<p class="small-gap">
-			<b> {entry.firstName} {entry.lastName} </b>
+			{#if entry.firstName || entry.lastName}
+				<b> {entry.firstName ?? ""} {entry.lastName ?? ""} </b>
+			{/if}
 			
 			{#if isWithSubject}
 				<span> {subjectName} </span>
@@ -94,7 +98,7 @@
 		{/if}
 		
 		{#if entry.meta.specials}
-			<p>
+			<p class="small-gap small-margin">
 				<b> Besonderheiten: </b> {entry.meta.specials}
 			</p>
 		{/if}
@@ -107,13 +111,13 @@
 	</div>
 	
 	<div class="controls">
-		<LightButton>
+		<EdgeButton>
 			<EditIcon />
-		</LightButton>
+		</EdgeButton>
 		
-		<LightButton>
+		<EdgeButton>
 			<Share2Icon />
-		</LightButton>
+		</EdgeButton>
 	</div>
 </div>
 

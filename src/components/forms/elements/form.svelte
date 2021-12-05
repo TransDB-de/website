@@ -15,7 +15,7 @@
 </script>
 
 <form on:submit|preventDefault={ handleSubmit } bind:this={ form }>
-	<slot />
+	<slot></slot>
 </form>
 
 <style lang="scss">

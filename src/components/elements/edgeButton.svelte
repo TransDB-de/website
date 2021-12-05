@@ -1,5 +1,5 @@
 <button on:click>
-	<slot />
+	<slot></slot>
 </button>
 
 <style lang="scss">
