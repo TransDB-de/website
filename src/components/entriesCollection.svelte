@@ -50,7 +50,7 @@
 			return;
 		}
 		
-		entries = [...res.data.entries, ...entries];
+		entries = [...entries, ...res.data.entries];
 		more = res.data.more;
 		pageCount = newPage;
 		

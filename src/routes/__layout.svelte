@@ -17,15 +17,19 @@
 	import Footer from "$components/footer.svelte"
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
+	
+	import { page } from '$app/stores'
 </script>
 
 <div class="app">
 	<Header />
 	
-	<div transition:fade={{ duration: 0.6 }} class="page">
-		<slot></slot>
-	</div>
-	
+	{#key $page.path}
+		<div in:fade={{duration: 200}} class="page">
+			<slot></slot>
+		</div>
+	{/key}
+		
 	<Footer />
 	<Popup />
 </div>
@@ -35,6 +39,11 @@
 	
 	:global * {
 		box-sizing: border-box;
+	}
+	
+	:global(html) {
+		overflow: -moz-scrollbars-vertical; 
+		overflow-y: scroll;
 	}
 	
 	:global body {

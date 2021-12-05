@@ -70,7 +70,7 @@
 		</span>
 	</div>
 	
-	<h1 class="title" on:click={() => goto("/")}> Trans*DB </h1>
+	<h1 class="title" on:click={() => goto("/search")}> Trans*DB </h1>
 	
 	<h2 class="subtitle"> Die Suchmaschine für trans* relevante Angebote </h2>
 	

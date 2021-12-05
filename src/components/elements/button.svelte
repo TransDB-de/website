@@ -81,6 +81,7 @@
 			}
 			
 			padding: 5px 10px;
+			min-height: 35px;
 			
 			&.iconOnly {
 				padding: 7.5px;

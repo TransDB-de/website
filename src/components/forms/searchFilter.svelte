@@ -307,6 +307,7 @@
 				right: 6px;
 				padding: 5.5px;
 				transition: opacity 0.2s ease, right 0.2s ease;
+				min-height: 0;
 			}
 			
 			:global(.search-button.collapsed) {

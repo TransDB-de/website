@@ -12,11 +12,13 @@
 	import GlobeIcon from "lucide-icons-svelte/globe.svelte"
 	import EditIcon from "lucide-icons-svelte/edit.svelte"
 	import Share2Icon from "lucide-icons-svelte/share2.svelte"
+	import NavigationIcon from "lucide-icons-svelte/navigation.svelte"
 	
 	export let entry: Entry = null;
 	
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
+	$: website = entry.website ? new URL(entry.website).host : null
 	
 	let addressText = "";
 	$: {
@@ -72,8 +74,8 @@
 			{/if}
 			
 			{#if entry.website}
-				<a href={entry.website} target="_blank" rel="noopener">
-					<GlobeIcon />{ entry.website }
+				<a href={website} target="_blank" rel="noopener">
+					<GlobeIcon />{ website }
 				</a>
 			{/if}
 		</p>
@@ -104,8 +106,14 @@
 		{/if}
 		
 		{#if entry.meta.minAge}
-			<p>
+			<p class="small-gap small-margin">
 				<b> Mindestalter: </b> {entry.meta.minAge}
+			</p>
+		{/if}
+		
+		{#if entry.distance}
+			<p class="small-gap distance">
+				<NavigationIcon /> <b> {entry.distance} km </b> 
 			</p>
 		{/if}
 	</div>
@@ -154,6 +162,10 @@
 				
 				&.small-margin {
 					margin: 0 0 10px 0;
+				}
+				
+				&.distance {
+					color: var(--color-edge-highlight)
 				}
 				
 				&:last-child {
@@ -205,6 +217,8 @@
 			:global(.lucide) {
 				height: 18px;
 				width: 18px;
+				min-height: 18px;
+				min-width: 18px;
 			}
 		}
 		

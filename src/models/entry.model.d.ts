@@ -10,6 +10,8 @@ export interface Entry {
 	
 	address: Address
 	meta: Meta
+	
+	distance?: number;
 }
 
 export interface Address {

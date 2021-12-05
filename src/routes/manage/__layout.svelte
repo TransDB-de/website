@@ -10,7 +10,8 @@
 	const linkOptions = {
 		shadow: false,
 		color: "var(--color-edge)",
-		lineHeight: "2px"
+		lineHeight: "2px",
+		lineOffset: "-2px"
 	}
 	
 	let username: string = "Account";
@@ -41,6 +42,7 @@
 
 <style lang="scss">
 	@import "../../scss/mixins";
+	@import "../../scss/shadows";
 	
 	.manage-nav {
 		background-color: var(--color-background-bright);
@@ -49,6 +51,9 @@
 		display: flex;
 		flex-direction: row;
 		justify-content: space-around;
+		
+		padding: 5px;
+		box-shadow: $surface-shadow-soft;
 		
 		nav {
 			display: flex;
@@ -72,7 +77,6 @@
 		
 		@include media-mobile {
 			flex-direction: column;
-			padding: 8px;
 		}
 	}
 </style>
