@@ -38,7 +38,7 @@
 		<NavLink {...linkOptions} href="/manage/users"> Nutzer </NavLink>
 	</nav>
 	<span class="account">
-		<Button light>
+		<Button light  on:click={ () => goto("/manage/account") }>
 			<SettingsIcon class="settings-icon" size="28px"/>
 			{ username }
 		</Button>
