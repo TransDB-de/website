@@ -8,6 +8,7 @@
 
 <template lang="pug">
 	div.content
+		h1 Account Einstellungen
 		UpdatePasswordForm
 		UpdateUsernameForm(username="{$userdata?.username}")
 		UpdateEmailForm(email="{$userdata?.email}")

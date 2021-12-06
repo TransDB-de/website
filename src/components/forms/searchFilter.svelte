@@ -2,7 +2,6 @@
 	import ChevronRightIcon from "lucide-icons-svelte/chevronRight.svelte"
 	import MapPinIcon from "lucide-icons-svelte/mapPin.svelte"
 	import SearchIcon from "lucide-icons-svelte/search.svelte"
-	import XIcon from "lucide-icons-svelte/x.svelte"
 	
 	import RadioButton from "$formElements/radioButton.svelte"
 	import TagCheckbox from "$formElements/tagCheckbox.svelte"

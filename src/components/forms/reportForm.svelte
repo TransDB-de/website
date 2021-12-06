@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Form from "$components/forms/elements/form.svelte"
+	import Form from "$formElements/form.svelte"
 	import EntryComponent from "$components/entry.svelte"
-	import Textarea from "$components/forms/elements/textarea.svelte"
+	import Textarea from "$formElements/textarea.svelte"
 	import Button from "$components/elements/button.svelte"
 	import Loader from "$components/elements/loader.svelte"
-	import Select from "$components/forms/elements/select.svelte";
+	import Select from "$formElements/select.svelte";
 	import { popupError, popupOk } from "$components/popup.svelte";
 	
 	import ReportNote from "$content/report-note.md"

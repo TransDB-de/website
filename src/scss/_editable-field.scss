@@ -1,0 +1,42 @@
+@mixin editable-field($element) {
+	font-family: 'Fira Sans', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	color: var(--color-edge-dimmed);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	line-height: 0.95em;
+	width: 100%;
+	
+	* {
+		font-size: 0.95em;
+		margin: 0;
+		border-radius: 4px;
+		color: var(--color-edge);
+		width: 100%;
+		outline: 0;
+		height: 30px;
+		display: inline-flex;
+		align-items: center;
+	}
+	
+	#{$element} {
+		outline: 0;
+		border-radius: 4px;
+		border: 2px solid var(--color-edge-faded);
+		transition: 0.2s ease border;
+		padding: 2px 4px;
+		
+		&:focus {
+			border: 2px solid var(--color-edge-dimmed);
+		}
+	}
+	
+	span {
+		padding: 4px 6px;
+		overflow: hidden;
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+}

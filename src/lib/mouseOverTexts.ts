@@ -73,7 +73,10 @@ const mouseOverTexts = {
 	filter: "Einträge filtern",
 	help: "Hilfe",
 	reloadGeo: "Versuche die Geodaten erneut beim Api abzurufen",
-	backup: "Backup der Datenbank herunterladen"
+	backup: "Backup der Datenbank herunterladen",
+	
+	deleteUser: "Benutzer löschen",
+	resetPassword: "Passwort zurücksetzen",
 }
 
 export default mouseOverTexts;

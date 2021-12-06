@@ -14,21 +14,34 @@
 	import Footer from "$components/footer.svelte"
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
+	import Confirm from "$components/confirm.svelte"
 	
 	import { page } from '$app/stores'
+	
+	// key which triggers fade transition between pages
+	let path = "";
+	
+	// do not fade in manage subpaths
+	$: {
+		path = $page.path
+		if (path.startsWith("/manage")) {
+			path = "/manage"
+		}
+	}
 </script>
 
 <div class="app">
 	<Header />
 	
-	{#key $page.path}
+	{#key path}
 		<div in:fade={{duration: 200}} class="page">
 			<slot></slot>
 		</div>
 	{/key}
-		
+	
 	<Footer />
 	<Popup />
+	<Confirm />
 </div>
 
 <style lang="scss">

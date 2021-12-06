@@ -15,6 +15,6 @@
 		flex-direction: column;
 		max-width: $conent-max-width;
 		width: 100%;
-		padding: 20px;
+		padding: 20px 10px;
 	}
 </style>

@@ -14,7 +14,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={ handleSubmit } bind:this={ form }>
+<form on:submit|preventDefault={ handleSubmit } bind:this={ form } {...$$props}>
 	<slot></slot>
 </form>
 
@@ -37,10 +37,35 @@
 			}
 		}
 		
+		&.inline {
+			flex-direction: row;
+			width: 100%;
+			gap: 10px;
+			
+			@include media-mobile {
+				flex-direction: column;
+				gap: 0px;
+				
+				:global(button:last-child) {
+					max-width: 80px;
+				}
+			}
+		}
+		
+		&:not(.inline) {
+			:global(button:last-child) {
+				margin-bottom: 20px;
+				align-self: center;
+				min-width: 200px;
+				
+				@include media-mobile {
+					min-width: 0;
+				}
+			}
+		}
+		
 		:global(button:last-child) {
-			margin-bottom: 20px;
-			align-self: center;
-			min-width: 200px;
+			min-width: 40px;
 		}
 	}
 </style>

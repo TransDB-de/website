@@ -42,7 +42,7 @@
 	
 	function share() {
 		let url = "/entry/" + entry._id;
-
+		
 		if (navigator.share) {
 			navigator.share({ url });
 		} else {
@@ -95,24 +95,24 @@
 		
 		<p>
 			<a href={`https://www.google.de/maps/search/${addressText}`} target="_blank" rel="noopener">
-				<MapIcon />{ addressText }
+				<MapIcon /><span>{ addressText }</span>
 			</a>
-	
+			
 			{#if entry.telephone}
 				<a href={`tel:${ entry.telephone }`}>
-					<PhoneIcon />{ entry.telephone }
+					<PhoneIcon /><span>{ entry.telephone }</span>
 				</a>
 			{/if}
 			
 			{#if entry.email}
 				<a href={`mailto:${ entry.email }`}>
-					<MailIcon />{ entry.email }
+					<MailIcon /><span>{ entry.email }</span>
 				</a>
 			{/if}
 			
 			{#if entry.website}
 				<a href={ entry.website } target="_blank" rel="noopener">
-					<GlobeIcon />{ website }
+					<GlobeIcon /><span>{ website }</span>
 				</a>
 			{/if}
 		</p>
@@ -165,13 +165,6 @@
 				<Share2Icon />
 			</EdgeButton>
 		{:else}
-			<!--<EdgeButton title={ mouseOverTexts["approveEntry"] } color="highlight" on:click={ approve } loading={ approveLoading }>
-				<CheckCircle />
-			</EdgeButton>
-			
-			<EdgeButton title={ mouseOverTexts["report"] } color="warn">
-				<AlertTriangleIcon />
-			</EdgeButton>-->
 			<Button light iconOnly color="edge-highlight" title={ mouseOverTexts["approveEntry"] } on:click={ approve } loading={ approveLoading }>
 				<CheckCircle />
 			</Button>
@@ -193,11 +186,24 @@
 		box-shadow: $surface-shadow-soft;
 		border-radius: 4px;
 		padding: 10px 15px 10px 20px;
-		overflow-wrap: break-word;
 		gap: 5px;
+		
+		.controls {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
 		
 		@include media-mobile-small {
 			padding: 10px;
+			flex-direction: column;
+			gap: 10px;
+			
+			.controls {
+				flex-direction: row;
+				gap: 20px;
+				justify-content: center;
+			}
 		}
 		
 		.data {
@@ -249,6 +255,8 @@
 					font-size: 1.4em;
 					font-weight: 600;
 					margin: -4px 0;
+					word-break: break-word;
+					max-width: 100%;
 				}
 				
 				.special-tag {
@@ -278,6 +286,11 @@
 				&:hover {
 					text-decoration: underline;
 				}
+				
+				span {
+					word-break: break-word;
+					max-width: 100%;
+				}
 			}
 			
 			:global(.lucide) {
@@ -286,12 +299,6 @@
 				min-height: 18px;
 				min-width: 18px;
 			}
-		}
-		
-		.controls {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
 		}
 	}
 </style>

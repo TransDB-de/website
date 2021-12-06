@@ -14,6 +14,8 @@
 </button>
 
 <style lang="scss">
+	@import "../../scss/mixins";
+	
 	button {
 		display: flex;
 		align-items: center;
@@ -42,6 +44,10 @@
 		:global(.lucide) {
 			width: 1.8em;
 			height: 1.8em;
+		}
+		
+		@include media-mobile {
+			color: var(--color-edge);
 		}
 	}
 </style>

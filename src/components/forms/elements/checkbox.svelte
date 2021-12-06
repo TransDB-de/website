@@ -1,12 +1,16 @@
 <script lang="ts">
 	export let group = [];
 	export let value = "";
+	export let checked = false;
+	export let single = false;
 	
 	/*
 	* Group bindings on custom components with checkboxes has to be done manually
 	* https://github.com/sveltejs/svelte/issues/2308
 	*/
 	function onChange({ target }) {
+		if (single) return;
+		
 		const { value, checked } = target;
 		if (checked) {
 			group = [...group, value]
@@ -21,8 +25,8 @@
 	<input
 		type="checkbox"
 		{...$$props}
-		{value}
-		checked={ group.includes(value) }
+		{ value }
+		bind:checked={ checked }
 		on:change={ onChange }
 	/>
 	<span class="checkmark"></span>

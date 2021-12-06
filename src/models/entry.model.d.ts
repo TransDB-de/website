@@ -10,10 +10,17 @@ export interface Entry {
 	telephone ?: string;
 	accessible ?: string;
 	
-	address: Address
-	meta: Meta
+	address: Address;
+	meta: Meta;
+	
+	location: GeoJsonPoint;
 	
 	distance?: number;
+}
+
+export interface GeoJsonPoint {
+	type: "Point",
+	coordinates: [number, number]
 }
 
 export interface Address {

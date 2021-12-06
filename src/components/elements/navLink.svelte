@@ -34,6 +34,7 @@
 		font-size: 20px;
 		margin: 10px 10px;
 		cursor: pointer;
+		white-space: nowrap;
 		
 		@include underline(
 			$color: var(--color),

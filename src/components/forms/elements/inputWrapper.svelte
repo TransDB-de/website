@@ -43,7 +43,6 @@
 			padding: 6px 12px;
 			transition: 0.2s ease border;
 			width: 100%;
-			min-width: 300px;
 			
 			&::placeholder {
 				color: var(--color-edge-dimmed);

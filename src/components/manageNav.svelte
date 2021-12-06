@@ -33,9 +33,9 @@
 
 <div class="manage-nav">
 	<nav>
-		<NavLink {...linkOptions} href="/manage"> Freischalten </NavLink>
+		<NavLink {...linkOptions} exact href="/manage"> Freischalten </NavLink>
 		<NavLink {...linkOptions} href="/manage/database"> Datenbank </NavLink>
-		<NavLink {...linkOptions} href="/manage/users"> Nutzer </NavLink>
+		<NavLink {...linkOptions} href="/manage/users"> Benutzer </NavLink>
 	</nav>
 	<span class="account">
 		<Button light  on:click={ () => goto("/manage/account") }>
@@ -67,6 +67,7 @@
 		nav {
 			display: flex;
 			flex-direction: row;
+			flex-wrap: wrap;
 			
 			@include media-mobile {
 				justify-content: center;

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Form from "$components/forms/elements/form.svelte"
-	import Input from "$components/forms/elements/input.svelte"
+	import Form from "$formElements/form.svelte"
+	import Input from "$formElements/input.svelte"
 	import Button from "$components/elements/button.svelte"
 	
 	import { parseValidationErrors } from "$lib/utils"
