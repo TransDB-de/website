@@ -1,3 +1,5 @@
+import type * as FilterLang from "@transdb-de/filter-lang"
+
 export interface Entry {
 	_id?: string;
 	type: string;
@@ -42,4 +44,9 @@ export interface EntriesResponse {
 	entries: Entry[];
 	locationName?: string;
 	more: boolean;
+}
+
+export interface FilterFull {
+	filter: FilterLang.IntermediateFormat.AbstractFilters,
+	page: number
 }

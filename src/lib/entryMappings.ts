@@ -1,4 +1,6 @@
-export const typeMapping = {
+type Dict = {[key: string]: string};
+
+export const typeMapping: Dict = {
 	"": "Alle Kategorien",
 	group: "Gruppe/Verein",
 	therapist: "Therapeut*in/Psychiater*in",
@@ -13,7 +15,7 @@ export const typeMapping = {
 let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
 export const typeMappingData = _typeMappingData;
 
-export const typeDescriptions = {
+export const typeDescriptions: Dict = {
 	group: "Name der Gruppe",
 	therapist: "Name der Praxis",
 	surveyor: "Name der Praxis / der Gutachter*in",
@@ -85,8 +87,14 @@ export const offerMapping = {
 }
 
 export const subjectMapping = {
-	therapist: {	
+	therapist: {
 		therapist: "Psychologische*r Psychotherapeut*in",
 		psychologist: "Psychiater (Facharzt für Psychiatrie)"
 	}
+}
+
+export const accessibleMapping: Dict = {
+	unkown: "Unbekannt",
+	yes: "Barrierefrei",
+	no: "Nicht Barrierefrei"
 }

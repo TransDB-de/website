@@ -1,11 +1,11 @@
 <script lang="ts">
-	import DataFilter from "$components/database/dataFilter.svelte"
+	import DatabaseFilter from "$components/database/databaseFilter.svelte"
 	import DatabaseEntryCollection from "$components/database/databaseEntryCollection.svelte"
 </script>
 
 <template lang="pug">
 	div.database
-		DataFilter
+		DatabaseFilter
 		DatabaseEntryCollection
 </template>
 
@@ -14,6 +14,8 @@
 	
 	.database {
 		width: 100%;
-		max-width: $conent-max-width;
+		max-width: 1200px;
+		display: flex;
+		flex-direction: column;
 	}
 </style>

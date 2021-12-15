@@ -74,3 +74,15 @@ export async function timeout(delay: number): Promise<void> {
 		setTimeout(resolve, delay);
 	});
 }
+
+export function getObjChanges(original: object, changed: object): object {
+	let changes = {};
+
+	for (const [key, val] of Object.entries(original)) {
+		if (JSON.stringify(val) !== JSON.stringify(changed[key])) {
+			changes[key] = changed[key]
+		}
+	}
+
+	return changes;
+}

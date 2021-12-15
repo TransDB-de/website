@@ -27,6 +27,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
     "ackee-tracker": "^5.1.0",
     "axios": "^0.24.0",
     "rehype-external-links": "^1.0.0"

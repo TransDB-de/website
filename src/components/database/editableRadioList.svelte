@@ -5,13 +5,22 @@
 	export let value = [];
 	export let mapping: {[key: string]: string} = {};
 	export let edit = false;
+	
+	let mappingList = [];
+	$: {
+		if (mapping) {
+			mappingList = Object.entries(mapping);
+		} else {
+			mappingList = [];
+		}
+	}
 </script>
 
 <div class="editable-radio-list">
 	{ label }
 	{#if edit}
 		<div class="list edit">
-			{#each Object.entries(mapping) as [key, val]}
+			{#each mappingList as [key, val]}
 				<TagCheckbox value={ key } bind:group={ value } >
 					{ val }
 				</TagCheckbox>
@@ -19,9 +28,11 @@
 		</div>
 	{:else}
 		<ul class="list show">
-			{#each value as val}
-				<li> { mapping[val] } </li>
-			{/each}
+			{#if value}
+				{#each value as val}
+					<li> { mapping[val] } </li>
+				{/each}
+			{/if}
 		</ul>
 	{/if}
 </div>
@@ -30,11 +41,11 @@
 	@import "../../scss/mixins";
 	
 	.editable-radio-list {
-		font-weight: 400;
-		font-size: 0.9em;
 		color: var(--color-edge-dimmed);
 		display: flex;
 		flex-direction: column;
+		font-weight: 400;
+		font-size: 0.8em;
 		
 		.list {
 			display: flex;
@@ -43,12 +54,14 @@
 			
 			&.show {
 				padding: 0;
+				margin: 0;
 				
 				li {
-					display: inline-block;
+					display: inline-flex;
 					background-color: var(--color-surface-highlight);
-					color: var(--color-edge);
+					color: var(--color-edge-bright);
 					
+					font-size: 0.9em;
 					padding: 3px 8px;
 					border-radius: 4px;
 					margin: 2px;

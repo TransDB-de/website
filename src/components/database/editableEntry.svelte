@@ -1,8 +1,13 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	
-	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
-	import mouseOverTexts from "$lib/mouseOverTexts";
+	import { typeMapping, offerMapping, attributeMapping, accessibleMapping, subjectMapping } from "$lib/entryMappings"
+	import mouseOverTexts from "$lib/mouseOverTexts"
+	
+	import axios from "axios"
+	import { popupOk, popupError } from "$components/popup.svelte"
+	import { confirm } from "$components/confirm.svelte"
+	import { getObjChanges } from "$lib/utils"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
 	import EditableSelectField from "$components/database/editableSelectField.svelte"
@@ -11,6 +16,11 @@
 	import Button from "$components/elements/button.svelte"
 	
 	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
+	import SaveIcon from "lucide-icons-svelte/save.svelte"
+	import TrashIcon from "lucide-icons-svelte/trash.svelte"
+	import EditIcon from "lucide-icons-svelte/edit.svelte"
+	import XIcon from "lucide-icons-svelte/x.svelte"
+	import LinkIcon from "lucide-icons-svelte/link.svelte"
 	
 	let edit: boolean = false;
 	export let entry: Entry = null;
@@ -26,58 +36,198 @@
 	
 	let noContactDetails: boolean = false;
 	$: noContactDetails = !_entry.website && !_entry.email && !_entry.telephone;
+	
+	function editEntry() {
+		edit = true;
+		geoNotRefetched = true;
+	}
+	
+	function cancelEdit() {
+		edit = false;
+		_entry = JSON.parse(JSON.stringify(entry));
+	}
+	
+	function copyLink() {
+		navigator.clipboard.writeText(`${window.location.origin}/manage/database?id=${_entry._id}`);
+		popupOk("Link in die Zwischenablage kopiert!");
+	}
+	
+	async function saveChanges() {
+		let changes = getObjChanges(entry, _entry);
+		
+		if (Object.keys(changes).length < 1) return;
+		
+		edit = false;
+		
+		try {
+			await axios.patch(`entries/${_entry._id}/edit`, changes);
+			popupOk("Änderungen gespeichert");
+		} catch (e) {
+			if (e.response) {
+				popupError("Fehler beim Speichern: " + e.response.status);
+			} else {
+				popupError("Unbekannter Fehler beim Speichern");
+			}
+		}
+	}
+	
+	async function deleteEntry() {
+		let success: boolean = await confirm("Möchtest du diesen Eintrag wirklich löschen?");
+		
+		if (!success) return;
+		
+		try {
+			await axios.delete(`entries/${_entry._id}`);
+			popupOk("Eintrag gelöscht");
+		} catch (e) {
+			popupError("Unbekannter fehler beim Löschen");
+		}
+	}
 </script>
 
-<div class="editable-entry" class:edit>
-	<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } />
-	<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } />
-	<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } />
-	
-	<div>
-		<span> Adresse </span>
-		<EditableInputField label="Straße" bind:value={ _entry.address.street } />
-		<EditableInputField label="Hausnummer" bind:value={ _entry.address.house } />
-		<EditableInputField label="Postleitzahl" bind:value={ _entry.address.plz } />
-		<EditableInputField label="Stadt / Ort" bind:value={ _entry.address.city } />
+
+<div class="editable-entry">
+	<div class="auto-grid">
+		<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
+		<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
 		
-		{#if noGeoData}
-			<span class="warn">
-				<AlertTriangleIcon /> Keine Geo-Daten vorhanden!
+		<div class="group">
+			<span> Adresse </span>
+			<div class="sub-grid">
+				<EditableInputField label="Straße" bind:value={ _entry.address.street } { edit } />
+				<EditableInputField label="Hausnummer" bind:value={ _entry.address.house } { edit } />
+				<EditableInputField label="Postleitzahl" bind:value={ _entry.address.plz } { edit } />
+				<EditableInputField label="Stadt / Ort" bind:value={ _entry.address.city } { edit } />
+			</div>
 			
-				{#if !edit && geoNotRefetched}
-					<Button light title={mouseOverTexts["reloadGeo"]}>Erneut versuchen</Button>
-				{/if}
-			</span>
-		{/if}
+			{#if noGeoData}
+				<span class="warn">
+					<AlertTriangleIcon /> Keine Geo-Daten vorhanden!
+				
+					{#if !edit && geoNotRefetched}
+						<Button light title={mouseOverTexts["reloadGeo"]}>Erneut versuchen</Button>
+					{/if}
+				</span>
+			{/if}
+		</div>
+		
+		<div class="group">
+			<span> Kontaktdaten </span>
+			
+			<div class="sub-grid">
+				<EditableInputField label="Vorname" bind:value={ _entry.firstName } { edit } />
+				<EditableInputField label="Nachname" bind:value={ _entry.lastName } { edit } />
+				
+				<EditableInputField label="Webseite" bind:value={ _entry.website } { edit } />
+				<EditableInputField label="E-Mail" bind:value={ _entry.email } { edit } />
+				<EditableInputField label="Telefonnummer" bind:value={ _entry.telephone } { edit } />
+			</div>
+			
+			{#if noContactDetails}
+				<span class="warn">
+					<AlertTriangleIcon /> Dieser Eintrag hat keine Kontaktdaten!
+				</span>
+			{/if}
+		</div>
+		
+		<div class="sub-grid">
+			<EditableRadioList label="Angebote" bind:value={ _entry.meta.offers } mapping={ offerMapping[_entry.type] } { edit } />
+			<EditableRadioList label="Attribute" bind:value={ _entry.meta.attributes } mapping={ attributeMapping[_entry.type] } { edit } />
+		</div>
+		
+		<div class="sub-grid">
+			<EditableInputField label="Besonderheiten" bind:value={ _entry.meta.specials } { edit } />
+			<EditableInputField label="Mindestalter" number bind:value={ _entry.meta.minAge } { edit } />
+			
+			{#if subjectMapping[_entry.type]}
+				<EditableSelectField label="Fachrichtung" bind:value={ _entry.meta.subject } mapping={ accessibleMapping } { edit } />
+			{/if}
+			
+			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ accessibleMapping } { edit } />
+		</div>
+		
+		<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } />
 	</div>
 	
-	<div>
-		<span> Kontaktdaten </span>
-		
-		<EditableInputField label="Vorname" bind:value={ _entry.firstName } />
-		<EditableInputField label="Nachname" bind:value={ _entry.lastName } />
-		
-		<EditableInputField label="Webseite" bind:value={ _entry.website } />
-		<EditableInputField label="E-Mail" bind:value={ _entry.email } />
-		<EditableInputField label="Telefonnummer" bind:value={ _entry.telephone } />
-		
-		{#if noContactDetails}
-			<span class="warn">
-				<AlertTriangleIcon /> Dieser Eintrag hat keine Kontaktdaten!
-			</span>
+	<div class="controls">
+		{#if edit}
+			<Button light iconOnly on:click={ saveChanges }  title={ mouseOverTexts["saveChanges"] }> <SaveIcon /> </Button>
+			<Button light iconOnly on:click={ cancelEdit } title={ mouseOverTexts["discardChanges"] }> <XIcon /> </Button>
+			<Button light color="red" on:click={ deleteEntry } iconOnly title={ mouseOverTexts["deleteEntry"] }> <TrashIcon /> </Button>
+		{:else}
+			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
+			<Button light iconOnly on:click={ editEntry } title={ mouseOverTexts["editEntry"] }> <EditIcon /> </Button>
 		{/if}
-	</div>
-	
-	<EditableRadioList label="Angebote" bind:value={ _entry.meta.offers } mapping={ offerMapping[_entry.type] } />
-	<EditableRadioList label="Attribute" bind:value={ _entry.meta.attributes } mapping={ attributeMapping[_entry.type] } />
-	
-	<div>
-		<EditableInputField label="Besonderheiten" bind:value={ _entry.meta.specials } />
-		<EditableInputField label="Mindestalter" number bind:value={ _entry.meta.minAge } />
-		
 	</div>
 </div>
 
 <style lang="scss">
+	@import "../../scss/shadows";
+	@import "../../scss/mixins";
 	
+	.editable-entry {
+		display: flex;
+		background-color: var(--color-background-bright);
+		box-shadow: $surface-shadow-soft;
+		border-radius: 4px;
+		padding: 10px;
+		gap: 10px;
+		
+		.controls {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+	}
+	
+	.auto-grid {
+		display: grid;
+		flex-grow: 1;
+		gap: 10px;
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		
+		:global(.lucide) {
+			height: 18px;
+			width: 18px;
+			min-height: 18px;
+			min-width: 18px;
+		}
+		
+		// Every div element (including components) that is in the entry gets a border
+		& > :global(div) {
+			border-radius: 4px;
+			padding: 5px 8px;
+			border: 1px solid var(--color-rim-bright);
+		}
+		
+		.no-border {
+			border: none;
+			padding: 0;
+		}
+		
+		& > div {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			
+			span {
+				font-size: 0.8em;
+				color: var(--color-edge-dimmed);
+			}
+		}
+		
+		.sub-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+			gap: 10px;
+		}
+		
+		.warn {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			color: var(--color-edge-warn);
+			font-size: 15px;
+		}
+	}
 </style>

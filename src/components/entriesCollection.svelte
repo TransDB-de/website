@@ -56,7 +56,7 @@
 		loading = true;
 		
 		try {
-			res = await axios.get<EntriesResponse>(unapproved ? "entries/unapproved" : "entries", { params })
+			res = await axios.get<EntriesResponse>(unapproved ? "entries/unapproved" : "entries", { params });
 		} catch(e) {
 			popupError(`Fehler beim Laden (${e.response.status})`);
 			loading = false;

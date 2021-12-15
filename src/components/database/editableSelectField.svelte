@@ -14,7 +14,7 @@
 			{/each}
 		</select>
 	{:else}
-		<span> { mapping[value] } </span>
+		<span> { mapping[value] ?? "" } </span>
 	{/if}
 </div>
 
@@ -23,5 +23,10 @@
 	
 	.editable-select-field {
 		@include editable-field(select);
+		
+		select {
+			background-color: var(--color-background-bright);
+			padding: 0;
+		}
 	}
 </style>
