@@ -118,10 +118,11 @@
 </div>
 
 <style lang="scss">
+	@import "../../scss/input";
+	
 	.text-filter {
 		display: grid;
 		grid-template-columns: 1fr auto;
-		margin-top: 1.5em;
 		max-width: 850px;
 		width: 100%;
 		align-self: center;
@@ -136,32 +137,13 @@
 		}
 		
 		input {
-			background-color: var(--color-background-bright);
-			
-			font-family: 'Poppins', sans-serif;
-			font-size: 18px;
-			color: var(--edge-color);
-			outline: 0;
-			border-radius: 4px;
-			border: 2px solid var(--color-rim);
+			@include input-box;
+			@include input-font;
 			
 			padding: 6px 12px;
 			margin-bottom: 20px;
 			width: 100%;
 			height: 40px;
-			
-			&:hover {
-				border: 2px solid var(--color-rim-hover);
-			}
-			
-			&:focus {
-				border: 2px solid var(--color-rim-active);
-			}
-			
-			&::placeholder {
-				color: var(--color-edge-dimmed);
-				font-weight: 500;
-			}
 		}
 		
 		.dropdown {

@@ -17,5 +17,6 @@
 		max-width: 1200px;
 		display: flex;
 		flex-direction: column;
+		padding: 18px;
 	}
 </style>

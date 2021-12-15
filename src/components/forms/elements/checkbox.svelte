@@ -33,6 +33,8 @@
 </label>
 
 <style lang="scss">
+	@import "../../../scss/input";
+	
 	label {
 		display: flex;
 		align-items: center;
@@ -46,46 +48,13 @@
 		min-height: 28px;
 		-webkit-tap-highlight-color: transparent;
 		
-		// Hide the browser's default checkbox
 		input {
-			position: absolute;
-			opacity: 0;
-			cursor: pointer;
-			height: 0;
-			width: 0;
-		}
-		
-		&:hover input ~ .checkmark {
-			border: 2px solid var(--color-rim-hover);
-		}
-		
-		input:checked ~ .checkmark:after {
-			transform: scale(1) rotate(45deg);
+			@include hide-checkmark;
 		}
 	}
 	
 	/* Create a custom checkbox */
 	.checkmark {
-		position: absolute;
-		border-radius: 4px;
-		border: 2px solid var(--color-rim);
-		left: 0;
-		height: 28px;
-		width: 28px;
-		background-color: var(--color-background-bright);
-		transition: 0.2s ease border;
-		
-		&:after {
-			content: "";
-			position: absolute;
-			transition: all 0.1s ease;
-			left: 8px;
-			top: 3px;
-			width: 6px;
-			height: 12px;
-			border: solid var(--color-edge-highlight);
-			border-width: 0 3px 3px 0;
-			transform: scale(0) rotate(20deg);
-		}
+		@include input-checkbox;
 	}
 </style>

@@ -5,9 +5,9 @@
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import axios from "axios"
+	import { getObjChanges } from "$lib/utils"
 	import { popupOk, popupError } from "$components/popup.svelte"
 	import { confirm } from "$components/confirm.svelte"
-	import { getObjChanges } from "$lib/utils"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
 	import EditableSelectField from "$components/database/editableSelectField.svelte"
@@ -27,7 +27,7 @@
 	
 	// Deep copy
 	let _entry: Entry = null;
-	$: _entry = JSON.parse(JSON.stringify(entry));
+	_entry = JSON.parse(JSON.stringify(entry));
 	
 	let noGeoData = false;
 	$: noGeoData = _entry.approved && !_entry.location;
@@ -88,8 +88,11 @@
 
 <div class="editable-entry">
 	<div class="auto-grid">
-		<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
-		<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
+		<div class="sub-grid wide">
+			<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
+			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
+			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } />
+		</div>
 		
 		<div class="group">
 			<span> Adresse </span>
@@ -102,9 +105,9 @@
 			
 			{#if noGeoData}
 				<span class="warn">
-					<AlertTriangleIcon /> Keine Geo-Daten vorhanden!
+					<AlertTriangleIcon /> <span>Keine Geo-Daten vorhanden!</span>
 				
-					{#if !edit && geoNotRefetched}
+					{#if edit && geoNotRefetched}
 						<Button light title={mouseOverTexts["reloadGeo"]}>Erneut versuchen</Button>
 					{/if}
 				</span>
@@ -125,7 +128,7 @@
 			
 			{#if noContactDetails}
 				<span class="warn">
-					<AlertTriangleIcon /> Dieser Eintrag hat keine Kontaktdaten!
+					<AlertTriangleIcon /> <span>Dieser Eintrag hat keine Kontaktdaten!</span>
 				</span>
 			{/if}
 		</div>
@@ -145,8 +148,6 @@
 			
 			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ accessibleMapping } { edit } />
 		</div>
-		
-		<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } />
 	</div>
 	
 	<div class="controls">
@@ -184,7 +185,7 @@
 		display: grid;
 		flex-grow: 1;
 		gap: 10px;
-		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 		
 		:global(.lucide) {
 			height: 18px;
@@ -220,14 +221,27 @@
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 			gap: 10px;
+			
+			&.wide {
+				grid-column: 1 / -1;
+			}
 		}
 		
 		.warn {
 			display: flex;
 			align-items: center;
+			justify-content: flex-start;
 			gap: 10px;
-			color: var(--color-edge-warn);
-			font-size: 15px;
+			min-height: 35px;
+			
+			&, span {
+				color: var(--color-edge-warn);
+				font-size: 15px;
+			}
+			
+			:global(button) {
+				min-height: unset;
+			}
 		}
 	}
 </style>

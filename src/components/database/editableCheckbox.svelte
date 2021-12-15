@@ -11,15 +11,35 @@
 		{#if edit}
 			<input type="checkbox" bind:checked={ checked } />
 		{/if}
-		<div class="mark { checked ? "selected" : "false" }"></div>
+		<span class="mark { checked ? "selected" : "false" }" class:edit></span>
 	</label>
 </div>
 
 <style lang="scss">
 	@import "../../scss/editable-field";
+	@import "../../scss/input";
 	
 	.editable-checkbox {
 		@include editable-field(input);
+		position: relative;
+		
+		label {
+			&.edit {
+				cursor: pointer;
+			}
+		}
+		
+		input {
+			@include hide-checkmark;
+		}
+		
+		.mark {
+			@include input-checkbox;
+			
+			&:not(.edit) {
+				border-color: transparent;
+			}
+		}
 	}
 	
 </style>

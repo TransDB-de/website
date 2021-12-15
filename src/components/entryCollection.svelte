@@ -38,46 +38,45 @@
 	/** Type of EntryCollection */
 	export let type: "search" | "unapproved" | "database" = "search";
 	
-	// what component to render for "entries"
+	// component to render for "entries"
 	let entryComponent;
 	// how and where to fetch data
 	let fetchFunction: (pageObject: Page, pageCount?: number) => Promise< AxiosResponse<EntriesResponse> >;
-	$: {
-		switch (type) {
-			case "search": {
-				entryComponent = EntryComponent;
-				fetchFunction = async (pageObject, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(pageObject.query.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries", { params });
-				}
-				break;
+	
+	switch (type) {
+		case "search": {
+			entryComponent = EntryComponent;
+			fetchFunction = async (pageObject, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries", { params });
 			}
-			
-			case "unapproved": {
-				entryComponent = EntryComponent;
-				fetchFunction = async (pageObject, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(pageObject.query.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries/unapproved", { params });
-				}
-				break;
+			break;
+		}
+		
+		case "unapproved": {
+			entryComponent = EntryComponent;
+			fetchFunction = async (pageObject, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries/unapproved", { params });
 			}
-			
-			case "database": {
-				entryComponent = EditableEntry;
-				fetchFunction = async (_pageObject, pageCount = 0) => {
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: $filters
-					});
-				}
-				break;
+			break;
+		}
+		
+		case "database": {
+			entryComponent = EditableEntry;
+			fetchFunction = async (_pageObject, pageCount = 0) => {
+				return axios.post<EntriesResponse>("entries/full", {
+					page: pageCount,
+					filter: $filters
+				});
 			}
-			
-			default: {
-				console.error(`No such type for EntryCollection: "${type}"`);
-			}
+			break;
+		}
+		
+		default: {
+			console.error(`No such type for EntryCollection: "${type}"`);
 		}
 	}
 	
