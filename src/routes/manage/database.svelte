@@ -1,12 +1,12 @@
 <script lang="ts">
 	import DatabaseFilter from "$components/database/databaseFilter.svelte"
-	import DatabaseEntryCollection from "$components/database/databaseEntryCollection.svelte"
+	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
 <template lang="pug">
 	div.database
 		DatabaseFilter
-		DatabaseEntryCollection
+		EntryCollection(type="database")
 </template>
 
 <style lang="scss">

@@ -1,10 +1,10 @@
 <script lang="ts">
-	import EntriesCollection from "$components/entriesCollection.svelte";
+	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
 <template lang="pug">
 	div
-		EntriesCollection(unapproved)
+		EntryCollection(type="unapproved")
 </template>
 
 <style lang="scss">

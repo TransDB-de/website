@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SearchFilter from "$components/forms/searchFilter.svelte"
-	import EntriesCollection from "$components/entriesCollection.svelte"
+	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
 <svelte:head>
@@ -13,7 +13,7 @@
 		SearchFilter.filter
 		
 		div.entries
-			EntriesCollection
+			EntryCollection(type="search")
 </template>
 
 <style lang="scss">

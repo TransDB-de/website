@@ -10,7 +10,7 @@
 	import EdgeButton from "$components/elements/edgeButton.svelte"
 	import Button from "$components/elements/button.svelte"
 	import { popupOk, popupError } from "$components/popup.svelte"
-	import { removeEntry } from "$components/entriesCollection.svelte"
+	import { removeEntry } from "$components/entryCollection.svelte"
 	import { timeout } from "$lib/utils";
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
