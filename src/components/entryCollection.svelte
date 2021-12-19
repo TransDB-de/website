@@ -1,18 +1,9 @@
-<script lang="ts" context="module">
-	import { writable } from "svelte/store"
+<script lang="ts" context="module">	
+	let moduleFunctionRemoveEntry: Function = () => {};
 	
-	let entries = writable<Entry[]>( [] );
-	
+	// TODO: test! Nothing currently calls this
 	export function removeEntry(entry: Entry) {
-		entries.update((array: Entry[]) => {
-			const index = array.indexOf(entry);
-			
-			if (index > -1) {
-				array.splice(index, 1);
-			}
-			
-			return array;
-		});
+		moduleFunctionRemoveEntry(entry);
 	}
 </script>
 
@@ -39,49 +30,47 @@
 	/** Type of EntryCollection */
 	export let type: "search" | "unapproved" | "database" = "search";
 	
-	$entries = [];
+	let entries: Entry[] = [];
 	
 	// component to render for "entries"
 	let entryComponent;
 	// how and where to fetch data
 	let fetchFunction: (pageObject: Page, pageCount?: number) => Promise< AxiosResponse<EntriesResponse> >;
 	
-	$: {
-		switch (type) {
-			case "search": {
-				entryComponent = EntryComponent;
-				fetchFunction = async (pageObject, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(pageObject.query.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries", { params });
-				}
-				break;
+	switch (type) {
+		case "search": {
+			entryComponent = EntryComponent;
+			fetchFunction = async (pageObject, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries", { params });
 			}
-			
-			case "unapproved": {
-				entryComponent = EntryComponent;
-				fetchFunction = async (pageObject, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(pageObject.query.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries/unapproved", { params });
-				}
-				break;
+			break;
+		}
+		
+		case "unapproved": {
+			entryComponent = EntryComponent;
+			fetchFunction = async (pageObject, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries/unapproved", { params });
 			}
-			
-			case "database": {
-				entryComponent = EditableEntry;
-				fetchFunction = async (_pageObject, pageCount = 0) => {
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: $filters
-					});
-				}
-				break;
+			break;
+		}
+		
+		case "database": {
+			entryComponent = EditableEntry;
+			fetchFunction = async (_pageObject, pageCount = 0) => {
+				return axios.post<EntriesResponse>("entries/full", {
+					page: pageCount,
+					filter: $filters
+				});
 			}
-			
-			default: {
-				console.error(`No such type for EntryCollection: "${type}"`);
-			}
+			break;
+		}
+		
+		default: {
+			console.error(`No such type for EntryCollection: "${type}"`);
 		}
 	}
 	
@@ -103,10 +92,16 @@
 		unsubscribe();
 	});
 	
+	moduleFunctionRemoveEntry = (entry: Entry) => {
+		const index = entries.indexOf(entry);
+		
+		if (index > -1) {
+			entries.splice(index, 1);
+		}
+	}
+	
 	async function loadInitalEntries(pageObject: Page) {
 		if (!browser) return;
-		
-		$entries = [];
 		
 		let res: AxiosResponse<EntriesResponse>;
 		loading = true;
@@ -119,7 +114,7 @@
 			return;
 		}
 		
-		$entries = res.data.entries;
+		entries = res.data.entries;
 		$currentLocation = res.data.locationName;
 		more = res.data.more;
 		
@@ -153,7 +148,7 @@
 			return;
 		}
 		
-		$entries = [...$entries, ...res.data.entries];
+		entries = [...entries, ...res.data.entries];
 		more = res.data.more;
 		pageCount = params.page;
 		
@@ -164,7 +159,7 @@
 
 <div class="entries-collection">
 	
-	{#each $entries as entry (entry._id)}
+	{#each entries as entry (entry._id)}
 		<div animate:flip={{duration: 400}} transition:fade={{duration: 200}}>
 			<svelte:component this={ entryComponent } entry={ entry } />
 		</div>
