@@ -25,6 +25,7 @@
 	import { flip } from "svelte/animate"
 	import type { Page } from "@sveltejs/kit"
 	import { page, navigating } from "$app/stores"
+	import { browser } from "$app/env"
 	
 	import { currentLocation } from "$lib/store"
 	import { filters } from "$lib/filterLang"
@@ -38,45 +39,49 @@
 	/** Type of EntryCollection */
 	export let type: "search" | "unapproved" | "database" = "search";
 	
+	$entries = [];
+	
 	// component to render for "entries"
 	let entryComponent;
 	// how and where to fetch data
 	let fetchFunction: (pageObject: Page, pageCount?: number) => Promise< AxiosResponse<EntriesResponse> >;
 	
-	switch (type) {
-		case "search": {
-			entryComponent = EntryComponent;
-			fetchFunction = async (pageObject, pageCount = 0) => {
-				let params = Object.fromEntries<string | number>(pageObject.query.entries());
-				params.page = pageCount;
-				return await axios.get<EntriesResponse>("entries", { params });
+	$: {
+		switch (type) {
+			case "search": {
+				entryComponent = EntryComponent;
+				fetchFunction = async (pageObject, pageCount = 0) => {
+					let params = Object.fromEntries<string | number>(pageObject.query.entries());
+					params.page = pageCount;
+					return await axios.get<EntriesResponse>("entries", { params });
+				}
+				break;
 			}
-			break;
-		}
-		
-		case "unapproved": {
-			entryComponent = EntryComponent;
-			fetchFunction = async (pageObject, pageCount = 0) => {
-				let params = Object.fromEntries<string | number>(pageObject.query.entries());
-				params.page = pageCount;
-				return await axios.get<EntriesResponse>("entries/unapproved", { params });
+			
+			case "unapproved": {
+				entryComponent = EntryComponent;
+				fetchFunction = async (pageObject, pageCount = 0) => {
+					let params = Object.fromEntries<string | number>(pageObject.query.entries());
+					params.page = pageCount;
+					return await axios.get<EntriesResponse>("entries/unapproved", { params });
+				}
+				break;
 			}
-			break;
-		}
-		
-		case "database": {
-			entryComponent = EditableEntry;
-			fetchFunction = async (_pageObject, pageCount = 0) => {
-				return axios.post<EntriesResponse>("entries/full", {
-					page: pageCount,
-					filter: $filters
-				});
+			
+			case "database": {
+				entryComponent = EditableEntry;
+				fetchFunction = async (_pageObject, pageCount = 0) => {
+					return axios.post<EntriesResponse>("entries/full", {
+						page: pageCount,
+						filter: $filters
+					});
+				}
+				break;
 			}
-			break;
-		}
-		
-		default: {
-			console.error(`No such type for EntryCollection: "${type}"`);
+			
+			default: {
+				console.error(`No such type for EntryCollection: "${type}"`);
+			}
 		}
 	}
 	
@@ -99,6 +104,10 @@
 	});
 	
 	async function loadInitalEntries(pageObject: Page) {
+		if (!browser) return;
+		
+		$entries = [];
+		
 		let res: AxiosResponse<EntriesResponse>;
 		loading = true;
 		
@@ -154,6 +163,7 @@
 </script>
 
 <div class="entries-collection">
+	
 	{#each $entries as entry (entry._id)}
 		<div animate:flip={{duration: 400}} transition:fade={{duration: 200}}>
 			<svelte:component this={ entryComponent } entry={ entry } />

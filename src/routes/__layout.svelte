@@ -19,21 +19,21 @@
 	import { page } from '$app/stores'
 	
 	// key which triggers fade transition between pages
-	let path = "";
+	/*let path = "";
 	
 	// do not fade in manage subpaths
 	$: {
 		path = $page.path
-		if (path.startsWith("/manage")) {
-			path = "/manage"
-		}
-	}
+		//if (path.startsWith("/manage")) {
+		//	path = "/manage"
+		//}
+	}*/
 </script>
 
 <div class="app">
 	<Header />
 	
-	{#key path}
+	{#key $page.path}
 		<div in:fade={{duration: 200}} class="page">
 			<slot></slot>
 		</div>

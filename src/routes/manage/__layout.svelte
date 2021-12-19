@@ -7,6 +7,8 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
+
 <ManageNav />
 
-<slot></slot>
+<slot />
+

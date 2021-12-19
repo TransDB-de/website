@@ -11,6 +11,7 @@
 
 <style lang="scss">
 	@import "../../scss/lengths";
+	@import "../../scss/mixins";
 	
 	.database {
 		width: 100%;
@@ -18,5 +19,9 @@
 		display: flex;
 		flex-direction: column;
 		padding: 18px;
+		
+		@include media-mobile-small {
+			padding: 18px 8px;
+		}
 	}
 </style>

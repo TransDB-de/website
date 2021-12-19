@@ -31,7 +31,6 @@
 	
 	$: {
 		if (browser && component) {
-			//console.log(scrollY);
 			
 			let frac = (scrollY / (component.scrollHeight - navbar.scrollHeight));
 			
@@ -92,6 +91,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		z-index: 2;
 		
 		padding: 40px 0 0 0;
 		height: $header-height-expanded;

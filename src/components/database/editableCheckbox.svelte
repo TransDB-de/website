@@ -39,6 +39,10 @@
 			&:not(.edit) {
 				border-color: transparent;
 			}
+			
+			&:edit() {
+				transform: unset !important;
+			}
 		}
 	}
 	

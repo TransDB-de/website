@@ -12,7 +12,7 @@ export const typeMapping: Dict = {
 }
 
 // for using the mappings as data key references
-let {[""]: _deletedKey, ..._typeMappingData} = typeMapping;
+let {"": _deletedKey, ..._typeMappingData} = typeMapping;
 export const typeMappingData = _typeMappingData;
 
 export const typeDescriptions: Dict = {

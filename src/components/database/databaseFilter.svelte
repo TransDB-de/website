@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte"
 	import { language } from "$lib/filterLang"
-	import { clamp } from "$lib/utils"
+	import { clamp, timeout } from "$lib/utils"
 	
 	let focused = false;
 	let input = "";
@@ -15,6 +15,8 @@
 	
 	let dropdown: HTMLUListElement;
 	let suggestionElements: HTMLLIElement[] = [];
+	
+	let filterElement: HTMLDivElement;
 	
 	// Random Suggestion
 	let randomSuggestion = "";
@@ -85,12 +87,21 @@
 		}
 	}
 	
+	/*async function bodyClick(event: MouseEvent) {
+		console.log(event);
+		if (!filterElement.contains(event.target as Node)) {
+			focused = false;
+		}
+	}*/
+	
 	function filter() {
 		
 	}
 </script>
 
-<div class="text-filter">
+<!--<svelte:body on:click={ bodyClick }></svelte:body>-->
+
+<div class="text-filter" bind:this={ filterElement }>
 	
 	<div class="autocomplete">
 		
@@ -98,7 +109,6 @@
 			placeholder={ randomSuggestion }
 			bind:value={ input }
 			on:focus={ () => focused = true }
-			on:blur={ () => focused = false}
 			on:keydown={ keyDown }>
 		
 		<ul class="dropdown" class:dropdownVisible bind:this={ dropdown }>
@@ -148,11 +158,12 @@
 		
 		.dropdown {
 			position: absolute;
+			z-index: 1;
 			top: 36px;
 			width: 100%;
 			max-height: 200px;
 			overflow: auto;
-			background-color: var(--color-surface-bright);
+			background-color: var(--color-background);
 			
 			font-family: 'Poppins', sans-serif;
 			font-size: 18px;
@@ -178,7 +189,7 @@
 				scroll-snap-type: y mandatory;
 				
 				&:hover {
-					background-color: var(--color-surface-bright-hover);
+					background-color: var(--color-background-dimmed);
 				}
 				
 				&.selected {

@@ -88,14 +88,14 @@
 
 <div class="editable-entry">
 	<div class="auto-grid">
-		<div class="sub-grid wide">
+		<div class="header">
 			<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
 			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
 			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } />
 		</div>
 		
-		<div class="group">
-			<span> Adresse </span>
+		<div>
+			<span class="group-title"> Adresse </span>
 			<div class="sub-grid">
 				<EditableInputField label="Straße" bind:value={ _entry.address.street } { edit } />
 				<EditableInputField label="Hausnummer" bind:value={ _entry.address.house } { edit } />
@@ -114,8 +114,8 @@
 			{/if}
 		</div>
 		
-		<div class="group">
-			<span> Kontaktdaten </span>
+		<div>
+			<span class="group-title"> Kontaktdaten </span>
 			
 			<div class="sub-grid">
 				<EditableInputField label="Vorname" bind:value={ _entry.firstName } { edit } />
@@ -154,7 +154,7 @@
 		{#if edit}
 			<Button light iconOnly on:click={ saveChanges }  title={ mouseOverTexts["saveChanges"] }> <SaveIcon /> </Button>
 			<Button light iconOnly on:click={ cancelEdit } title={ mouseOverTexts["discardChanges"] }> <XIcon /> </Button>
-			<Button light color="red" on:click={ deleteEntry } iconOnly title={ mouseOverTexts["deleteEntry"] }> <TrashIcon /> </Button>
+			<Button light iconOnly color="red" on:click={ deleteEntry } title={ mouseOverTexts["deleteEntry"] }> <TrashIcon /> </Button>
 		{:else}
 			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
 			<Button light iconOnly on:click={ editEntry } title={ mouseOverTexts["editEntry"] }> <EditIcon /> </Button>
@@ -174,10 +174,45 @@
 		padding: 10px;
 		gap: 10px;
 		
+		@include media-mobile {
+			flex-direction: column;
+		}
+		
 		.controls {
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
+		}
+		
+		.group-title {
+			font-size: 0.9em;
+			font-weight: 500;
+			margin-left: -2px;
+			margin-top: -2px;
+		}
+		
+		.header {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+			overflow: hidden;
+			
+			@include media-mobile {
+				grid-template-columns: 1fr;
+			}
+			
+			gap: 10px;
+			grid-column: 1 / -1;
+			
+			:global(div) {
+				grid-column: span 2;
+				
+				@include media-mobile {
+					grid-column: unset;
+				}
+			}
+			:global(div:last-child) {
+				grid-column: span 1;
+			}
 		}
 	}
 	
@@ -186,6 +221,10 @@
 		flex-grow: 1;
 		gap: 10px;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+		
+		@include media-mobile {
+			grid-template-columns: minmax(0, 1fr);
+		}
 		
 		:global(.lucide) {
 			height: 18px;
@@ -199,11 +238,6 @@
 			border-radius: 4px;
 			padding: 5px 8px;
 			border: 1px solid var(--color-rim-bright);
-		}
-		
-		.no-border {
-			border: none;
-			padding: 0;
 		}
 		
 		& > div {
@@ -220,11 +254,13 @@
 		.sub-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-			gap: 10px;
+			min-width: 0;
 			
-			&.wide {
-				grid-column: 1 / -1;
+			@include media-mobile {
+				grid-template-columns: minmax(0, 1fr);
 			}
+			
+			gap: 10px;
 		}
 		
 		.warn {
