@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UsersCollection from "$components/usersCollection.svelte";
+	import UserCollection from "$components/userCollection.svelte";
 	import CreateUserForm from "$components/forms/createUserForm.svelte";
 </script>
 
@@ -9,7 +9,7 @@
 		CreateUserForm
 		
 		h2 Benutzerliste
-		UsersCollection
+		UserCollection
 </template>
 
 <style lang="scss">

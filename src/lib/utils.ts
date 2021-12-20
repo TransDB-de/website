@@ -54,8 +54,8 @@ export function parseValidationErrors(errors: ApiValidationError[]): ValidationE
 
 /**
  * Wrapper for Object.entries, which can accept undefined objects
- * @param obj Object to parse
- * @returns Key, Value pair array
+ * @param obj object to parse
+ * @returns key, value pair array
  */
 export function getEntries<T = any>(obj?: Object): [string, T][] {
 	if (obj) {
@@ -65,24 +65,79 @@ export function getEntries<T = any>(obj?: Object): [string, T][] {
 	}
 }
 
+/**
+ * Clamps a value to specified ran
+ * @param val value to clamp
+ * @param min lower clamp
+ * @param max upper clamp
+ * @returns clamped value
+ */
 export function clamp(val: number, min: number, max: number): number {
 	return Math.min(Math.max(val, min), max);
 }
 
+/**
+ * Async-Await variant of setTimeout
+ * @param delay milliseconds to wait before resolving the promise
+ * @returns promise that resolves after specified delay
+ */
 export async function timeout(delay: number): Promise<void> {
 	return new Promise((resolve) => {
 		setTimeout(resolve, delay);
 	});
 }
 
+/**
+ * Compare two objects and get the changes
+ * @param original original unchanged object
+ * @param changed modified object
+ * @return object containing the changes
+ */
 export function getObjChanges(original: object, changed: object): object {
 	let changes = {};
-
+	
 	for (const [key, val] of Object.entries(original)) {
 		if (JSON.stringify(val) !== JSON.stringify(changed[key])) {
 			changes[key] = changed[key]
 		}
 	}
-
+	
 	return changes;
+}
+
+/**
+ * Recursilvy replaces all values of an object
+ * @param object target object to replace values in
+ * @param search value to match
+ * @param replace replacement value
+ * @returns modified object
+ */
+export function replaceFields<S, R>(object: object, search: S, replace: R): object {
+	for (let key in object) {
+		let val = object[key];
+		
+		if (val === search) {
+			object[key] = replace;
+		} else if (typeof val === "object" && !Array.isArray(val)) {
+			object[key] = replaceFields(val, search, replace);
+		}
+	}
+	
+	return object;
+}
+
+/**
+ * Removes an element from an array. Returns true if the element was removed
+ * @param array array from which the element should be removed
+ * @param element element to be removed
+ * @returns modified array
+ */
+export function removeFromArray<T>(array: Array<T>, element: T): Array<T> {
+	const index = array.indexOf(element);
+	
+	if (index > -1) {
+		array.splice(index, 1);
+	}
+	
+	return array;
 }

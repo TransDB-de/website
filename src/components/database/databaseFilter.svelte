@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte"
 	import { language } from "$lib/filterLang"
-	import { clamp, timeout } from "$lib/utils"
+	import { clamp } from "$lib/utils"
 	
 	let focused = false;
 	let input = "";
@@ -87,19 +87,18 @@
 		}
 	}
 	
-	/*async function bodyClick(event: MouseEvent) {
-		console.log(event);
+	async function bodyClick(event: MouseEvent) {
 		if (!filterElement.contains(event.target as Node)) {
 			focused = false;
 		}
-	}*/
+	}
 	
 	function filter() {
 		
 	}
 </script>
 
-<!--<svelte:body on:click={ bodyClick }></svelte:body>-->
+<svelte:body on:click={ bodyClick }></svelte:body>
 
 <div class="text-filter" bind:this={ filterElement }>
 	
@@ -132,18 +131,15 @@
 	
 	.text-filter {
 		display: grid;
-		grid-template-columns: 1fr auto;
+		grid-template-columns: 1fr auto auto;
 		max-width: 850px;
 		width: 100%;
 		align-self: center;
+		gap: 10px;
 		
 		.autocomplete {
 			position: relative;
 			width: 100%;
-		}
-		
-		:global(button) {
-			margin-left: 16px;
 		}
 		
 		input {
@@ -151,7 +147,6 @@
 			@include input-font;
 			
 			padding: 6px 12px;
-			margin-bottom: 20px;
 			width: 100%;
 			height: 40px;
 		}

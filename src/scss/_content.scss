@@ -57,4 +57,10 @@
 	& > :global(ul) {
 		margin: 0 0 20px;
 	}
+	
+	& > :global(p > code) {
+		padding: 2px 4px;
+		border-radius: 4px;
+		background-color: var(--color-background-important-text);
+	}
 }

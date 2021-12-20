@@ -5,7 +5,7 @@
 	import Button from "$components/elements/button.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	import { confirm } from "$components/confirm.svelte"
-	import { fetchUsers } from "$components/usersCollection.svelte"
+	import { fetchUsers } from "$components/userCollection.svelte"
 	
 	import MailIcon from "lucide-icons-svelte/mail.svelte"
 	import CalendarIcon from "lucide-icons-svelte/calendar.svelte"
@@ -23,7 +23,7 @@
 	}
 	
 	async function deleteUser() {
-		let success: boolean = await confirm("Möchtest das Passwort dieses Benutzers wirklich zurücksetzen?");
+		let success: boolean = await confirm("Möchtest du diesen Nutzer wirklich löschen?");
 		if (!success) return;
 		
 		loading.delete = true;

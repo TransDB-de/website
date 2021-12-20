@@ -6,7 +6,7 @@
 	
 	import UserPlusIcon from "lucide-icons-svelte/userPlus.svelte"
 	
-	import { fetchUsers } from "$components/usersCollection.svelte"
+	import { fetchUsers } from "$components/userCollection.svelte"
 	
 	import { parseValidationErrors } from "$lib/utils"
 	import type { ValidationErrorMap } from "$models/error"

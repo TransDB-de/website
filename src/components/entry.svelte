@@ -5,13 +5,13 @@
 	import axios from "axios"
 	
 	import { goto } from "$app/navigation"
+	import { createEventDispatcher } from "svelte"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
 	import Button from "$components/elements/button.svelte"
 	import { popupOk, popupError } from "$components/popup.svelte"
-	import { removeEntry } from "$components/entryCollection.svelte"
-	import { timeout } from "$lib/utils";
+	import { timeout } from "$lib/utils"
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
 	import MapIcon from "lucide-icons-svelte/map.svelte"
@@ -24,6 +24,7 @@
 	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
+	const dispatch = createEventDispatcher();
 	
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
@@ -56,12 +57,12 @@
 	async function approve() {
 		approveLoading = true;
 		try {
-			await axios.patch(`/entries/${entry._id}/approve`);
+			//await axios.patch(`/entries/${entry._id}/approve`);
 			approveLoading = false;
 			popupOk("Eintrag freigeschaltet");
 			
 			await timeout(0);
-			removeEntry(entry);
+			dispatch("remove", entry);
 		} catch (e) {
 			popupError("Fehler beim Freischalten");
 		}

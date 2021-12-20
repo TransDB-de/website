@@ -1,12 +1,3 @@
-<script lang="ts" context="module">	
-	let moduleFunctionRemoveEntry: Function = () => {};
-	
-	// TODO: test! Nothing currently calls this
-	export function removeEntry(entry: Entry) {
-		moduleFunctionRemoveEntry(entry);
-	}
-</script>
-
 <script lang="ts">
 	import axios from "axios"
 	import type { AxiosResponse } from "axios"
@@ -20,6 +11,7 @@
 	
 	import { currentLocation } from "$lib/store"
 	import { filters } from "$lib/filterLang"
+	import { removeFromArray } from "$lib/utils"
 	import type { EntriesResponse, Entry } from "$models/entry.model"
 	
 	import EntryComponent from "$components/entry.svelte"
@@ -92,14 +84,6 @@
 		unsubscribe();
 	});
 	
-	moduleFunctionRemoveEntry = (entry: Entry) => {
-		const index = entries.indexOf(entry);
-		
-		if (index > -1) {
-			entries.splice(index, 1);
-		}
-	}
-	
 	async function loadInitalEntries(pageObject: Page) {
 		if (!browser) return;
 		
@@ -155,13 +139,15 @@
 		loading = false;
 	}
 	
+	function removeEntry(event: CustomEvent<Entry>) {
+		entries = removeFromArray(entries, event.detail);
+	}
 </script>
 
 <div class="entries-collection">
-	
 	{#each entries as entry (entry._id)}
 		<div animate:flip={{duration: 400}} transition:fade={{duration: 200}}>
-			<svelte:component this={ entryComponent } entry={ entry } />
+			<svelte:component this={ entryComponent } entry={ entry } on:remove={ removeEntry } />
 		</div>
 	{/each}
 	

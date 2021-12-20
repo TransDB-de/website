@@ -5,7 +5,7 @@
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import axios from "axios"
-	import { getObjChanges } from "$lib/utils"
+	import { getObjChanges, replaceFields } from "$lib/utils"
 	import { popupOk, popupError } from "$components/popup.svelte"
 	import { confirm } from "$components/confirm.svelte"
 	
@@ -54,6 +54,7 @@
 	
 	async function saveChanges() {
 		let changes = getObjChanges(entry, _entry);
+		changes = replaceFields(changes, "", null);
 		
 		if (Object.keys(changes).length < 1) return;
 		
@@ -61,6 +62,9 @@
 		
 		try {
 			await axios.patch(`entries/${_entry._id}/edit`, changes);
+			
+			entry = JSON.parse(JSON.stringify(_entry));
+			
 			popupOk("Änderungen gespeichert");
 		} catch (e) {
 			if (e.response) {
@@ -156,8 +160,8 @@
 			<Button light iconOnly on:click={ cancelEdit } title={ mouseOverTexts["discardChanges"] }> <XIcon /> </Button>
 			<Button light iconOnly color="red" on:click={ deleteEntry } title={ mouseOverTexts["deleteEntry"] }> <TrashIcon /> </Button>
 		{:else}
-			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
 			<Button light iconOnly on:click={ editEntry } title={ mouseOverTexts["editEntry"] }> <EditIcon /> </Button>
+			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
 		{/if}
 	</div>
 </div>

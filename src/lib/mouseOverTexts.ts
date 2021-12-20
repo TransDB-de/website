@@ -71,9 +71,9 @@ const mouseOverTexts = {
 	discardChanges: "Änderungen verwerfen",
 	copyLink: "Link zum Eintrag in Zwischenablage kopieren",
 	filter: "Einträge filtern",
-	help: "Hilfe",
+	databaseHelp: "Hilfestellung zur Datenbankverwaltung und Filterung von Einträgen",
 	reloadGeo: "Versuche die Geodaten erneut beim Api abzurufen",
-	backup: "Backup der Datenbank herunterladen",
+	backup: "Backup-Datei der Datenbank herunterladen",
 	
 	deleteUser: "Benutzer löschen",
 	resetPassword: "Passwort zurücksetzen",
