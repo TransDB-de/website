@@ -41,7 +41,6 @@
 	async function filtersUpdated() {
 		// mobile changes are applied manually to save data
 		if ($isMobile) {
-			console.log("mobile")
 			return;
 		}
 		
@@ -109,9 +108,6 @@
 		goto("/search" + searchString, { keepfocus: true, noscroll: true });
 	}
 	
-	let hasMeta = false;
-	$: hasMeta = offerMapping[selectedType] || attributeMapping[selectedType];
-	
 	// scroll edge case
 	// this snippet ensures decives with small screens can sroll the sticky sidebar
 	const topOffset = 56;
@@ -175,7 +171,7 @@
 			{/each}
 		</fieldset>
 		
-		{#if hasMeta}
+		{#if offerMapping[selectedType]}
 			<p class="sub-title"> Angebote </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
@@ -187,7 +183,13 @@
 						{ value }
 					</TagCheckbox>
 				{/each}
-				
+			</fieldset>
+		{/if}
+		
+		{#if attributeMapping[selectedType]}
+			<p class="sub-title"> Weitere Infos </p>
+			
+			<fieldset class="tags" on:input={ filtersUpdated }>
 				{#each getEntries(attributeMapping[selectedType]) as [key, value]}
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }

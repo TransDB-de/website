@@ -18,8 +18,12 @@
 	}
 	
 	let username: string = "Account";
+	let admin: boolean = false;
 	$: {
-		if (browser && $userdata) { username = $userdata.username; }
+		if (browser && $userdata) {
+			username = $userdata.username;
+			admin = $userdata.admin;
+		}
 	}
 	
 	function logout() {
@@ -34,11 +38,15 @@
 <div class="manage-nav">
 	<nav>
 		<NavLink {...linkOptions} exact href="/manage"> Freischalten </NavLink>
-		<NavLink {...linkOptions} href="/manage/database"> Datenbank </NavLink>
-		<NavLink {...linkOptions} href="/manage/users"> Benutzer </NavLink>
+		<NavLink {...linkOptions} exact href="/manage/blacklist"> Blacklist </NavLink>
+		
+		{#if admin}
+			<NavLink {...linkOptions} href="/manage/database"> Datenbank </NavLink>
+			<NavLink {...linkOptions} href="/manage/users"> Benutzer </NavLink>
+		{/if}
 	</nav>
 	<span class="account">
-		<Button light  on:click={ () => goto("/manage/account") }>
+		<Button light on:click={ () => goto("/manage/account") }>
 			<SettingsIcon class="settings-icon" size="28px"/>
 			{ username }
 		</Button>

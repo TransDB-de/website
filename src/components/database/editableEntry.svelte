@@ -7,17 +7,16 @@
 	import axios from "axios"
 	import { getObjChanges, replaceFields } from "$lib/utils"
 	import { popupOk, popupError } from "$components/popup.svelte"
-	import { confirm } from "$components/confirm.svelte"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
 	import EditableSelectField from "$components/database/editableSelectField.svelte"
 	import EditableCheckbox from "$components/database/editableCheckbox.svelte"
 	import EditableRadioList from "$components/database/editableRadioList.svelte"
 	import Button from "$components/elements/button.svelte"
+	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte"
 	
 	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	import SaveIcon from "lucide-icons-svelte/save.svelte"
-	import TrashIcon from "lucide-icons-svelte/trash.svelte"
 	import EditIcon from "lucide-icons-svelte/edit.svelte"
 	import XIcon from "lucide-icons-svelte/x.svelte"
 	import LinkIcon from "lucide-icons-svelte/link.svelte"
@@ -68,23 +67,25 @@
 			popupOk("Änderungen gespeichert");
 		} catch (e) {
 			if (e.response) {
-				popupError("Fehler beim Speichern: " + e.response.status);
+				popupError(`Fehler beim Speichern (${e.response.status})`);
 			} else {
 				popupError("Unbekannter Fehler beim Speichern");
 			}
 		}
 	}
 	
-	async function deleteEntry() {
-		let success: boolean = await confirm("Möchtest du diesen Eintrag wirklich löschen?");
-		
-		if (!success) return;
+	async function refetchGeo() {
+		geoNotRefetched = false;
 		
 		try {
-			await axios.delete(`entries/${_entry._id}`);
-			popupOk("Eintrag gelöscht");
+			await axios.patch(`entries/${entry._id}/updateGeo`);
+			popupOk("Geodaten-Update angefragt. Bitte warte ein wenig und lade die Seite dann neu");
 		} catch (e) {
-			popupError("Unbekannter fehler beim Löschen");
+			if (e.response) {
+				popupError(`Fehler (${e.response.status})`);
+			} else {
+				popupError("Unbekannter Fehler");
+			}
 		}
 	}
 </script>
@@ -95,7 +96,8 @@
 		<div class="header">
 			<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
 			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
-			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } />
+			<EditableCheckbox label="Blacklisted" bind:checked={ _entry.blacklisted } { edit } class="narrow"/>
+			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } class="narrow"/>
 		</div>
 		
 		<div>
@@ -112,7 +114,7 @@
 					<AlertTriangleIcon /> <span>Keine Geo-Daten vorhanden!</span>
 				
 					{#if edit && geoNotRefetched}
-						<Button light title={mouseOverTexts["reloadGeo"]}>Erneut versuchen</Button>
+						<Button light title={mouseOverTexts["reloadGeo"]} on:click={ refetchGeo }>Erneut versuchen</Button>
 					{/if}
 				</span>
 			{/if}
@@ -158,7 +160,7 @@
 		{#if edit}
 			<Button light iconOnly on:click={ saveChanges }  title={ mouseOverTexts["saveChanges"] }> <SaveIcon /> </Button>
 			<Button light iconOnly on:click={ cancelEdit } title={ mouseOverTexts["discardChanges"] }> <XIcon /> </Button>
-			<Button light iconOnly color="red" on:click={ deleteEntry } title={ mouseOverTexts["deleteEntry"] }> <TrashIcon /> </Button>
+			<DeleteEntryButton on:remove { entry } />
 		{:else}
 			<Button light iconOnly on:click={ editEntry } title={ mouseOverTexts["editEntry"] }> <EditIcon /> </Button>
 			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
@@ -214,7 +216,8 @@
 					grid-column: unset;
 				}
 			}
-			:global(div:last-child) {
+			
+			:global(.narrow) {
 				grid-column: span 1;
 			}
 		}

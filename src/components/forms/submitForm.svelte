@@ -8,7 +8,7 @@
 	import ErrorBox from "$components/elements/errorBox.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
-	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions } from "$lib/entryMappings"
+	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import axios from "axios"
@@ -58,9 +58,6 @@
 	function checkWebsite(val) {
 		const httpRegex = /^https?:\/\//gm;
 		const removePrefixRegex = /^[a-z]*:?\/?\//gmi;
-		
-		console.log(val)
-		console.log(newEntry.website)
 		
 		if (!newEntry.website) { return; }
 		
@@ -150,68 +147,39 @@
 	
 	<h2> Spezifische Angaben </h2>
 	
-	{#if newEntry.type === "group"}
-	
-		{#each Object.entries(attributeMapping.group) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
+	{#if attributeMapping[newEntry.type]}
+		<h3> Angebote: </h3>
+		
+		{#each Object.entries(attributeDetails[newEntry.type]) as [key, value]}
+			<Checkbox bind:group={ newEntry.meta.attributes } value={ key }> { value } </Checkbox>
 		{/each}
+	{/if}
+	
+	{#if offerMapping[newEntry.type]}
+		{#if attributeMapping[newEntry.type]}
+			<h3> Weitere Angaben: </h3>
+		{/if}
+		
+		{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
+			<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
+		{/each}
+	{/if}
+	
+	{#if newEntry.type === "group"}
 		
 		<Input bind:value={ newEntry.meta.specials } type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
 		<Input bind:value={ newEntry.meta.minAge } type="number" placeholder="Mindestalter"/> 
 		
 	{:else if newEntry.type === "therapist"}
-	
+		<h3> Fachrichtung: </h3>
+		
 		<Select bind:value={ newEntry.meta.subject } required>
 			<option value="" disabled selected> Fachrichtung wählen </option>
-			<option value="therapist"> Psychologische*r Psychotherapeut*in </option>
-			<option value="psychologist"> Psychiater (Facharzt für Psychiatrie) </option>
+			
+			{#each Object.entries(subjectMapping.therapist) as [key, value]}
+				<option value={ key }> { value } </option>
+			{/each}
 		</Select>
-
-		<h3> Angebote: </h3>
-		
-		<ErrorBox error={ errors["meta.offers"] }>
-			{#each Object.entries(offerMapping.therapist) as [key, value]}
-				<Checkbox bind:group={ newEntry.meta.offers } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-			{/each}
-		</ErrorBox>
-		
-	{:else if newEntry.type === "surveyor"}
-	
-		{#each Object.entries(attributeMapping.surveyor) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-		{/each}
-		
-	{:else if newEntry.type === "surgeon"}
-	
-		<h3> Angebotene Operationen: </h3>
-		
-		<ErrorBox error={errors["meta.offers"]}>
-			{#each Object.entries(offerMapping.surgeon) as [key, value]}
-				<Checkbox bind:group={ newEntry.meta.offers } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-			{/each}
-		</ErrorBox>
-		
-	{:else if newEntry.type === "hairremoval"}
-	
-		<h3> Angebote: </h3>
-		
-		<ErrorBox error={errors["meta.offers"]}>
-			{#each Object.entries(offerMapping.hairremoval) as [key, value]}
-				<Checkbox bind:group={ newEntry.meta.offers } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-			{/each}
-		</ErrorBox>
-
-		<h3> Weitere Infos: </h3>
-		{#each Object.entries(attributeMapping.hairremoval) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-		{/each}
-		
-	{:else if newEntry.type === "endocrinologist"}
-	
-		{#each Object.entries(attributeMapping.endocrinologist) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key } title={ mouseOverTexts[key] }> { value } </Checkbox>
-		{/each}
-		
 	{/if}
 	
 	<h3> Barrierefreiheit: </h3>

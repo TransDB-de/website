@@ -2,16 +2,18 @@
 	import type { Entry } from "$models/entry.model"
 	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
-	import axios from "axios"
 	
 	import { goto } from "$app/navigation"
-	import { createEventDispatcher } from "svelte"
+	import { page } from "$app/stores"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
 	import Button from "$components/elements/button.svelte"
 	import { popupOk, popupError } from "$components/popup.svelte"
-	import { timeout } from "$lib/utils"
+	
+	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte"
+	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte"
+	import BlacklistEntryButton from "$components/entry/blacklistEntryButton.svelte"
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
 	import MapIcon from "lucide-icons-svelte/map.svelte"
@@ -20,11 +22,8 @@
 	import EditIcon from "lucide-icons-svelte/edit.svelte"
 	import Share2Icon from "lucide-icons-svelte/share2.svelte"
 	import NavigationIcon from "lucide-icons-svelte/navigation.svelte"
-	import CheckCircle from "lucide-icons-svelte/checkCircle.svelte"
-	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
-	const dispatch = createEventDispatcher();
 	
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
@@ -51,23 +50,6 @@
 			popupOk("Link in die Zwischenablage kopiert!");
 		}
 	}
-	
-	let approveLoading: boolean = false;
-	
-	async function approve() {
-		approveLoading = true;
-		try {
-			//await axios.patch(`/entries/${entry._id}/approve`);
-			approveLoading = false;
-			popupOk("Eintrag freigeschaltet");
-			
-			await timeout(0);
-			dispatch("remove", entry);
-		} catch (e) {
-			popupError("Fehler beim Freischalten");
-		}
-		
-	}
 </script>
 
 <div class="entry">
@@ -76,9 +58,9 @@
 			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
-				<span class="special-tag green"> Barrierefrei </span>
+				<span class="special-tag green" title={ mouseOverTexts["barrierFree"] }> Barrierefrei </span>
 			{:else if entry.accessible === "no"}
-				<span class="special-tag orange"> Nicht Barrierefrei </span>
+				<span class="special-tag orange" title={ mouseOverTexts["notBarrierFree"] }> Nicht Barrierefrei </span>
 			{/if}
 		</div>
 		
@@ -156,30 +138,29 @@
 		{/if}
 	</div>
 	
-	<div class="controls">
-		{#if entry.approved}
-			<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
-				<EditIcon />
-			</EdgeButton>
-			
-			<EdgeButton on:click={share} title={ mouseOverTexts["share"] }>
-				<Share2Icon />
-			</EdgeButton>
-		{:else}
-			<Button light iconOnly color="edge-highlight" title={ mouseOverTexts["approveEntry"] } on:click={ approve } loading={ approveLoading }>
-				<CheckCircle />
-			</Button>
-			
-			<Button light iconOnly color="edge-error">
-				<AlertTriangleIcon />
-			</Button>
-		{/if}
-	</div>
+	{#if !entry.blacklisted}
+		<div class="controls">
+			{#if !entry.approved}
+				<ApproveEntryButton on:remove { entry } />
+				<BlacklistEntryButton on:remove { entry } />
+				<DeleteEntryButton { entry } />
+			{:else}
+				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
+					<EditIcon />
+				</EdgeButton>
+				
+				<EdgeButton on:click={share} title={ mouseOverTexts["share"] }>
+					<Share2Icon />
+				</EdgeButton>
+			{/if}
+		</div>
+	{/if}
+	
 </div>
 
 <style lang="scss">
-	@import "../scss/shadows";
-	@import "../scss/mixins";
+	@import "../../scss/shadows";
+	@import "../../scss/mixins";
 	
 	.entry {
 		display: flex;

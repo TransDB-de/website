@@ -5,6 +5,7 @@ export interface Entry {
 	type: string;
 	name: string;
 	approved ?: boolean;
+	blacklisted ?: boolean;
 	firstName ?: string;
 	lastName ?: string;
 	email ?: string;
@@ -15,8 +16,7 @@ export interface Entry {
 	address: Address;
 	meta: Meta;
 	
-	location: GeoJsonPoint;
-	
+	location?: GeoJsonPoint;
 	distance?: number;
 }
 

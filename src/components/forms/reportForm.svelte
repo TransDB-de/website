@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Form from "$formElements/form.svelte"
-	import EntryComponent from "$components/entry.svelte"
+	import EntryComponent from "$components/entry/entry.svelte"
 	import Textarea from "$formElements/textarea.svelte"
 	import Button from "$components/elements/button.svelte"
 	import Loader from "$components/elements/loader.svelte"

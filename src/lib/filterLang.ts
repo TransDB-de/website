@@ -1,6 +1,7 @@
 import * as filterLang from "@transdb-de/filter-lang"
 import * as entryMappings from "./entryMappings"
-import { writable } from "svelte/store"
+import type { Subscriber, Updater, Writable } from "svelte/store"
+import { removeFromArray } from "./utils"
 
 type Dict = {[key: string]: string};
 
@@ -46,7 +47,8 @@ const langDef: filterLang.LanguageDefinition = [
 		negationSuffix: "nicht",
 		type: "boolean",
 		mappings: {
-			"Freigeschaltet": "approved"
+			"Freigeschaltet": "approved",
+			"Blacklisted": "blacklisted"
 		}
 	},
 	
@@ -159,5 +161,35 @@ const langDef: filterLang.LanguageDefinition = [
 ]
 
 export const language = new filterLang.Language(langDef);
-export const filters = writable<filterLang.IntermediateFormat.AbstractFilters>({});
 
+type filterCallback = Subscriber<filterLang.IntermediateFormat.AbstractFilters>;
+
+class FilterStore implements Writable<filterLang.IntermediateFormat.AbstractFilters> {
+	callbacks: filterCallback[] = [];
+	filters: filterLang.IntermediateFormat.AbstractFilters = {};
+	
+	subscribe(callback: filterCallback) {
+		this.callbacks.push(callback);
+		
+		return () => {
+			removeFromArray(this.callbacks, callback);
+		}
+	}
+	
+	set(new_filters: filterLang.IntermediateFormat.AbstractFilters) {
+		this.filters = new_filters
+	}
+	
+	update(updater: Updater<filterLang.IntermediateFormat.AbstractFilters>) {
+		this.filters = updater(this.filters);
+	}
+	
+	/** run the callbacks on all subscribers */
+	filter() {
+		this.callbacks.forEach(c => {
+			c(this.filters);
+		});
+	}
+}
+
+export const filters = new FilterStore();

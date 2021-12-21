@@ -48,7 +48,7 @@
 
 <svelte:window bind:scrollY={ scrollY }/>
 
-<div class="header" class:hide bind:this={ component } style="--opacity: { opacity }">
+<div class="header" class:hide bind:this={ component }>
 	<div class="navbar" class:expand class:collapsed bind:this={ navbar } >
 		<h1 class="title-mobile" on:click={() => goto("/")} > TransDB.de </h1>
 		
@@ -69,11 +69,11 @@
 		</span>
 	</div>
 	
-	<h1 class="title" on:click={() => goto("/search")}> Trans*DB </h1>
+	<h1 class="title" on:click={() => goto("/search")} style="--opacity: { opacity }"> Trans*DB </h1>
 	
-	<h2 class="subtitle"> Die Suchmaschine für trans* relevante Angebote </h2>
+	<h2 class="subtitle" style="--opacity: { opacity }"> Die Suchmaschine für trans* relevante Angebote </h2>
 	
-	<SearchBar />
+	<SearchBar style="--opacity: { opacity }"/>
 	
 </div>
 

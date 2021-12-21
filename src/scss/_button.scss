@@ -58,10 +58,7 @@
 	
 	&.light {
 		background-color: var(--color-surface-bright);
-		
-		&:not(.red):not(.edge-error):not(.edge-highlight) {
-			color: var(--color-edge);
-		}
+		color: var(--color-edge);
 		
 		padding: 5px 10px;
 		height: unset;
@@ -85,6 +82,7 @@
 	/* colored button */
 	&.red {
 		background-color: var(--color-surface-warn);
+		color: var(--color-edge-bright);
 	}
 
 	&.red:hover,
@@ -98,6 +96,10 @@
 	
 	&.edge-highlight {
 		color: var(--color-edge-highlight);
+	}
+	
+	&.edge-warn {
+		color: var(--color-edge-warn);
 	}
 	
 	&.edge-error {

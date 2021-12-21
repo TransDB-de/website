@@ -14,7 +14,7 @@
 			<input type="text" bind:value={ value } />
 		{/if}
 	{:else}
-		<span> { value ?? "" } </span>
+		<span title={ `${value}` }> { value ?? "" } </span>
 	{/if}
 </div>
 

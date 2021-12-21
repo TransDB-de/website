@@ -8,7 +8,10 @@ export const typeMapping: Dict = {
 	endocrinologist: "Endokrinologische Praxis",
 	surgeon: "Operateur*in",
 	logopedics: "Logopäd*in",
-	hairremoval: "Haarentfernung"
+	hairremoval: "Haarentfernung",
+	urologist: "Urologie",
+	gynecologist: "Gynäkologie",
+	GP: "Allgemeinmediziner*in/Hausärzt*in"
 }
 
 // for using the mappings as data key references
@@ -22,7 +25,10 @@ export const typeDescriptions: Dict = {
 	endocrinologist: "Name der Praxis",
 	surgeon: "Name des Arztes / der Klinik",
 	hairremoval: "Name des Studios",
-	logopedics: "Name der Praxis"
+	logopedics: "Name der Praxis",
+	urologist: "Name der Praxis",
+	gynecologist: "Name der Praxis",
+	GP: "Name der Praxis"
 }
 
 export const attributeMapping = {
@@ -40,7 +46,28 @@ export const attributeMapping = {
 	surveyor: {
 		enby: "NB Gutachten"
 	},
+	surgeon: {
+		selfPayedOnly: "Nur Selbstzahler"
+	},
 	endocrinologist: {
+		treatsNB: "Behandelt NB Personen"
+	},
+	therapist: {
+		selfPayedOnly: "Nur Selbstzahler",
+		treatsNB: "Behandelt NB Personen",
+		youthOnly: "Kinder- und Jugend"
+	},
+	urologist: {
+		treatsNB: "Behandelt NB Personen",
+		transFem: "Trans*feminin freundlich",
+		transMask: "Trans*maskulin freundlich"
+	},
+	gynecologist: {
+		treatsNB: "Behandelt NB Personen",
+		transFem: "Trans*feminin freundlich",
+		transMask: "Trans*maskulin freundlich"
+	},
+	GP: {
 		treatsNB: "Behandelt NB Personen"
 	}
 }
@@ -56,6 +83,27 @@ export const attributeDetails = {
 	},
 	surveyor: {
 		enby: "Stellt Gutachten für nicht-binäre Personen aus"
+	},
+	surgeon: {
+		selfPayedOnly: "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
+	},
+	therapist: {
+		selfPayedOnly: "Kein Kassensitz oder Kostenerstattung. Bietet nur Therpaie für Selbstzahler",
+		treatsNB: "Behandelt nicht-binäre Personen",
+		youthOnly: "Kinder- und Jugendtherapeut*in"
+	},
+	urologist: {
+		treatsNB: "Behandelt nicht-binäre Personen",
+		transFem: "Trans*feminin freundlich",
+		transMask: "Trans*maskulin freundlich"
+	},
+	gynecologist: {
+		treatsNB: "Behandelt nicht-binäre Personen",
+		transFem: "Trans*feminin freundlich",
+		transMask: "Trans*maskulin freundlich"
+	},
+	GP: {
+		treatsNB: "Behandelt nicht-binäre Personen"
 	}
 }
 
@@ -83,13 +131,27 @@ export const offerMapping = {
 		ipl: "IPL",
 		electro: "Elektroepilation",
 		electroAE: "Elektroepilation mit Lokalanästhesie"
+	},
+	urologist: {
+		hrt: "Begleitet Hormontherapie",
+		medication: "Verschreibt Hormonmedikation"
+	},
+	gynecologist: {
+		hrt: "Begleitet Hormontherapie",
+		medication: "Verschreibt Hormonmedikation"
+	},
+	GP: {
+		hrt: "Begleitet Hormontherapie",
+		medication: "Verschreibt Hormonmedikation"
 	}
 }
 
 export const subjectMapping = {
 	therapist: {
 		therapist: "Psychologische*r Psychotherapeut*in",
-		psychologist: "Psychiater (Facharzt für Psychiatrie)"
+		psychologist: "Psychiater (Facharzt für Psychiatrie)",
+		naturopath: "Heilpraktiker*in",
+		other: "Andere Fachrichtung"
 	}
 }
 

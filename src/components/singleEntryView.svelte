@@ -3,7 +3,7 @@
 	import { onMount } from "svelte"
 	import axios from "axios";
 	import { popupError } from "$components/popup.svelte"
-	import EntryComponent from "$components/entry.svelte"
+	import EntryComponent from "$components/entry/entry.svelte"
 	import Button from "$components/elements/button.svelte"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import Loader from "$components/elements/loader.svelte";

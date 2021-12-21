@@ -14,13 +14,13 @@
 	import { removeFromArray } from "$lib/utils"
 	import type { EntriesResponse, Entry } from "$models/entry.model"
 	
-	import EntryComponent from "$components/entry.svelte"
+	import EntryComponent from "$components/entry/entry.svelte"
 	import EditableEntry from "$components/database/editableEntry.svelte"
 	import LoadMore from "$components/loadMore.svelte"
 	import { popupError } from "$components/popup.svelte"
 	
 	/** Type of EntryCollection */
-	export let type: "search" | "unapproved" | "database" = "search";
+	export let type: "search" | "unapproved" | "database" | "blacklist" = "search";
 	
 	let entries: Entry[] = [];
 	
@@ -61,6 +61,26 @@
 			break;
 		}
 		
+		case "blacklist": {
+			entryComponent = EntryComponent;
+			
+			fetchFunction = async (_pageObject, pageCount = 0) => {
+				let _filters = $filters;
+				
+				if (!("boolTrue" in _filters)) {
+					_filters["boolTrue"] = [];
+				}
+				
+				_filters["boolTrue"].push("blacklisted");
+				
+				return axios.post<EntriesResponse>("entries/full", {
+					page: pageCount,
+					filter: _filters
+				});
+			}
+			break;
+		}
+		
 		default: {
 			console.error(`No such type for EntryCollection: "${type}"`);
 		}
@@ -70,7 +90,15 @@
 	let pageCount: number = 0;
 	let loading: boolean = true;
 	
-	onMount(() => loadInitalEntries($page));
+	//onMount(() => loadInitalEntries($page));
+	
+	$filters = {};
+	
+	$: {
+		if ($filters) {
+			loadInitalEntries($page);
+		}
+	}
 	
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	const unsubscribe = navigating.subscribe((nav) => {
@@ -93,7 +121,13 @@
 		try {
 			res = await fetchFunction(pageObject);
 		} catch(e) {
-			popupError(`Fehler beim Laden (${e.response.status})`);
+			if (e.response) {
+				popupError(`Fehler beim Laden (${e.response.status})`);
+			} else {
+				popupError(`Unbekannter Fehler`);
+				console.error(e);
+			}
+			
 			loading = false;
 			return;
 		}
@@ -154,6 +188,10 @@
 	{#if more}
 		<LoadMore on:click={ loadNextPage } loading={ loading } />
 	{/if}
+	
+	{#if entries.length < 1}
+		<h3> Keine passenden Einträge gefunden </h3>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -161,5 +199,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		
+		h3 {
+			text-align: center;
+		}
 	}
 </style>

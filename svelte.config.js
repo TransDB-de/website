@@ -1,6 +1,5 @@
 import { mdsvex } from "mdsvex"
 import mdsvexConfig from "./mdsvex.config.js"
-//import adapter from "@sveltejs/adapter-auto"
 import preprocess from "svelte-preprocess"
 import { resolve } from "path"
 import adapter from '@sveltejs/adapter-node'
@@ -15,7 +14,7 @@ const config = {
 	
 	kit: {
 		adapter: adapter({
-			out: "build-deno"
+			out: "build"
 		}),
 		
 		// hydrate the <div id="svelte"> element in src/app.html

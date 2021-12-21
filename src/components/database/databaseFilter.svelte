@@ -1,7 +1,9 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte"
+	import { filters } from "$lib/filterLang"
 	import { language } from "$lib/filterLang"
 	import { clamp } from "$lib/utils"
+	import { onDestroy, onMount } from "svelte"
 	
 	let focused = false;
 	let input = "";
@@ -47,7 +49,11 @@
 		else if (event.code === "ArrowDown") keyPress(event, false);
 		else if (event.code === "ArrowRight") input += selectedSuggestion;
 		else if (event.code === "Enter") {
-			input += selectedSuggestion;
+			if (selectedSuggestion) {
+				input += selectedSuggestion;
+			} else {
+				filter();
+			}
 		}
 	}
 	
@@ -94,7 +100,8 @@
 	}
 	
 	function filter() {
-		
+		$filters = language.parse(input);
+		filters.filter();
 	}
 </script>
 
@@ -122,7 +129,7 @@
 		
 	</div>
 	
-	<Button> Filtern </Button>
+	<Button on:click={ filter }> Filtern </Button>
 	
 </div>
 
@@ -131,7 +138,7 @@
 	
 	.text-filter {
 		display: grid;
-		grid-template-columns: 1fr auto auto;
+		grid-template-columns: 1fr auto;
 		max-width: 850px;
 		width: 100%;
 		align-self: center;

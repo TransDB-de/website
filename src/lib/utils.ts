@@ -96,8 +96,12 @@ export async function timeout(delay: number): Promise<void> {
 export function getObjChanges(original: object, changed: object): object {
 	let changes = {};
 	
-	for (const [key, val] of Object.entries(original)) {
-		if (JSON.stringify(val) !== JSON.stringify(changed[key])) {
+	for (const [key, val] of Object.entries(changed)) {
+		if (key in original) {
+			if (JSON.stringify(val) !== JSON.stringify(original[key])) {
+				changes[key] = changed[key]
+			}
+		} else {
 			changes[key] = changed[key]
 		}
 	}

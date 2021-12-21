@@ -1,5 +1,9 @@
 # Häufig gestellte Fragen
 
+## Was bedeutet das "DB" in "Trans*DB"?
+
+DB steht für DatenBank.
+
 ## Funktioniert Trans*DB auch in anderen Ländern?
 
 Es ist möglich, Einträge einzureichen, dessen Standort sich im Ausland befindet.  
