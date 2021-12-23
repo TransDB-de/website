@@ -48,7 +48,7 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "boolean",
 		mappings: {
 			"Freigeschaltet": "approved",
-			"Blacklisted": "blacklisted"
+			"Blocked": "blocked"
 		}
 	},
 	

@@ -1,6 +1,6 @@
 <script context="module">
 	import ackee from "$lib/ackee"
-	import "$lib/axios";
+	import { injectSession } from "$lib/axios";
 	
 	// runs every time "page" changes
 	export async function load({ page }) {
@@ -16,7 +16,9 @@
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
 	
-	import { page } from '$app/stores'
+	import { page, session } from '$app/stores'
+	
+	injectSession($session);
 	
 	// key which triggers fade transition between pages
 	let path = "";

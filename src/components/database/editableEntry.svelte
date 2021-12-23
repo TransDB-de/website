@@ -96,7 +96,7 @@
 		<div class="header">
 			<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
 			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
-			<EditableCheckbox label="Blacklisted" bind:checked={ _entry.blacklisted } { edit } class="narrow"/>
+			<EditableCheckbox label="Blockiert" bind:checked={ _entry.blocked } { edit } class="narrow"/>
 			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } class="narrow"/>
 		</div>
 		

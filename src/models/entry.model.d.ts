@@ -5,7 +5,7 @@ export interface Entry {
 	type: string;
 	name: string;
 	approved ?: boolean;
-	blacklisted ?: boolean;
+	blocked ?: boolean;
 	firstName ?: string;
 	lastName ?: string;
 	email ?: string;

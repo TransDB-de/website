@@ -29,7 +29,7 @@ const config = {
 					$models: resolve('./src/models'),
 					$formElements: resolve('./src/components/forms/elements'),
 					$brandIcons: resolve('./src/components/icons/brands')
-				}
+				},
 			},
 			envPrefix: "CLIENT_"
 		}

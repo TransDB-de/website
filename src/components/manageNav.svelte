@@ -38,7 +38,7 @@
 <div class="manage-nav">
 	<nav>
 		<NavLink {...linkOptions} exact href="/manage"> Freischalten </NavLink>
-		<NavLink {...linkOptions} exact href="/manage/blacklist"> Blacklist </NavLink>
+		<NavLink {...linkOptions} exact href="/manage/blocklist"> Blocklist </NavLink>
 		
 		{#if admin}
 			<NavLink {...linkOptions} href="/manage/database"> Datenbank </NavLink>

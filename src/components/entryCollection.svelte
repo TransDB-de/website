@@ -20,7 +20,7 @@
 	import { popupError } from "$components/popup.svelte"
 	
 	/** Type of EntryCollection */
-	export let type: "search" | "unapproved" | "database" | "blacklist" = "search";
+	export let type: "search" | "unapproved" | "database" | "blocklist" = "search";
 	
 	let entries: Entry[] = [];
 	
@@ -61,7 +61,7 @@
 			break;
 		}
 		
-		case "blacklist": {
+		case "blocklist": {
 			entryComponent = EntryComponent;
 			
 			fetchFunction = async (_pageObject, pageCount = 0) => {
@@ -71,7 +71,7 @@
 					_filters["boolTrue"] = [];
 				}
 				
-				_filters["boolTrue"].push("blacklisted");
+				_filters["boolTrue"].push("blocked");
 				
 				return axios.post<EntriesResponse>("entries/full", {
 					page: pageCount,
@@ -189,7 +189,7 @@
 		<LoadMore on:click={ loadNextPage } loading={ loading } />
 	{/if}
 	
-	{#if entries.length < 1}
+	{#if entries.length < 1 && !loading}
 		<h3> Keine passenden Einträge gefunden </h3>
 	{/if}
 </div>

@@ -13,7 +13,7 @@
 	
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte"
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte"
-	import BlacklistEntryButton from "$components/entry/blacklistEntryButton.svelte"
+	import BlocklistEntryButton from "$components/entry/blocklistEntryButton.svelte"
 	
 	import PhoneIcon from "lucide-icons-svelte/phone.svelte"
 	import MapIcon from "lucide-icons-svelte/map.svelte"
@@ -138,11 +138,11 @@
 		{/if}
 	</div>
 	
-	{#if !entry.blacklisted}
+	{#if !entry.blocked}
 		<div class="controls">
 			{#if !entry.approved}
 				<ApproveEntryButton on:remove { entry } />
-				<BlacklistEntryButton on:remove { entry } />
+				<BlocklistEntryButton on:remove { entry } />
 				<DeleteEntryButton { entry } />
 			{:else}
 				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
@@ -167,7 +167,7 @@
 		background-color: var(--color-background-bright);
 		box-shadow: $surface-shadow-soft;
 		border-radius: 4px;
-		padding: 10px 15px 10px 20px;
+		padding: 15px 15px 15px 20px;
 		gap: 5px;
 		
 		.controls {
@@ -202,7 +202,7 @@
 				font-size: 0.9em;
 				
 				&:first-of-type{
-					margin: 4px 0 20px 5px;
+					margin: 0 0 20px 5px;
 				}
 				
 				&.small-gap {
@@ -236,9 +236,10 @@
 				h1 {
 					font-size: 1.4em;
 					font-weight: 600;
-					margin: -4px 0;
+					margin: -4px 0 6px 0;
 					word-break: break-word;
 					max-width: 100%;
+					line-height: 1.2em;
 				}
 				
 				.special-tag {
@@ -246,6 +247,7 @@
 					border-radius: 4px;
 					font-size: 0.8em;
 					font-weight: 400;
+					margin: -4px 0 6px 0;
 					cursor: default;
 					
 					&.green {

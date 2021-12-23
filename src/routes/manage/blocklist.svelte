@@ -6,7 +6,7 @@
 <template lang="pug">
 	div
 		DatabaseFilter
-		EntryCollection(type="blacklist")
+		EntryCollection(type="blocklist")
 </template>
 
 <style lang="scss">

@@ -67,7 +67,7 @@ const mouseOverTexts = {
 	editEntry: "Eintrag bearbeiten",
 	deleteEntry: "Eintrag löschen",
 	approveEntry: "Eintrag freischalten",
-	blacklistEntry: "Eintrag auf die Blacklist setzen",
+	blocklistEntry: "Eintrag auf die Blocklist setzen",
 	saveChanges: "Änderungen speichern",
 	discardChanges: "Änderungen verwerfen",
 	copyLink: "Link zum Eintrag in Zwischenablage kopieren",

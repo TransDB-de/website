@@ -15,23 +15,23 @@
 	export let entry: Entry;
 	let loading = false;
 	
-	async function blacklist() {
-		let confirmed = await confirm("Möchtest du diesen Eintrag wirklich auf die Blacklist setzen?");
+	async function blocklist() {
+		let confirmed = await confirm("Möchtest du diesen Eintrag wirklich auf die Blocklist setzen?");
 		if (!confirmed) return;
 		
 		loading = true;
 		try {
-			await axios.patch(`/entries/${entry._id}/blacklist`);
-			popupWarn("Der Eintrag wurde auf die Blacklist gesetzt");
+			await axios.patch(`/entries/${entry._id}/blocklist`);
+			popupWarn("Der Eintrag wurde auf die Blocklist gesetzt");
 			dispatch("remove", entry);
 		} catch (e) {
-			popupError("Fehler beim Blacklisten des Eintrags");
+			popupError("Fehler beim Blocklisten des Eintrags");
 		}
 		
 		loading = false;
 	}
 </script>
 
-<Button light iconOnly title={ mouseOverTexts["blacklistEntry"] } on:click={ blacklist } { loading }>
+<Button light iconOnly title={ mouseOverTexts["blocklistEntry"] } on:click={ blocklist } { loading }>
 	<FlagIcon />
 </Button>
