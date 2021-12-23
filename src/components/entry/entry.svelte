@@ -4,12 +4,11 @@
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import { goto } from "$app/navigation"
-	import { page } from "$app/stores"
+	import { userdata } from "$lib/store"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
-	import Button from "$components/elements/button.svelte"
-	import { popupOk, popupError } from "$components/popup.svelte"
+	import { popupOk } from "$components/popup.svelte"
 	
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte"
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte"
@@ -22,12 +21,14 @@
 	import EditIcon from "lucide-icons-svelte/edit.svelte"
 	import Share2Icon from "lucide-icons-svelte/share2.svelte"
 	import NavigationIcon from "lucide-icons-svelte/navigation.svelte"
+	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
 	
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
 	$: website = entry.website ? new URL(entry.website).host : null;
+	$: possibleDuplicateLink = entry.possibleDuplicate && $userdata.admin ? "/manage/database?id=" + entry.possibleDuplicate : "/entry/" + entry.possibleDuplicate
 	
 	let addressText = "";
 	$: {
@@ -101,7 +102,7 @@
 		</p>
 		
 		
-		{#if entry.meta.offers}
+		{#if entry.meta.offers && entry.meta.offers.length > 0}
 			<p class="small-gap small-margin">
 				<b> Angebote: </b>
 				{#each entry.meta.offers as offer}
@@ -110,7 +111,7 @@
 			</p>
 		{/if}
 		
-		{#if entry.meta.attributes}
+		{#if entry.meta.attributes && entry.meta.attributes.length > 0}
 			<p class="small-gap small-margin">
 				<b> Eigenschaften: </b>
 				{#each entry.meta.attributes as attribute}
@@ -136,6 +137,14 @@
 				<NavigationIcon /> <b> { entry.distance.toFixed(1) } km - { entry.address.city } </b> 
 			</p>
 		{/if}
+		
+		{#if !entry.approved && entry.possibleDuplicate}
+			<p class="small-gap">
+				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
+					<AlertTriangleIcon /> Mögliches Duplikat
+				</a>
+			</p>
+		{/if}
 	</div>
 	
 	{#if !entry.blocked}
@@ -143,7 +152,7 @@
 			{#if !entry.approved}
 				<ApproveEntryButton on:remove { entry } />
 				<BlocklistEntryButton on:remove { entry } />
-				<DeleteEntryButton { entry } />
+				<DeleteEntryButton on:remove { entry } />
 			{:else}
 				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
 					<EditIcon />
@@ -274,6 +283,18 @@
 				span {
 					word-break: break-word;
 					max-width: 100%;
+				}
+			}
+			
+			.warn-link {
+				font-weight: 500;
+				color: var(--color-edge-warn);
+				gap: 10px;
+				
+				:global(.lucide) {
+					stroke-width: 2.5px;
+					min-height: 22px;
+					min-width: 22px;
 				}
 			}
 			

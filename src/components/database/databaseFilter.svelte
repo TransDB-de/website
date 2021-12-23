@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { page } from "$app/stores"
+
 	import Button from "$components/elements/button.svelte"
 	import { filters } from "$lib/filterLang"
 	import { language } from "$lib/filterLang"
 	import { clamp } from "$lib/utils"
-	import { onDestroy, onMount } from "svelte"
+	import { onMount } from "svelte"
 	
 	let focused = false;
 	let input = "";
@@ -25,6 +27,13 @@
 	$: {
 		if (input === "") randomSuggestion = getRandomSuggestion();
 	}
+	
+	onMount(() => {
+		if ($page.query.has("id")) {
+			input = `id: ${$page.query.get("id")}`;
+			filter();
+		}
+	})
 	
 	function getRandomSuggestion() {
 		let arr = Object.keys(language.filters);

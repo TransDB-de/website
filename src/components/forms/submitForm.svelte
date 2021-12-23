@@ -17,6 +17,8 @@
 	import type { ValidationErrorMap } from "$models/error"
 	
 	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
+	$: hasAttributes = newEntry.type ? attributeMapping[newEntry.type] ? true : false : null;
+	$: attributesObject = hasAttributes ? ( attributeDetails[newEntry.type] ? Object.entries(attributeDetails[newEntry.type]) : Object.entries(attributeMapping[newEntry.type]) ) : null;
 	
 	let loading = false;
 	let errors: ValidationErrorMap = {};
@@ -147,10 +149,10 @@
 	
 	<h2> Spezifische Angaben </h2>
 	
-	{#if attributeMapping[newEntry.type]}
+	{#if hasAttributes}
 		<h3> Angebote: </h3>
 		
-		{#each Object.entries(attributeDetails[newEntry.type]) as [key, value]}
+		{#each attributesObject as [key, value]}
 			<Checkbox bind:group={ newEntry.meta.attributes } value={ key }> { value } </Checkbox>
 		{/each}
 	{/if}
