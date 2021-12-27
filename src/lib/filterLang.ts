@@ -168,6 +168,10 @@ class FilterStore implements Writable<filterLang.IntermediateFormat.AbstractFilt
 	callbacks: filterCallback[] = [];
 	filters: filterLang.IntermediateFormat.AbstractFilters = {};
 	
+	constructor() {
+		this.set({});
+	}
+	
 	subscribe(callback: filterCallback) {
 		this.callbacks.push(callback);
 		

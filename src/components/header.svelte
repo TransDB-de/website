@@ -132,7 +132,7 @@
 		
 		&.hide {
 			height: 56px;
-			transition:  0.4s ease height, 0.8s ease box-shadow 0.2s;
+			transition: 0.4s ease height, 0.8s ease box-shadow 0.2s;
 			box-shadow: $no-shadow;
 			
 			& .title, & .subtitle, :global(& .search-bar) {

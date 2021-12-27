@@ -2,7 +2,7 @@
 	import axios from "axios"
 	import type { AxiosResponse } from "axios"
 	
-	import { onMount, onDestroy } from "svelte"
+	import { onMount, onDestroy, tick } from "svelte"
 	import { fade } from "svelte/transition"
 	import { flip } from "svelte/animate"
 	import type { Page } from "@sveltejs/kit"
@@ -11,7 +11,7 @@
 	
 	import { currentLocation } from "$lib/store"
 	import { filters } from "$lib/filterLang"
-	import { removeFromArray } from "$lib/utils"
+	import { removeFromArray, timeout } from "$lib/utils"
 	import type { EntriesResponse, Entry } from "$models/entry.model"
 	
 	import EntryComponent from "$components/entry/entry.svelte"
@@ -55,7 +55,7 @@
 			fetchFunction = async (_pageObject, pageCount = 0) => {
 				return axios.post<EntriesResponse>("entries/full", {
 					page: pageCount,
-					filter: $filters
+					filter: filters.filters
 				});
 			}
 			break;
@@ -65,7 +65,7 @@
 			entryComponent = EntryComponent;
 			
 			fetchFunction = async (_pageObject, pageCount = 0) => {
-				let _filters = $filters;
+				let _filters = filters.filters;
 				
 				if (!("boolTrue" in _filters)) {
 					_filters["boolTrue"] = [];
@@ -90,15 +90,15 @@
 	let pageCount: number = 0;
 	let loading: boolean = true;
 	
-	//onMount(() => loadInitalEntries($page));
 	
-	$filters = {};
 	
-	$: {
-		if ($filters) {
-			loadInitalEntries($page);
-		}
-	}
+	onMount(() => {
+		loadInitalEntries($page)
+	});
+	
+	let unsubscribeFilters = filters.subscribe((fil) => {
+		loadInitalEntries($page);
+	});
 	
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	const unsubscribe = navigating.subscribe((nav) => {
@@ -110,6 +110,7 @@
 	onDestroy(() => {
 		$currentLocation = "";
 		unsubscribe();
+		unsubscribeFilters();
 	});
 	
 	async function loadInitalEntries(pageObject: Page) {

@@ -28,12 +28,14 @@
 		if (input === "") randomSuggestion = getRandomSuggestion();
 	}
 	
-	onMount(() => {
-		if ($page.query.has("id")) {
-			input = `id: ${$page.query.get("id")}`;
-			filter();
-		}
-	})
+	$filters = {};
+	
+	if ($page.query.has("id")) {
+		input = `id: ${$page.query.get("id")}`;
+		$filters = language.parse(input);
+		
+		console.log("Filter bar");
+	}
 	
 	function getRandomSuggestion() {
 		let arr = Object.keys(language.filters);

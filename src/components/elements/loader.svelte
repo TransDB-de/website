@@ -1,9 +1,12 @@
 <script lang="ts">
 	export let dark = false;
 	export let big = false;
+	
+	let customClass = "";
+	export {customClass as class};
 </script>
 
-<span class="loader" class:dark class:big></span>
+<span class="loader {customClass}" class:dark class:big></span>
 
 <style lang="scss">
 	.loader {

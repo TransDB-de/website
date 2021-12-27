@@ -47,25 +47,24 @@
 	
 	<EntryComponent entry={ entry } />
 	
-	<Button on:click={ click } title={ mouseOverTexts["searchNearbyButton"] }>
+	<Button class="single-entry-view-button" on:click={ click } title={ mouseOverTexts["searchNearbyButton"] }>
 		Mehr Angebote in dieser Gegend
 	</Button>
-	
 {:else}
-	<Loader dark big />
+	<Loader class="single-entry-view-loader" dark big />
 {/if}
+
 <style lang="scss">
-	h1 {
-		span {
-			display: inline-block;
-		}
-	}
+	@import "../scss/lengths";
+	@import "../scss/mixins";
 	
-	:global(.entry) {
-		margin-bottom: 20px;
-	}
-	
-	:global(button) {
+	:global(.single-entry-view-loader) {
 		align-self: center;
+		margin-top: 2em;
+	}
+	
+	:global(button.single-entry-view-button) {
+		align-self: center;
+		margin-top: 20px;
 	}
 </style>
