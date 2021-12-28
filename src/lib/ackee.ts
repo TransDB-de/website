@@ -1,4 +1,4 @@
-import { ackee } from "$lib/config"
+import config from "$lib/config"
 import { browser } from "$app/env"
 import * as ackeeTracker from "ackee-tracker"
 
@@ -6,19 +6,19 @@ let instance: ackeeTracker.AckeeInstance;
 
 if (browser) {
 	instance = ackeeTracker.create(
-		ackee.server,
+		config.ackee_server,
 		{
-			detailed: ackee.detailed,
-			ignoreLocalhost: ackee.ignoreLocalhost
+			detailed: config.ackee_detailed,
+			ignoreLocalhost: config.ackee_ignoreLocalhost
 		}
 	);
 }
 
 async function onNavigate(path: string) {
 	if (browser) {
-		let attributes = ackeeTracker.attributes(ackee.detailed);
+		let attributes = ackeeTracker.attributes(config.ackee_detailed);
 		attributes.siteLocation = window.location.origin + path;
-		instance.record(ackee.domainId, attributes);
+		instance.record(config.ackee_domainId, attributes);
 	}
 }
 

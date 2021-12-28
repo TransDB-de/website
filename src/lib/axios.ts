@@ -3,8 +3,6 @@ import axios from "axios"
 
 import { goto } from "$app/navigation"
 
-axios.defaults.baseURL = config.axios.baseURL;
-
 axios.interceptors.response.use((res) => res, (err) => {
 	// Axios interceptor (middleware) to redirect unauthorized requests to login page
 	if (err.response.status === 401 && !window.location.pathname.includes("/login")) {
@@ -20,5 +18,6 @@ axios.interceptors.response.use((res) => res, (err) => {
 });
 
 export function injectSession(session) {
+	axios.defaults.baseURL = config.axios_baseURL;
 	axios.defaults.headers.common["x-csrf-token"] = session.csrfToken;
 }

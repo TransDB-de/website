@@ -1,38 +1,29 @@
-# create-svelte
+# Trans*DB Website
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+The offical Trans*DB Website built with SvelteKit.
 
-## Creating a project
+## Dependencies
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [SvelteKit](https://kit.svelte.dev/) Front-End Framework for Svelte
+- [Ackee](https://github.com/electerious/ackee-tracker) Privacy conscious tracking software
+- [Axios](https://github.com/axios/axios) HTTP client for Node.js
+- [Sass](https://sass-lang.com/) CSS Preprocessor for DRY css
+- [Pug](https://pugjs.org/) HTML template engine
+- [LucideIconsSvelte](https://www.npmjs.com/package/lucide-icons-svelte) Svelte Port of Lucide Icons
+- [FilterLang](https://github.com/TransDB-de/filter-lang) Domain specific filter language
 
-```bash
-# create a new project in the current directory
-npm init svelte@next
+## Build Setup
 
-# create a new project in my-app
-npm init svelte@next my-app
+Requires git and node.
+
 ```
+# install dependencies
+$ npm install
 
-> Note: the `@next` is temporary
+# serve with hot reload at localhost:3000
+$ npm run dev
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# build for production and launch server
+$ npm run build
+$ npm run start
 ```
-
-## Building
-
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
-
-```bash
-npm run build
-```
-
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.

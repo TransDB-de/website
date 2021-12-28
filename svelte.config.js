@@ -31,7 +31,18 @@ const config = {
 					$brandIcons: resolve('./src/components/icons/brands')
 				},
 			},
-			envPrefix: "CLIENT_"
+			envPrefix: "CLIENT_",
+			plugins: [
+				// Source: https://github.com/sveltejs/kit/issues/3030
+				(function LoadSecrets() {
+					return {
+						name: "load-secrets",
+						configureServer: async () => {
+							;(await import('dotenv')).config()
+						}
+					}
+				})()
+			]
 		}
 	},
 };

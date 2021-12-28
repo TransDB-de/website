@@ -17,7 +17,7 @@
 		id += 1;
 		let currentId = id;
 		
-		await timeout(config.client.popupLinger);
+		await timeout(config.client_popupLinger);
 		
 		// only run, if no new popups were called since timer started
 		if (id === currentId) {

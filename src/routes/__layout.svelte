@@ -15,9 +15,11 @@
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
+	import { populateConfig } from "$lib/config"
 	
-	import { page, session } from '$app/stores'
+	import { page, session } from "$app/stores"
 	
+	populateConfig($session);
 	injectSession($session);
 	
 	// key which triggers fade transition between pages

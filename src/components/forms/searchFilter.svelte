@@ -50,7 +50,7 @@
 			changeId += 1;
 			let thisChange = changeId;
 			
-			await timeout(config.client.filterApplyTimeout);
+			await timeout(config.client_filterApplyTimeout);
 			
 			// if another change occured since the timer was started, do nothing
 			if (changeId === thisChange) {
