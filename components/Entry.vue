@@ -32,7 +32,7 @@
 		
 		<p class="flex large-gap">
 			
-			<a :href="`https://www.google.de/maps/search/${address}`" target="_blank" class="flex small-gap no-wrap">
+			<a :href="`https://www.openstreetmap.org/search?query=${address}`" target="_blank" class="flex small-gap no-wrap">
 				<MapIcon />{{ address }}
 			</a>
 	
