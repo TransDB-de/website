@@ -18,7 +18,6 @@ export default config;
 export function populateConfig(session: object) {
 	for (let [key, value] of Object.entries(session)) {
 		
-		console.log(key, value)
 		if (key in config && value !== undefined) {
 			config[key] = value;
 		}
