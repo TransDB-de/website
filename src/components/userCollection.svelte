@@ -26,7 +26,7 @@
 	import type { User } from "$models/user.model"
 	
 	import UserComponent from "$components/user.svelte"
-	import LoadMore from "$components/loadMore.svelte"
+	import LoadMore from "$components/elements/loadMore.svelte"
 	
 	onMount(() => fetchUsers());
 </script>

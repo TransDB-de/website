@@ -10,8 +10,8 @@ const config = {
 	ackee_ignoreLocalhost: process.env["ACKEE_IGNORE_LOCALHOST"] ? (process.env["ACKEE_IGNORE_LOCALHOST"] === "true") : true,
 	ackee_detailed: process.env["ACKEE_DETAILED"] ? (process.env["ACKEE_DETAILED"] === "true") : false,
 	axios_baseURL: process.env["AXIOS_BASE_URL"],
-	client_filterApplyTimeout: process.env["FILTER_APPLY_TIMEOUT"] ? parseFloat(process.env["FILTER_APPLY_TIMEOUT"]) : undefined,
-	client_popupLinger: process.env["POPUP_LINGER"] ? parseFloat(process.env["POPUP_LINGER"]) : undefined
+	client_filterApplyTimeout: process.env["FILTER_APPLY_TIMEOUT"] ? parseFloat(process.env["FILTER_APPLY_TIMEOUT"]) * 1000: undefined,
+	client_popupLinger: process.env["POPUP_LINGER"] ? parseFloat(process.env["POPUP_LINGER"]) * 1000 : undefined
 }
 
 export const getSession: GetSession = (request) => {

@@ -48,7 +48,9 @@
 		margin-top: 0;
 	}
 	
-	& > :global(a), & > :global(p > a) , & > :global(form > p > a) {
+	& > :global(a),
+	& > :global(p > a) ,
+	& > :global(form > p > a) {
 		color: var(--color-edge-highlight);
 		text-decoration: none;
 		border-bottom: 2px solid var(--color-edge-highlight);

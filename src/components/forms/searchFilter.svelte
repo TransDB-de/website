@@ -29,6 +29,9 @@
 	let selectedAttributes = $page.query.getAll("attributes");
 	let textFilter = $page.query.get("text") ?? "";
 	
+	let customClass = "";
+	export {customClass as class};
+	
 	let element;
 	
 	function toggleExpand() { expand = !expand }
@@ -128,7 +131,7 @@
 
 <svelte:window bind:scrollY={ scrollY }></svelte:window>
 
-<div class="search-filter" style="--scroll-y: { top }px" bind:this={ element }>
+<div class="search-filter {customClass}" style="--scroll-y: { top }px" bind:this={ element }>
 	<div class="bar mobile" class:expand on:click={ toggleExpand }>
 		<ChevronRightIcon class="chevron" size="24px" />
 		

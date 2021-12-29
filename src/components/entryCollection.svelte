@@ -16,7 +16,7 @@
 	
 	import EntryComponent from "$components/entry/entry.svelte"
 	import EditableEntry from "$components/database/editableEntry.svelte"
-	import LoadMore from "$components/loadMore.svelte"
+	import LoadMore from "$components/elements/loadMore.svelte"
 	import { popupError } from "$components/popup.svelte"
 	
 	/** Type of EntryCollection */
@@ -90,10 +90,8 @@
 	let pageCount: number = 0;
 	let loading: boolean = true;
 	
-	
-	
 	onMount(() => {
-		loadInitalEntries($page)
+		loadInitalEntries($page);
 	});
 	
 	let unsubscribeFilters = filters.subscribe((fil) => {
@@ -102,7 +100,7 @@
 	
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	const unsubscribe = navigating.subscribe((nav) => {
-		if (nav && nav.to.path === "/search") {
+		if (nav && nav.to.path === "/search" && nav.from.path === "/search") {
 			loadInitalEntries(nav.to);
 		}
 	});

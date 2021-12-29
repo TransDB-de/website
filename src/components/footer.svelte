@@ -35,14 +35,14 @@
 		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title="Trete unserem Discord Server bei">
 			<DiscordBrandIcon />
 		</a>
-		<a href={externalLinks.donation} target="_blank" rel="noopener" class="xl-icon" title="Unterstütze uns auf Ko-fi">
+		<!--<a href={externalLinks.donation} target="_blank" rel="noopener" class="xl-icon" title="Unterstütze uns auf Ko-fi">
 			<KofiBrandIcon />
-		</a>
+		</a>-->
 	</div>
 	
 </div>
 
-<style lang="scss">	
+<style lang="scss">
 	@import "../scss/mixins";
 	
 	.footer {

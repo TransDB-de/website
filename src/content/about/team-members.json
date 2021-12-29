@@ -1,0 +1,68 @@
+[
+	{
+		"name": "Malin",
+		"title": "Projektmanager*in",
+		"imageURL": "/img/team/malin.png",
+		"socials": []
+	},
+	{
+		"name": "Lena",
+		"title": "Software-Entwickler*in",
+		"imageURL": "/img/team/lena.png",
+		"socials": [
+			{
+				"type": "discord",
+				"link": null,
+				"text": "Feuerhamster#8828"
+			},
+			{
+				"type": "github",
+				"link": "https://github.com/Feuerhamster"
+			},
+			{
+				"type": "web",
+				"link": "https://hamsterlabs.de"
+			},
+			{
+				"type": "instagram",
+				"link": "https://www.instagram.com/derfeuerhamster/"
+			}
+		]
+	},
+	{
+		"name": "Laila",
+		"title": "Software-Entwickler*in",
+		"imageURL": "/img/team/laila.png",
+		"socials": [
+			{
+				"type": "discord",
+				"link": null,
+				"text": "Laila#3077"
+			},
+			{
+				"type": "github",
+				"link": "https://github.com/ElectronicBlueberry"
+			},
+			{
+				"type": "instagram",
+				"link": "https://www.instagram.com/electronicblueberry/"
+			}
+		]
+	},
+	{
+		"name": "Lola",
+		"title": "Content-Moderator*in",
+		"imageURL": "/img/team/lola.png",
+		"socials": [
+			{
+				"type": "discord",
+				"link": null,
+				"text": "Nekolumbus#6673"
+			},
+			{
+				"type": "instagram",
+				"link": "https://www.instagram.com/panikisnotavailable2/"
+			}
+		]
+	}
+]

@@ -1,4 +1,4 @@
-<script context="module">
+<script context="module" lang="ts">
 	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
 	import { populateConfig } from "$lib/config"
@@ -15,29 +15,24 @@
 		}
 		
 		ackee(page.path);
-		return {};
+		
+		let path = page.path.startsWith("/manage") ? "/manage" : page.path;
+		
+		return {
+			props: { path }
+		};
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { fade } from "svelte/transition"
 	import Footer from "$components/footer.svelte"
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
 	
-	import { page } from "$app/stores"
-	
 	// key which triggers fade transition between pages
-	let path = "";
-	
-	// do not fade in manage subpaths
-	$: {
-		path = $page.path
-		if (path.startsWith("/manage")) {
-			path = "/manage"
-		}
-	}
+	export let path: string;
 </script>
 
 <div class="app">

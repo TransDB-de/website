@@ -1,0 +1,2 @@
+Wir haben einen eigenen Flyer gestaltet, damit trans\* Personen zb. in Selbsthifegruppen und Beratungsstellen auf Trans\*DB aufmerksam gemacht werden können.
+Den Flyer stellen wir euch druckfertig zum Download bereit, damit ihr diese auch bei euch verteilen könnt.

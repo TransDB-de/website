@@ -2,7 +2,7 @@
 	import { browser } from "$app/env"
 	import { createEventDispatcher } from "svelte";
 	
-	import Button from "./elements/button.svelte";
+	import Button from "./button.svelte";
 	
 	const dispatch = createEventDispatcher();
 	let scrollY: number;

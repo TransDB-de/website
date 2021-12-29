@@ -42,6 +42,15 @@
 		justify-content: center;
 		gap: 20px;
 		
+		a {
+			border: none!important;
+			transition: transform 0.2s;
+			
+			&:hover {
+					transform: scale(1.2);
+				}
+		}
+		
 		svg {
 			width: 50px;
 			height: 50px;
