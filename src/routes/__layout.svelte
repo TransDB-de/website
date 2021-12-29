@@ -1,9 +1,19 @@
 <script context="module">
 	import ackee from "$lib/ackee"
-	import { injectSession } from "$lib/axios";
+	import { injectSession } from "$lib/axios"
+	import { populateConfig } from "$lib/config"
+	
+	let configLoaded = false;
 	
 	// runs every time "page" changes
-	export async function load({ page }) {
+	export async function load({ page, session }) {
+		if (!configLoaded) {
+			populateConfig(session);
+			injectSession(session);
+			
+			configLoaded = true;
+		}
+		
 		ackee(page.path);
 		return {};
 	}
@@ -15,12 +25,8 @@
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
-	import { populateConfig } from "$lib/config"
 	
-	import { page, session } from "$app/stores"
-	
-	populateConfig($session);
-	injectSession($session);
+	import { page } from "$app/stores"
 	
 	// key which triggers fade transition between pages
 	let path = "";

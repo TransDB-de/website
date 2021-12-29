@@ -15,6 +15,7 @@
     "@sveltejs/kit": "next",
     "@types/ackee-tracker": "^5.0.2",
     "@types/jsonwebtoken": "^8.5.6",
+    "dotenv": "^10.0.0",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
     "pug": "^3.0.2",
@@ -30,7 +31,6 @@
     "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
     "ackee-tracker": "^5.1.0",
     "axios": "^0.24.0",
-    "dotenv": "^10.0.0",
     "jsonwebtoken": "^8.5.1",
     "rehype-external-links": "^1.0.0"
   }
