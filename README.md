@@ -2,6 +2,11 @@
 
 The official Trans*DB website based on Nuxtjs.
 
+## Copyright Notice
+(c) 2022 Trans\*DB. All rights reserved. 
+
+While this projects source code is public, it is not open source, as it does not have a usage license attached. Hosting, copying or redistributing this code is prohibited, unless explicitly allowed with a written permission from the Trans\*DB development team. 
+
 ## Dependencies
 
 - [Nuxtjs](https://nuxtjs.org/) Framework based on [Vuejs](https://vuejs.org/).
