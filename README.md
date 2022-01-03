@@ -2,6 +2,11 @@
 
 The offical Trans*DB Website built with SvelteKit.
 
+## Copyright Notice
+(c) 2022 Trans\*DB. All rights reserved. 
+
+While this projects source code is public, it is not open source, as it does not have a usage license attached. Hosting, copying or redistributing this code is prohibited, unless explicitly allowed with a written permission from the Trans\*DB development team.
+
 ## Dependencies
 
 - [SvelteKit](https://kit.svelte.dev/) Front-End Framework for Svelte

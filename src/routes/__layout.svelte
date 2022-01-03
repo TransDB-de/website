@@ -2,11 +2,12 @@
 	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
 	import { populateConfig } from "$lib/config"
+	import type { Load } from "@sveltejs/kit"
 	
 	let configLoaded = false;
 	
 	// runs every time "page" changes
-	export async function load({ page, session }) {
+	export const load: Load = async ({ url, session }) => {
 		if (!configLoaded) {
 			populateConfig(session);
 			injectSession(session);
@@ -14,9 +15,9 @@
 			configLoaded = true;
 		}
 		
-		ackee(page.path);
+		ackee(url.pathname);
 		
-		let path = page.path.startsWith("/manage") ? "/manage" : page.path;
+		let path = url.pathname.startsWith("/manage") ? "/manage" : url.pathname;
 		
 		return {
 			props: { path }

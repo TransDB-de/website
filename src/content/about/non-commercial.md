@@ -1,3 +1,3 @@
 Unser Projekt baut zum größten Teil auf der freiwilligen Arbeit unseres Teams auf.  
-Diese Seite ist dazu gemacht worden, um möglichst vielen trans* Menschen zu helfen. Wir sind keine Profit-orientierte Organisation.
-Wir sammeln und verkaufen somit auch keine Daten und betreiben diese Seite ohne Werbung.
+Wir haben diese Seite gemacht, um möglichst vielen trans* Menschen zu helfen.
+Wir sind eine (sehr kleine) Non-Profit-Organisation, daher sammeln und verkaufen wir auch keine Daten und betreiben diese Seite ohne Werbung.

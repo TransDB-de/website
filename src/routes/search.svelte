@@ -25,14 +25,14 @@
 		width: 100%;
 		grid-template-columns: minmax(auto, 1fr) minmax(auto, 860px) 1fr;
 		
-		:global(.filter) {
+		:global(.search-filter) {
 			margin-right: 20px;
 		}
 		
 		@include media-mobile {
 			grid-template-columns: 1fr;
 			
-			:global(.filter) {
+			:global(.search-filter) {
 				margin-right: 0;
 			}
 		}

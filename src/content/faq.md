@@ -6,7 +6,7 @@ DB steht für DatenBank.
 
 ## Funktioniert Trans*DB auch in anderen Ländern?
 
-Es ist möglich, Einträge einzureichen, dessen Standort sich im Ausland befindet.  
+Es ist möglich, einen neuen Eintrag einzureichen, dessen Standort sich nicht in Deutschland befindet.  
 Die **Umgebungssuche** funktioniert zur Zeit allerdings nur in Deutschland.
 
 ## Warum taucht mein Eintrag nicht in der Suche auf?
@@ -24,11 +24,10 @@ Dies kann passieren bei:
 
 ## Warum werden mir Einträge außerhalb meiner Stadt angezeigt?
 
-Die Umgebungssuche filtert nicht nach einer Stadt, sondern sortiert die Einträge zu denen welche dir am nächsten sind.
+Die Umgebungssuche filtert nicht nach einer Stadt, sondern gibt alle passenden Einträge in aufsteigender Entfernung zu deinem (gewählten) Standort aus.
 
 ## Warum sehe ich nur Einträge von Orten die ganz weit weg sind?
 
-Stelle sicher dass du deinen Standort richtig angegeben hast. Oben siehst du nach welchen Standort das System filtert.
-Du kannst auch die Umgebungssuche vom Browser verwenden, indem du den "Umgebungssuche" Knopf verwendest.
+Stelle sicher, dass du deinen Standort richtig angegeben hast. Oben siehst du, nach welchen Standort das System filtert. Du kannst auch die Standortdaten deines Browsers verwenden, indem du auf den “Umgebungssuche” Knopf klickst.
 
-Es ist auch möglich dass es in deiner Nähe noch keine Einträge gibt.
+Es ist leider auch möglich, dass es in deiner Nähe noch keine Einträge gibt - das ändert sich hoffentlich bald!

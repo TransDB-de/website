@@ -24,13 +24,10 @@
 	let expand = true;
 	
 	let location = null;
-	let selectedType = $page.query.get("type") ?? "";
-	let selectedOffers = $page.query.getAll("offers");
-	let selectedAttributes = $page.query.getAll("attributes");
-	let textFilter = $page.query.get("text") ?? "";
-	
-	let customClass = "";
-	export {customClass as class};
+	let selectedType = $page.url.searchParams.get("type") ?? "";
+	let selectedOffers = $page.url.searchParams.getAll("offers");
+	let selectedAttributes = $page.url.searchParams.getAll("attributes");
+	let textFilter = $page.url.searchParams.get("text") ?? "";
 	
 	let element;
 	
@@ -73,26 +70,26 @@
 		if (value) {
 			if (Array.isArray(value)) {
 				
-				$page.query.delete(field);
+				$page.url.searchParams.delete(field);
 				
 				for (let e of value) {
-					$page.query.append(field, e);
+					$page.url.searchParams.append(field, e);
 				}
 				
 			} else {
-				$page.query.set(field, value);
+				$page.url.searchParams.set(field, value);
 			}
 		} else {
-			$page.query.delete(field);
+			$page.url.searchParams.delete(field);
 		}
 	}
 	
 	function resetLocation() {
 		$currentLocation = "";
 		
-		$page.query.delete("lat");
-		$page.query.delete("long");
-		$page.query.delete("location");
+		$page.url.searchParams.delete("lat");
+		$page.url.searchParams.delete("long");
+		$page.url.searchParams.delete("location");
 		
 		applyFilters();
 	}
@@ -104,8 +101,8 @@
 		setQuery("text", textFilter);
 		
 		let searchString = "";
-		if ($page.query.toString()) {
-			searchString = "?" + $page.query.toString();
+		if ($page.url.searchParams.toString()) {
+			searchString = "?" + $page.url.searchParams.toString();
 		}
 		
 		goto("/search" + searchString, { keepfocus: true, noscroll: true });
@@ -131,7 +128,7 @@
 
 <svelte:window bind:scrollY={ scrollY }></svelte:window>
 
-<div class="search-filter {customClass}" style="--scroll-y: { top }px" bind:this={ element }>
+<div class="search-filter" style="--scroll-y: { top }px" bind:this={ element }>
 	<div class="bar mobile" class:expand on:click={ toggleExpand }>
 		<ChevronRightIcon class="chevron" size="24px" />
 		

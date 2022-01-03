@@ -149,21 +149,21 @@
 	
 	<h2> Spezifische Angaben </h2>
 	
-	{#if hasAttributes}
+	{#if offerMapping[newEntry.type]}
 		<h3> Angebote: </h3>
-		
-		{#each attributesObject as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key }> { value } </Checkbox>
+
+		{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
+			<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
 		{/each}
 	{/if}
 	
-	{#if offerMapping[newEntry.type]}
-		{#if attributeMapping[newEntry.type]}
+	{#if hasAttributes}
+		{#if offerMapping[newEntry.type]}
 			<h3> Weitere Angaben: </h3>
 		{/if}
 		
-		{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
+		{#each attributesObject as [key, value]}
+			<Checkbox bind:group={ newEntry.meta.attributes } value={ key }> { value } </Checkbox>
 		{/each}
 	{/if}
 	

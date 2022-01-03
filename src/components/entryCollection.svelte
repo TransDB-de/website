@@ -5,7 +5,6 @@
 	import { onMount, onDestroy, tick } from "svelte"
 	import { fade } from "svelte/transition"
 	import { flip } from "svelte/animate"
-	import type { Page } from "@sveltejs/kit"
 	import { page, navigating } from "$app/stores"
 	import { browser } from "$app/env"
 	
@@ -27,13 +26,13 @@
 	// component to render for "entries"
 	let entryComponent;
 	// how and where to fetch data
-	let fetchFunction: (pageObject: Page, pageCount?: number) => Promise< AxiosResponse<EntriesResponse> >;
+	let fetchFunction: (url: URL, pageCount?: number) => Promise< AxiosResponse<EntriesResponse> >;
 	
 	switch (type) {
 		case "search": {
 			entryComponent = EntryComponent;
-			fetchFunction = async (pageObject, pageCount = 0) => {
-				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+			fetchFunction = async (url, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(url.searchParams.entries());
 				params.page = pageCount;
 				return await axios.get<EntriesResponse>("entries", { params });
 			}
@@ -42,8 +41,8 @@
 		
 		case "unapproved": {
 			entryComponent = EntryComponent;
-			fetchFunction = async (pageObject, pageCount = 0) => {
-				let params = Object.fromEntries<string | number>(pageObject.query.entries());
+			fetchFunction = async (url, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(url.searchParams.entries());
 				params.page = pageCount;
 				return await axios.get<EntriesResponse>("entries/unapproved", { params });
 			}
@@ -52,7 +51,7 @@
 		
 		case "database": {
 			entryComponent = EditableEntry;
-			fetchFunction = async (_pageObject, pageCount = 0) => {
+			fetchFunction = async (_url, pageCount = 0) => {
 				return axios.post<EntriesResponse>("entries/full", {
 					page: pageCount,
 					filter: filters.filters
@@ -64,7 +63,7 @@
 		case "blocklist": {
 			entryComponent = EntryComponent;
 			
-			fetchFunction = async (_pageObject, pageCount = 0) => {
+			fetchFunction = async (_url, pageCount = 0) => {
 				let _filters = filters.filters;
 				
 				if (!("boolTrue" in _filters)) {
@@ -91,16 +90,16 @@
 	let loading: boolean = true;
 	
 	onMount(() => {
-		loadInitalEntries($page);
+		loadInitalEntries($page.url);
 	});
 	
 	let unsubscribeFilters = filters.subscribe((fil) => {
-		loadInitalEntries($page);
+		loadInitalEntries($page.url);
 	});
 	
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	const unsubscribe = navigating.subscribe((nav) => {
-		if (nav && nav.to.path === "/search" && nav.from.path === "/search") {
+		if (nav && nav.to.pathname === "/search" && nav.from.pathname === "/search") {
 			loadInitalEntries(nav.to);
 		}
 	});
@@ -111,14 +110,14 @@
 		unsubscribeFilters();
 	});
 	
-	async function loadInitalEntries(pageObject: Page) {
+	async function loadInitalEntries(url: URL) {
 		if (!browser) return;
 		
 		let res: AxiosResponse<EntriesResponse>;
 		loading = true;
 		
 		try {
-			res = await fetchFunction(pageObject);
+			res = await fetchFunction(url);
 		} catch(e) {
 			if (e.response) {
 				popupError(`Fehler beim Laden (${e.response.status})`);
@@ -142,13 +141,13 @@
 		if (!more) return;
 		loading = true;
 		
-		let params = Object.fromEntries<string | number>($page.query.entries());
+		let params = Object.fromEntries<string | number>($page.url.searchParams.entries());
 		params.page = pageCount + 1;
 		
 		let res: AxiosResponse<EntriesResponse>;
 		
 		try {
-			res = await fetchFunction($page, params.page);
+			res = await fetchFunction($page.url, params.page);
 		} catch(e) {
 			switch(e.response.status) {
 				case 422: {

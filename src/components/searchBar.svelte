@@ -14,7 +14,7 @@
 	import { isKey, getGeoLocation } from "$lib/utils"
 	
 	export let hide = false;
-	let locationText = $page.query.get("location") ?? "";
+	let locationText = $page.url.searchParams.get("location") ?? "";
 	
 	$: isTextSearch = locationText.trim().length > 0
 	
@@ -22,11 +22,11 @@
 	const unsubscribeNav = navigating.subscribe((nav) => {
 		if (!nav) return;
 		
-		if (nav.to.query.has("location")) {
-			locationText = nav.to.query.get("location");
+		if (nav.to.searchParams.has("location")) {
+			locationText = nav.to.searchParams.get("location");
 		}
 		
-		if (locationText && !nav.to.query.has("location")) {
+		if (locationText && !nav.to.searchParams.has("location")) {
 			locationText = "";
 		}
 	});
@@ -34,14 +34,14 @@
 	onDestroy( unsubscribeNav );
 	
 	function resetLocaction() {
-		if ($page.path.includes("search")) {
-			$page.query.delete("location");
-			$page.query.delete("lat");
-			$page.query.delete("long");
+		if ($page.url.pathname.includes("search")) {
+			$page.url.searchParams.delete("location");
+			$page.url.searchParams.delete("lat");
+			$page.url.searchParams.delete("long");
 		}
 		
-		if ( $page.query.toString() ) {
-			goto("/search?" + $page.query.toString());
+		if ( $page.url.searchParams.toString() ) {
+			goto("/search?" + $page.url.searchParams.toString());
 		} else {
 			goto("/search");
 		}
@@ -56,18 +56,18 @@
 					return;
 				}
 				
-				$page.query.set("location", locationText);
-				$page.query.delete("lat");
-				$page.query.delete("long");
+				$page.url.searchParams.set("location", locationText);
+				$page.url.searchParams.delete("lat");
+				$page.url.searchParams.delete("long");
 				break;
 			}
 			case "distance": {
 				
 				try {
 					let pos = await getGeoLocation();
-					$page.query.set("lat", pos.coords.latitude.toString());
-					$page.query.set("long", pos.coords.longitude.toString());
-					$page.query.delete("location");
+					$page.url.searchParams.set("lat", pos.coords.latitude.toString());
+					$page.url.searchParams.set("long", pos.coords.longitude.toString());
+					$page.url.searchParams.delete("location");
 					locationText = "";
 				} catch(e) {
 					console.log(e);
@@ -78,7 +78,7 @@
 			}
 		}
 		
-		await goto("/search?" + $page.query.toString(), { keepfocus: true });
+		await goto("/search?" + $page.url.searchParams.toString(), { keepfocus: true });
 	}
 </script>
 

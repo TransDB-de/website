@@ -26,7 +26,7 @@
 	
 	let hide = false;
 	$: hide = Boolean(hiddenRoutes.find( (e) => 
-		$page.path.startsWith(e)
+		$page.url.pathname.startsWith(e)
 	));
 	
 	$: {

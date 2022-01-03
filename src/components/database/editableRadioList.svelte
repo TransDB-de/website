@@ -13,6 +13,10 @@
 		} else {
 			mappingList = [];
 		}
+		
+		if (value === null) {
+			value = [];
+		}
 	}
 </script>
 
@@ -41,7 +45,6 @@
 	@import "../../scss/mixins";
 	
 	.editable-radio-list {
-		color: var(--color-edge-dimmed);
 		display: flex;
 		flex-direction: column;
 		font-weight: 400;

@@ -21,14 +21,14 @@
 	let formElement;
 	
 	let report: Report = {
-		id: $page.query.get("id"),
+		id: $page.url.searchParams.get("id"),
 		type: "",
 		message: ""
 	}
 	
 	onMount(async () => {
 		try {
-			let res = await axios.get<Entry>("/entries/" + $page.query.get("id"));
+			let res = await axios.get<Entry>("/entries/" + $page.url.searchParams.get("id"));
 			entry = res.data;
 		} catch (e) {
 			switch(e.response.status) {

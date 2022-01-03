@@ -30,8 +30,8 @@
 	
 	$filters = {};
 	
-	if ($page.query.has("id")) {
-		input = `id: ${$page.query.get("id")}`;
+	if ($page.url.searchParams.has("id")) {
+		input = `id: ${$page.url.searchParams.get("id")}`;
 		$filters = language.parse(input);
 		
 		console.log("Filter bar");

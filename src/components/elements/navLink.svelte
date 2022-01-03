@@ -8,8 +8,8 @@
 	export let lineHeight = "3px";
 	export let lineOffset = "0";
 	
-	$: active = $page.path.startsWith($$props.href) ? "active" : "";
-	$: activeExact = $page.path === $$props.href ? "active" : "";
+	$: active = $page.url.pathname.startsWith($$props.href) ? "active" : "";
+	$: activeExact = $page.url.pathname === $$props.href ? "active" : "";
 </script>
 
 <a {...$$props}

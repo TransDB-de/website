@@ -32,7 +32,7 @@
 			SocialMedia
 	
 	div.section
-		h2 Nicht-Kommerziell
+		h2 Non-Profit
 		div.inner
 			NonCommercial
 	
