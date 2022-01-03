@@ -81,7 +81,7 @@
 	</div>
 {/if}
 
-<Form on:submit={ submit } bind:this={ formElement }>
+<Form on:submit={ submit } bind:this={ formElement } class="report-form">
 	
 	<Select required bind:value={ report.type }>
 		<option value="" disabled selected>Kategorie wählen</option>
@@ -98,8 +98,8 @@
 </Form>
 
 <style lang="scss">
-	:global(.entry) {
-		margin-bottom: 20px;
+	:global(.report-form) {
+		margin-top: 20px;
 	}
 	
 	.loader-container {
