@@ -4,12 +4,13 @@
 	import Textarea from "$formElements/textarea.svelte"
 	import Button from "$components/elements/button.svelte"
 	import Loader from "$components/elements/loader.svelte"
-	import Select from "$formElements/select.svelte";
-	import { popupError, popupOk } from "$components/popup.svelte";
+	import Select from "$formElements/select.svelte"
+	import { popupError, popupOk } from "$components/popup.svelte"
 	
 	import ReportNote from "$content/report-note.md"
 	
 	import { page } from "$app/stores"
+	import { goto } from "$app/navigation"
 	
 	import type { Entry } from "$models/entry.model"
 	import { onMount } from "svelte"
@@ -68,6 +69,7 @@
 		loading = false;
 		formElement.reset();
 		popupOk("Meldung erfolgreich abgesendet");
+		goto("/reported");
 	}
 </script>
 
