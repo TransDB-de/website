@@ -228,6 +228,7 @@
 		.title-mobile {
 			margin: 0;
 			font-size: 24px;
+			padding-left: 10px;
 			cursor: pointer;
 		}
 		
