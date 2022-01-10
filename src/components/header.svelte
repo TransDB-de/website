@@ -193,8 +193,7 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
-		height: 56px;
-		overflow: hidden;
+		min-height: 56px;
 		color: white;
 		text-shadow: $edge-shadow-small;
 		position: fixed;
