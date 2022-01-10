@@ -191,7 +191,10 @@
 		
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		width: 100%;
+		height: 56px;
+		overflow: hidden;
 		color: white;
 		text-shadow: $edge-shadow-small;
 		position: fixed;
@@ -225,7 +228,6 @@
 		.title-mobile {
 			margin: 0;
 			font-size: 24px;
-			padding: 10px;
 			cursor: pointer;
 		}
 		
