@@ -47,8 +47,8 @@
 		div.inner
 			FlyerContent
 			div.flyer-preview
-				img(src="/img/transdb_flyer_preview_front.png")
-				img(src="/img/transdb_flyer_preview_back.png")
+				img(src="/img/transdb_flyer_preview_front.png" alt="Flyer vorne")
+				img(src="/img/transdb_flyer_preview_back.png" alt="Flyer hinten")
 			
 			a.light(href="/files/transdb_flyer_a6.pdf" download title="A6 (PDF)")
 				DownloadIcon
