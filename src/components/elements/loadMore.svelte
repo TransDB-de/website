@@ -11,15 +11,14 @@
 	
 	export let loading: boolean = false;
 	
-	let loadOffset: number = 340;
-	const loadThreshold = 0.5;
+	const desktopLoadOffset = 720;
+	const mobileLoadOffset = 1200;
+	
+	let loadOffset = desktopLoadOffset;
 	
 	$: {
 		if (browser) {
-			let pixelRatio = window.devicePixelRatio || 1;
-			let height = isMobile ? window.innerHeight : window.screen.height;
-			
-			loadOffset = height * pixelRatio * loadThreshold;
+			loadOffset = isMobile ? mobileLoadOffset : desktopLoadOffset;
 			
 			let scrolledHeight = Math.ceil(scrollY + window.innerHeight);
 			
