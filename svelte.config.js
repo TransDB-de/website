@@ -45,6 +45,17 @@ const config = {
 			]
 		}
 	},
+	
+	onwarn: (warning, handler) => {
+		const { code, message } = warning;
+		
+		if (code === "css-unused-selector") {
+			// ignores this warning
+			return;
+		} else {
+			handler(warning);
+		}
+	}
 };
 
 export default config;
