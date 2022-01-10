@@ -83,7 +83,6 @@
 		justify-content: flex-start;
 		padding: 20px;
 		width: 210px;
-		user-select: none;
 		
 		img {
 			height: 100px;

@@ -145,3 +145,37 @@ export function removeFromArray<T>(array: Array<T>, element: T): Array<T> {
 	
 	return array;
 }
+
+/** Shuffles an array, and returns the shuffled version */
+export function shuffleArray<T>(array: Array<T>): Array<T> {
+	let j, x, i;
+	let a = [...array];
+	
+	for (i = array.length - 1; i > 0; i--) {
+		j = Math.floor(random() * (i + 1));
+		x = a[i];
+		a[i] = a[j];
+		a[j] = x;
+	}
+	
+	return a;
+}
+
+
+let _s = Math.random() * 1000;
+/**
+ * Set seet for seedable random number generator
+ * @param seed 
+ */
+export function seed(seed: number): void {
+	_s = seed;
+}
+
+/**
+ * Seedable random number generator
+ * @see seed()
+ */
+export function random(): number {
+	var x = Math.sin(_s++) * 10000;
+	return x - Math.floor(x);
+}
