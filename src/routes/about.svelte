@@ -46,7 +46,7 @@
 		h2 Der offizielle Trans*DB Flyer
 		div.inner
 			FlyerContent
-			div.row
+			div.flyer-preview
 				img(src="/img/transdb_flyer_preview_front.png")
 				img(src="/img/transdb_flyer_preview_back.png")
 			
@@ -106,16 +106,17 @@
 			flex-direction: column;
 			align-items: center;
 			
-			.row {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 1.3em;
-				margin: 0 0 1.3em 0;
-			
+			.flyer-preview {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 18px;
+				max-width: 100%;
+				margin-bottom: 18px;
+				
 				img {
+					display: block;
 					max-height: 400px;
-					border-radius: 4px;
-					box-shadow: $surface-shadow-small;
+					max-width: 100%;
 				}
 			}
 			
