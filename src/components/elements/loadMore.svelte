@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { browser } from "$app/env"
-	import { createEventDispatcher } from "svelte";
+	import { isMobile } from "$lib/store"
+	import { createEventDispatcher } from "svelte"
 	
-	import Button from "./button.svelte";
+	import Button from "./button.svelte"
 	
 	const dispatch = createEventDispatcher();
 	let scrollY: number;
@@ -10,15 +11,23 @@
 	
 	export let loading: boolean = false;
 	
+	let loadOffset: number = 340;
+	const loadThreshold = 0.5;
+	
 	$: {
 		if (browser) {
+			let pixelRatio = window.devicePixelRatio || 1;
+			let height = isMobile ? window.innerHeight : window.screen.height;
+			
+			loadOffset = height * pixelRatio * loadThreshold;
+			
 			let scrolledHeight = Math.ceil(scrollY + window.innerHeight);
 			
 			// Check if user has scrolled to the bottom of the page
-			if (scrolledHeight >= document.body.offsetHeight - 10 && scrollY > 0 && aboveThreshold) {
+			if (scrolledHeight >= document.body.offsetHeight - loadOffset && scrollY > 0 && aboveThreshold) {
 				aboveThreshold = false;
 				dispatch("click");
-			} else if ( scrolledHeight < document.body.offsetHeight - 10) {
+			} else if ( scrolledHeight < document.body.offsetHeight - loadOffset) {
 				aboveThreshold = true;
 			}
 		}
