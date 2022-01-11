@@ -135,6 +135,7 @@
 		more = res.data.more;
 		
 		loading = false;
+		pageCount = 0;
 	}
 	
 	async function loadNextPage() {
