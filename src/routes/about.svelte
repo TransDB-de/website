@@ -117,6 +117,9 @@
 					display: block;
 					max-height: 400px;
 					max-width: 100%;
+					
+					border-radius: 4px;
+					box-shadow: $surface-shadow-small;
 				}
 			}
 			

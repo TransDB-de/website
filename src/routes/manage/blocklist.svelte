@@ -18,6 +18,6 @@
 		gap: 20px;
 		max-width: $conent-max-width;
 		width: 100%;
-		padding: 20px 10px;
+		padding: 18px 10px;
 	}
 </style>
