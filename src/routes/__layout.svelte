@@ -2,7 +2,6 @@
 	import type { Load } from "@sveltejs/kit"
 	
 	import { get } from "svelte/store"
-	import { browser } from "$app/env"
 	
 	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
@@ -26,7 +25,7 @@
 		// also don't track team members
 		let noTrack = ["/manage", "/login"].includes(path) || Boolean(get(token));
 		
-		if (!noTrack && browser) {
+		if (!noTrack) {
 			ackee(path);
 		}
 		
