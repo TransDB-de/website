@@ -1,8 +1,12 @@
 <script context="module" lang="ts">
+	import type { Load } from "@sveltejs/kit"
+	
+	import { get } from "svelte/store"
+	
 	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
 	import { populateConfig } from "$lib/config"
-	import type { Load } from "@sveltejs/kit"
+	import { token } from "$lib/store"
 	
 	let configLoaded = false;
 	
@@ -15,9 +19,15 @@
 			configLoaded = true;
 		}
 		
-		ackee(url.pathname);
-		
 		let path = url.pathname.startsWith("/manage") ? "/manage" : url.pathname;
+		
+		// do not track some paths
+		// also don't track team members
+		let noTrack = ["/manage", "/login"].includes(path) || Boolean(get(token));
+		
+		if (!noTrack) {
+			ackee(path);
+		}
 		
 		return {
 			props: { path }
