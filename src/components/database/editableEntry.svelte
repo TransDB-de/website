@@ -57,6 +57,10 @@
 		
 		if (Object.keys(changes).length < 1) return;
 		
+		if (!changes["type"]) {
+			changes["type"] = _entry.type;
+		}
+		
 		edit = false;
 		
 		try {
