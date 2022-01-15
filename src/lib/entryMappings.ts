@@ -108,9 +108,16 @@ export const attributeDetails = {
 }
 
 export const offerMapping = {
+	surveyor: {
+		remote: "Remote Gespräche"
+	},
+	endocrinologist: {
+		remote: "Remote Gespräche"
+	},
 	therapist: {
 		indication: "Indikationen",
-		therapy: "Begleittherapie"
+		therapy: "Begleittherapie",
+		remote: "Remote Gespräche"
 	},
 	surgeon: {
 		mastectomy: "Mastektomie",
@@ -124,7 +131,8 @@ export const offerMapping = {
 		clitPI: "Klitorispenoid / Metoidioplastik",
 		bodyfem: "Körperfemininisierende OPs",
 		glottoplasty: "Stimmband OPs",
-		fms: "Gesichtsmaskulinisierende OPs (FMS)"
+		fms: "Gesichtsmaskulinisierende OPs (FMS)",
+		remote: "Remote Gespräche"
 	},
 	hairremoval: {
 		laser: "Laserepilation",
@@ -134,15 +142,18 @@ export const offerMapping = {
 	},
 	urologist: {
 		hrt: "Begleitet Hormontherapie",
-		medication: "Verschreibt Hormonmedikation"
+		medication: "Verschreibt Hormonmedikation",
+		remote: "Remote Gespräche"
 	},
 	gynecologist: {
 		hrt: "Begleitet Hormontherapie",
-		medication: "Verschreibt Hormonmedikation"
+		medication: "Verschreibt Hormonmedikation",
+		remote: "Remote Gespräche"
 	},
 	GP: {
 		hrt: "Begleitet Hormontherapie",
-		medication: "Verschreibt Hormonmedikation"
+		medication: "Verschreibt Hormonmedikation",
+		remote: "Remote Gespräche"
 	}
 }
 
