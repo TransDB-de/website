@@ -6,6 +6,7 @@ export interface Entry {
 	name: string;
 	approved ?: boolean;
 	blocked ?: boolean;
+	academicTitle ?: string;
 	firstName ?: string;
 	lastName ?: string;
 	email ?: string;

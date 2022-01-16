@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	
-	import { typeMapping, offerMapping, attributeMapping, accessibleMapping, subjectMapping } from "$lib/entryMappings"
+	import { typeMapping, offerMapping, attributeMapping, accessibleMapping, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import axios from "axios"
@@ -128,6 +128,7 @@
 			<span class="group-title"> Kontaktdaten </span>
 			
 			<div class="sub-grid">
+				<EditableSelectField label="Titel" bind:value={ _entry.academicTitle } mapping={ academicTitleMapping } { edit } />
 				<EditableInputField label="Vorname" bind:value={ _entry.firstName } { edit } />
 				<EditableInputField label="Nachname" bind:value={ _entry.lastName } { edit } />
 				

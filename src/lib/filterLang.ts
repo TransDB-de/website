@@ -5,7 +5,7 @@ import { removeFromArray } from "./utils"
 
 type Dict = {[key: string]: string};
 
-function flipDictrionay(dict: Dict): Dict {
+function flipDictionary(dict: Dict): Dict {
 	let newDict: Dict = {};
 	
 	for (const [key, val] of Object.entries(dict)) {
@@ -39,7 +39,7 @@ const langDef: filterLang.LanguageDefinition = [
 		negationSuffix: "nicht",
 		type: "text",
 		field: "type",
-		mappings: flipDictrionay(entryMappings.typeMappingData)
+		mappings: flipDictionary(entryMappings.typeMappingData)
 	},
 	
 	{
@@ -69,10 +69,10 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictrionay(entryMappings.attributeMapping.group),
-			...flipDictrionay(entryMappings.attributeMapping.hairremoval),
-			...flipDictrionay(entryMappings.offerMapping.therapist),
-			...flipDictrionay(entryMappings.offerMapping.surgeon)
+			...flipDictionary(entryMappings.attributeMapping.group),
+			...flipDictionary(entryMappings.attributeMapping.hairremoval),
+			...flipDictionary(entryMappings.offerMapping.therapist),
+			...flipDictionary(entryMappings.offerMapping.surgeon)
 		}
 	},
 	
@@ -82,8 +82,8 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictrionay(entryMappings.offerMapping.therapist),
-			...flipDictrionay(entryMappings.offerMapping.surgeon)
+			...flipDictionary(entryMappings.offerMapping.therapist),
+			...flipDictionary(entryMappings.offerMapping.surgeon)
 		}
 	},
 	
@@ -93,8 +93,8 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictrionay(entryMappings.attributeMapping.group),
-			...flipDictrionay(entryMappings.attributeMapping.hairremoval)
+			...flipDictionary(entryMappings.attributeMapping.group),
+			...flipDictionary(entryMappings.attributeMapping.hairremoval)
 		}
 	},
 	
@@ -114,6 +114,13 @@ const langDef: filterLang.LanguageDefinition = [
 		mappings: generalFields
 	},
 	
+	{
+		name: "titel",
+		type: "text",
+		field: "academicTitle",
+		mappings: flipDictionary(entryMappings.academicTitleMapping)
+	},
+
 	{
 		name: "eingereicht",
 		type: "date-compare",
