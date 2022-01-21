@@ -2,6 +2,11 @@
 	import SubmittedContent from "$content/submitted.md"
 </script>
 
+<svelte:head>
+	<title>Danke für deinen Eintrag - Trans*DB</title>
+	<meta name="robots" content="noindex">
+</svelte:head>
+
 <template lang="pug">
 	div.content
 		SubmittedContent

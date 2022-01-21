@@ -15,6 +15,11 @@
 	//import externalLinks from "$content/external-links.json"
 </script>
 
+<svelte:head>
+	<title>Über uns - Trans*DB</title>
+	<meta name="description" content="Wer das Team hinter Trans*DB ist, warum wir das machen, und wo ihr mehr erfahren könnt.">
+</svelte:head>
+
 <template lang="pug">
 	div.section
 		h2 Das Trans*DB Team
