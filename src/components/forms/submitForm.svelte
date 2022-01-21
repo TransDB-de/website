@@ -139,7 +139,7 @@
 	
 	<div>
 		<Select bind:value={newEntry.academicTitle} on:change={resetMeta}>
-			<option value={null} disabled selected> Titel wählen </option>
+			<option value={null} selected> Kein Titel </option>
 			
 			{#each Object.entries(academicTitleMapping) as [key, value]}
 				<option value={ key }> { value } </option>
