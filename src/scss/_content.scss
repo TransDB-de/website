@@ -65,4 +65,15 @@
 		border-radius: 4px;
 		background-color: var(--color-background-important-text);
 	}
+	
+	& > :global(blockquote) {
+		margin: 0 0 20px;
+		border-radius: 4px;
+		padding: 10px 20px;
+		background-color: var(--color-background-important-text);
+		
+		& > :global(p) {
+			margin: 0;
+		}
+	}
 }

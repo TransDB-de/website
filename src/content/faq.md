@@ -1,3 +1,5 @@
+> Wir können nicht für die Qualität der Angebote garantieren und sprechen keine direkten Empfehlungen aus.
+
 # Häufig gestellte Fragen
 
 ## Was bedeutet das "DB" in "Trans*DB"?
@@ -7,7 +9,7 @@ DB steht für DatenBank.
 ## Funktioniert Trans*DB auch in anderen Ländern?
 
 Es ist möglich, einen neuen Eintrag einzureichen, dessen Standort sich nicht in Deutschland befindet.  
-Die **Umgebungssuche** funktioniert zur Zeit allerdings nur in Deutschland.
+Die Umgebungssuche funktioniert zur Zeit allerdings nur in Deutschland.
 
 ## Warum taucht mein Eintrag nicht in der Suche auf?
 
