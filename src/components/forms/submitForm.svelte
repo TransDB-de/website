@@ -11,6 +11,8 @@
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import mouseOverTexts from "$lib/mouseOverTexts"
+	import * as ackee from "$lib/ackee"
+	import config from "$lib/config"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
 	import { parseValidationErrors } from "$lib/utils"
@@ -104,6 +106,9 @@
 		
 		loading = false;
 		formElement.reset();
+		
+		ackee.logEvent(config.ackee_eventId_newEntry);
+		
 		goto("/submitted");
 	}
 </script>

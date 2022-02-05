@@ -4,7 +4,10 @@
 	import DiscordBrandIcon from "$brandIcons/discordBrandIcon.svelte"
 	import WebIcon from "lucide-icons-svelte/globe.svelte"
 	
-	import { tick } from 'svelte';
+	import * as ackee from "$lib/ackee"
+	import config from "$lib/config"
+	
+	import { tick } from "svelte";
 	import { popupOk } from "$components/popup.svelte"
 	
 	export let name: string = "";
@@ -43,6 +46,18 @@
 		}
 	}
 	
+	function logSocials(event: MouseEvent) {
+		let key = (event.currentTarget as HTMLLinkElement).href;
+		
+		if (key === "") {
+			key = "Discord Tag";
+		}
+		
+		console.dir(event.currentTarget)
+		
+		ackee.logEvent(config.ackee_eventId_social, key);
+	}
+	
 	async function copyToClipboard(e: MouseEvent, string?: string) {
 		if (!string) return;
 		
@@ -65,7 +80,7 @@
 		{#each socials as social}
 			<a href={social.link ?? ""}
 			   target={social.link ? "_blank" : "_self"}
-			   on:click={ (e) => copyToClipboard(e, social.text) }
+			   on:click={ (e) => { logSocials(e); copyToClipboard(e, social.text); } }
 			   rel="noopener">
 				<svelte:component this={ getComponent(social.type) }></svelte:component>
 			</a>
