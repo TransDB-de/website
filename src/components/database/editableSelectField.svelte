@@ -3,12 +3,17 @@
 	export let mapping: {[key: string]: string} = {};
 	export let edit = false;
 	export let label = "";
+	export let nullMapping = "";
 </script>
 
 <div class="editable-select-field" {...$$props}>
 	{ label }
 	{#if edit}
 		<select bind:value={ value }>
+			{#if nullMapping !== ""}
+				<option value={ null }> { nullMapping } </option>
+			{/if}
+			
 			{#each Object.entries(mapping) as [key, val]}
 				<option value={ key }> { val } </option> 
 			{/each}

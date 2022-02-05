@@ -136,7 +136,7 @@
 			<span class="group-title"> Kontaktdaten </span>
 			
 			<div class="sub-grid">
-				<EditableSelectField label="Titel" bind:value={ _entry.academicTitle } mapping={ academicTitleMapping } { edit } />
+				<EditableSelectField label="Titel" bind:value={ _entry.academicTitle } mapping={ academicTitleMapping } nullMapping="Kein Titel" { edit } />
 				<EditableInputField label="Vorname" bind:value={ _entry.firstName } { edit } />
 				<EditableInputField label="Nachname" bind:value={ _entry.lastName } { edit } />
 				
