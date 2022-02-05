@@ -92,6 +92,14 @@
 			}
 		}
 	}
+	
+	function toCustomLocaleDateString(timestamp: number | null): string {
+		if (!timestamp) return "-";
+		
+		let date = new Date(timestamp);
+		
+		return `${date.toLocaleDateString()}, ${date.getHours()} Uhr`;
+	}
 </script>
 
 
@@ -158,6 +166,12 @@
 			{/if}
 			
 			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ accessibleMapping } { edit } />
+		</div>
+		
+		<div class="sub-grid grid-full-width">
+			<EditableInputField label="Eintrag eingereicht am" value={ toCustomLocaleDateString(_entry.submittedTimestamp) } />
+			<EditableInputField label="Eintrag freigeschaltet am" value={ toCustomLocaleDateString(_entry.approvedTimestamp) } />
+			<EditableInputField label="Freigeschaltet von" value={ _entry.approvedBy ? _entry.approvedBy : "-" } />
 		</div>
 	</div>
 	
@@ -226,6 +240,10 @@
 				grid-column: span 1;
 			}
 		}
+	}
+	
+	.grid-full-width {
+		grid-column: 1 / -1;
 	}
 	
 	.auto-grid {
