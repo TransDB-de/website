@@ -1,4 +1,6 @@
-> Wir können nicht für die Qualität der Angebote garantieren und sprechen keine direkten Empfehlungen aus.
+# Disclaimer
+
+Wir können nicht für die Qualität der Angebote garantieren und sprechen keine direkten Empfehlungen aus.
 
 # Häufig gestellte Fragen
 
