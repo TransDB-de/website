@@ -17,8 +17,9 @@
 	import config from "$lib/config"
 	
 	import { browser } from "$app/env"
-	import { page } from "$app/stores"
+	import { navigating, page } from "$app/stores"
 	import { goto } from "$app/navigation"
+	import { onDestroy } from "svelte"
 	
 	let scrollY = 0;
 	let expand = true;
@@ -107,6 +108,22 @@
 		
 		goto("/search" + searchString, { keepfocus: true, noscroll: true });
 	}
+	
+	function resetFilter() {
+		selectedType = "";
+		selectedOffers = [];
+		selectedAttributes = [];
+		textFilter = "";
+	}
+	
+	// React on navigating eg. reset filters if user navigates to /search without any other parameters
+	const unsubscribe = navigating.subscribe((nav) => {
+		if (nav && nav.to.pathname === "/search" && nav.from.pathname === "/search" && Array.from(nav.to.searchParams).length < 1) {
+			resetFilter();
+		}
+	});
+	
+	onDestroy(unsubscribe);
 	
 	// scroll edge case
 	// this snippet ensures decives with small screens can sroll the sticky sidebar

@@ -24,6 +24,8 @@ const mouseOverTexts = {
 	treatsNB: "Behandelt nicht-binäre Personen",
 
 	// Offers
+	remote: "Bietet online/telefonische (Vor-)Gespräche an",
+
 	indication: "Schreibt Indikationen (für z.B. Hormon Therapie)",
 	therapy: "Bietet Begleittherapie für trans* Personen",
 

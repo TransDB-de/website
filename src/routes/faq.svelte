@@ -2,6 +2,11 @@
 	import FAQContent from "$content/faq.md";
 </script>
 
+<svelte:head>
+	<title>FAQ - Trans*DB</title>
+	<meta name="description" content="Antworten auf häufig gestellte Fragen rund um unsere Website.">
+</svelte:head>
+
 <template lang="pug">
 	div.content
 		FAQContent

@@ -8,7 +8,7 @@
 	import ErrorBox from "$components/elements/errorBox.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
-	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping } from "$lib/entryMappings"
+	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	import axios from "axios"
@@ -27,6 +27,7 @@
 	let newEntry: Entry = {
 		type: "",
 		name: null,
+		academicTitle: null,
 		firstName: null,
 		lastName: null,
 		telephone: null,
@@ -137,6 +138,13 @@
 	<h2> Ansprechpartner*in </h2>
 	
 	<div>
+		<Select bind:value={newEntry.academicTitle} on:change={resetMeta}>
+			<option value={null} selected> Kein Titel </option>
+			
+			{#each Object.entries(academicTitleMapping) as [key, value]}
+				<option value={ key }> { value } </option>
+			{/each}
+		</Select>
 		<Input bind:value={ newEntry.firstName } placeholder="Vorname" minlength="2" maxlength="30" error={ errors["firstName"] } />
 		<Input bind:value={ newEntry.lastName } placeholder="Nachname" minlength="2" maxlength="30" error={ errors["lastName"] } />		
 	</div>

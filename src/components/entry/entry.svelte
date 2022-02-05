@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
-	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
+	import { subjectMapping, typeMapping, offerMapping, attributeMapping, academicTitleMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import { goto } from "$app/navigation"
@@ -73,7 +73,7 @@
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
-				<span> { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
+				<span> { academicTitleMapping[entry.academicTitle] ?? "" } { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
 			{/if}
 		</p>
 		

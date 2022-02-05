@@ -31,12 +31,19 @@ export const typeDescriptions: Dict = {
 	GP: "Name der Praxis"
 }
 
+export const academicTitleMapping: Dict = {
+	dr: "Dr.",
+	prof: "Prof.",
+	prof_dr: "Prof. Dr."
+}
+
 export const attributeMapping = {
 	group: {
 		trans: "Transfokus",
 		regularMeetings: "Regelmäßige Treffen",
 		consulting: "Beratungsangebot",
-		activities: "Freizeitangebote"
+		activities: "Freizeitangebote",
+		remote: "Remote Gespräche"
 	},
 	hairremoval: {
 		insurancePay: "Kostenübernahme",
@@ -44,31 +51,41 @@ export const attributeMapping = {
 		hasDoctor: "Ärztlich"
 	},
 	surveyor: {
-		enby: "NB Gutachten"
+		enby: "NB Gutachten",
+		remote: "Remote Gespräche"
 	},
 	surgeon: {
-		selfPayedOnly: "Nur Selbstzahler"
+		selfPayedOnly: "Nur Selbstzahler",
+		remote: "Remote Gespräche"
 	},
 	endocrinologist: {
-		treatsNB: "Behandelt NB Personen"
+		treatsNB: "Behandelt NB Personen",
+		remote: "Remote Gespräche"
 	},
 	therapist: {
 		selfPayedOnly: "Nur Selbstzahler",
 		treatsNB: "Behandelt NB Personen",
-		youthOnly: "Kinder- und Jugend"
+		youthOnly: "Kinder- und Jugend",
+		remote: "Remote Gespräche"
+	},
+	logopedics: {
+		remote: "Remote Gespräche"
 	},
 	urologist: {
 		treatsNB: "Behandelt NB Personen",
 		transFem: "Trans*feminin freundlich",
-		transMask: "Trans*maskulin freundlich"
+		transMasc: "Trans*maskulin freundlich",
+		remote: "Remote Gespräche"
 	},
 	gynecologist: {
 		treatsNB: "Behandelt NB Personen",
 		transFem: "Trans*feminin freundlich",
-		transMask: "Trans*maskulin freundlich"
+		transMasc: "Trans*maskulin freundlich",
+		remote: "Remote Gespräche"
 	},
 	GP: {
-		treatsNB: "Behandelt NB Personen"
+		treatsNB: "Behandelt NB Personen",
+		remote: "Remote Gespräche"
 	}
 }
 
@@ -79,31 +96,41 @@ export const attributeDetails = {
 		hasDoctor: "Wird die Praxis / das Studio von einer Arztperson geführt, oder begleitet?"
 	},
 	endocrinologist: {
-		treatsNB: "Behandelt nicht-binäre Personen"
+		treatsNB: "Behandelt nicht-binäre Personen",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	surveyor: {
-		enby: "Stellt Gutachten für nicht-binäre Personen aus"
+		enby: "Stellt Gutachten für nicht-binäre Personen aus",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	surgeon: {
-		selfPayedOnly: "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
+		selfPayedOnly: "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	therapist: {
 		selfPayedOnly: "Kein Kassensitz oder Kostenerstattung. Bietet nur Therpaie für Selbstzahler",
 		treatsNB: "Behandelt nicht-binäre Personen",
-		youthOnly: "Kinder- und Jugendtherapeut*in"
+		youthOnly: "Kinder- und Jugendtherapeut*in",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
+	},
+	logopedics: {
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	urologist: {
 		treatsNB: "Behandelt nicht-binäre Personen",
 		transFem: "Trans*feminin freundlich",
-		transMask: "Trans*maskulin freundlich"
+		transMasc: "Trans*maskulin freundlich",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	gynecologist: {
 		treatsNB: "Behandelt nicht-binäre Personen",
 		transFem: "Trans*feminin freundlich",
-		transMask: "Trans*maskulin freundlich"
+		transMasc: "Trans*maskulin freundlich",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	},
 	GP: {
-		treatsNB: "Behandelt nicht-binäre Personen"
+		treatsNB: "Behandelt nicht-binäre Personen",
+		remote: "Bietet online/telefonische (Vor-)Gespräche an"
 	}
 }
 
