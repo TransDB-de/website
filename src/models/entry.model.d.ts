@@ -20,7 +20,11 @@ export interface Entry {
 	location?: GeoJsonPoint;
 	distance?: number;
 	
-	possibleDuplicate?: string
+	possibleDuplicate?: string;
+	
+	submittedTimestamp?: number;
+	approvedTimestamp?: number;
+	approvedBy?: string;
 }
 
 export interface GeoJsonPoint {

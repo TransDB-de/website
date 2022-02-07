@@ -11,6 +11,8 @@
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import mouseOverTexts from "$lib/mouseOverTexts"
+	import * as ackee from "$lib/ackee"
+	import config from "$lib/config"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
 	import { parseValidationErrors } from "$lib/utils"
@@ -104,6 +106,9 @@
 		
 		loading = false;
 		formElement.reset();
+		
+		ackee.logEvent(config.ackee_eventId_newEntry);
+		
 		goto("/submitted");
 	}
 </script>
@@ -160,9 +165,11 @@
 	{#if offerMapping[newEntry.type]}
 		<h3> Angebote: </h3>
 
-		{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
-		{/each}
+		<ErrorBox error={ errors["meta.offers"] }>
+			{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
+				<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
+			{/each}
+		</ErrorBox>
 	{/if}
 	
 	{#if hasAttributes}
@@ -175,9 +182,10 @@
 		{/each}
 	{/if}
 	
+	<Input bind:value={ newEntry.meta.specials } type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
+	
 	{#if newEntry.type === "group"}
 		
-		<Input bind:value={ newEntry.meta.specials } type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
 		<Input bind:value={ newEntry.meta.minAge } type="number" placeholder="Mindestalter"/> 
 		
 	{:else if newEntry.type === "therapist"}

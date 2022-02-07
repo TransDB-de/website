@@ -7,6 +7,10 @@ const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
 const config = {
 	ackee_server: process.env["ACKEE_SERVER"],
 	ackee_domainId: process.env["ACKEE_DOMAIN_ID"],
+	ackee_eventId_distanceSearchCoordinates: process.env["ACKEE_EVENT_ID_DISTANCE_SEARCH_COORDINATES"],
+	ackee_eventId_distanceSearchText: process.env["ACKEE_EVENT_ID_DISTANCE_SEARCH_TEXT"],
+	ackee_eventId_newEntry: process.env["ACKEE_EVENT_ID_NEW_ENTRY"],
+	ackee_eventId_social: process.env["ACKEE_EVENT_ID_SOCIAL"],
 	ackee_ignoreLocalhost: process.env["ACKEE_IGNORE_LOCALHOST"] ? (process.env["ACKEE_IGNORE_LOCALHOST"] === "true") : true,
 	ackee_detailed: process.env["ACKEE_DETAILED"] ? (process.env["ACKEE_DETAILED"] === "true") : false,
 	axios_baseURL: process.env["AXIOS_BASE_URL"],

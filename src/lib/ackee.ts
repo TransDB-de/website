@@ -22,4 +22,10 @@ async function onNavigate(path: string) {
 	}
 }
 
+export async function logEvent(eventId: string, key: string = "Event") {
+	if (browser && instance) {
+		instance.action(eventId, { key, value: 1 })
+	}
+}
+
 export default onNavigate;

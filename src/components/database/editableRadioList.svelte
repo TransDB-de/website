@@ -49,6 +49,7 @@
 		flex-direction: column;
 		font-weight: 400;
 		font-size: 0.8em;
+		color: var(--color-edge-dimmed);
 		
 		.list {
 			display: flex;

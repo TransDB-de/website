@@ -8,11 +8,18 @@
 	
 	import NavLink from "$components/elements/navLink.svelte"
 	
+	import * as ackee from "$lib/ackee"
+	import config from "$lib/config"
+	
 	const linkOptions = {
 		lineHeight: "2px",
 		lineOffset: "-2px",
 		shadow: false,
 		color: "var(--color-edge)"
+	}
+	
+	function linkClicked(event: MouseEvent) {
+		ackee.logEvent(config.ackee_eventId_social, (event.currentTarget as HTMLLinkElement).href);
 	}
 </script>
 
@@ -26,13 +33,13 @@
 	</div>
 	
 	<div class="low-hover-bar">
-		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title="Folge uns auf Instagram">
+		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title="Folge uns auf Instagram" on:click={ linkClicked }>
 			<InstagramBrandIcon />
 		</a>
-		<a href={externalLinks.social.github} target="_blank" rel="noopener" title="Besuche uns auf GitHub">
+		<a href={externalLinks.social.github} target="_blank" rel="noopener" title="Besuche uns auf GitHub" on:click={ linkClicked }>
 			<GitHubBrandIcon />
 		</a>
-		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title="Trete unserem Discord Server bei">
+		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title="Trete unserem Discord Server bei" on:click={ linkClicked }>
 			<DiscordBrandIcon />
 		</a>
 		<!--<a href={externalLinks.donation} target="_blank" rel="noopener" class="xl-icon" title="Unterstütze uns auf Ko-fi">

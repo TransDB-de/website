@@ -11,6 +11,9 @@
 	import { page, navigating } from "$app/stores"
 	import { goto } from "$app/navigation"
 	
+	import * as ackee from "$lib/ackee"
+	import config from "$lib/config"
+	
 	import { isKey, getGeoLocation } from "$lib/utils"
 	
 	export let hide = false;
@@ -59,6 +62,9 @@
 				$page.url.searchParams.set("location", locationText);
 				$page.url.searchParams.delete("lat");
 				$page.url.searchParams.delete("long");
+				
+				ackee.logEvent(config.ackee_eventId_distanceSearchText);
+				
 				break;
 			}
 			case "distance": {
@@ -74,6 +80,9 @@
 					resetLocaction();
 					return;
 				}
+				
+				ackee.logEvent(config.ackee_eventId_distanceSearchCoordinates);
+				
 				break;
 			}
 		}

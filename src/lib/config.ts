@@ -6,6 +6,10 @@
 let config = {
 	ackee_server: "",
 	ackee_domainId: "",
+	ackee_eventId_distanceSearchCoordinates: "",
+	ackee_eventId_distanceSearchText: "",
+	ackee_eventId_newEntry: "",
+	ackee_eventId_social: "",
 	ackee_ignoreLocalhost: true,
 	ackee_detailed: true,
 	axios_baseURL: "http://localhost:1300",
