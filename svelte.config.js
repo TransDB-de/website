@@ -6,6 +6,7 @@ import adapter from "@sveltejs/adapter-node"
 import dotenv from "dotenv"
 
 await dotenv.config();
+const prod = process.env["NODE_ENV"] === "production";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -46,14 +47,16 @@ const config = {
 		},
 		
 		csp: {
-			directives: {
+			
+			
+			/** @see hooks `src/hooks/index.ts` for additional directives */
+			directives: prod ? {
 				"default-src": ["none"],
-				"connect-src": ["self", process.env["AXIOS_BASE_URL"], process.env["ACKEE_SERVER"]],
 				"font-src": ["self"],
 				"img-src": ["self"],
 				"script-src": ["self"],
 				"style-src": ["self", "unsafe-inline"]
-			}
+			} : {}
 		}
 	},
 	
