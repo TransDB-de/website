@@ -1,8 +1,11 @@
-import type { GetSession } from "@sveltejs/kit"
+import type { GetSession, Handle } from "@sveltejs/kit"
 import jwt from "jsonwebtoken"
 
 const secret = process.env["CSRF_TOKEN_SECRET"] as string ?? "";
 const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
+
+const prod = process.env["NODE_ENV"] === "production";
+const cspConnectSrc = `connect-src 'self' ${process.env["AXIOS_BASE_URL"]} ${process.env["ACKEE_SERVER"]}`;
 
 const config = {
 	ackee_server: process.env["ACKEE_SERVER"],
@@ -33,4 +36,19 @@ export const getSession: GetSession = (request) => {
 		csrfToken: csrfToken,
 		...config
 	}
+}
+
+export const handle: Handle = async ({ event, resolve }) => {
+	const response = await resolve(event);
+	
+	if (prod) {
+		let csp = response.headers.get("Content-Security-Policy");
+		
+		csp += "; " + cspConnectSrc;
+		
+		// add connect-src to csp header
+		response.headers.set("Content-Security-Policy", csp);
+	}
+	
+	return response;
 }

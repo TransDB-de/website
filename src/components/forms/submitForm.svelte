@@ -10,7 +10,6 @@
 	
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
-	import mouseOverTexts from "$lib/mouseOverTexts"
 	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	import axios from "axios"
@@ -46,7 +45,8 @@
 			attributes: [],
 			offers: [],
 			specials: null,
-			subject: null
+			subject: null,
+			minAge: null
 		}
 	}
 	
@@ -55,7 +55,8 @@
 			attributes: [],
 			offers: [],
 			specials: "",
-			subject: ""
+			subject: "",
+			minAge: null
 		}
 	}
 	
@@ -116,7 +117,7 @@
 <Form on:submit={ submit } bind:this={ formElement }>
 	<h1> Einen neuen Eintrag einreichen </h1>
 	
-	<Select bind:value={newEntry.type} on:change={resetMeta}>
+	<Select bind:value={ newEntry.type } on:change={ resetMeta }>
 		<option value="" disabled selected> Kategorie wählen </option>
 		
 		{#each Object.entries(typeMappingData) as [key, value]}
