@@ -2,7 +2,6 @@ import config from "$lib/config"
 import axios from "axios"
 
 import { goto } from "$app/navigation"
-// @ts-ignore no such export
 import { popupWarn } from "$components/popup.svelte"
 import { token } from "./store"
 

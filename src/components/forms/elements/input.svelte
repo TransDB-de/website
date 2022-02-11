@@ -8,16 +8,11 @@
 	
 	export let error = "";
 	export let value: string | number | undefined;
-	export let type = "";
 	
 	$uid += 1;
 	let id = "input" + $uid;
 </script>
 
 <InputWrapper { error } for={ id }>
-	{#if type == "number"}
-		<input bind:value on:change type="number" {...$$props} id={ id } />
-	{:else}
-		<input bind:value on:change {...$$props} id={ id } />
-	{/if}
+	<input bind:value on:change {...$$props} id={ id } />
 </InputWrapper>
