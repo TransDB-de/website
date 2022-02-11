@@ -2,7 +2,11 @@ import { mdsvex } from "mdsvex"
 import mdsvexConfig from "./mdsvex.config.js"
 import preprocess from "svelte-preprocess"
 import { resolve } from "path"
-import adapter from '@sveltejs/adapter-node'
+import adapter from "@sveltejs/adapter-node"
+import dotenv from "dotenv"
+
+await dotenv.config();
+const prod = process.env["NODE_ENV"] === "production";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -16,9 +20,6 @@ const config = {
 		adapter: adapter({
 			out: "build"
 		}),
-		
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: "#svelte",
 		
 		vite: {
 			resolve: {
@@ -43,6 +44,19 @@ const config = {
 					}
 				})()
 			]
+		},
+		
+		csp: {
+			
+			
+			/** @see hooks `src/hooks/index.ts` for additional directives */
+			directives: prod ? {
+				"default-src": ["none"],
+				"font-src": ["self"],
+				"img-src": ["self"],
+				"script-src": ["self"],
+				"style-src": ["self", "unsafe-inline"]
+			} : {}
 		}
 	},
 	
