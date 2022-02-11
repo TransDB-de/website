@@ -5,7 +5,7 @@ const secret = process.env["CSRF_TOKEN_SECRET"] as string ?? "";
 const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
 
 const prod = process.env["NODE_ENV"] === "production";
-const cspConnectSrc = prod ? `connect-src 'self' ${process.env["AXIOS_BASE_URL"]} ${process.env["ACKEE_SERVER"]}` : "";
+const cspConnectSrc = `connect-src 'self' ${process.env["AXIOS_BASE_URL"]} ${process.env["ACKEE_SERVER"]}`;
 
 const config = {
 	ackee_server: process.env["ACKEE_SERVER"],
@@ -41,8 +41,14 @@ export const getSession: GetSession = (request) => {
 export const handle: Handle = async ({ event, resolve }) => {
 	const response = await resolve(event);
 	
-	// add connect-src to csp header
-	response.headers.append("Content-Security-Policy", cspConnectSrc);
+	if (prod) {
+		let csp = response.headers.get("Content-Security-Policy");
+		
+		csp += "; " + cspConnectSrc;
+		
+		// add connect-src to csp header
+		response.headers.set("Content-Security-Policy", csp);
+	}
 	
 	return response;
 }
