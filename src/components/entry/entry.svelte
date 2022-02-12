@@ -102,20 +102,24 @@
 		</p>
 		
 		
-		{#if entry.meta.offers && entry.meta.offers.length > 0}
+		{#if entry.meta.offers && entry.meta.offers.length > 0 && entry.type in offerMapping}
 			<p class="small-gap small-margin">
 				<b> Angebote: </b>
 				{#each entry.meta.offers as offer}
-					<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
+					{#if offer in offerMapping[entry.type]}
+						<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
+					{/if}
 				{/each}
 			</p>
 		{/if}
 		
-		{#if entry.meta.attributes && entry.meta.attributes.length > 0}
+		{#if entry.meta.attributes && entry.meta.attributes.length > 0 && entry.type in attributeMapping}
 			<p class="small-gap small-margin">
 				<b> Eigenschaften: </b>
 				{#each entry.meta.attributes as attribute}
-					<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
+					{#if attribute in attributeMapping[entry.type]}
+						<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
+					{/if}
 				{/each}
 			</p>
 		{/if}
