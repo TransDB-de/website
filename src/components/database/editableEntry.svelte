@@ -51,7 +51,37 @@
 		popupOk("Link in die Zwischenablage kopiert!");
 	}
 	
+	/** Filters a string array with a type and a mapping */
+	function filterWithMapping(fields: string[], type: string, mapping: typeof offerMapping | typeof attributeMapping) {
+		return fields.filter((field) => {
+			if (! (type in mapping)) {
+				return false;
+			}
+			
+			if (field in mapping[type]) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
+	
 	async function saveChanges() {
+		// if type changed, filter unsupported props
+		if (_entry.type !== entry.type) {
+			
+			// filter offers and attributes
+			_entry.meta.offers = filterWithMapping(_entry.meta.offers, _entry.type, offerMapping);
+			_entry.meta.attributes = filterWithMapping(_entry.meta.attributes, _entry.type, attributeMapping);
+			
+			// filter subject
+			if (! (_entry.type in subjectMapping)) {
+				_entry.meta.subject = "";
+			} else if (! (_entry.meta.subject in subjectMapping[_entry.type])) {
+				_entry.meta.subject = "";
+			}
+		}
+		
 		let changes = getObjChanges(entry, _entry);
 		changes = replaceFields(changes, "", null);
 		
@@ -162,7 +192,7 @@
 			<EditableInputField label="Mindestalter" number bind:value={ _entry.meta.minAge } { edit } />
 			
 			{#if subjectMapping[_entry.type]}
-				<EditableSelectField label="Fachrichtung" bind:value={ _entry.meta.subject } mapping={ accessibleMapping } { edit } />
+				<EditableSelectField label="Fachrichtung" bind:value={ _entry.meta.subject } mapping={ subjectMapping[_entry.type] } { edit } />
 			{/if}
 			
 			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ accessibleMapping } { edit } />

@@ -34,7 +34,9 @@
 		<ul class="list show">
 			{#if value}
 				{#each value as val}
-					<li> { mapping[val] } </li>
+					{#if mapping && val in mapping}
+						<li> { mapping[val] } </li>
+					{/if}
 				{/each}
 			{/if}
 		</ul>
