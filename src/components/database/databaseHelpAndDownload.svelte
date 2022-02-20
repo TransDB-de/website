@@ -11,7 +11,7 @@
 	async function downloadBackup() {
 		try {
 			const res = await axios.get(`entries/backup`);
-			const data = new Blob([JSON.stringify(res)], { type: "application/json" });
+			const data = new Blob([JSON.stringify(res.data)], { type: "application/json" });
 			const url = window.URL.createObjectURL(data);
 			const link = document.createElement("a");
 			const date = new Date();
