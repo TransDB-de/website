@@ -16,6 +16,7 @@
 	import { goto } from "$app/navigation"
 	import { parseValidationErrors } from "$lib/utils"
 	import type { ValidationErrorMap } from "$models/error"
+	import { slide } from "svelte/transition";
 	
 	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
 	$: hasAttributes = newEntry.type ? attributeMapping[newEntry.type] ? true : false : null;
@@ -24,6 +25,7 @@
 	let loading = false;
 	let errors: ValidationErrorMap = {};
 	let formElement;
+	let isSpecialsFocused = false;
 	
 	let newEntry: Entry = {
 		type: "",
@@ -58,6 +60,10 @@
 			subject: "",
 			minAge: null
 		}
+	}
+
+	function specialsFocus(value: boolean) {
+		isSpecialsFocused = value;
 	}
 	
 	// Check and correct the contents of the Website field
@@ -183,7 +189,14 @@
 		{/each}
 	{/if}
 	
-	<Input bind:value={ newEntry.meta.specials } type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
+	{#if isSpecialsFocused}
+		<p class="info" transition:slide>
+			Dieses Feld ist für Infos gedacht, die nicht in die anderen Felder passen.<br/>
+			Bitte keine Meinungen oder Erfahrungsberichte hier eintragen.
+		</p>
+	{/if}
+
+	<Input bind:value={ newEntry.meta.specials } on:focus={() => specialsFocus(true)} on:blur={() => specialsFocus(false)} type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
 	
 	{#if newEntry.type === "group"}
 		
