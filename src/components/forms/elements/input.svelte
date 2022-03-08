@@ -16,8 +16,8 @@
 
 <InputWrapper { error } for={ id }>
 	{#if type == "number"}
-		<input bind:value on:change type="number" {...$$props} id={ id } />
+		<input bind:value on:change on:focus on:blur type="number" {...$$props} id={ id } />
 	{:else}
-		<input bind:value on:change {...$$props} id={ id } />
+		<input bind:value on:change on:focus on:blur {...$$props} id={ id } />
 	{/if}
 </InputWrapper>
