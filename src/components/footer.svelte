@@ -2,7 +2,7 @@
 	import GitHubBrandIcon from "$brandIcons/gitHubBrandIcon.svelte"
 	import InstagramBrandIcon from "$brandIcons/instagramBrandIcon.svelte"
 	import DiscordBrandIcon from "$brandIcons/discordBrandIcon.svelte"
-	import KofiBrandIcon from "$brandIcons/kofiBrandIcon.svelte"
+	import OpenCollectiveBrandIcon from "$brandIcons/openCollectiveIcon.svelte"
 	
 	import externalLinks from "$content/external-links.json"
 	
@@ -42,9 +42,9 @@
 		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title="Trete unserem Discord Server bei" on:click={ linkClicked }>
 			<DiscordBrandIcon />
 		</a>
-		<!--<a href={externalLinks.donation} target="_blank" rel="noopener" class="xl-icon" title="Unterstütze uns auf Ko-fi">
-			<KofiBrandIcon />
-		</a>-->
+		<a href={externalLinks.donation} target="_blank" rel="noopener" title="Unterstütze uns auf Open Collective">
+			<OpenCollectiveBrandIcon />
+		</a>
 	</div>
 	
 </div>
@@ -126,13 +126,6 @@
 			:global(svg) {
 				height: 35px;
 				width: 35px;
-			}
-		}
-		
-		&.xl-icon {
-			:global(svg) {
-				height: 38px;
-				width: 38px;
 			}
 		}
 		
