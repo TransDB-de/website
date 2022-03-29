@@ -35,3 +35,7 @@ Die Umgebungssuche filtert nicht nach einer Stadt, sondern gibt alle passenden E
 Stelle sicher, dass du deinen Standort richtig angegeben hast. Oben siehst du, nach welchen Standort das System filtert. Du kannst auch die Standortdaten deines Browsers verwenden, indem du auf den “Umgebungssuche” Knopf klickst.
 
 Es ist leider auch möglich, dass es in deiner Nähe noch keine Einträge gibt - das ändert sich hoffentlich bald!
+
+## Nehmt ihr spenden entgegen?
+
+Sehr gerne. Unsere Spenden verwalten wir transparent über [Open Collective](https://opencollective.com/transdb).

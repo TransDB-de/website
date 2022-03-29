@@ -3,30 +3,33 @@
 </script>
 
 <a {href} target="_blank" rel="noopener">
-	<img src="/img/ko-fi-logo.png" alt="ko-fi logo" /> Unterstütze uns auf Ko-fi
+	<img src="/img/open-collective.svg" alt="open collective logo" /> Unterstütze uns auf Open Collective
 </a>
 
 <style lang="scss">
+	@import "../scss/shadows";
+	
 	a {
 		display: flex;
 		align-items: center;
 		border-radius: 6px;
-		background-color: #29ABE0;
+		background: var(--donate-button-gradient);
 		font-weight: 500;
 		color: white;
 		text-decoration: none;
 		gap: 10px;
-		padding: 0 15px 0 5px;
+		padding: 6px 8px;
 		font-family: "Poppins", sans-serif;
+		box-shadow: $surface-shadow-soft;
 		
 		transition: 0.2s background-color;
 		
 		img {
-			height: 50px;
+			height: 44px;
 		}
 		
-		&:hover {
-			background-color: darken(#29ABE0, 5%);
+		&:hover, &:focus {
+			box-shadow: $surface-shadow-strong;
 		}
 	}
 </style>

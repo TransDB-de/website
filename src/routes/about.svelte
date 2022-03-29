@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MemberCardCollection from "$components/memberCardCollection.svelte"
-	import KofiButton from "$components/kofiButton.svelte"
+	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
 	import TechStack from "$components/techStack.svelte"
 	
 	import DownloadIcon from "lucide-icons-svelte/download.svelte"
@@ -12,7 +12,7 @@
 	import MotivationContent from "$content/about/motivation.md"
 	import FlyerContent from "$content/about/flyer.md"
 	
-	//import externalLinks from "$content/external-links.json"
+	import externalLinks from "$content/external-links.json"
 </script>
 
 <svelte:head>
@@ -25,6 +25,12 @@
 		h2 Das Trans*DB Team
 		div.inner
 			MemberCardCollection
+	
+	div.section
+		h2 Unterstütze uns mit einer Spende
+		div.inner
+			DonationContent
+			OpenCollectiveButton(href="{externalLinks.donation}")
 	
 	div.section
 		h2 Motivation
@@ -61,12 +67,6 @@
 			a.light(href="/files/transdb_flyer_print.pdf" download title="Druckversion mit Abschnittrand und Farbprofil (PDF)")
 				DownloadIcon
 				| Profi-Druckdaten
-	
-	//div.section
-	//	h2 Unterstütze uns mit einer Spende
-	//	div.inner
-	//		DonationContent
-	//		KofiButton(href="{externalLinks.donation}")
 </template>
 
 <style lang="scss">
@@ -132,7 +132,7 @@
 				text-align: center;
 			}
 			
-			:global(a) {
+			:global(a:not([class])) {
 				color: var(--color-edge-highlight);
 				text-decoration: none;
 				border-bottom: 2px solid var(--color-edge-highlight);
@@ -141,6 +141,7 @@
 			a[download] {
 				@include button;
 				margin-bottom: 10px;
+				text-decoration: none;
 				
 				&:last-child {
 					margin-bottom: 0;
