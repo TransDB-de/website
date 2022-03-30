@@ -13,6 +13,8 @@
 	
 	import Button from "$components/elements/button.svelte"
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
+	
+	import externalLinks from "$content/external-links.json"
 </script>
 
 <svelte:head>
