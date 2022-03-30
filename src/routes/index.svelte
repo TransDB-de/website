@@ -3,6 +3,8 @@
 	import Section2 from "$content/index/section-2.md"
 	import Section3 from "$content/index/section-3.md"
 	
+	import Donation from "$content/about/donation.md"
+	
 	import SkylineLeft from "$assets/skyline_left.svg"
 	import SkylineRight from "$assets/skyline_right.svg"
 	import ContributeLarge from "$assets/contribute_large.svg"
@@ -10,6 +12,7 @@
 	import Heart from "$assets/heart.svg"
 	
 	import Button from "$components/elements/button.svelte"
+	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
 </script>
 
 <svelte:head>
@@ -48,6 +51,9 @@ div.homepage
 			Section3
 		
 		img.heart(src!="{Heart}" alt="Ein Herz in den Farben der Trans-Pride Flagge")
+		
+		div.donation
+			OpenCollectiveButton
 </template>
 
 
@@ -217,7 +223,8 @@ div.homepage
 	.section.three {
 		grid-template-columns: 3fr 2fr;
 		grid-template-areas: "h2  h2 "
-		                     "txt img";
+		                     "txt img"
+		                     "don don";
 		
 		:global(h2) {
 			grid-area: h2;
@@ -231,11 +238,20 @@ div.homepage
 			grid-area: txt;
 		}
 		
+		.donation {
+			grid-area: don;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			pointer-events: all;
+		}
+		
 		@include media-mobile {
 			grid-template-columns: 100%;
 			grid-template-areas: "h2"
 			                     "img"
-			                     "txt";
+			                     "txt"
+			                     "don";
 			
 			justify-items: center;
 			
