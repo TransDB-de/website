@@ -53,7 +53,7 @@ div.homepage
 		img.heart(src!="{Heart}" alt="Ein Herz in den Farben der Trans-Pride Flagge")
 		
 		div.donation
-			OpenCollectiveButton
+			OpenCollectiveButton(href="{externalLinks.donation}")
 </template>
 
 
