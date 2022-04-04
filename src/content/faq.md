@@ -36,6 +36,6 @@ Stelle sicher, dass du deinen Standort richtig angegeben hast. Oben siehst du, n
 
 Es ist leider auch möglich, dass es in deiner Nähe noch keine Einträge gibt - das ändert sich hoffentlich bald!
 
-## Nehmt ihr spenden entgegen?
+## Nehmt ihr Spenden entgegen?
 
 Sehr gerne. Unsere Spenden verwalten wir transparent über [Open Collective](https://opencollective.com/transdb).
