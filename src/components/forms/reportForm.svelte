@@ -11,6 +11,7 @@
 	
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
+	import { slide } from "svelte/transition";
 	
 	import type { Entry } from "$models/entry.model"
 	import { onMount } from "svelte"
@@ -92,6 +93,12 @@
 		<option value="other">Sonstiges</option>
 	</Select>
 	
+	{#if report.type === "edit"}
+		<p class="info" transition:slide>
+			Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.
+		</p>
+	{/if}
+
 	<Textarea bind:value={ report.message } placeholder="Beschreibe dein Anliegen / deine Änderungsvorschläge" requried minlength="10" maxlength={ 1200 } />
 	
 	<ReportNote />
