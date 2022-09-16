@@ -36,6 +36,12 @@ Stelle sicher, dass du deinen Standort richtig angegeben hast. Oben siehst du, n
 
 Es ist leider auch möglich, dass es in deiner Nähe noch keine Einträge gibt - das ändert sich hoffentlich bald!
 
+## Wieso werden manche Einträge doppelt angezeigt?
+
+Bei uns können Anlaufstellen auch mehrfach vorkommen, wenn sie in mehrere Kategorien fallen.
+Zum Beispiel gibt es Therapeut\*innen, die gleichzeitig auch noch Gutachter\*innen sind.
+Für diese Fälle existiert der Eintrag jeweils einmal für jede passende Kategorie.
+
 ## Nehmt ihr Spenden entgegen?
 
 Sehr gerne. Unsere Spenden verwalten wir transparent über [Open Collective](https://opencollective.com/transdb).
