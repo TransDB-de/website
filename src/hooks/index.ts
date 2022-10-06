@@ -1,5 +1,6 @@
 import type { GetSession, Handle } from "@sveltejs/kit"
 import jwt from "jsonwebtoken"
+import langHeaderParser from "accept-language-parser"
 
 const secret = process.env["CSRF_TOKEN_SECRET"] as string ?? "";
 const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
@@ -31,10 +32,14 @@ export const getSession: GetSession = (request) => {
 			{ expiresIn: secretExpires }
 		);
 	}
-	
+
+	const langs = langHeaderParser.parse(request.request.headers.get("Accept-Language"));
+	const preferredLang = langs[0] ? langs[0].code : null;
+
 	return {
 		csrfToken: csrfToken,
-		...config
+		preferredLang,
+		...config,
 	}
 }
 

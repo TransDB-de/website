@@ -1,10 +1,21 @@
+<script lang="ts" context="module">
+	import { currentLocale } from "$lib/localization"
+	import { get } from "svelte/store"
+
+	export async function load() {
+		const l = get(currentLocale);
+
+		return {
+			props: {
+				Section1: (await import(`../content/${l}/index/section-1.md`)).default,
+				Section2: (await import(`../content/${l}/index/section-2.md`)).default,
+				Section3: (await import(`../content/${l}/index/section-3.md`)).default
+			}
+		}
+	}
+</script>
+
 <script lang="ts">
-	import Section1 from "$content/index/section-1.md"
-	import Section2 from "$content/index/section-2.md"
-	import Section3 from "$content/index/section-3.md"
-	
-	import Donation from "$content/about/donation.md"
-	
 	import SkylineLeft from "$assets/skyline_left.svg"
 	import SkylineRight from "$assets/skyline_right.svg"
 	import ContributeLarge from "$assets/contribute_large.svg"
@@ -15,6 +26,13 @@
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
 	
 	import externalLinks from "$content/external-links.json"
+	import { onMount } from "svelte";
+
+	import { t } from "$lib/localization"
+
+	export let Section1;
+	export let Section2;
+	export let Section3;
 </script>
 
 <svelte:head>
@@ -36,7 +54,7 @@ div.homepage
 	
 	div.stripe
 		a.submit(href="/submit")
-			Button Einen neuen Eintrag einreichen
+			Button {$t("index.addNewEntry")}
 		
 		div.section.two
 			h2 Wie kann ich helfen?
@@ -48,7 +66,7 @@ div.homepage
 				Section2
 	
 	div.section.three
-		h2 Vielen Dank!
+		h2 { $t("index.thankYou") }
 		div.content
 			Section3
 		

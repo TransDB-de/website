@@ -1,0 +1,51 @@
+{
+	"header": {
+		"subtitle": "Die Suchmaschine für trans* relevante Angebote",
+		"homepage": "Startseite",
+		"search": "Suche",
+		"newEntry": "Neuer Eintrag",
+		"searchBar": {
+			"areaSearch": "Umgebungssuche",
+			"placeholder": "Suche nach Postleitzahl oder Ort",
+			"placeholderMobile": "Suche nach PLZ oder Ort"
+		}
+	},
+	"index": {
+		"addNewEntry": "Einen neuen Eintrag einreichen",
+		"thankYou": "Vielen Dank!"
+	},
+	"footer": {
+		"imprint": "Impressum",
+		"privacy": "Datenschutz",
+		"aboutUs": "Über uns",
+		"instagramPlaceholder": "Folge uns auf Instagram",
+		"githubPlaceholder": "Besuche uns auf GitHub",
+		"discordPlaceholder": "Trete unserem Discord Server bei",
+		"openCollectivePlaceholder": "Unterstütze uns auf Open Collective"
+	},
+	"openCollectiveButton": {
+		"text": "Unterstütze uns auf Open Collective",
+		"alt": "open collective logo"
+	},
+	"submitted": {
+		"title": "Danke für deinen Eintrag - Trans*DB"
+	},
+	"reported": {
+		"title": "Danke für deine Meldung - Trans*DB"
+	},
+	"privacy": {
+		"title": "Datenschutz - Trans*DB"
+	},
+	"about": {
+		"title": "Über uns - Trans*DB",
+		"meta": {
+			"description": "Wer das Team hinter Trans*DB ist, warum wir das machen, und wo ihr mehr erfahren könnt."
+		},
+		"team": "Das Trans*DB Team",
+		"donation": "Unterstütze uns mit einer Spende",
+		"techStack": "Unser Tech-Stack",
+		"flyer": "Der offizielle Trans*DB Flyer",
+		"downloadFlyer": "Flyer herunterladen",
+		"downloadFlyerProfessional": "Profi-Druckdaten"
+	}
+}

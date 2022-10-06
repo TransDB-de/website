@@ -15,6 +15,7 @@
 	import config from "$lib/config"
 	
 	import { isKey, getGeoLocation } from "$lib/utils"
+	import { t } from "$lib/localization"
 	
 	export let hide = false;
 	let locationText = $page.url.searchParams.get("location") ?? "";
@@ -95,7 +96,7 @@
 	
 	<input type=text
 	       title={ mouseOverTexts.locationSearch }
-	       placeholder={ $isMobile ? "Suche nach PLZ oder Ort" : "Suche nach Postleitzahl oder Ort" }
+	       placeholder={ $isMobile ? $t("header.searchBar.placeholderMobile") : $t("header.searchBar.placeholder") }
 	       on:keydown={ isKey("Enter", () => search("text")) }
 	       bind:value={ locationText }
 	/>
@@ -106,7 +107,7 @@
 	        class="proximity-button">
 		
 		<MapPinIcon />
-		<span class="hide-on-mobile">Umgebungssuche</span>
+		<span class="hide-on-mobile">{ $t("header.searchBar.areaSearch") }</span>
 	</Button>
 	
 	<Button light

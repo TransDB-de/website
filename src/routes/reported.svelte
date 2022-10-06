@@ -1,9 +1,26 @@
+<script lang="ts" context="module">
+	import { currentLocale } from "$lib/localization"
+	import { get } from "svelte/store"
+
+	export async function load() {
+		const l = get(currentLocale);
+
+		return {
+			props: {
+				ReportedContent: (await import(`../content/${l}/submitted.md`)).default
+			}
+		}
+	}
+</script>
+
 <script lang="ts">
-	import ReportedContent from "$content/reported.md"
+	import { t } from "$lib/localization"
+
+	export let ReportedContent;
 </script>
 
 <svelte:head>
-	<title>Danke für deine Meldung - Trans*DB</title>
+	<title>{ $t("reported.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 

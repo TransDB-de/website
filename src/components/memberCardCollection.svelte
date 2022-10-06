@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MemberCard from "./memberCard.svelte"
-	import members from "$content/about/team-members.json"
+	import members from "$content/team-members.json"
 	import { shuffleArray, seed } from "$lib/utils"
 	
 	seed( Math.floor(Date.now() / 1000 / 60) );

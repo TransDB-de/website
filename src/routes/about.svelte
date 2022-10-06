@@ -1,3 +1,23 @@
+<script lang="ts" context="module">
+	import { currentLocale } from "$lib/localization"
+	import { get } from "svelte/store"
+
+	export async function load() {
+		const l = get(currentLocale);
+
+		return {
+			props: {
+				DonationContent: (await import(`../content/${l}/about/donation.md`)).default,
+				TechStackContent: (await import(`../content/${l}/about/tech-stack.md`)).default,
+				NonCommercial: (await import(`../content/${l}/about/non-commercial.md`)).default,
+				SocialMedia: (await import(`../content/${l}/about/social-media.md`)).default,
+				MotivationContent: (await import(`../content/${l}/about/motivation.md`)).default,
+				FlyerContent: (await import(`../content/${l}/about/flyer.md`)).default
+			}
+		}
+	}
+</script>
+
 <script lang="ts">
 	import MemberCardCollection from "$components/memberCardCollection.svelte"
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
@@ -5,29 +25,31 @@
 	
 	import DownloadIcon from "lucide-icons-svelte/download.svelte"
 	
-	import DonationContent from "$content/about/donation.md"
-	import TechStackContent from "$content/about/tech-stack.md"
-	import NonCommercial from "$content/about/non-commercial.md"
-	import SocialMedia from "$content/about/social-media.md"
-	import MotivationContent from "$content/about/motivation.md"
-	import FlyerContent from "$content/about/flyer.md"
+	export let DonationContent;
+	export let TechStackContent;
+	export let NonCommercial;
+	export let SocialMedia;
+	export let MotivationContent;
+	export let FlyerContent;
 	
 	import externalLinks from "$content/external-links.json"
+
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>
-	<title>Über uns - Trans*DB</title>
-	<meta name="description" content="Wer das Team hinter Trans*DB ist, warum wir das machen, und wo ihr mehr erfahren könnt.">
+	<title>{ $t("about.title") }</title>
+	<meta name="description" content={ $t("about.meta.description") }>
 </svelte:head>
 
 <template lang="pug">
 	div.section
-		h2 Das Trans*DB Team
+		h2 { $t("about.team") }
 		div.inner
 			MemberCardCollection
 	
 	div.section
-		h2 Unterstütze uns mit einer Spende
+		h2 { $t("about.donation") }
 		div.inner
 			DonationContent
 			OpenCollectiveButton(href="{externalLinks.donation}")
@@ -48,13 +70,13 @@
 			NonCommercial
 	
 	div.section
-		h2 Unser Tech-Stack
+		h2 { $t("about.techStack") }
 		div.inner
 			TechStackContent
 			TechStack
 			
 	div.section
-		h2 Der offizielle Trans*DB Flyer
+		h2 { $t("about.flyer") }
 		div.inner
 			FlyerContent
 			div.flyer-preview
@@ -63,10 +85,10 @@
 			
 			a.light(href="/files/transdb_flyer_a6.pdf" download title="A6 (PDF)")
 				DownloadIcon
-				| Flyer herunterladen
+				| { $t("about.downloadFlyer") }
 			a.light(href="/files/transdb_flyer_print.pdf" download title="Druckversion mit Abschnittrand und Farbprofil (PDF)")
 				DownloadIcon
-				| Profi-Druckdaten
+				| { $t("about.downloadFlyerProfessional") }
 </template>
 
 <style lang="scss">

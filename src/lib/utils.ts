@@ -179,3 +179,13 @@ export function random(): number {
 	var x = Math.sin(_s++) * 10000;
 	return x - Math.floor(x);
 }
+
+/**
+ * Get a value from a nested object by path
+ * @param object Source object
+ * @param path Path to desired value
+ * @returns selected value
+ */
+ export function getValueByPath(object: any, path: string): any {
+	return path.split(".").reduce((a, b) => a[b], object);
+}

@@ -6,6 +6,7 @@
 	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
 	import { populateConfig } from "$lib/config"
+	import { initLocalization } from "$lib/localization"
 	import { token } from "$lib/store"
 	
 	let configLoaded = false;
@@ -15,6 +16,7 @@
 		if (!configLoaded) {
 			populateConfig(session);
 			injectSession(session);
+			await initLocalization(session);
 			
 			configLoaded = true;
 		}

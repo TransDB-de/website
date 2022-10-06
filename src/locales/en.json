@@ -1,0 +1,51 @@
+{
+	"header": {
+		"subtitle": "The search engine for trans* healthcare",
+		"homepage": "Home",
+		"search": "Search",
+		"newEntry": "New Entry",
+		"searchBar": {
+			"areaSearch": "Area Search",
+			"placeholder": "Search by postalcode or city",
+			"placeholderMobile": "Search zip or city"
+		}
+	},
+	"index": {
+		"addNewEntry": "Contribute a new entry",
+		"thankYou": "Thank you"
+	},
+	"footer": {
+		"aboutUs": "About us",
+		"imprint": "Imprint",
+		"privacy": "Privacy",
+		"discordPlaceholder": "Join our discord server",
+		"githubPlaceholder": "Visit us on GitHub",
+		"instagramPlaceholder": "Follow us on Instagram",
+		"openCollectivePlaceholder": "Support us on Open Collective"
+	},
+	"openCollectiveButton": {
+		"text": "Support us on Open Collective",
+		"alt": "open collective logo"
+	},
+	"submitted": {
+		"title": "Thank you for your entry - Trans*DB"
+	},
+	"privacy": {
+		"title": "Privacy - Trans*DB"
+	},
+	"reported": {
+		"title": "Thank you for your report - Trans*DB"
+	},
+	"about": {
+		"meta": {
+			"description": "Who the team behind Trans*DB is, why we do it, and where you can learn more."
+		},
+		"title": "About us - Trans*DB",
+		"donation": "Support us with a donation",
+		"downloadFlyerProfessional": "Professional print data",
+		"flyer": "The official Trans*DB flyer",
+		"downloadFlyer": "Download flyer",
+		"team": "The Trans*DB Team",
+		"techStack": "Our Tech-Stack"
+	}
+}

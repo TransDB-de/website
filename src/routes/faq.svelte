@@ -1,5 +1,20 @@
+<script lang="ts" context="module">
+	import { currentLocale } from "$lib/localization"
+	import { get } from "svelte/store"
+
+	export async function load() {
+		const l = get(currentLocale);
+
+		return {
+			props: {
+				FAQContent: (await import(`../content/${l}/faq.md`)).default
+			}
+		}
+	}
+</script>
+
 <script lang="ts">
-	import FAQContent from "$content/faq.md";
+	export let FAQContent;
 </script>
 
 <svelte:head>

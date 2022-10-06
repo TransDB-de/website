@@ -29,6 +29,7 @@
   "type": "module",
   "dependencies": {
     "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
+    "accept-language-parser": "^1.5.0",
     "ackee-tracker": "^5.1.0",
     "axios": "^0.24.0",
     "jsonwebtoken": "^8.5.1",
