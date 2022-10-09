@@ -7,7 +7,8 @@
 	import Select from "$formElements/select.svelte"
 	import { popupError, popupOk } from "$components/popup.svelte"
 	
-	import ReportNote from "$content/report-note.md"
+	import ReportNoteDe from "$content/de/report-note.md"
+	import ReportNoteEn from "$content/en/report-note.md"
 	
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
@@ -17,7 +18,8 @@
 	import { onMount } from "svelte"
 	import axios from "axios"
 	import type { Report } from "$models/report.model"
-	import { t } from "$lib/localization"
+	import { t, currentLocale } from "$lib/localization"
+	import config from "$lib/config";
 	
 	let entry: Entry = null;
 	let loading = false;
@@ -28,6 +30,8 @@
 		type: "",
 		message: ""
 	}
+	
+	$: ReportNote = $currentLocale === "de" ? ReportNoteDe : ReportNoteEn;
 	
 	onMount(async () => {
 		try {
@@ -102,7 +106,7 @@
 
 	<Textarea bind:value={ report.message } placeholder="Beschreibe dein Anliegen / deine Änderungsvorschläge" requried minlength="10" maxlength={ 1200 } />
 	
-	<ReportNote />
+	<svelte:component this={ReportNote} />
 	
 	<Button { loading }>Melden</Button>
 </Form>

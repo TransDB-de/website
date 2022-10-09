@@ -1,16 +1,6 @@
 {
+	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
-		"moduleResolution": "node",
-		"module": "es2020",
-		"lib": ["es2020", "DOM", "dom.iterable"],
-		"target": "es2020",
-		/**
-			svelte-preprocess cannot figure out whether you have a value or a type, so tell TypeScript
-			to enforce using \`import type\` instead of \`import\` for Types.
-			*/
-		"importsNotUsedAsValues": "error",
-		"isolatedModules": true,
-		"resolveJsonModule": true,
 		/**
 			To have warnings/errors of the Svelte compiler at the correct position,
 			enable source maps by default.
@@ -19,25 +9,8 @@
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": false,
-		"baseUrl": ".",
 		"allowJs": true,
 		"checkJs": true,
-		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$assets": ["src/assets"],
-			"$assets/*": ["src/assets/*"],
-			"$content": ["src/content"],
-			"$content/*": ["src/content/*"],
-			"$components": ["src/components"],
-			"$components/*": ["src/components/*"],
-			"$models": ["src/models"],
-			"$models/*": ["src/models/*"],
-			"$formElements": ["src/components/forms/elements"],
-			"$formElements/*": ["src/components/forms/elements/*"],
-			"$brandIcons": ["src/components/icons/brands"],
-			"$brandIcons/*": ["src/components/icons/brands/*"]
-		}
-	},
-	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
+		"resolveJsonModule": true
+	}
 }

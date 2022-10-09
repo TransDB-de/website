@@ -1,17 +1,19 @@
 <script lang="ts" context="module">
-	import { currentLocale } from "$lib/localization"
-	import { get } from "svelte/store"
-
+	import { loadContents } from "$lib/loadContents";
+	
 	export async function load() {
-		const l = get(currentLocale);
-
-		return {
-			props: {
-				Section1: (await import(`../content/${l}/index/section-1.md`)).default,
-				Section2: (await import(`../content/${l}/index/section-2.md`)).default,
-				Section3: (await import(`../content/${l}/index/section-3.md`)).default
-			}
-		}
+		const props = await loadContents({
+			name: "Section1",
+			path: "index/section-1.md"
+		}, {
+			name: "Section2",
+			path: "index/section-2.md"
+		}, {
+			name: "Section3",
+			path: "index/section-3.md"
+		});
+		
+		return { props };
 	}
 </script>
 
@@ -26,10 +28,10 @@
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
 	
 	import externalLinks from "$content/external-links.json"
-	import { onMount } from "svelte";
-
+	import { onMount } from "svelte"
+	
 	import { t } from "$lib/localization"
-
+	
 	export let Section1;
 	export let Section2;
 	export let Section3;
@@ -44,7 +46,7 @@
 div.homepage
 	div.section.one
 		div.content
-			Section1
+			svelte:component(this!="{Section1}")
 			
 		div.skyline
 			// svelte-ignore a11y-missing-attribute
@@ -63,17 +65,17 @@ div.homepage
 			img.contribute.small(src!="{ContributeSmall}" alt="Mehrere Hände beschriften einen Papierbogen")
 			
 			div.content
-				Section2
+				svelte:component(this!="{Section2}")
 	
 	div.section.three
 		h2 { $t("index.thankYou") }
 		div.content
-			Section3
+			svelte:component(this!="{Section3}")
 		
 		img.heart(src!="{Heart}" alt="Ein Herz in den Farben der Trans-Pride Flagge")
 		
 		div.donation
-			OpenCollectiveButton(href="{externalLinks.donation}")
+			OpenCollectiveButton(href!="{externalLinks.donation}")
 </template>
 
 

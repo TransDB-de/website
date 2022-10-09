@@ -32,10 +32,10 @@ export const getSession: GetSession = (request) => {
 			{ expiresIn: secretExpires }
 		);
 	}
-
+	
 	const langs = langHeaderParser.parse(request.request.headers.get("Accept-Language"));
 	const preferredLang = langs[0] ? langs[0].code : null;
-
+	
 	return {
 		csrfToken: csrfToken,
 		preferredLang,

@@ -21,17 +21,16 @@ const config = {
 			out: "build"
 		}),
 		
+		alias: {
+			$assets: "./src/assets",
+					$content: './src/content',
+					$components: './src/components',
+					$models: './src/models',
+					$formElements: './src/components/forms/elements',
+					$brandIcons: './src/components/icons/brands'
+		},
+
 		vite: {
-			resolve: {
-				alias: {
-					$assets: resolve("./src/assets"),
-					$content: resolve('./src/content'),
-					$components: resolve('./src/components'),
-					$models: resolve('./src/models'),
-					$formElements: resolve('./src/components/forms/elements'),
-					$brandIcons: resolve('./src/components/icons/brands')
-				},
-			},
 			envPrefix: "CLIENT_",
 			plugins: [
 				// Source: https://github.com/sveltejs/kit/issues/3030

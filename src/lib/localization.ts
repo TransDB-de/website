@@ -6,7 +6,7 @@ export const localeMappings = {
 	en: "English"
 }
 
-export const currentLocale = writable<string>("de");
+export const currentLocale = writable<keyof typeof localeMappings>("de");
 export const locales: string[] = Object.keys(localeMappings);
 
 let translation: any = null;
@@ -17,22 +17,22 @@ let translation: any = null;
  */
 export async function initLocalization(session: any) {
 	const preferredLang = session.preferredLang;
-
+	
 	if (locales.includes(preferredLang)) {
 		currentLocale.set(preferredLang)
 	}
-
+	
 	translation = await import(`../locales/${get(currentLocale)}.json`);
 }
 
 function translate(locale: string, key: string) {
 	if (!key) throw new Error("no key provided");
 	if (!locale) throw new Error(`no translation for key "${key}"`);
-
+	
 	let text = getValueByPath(translation, key);
-
+	
 	if (!text) throw new Error(`no translation found for ${locale}.${key}`);
-
+	
 	return text;
 }
 

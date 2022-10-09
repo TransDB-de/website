@@ -15,11 +15,11 @@
 	export const load: Load = async ({ url, session }) => {
 		if (!configLoaded) {
 			populateConfig(session);
-			injectSession(session);
-			await initLocalization(session);
-			
 			configLoaded = true;
 		}
+		
+		injectSession(session);
+		await initLocalization(session);
 		
 		let path = url.pathname.startsWith("/manage") ? "/manage" : url.pathname;
 		

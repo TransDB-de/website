@@ -186,6 +186,6 @@ export function random(): number {
  * @param path Path to desired value
  * @returns selected value
  */
- export function getValueByPath(object: any, path: string): any {
+export function getValueByPath(object: any, path: string): any {
 	return path.split(".").reduce((a, b) => a[b], object);
 }
