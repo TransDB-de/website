@@ -1,17 +1,19 @@
 <script lang="ts" context="module">
-	import { currentLocale } from "$lib/localization"
-	import { get } from "svelte/store"
-
+	import { loadContents } from "$lib/loadContents";
+	
 	export async function load() {
-		const l = get(currentLocale);
-
-		return {
-			props: {
-				PrivacyContent: (await import(`../content/${l}/privacy.md`)).default,
-				DisclaimerContent: (await import(`../content/${l}/disclaimer.md`)).default,
-				EntryRemovalContent: (await import(`../content/${l}/entry-removal-policy.md`)).default
-			}
-		}
+		const props = await loadContents({
+			name: "PrivacyContent",
+			path: "privacy.md"
+		}, {
+			name: "DisclaimerContent",
+			path: "disclaimer.md"
+		}, {
+			name: "EntryRemovalContent",
+			path: "entry-removal-policy.md"
+		});
+		
+		return { props };
 	}
 </script>
 

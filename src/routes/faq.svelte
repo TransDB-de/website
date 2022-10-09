@@ -1,15 +1,13 @@
 <script lang="ts" context="module">
-	import { currentLocale } from "$lib/localization"
-	import { get } from "svelte/store"
-
+	import { loadContents } from "$lib/loadContents";
+	
 	export async function load() {
-		const l = get(currentLocale);
-
-		return {
-			props: {
-				FAQContent: (await import(`../content/${l}/faq.md`)).default
-			}
-		}
+		const props = await loadContents({
+			name: "FAQContent",
+			path: "faq.md"
+		});
+		
+		return { props };
 	}
 </script>
 

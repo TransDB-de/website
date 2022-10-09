@@ -225,7 +225,7 @@
 			}
 		},
 		"accessibleMapping": {
-			"unkown": "Unbekannt",
+			"unknown": "Unbekannt",
 			"yes": "Barrierefrei",
 			"no": "Nicht Barrierefrei"
 		}

@@ -1,20 +1,28 @@
 <script lang="ts" context="module">
-	import { currentLocale } from "$lib/localization"
-	import { get } from "svelte/store"
-
+	import { loadContents } from "$lib/loadContents";
+	
 	export async function load() {
-		const l = get(currentLocale);
-
-		return {
-			props: {
-				DonationContent: (await import(`../content/${l}/about/donation.md`)).default,
-				TechStackContent: (await import(`../content/${l}/about/tech-stack.md`)).default,
-				NonCommercial: (await import(`../content/${l}/about/non-commercial.md`)).default,
-				SocialMedia: (await import(`../content/${l}/about/social-media.md`)).default,
-				MotivationContent: (await import(`../content/${l}/about/motivation.md`)).default,
-				FlyerContent: (await import(`../content/${l}/about/flyer.md`)).default
-			}
-		}
+		const props = await loadContents({
+			name: "DonationContent",
+			path: "donation.md"
+		}, {
+			name: "TechStackContent",
+			path: "tech-stack.md"
+		}, {
+			name: "NonCommercial",
+			path: "non-commercial.md"
+		}, {
+			name: "SocialMedia",
+			path: "social-media.md"
+		}, {
+			name: "MotivationContent",
+			path: "motivation.md"
+		}, {
+			name: "FlyerContent",
+			path: "flyer.md"
+		});
+		
+		return { props };
 	}
 </script>
 
