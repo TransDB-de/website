@@ -8,15 +8,20 @@
 	import ErrorBox from "$components/elements/errorBox.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
-	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
+	import { academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
+	import { t } from "$lib/localization"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
 	import { parseValidationErrors } from "$lib/utils"
 	import type { ValidationErrorMap } from "$models/error"
 	import { slide } from "svelte/transition";
+
+	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = $t("entryMapping");
+	let {"": _deletedKey, ..._typeMappingData} = typeMapping;
+	const typeMappingData = _typeMappingData;
 	
 	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
 	$: hasAttributes = newEntry.type ? attributeMapping[newEntry.type] ? true : false : null;

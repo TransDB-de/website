@@ -1,11 +1,12 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	
-	import { typeMapping, offerMapping, attributeMapping, accessibleMapping, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
+	import { academicTitleMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import axios from "axios"
 	import { getObjChanges, replaceFields } from "$lib/utils"
+	import { t } from "$lib/localization"
 	import { popupOk, popupError } from "$components/popup.svelte"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
@@ -21,6 +22,8 @@
 	import XIcon from "lucide-icons-svelte/x.svelte"
 	import LinkIcon from "lucide-icons-svelte/link.svelte"
 	
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping, accessibleMapping } = $t("entryMapping");
+
 	let edit: boolean = false;
 	export let entry: Entry = null;
 	

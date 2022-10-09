@@ -1,10 +1,11 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
-	import { subjectMapping, typeMapping, offerMapping, attributeMapping, academicTitleMapping } from "$lib/entryMappings"
+	import { academicTitleMapping } from "$lib/entryMappings"
 	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import { goto } from "$app/navigation"
 	import { userdata } from "$lib/store"
+	import { t } from "$lib/localization"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
@@ -24,7 +25,9 @@
 	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
-	
+
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping } = $t("entryMapping");
+
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
 	$: website = entry.website ? new URL(entry.website).host : null;
@@ -59,9 +62,9 @@
 			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
-				<span class="special-tag green" title={ mouseOverTexts["barrierFree"] }> Barrierefrei </span>
+				<span class="special-tag green" title={ mouseOverTexts["barrierFree"] }> { $t("entryMapping.accessibleMapping.yes") } </span>
 			{:else if entry.accessible === "no"}
-				<span class="special-tag orange" title={ mouseOverTexts["notBarrierFree"] }> Nicht Barrierefrei </span>
+				<span class="special-tag orange" title={ mouseOverTexts["notBarrierFree"] }> { $t("entryMapping.accessibleMapping.no") } </span>
 			{/if}
 		</div>
 		
@@ -104,7 +107,7 @@
 		
 		{#if entry.meta.offers && entry.meta.offers.length > 0 && entry.type in offerMapping}
 			<p class="small-gap small-margin">
-				<b> Angebote: </b>
+				<b> { $t('entry.offers') }: </b>
 				{#each entry.meta.offers as offer}
 					{#if offer in offerMapping[entry.type]}
 						<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
@@ -115,7 +118,7 @@
 		
 		{#if entry.meta.attributes && entry.meta.attributes.length > 0 && entry.type in attributeMapping}
 			<p class="small-gap small-margin">
-				<b> Eigenschaften: </b>
+				<b> { $t('entry.features') }: </b>
 				{#each entry.meta.attributes as attribute}
 					{#if attribute in attributeMapping[entry.type]}
 						<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
@@ -126,13 +129,13 @@
 		
 		{#if entry.meta.specials}
 			<p class="small-gap small-margin">
-				<b> Besonderheiten: </b> { entry.meta.specials }
+				<b> { $t('entry.specials') }: </b> { entry.meta.specials }
 			</p>
 		{/if}
 		
 		{#if entry.meta.minAge}
 			<p class="small-gap small-margin">
-				<b> Mindestalter: </b> { entry.meta.minAge }
+				<b> { $t('entry.minage') }: </b> { entry.meta.minAge }
 			</p>
 		{/if}
 		

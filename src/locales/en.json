@@ -47,5 +47,203 @@
 		"downloadFlyer": "Download flyer",
 		"team": "The Trans*DB Team",
 		"techStack": "Our Tech-Stack"
+	},
+	"reportForm": {
+		"note": "When proposing a change, please always provide the new data.",
+		"categories": [
+			"Select category",
+			"Propose modification",
+			"Not recommendable",
+			"Other"
+		]
+	},
+	"entryMapping": {
+		"typeMapping": {
+			"": "All categories",
+			"group": "Group/Association",
+			"therapist": "Therapist/psychiatrist",
+			"surveyor": "Surveyor",
+			"endocrinologist": "Endocrinology clinic",
+			"surgeon": "Surgeon",
+			"logopedics": "Logopedist",
+			"hairremoval": "Hair removal",
+			"urologist": "Urology",
+			"gynecologist": "Gynecology",
+			"GP": "General practitioner/family doctor"
+		},
+		"typeDescriptions": {
+			"group": "Name of the group",
+			"therapist": "Name of the office",
+			"surveyor": "Name of the office / the surveyor",
+			"endocrinologist": "Name of the doctor's office",
+			"surgeon": "Name of the doctor / clinic",
+			"hairremoval": "Name of the studio",
+			"logopedics": "Name of the office",
+			"urologist": "Name of the doctor's office",
+			"gynecologist": "Name of the doctor's office",
+			"GP": "Name of the doctor's office"
+		},
+		"attributeMapping": {
+			"group": {
+				"trans": "Trans focus",
+				"regularMeetings": "Regular meetings",
+				"consulting": "Consulting services",
+				"activities": "Hobby activities",
+				"remote": "Remote sessions"
+			},
+			"hairremoval": {
+				"insurancePay": "Cost coverage",
+				"transfriendly": "Trans-friendly",
+				"hasDoctor": "Medical"
+			},
+			"surveyor": {
+				"enby": "NB assessment",
+				"remote": "Remote sessions"
+			},
+			"surgeon": {
+				"selfPayedOnly": "Self pay only",
+				"remote": "Remote sessions"
+			},
+			"endocrinologist": {
+				"treatsNB": "Treats NB persons",
+				"remote": "Remote sessions"
+			},
+			"therapist": {
+				"selfPayedOnly": "Self pay only",
+				"treatsNB": "Treats NB persons",
+				"youthOnly": "Children and youth",
+				"remote": "Remote sessions"
+			},
+			"logopedics": {
+				"remote": "Remote sessions"
+			},
+			"urologist": {
+				"treatsNB": "Treats NB persons",
+				"transFem": "Transfem friendly",
+				"transMasc": "Transmasc friendly",
+				"remote": "Remote sessions"
+			},
+			"gynecologist": {
+				"treatsNB": "Treats NB persons",
+				"transFem": "Transfem friendly",
+				"transMasc": "Transmasc friendly",
+				"remote": "Remote sessions"
+			},
+			"GP": {
+				"treatsNB": "Treats NB persons",
+				"remote": "Remote sessions"
+			}
+		},
+		"attributeDetails": {
+			"hairremoval": {
+				"insurancePay": "Have health insurance covered costs here?",
+				"transfriendly": "Is the office/studio trans* friendly?",
+				"hasDoctor": "Is the office/studio run/assisted by a doctor?"
+			},
+			"endocrinologist": {
+				"treatsNB": "Treats non-binary persons",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"surveyor": {
+				"enby": "Provides assessments for non-binary persons",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"surgeon": {
+				"selfPayedOnly": "No insurance coverage, treats only self-pay patients",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"therapist": {
+				"selfPayedOnly": "No insurance coverage, treats only self-pay patients",
+				"treatsNB": "Treats non-binary persons",
+				"youthOnly": "Child and Adolescent Therapist",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"logopedics": {
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"urologist": {
+				"treatsNB": "Treats non-binary persons",
+				"transFem": "Transfem friendly",
+				"transMasc": "Transmasc friendly",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"gynecologist": {
+				"treatsNB": "Treats non-binary persons",
+				"transFem": "Transfem friendly",
+				"transMasc": "Transmasc friendly",
+				"remote": "Offers online/telephonic (pre)calls"
+			},
+			"GP": {
+				"treatsNB": "Treats non-binary persons",
+				"remote": "Offers online/telephonic (pre)calls"
+			}
+		},
+		"offerMapping": {
+			"therapist": {
+				"indication": "Indications",
+				"therapy": "Therapy"
+			},
+			"surgeon": {
+				"mastectomy": "Mastectomy",
+				"vaginPI": "Vaginoplasty (penile inversion)",
+				"vaginCombined": "Vaginoplasty (combined method)",
+				"ffs": "Facial feminization surgery",
+				"penoid": "Penoid buildup",
+				"breast": "Breast augmentation",
+				"hyst": "Hysterectomy",
+				"orch": "Orchiectomy",
+				"clitPI": "Clitoris penoid / metoidioplasty",
+				"bodyfem": "Body feminization surgeries",
+				"glottoplasty": "Vocal cord surgeries",
+				"fms": "Facial masculinization surgery"
+			},
+			"hairremoval": {
+				"laser": "Laser epilation",
+				"ipl": "IPL",
+				"electro": "Electroepilation",
+				"electroAE": "Electroepilation with local anesthesia"
+			},
+			"urologist": {
+				"hrt": "Accompanied hormone therapy",
+				"medication": "Prescribes hormone medication"
+			},
+			"gynecologist": {
+				"hrt": "Accompanied hormone therapy",
+				"medication": "Prescribes hormone medication"
+			},
+			"GP": {
+				"hrt": "Accompanied hormone therapy",
+				"medication": "Prescribes hormone medication"
+			}
+		},
+		"subjectMapping": {
+			"therapist": {
+				"therapist": "Psychological Psychotherapist",
+				"psychologist": "Psychiatrist (doctor of psychiatry)",
+				"naturopath": "Alternative practitioner",
+				"other": "Other specialty"
+			}
+		},
+		"accessibleMapping": {
+			"unkown": "Unknown",
+			"yes": "Accessible",
+			"no": "Not accessible"
+		}
+	},
+	"searchFilter": {
+		"categories": "Categories",
+		"delete": "delete",
+		"filter": "Filter",
+		"location": "Location",
+		"more": "More infos",
+		"offers": "Offers",
+		"textSearch": "Text search",
+		"title": "Specific filters"
+	},
+	"entry": {
+		"features": "Features",
+		"minage": "Minimum age",
+		"offers": "Offers",
+		"specials": "Specials"
 	}
 }

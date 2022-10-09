@@ -17,6 +17,7 @@
 	import { onMount } from "svelte"
 	import axios from "axios"
 	import type { Report } from "$models/report.model"
+	import { t } from "$lib/localization"
 	
 	let entry: Entry = null;
 	let loading = false;
@@ -87,15 +88,15 @@
 <Form on:submit={ submit } bind:this={ formElement } class="report-form">
 	
 	<Select required bind:value={ report.type }>
-		<option value="" disabled selected>Kategorie wählen</option>
-		<option value="edit">Änderung vorschlagen</option>
-		<option value="report">Nicht empfehlenswert</option>
-		<option value="other">Sonstiges</option>
+		<option value="" disabled selected>{ $t("reportForm.categories")[0] }</option>
+		<option value="edit">{ $t("reportForm.categories")[1] }</option>
+		<option value="report">{ $t("reportForm.categories")[2] }</option>
+		<option value="other">{ $t("reportForm.categories")[3] }</option>
 	</Select>
 	
 	{#if report.type === "edit"}
 		<p class="info" transition:slide>
-			Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.
+			{ $t("reportForm.note") }
 		</p>
 	{/if}
 
