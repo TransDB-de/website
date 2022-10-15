@@ -27,7 +27,7 @@
 
 <svelte:head>
 	<title>{ $t("privacy.title") }</title>
-	<meta name="description" content="Unsere Datenschutzerklärung.">
+	<meta name="description" content={ $t("privacy.description") }>
 </svelte:head>
 
 <template lang="pug">

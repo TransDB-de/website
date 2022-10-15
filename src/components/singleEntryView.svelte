@@ -5,8 +5,8 @@
 	import { popupError } from "$components/popup.svelte"
 	import EntryComponent from "$components/entry/entry.svelte"
 	import Button from "$components/elements/button.svelte"
-	import mouseOverTexts from "$lib/mouseOverTexts"
-	import Loader from "$components/elements/loader.svelte";
+	import { t } from "$lib/localization"
+	import Loader from "$components/elements/loader.svelte"
 	import { goto } from "$app/navigation"
 	
 	export let id: string;
@@ -47,7 +47,7 @@
 	
 	<EntryComponent entry={ entry } />
 	
-	<Button class="single-entry-view-button" on:click={ click } title={ mouseOverTexts["searchNearbyButton"] }>
+	<Button class="single-entry-view-button" on:click={ click } title={ $t("mouseOverTexts.searchNearbyButton") }>
 		Mehr Angebote in dieser Gegend
 	</Button>
 {:else}

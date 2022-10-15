@@ -1,9 +1,10 @@
 <script lang="ts">
 	import ReportForm from "$components/forms/reportForm.svelte";
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>
-	<title>Eintrag Melden - Trans*DB</title>
+	<title>{ $t("report.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 

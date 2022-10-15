@@ -12,7 +12,8 @@
 	},
 	"index": {
 		"addNewEntry": "Contribute a new entry",
-		"thankYou": "Thank you"
+		"thankYou": "Thank you",
+		"description": "A public list and search engine for trans*related medical services and community offers. Find doctors, therapists, or other resources."
 	},
 	"footer": {
 		"aboutUs": "About us",
@@ -31,7 +32,8 @@
 		"title": "Thank you for your entry - Trans*DB"
 	},
 	"privacy": {
-		"title": "Privacy - Trans*DB"
+		"title": "Privacy - Trans*DB",
+		"description": "Our privacy policy"
 	},
 	"reported": {
 		"title": "Thank you for your report - Trans*DB"
@@ -225,7 +227,7 @@
 			}
 		},
 		"accessibleMapping": {
-			"unkown": "Unknown",
+			"unknown": "Unknown",
 			"yes": "Accessible",
 			"no": "Not accessible"
 		}
@@ -245,5 +247,93 @@
 		"minage": "Minimum age",
 		"offers": "Offers",
 		"specials": "Specials"
+	},
+	"mouseOverTexts": {
+		"": "All categories of entries",
+		"group": "LGBT+ or trans* groups, associations and clubs",
+		"therapist": "Therapists with trans* specific experience",
+		"surveyor": "TSG Surveyor",
+		"endocrinologist": "Endocrinology clinic for hormone therapy",
+		"surgeon": "Surgeons for trans-related surgeries",
+		"logopedics": "Logopedist / Speech therapist for voice training",
+		"hairremoval": "Hair removal studios and doctor's offices",
+		"trans": "A group/club primarily for trans people",
+		"regularMeetings": "Meet regularly",
+		"consulting": "Offers counseling for trans* people",
+		"activities": "Offers hobby/free time activities",
+		"insurancePay": "Health insurance have already approved coverage of costs here",
+		"transfriendly": "Good and respectful treatment of trans* persons",
+		"hasDoctor": "Has medical accompaniment, or connection to a doctor",
+		"enby": "Provides assessment for non-binary persons",
+		"treatsNB": "Treats non-binary people",
+		"remote": "Offers online/telephonic appointments",
+		"indication": "Writes indications (for e.g. hormone therapy)",
+		"therapy": "Provides therapy for trans* individuals",
+		"mastectomy": "Mastectomy",
+		"vaginPI": "Vaginoplasty using penile inversion method",
+		"vaginCombined": "Vaginoplasty using the combined method",
+		"ffs": "Facial feminizing surgery (abbreviation: FFS).",
+		"penoid": "Penoid buildup",
+		"breast": "Breast augmentation",
+		"orch": "Orchiectomy",
+		"clitPI": "Clitoris penoid / metoidioplasty",
+		"bodyfem": "Body feminizing surgery",
+		"glottoplasty": "Vocal cord surgery, such as voice feminization",
+		"fms": "Facial Masculinizing Surgeries (Abbreviation: FMS)",
+		"laser": "Epilation with the help of a laser",
+		"ipl": "Epliation by strong light pulses. Not permanent.",
+		"electro": "Permanent epilation by electricity",
+		"electroAE": "Electroepilation with local anesthesia",
+		"applyFilter": "Appy filter",
+		"proximitySearch": "Locate position",
+		"locationSearchButton": "Search",
+		"searchNearbyButton": "Search for more entries in the surroundings of this entry",
+		"report": "Report entry or suggest change",
+		"share": "Share the link to this entry",
+		"location": "Your location",
+		"locationSearch": "Enter a city or a zip code and press 🔍",
+		"distance": "Distance to your location",
+		"barrierFree": "Facilities are barrier free accessible",
+		"notBarrierFree": "Facilities not barrier-free accessible",
+		"isBarrierFree": "Are the facilities barrier-free accessible?",
+		"logout": "Log out",
+		"accountSettings": "Account-Settings",
+		"editEntry": "Edit entry",
+		"deleteEntry": "Delete entry",
+		"approveEntry": "Approve entry",
+		"blocklistEntry": "Put entry on the blocklist",
+		"saveChanges": "Save changes",
+		"discardChanges": "Discard changes",
+		"copyLink": "Copy link to entry to clipboard",
+		"filter": "Filter entries",
+		"databaseHelp": "Help with database management and filtering of entries",
+		"reloadGeo": "Retry to fetch the geodata from the Api",
+		"backup": "Download backup file of the database",
+		"deleteUser": "Delete user",
+		"resetPassword": "Reset password",
+		"GP": "General practitioner doctor's office",
+		"gynecologist": "Gynecological doctor's office",
+		"hrt": "Medical monitoring of hormone therapy",
+		"medication": "Prescribes medications needed for ongoing hormone therapy",
+		"transFem": "Friendly and respectful towards trans*feminine people",
+		"transMasc": "Friendly and respectful towards trans*masculine people",
+		"urologist": "Urological doctor's office",
+		"youthOnly": "Exclusively pediatricians and adolescents"
+	},
+	"faq": {
+		"description": "Answers to frequently asked questions about our website"
+	},
+	"imprint": {
+		"description": "Imprint address for Trans*DB",
+		"title": "Imprint - Trans*DB"
+	},
+	"report": {
+		"title": "Report entry - Trans*DB"
+	},
+	"search": {
+		"title": "Search - Trans*DB"
+	},
+	"submit": {
+		"title": "New entry - Trans*DB"
 	}
 }

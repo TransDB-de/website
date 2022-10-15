@@ -26,8 +26,8 @@
 </script>
 
 <svelte:head>
-	<title>Impressum - Trans*DB</title>
-	<meta name="description" content="Impressumsanschrift für Trans*DB.">
+	<title>{ $t("imprint.title") }</title>
+	<meta name="description" content={ $t("imprint.description") }>
 </svelte:head>
 
 <template lang="pug">

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	import { academicTitleMapping } from "$lib/entryMappings"
-	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import { goto } from "$app/navigation"
 	import { userdata } from "$lib/store"
@@ -62,9 +61,9 @@
 			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
-				<span class="special-tag green" title={ mouseOverTexts["barrierFree"] }> { $t("entryMapping.accessibleMapping.yes") } </span>
+				<span class="special-tag green" title={ $t("mouseOverTexts.barrierFree") }> { $t("entryMapping.accessibleMapping.yes") } </span>
 			{:else if entry.accessible === "no"}
-				<span class="special-tag orange" title={ mouseOverTexts["notBarrierFree"] }> { $t("entryMapping.accessibleMapping.no") } </span>
+				<span class="special-tag orange" title={ $t("mouseOverTexts.notBarrierFree") }> { $t("entryMapping.accessibleMapping.no") } </span>
 			{/if}
 		</div>
 		
@@ -72,7 +71,7 @@
 			{#if isWithSubject}
 				<b> { subjectName } </b>
 			{:else}
-				<b title={ mouseOverTexts[entry.type] }> { typeMapping[entry.type] } </b>
+				<b title={ $t("mouseOverTexts." + entry.type) }> { typeMapping[entry.type] } </b>
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
@@ -110,7 +109,7 @@
 				<b> { $t('entry.offers') }: </b>
 				{#each entry.meta.offers as offer}
 					{#if offer in offerMapping[entry.type]}
-						<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
+						<Tag title={ $t("mouseOverTexts." + offer) }> { offerMapping[entry.type][offer] } </Tag>
 					{/if}
 				{/each}
 			</p>
@@ -121,7 +120,7 @@
 				<b> { $t('entry.features') }: </b>
 				{#each entry.meta.attributes as attribute}
 					{#if attribute in attributeMapping[entry.type]}
-						<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
+						<Tag title={ $t("mouseOverTexts." + attribute) }> { attributeMapping[entry.type][attribute] } </Tag>
 					{/if}
 				{/each}
 			</p>
@@ -140,7 +139,7 @@
 		{/if}
 		
 		{#if entry.distance}
-			<p class="small-gap distance" title={ mouseOverTexts["distance"] }>
+			<p class="small-gap distance" title={ $t("mouseOverTexts.distance") }>
 				<NavigationIcon /> <b> { entry.distance.toFixed(1) } km - { entry.address.city } </b> 
 			</p>
 		{/if}
@@ -161,11 +160,11 @@
 				<BlocklistEntryButton on:remove { entry } />
 				<DeleteEntryButton on:remove { entry } />
 			{:else}
-				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
+				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ $t("mouseOverTexts.report") }>
 					<EditIcon />
 				</EdgeButton>
 				
-				<EdgeButton on:click={share} title={ mouseOverTexts["share"] }>
+				<EdgeButton on:click={share} title={ $t("mouseOverTexts.share") }>
 					<Share2Icon />
 				</EdgeButton>
 			{/if}

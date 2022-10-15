@@ -1,5 +1,6 @@
 <script lang="ts">
 	import LoginForm from "$components/forms/loginForm.svelte"
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>

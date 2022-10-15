@@ -5,7 +5,7 @@
 	import { confirm } from "$components/confirm.svelte"
 	import type { Entry } from "$models/entry.model"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { t } from "$lib/localization"
 	import { createEventDispatcher } from "svelte"
 	
 	import axios from "axios"
@@ -33,6 +33,6 @@
 	}
 </script>
 
-<Button light iconOnly color="edge-error" on:click={ deleteEntry } title={ mouseOverTexts["deleteEntry"] } { loading }>
+<Button light iconOnly color="edge-error" on:click={ deleteEntry } title={ $t("mouseOverTexts.deleteEntry") } { loading }>
 	<TrashIcon />
 </Button>

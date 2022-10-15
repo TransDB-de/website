@@ -13,11 +13,12 @@
 
 <script lang="ts">
 	export let FAQContent;
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>
 	<title>FAQ - Trans*DB</title>
-	<meta name="description" content="Antworten auf häufig gestellte Fragen rund um unsere Website.">
+	<meta name="description" content={ $t("faq.description") }>
 </svelte:head>
 
 <template lang="pug">

@@ -39,7 +39,7 @@
 
 <svelte:head>
 	<title>Trans*DB</title>
-	<meta name="description" content="Eine öffentliche Liste und Suchmaschine für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, TherapeutInnen oder andere Anlaufstellen.">
+	<meta name="description" content={ $t("index.description") }>
 </svelte:head>
 
 <template lang="pug">

@@ -10,7 +10,6 @@
 	
 	import Button from "$components/elements/button.svelte"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
 	import { getEntries, clamp, timeout } from "$lib/utils"
 	import { isMobile, currentLocation } from "$lib/store"
 	import config from "$lib/config"
@@ -26,7 +25,6 @@
 	let scrollY = 0;
 	let expand = true;
 	
-	let location = null;
 	let selectedType = $page.url.searchParams.get("type") ?? "";
 	let selectedOffers = $page.url.searchParams.getAll("offers");
 	let selectedAttributes = $page.url.searchParams.getAll("attributes");
@@ -161,7 +159,7 @@
 				<Button light class="reset-location" on:click={resetLocation}> { $t("searchFilter.delete") } </Button>
 			</p>
 			
-			<p class="location" title={ mouseOverTexts[location] }>
+			<p class="location" title={ $t("mouseOverTexts.location") }>
 				<MapPinIcon />
 				<span> { $currentLocation } </span>
 			</p>
@@ -173,7 +171,7 @@
 			{#each Object.entries(typeMapping) as [key, value]}
 				<option name="type"
 				        value={ key }
-				        title={ mouseOverTexts[key] }>
+				        title={ $t("mouseOverTexts." + key) }>
 					{ value }
 				</option>
 			{/each}
@@ -184,7 +182,7 @@
 				<RadioButton name="type"
 				             bind:group={ selectedType }
 				             value={ key }
-				             title={ mouseOverTexts[key] }>
+				             title={ $t("mouseOverTexts." + key) }>
 					{ value }
 				</RadioButton>
 			{/each}
@@ -198,7 +196,7 @@
 					<TagCheckbox name="offers"
 					             bind:group={ selectedOffers }
 					             value={ key }
-					             title={ mouseOverTexts[key] }>
+					             title={ $t("mouseOverTexts." + key) }>
 						{ value }
 					</TagCheckbox>
 				{/each}
@@ -213,7 +211,7 @@
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
 					             value={ key }
-					             title={ mouseOverTexts[key] }>
+					             title={ $t("mouseOverTexts." + key) }>
 						{ value }
 					</TagCheckbox>
 				{/each}
@@ -233,7 +231,7 @@
 			<Button light
 			        iconOnly
 			        on:click={ applyFilters }
-			        title={ mouseOverTexts.filter }
+			        title={ $t("mouseOverTexts.filter") }
 			        class="search-button { textFilter ? "" : "collapsed"}">
 				
 				<SearchIcon />
@@ -242,7 +240,7 @@
 		
 		<Button class="mobile filter-button"
 		        on:click={ applyFilters }
-		        title={ mouseOverTexts.filter }>
+		        title={ $t("mouseOverTexts.filter") }>
 			{ $t("searchFilter.filter") }
 		</Button>
 		

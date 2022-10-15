@@ -13,7 +13,7 @@
 	import TrashIcon from "lucide-icons-svelte/trash.svelte"
 	import KeyIcon from "lucide-icons-svelte/key.svelte"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { t } from "$lib/localization";
 	
 	export let user: User = null;
 	
@@ -97,11 +97,11 @@
 	</div>
 	
 	<div class="controls">
-		<Button on:click={ resetPassword } light iconOnly title={ mouseOverTexts["resetPassword"] } loading={ loading.password }>
+		<Button on:click={ resetPassword } light iconOnly title={ $t("mouseOverTexts.resetPassword") } loading={ loading.password }>
 			<KeyIcon />
 		</Button>
 		
-		<Button on:click={ deleteUser } light iconOnly color="edge-error" title={ mouseOverTexts["deleteUser"] } loading={ loading.delete }>
+		<Button on:click={ deleteUser } light iconOnly color="edge-error" title={ $t("mouseOverTexts.deleteUser") } loading={ loading.delete }>
 			<TrashIcon />
 		</Button>
 	</div>
