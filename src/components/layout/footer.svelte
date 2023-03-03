@@ -11,6 +11,7 @@
 	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	import { t } from "$lib/localization"
+    import LocaleSwitcher from "$components/localeSwitcher.svelte";
 	
 	const linkOptions = {
 		lineHeight: "2px",
@@ -26,24 +27,26 @@
 
 <div class="footer">
 	
+	<LocaleSwitcher />
+
 	<div>
-		<NavLink {...linkOptions} href="/imprint">{ $t("footer.imprint") }</NavLink>
-		<NavLink {...linkOptions} href="/privacy">{ $t("footer.privacy") }</NavLink>
-		<NavLink {...linkOptions} href="/about">{ $t("footer.aboutUs") }</NavLink>
+		<NavLink {...linkOptions} href="/imprint">{ t("footer.imprint") }</NavLink>
+		<NavLink {...linkOptions} href="/privacy">{ t("footer.privacy") }</NavLink>
+		<NavLink {...linkOptions} href="/about">{ t("footer.aboutUs") }</NavLink>
 		<NavLink {...linkOptions} href="/faq">FAQ</NavLink>
 	</div>
 	
 	<div class="low-hover-bar">
-		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title={ $t("footer.instagramPlaceholder") } on:click={ linkClicked }>
+		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title={ t("footer.instagramPlaceholder") } on:click={ linkClicked }>
 			<InstagramBrandIcon />
 		</a>
-		<a href={externalLinks.social.github} target="_blank" rel="noopener" title={ $t("footer.githubPlaceholder") } on:click={ linkClicked }>
+		<a href={externalLinks.social.github} target="_blank" rel="noopener" title={ t("footer.githubPlaceholder") } on:click={ linkClicked }>
 			<GitHubBrandIcon />
 		</a>
-		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title={ $t("footer.discordPlaceholder") } on:click={ linkClicked }>
+		<a href={externalLinks.social.discord} target="_blank" rel="noopener" class="l-icon" title={ t("footer.discordPlaceholder") } on:click={ linkClicked }>
 			<DiscordBrandIcon />
 		</a>
-		<a href={externalLinks.donation} target="_blank" rel="noopener" title={ $t("footer.openCollectivePlaceholder") }>
+		<a href={externalLinks.donation} target="_blank" rel="noopener" title={ t("footer.openCollectivePlaceholder") }>
 			<OpenCollectiveBrandIcon />
 		</a>
 	</div>
@@ -51,7 +54,7 @@
 </div>
 
 <style lang="scss">
-	@import "../scss/mixins";
+	@import "../../scss/mixins";
 	
 	.footer {
 		display: flex;
@@ -121,13 +124,6 @@
 		&:hover:after{
 			width: 100%!important;
 			opacity: 1;
-		}
-		
-		&.l-icon {
-			:global(svg) {
-				height: 35px;
-				width: 35px;
-			}
 		}
 		
 		:global(svg) {

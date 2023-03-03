@@ -32,6 +32,6 @@
 	}
 </script>
 
-<Button light iconOnly title={ $t("mouseOverTexts.blocklistEntry") } on:click={ blocklist } { loading }>
+<Button light iconOnly title={ t("mouseOverTexts.blocklistEntry") } on:click={ blocklist } { loading }>
 	<FlagIcon />
 </Button>

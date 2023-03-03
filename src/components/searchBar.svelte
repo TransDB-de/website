@@ -94,25 +94,25 @@
 <div class="search-bar" class:hide class:isTextSearch {...$$props}>
 	
 	<input type=text
-	       title={ $t("mouseOverTexts.locationSearch") }
-	       placeholder={ $isMobile ? $t("header.searchBar.placeholderMobile") : $t("header.searchBar.placeholder") }
+	       title={ t("mouseOverTexts.locationSearch") }
+	       placeholder={ $isMobile ? t("header.searchBar.placeholderMobile") : t("header.searchBar.placeholder") }
 	       on:keydown={ isKey("Enter", () => search("text")) }
 	       bind:value={ locationText }
 	/>
 	
 	<Button light
 	        on:click={ () => search("distance") }
-	        title={ $t("mouseOverTexts.proximitySearch") }
+	        title={ t("mouseOverTexts.proximitySearch") }
 	        class="proximity-button">
 		
 		<MapPinIcon />
-		<span class="hide-on-mobile">{ $t("header.searchBar.areaSearch") }</span>
+		<span class="hide-on-mobile">{ t("header.searchBar.areaSearch") }</span>
 	</Button>
 	
 	<Button light
 	        iconOnly
 	        on:click={ () => search("text") }
-	        title={ $t("mouseOverTexts.locationSearchButton") }
+	        title={ t("mouseOverTexts.locationSearchButton") }
 	        class="search-button {isTextSearch ? "" : "collapsed"}">
 		
 		<SearchIcon />

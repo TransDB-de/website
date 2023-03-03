@@ -7,15 +7,12 @@
 	import Select from "$formElements/select.svelte"
 	import { popupError, popupOk } from "$components/popup.svelte"
 	
-	import ReportNoteDe from "$content/de/report-note.md"
-	import ReportNoteEn from "$content/en/report-note.md"
-	
 	import { page } from "$app/stores"
 	import { goto } from "$app/navigation"
 	import { slide } from "svelte/transition";
 	
 	import type { Entry } from "$models/entry.model"
-	import { onMount } from "svelte"
+	import { onMount, type SvelteComponentTyped } from "svelte"
 	import axios from "axios"
 	import type { Report } from "$models/report.model"
 	import { t, currentLocale } from "$lib/localization"
@@ -31,7 +28,7 @@
 		message: ""
 	}
 	
-	$: ReportNote = $currentLocale === "de" ? ReportNoteDe : ReportNoteEn;
+	export let ReportNote: typeof SvelteComponentTyped;
 	
 	onMount(async () => {
 		try {
@@ -79,7 +76,7 @@
 	}
 </script>
 
-<h1> Eintrag melden </h1>
+<h1> { t("reportForm.heading") } </h1>
 
 {#if entry}
 	<EntryComponent { entry } />
@@ -92,15 +89,15 @@
 <Form on:submit={ submit } bind:this={ formElement } class="report-form">
 	
 	<Select required bind:value={ report.type }>
-		<option value="" disabled selected>{ $t("reportForm.categories")[0] }</option>
-		<option value="edit">{ $t("reportForm.categories")[1] }</option>
-		<option value="report">{ $t("reportForm.categories")[2] }</option>
-		<option value="other">{ $t("reportForm.categories")[3] }</option>
+		<option value="" disabled selected>{ t("reportForm.categories")[0] }</option>
+		<option value="edit">{ t("reportForm.categories")[1] }</option>
+		<option value="report">{ t("reportForm.categories")[2] }</option>
+		<option value="other">{ t("reportForm.categories")[3] }</option>
 	</Select>
 	
 	{#if report.type === "edit"}
 		<p class="info" transition:slide>
-			{ $t("reportForm.note") }
+			{ t("reportForm.note") }
 		</p>
 	{/if}
 

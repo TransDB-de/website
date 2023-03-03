@@ -4,13 +4,13 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "PrivacyContent",
-			path: "privacy.md"
+			path: "privacy"
 		}, {
 			name: "DisclaimerContent",
-			path: "disclaimer.md"
+			path: "disclaimer"
 		}, {
 			name: "EntryRemovalContent",
-			path: "entry-removal-policy.md"
+			path: "entry-removal-policy"
 		});
 		
 		return { props };
@@ -26,8 +26,8 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("privacy.title") }</title>
-	<meta name="description" content={ $t("privacy.description") }>
+	<title>{ t("privacy.title") }</title>
+	<meta name="description" content={ t("privacy.description") }>
 </svelte:head>
 
 <template lang="pug">

@@ -4,22 +4,22 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "DonationContent",
-			path: "donation.md"
+			path: "about/donation"
 		}, {
 			name: "TechStackContent",
-			path: "tech-stack.md"
+			path: "about/tech-stack"
 		}, {
 			name: "NonCommercial",
-			path: "non-commercial.md"
+			path: "about/non-commercial"
 		}, {
 			name: "SocialMedia",
-			path: "social-media.md"
+			path: "about/social-media"
 		}, {
 			name: "MotivationContent",
-			path: "motivation.md"
+			path: "about/motivation"
 		}, {
 			name: "FlyerContent",
-			path: "flyer.md"
+			path: "about/flyer"
 		});
 		
 		return { props };
@@ -46,18 +46,18 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("about.title") }</title>
-	<meta name="description" content={ $t("about.meta.description") }>
+	<title>{ t("about.title") }</title>
+	<meta name="description" content={ t("about.meta.description") }>
 </svelte:head>
 
 <template lang="pug">
 	div.section
-		h2 { $t("about.team") }
+		h2 { t("about.team") }
 		div.inner
 			MemberCardCollection
 	
 	div.section
-		h2 { $t("about.donation") }
+		h2 { t("about.donation") }
 		div.inner
 			DonationContent
 			OpenCollectiveButton(href="{externalLinks.donation}")
@@ -78,13 +78,13 @@
 			NonCommercial
 	
 	div.section
-		h2 { $t("about.techStack") }
+		h2 { t("about.techStack") }
 		div.inner
 			TechStackContent
 			TechStack
 			
 	div.section
-		h2 { $t("about.flyer") }
+		h2 { t("about.flyer") }
 		div.inner
 			FlyerContent
 			div.flyer-preview
@@ -93,10 +93,10 @@
 			
 			a.light(href="/files/transdb_flyer_a6.pdf" download title="A6 (PDF)")
 				DownloadIcon
-				| { $t("about.downloadFlyer") }
+				| { t("about.downloadFlyer") }
 			a.light(href="/files/transdb_flyer_print.pdf" download title="Druckversion mit Abschnittrand und Farbprofil (PDF)")
 				DownloadIcon
-				| { $t("about.downloadFlyerProfessional") }
+				| { t("about.downloadFlyerProfessional") }
 </template>
 
 <style lang="scss">

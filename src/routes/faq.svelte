@@ -4,7 +4,7 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "FAQContent",
-			path: "faq.md"
+			path: "faq"
 		});
 		
 		return { props };
@@ -18,7 +18,7 @@
 
 <svelte:head>
 	<title>FAQ - Trans*DB</title>
-	<meta name="description" content={ $t("faq.description") }>
+	<meta name="description" content={ t("faq.description") }>
 </svelte:head>
 
 <template lang="pug">

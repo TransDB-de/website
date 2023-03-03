@@ -97,11 +97,11 @@
 	</div>
 	
 	<div class="controls">
-		<Button on:click={ resetPassword } light iconOnly title={ $t("mouseOverTexts.resetPassword") } loading={ loading.password }>
+		<Button on:click={ resetPassword } light iconOnly title={ t("mouseOverTexts.resetPassword") } loading={ loading.password }>
 			<KeyIcon />
 		</Button>
 		
-		<Button on:click={ deleteUser } light iconOnly color="edge-error" title={ $t("mouseOverTexts.deleteUser") } loading={ loading.delete }>
+		<Button on:click={ deleteUser } light iconOnly color="edge-error" title={ t("mouseOverTexts.deleteUser") } loading={ loading.delete }>
 			<TrashIcon />
 		</Button>
 	</div>

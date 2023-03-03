@@ -4,13 +4,13 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "Section1",
-			path: "index/section-1.md"
+			path: "index/section-1"
 		}, {
 			name: "Section2",
-			path: "index/section-2.md"
+			path: "index/section-2"
 		}, {
 			name: "Section3",
-			path: "index/section-3.md"
+			path: "index/section-3"
 		});
 		
 		return { props };
@@ -39,7 +39,7 @@
 
 <svelte:head>
 	<title>Trans*DB</title>
-	<meta name="description" content={ $t("index.description") }>
+	<meta name="description" content={ t("index.description") }>
 </svelte:head>
 
 <template lang="pug">
@@ -56,10 +56,10 @@ div.homepage
 	
 	div.stripe
 		a.submit(href="/submit")
-			Button {$t("index.addNewEntry")}
+			Button {t("index.addNewEntry")}
 		
 		div.section.two
-			h2 Wie kann ich helfen?
+			h2 { t("index.howToHelp") }
 			
 			img.contribute.large(src!="{ContributeLarge}" alt="Mehrere Hände beschriften einen Papierbogen")
 			img.contribute.small(src!="{ContributeSmall}" alt="Mehrere Hände beschriften einen Papierbogen")
@@ -68,7 +68,7 @@ div.homepage
 				svelte:component(this!="{Section2}")
 	
 	div.section.three
-		h2 { $t("index.thankYou") }
+		h2 { t("index.thankYou") }
 		div.content
 			svelte:component(this!="{Section3}")
 		

@@ -39,8 +39,8 @@
 
 <script lang="ts">
 	import { fade } from "svelte/transition"
-	import Footer from "$components/footer.svelte"
-	import Header from "$components/header.svelte"
+	import Footer from "$components/layout/footer.svelte"
+	import Header from "$components/layout/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
 	

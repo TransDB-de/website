@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("submit.title") }</title>
+	<title>{ t("submit.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 

@@ -25,7 +25,7 @@
 	
 	export let entry: Entry = null;
 
-	const { subjectMapping, typeMapping, offerMapping, attributeMapping } = $t("entryMapping");
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping } = t("entryMapping");
 
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
@@ -61,9 +61,9 @@
 			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
-				<span class="special-tag green" title={ $t("mouseOverTexts.barrierFree") }> { $t("entryMapping.accessibleMapping.yes") } </span>
+				<span class="special-tag green" title={ t("mouseOverTexts.barrierFree") }> { t("entryMapping.accessibleMapping.yes") } </span>
 			{:else if entry.accessible === "no"}
-				<span class="special-tag orange" title={ $t("mouseOverTexts.notBarrierFree") }> { $t("entryMapping.accessibleMapping.no") } </span>
+				<span class="special-tag orange" title={ t("mouseOverTexts.notBarrierFree") }> { t("entryMapping.accessibleMapping.no") } </span>
 			{/if}
 		</div>
 		
@@ -71,7 +71,7 @@
 			{#if isWithSubject}
 				<b> { subjectName } </b>
 			{:else}
-				<b title={ $t("mouseOverTexts." + entry.type) }> { typeMapping[entry.type] } </b>
+				<b title={ t("mouseOverTexts." + entry.type) }> { typeMapping[entry.type] } </b>
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
@@ -106,10 +106,10 @@
 		
 		{#if entry.meta.offers && entry.meta.offers.length > 0 && entry.type in offerMapping}
 			<p class="small-gap small-margin">
-				<b> { $t('entry.offers') }: </b>
+				<b> { t("entry.offers") }: </b>
 				{#each entry.meta.offers as offer}
 					{#if offer in offerMapping[entry.type]}
-						<Tag title={ $t("mouseOverTexts." + offer) }> { offerMapping[entry.type][offer] } </Tag>
+						<Tag title={ t("mouseOverTexts." + offer) }> { offerMapping[entry.type][offer] } </Tag>
 					{/if}
 				{/each}
 			</p>
@@ -117,10 +117,10 @@
 		
 		{#if entry.meta.attributes && entry.meta.attributes.length > 0 && entry.type in attributeMapping}
 			<p class="small-gap small-margin">
-				<b> { $t('entry.features') }: </b>
+				<b> { t("entry.attributes") }: </b>
 				{#each entry.meta.attributes as attribute}
 					{#if attribute in attributeMapping[entry.type]}
-						<Tag title={ $t("mouseOverTexts." + attribute) }> { attributeMapping[entry.type][attribute] } </Tag>
+						<Tag title={ t("mouseOverTexts." + attribute) }> { attributeMapping[entry.type][attribute] } </Tag>
 					{/if}
 				{/each}
 			</p>
@@ -128,18 +128,18 @@
 		
 		{#if entry.meta.specials}
 			<p class="small-gap small-margin">
-				<b> { $t('entry.specials') }: </b> { entry.meta.specials }
+				<b> { t("entry.specials") }: </b> { entry.meta.specials }
 			</p>
 		{/if}
 		
 		{#if entry.meta.minAge}
 			<p class="small-gap small-margin">
-				<b> { $t('entry.minage') }: </b> { entry.meta.minAge }
+				<b> { t("entry.minage") }: </b> { entry.meta.minAge }
 			</p>
 		{/if}
 		
 		{#if entry.distance}
-			<p class="small-gap distance" title={ $t("mouseOverTexts.distance") }>
+			<p class="small-gap distance" title={ t("mouseOverTexts.distance") }>
 				<NavigationIcon /> <b> { entry.distance.toFixed(1) } km - { entry.address.city } </b> 
 			</p>
 		{/if}
@@ -160,11 +160,11 @@
 				<BlocklistEntryButton on:remove { entry } />
 				<DeleteEntryButton on:remove { entry } />
 			{:else}
-				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ $t("mouseOverTexts.report") }>
+				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ t("mouseOverTexts.report") }>
 					<EditIcon />
 				</EdgeButton>
 				
-				<EdgeButton on:click={share} title={ $t("mouseOverTexts.share") }>
+				<EdgeButton on:click={share} title={ t("mouseOverTexts.share") }>
 					<Share2Icon />
 				</EdgeButton>
 			{/if}

@@ -13,7 +13,8 @@
 	"index": {
 		"addNewEntry": "Einen neuen Eintrag einreichen",
 		"thankYou": "Vielen Dank!",
-		"description": "Eine öffentliche Liste und Suchmaschine für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, TherapeutInnen oder andere Anlaufstellen."
+		"description": "Eine öffentliche Liste und Suchmaschine für trans*relevante medizinische Leistungen und Communityangebote. Finde Arztpersonen, TherapeutInnen oder andere Anlaufstellen.",
+		"howToHelp": "Wie kann ich helfen?"
 	},
 	"footer": {
 		"imprint": "Impressum",
@@ -51,6 +52,7 @@
 		"downloadFlyerProfessional": "Profi-Druckdaten"
 	},
 	"reportForm": {
+		"heading": "Eintrag melden",
 		"note": "Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.",
 		"categories": [
 			"Kategorie wählen",
@@ -240,11 +242,12 @@
 		"offers": "Angebote",
 		"more": "Weitere Infos",
 		"textSearch": "Textsuche",
-		"filter": "Filtern"
+		"filter": "Filtern",
+		"textSearchPlaceholder": "Suche Namen oder Personen"
 	},
 	"entry": {
 		"offers": "Angebote",
-		"features": "Eigenschaften",
+		"attributes": "Eigenschaften",
 		"specials": "Besonderheiten",
 		"minage": "Mindestalter"
 	},
@@ -335,5 +338,44 @@
 	},
 	"faq": {
 		"description": "Antworten auf häufig gestellte Fragen rund um unsere Website"
+	},
+	"submitForm": {
+		"submittedPopup": "Eintrag eingereicht",
+		"header": "Einen neuen Eintrag einreichen",
+		"selectCategory": "Kategorie wählen",
+		"address": "Adresse",
+		"street": "Straße",
+		"house": "Hausnummer",
+		"city": "Stadt / Ort",
+		"plz": "Postleitzahl",
+		"contact": "Ansprechpartner*in",
+		"noTitle": "Kein Titel",
+		"firstName": "Vorname",
+		"lastName": "Nachname",
+		"contactDetails": "Kontaktdaten",
+		"email": "E-Mail Adresse",
+		"tel": "Telefonnummer",
+		"website": "Webseite",
+		"specifics": "Spezifische Angaben",
+		"offers": "Angebote",
+		"attributes": "Weitere Angaben",
+		"minAge": "Mindestalter",
+		"subject": "Fachrichtung",
+		"selectSubject": "Fachrichtung wählen",
+		"accessibility": "Barrierefreiheit",
+		"accessibilityUnknown": "Barrierefreiheit unbekannt",
+		"accessible": "Barrierefrei",
+		"notAccessible": "Nicht Barrierefrei",
+		"specialsInfo": [
+			"Dieses Feld ist für Infos gedacht, die nicht in die anderen Felder passen.",
+			"Bitte keine Meinungen oder Erfahrungsberichte hier eintragen."
+		],
+		"info": "Bitte beachte, dass dein Eintrag von unserem Team überprüft wird bevor er auf der Seite zu finden ist.",
+		"submit": "Abschicken"
+	},
+	"errors": {
+		"checkInput": "Bitte überprüfe deine Angaben",
+		"tooMany": "Zu oft eingereicht. Bitte warte einige Minuten bis zum nächsten Versuch",
+		"unknown": "Unbekannter Fehler"
 	}
 }

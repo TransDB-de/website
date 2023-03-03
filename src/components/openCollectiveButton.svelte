@@ -5,7 +5,7 @@
 </script>
 
 <a {href} target="_blank" rel="noopener">
-	<img src="/img/open-collective.svg" alt={ $t("openCollectiveButton.alt") } /> { $t("openCollectiveButton.text") }
+	<img src="/img/open-collective.svg" alt={ t("openCollectiveButton.alt") } /> { t("openCollectiveButton.text") }
 </a>
 
 <style lang="scss">

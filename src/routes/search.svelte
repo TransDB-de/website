@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("search.title") }</title>
+	<title>{ t("search.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 

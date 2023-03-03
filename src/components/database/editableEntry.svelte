@@ -21,7 +21,7 @@
 	import XIcon from "lucide-icons-svelte/x.svelte"
 	import LinkIcon from "lucide-icons-svelte/link.svelte"
 	
-	const { subjectMapping, typeMapping, offerMapping, attributeMapping, accessibleMapping } = $t("entryMapping");
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping, accessibleMapping } = t("entryMapping");
 
 	let edit: boolean = false;
 	export let entry: Entry = null;
@@ -158,7 +158,7 @@
 					<AlertTriangleIcon /> <span>Keine Geo-Daten vorhanden!</span>
 				
 					{#if edit && geoNotRefetched}
-						<Button light title={ $t("mouseOverTexts.reloadGeo") } on:click={ refetchGeo }>Erneut versuchen</Button>
+						<Button light title={ t("mouseOverTexts.reloadGeo") } on:click={ refetchGeo }>Erneut versuchen</Button>
 					{/if}
 				</span>
 			{/if}
@@ -209,12 +209,12 @@
 	
 	<div class="controls">
 		{#if edit}
-			<Button light iconOnly on:click={ saveChanges }  title={ $t("mouseOverTexts.saveChanges") }> <SaveIcon /> </Button>
-			<Button light iconOnly on:click={ cancelEdit } title={ $t("mouseOverTexts.discardChanges") }> <XIcon /> </Button>
+			<Button light iconOnly on:click={ saveChanges }  title={ t("mouseOverTexts.saveChanges") }> <SaveIcon /> </Button>
+			<Button light iconOnly on:click={ cancelEdit } title={ t("mouseOverTexts.discardChanges") }> <XIcon /> </Button>
 			<DeleteEntryButton on:remove { entry } />
 		{:else}
-			<Button light iconOnly on:click={ editEntry } title={ $t("mouseOverTexts.editEntry") }> <EditIcon /> </Button>
-			<Button light iconOnly on:click={ copyLink } title={ $t("mouseOverTexts.copyLink") }> <LinkIcon /> </Button>
+			<Button light iconOnly on:click={ editEntry } title={ t("mouseOverTexts.editEntry") }> <EditIcon /> </Button>
+			<Button light iconOnly on:click={ copyLink } title={ t("mouseOverTexts.copyLink") }> <LinkIcon /> </Button>
 		{/if}
 	</div>
 </div>

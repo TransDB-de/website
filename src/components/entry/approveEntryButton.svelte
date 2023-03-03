@@ -28,6 +28,6 @@
 	}
 </script>
 
-<Button light iconOnly color="edge-highlight" title={ $t("mouseOverTexts.approveEntry") } on:click={ approve } { loading }>
+<Button light iconOnly color="edge-highlight" title={ t("mouseOverTexts.approveEntry") } on:click={ approve } { loading }>
 	<CheckCircleIcon />
 </Button>

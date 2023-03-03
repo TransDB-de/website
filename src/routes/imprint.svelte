@@ -4,13 +4,13 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "ImprintContent",
-			path: "imprint.md"
+			path: "imprint"
 		}, {
 			name: "DisclaimerContent",
-			path: "disclaimer.md"
+			path: "disclaimer"
 		}, {
 			name: "EntryRemovalContent",
-			path: "entry-removal-policy.md"
+			path: "entry-removal-policy"
 		});
 		
 		return { props };
@@ -26,8 +26,8 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("imprint.title") }</title>
-	<meta name="description" content={ $t("imprint.description") }>
+	<title>{ t("imprint.title") }</title>
+	<meta name="description" content={ t("imprint.description") }>
 </svelte:head>
 
 <template lang="pug">

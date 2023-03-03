@@ -1,22 +1,23 @@
 {
 	"header": {
-		"subtitle": "The search engine for trans* healthcare",
+		"subtitle": "Find offers and help for trans* people",
 		"homepage": "Home",
 		"search": "Search",
 		"newEntry": "New Entry",
 		"searchBar": {
-			"areaSearch": "Area Search",
+			"areaSearch": "Location Search",
 			"placeholder": "Search by postalcode or city",
 			"placeholderMobile": "Search zip or city"
 		}
 	},
 	"index": {
-		"addNewEntry": "Contribute a new entry",
-		"thankYou": "Thank you",
-		"description": "A public list and search engine for trans*related medical services and community offers. Find doctors, therapists, or other resources."
+		"addNewEntry": "Add a New Entry",
+		"thankYou": "Thank You!",
+		"description": "A public list and search engine for trans*related medical services and community offers. Find doctors, therapists, and other resources.",
+		"howToHelp": "How can I help?"
 	},
 	"footer": {
-		"aboutUs": "About us",
+		"aboutUs": "About Us",
 		"imprint": "Imprint",
 		"privacy": "Privacy",
 		"discordPlaceholder": "Join our discord server",
@@ -26,10 +27,10 @@
 	},
 	"openCollectiveButton": {
 		"text": "Support us on Open Collective",
-		"alt": "open collective logo"
+		"alt": "Open Collective logo"
 	},
 	"submitted": {
-		"title": "Thank you for your entry - Trans*DB"
+		"title": "Thank you for your submission - Trans*DB"
 	},
 	"privacy": {
 		"title": "Privacy - Trans*DB",
@@ -39,19 +40,20 @@
 		"title": "Thank you for your report - Trans*DB"
 	},
 	"about": {
+		"title": "About Us - Trans*DB",
 		"meta": {
-			"description": "Who the team behind Trans*DB is, why we do it, and where you can learn more."
+			"description": "About the team behind Trans*DB, why we built it, and where you can learn more about the project."
 		},
-		"title": "About us - Trans*DB",
-		"donation": "Support us with a donation",
-		"downloadFlyerProfessional": "Professional print data",
-		"flyer": "The official Trans*DB flyer",
-		"downloadFlyer": "Download flyer",
 		"team": "The Trans*DB Team",
-		"techStack": "Our Tech-Stack"
+		"donation": "Support us with a donation",
+		"techStack": "Our Tech-Stack",
+		"flyer": "The official Trans*DB Flyer",
+		"downloadFlyer": "Download Flyer",
+		"downloadFlyerProfessional": "Advanced Print Data"
 	},
 	"reportForm": {
-		"note": "When proposing a change, please always provide the new data.",
+		"heading": "Report entry",
+		"note": "When proposing a change, please provide the new data.",
 		"categories": [
 			"Select category",
 			"Propose modification",
@@ -61,17 +63,17 @@
 	},
 	"entryMapping": {
 		"typeMapping": {
-			"": "All categories",
-			"group": "Group/Association",
-			"therapist": "Therapist/psychiatrist",
-			"surveyor": "Surveyor",
-			"endocrinologist": "Endocrinology clinic",
+			"": "All Categories",
+			"group": "Group",
+			"therapist": "Therapist/Psychiatrist",
+			"surveyor": "Appraiser",
+			"endocrinologist": "Endocrinologist",
 			"surgeon": "Surgeon",
 			"logopedics": "Logopedist",
-			"hairremoval": "Hair removal",
+			"hairremoval": "Hair-Removal",
 			"urologist": "Urology",
 			"gynecologist": "Gynecology",
-			"GP": "General practitioner/family doctor"
+			"GP": "General Practitioner"
 		},
 		"typeDescriptions": {
 			"group": "Name of the group",
@@ -87,14 +89,14 @@
 		},
 		"attributeMapping": {
 			"group": {
-				"trans": "Trans focus",
+				"trans": "Trans-Focused",
 				"regularMeetings": "Regular meetings",
 				"consulting": "Consulting services",
 				"activities": "Hobby activities",
 				"remote": "Remote sessions"
 			},
 			"hairremoval": {
-				"insurancePay": "Cost coverage",
+				"insurancePay": "Insurance coverage",
 				"transfriendly": "Trans-friendly",
 				"hasDoctor": "Medical"
 			},
@@ -107,12 +109,12 @@
 				"remote": "Remote sessions"
 			},
 			"endocrinologist": {
-				"treatsNB": "Treats NB persons",
+				"treatsNB": "Treats NB people",
 				"remote": "Remote sessions"
 			},
 			"therapist": {
 				"selfPayedOnly": "Self pay only",
-				"treatsNB": "Treats NB persons",
+				"treatsNB": "Treats NB people",
 				"youthOnly": "Children and youth",
 				"remote": "Remote sessions"
 			},
@@ -120,69 +122,69 @@
 				"remote": "Remote sessions"
 			},
 			"urologist": {
-				"treatsNB": "Treats NB persons",
-				"transFem": "Transfem friendly",
-				"transMasc": "Transmasc friendly",
+				"treatsNB": "Treats NB people",
+				"transFem": "Trans*feminine friendly",
+				"transMasc": "Trans*masculine friendly",
 				"remote": "Remote sessions"
 			},
 			"gynecologist": {
-				"treatsNB": "Treats NB persons",
-				"transFem": "Transfem friendly",
-				"transMasc": "Transmasc friendly",
+				"treatsNB": "Treats NB people",
+				"transFem": "Trans*feminine friendly",
+				"transMasc": "Trans*masculine friendly",
 				"remote": "Remote sessions"
 			},
 			"GP": {
-				"treatsNB": "Treats NB persons",
+				"treatsNB": "Treats NB people",
 				"remote": "Remote sessions"
 			}
 		},
 		"attributeDetails": {
 			"hairremoval": {
-				"insurancePay": "Have health insurance covered costs here?",
-				"transfriendly": "Is the office/studio trans* friendly?",
-				"hasDoctor": "Is the office/studio run/assisted by a doctor?"
+				"insurancePay": "Have health insurances covered costs here?",
+				"transfriendly": "Is the studio trans* friendly?",
+				"hasDoctor": "Is the studio run or assisted by a doctor?"
 			},
 			"endocrinologist": {
-				"treatsNB": "Treats non-binary persons",
-				"remote": "Offers online/telephonic (pre)calls"
+				"treatsNB": "Treats non-binary people",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"surveyor": {
-				"enby": "Provides assessments for non-binary persons",
-				"remote": "Offers online/telephonic (pre)calls"
+				"enby": "Provides assessments for non-binary people",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"surgeon": {
-				"selfPayedOnly": "No insurance coverage, treats only self-pay patients",
-				"remote": "Offers online/telephonic (pre)calls"
+				"selfPayedOnly": "No insurance coverage, only treats private patients",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"therapist": {
-				"selfPayedOnly": "No insurance coverage, treats only self-pay patients",
-				"treatsNB": "Treats non-binary persons",
-				"youthOnly": "Child and Adolescent Therapist",
-				"remote": "Offers online/telephonic (pre)calls"
+				"selfPayedOnly": "No insurance coverage, only treats private patients",
+				"treatsNB": "Treats non-binary people",
+				"youthOnly": "Therapist for children and adolescents",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"logopedics": {
-				"remote": "Offers online/telephonic (pre)calls"
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"urologist": {
-				"treatsNB": "Treats non-binary persons",
-				"transFem": "Transfem friendly",
-				"transMasc": "Transmasc friendly",
-				"remote": "Offers online/telephonic (pre)calls"
+				"treatsNB": "Treats non-binary people",
+				"transFem": "Trans*feminine friendly",
+				"transMasc": "Trans*masculine friendly",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"gynecologist": {
-				"treatsNB": "Treats non-binary persons",
-				"transFem": "Transfem friendly",
-				"transMasc": "Transmasc friendly",
-				"remote": "Offers online/telephonic (pre)calls"
+				"treatsNB": "Treats non-binary people",
+				"transFem": "Trans*feminine friendly",
+				"transMasc": "Trans*masculine friendly",
+				"remote": "Offers online / telephone (preliminary)calls"
 			},
 			"GP": {
-				"treatsNB": "Treats non-binary persons",
-				"remote": "Offers online/telephonic (pre)calls"
+				"treatsNB": "Treats non-binary people",
+				"remote": "Offers online / telephone (preliminary)calls"
 			}
 		},
 		"offerMapping": {
 			"therapist": {
-				"indication": "Indications",
+				"indication": "Referrals",
 				"therapy": "Therapy"
 			},
 			"surgeon": {
@@ -206,15 +208,15 @@
 				"electroAE": "Electroepilation with local anesthesia"
 			},
 			"urologist": {
-				"hrt": "Accompanied hormone therapy",
+				"hrt": "Accompanies hormone therapy",
 				"medication": "Prescribes hormone medication"
 			},
 			"gynecologist": {
-				"hrt": "Accompanied hormone therapy",
+				"hrt": "Accompanies hormone therapy",
 				"medication": "Prescribes hormone medication"
 			},
 			"GP": {
-				"hrt": "Accompanied hormone therapy",
+				"hrt": "Accompanies hormone therapy",
 				"medication": "Prescribes hormone medication"
 			}
 		},
@@ -240,34 +242,35 @@
 		"more": "More infos",
 		"offers": "Offers",
 		"textSearch": "Text search",
-		"title": "Specific filters"
+		"title": "Specific filters",
+		"textSearchPlaceholder": "Search for names or people"
 	},
 	"entry": {
-		"features": "Features",
+		"attributes": "Attributes",
 		"minage": "Minimum age",
 		"offers": "Offers",
 		"specials": "Specials"
 	},
 	"mouseOverTexts": {
 		"": "All categories of entries",
-		"group": "LGBT+ or trans* groups, associations and clubs",
+		"group": "LGBT+ or trans* groups, associations and Stammtische",
 		"therapist": "Therapists with trans* specific experience",
-		"surveyor": "TSG Surveyor",
-		"endocrinologist": "Endocrinology clinic for hormone therapy",
+		"surveyor": "TSG appraiser",
+		"endocrinologist": "Endocrinologist for hormone therapy",
 		"surgeon": "Surgeons for trans-related surgeries",
-		"logopedics": "Logopedist / Speech therapist for voice training",
+		"logopedics": "Logopedist / speech therapist for voice training",
 		"hairremoval": "Hair removal studios and doctor's offices",
 		"trans": "A group/club primarily for trans people",
 		"regularMeetings": "Meet regularly",
 		"consulting": "Offers counseling for trans* people",
-		"activities": "Offers hobby/free time activities",
-		"insurancePay": "Health insurance have already approved coverage of costs here",
-		"transfriendly": "Good and respectful treatment of trans* persons",
-		"hasDoctor": "Has medical accompaniment, or connection to a doctor",
-		"enby": "Provides assessment for non-binary persons",
+		"activities": "Offers hobby/free-time activities",
+		"insurancePay": "Health insurance have approved cost coverage here before",
+		"transfriendly": "Good and respectful treatment of trans* people",
+		"hasDoctor": "Is accompanied, or connected to a doctor",
+		"enby": "Provides TSG assessment for non-binary people",
 		"treatsNB": "Treats non-binary people",
-		"remote": "Offers online/telephonic appointments",
-		"indication": "Writes indications (for e.g. hormone therapy)",
+		"remote": "Offers online/telephone appointments",
+		"indication": "Writes referrals (for e.g. hormone therapy)",
 		"therapy": "Provides therapy for trans* individuals",
 		"mastectomy": "Mastectomy",
 		"vaginPI": "Vaginoplasty using penile inversion method",
@@ -287,15 +290,15 @@
 		"applyFilter": "Appy filter",
 		"proximitySearch": "Locate position",
 		"locationSearchButton": "Search",
-		"searchNearbyButton": "Search for more entries in the surroundings of this entry",
+		"searchNearbyButton": "Search for more entries in the surrounding area",
 		"report": "Report entry or suggest change",
 		"share": "Share the link to this entry",
 		"location": "Your location",
 		"locationSearch": "Enter a city or a zip code and press 🔍",
 		"distance": "Distance to your location",
-		"barrierFree": "Facilities are barrier free accessible",
-		"notBarrierFree": "Facilities not barrier-free accessible",
-		"isBarrierFree": "Are the facilities barrier-free accessible?",
+		"barrierFree": "Facilities are barrier-free/accessible",
+		"notBarrierFree": "Facilities not barrier-free/accessible",
+		"isBarrierFree": "Are the facilities barrier-free/accessible?",
 		"logout": "Log out",
 		"accountSettings": "Account-Settings",
 		"editEntry": "Edit entry",
@@ -307,7 +310,7 @@
 		"copyLink": "Copy link to entry to clipboard",
 		"filter": "Filter entries",
 		"databaseHelp": "Help with database management and filtering of entries",
-		"reloadGeo": "Retry to fetch the geodata from the Api",
+		"reloadGeo": "Retry to fetch the geodata from the API",
 		"backup": "Download backup file of the database",
 		"deleteUser": "Delete user",
 		"resetPassword": "Reset password",
@@ -318,10 +321,49 @@
 		"transFem": "Friendly and respectful towards trans*feminine people",
 		"transMasc": "Friendly and respectful towards trans*masculine people",
 		"urologist": "Urological doctor's office",
-		"youthOnly": "Exclusively pediatricians and adolescents"
+		"youthOnly": "Exclusively for children and adolescents"
 	},
 	"faq": {
 		"description": "Answers to frequently asked questions about our website"
+	},
+	"submitForm": {
+		"submittedPopup": "Entry submitted",
+		"header": "Submit a new Entry",
+		"selectCategory": "Select category",
+		"address": "Adress",
+		"street": "Street",
+		"house": "Housenumber",
+		"city": "City",
+		"plz": "Postalcode",
+		"contact": "Contact person",
+		"noTitle": "No title",
+		"firstName": "First name",
+		"lastName": "Last name",
+		"contactDetails": "Contact Details",
+		"email": "E-Mail adress",
+		"tel": "Telephone number",
+		"website": "Website",
+		"specifics": "Specific Info",
+		"offers": "Offers",
+		"attributes": "Additional Info",
+		"minAge": "Minimum Age",
+		"subject": "Specialization",
+		"selectSubject": "Select specialization",
+		"accessibility": "Accessibility",
+		"accessibilityUnknown": "Accessibility unknown",
+		"accessible": "Accessible",
+		"notAccessible": "Not accessible",
+		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
+		"submit": "Submit",
+		"specialsInfo": [
+			"This text area is meant for information, which does not fit into any of the other form fields.",
+			"Please do not use it to share opinions or reviews."
+		]
+	},
+	"errors": {
+		"checkInput": "Please double check the inputs",
+		"tooMany": "Too many submissions. Please wait a few minuets before trying again",
+		"unknown": "Unkown Error"
 	},
 	"imprint": {
 		"description": "Imprint address for Trans*DB",

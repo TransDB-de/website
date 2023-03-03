@@ -20,7 +20,7 @@
 	import { goto } from "$app/navigation"
 	import { onDestroy } from "svelte"
 
-	const { typeMapping, offerMapping, attributeMapping } = $t("entryMapping");
+	const { typeMapping, offerMapping, attributeMapping } = t("entryMapping");
 	
 	let scrollY = 0;
 	let expand = true;
@@ -149,29 +149,29 @@
 	<div class="bar mobile" class:expand on:click={ toggleExpand }>
 		<ChevronRightIcon class="chevron" size="24px" />
 		
-		<span class="title"> { $t("searchFilter.title") } </span>
+		<span class="title"> { t("searchFilter.title") } </span>
 	</div>
 	
 	<div class="filter" class:expand>
 		{#if $currentLocation}
 			<p class="sub-title">
-				{ $t("searchFilter.location") }
-				<Button light class="reset-location" on:click={resetLocation}> { $t("searchFilter.delete") } </Button>
+				{ t("searchFilter.location") }
+				<Button light class="reset-location" on:click={resetLocation}> { t("searchFilter.delete") } </Button>
 			</p>
 			
-			<p class="location" title={ $t("mouseOverTexts.location") }>
+			<p class="location" title={ t("mouseOverTexts.location") }>
 				<MapPinIcon />
 				<span> { $currentLocation } </span>
 			</p>
 		{/if}
 		
-		<p class="sub-title"> { $t("searchFilter.categories") } </p>
+		<p class="sub-title"> { t("searchFilter.categories") } </p>
 		
-		<Select class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
+		<Select name="type" class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
 			{#each Object.entries(typeMapping) as [key, value]}
-				<option name="type"
+				<option
 				        value={ key }
-				        title={ $t("mouseOverTexts." + key) }>
+				        title={ t("mouseOverTexts." + key) }>
 					{ value }
 				</option>
 			{/each}
@@ -182,21 +182,21 @@
 				<RadioButton name="type"
 				             bind:group={ selectedType }
 				             value={ key }
-				             title={ $t("mouseOverTexts." + key) }>
+				             title={ t("mouseOverTexts." + key) }>
 					{ value }
 				</RadioButton>
 			{/each}
 		</fieldset>
 		
 		{#if offerMapping[selectedType]}
-			<p class="sub-title"> { $t("searchFilter.offers") } </p>
+			<p class="sub-title"> { t("searchFilter.offers") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
 				{#each getEntries(offerMapping[selectedType]) as [key, value]}
 					<TagCheckbox name="offers"
 					             bind:group={ selectedOffers }
 					             value={ key }
-					             title={ $t("mouseOverTexts." + key) }>
+					             title={ t("mouseOverTexts." + key) }>
 						{ value }
 					</TagCheckbox>
 				{/each}
@@ -204,34 +204,34 @@
 		{/if}
 		
 		{#if attributeMapping[selectedType]}
-			<p class="sub-title"> { $t("searchFilter.more") } </p>
+			<p class="sub-title"> { t("searchFilter.more") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
 				{#each getEntries(attributeMapping[selectedType]) as [key, value]}
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
 					             value={ key }
-					             title={ $t("mouseOverTexts." + key) }>
+					             title={ t("mouseOverTexts." + key) }>
 						{ value }
 					</TagCheckbox>
 				{/each}
 			</fieldset>
 		{/if}
 		
-		<p class="sub-title"> { $t("searchFilter.textSearch") } </p>
+		<p class="sub-title"> { t("searchFilter.textSearch") } </p>
 		
 		<div class="text-filter">
 			<Input type="text"
 			       bind:value={ textFilter }
 			       on:change={ filtersUpdated }
-			       placeholder="Suche Namen oder Personen"
+			       placeholder={ t("searchFilter.textSearchPlaceholder") }
 			       class="text-input { textFilter ? "has-text" : "" }"
 			       maxlength="120"/>
 			
 			<Button light
 			        iconOnly
 			        on:click={ applyFilters }
-			        title={ $t("mouseOverTexts.filter") }
+			        title={ t("mouseOverTexts.filter") }
 			        class="search-button { textFilter ? "" : "collapsed"}">
 				
 				<SearchIcon />
@@ -240,8 +240,8 @@
 		
 		<Button class="mobile filter-button"
 		        on:click={ applyFilters }
-		        title={ $t("mouseOverTexts.filter") }>
-			{ $t("searchFilter.filter") }
+		        title={ t("mouseOverTexts.filter") }>
+			{ t("searchFilter.filter") }
 		</Button>
 		
 	</div>

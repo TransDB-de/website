@@ -4,7 +4,7 @@
 	export async function load() {
 		const props = await loadContents({
 			name: "SubmittedContent",
-			path: "submitted.md"
+			path: "submitted"
 		});
 		
 		return { props };
@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<title>{ $t("submitted.title") }</title>
+	<title>{ t("submitted.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 

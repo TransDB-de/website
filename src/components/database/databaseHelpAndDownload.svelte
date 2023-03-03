@@ -34,11 +34,11 @@
 </script>
 
 <div>
-	<a class="light" title={ $t("mouseOverTexts.databaseHelp") } href="/manage/help">
+	<a class="light" title={ t("mouseOverTexts.databaseHelp") } href="/manage/help">
 		<HelpCircleIcon /> Hilfe
 	</a>
 	
-	<Button light title={ $t("mouseOverTexts.backup") } on:click={ downloadBackup }>
+	<Button light title={ t("mouseOverTexts.backup") } on:click={ downloadBackup }>
 		<DownloadIcon /> Backup herunterladen
 	</Button>
 </div>

@@ -33,6 +33,6 @@
 	}
 </script>
 
-<Button light iconOnly color="edge-error" on:click={ deleteEntry } title={ $t("mouseOverTexts.deleteEntry") } { loading }>
+<Button light iconOnly color="edge-error" on:click={ deleteEntry } title={ t("mouseOverTexts.deleteEntry") } { loading }>
 	<TrashIcon />
 </Button>

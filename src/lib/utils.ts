@@ -189,3 +189,8 @@ export function random(): number {
 export function getValueByPath(object: any, path: string): any {
 	return path.split(".").reduce((a, b) => a[b], object);
 }
+
+export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> = Key extends string
+	? T[Key] extends Record<string, unknown>
+		? `${Key}.${FlattenObjectKeys<T[Key]>}` : `${Key}`
+	: never;

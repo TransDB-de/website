@@ -4,6 +4,7 @@ import preprocess from "svelte-preprocess"
 import { resolve } from "path"
 import adapter from "@sveltejs/adapter-node"
 import dotenv from "dotenv"
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars"
 
 await dotenv.config();
 const prod = process.env["NODE_ENV"] === "production";
@@ -41,7 +42,12 @@ const config = {
 							;(await import('dotenv')).config()
 						}
 					}
-				})()
+				})(),
+				dynamicImportVars({
+					include: [
+						"./src/lib/loadContents.js"
+					]
+				})
 			]
 		},
 		

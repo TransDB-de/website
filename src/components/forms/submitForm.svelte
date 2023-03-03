@@ -19,7 +19,7 @@
 	import type { ValidationErrorMap } from "$models/error"
 	import { slide } from "svelte/transition";
 
-	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = $t("entryMapping");
+	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = t("entryMapping");
 	let {"": _deletedKey, ..._typeMappingData} = typeMapping;
 	const typeMappingData = _typeMappingData;
 	
@@ -94,20 +94,20 @@
 		
 		try {
 			await axios.post("entries", newEntry);
-			popupOk("Eintrag eingereicht")
+			popupOk(t("submitForm.submittedPopup"))
 		} catch(e) {
 			switch(e.response.status) {
 				case 422: {
 					errors = parseValidationErrors(e.response.data.problems);
-					popupWarn("Bitte überprüfe deine Angaben");
+					popupWarn(t("errors.checkInput"));
 					break;
 				}
 				case 429: {
-					popupError("Zu oft eingereicht. Bitte warte einige Minuten bis zum nächsten Versuch");
+					popupError(t("errors.tooMany"));
 					break;
 				}
 				default: {
-					popupError(`Unbekannter Fehler (${e.response.status})`);
+					popupError(`${t("errors.unknown")} (${e.response.status})`);
 					break;
 				}
 			}
@@ -126,10 +126,10 @@
 </script>
 
 <Form on:submit={ submit } bind:this={ formElement }>
-	<h1> Einen neuen Eintrag einreichen </h1>
+	<h1> { t("submitForm.header") } </h1>
 	
 	<Select bind:value={ newEntry.type } on:change={ resetMeta }>
-		<option value="" disabled selected> Kategorie wählen </option>
+		<option value="" disabled selected> { t("submitForm.selectCategory") } </option>
 		
 		{#each Object.entries(typeMappingData) as [key, value]}
 			<option value={ key }> { value } </option>
@@ -140,42 +140,42 @@
 		<Input bind:value={ newEntry.name } placeholder={ typePlaceholder } required minlength="1" maxlength="160" error={ errors["name"] } />
 	{/if}
 	
-	<h2> Adresse </h2>
+	<h2> { t("submitForm.address") } </h2>
 	
 	<div>
-		<Input bind:value={ newEntry.address.street } placeholder="Straße" minlength="0" maxlength="50" error={ errors["address.street"] } />
-		<Input bind:value={ newEntry.address.house } placeholder="Hausnummer" minlength="0" maxlength="10" error={ errors["address.house"] } />
+		<Input bind:value={ newEntry.address.street } placeholder={ t("submitForm.street") } minlength="0" maxlength="50" error={ errors["address.street"] } />
+		<Input bind:value={ newEntry.address.house } placeholder={ t("submitForm.house") } minlength="0" maxlength="10" error={ errors["address.house"] } />
 	</div>
 	
 	<div>
-		<Input bind:value={ newEntry.address.city } placeholder="Stadt / Ort" required minlength="2" maxlength="50" error={ errors["address.city"] } />
-		<Input bind:value={ newEntry.address.plz } placeholder="Postleitzahl" minlength="0" maxlength="10" error={ errors["address.plz"] } />
+		<Input bind:value={ newEntry.address.city } placeholder={ t("submitForm.city") } required minlength="2" maxlength="50" error={ errors["address.city"] } />
+		<Input bind:value={ newEntry.address.plz } placeholder={ t("submitForm.plz") } minlength="0" maxlength="10" error={ errors["address.plz"] } />
 	</div>
 	
-	<h2> Ansprechpartner*in </h2>
+	<h2> { t("submitForm.contact") } </h2>
 	
 	<div>
-		<Select bind:value={newEntry.academicTitle} on:change={resetMeta}>
-			<option value={null} selected> Kein Titel </option>
+		<Select bind:value={newEntry.academicTitle} on:change={ resetMeta }>
+			<option value={null} selected> { t("submitForm.noTitle") } </option>
 			
 			{#each Object.entries(academicTitleMapping) as [key, value]}
 				<option value={ key }> { value } </option>
 			{/each}
 		</Select>
-		<Input bind:value={ newEntry.firstName } placeholder="Vorname" minlength="2" maxlength="30" error={ errors["firstName"] } />
-		<Input bind:value={ newEntry.lastName } placeholder="Nachname" minlength="2" maxlength="30" error={ errors["lastName"] } />		
+		<Input bind:value={ newEntry.firstName } placeholder={ t("submitForm.firstName") } minlength="2" maxlength="30" error={ errors["firstName"] } />
+		<Input bind:value={ newEntry.lastName } placeholder={ t("submitForm.lastName") } minlength="2" maxlength="30" error={ errors["lastName"] } />		
 	</div>
 	
-	<h2> Kontaktdaten </h2>
+	<h2> { t("submitForm.contactDetails") } </h2>
 	
-	<Input bind:value={ newEntry.email } type="email" placeholder="E-Mail Adresse" minlength="5" maxlength="320" error={ errors["email"] } />
-	<Input bind:value={ newEntry.telephone } type="text" placeholder="Telefonnummer" minlength="5" maxlength="30" error={ errors["telephone"] } />
-	<Input bind:value={ newEntry.website } type="url" placeholder="Webseite" minlength="3" maxlength="500"  error={ errors["website"] } on:change={ checkWebsite } />
+	<Input bind:value={ newEntry.email } type="email" placeholder={ t("submitForm.email") } minlength="5" maxlength="320" error={ errors["email"] } />
+	<Input bind:value={ newEntry.telephone } type="text" placeholder={ t("submitForm.tel") } minlength="5" maxlength="30" error={ errors["telephone"] } />
+	<Input bind:value={ newEntry.website } type="url" placeholder={ t("submitForm.website") } minlength="3" maxlength="500"  error={ errors["website"] } on:change={ checkWebsite } />
 	
-	<h2> Spezifische Angaben </h2>
+	<h2> { t("submitForm.specifics") } </h2>
 	
 	{#if offerMapping[newEntry.type]}
-		<h3> Angebote: </h3>
+		<h3> { t("submitForm.offers") } </h3>
 
 		<ErrorBox error={ errors["meta.offers"] }>
 			{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
@@ -186,7 +186,7 @@
 	
 	{#if hasAttributes}
 		{#if offerMapping[newEntry.type]}
-			<h3> Weitere Angaben: </h3>
+			<h3> { t("submitForm.attributes") } </h3>
 		{/if}
 		
 		{#each attributesObject as [key, value]}
@@ -196,8 +196,8 @@
 	
 	{#if isSpecialsFocused}
 		<p class="info" transition:slide>
-			Dieses Feld ist für Infos gedacht, die nicht in die anderen Felder passen.<br/>
-			Bitte keine Meinungen oder Erfahrungsberichte hier eintragen.
+			{t("submitForm.specialsInfo")[0]}<br/>
+			{t("submitForm.specialsInfo")[1]}
 		</p>
 	{/if}
 
@@ -205,13 +205,13 @@
 	
 	{#if newEntry.type === "group"}
 		
-		<Input bind:value={ newEntry.meta.minAge } type="number" placeholder="Mindestalter"/> 
+		<Input bind:value={ newEntry.meta.minAge } type="number" placeholder={ t("submitForm.minAge") }/> 
 		
 	{:else if newEntry.type === "therapist"}
-		<h3> Fachrichtung: </h3>
+		<h3> { t("submitForm.subject") } </h3>
 		
 		<Select bind:value={ newEntry.meta.subject } required>
-			<option value="" disabled selected> Fachrichtung wählen </option>
+			<option value="" disabled selected> { t("submitForm.selectSubject") } </option>
 			
 			{#each Object.entries(subjectMapping.therapist) as [key, value]}
 				<option value={ key }> { value } </option>
@@ -219,17 +219,23 @@
 		</Select>
 	{/if}
 	
-	<h3> Barrierefreiheit: </h3>
+	<h3> { t("submitForm.accessibility") } </h3>
 	
 	<Select bind:value={ newEntry.accessible }>
-		<option value="unknown" selected> Barrierefreiheit unbekannt </option>
-		<option value="yes"> Barrierefrei </option>
-		<option value="no"> Nicht Barrierefrei </option>
+		<option value="unknown" selected> { t("submitForm.accessibilityUnknown") } </option>
+		<option value="yes"> { t("submitForm.accessible") } </option>
+		<option value="no"> { t("submitForm.notAccessible") } </option>
 	</Select>
 	
 	<p>
-		Bitte beachte, dass dein Eintrag von unserem Team überprüft wird bevor er auf der Seite zu finden ist.
+		{ t("submitForm.info") }
 	</p>
 	
-	<Button { loading }> Abschicken </Button>
+	<Button { loading }> {t("submitForm.submit")} </Button>
 </Form>
+
+<style lang="scss">
+	h3::after {
+		content: ":";
+	}
+</style>

@@ -47,7 +47,7 @@
 	
 	<EntryComponent entry={ entry } />
 	
-	<Button class="single-entry-view-button" on:click={ click } title={ $t("mouseOverTexts.searchNearbyButton") }>
+	<Button class="single-entry-view-button" on:click={ click } title={ t("mouseOverTexts.searchNearbyButton") }>
 		Mehr Angebote in dieser Gegend
 	</Button>
 {:else}
