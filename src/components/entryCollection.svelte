@@ -9,7 +9,7 @@
 	import { browser } from "$app/env"
 	
 	import { currentLocation } from "$lib/store"
-	import { filters } from "$lib/filterLang"
+	import { filters } from "$lib/filterLang.client"
 	import { removeFromArray, timeout } from "$lib/utils"
 	import type { EntriesResponse, Entry } from "$models/entry.model"
 	

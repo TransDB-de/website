@@ -21,10 +21,9 @@
 	<meta name="description" content={ t("faq.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		FAQContent
-</template>
+<div class="content">
+	<svelte:component this={FAQContent} />
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

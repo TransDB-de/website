@@ -25,7 +25,7 @@
 	
 	export let entry: Entry = null;
 
-	const { subjectMapping, typeMapping, offerMapping, attributeMapping } = t("entryMapping");
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping, attributeDetails } = t("entryMapping");
 
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
@@ -71,7 +71,7 @@
 			{#if isWithSubject}
 				<b> { subjectName } </b>
 			{:else}
-				<b title={ t("mouseOverTexts." + entry.type) }> { typeMapping[entry.type] } </b>
+				<b title={ t("mouseOverTexts")[entry.type] }> { typeMapping[entry.type] } </b>
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
@@ -120,7 +120,7 @@
 				<b> { t("entry.attributes") }: </b>
 				{#each entry.meta.attributes as attribute}
 					{#if attribute in attributeMapping[entry.type]}
-						<Tag title={ t("mouseOverTexts." + attribute) }> { attributeMapping[entry.type][attribute] } </Tag>
+						<Tag title={ attributeDetails[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
 					{/if}
 				{/each}
 			</p>

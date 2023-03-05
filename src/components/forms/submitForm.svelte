@@ -15,11 +15,11 @@
 	import { t } from "$lib/localization"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
-	import { parseValidationErrors } from "$lib/utils"
+	import { parseValidationErrors, type NestedDict } from "$lib/utils"
 	import type { ValidationErrorMap } from "$models/error"
 	import { slide } from "svelte/transition";
 
-	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = t("entryMapping");
+	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = t("entryMapping") as Record<string, NestedDict>;
 	let {"": _deletedKey, ..._typeMappingData} = typeMapping;
 	const typeMappingData = _typeMappingData;
 	

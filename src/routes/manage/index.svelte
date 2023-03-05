@@ -2,10 +2,9 @@
 	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
-<template lang="pug">
-	div
-		EntryCollection(type="unapproved")
-</template>
+<div>
+	<EntryCollection type="unapproved"/>
+</div>
 
 <style lang="scss">
 	@import "../../scss/lengths";

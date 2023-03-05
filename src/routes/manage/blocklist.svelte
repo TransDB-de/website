@@ -3,11 +3,10 @@
 	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
-<template lang="pug">
-	div
-		DatabaseFilter
-		EntryCollection(type="blocklist")
-</template>
+<div>
+	<DatabaseFilter />
+	<EntryCollection type="blocklist" />
+</div>
 
 <style lang="scss">
 	@import "../../scss/lengths";

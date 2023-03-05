@@ -50,54 +50,69 @@
 	<meta name="description" content={ t("about.meta.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.section
-		h2 { t("about.team") }
-		div.inner
-			MemberCardCollection
-	
-	div.section
-		h2 { t("about.donation") }
-		div.inner
-			DonationContent
-			OpenCollectiveButton(href="{externalLinks.donation}")
-	
-	div.section
-		h2 Motivation
-		div.inner
-			MotivationContent
-	
-	div.section
-		h2 Social Media
-		div.inner
-			SocialMedia
-	
-	div.section
-		h2 Non-Profit
-		div.inner
-			NonCommercial
-	
-	div.section
-		h2 { t("about.techStack") }
-		div.inner
-			TechStackContent
-			TechStack
-			
-	div.section
-		h2 { t("about.flyer") }
-		div.inner
-			FlyerContent
-			div.flyer-preview
-				img(src="/img/transdb_flyer_preview_front.png" alt="Flyer vorne")
-				img(src="/img/transdb_flyer_preview_back.png" alt="Flyer hinten")
-			
-			a.light(href="/files/transdb_flyer_a6.pdf" download title="A6 (PDF)")
-				DownloadIcon
-				| { t("about.downloadFlyer") }
-			a.light(href="/files/transdb_flyer_print.pdf" download title="Druckversion mit Abschnittrand und Farbprofil (PDF)")
-				DownloadIcon
-				| { t("about.downloadFlyerProfessional") }
-</template>
+<div class="section">
+	<h2>{ t("about.team") }</h2>
+	<div class="inner">
+		<MemberCardCollection />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.donation") }</h2>
+	<div class="inner">
+		<svelte:component this={DonationContent} />
+		<OpenCollectiveButton href={externalLinks.donation} />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.motivation") }</h2>
+	<div class="inner">
+		<svelte:component this={MotivationContent} />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.socialMedia") }</h2>
+	<div class="inner">
+		<svelte:component this={SocialMedia} />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.nonProfit") }</h2>
+	<div class="inner">
+		<svelte:component this={NonCommercial} />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.techStack") }</h2>
+	<div class="inner">
+		<svelte:component this={TechStackContent} />
+		<TechStack />
+	</div>
+</div>
+
+<div class="section">
+	<h2>{ t("about.flyer") }</h2>
+	<div class="inner">
+		<div class="flyer-preview">
+			<img src="/img/transdb_flyer_preview_front.png" alt={ t("altTexts.flyerFront") } />
+			<img src="/img/transdb_flyer_preview_back.png" alt={ t("altTexts.flyerBack") } />
+		</div>
+		
+		<a class="light" href="/files/transdb_flyer_a6.pdf" download title={ t("mouseOverTexts.flyerA6") }>
+			<DownloadIcon />
+			{ t("about.downloadFlyer") }
+		</a>
+		
+		<a class="light" href="/files/transdb_flyer_print.pdf" download title={ t("mouseOverTexts.flyerPrint") }>
+			<DownloadIcon />
+			{ t("about.downloadFlyerProfessional") }
+		</a>
+	</div>
+</div>
 
 <style lang="scss">
 	@import "../scss/lengths";

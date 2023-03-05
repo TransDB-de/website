@@ -42,42 +42,49 @@
 	<meta name="description" content={ t("index.description") }>
 </svelte:head>
 
-<template lang="pug">
-div.homepage
-	div.section.one
-		div.content
-			svelte:component(this!="{Section1}")
-			
-		div.skyline
-			// svelte-ignore a11y-missing-attribute
-			img.left(src!="{SkylineLeft}")
-			// svelte-ignore a11y-missing-attribute
-			img.right(src!="{SkylineRight}")
+<div class="homepage">
+	<div class="section one">
+		<div class="conent">
+			<svelte:component this={Section1} />
+		</div>
+		
+		<div class="skyline">
+			<img class="left" src={SkylineLeft} role="presentation" alt="" />
+			<img class="right" src={SkylineRight} role="presentation" alt="" />
+		</div>
+	</div>
 	
-	div.stripe
-		a.submit(href="/submit")
-			Button {t("index.addNewEntry")}
-		
-		div.section.two
-			h2 { t("index.howToHelp") }
-			
-			img.contribute.large(src!="{ContributeLarge}" alt="Mehrere Hände beschriften einen Papierbogen")
-			img.contribute.small(src!="{ContributeSmall}" alt="Mehrere Hände beschriften einen Papierbogen")
-			
-			div.content
-				svelte:component(this!="{Section2}")
-	
-	div.section.three
-		h2 { t("index.thankYou") }
-		div.content
-			svelte:component(this!="{Section3}")
-		
-		img.heart(src!="{Heart}" alt="Ein Herz in den Farben der Trans-Pride Flagge")
-		
-		div.donation
-			OpenCollectiveButton(href!="{externalLinks.donation}")
-</template>
+	<div class="stripe">
+		<a class="submit" href="/submit">
+			<Button>{ t("index.addNewEntry") }</Button>
+		</a>
 
+		<div class="section two">
+			<h2>{ t("index.howToHelp") }</h2>
+
+			<img class="contribute large" src={ContributeLarge} alt={ t("altTexts.contribute") } />
+			<img class="contribute small" src={ContributeSmall} alt={ t("altTexts.contribute") } />
+			
+			<div class="content">
+				<svelte:component this={Section2} />
+			</div>
+		</div>
+	</div>
+	
+	<div class="section three">
+		<h2>{ t("index.thankYou") }</h2>
+		
+		<div class="content">
+			<svelte:component this={Section3} />
+		</div>
+		
+		<img class="heart" src={Heart} alt={ t("altTexts.heart") } />
+		
+		<div class="donation">
+			<OpenCollectiveButton href={externalLinks.donation}/>
+		</div>
+	</div>
+</div>
 
 <style lang="scss">
 	@import "../scss/lengths";

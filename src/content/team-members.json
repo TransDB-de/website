@@ -1,13 +1,13 @@
 [
 	{
 		"name": "Malin",
-		"title": "Projektmanager*in",
+		"title": "projectManager",
 		"imageURL": "/img/team/malin.png",
 		"socials": []
 	},
 	{
 		"name": "Lena",
-		"title": "Software-Entwickler*in",
+		"title": "developer",
 		"imageURL": "/img/team/lena.png",
 		"socials": [
 			{
@@ -21,7 +21,7 @@
 			},
 			{
 				"type": "web",
-				"link": "https://hamsterlabs.de"
+				"link": "https://lmke.dev"
 			},
 			{
 				"type": "instagram",
@@ -31,7 +31,7 @@
 	},
 	{
 		"name": "Laila",
-		"title": "Software-Entwickler*in",
+		"title": "developer",
 		"imageURL": "/img/team/laila.png",
 		"socials": [
 			{
@@ -55,7 +55,7 @@
 	},
 	{
 		"name": "Lola",
-		"title": "Content-Moderator*in",
+		"title": "contentMod",
 		"imageURL": "/img/team/lola.png",
 		"socials": [
 			{

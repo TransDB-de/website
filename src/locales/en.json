@@ -49,19 +49,29 @@
 		"techStack": "Our Tech-Stack",
 		"flyer": "The official Trans*DB Flyer",
 		"downloadFlyer": "Download Flyer",
-		"downloadFlyerProfessional": "Advanced Print Data"
+		"downloadFlyerProfessional": "Advanced Print Data",
+		"motivation": "Motivation",
+		"socialMedia": "Social Media",
+		"nonProfit": "Non-Profit"
 	},
 	"reportForm": {
 		"heading": "Report entry",
 		"note": "When proposing a change, please provide the new data.",
+		"placeholder": "Describe your propsed change / details about your report",
 		"categories": [
 			"Select category",
 			"Propose modification",
 			"Not recommendable",
 			"Other"
-		]
+		],
+		"submit": "Report"
 	},
 	"entryMapping": {
+		"academicTitleMapping": {
+			"dr": "Dr.",
+			"prof": "Prof.",
+			"prof_dr": "Prof. Dr."
+		},
 		"typeMapping": {
 			"": "All Categories",
 			"group": "Group",
@@ -321,7 +331,10 @@
 		"transFem": "Friendly and respectful towards trans*feminine people",
 		"transMasc": "Friendly and respectful towards trans*masculine people",
 		"urologist": "Urological doctor's office",
-		"youthOnly": "Exclusively for children and adolescents"
+		"youthOnly": "Exclusively for children and adolescents",
+		"flyerA6": "A6 (PDF)",
+		"flyerPrint": "Druckversion mit Abschnittrand und Farbprofil (PDF)",
+		"selfPayedOnly": "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
 	},
 	"faq": {
 		"description": "Answers to frequently asked questions about our website"
@@ -377,5 +390,21 @@
 	},
 	"submit": {
 		"title": "New entry - Trans*DB"
+	},
+	"altTexts": {
+		"contribute": "Several hands writing a sheet of paper",
+		"heart": "A heart in the colors of the trans pride flag",
+		"flyerFront": "Flyer front",
+		"flyerBack": "Flyer back"
+	},
+	"memberRoles": {
+		"projectManager": "Project Manager",
+		"developer": "Software Developer",
+		"contentMod": "Content Moderator"
+	},
+	"manage": {
+		"accountSettings": "Account Settings",
+		"addUser": "Add User",
+		"userList": "User List"
 	}
 }

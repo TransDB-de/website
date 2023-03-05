@@ -8,10 +8,9 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		SubmitForm
-</template>
+<div class="content">
+	<SubmitForm />
+</div>
 
 <style lang="scss">
 	@import "../scss/content-small";

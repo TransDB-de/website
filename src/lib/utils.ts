@@ -194,3 +194,7 @@ export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> 
 	? T[Key] extends Record<string, unknown>
 		? `${Key}.${FlattenObjectKeys<T[Key]>}` : `${Key}`
 	: never;
+
+export type NestedDict = {
+	[key: string]: string | NestedDict;
+};

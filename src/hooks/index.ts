@@ -37,10 +37,12 @@ export const getSession: GetSession = (request) => {
 	const langs = langHeaderParser.parse(request.request.headers.get("Accept-Language"));
 	let preferredLang = langs[0] ? langs[0].code : null;
 
-	const cookies = parseCookies(request.request.headers.get("Cookie"))
+	if (request.request.headers.has("Cookie")) {
+		const cookies = parseCookies(request.request.headers.get("Cookie"))
 	
-	if ("preffered-lang" in cookies) {
-		preferredLang = cookies["preffered-lang"];
+		if ("preffered-lang" in cookies) {
+			preferredLang = cookies["preffered-lang"];
+		}
 	}
 
 	return {

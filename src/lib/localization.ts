@@ -1,7 +1,7 @@
 import { derived, writable, get } from "svelte/store"
 import { getValueByPath } from "./utils"
 import type translationMapping from "../locales/de.json"
-import type { FlattenObjectKeys } from "./utils"
+import type { FlattenObjectKeys, NestedDict } from "./utils"
 
 export const localeMappings = {
 	de: "Deutsch",
@@ -38,7 +38,7 @@ type MappingKey = FlattenObjectKeys<TranslationMapping>;
 /**
  * Translate a key to a given locale
  */
-export function translate(locale: string, key: MappingKey) {
+export function translate(locale: string, key: MappingKey | keyof TranslationMapping) {
 	if (!key) throw new Error("no key provided");
 	if (!locale) throw new Error(`no translation for key "${key}"`);
 	
@@ -49,7 +49,10 @@ export function translate(locale: string, key: MappingKey) {
 	return text;
 }
 
+export function t(key: keyof TranslationMapping): NestedDict;
+export function t(key: MappingKey): string;
+
 /**
  * Translate a key to the current locale
  */
-export const t = (key: MappingKey) => translate(currentLocale, key);
+export function t(key: MappingKey | keyof TranslationMapping) { return translate(currentLocale, key) };

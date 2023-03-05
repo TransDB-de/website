@@ -1,3 +1,5 @@
+import { t } from "./localization";
+
 type Dict = {[key: string]: string};
 
 export const typeMapping: Dict = {

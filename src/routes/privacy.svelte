@@ -30,12 +30,11 @@
 	<meta name="description" content={ t("privacy.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		PrivacyContent
-		DisclaimerContent
-		EntryRemovalContent
-</template>
+<div class="content">
+	<svelte:component this={PrivacyContent}/>
+	<svelte:component this={DisclaimerContent}/>
+	<svelte:component this={EntryRemovalContent}/>
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

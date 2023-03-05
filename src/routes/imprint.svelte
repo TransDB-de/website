@@ -30,12 +30,11 @@
 	<meta name="description" content={ t("imprint.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		ImprintContent
-		DisclaimerContent
-		EntryRemovalContent
-</template>
+<div class="content">
+	<svelte:component this={ImprintContent}/>
+	<svelte:component this={DisclaimerContent}/>
+	<svelte:component this={EntryRemovalContent}/>
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

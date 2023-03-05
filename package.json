@@ -21,7 +21,6 @@
     "dotenv": "^10.0.0",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
-    "pug": "^3.0.2",
     "sass": "^1.49.7",
     "svelte": "3.46.4",
     "svelte-check": "2.4.3",

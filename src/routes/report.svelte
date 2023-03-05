@@ -14,7 +14,7 @@
 <script lang="ts">
 	import ReportForm from "$components/forms/reportForm.svelte"
 	import { t } from "$lib/localization"
-    import type { SvelteComponentTyped } from "svelte";
+	import type { SvelteComponentTyped } from "svelte";
 	
 	export let ReportNote: typeof SvelteComponentTyped;
 </script>

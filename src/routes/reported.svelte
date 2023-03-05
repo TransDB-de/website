@@ -22,10 +22,9 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		ReportedContent
-</template>
+<div class="content">
+	<svelte:component this={ReportedContent}/>
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

@@ -20,7 +20,7 @@
 	import { goto } from "$app/navigation"
 	import { onDestroy } from "svelte"
 
-	const { typeMapping, offerMapping, attributeMapping } = t("entryMapping");
+	const { typeMapping, offerMapping, attributeMapping, attributeDetails } = t("entryMapping");
 	
 	let scrollY = 0;
 	let expand = true;
@@ -171,7 +171,7 @@
 			{#each Object.entries(typeMapping) as [key, value]}
 				<option
 				        value={ key }
-				        title={ t("mouseOverTexts." + key) }>
+				        title={ t("mouseOverTexts")[key] }>
 					{ value }
 				</option>
 			{/each}
@@ -182,7 +182,7 @@
 				<RadioButton name="type"
 				             bind:group={ selectedType }
 				             value={ key }
-				             title={ t("mouseOverTexts." + key) }>
+				             title={ t("mouseOverTexts")[key] }>
 					{ value }
 				</RadioButton>
 			{/each}
@@ -196,7 +196,7 @@
 					<TagCheckbox name="offers"
 					             bind:group={ selectedOffers }
 					             value={ key }
-					             title={ t("mouseOverTexts." + key) }>
+					             title={ value }>
 						{ value }
 					</TagCheckbox>
 				{/each}
@@ -211,7 +211,7 @@
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
 					             value={ key }
-					             title={ t("mouseOverTexts." + key) }>
+					             title={ attributeDetails[selectedType][key] }>
 						{ value }
 					</TagCheckbox>
 				{/each}

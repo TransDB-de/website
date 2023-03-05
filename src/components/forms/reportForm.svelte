@@ -101,11 +101,11 @@
 		</p>
 	{/if}
 
-	<Textarea bind:value={ report.message } placeholder="Beschreibe dein Anliegen / deine Änderungsvorschläge" requried minlength="10" maxlength={ 1200 } />
+	<Textarea bind:value={ report.message } placeholder={ t("reportForm.placeholder") } requried minlength="10" maxlength={ 1200 } />
 	
 	<svelte:component this={ReportNote} />
 	
-	<Button { loading }>Melden</Button>
+	<Button { loading }> { t("reportForm.submit") } </Button>
 </Form>
 
 <style lang="scss">

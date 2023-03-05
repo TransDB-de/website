@@ -9,10 +9,9 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		SingleEntryView(id="{$page.params.id}")
-</template>
+<div class="content">
+	<SingleEntryView id={$page.params.id} />
+</div>
 
 <style lang="scss">
 	@import "../../scss/content";

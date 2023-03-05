@@ -9,13 +9,13 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.search-page
-		SearchFilter.filter
-		
-		div.entries
-			EntryCollection(type="search")
-</template>
+<div class="search-page">
+	<SearchFilter />
+	
+	<div class="entries">
+		<EntryCollection type="search"/>
+	</div>
+</div>
 
 <style lang="scss">
 	@import "../scss/mixins";

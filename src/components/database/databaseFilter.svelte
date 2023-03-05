@@ -2,8 +2,8 @@
 	import { page } from "$app/stores"
 
 	import Button from "$components/elements/button.svelte"
-	import { filters } from "$lib/filterLang"
-	import { language } from "$lib/filterLang"
+	import { filters } from "$lib/filterLang.client"
+	import { language } from "$lib/filterLang.client"
 	import { clamp } from "$lib/utils"
 	import { onMount } from "svelte"
 	

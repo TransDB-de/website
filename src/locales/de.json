@@ -49,19 +49,29 @@
 		"techStack": "Unser Tech-Stack",
 		"flyer": "Der offizielle Trans*DB Flyer",
 		"downloadFlyer": "Flyer herunterladen",
-		"downloadFlyerProfessional": "Profi-Druckdaten"
+		"downloadFlyerProfessional": "Profi-Druckdaten",
+		"motivation": "Motivation",
+		"socialMedia": "Social Media",
+		"nonProfit": "Non-Profit"
 	},
 	"reportForm": {
 		"heading": "Eintrag melden",
 		"note": "Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.",
+		"placeholder": "Beschreibe dein Anliegen / deine Änderungsvorschläge",
 		"categories": [
 			"Kategorie wählen",
 			"Änderung vorschlagen",
 			"Nicht empfehlenswert",
 			"Sonstiges"
-		]
+		],
+		"submit": "Melden"
 	},
 	"entryMapping": {
+		"academicTitleMapping": {
+			"dr": "Dr.",
+			"prof": "Prof.",
+			"prof_dr": "Prof. Dr."
+		},
 		"typeMapping": {
 			"": "Alle Kategorien",
 			"group": "Gruppe/Verein",
@@ -321,7 +331,10 @@
 		"reloadGeo": "Versuche die Geodaten erneut beim Api abzurufen",
 		"backup": "Backup-Datei der Datenbank herunterladen",
 		"deleteUser": "Benutzer löschen",
-		"resetPassword": "Passwort zurücksetzen"
+		"resetPassword": "Passwort zurücksetzen",
+		"flyerA6": "A6 (PDF)",
+		"flyerPrint": "Druckversion mit Abschnittrand und Farbprofil (PDF)",
+		"selfPayedOnly": "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
 	},
 	"submit": {
 		"title": "Neuer Eintrag - Trans*DB"
@@ -377,5 +390,21 @@
 		"checkInput": "Bitte überprüfe deine Angaben",
 		"tooMany": "Zu oft eingereicht. Bitte warte einige Minuten bis zum nächsten Versuch",
 		"unknown": "Unbekannter Fehler"
+	},
+	"altTexts": {
+		"contribute": "Mehrere Hände beschriften einen Papierbogen",
+		"heart": "Ein Herz in den Farben der Trans-Pride Flagge",
+		"flyerFront": "Flyer vorne",
+		"flyerBack": "Flyer hinten"
+	},
+	"memberRoles": {
+		"projectManager": "Projekt Manager*in",
+		"developer": "Software Entwickler*in",
+		"contentMod": "Content Moderator*in"
+	},
+	"manage": {
+		"accountSettings": "Account Einstellungen",
+		"addUser": "Benutzer hinzufügen",
+		"userList": "Benutzerliste"
 	}
 }
