@@ -97,6 +97,18 @@
 			"gynecologist": "Name der Praxis",
 			"GP": "Name der Praxis"
 		},
+		"typeDetails": {
+			"group": "LGBT+ oder trans* Gruppen, Vereine und Stammtische",
+			"therapist": "Therapeut*in mit trans* spezifischer Erfahrung",
+			"surveyor": "TSG Gutachter*innen",
+			"endocrinologist": "Endokrinologische Arztpraxis für Hormon-Therapie",
+			"surgeon": "Operateur*innen / Chirurgen für trans-relevante OPs",
+			"logopedics": "Logopäd*innen / Logopädie Praxen für Stimmtraining",
+			"hairremoval": "Haarentfernungs-Studios und Arztpraxen",
+			"urologist": "Urologische Arztpraxis",
+			"gynecologist": "Gynäkologische Arztpraxis",
+			"GP": "Hausarztpraxis"
+		},
 		"attributeMapping": {
 			"group": {
 				"trans": "Transfokus",
@@ -149,10 +161,17 @@
 			}
 		},
 		"attributeDetails": {
+			"group": {
+				"trans": "Primär eine Trans Gruppe / Verein, im Gegensatz zu allgemeinen LGBT+ Gruppen",
+				"regularMeetings": "Treffen sich regelmäßig",
+				"consulting": "Bietet Beratung für trans* Personen an",
+				"activities": "Bietet Freizeitangebote an",
+				"remote": "Bietet online/telefonische (Vor-)Gespräche an"
+			},
 			"hairremoval": {
-				"insurancePay": "Haben Krankenkassen hier Kosten übernommen?",
-				"transfriendly": "Ist die Praxis / das Studio trans*freundlich?",
-				"hasDoctor": "Wird die Praxis / das Studio von einer Arztperson geführt, oder begleitet?"
+				"insurancePay": "Krankenkassen haben hier schon mal eine Kostenübernahme bewilligt",
+				"transfriendly": "Guter Umgang mit trans* Personen",
+				"hasDoctor": "Hat Ärztliche Begleitung, oder Anschluss an einen Arzt"
 			},
 			"endocrinologist": {
 				"treatsNB": "Behandelt nicht-binäre Personen",
@@ -177,14 +196,14 @@
 			},
 			"urologist": {
 				"treatsNB": "Behandelt nicht-binäre Personen",
-				"transFem": "Trans*feminin freundlich",
-				"transMasc": "Trans*maskulin freundlich",
+				"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
+				"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
 				"remote": "Bietet online/telefonische (Vor-)Gespräche an"
 			},
 			"gynecologist": {
 				"treatsNB": "Behandelt nicht-binäre Personen",
-				"transFem": "Trans*feminin freundlich",
-				"transMasc": "Trans*maskulin freundlich",
+				"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
+				"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
 				"remote": "Bietet online/telefonische (Vor-)Gespräche an"
 			},
 			"GP": {
@@ -230,6 +249,28 @@
 				"medication": "Verschreibt Hormonmedikation"
 			}
 		},
+		"offerDetails": {
+			"indication": "Schreibt Indikationen (für z.B. Hormon Therapie)",
+			"therapy": "Bietet Begleittherapie für trans* Personen",
+			"youthOnly": "Ausschließlich Kinder- und Jugendarztpersonen",
+			"mastectomy": "Mastektomie",
+			"vaginPI": "Vaginoplastie mit der Methode penile Inversion",
+			"vaginCombined": "Vaginoplastie mit der kombinierten Methode",
+			"ffs": "Gesichtsfeminisierende Operationen (Abkürzung: FFS)",
+			"penoid": "Penoidaufbau",
+			"breast": "Brustaufbau",
+			"orch": "Orchiektomie",
+			"clitPI": "Klitorispenoid / Metoidioplastik",
+			"bodyfem": "Körperfemininisierende Operationen",
+			"glottoplasty": "Stimmband Operationen, wie Stimmfeminisierung",
+			"fms": "Gesichtsmaskulinisierende Operationen (Abkürzung: FMS)",
+			"laser": "Epilation mit Hilfe eines Lasers",
+			"ipl": "Epliation durch starke Lichtimpulse. Nicht dauerhaft",
+			"electro": "Dauerhafte Epilation durch Strom",
+			"electroAE": "Elektroepilation mit lokaler Betäubung",
+			"hrt": "Medizinische Begleitung einer Hormontherapie",
+			"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente"
+		},
 		"subjectMapping": {
 			"therapist": {
 				"therapist": "Psychologische*r Psychotherapeut*in",
@@ -262,49 +303,9 @@
 		"minage": "Mindestalter"
 	},
 	"mouseOverTexts": {
-		"": "Alle Kategorien von Einträgen",
-		"group": "LGBT+ oder trans* Gruppen, Vereine und Stammtische",
-		"therapist": "Therapeut*in mit trans* spezifischer Erfahrung",
-		"surveyor": "TSG Gutachter*innen",
-		"endocrinologist": "Endokrinologische Arztpraxis für Hormon-Therapie",
-		"surgeon": "Operateur*innen / Chirurgen für trans-relevante OPs",
-		"logopedics": "Logopäd*innen / Logopädie Praxen für Stimmtraining",
-		"hairremoval": "Haarentfernungs-Studios und Arztpraxen",
-		"urologist": "Urologische Arztpraxis",
-		"gynecologist": "Gynäkologische Arztpraxis",
-		"GP": "Hausarztpraxis",
-		"trans": "Primär eine Trans Gruppe / Verein, im Gegensatz zu allgemeinen LGBT+ Gruppen",
-		"regularMeetings": "Treffen sich regelmäßig",
-		"consulting": "Bietet Beratung für trans* Personen an",
-		"activities": "Bietet Freizeitangebote an",
-		"insurancePay": "Krankenkassen haben hier schon mal eine Kostenübernahme bewilligt",
-		"transfriendly": "Guter Umgang mit trans* Personen",
-		"hasDoctor": "Hat Ärztliche Begleitung, oder Anschluss an einen Arzt",
-		"enby": "Stellt Gutachten für nicht-binäre Personen aus",
-		"treatsNB": "Behandelt nicht-binäre Personen",
 		"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
 		"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
 		"remote": "Bietet online/telefonische (Vor-)Gespräche an",
-		"indication": "Schreibt Indikationen (für z.B. Hormon Therapie)",
-		"therapy": "Bietet Begleittherapie für trans* Personen",
-		"youthOnly": "Ausschließlich Kinder- und Jugendarztpersonen",
-		"mastectomy": "Mastektomie",
-		"vaginPI": "Vaginoplastie mit der Methode penile Inversion",
-		"vaginCombined": "Vaginoplastie mit der kombinierten Methode",
-		"ffs": "Gesichtsfeminisierende Operationen (Abkürzung: FFS)",
-		"penoid": "Penoidaufbau",
-		"breast": "Brustaufbau",
-		"orch": "Orchiektomie",
-		"clitPI": "Klitorispenoid / Metoidioplastik",
-		"bodyfem": "Körperfemininisierende Operationen",
-		"glottoplasty": "Stimmband Operationen, wie Stimmfeminisierung",
-		"fms": "Gesichtsmaskulinisierende Operationen (Abkürzung: FMS)",
-		"laser": "Epilation mit Hilfe eines Lasers",
-		"ipl": "Epliation durch starke Lichtimpulse. Nicht dauerhaft",
-		"electro": "Dauerhafte Epilation durch Strom",
-		"electroAE": "Elektroepilation mit lokaler Betäubung",
-		"hrt": "Medizinische Begleitung einer Hormontherapie",
-		"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente",
 		"applyFilter": "Suchfilter anwenden",
 		"proximitySearch": "Standort ermitteln",
 		"locationSearchButton": "Suchen",
@@ -333,8 +334,7 @@
 		"deleteUser": "Benutzer löschen",
 		"resetPassword": "Passwort zurücksetzen",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Druckversion mit Abschnittrand und Farbprofil (PDF)",
-		"selfPayedOnly": "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
+		"flyerPrint": "Druckversion mit Abschnittrand und Farbprofil (PDF)"
 	},
 	"submit": {
 		"title": "Neuer Eintrag - Trans*DB"
