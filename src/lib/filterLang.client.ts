@@ -3,21 +3,15 @@ import type { Subscriber, Updater, Writable } from "svelte/store"
 import { removeFromArray } from "./utils"
 import { t } from "$lib/localization"
 
-type Dict = {[key: string]: string};
-
 type EntryMapping = {
-	typeMapping: Dict;
-	academicTitleMapping: Dict;
-} & {
-	[key: string]: Record<string, Dict>;
+	[key: string]: Record<string, string>;
 };
 
-const { subjectMapping, typeMapping, offerMapping, attributeMapping, attributeDetails, academicTitleMapping } = t("entryMapping") as EntryMapping;
-let {"": _deletedKey, ..._typeMappingData} = typeMapping as Record<string, string>;
-const typeMappingData = _typeMappingData;
+const { typeMapping, offerMapping, attributeMapping, academicTitleMapping, subjectMapping } = t("entryMapping") as EntryMapping;
+const {"": _deletedKey, ...typeMappingData} = typeMapping as Record<string, string>;
 
-function flipDictionary(dict: Dict): Dict {
-	let newDict: Dict = {};
+function flipDictionary(dict: Record<string, string>): Record<string, string> {
+	let newDict: Record<string, string> = {};
 	
 	for (const [key, val] of Object.entries(dict)) {
 		newDict[val] = key;
@@ -64,6 +58,14 @@ const langDef: filterLang.LanguageDefinition = [
 	},
 	
 	{
+		name: "ist",
+		negationSuffix: "nicht",
+		type: "text",
+		field: "meta.subject",
+		mappings: flipDictionary(subjectMapping),
+	},
+
+	{
 		name: "barrierefrei",
 		type: "text",
 		field: "accessible",
@@ -80,10 +82,8 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictionary(attributeMapping.group),
-			...flipDictionary(attributeMapping.hairremoval),
-			...flipDictionary(offerMapping.therapist),
-			...flipDictionary(offerMapping.surgeon)
+			...flipDictionary(attributeMapping),
+			...flipDictionary(offerMapping),
 		}
 	},
 	
@@ -93,8 +93,7 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictionary(offerMapping.therapist),
-			...flipDictionary(offerMapping.surgeon)
+			...flipDictionary(offerMapping),
 		}
 	},
 	
@@ -104,8 +103,7 @@ const langDef: filterLang.LanguageDefinition = [
 		type: "array-contains",
 		fields: [ "meta.attributes", "meta.offers" ],
 		mappings: {
-			...flipDictionary(attributeMapping.group),
-			...flipDictionary(attributeMapping.hairremoval)
+			...flipDictionary(attributeMapping),
 		}
 	},
 	

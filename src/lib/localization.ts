@@ -1,4 +1,3 @@
-import { derived, writable, get } from "svelte/store"
 import { getValueByPath } from "./utils"
 import type translationMapping from "../locales/de.json"
 import type { FlattenObjectKeys, NestedDict } from "./utils"
@@ -56,3 +55,7 @@ export function t(key: MappingKey): string;
  * Translate a key to the current locale
  */
 export function t(key: MappingKey | keyof TranslationMapping) { return translate(currentLocale, key) };
+
+export function tEntry(key: keyof TranslationMapping["entryMapping"]) { 
+	return translate(currentLocale, `entryMapping.${key}` as keyof TranslationMapping);
+}

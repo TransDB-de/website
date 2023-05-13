@@ -10,17 +10,17 @@
 	
 	import Button from "$components/elements/button.svelte"
 	
-	import { getEntries, clamp, timeout } from "$lib/utils"
+	import { clamp, timeout } from "$lib/utils"
 	import { isMobile, currentLocation } from "$lib/store"
 	import config from "$lib/config"
-	import { t } from "$lib/localization"
+	import { t, tEntry } from "$lib/localization"
 	
 	import { browser } from "$app/env"
 	import { navigating, page } from "$app/stores"
 	import { goto } from "$app/navigation"
 	import { onDestroy } from "svelte"
 
-	const { typeMapping, offerMapping, attributeMapping, attributeDetails } = t("entryMapping");
+	import { typeMapping, offerMapping, attributeMapping, attributeDetails } from "$lib/entryMappings";
 	
 	let scrollY = 0;
 	let expand = true;
@@ -36,7 +36,7 @@
 	
 	// change counter
 	let changeId = 0;
-	
+
 	// Automatic filter change handler
 	// Applies filters after a short delay, so that the changes don"t stack
 	async function filtersUpdated() {
@@ -168,22 +168,22 @@
 		<p class="sub-title"> { t("searchFilter.categories") } </p>
 		
 		<Select name="type" class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
-			{#each Object.entries(typeMapping) as [key, value]}
+			{#each typeMapping as type}
 				<option
-				        value={ key }
+				        value={ type }
 				        title={ t("mouseOverTexts")[key] }>
-					{ value }
+					{ tEntry("typeMapping")[type] }
 				</option>
 			{/each}
 		</Select>
 		
 		<fieldset class="desktop radio-buttons" on:input={ typeUpdated }>
-			{#each Object.entries(typeMapping) as [key, value]}
+			{#each typeMapping as type}
 				<RadioButton name="type"
 				             bind:group={ selectedType }
-				             value={ key }
+				             value={ type }
 				             title={ t("mouseOverTexts")[key] }>
-					{ value }
+					{ tEntry("typeMapping")["typeMapping"][type] }
 				</RadioButton>
 			{/each}
 		</fieldset>
@@ -192,12 +192,12 @@
 			<p class="sub-title"> { t("searchFilter.offers") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
-				{#each getEntries(offerMapping[selectedType]) as [key, value]}
+				{#each offerMapping[selectedType] as offer}
 					<TagCheckbox name="offers"
 					             bind:group={ selectedOffers }
-					             value={ key }
-					             title={ value }>
-						{ value }
+					             value={ offer }
+					             title={ tEntry("offerDetails")[offer] }>
+						{ tEntry("offerMapping")[offer] }
 					</TagCheckbox>
 				{/each}
 			</fieldset>

@@ -53,19 +53,6 @@ export function parseValidationErrors(errors: ApiValidationError[]): ValidationE
 }
 
 /**
- * Wrapper for Object.entries, which can accept undefined objects
- * @param obj object to parse
- * @returns key, value pair array
- */
-export function getEntries<T = any>(obj?: Object): [string, T][] {
-	if (obj) {
-		return Object.entries(obj);
-	} else {
-		return [];
-	}
-}
-
-/**
  * Clamps a value to specified ran
  * @param val value to clamp
  * @param min lower clamp
