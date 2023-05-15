@@ -64,7 +64,8 @@
 			"Nicht empfehlenswert",
 			"Sonstiges"
 		],
-		"submit": "Melden"
+		"submit": "Melden",
+		"successPopup": "Meldung erfolgreich abgesendet"
 	},
 	"entryMapping": {
 		"academicTitleMapping": {
@@ -173,6 +174,7 @@
 			"ffs": "Gesichtsfeminisierende Operationen (Abkürzung: FFS)",
 			"penoid": "Penoidaufbau",
 			"breast": "Brustaufbau",
+			"hyst": "Hysterektomie",
 			"orch": "Orchiektomie",
 			"clitPI": "Klitorispenoid / Metoidioplastik",
 			"bodyfem": "Körperfemininisierende Operationen",
@@ -215,9 +217,6 @@
 		"minage": "Mindestalter"
 	},
 	"mouseOverTexts": {
-		"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
-		"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
-		"remote": "Bietet online/telefonische (Vor-)Gespräche an",
 		"applyFilter": "Suchfilter anwenden",
 		"proximitySearch": "Standort ermitteln",
 		"locationSearchButton": "Suchen",
@@ -301,7 +300,18 @@
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",
 		"tooMany": "Zu oft eingereicht. Bitte warte einige Minuten bis zum nächsten Versuch",
-		"unknown": "Unbekannter Fehler"
+		"unknown": "Unbekannter Fehler",
+		"failedToLoad": "Fehler beim Laden",
+		"invalidFilter": "Ungültige Filter",
+		"entryNotFound": "Eintrag nicht gefunden",
+		"reportFailed": "Meldung konnte nicht gesendet werden"
+	},
+	"warns": {
+		"reLogin": "Bitte melde dich erneut an"
+	},
+	"infos": {
+		"copiedToClipboard": "Text in die Zwischenablage kopiert!",
+		"copiedLinktToClipboard": "Link in die Zwischenablage kopiert!"
 	},
 	"altTexts": {
 		"contribute": "Mehrere Hände beschriften einen Papierbogen",

@@ -20,7 +20,7 @@
 	import { goto } from "$app/navigation"
 	import { onDestroy } from "svelte"
 
-	import { typeMapping, offerMapping, attributeMapping, attributeDetails } from "$lib/entryMappings";
+	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 	
 	let scrollY = 0;
 	let expand = true;
@@ -169,9 +169,7 @@
 		
 		<Select name="type" class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
 			{#each typeMapping as type}
-				<option
-				        value={ type }
-				        title={ t("mouseOverTexts")[key] }>
+				<option value={ type }>
 					{ tEntry("typeMapping")[type] }
 				</option>
 			{/each}
@@ -181,9 +179,8 @@
 			{#each typeMapping as type}
 				<RadioButton name="type"
 				             bind:group={ selectedType }
-				             value={ type }
-				             title={ t("mouseOverTexts")[key] }>
-					{ tEntry("typeMapping")["typeMapping"][type] }
+				             value={ type } >
+					{ tEntry("typeMapping")[type] }
 				</RadioButton>
 			{/each}
 		</fieldset>
@@ -207,12 +204,12 @@
 			<p class="sub-title"> { t("searchFilter.more") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
-				{#each getEntries(attributeMapping[selectedType]) as [key, value]}
+				{#each attributeMapping[selectedType] as attribute}
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
-					             value={ key }
-					             title={ attributeDetails[selectedType][key] }>
-						{ value }
+					             value={ attribute }
+					             title={ tEntry("attributeDetails")[selectedType][attribute] }>
+						{ tEntry("attributeMapping")[attribute] }
 					</TagCheckbox>
 				{/each}
 			</fieldset>

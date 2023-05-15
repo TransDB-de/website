@@ -4,7 +4,7 @@
 	
 	import { goto } from "$app/navigation"
 	import { userdata } from "$lib/store"
-	import { t } from "$lib/localization"
+	import { t, tEntry } from "$lib/localization"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
@@ -25,10 +25,10 @@
 	
 	export let entry: Entry = null;
 
-	const { subjectMapping, typeMapping, offerMapping, attributeMapping, attributeDetails } = t("entryMapping");
+	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
 
 	$: isWithSubject = subjectMapping[entry.type];
-	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
+	$: subjectName = isWithSubject ? tEntry("subjectMapping")[entry.meta.subject] : null;
 	$: website = entry.website ? new URL(entry.website).host : null;
 	$: possibleDuplicateLink = entry.possibleDuplicate && $userdata.admin ? "/manage/database?id=" + entry.possibleDuplicate : "/entry/" + entry.possibleDuplicate
 	
@@ -50,7 +50,7 @@
 			navigator.share({ url });
 		} else {
 			navigator.clipboard.writeText(window.location.origin + url);
-			popupOk("Link in die Zwischenablage kopiert!");
+			popupOk(t("errors.copiedLinktToClipboard"));
 		}
 	}
 </script>
@@ -71,11 +71,11 @@
 			{#if isWithSubject}
 				<b> { subjectName } </b>
 			{:else}
-				<b title={ t("mouseOverTexts")[entry.type] }> { typeMapping[entry.type] } </b>
+				<b> { tEntry("typeMapping")[entry.type] } </b>
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
-				<span> { academicTitleMapping[entry.academicTitle] ?? "" } { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
+				<span> { tEntry("academicTitleMapping")[entry.academicTitle] ?? "" } { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
 			{/if}
 		</p>
 		
@@ -108,9 +108,7 @@
 			<p class="small-gap small-margin">
 				<b> { t("entry.offers") }: </b>
 				{#each entry.meta.offers as offer}
-					{#if offer in offerMapping[entry.type]}
-						<Tag title={ t("mouseOverTexts." + offer) }> { offerMapping[entry.type][offer] } </Tag>
-					{/if}
+					<Tag title={ tEntry("offerDetails")[offer] }> { tEntry("offerMapping")[offer] } </Tag>
 				{/each}
 			</p>
 		{/if}
@@ -119,9 +117,7 @@
 			<p class="small-gap small-margin">
 				<b> { t("entry.attributes") }: </b>
 				{#each entry.meta.attributes as attribute}
-					{#if attribute in attributeMapping[entry.type]}
-						<Tag title={ attributeDetails[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
-					{/if}
+					<Tag title={ tEntry("attributeDetails")[attribute] }> { tEntry("attributeMapping")[attribute] } </Tag>
 				{/each}
 			</p>
 		{/if}

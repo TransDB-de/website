@@ -6,6 +6,8 @@
 	
 	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
+
+	import { t } from "$lib/localization"
 	
 	import { tick } from "svelte";
 	import { popupOk } from "$components/popup.svelte"
@@ -67,7 +69,7 @@
 		
 		await tick();
 		
-		popupOk("Text in die Zwischenablage kopiert!");
+		popupOk(t("infos.copiedToClipboard"));
 	}
 </script>
 

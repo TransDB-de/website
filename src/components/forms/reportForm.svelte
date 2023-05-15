@@ -15,8 +15,7 @@
 	import { onMount, type SvelteComponentTyped } from "svelte"
 	import axios from "axios"
 	import type { Report } from "$models/report.model"
-	import { t, currentLocale } from "$lib/localization"
-	import config from "$lib/config";
+	import { t } from "$lib/localization"
 	
 	let entry: Entry = null;
 	let loading = false;
@@ -37,11 +36,11 @@
 		} catch (e) {
 			switch(e.response.status) {
 				case 404: {
-					popupError("Eintrag nicht gefunden");
+					popupError(t("errors.entryNotFound"));
 					break;
 				}
 				default: {
-					popupError(`Unbekannter Fehler (${e.response.status})`)
+					popupError(`${t("errors.unknown")} (${e.response.status})`)
 					break;
 				}	
 			}
@@ -56,11 +55,11 @@
 		} catch (e) {
 			switch(e.response.status) {
 				case 500: {
-					popupError("Meldung konnte nicht gesendet werden");
+					popupError(t("errors.reportFailed"));
 					break;
 				}
 				default: {
-					popupError(`Unbekannter Fehler (${e.response.status})`)
+					popupError(`${t("errors.unknown")} (${e.response.status})`)
 					break;
 				}
 			}
@@ -71,7 +70,7 @@
 		
 		loading = false;
 		formElement.reset();
-		popupOk("Meldung erfolgreich abgesendet");
+		popupOk(t("reportForm.successPopup"));
 		goto("/reported");
 	}
 </script>

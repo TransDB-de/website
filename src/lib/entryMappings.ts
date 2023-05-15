@@ -147,3 +147,22 @@ export const offerMapping = {
 		"medication"
 	]
 } as const;
+
+export const subjectMapping = [
+	"therapist",
+	"psychologist",
+	"naturopath",
+	"other"
+] as const;
+
+export const accessibleMapping = [
+	"unknown",
+	"yes",
+	"no"
+] as const;
+
+export const academicTitleMapping = [
+	"dr",
+	"prof",
+	"prof_dr"
+]

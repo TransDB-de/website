@@ -8,25 +8,20 @@
 	import ErrorBox from "$components/elements/errorBox.svelte"
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
-	import { academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
 	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
-	import { t } from "$lib/localization"
+	import { t, tEntry } from "$lib/localization"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
 	import { parseValidationErrors, type NestedDict } from "$lib/utils"
 	import type { ValidationErrorMap } from "$models/error"
-	import { slide } from "svelte/transition";
+	import { slide } from "svelte/transition"
+	
+	import { typeMapping, offerMapping, attributeMapping, subjectMapping, academicTitleMapping } from "$lib/entryMappings";
+	
+	$: typePlaceholder = newEntry.type ? tEntry("typeDescriptions")[newEntry.type] : "";
 
-	const { subjectMapping, offerMapping, typeMapping, attributeMapping, typeDescriptions, attributeDetails } = t("entryMapping") as Record<string, NestedDict>;
-	let {"": _deletedKey, ..._typeMappingData} = typeMapping;
-	const typeMappingData = _typeMappingData;
-	
-	$: typePlaceholder = newEntry.type ? typeDescriptions[newEntry.type] : "";
-	$: hasAttributes = newEntry.type ? attributeMapping[newEntry.type] ? true : false : null;
-	$: attributesObject = hasAttributes ? ( attributeDetails[newEntry.type] ? Object.entries(attributeDetails[newEntry.type]) : Object.entries(attributeMapping[newEntry.type]) ) : null;
-	
 	let loading = false;
 	let errors: ValidationErrorMap = {};
 	let formElement;
@@ -131,8 +126,8 @@
 	<Select bind:value={ newEntry.type } on:change={ resetMeta }>
 		<option value="" disabled selected> { t("submitForm.selectCategory") } </option>
 		
-		{#each Object.entries(typeMappingData) as [key, value]}
-			<option value={ key }> { value } </option>
+		{#each typeMapping as type}
+			<option value={ type }> { tEntry("typeMapping")[type] } </option>
 		{/each}
 	</Select>
 	
@@ -158,8 +153,8 @@
 		<Select bind:value={newEntry.academicTitle} on:change={ resetMeta }>
 			<option value={null} selected> { t("submitForm.noTitle") } </option>
 			
-			{#each Object.entries(academicTitleMapping) as [key, value]}
-				<option value={ key }> { value } </option>
+			{#each academicTitleMapping as title}
+				<option value={ title }> { tEntry("academicTitleMapping")[title] } </option>
 			{/each}
 		</Select>
 		<Input bind:value={ newEntry.firstName } placeholder={ t("submitForm.firstName") } minlength="2" maxlength="30" error={ errors["firstName"] } />
@@ -178,19 +173,19 @@
 		<h3> { t("submitForm.offers") } </h3>
 
 		<ErrorBox error={ errors["meta.offers"] }>
-			{#each Object.entries(offerMapping[newEntry.type]) as [key, value]}
-				<Checkbox bind:group={ newEntry.meta.offers } value={ key }> { value } </Checkbox>
+			{#each offerMapping[newEntry.type] as offer}
+				<Checkbox bind:group={ newEntry.meta.offers } value={ offer }> { tEntry("offerDetails")[offer] } </Checkbox>
 			{/each}
 		</ErrorBox>
 	{/if}
 	
-	{#if hasAttributes}
+	{#if attributeMapping[newEntry.type]}
 		{#if offerMapping[newEntry.type]}
 			<h3> { t("submitForm.attributes") } </h3>
 		{/if}
 		
-		{#each attributesObject as [key, value]}
-			<Checkbox bind:group={ newEntry.meta.attributes } value={ key }> { value } </Checkbox>
+		{#each attributeMapping[newEntry.type] as attribute}
+			<Checkbox bind:group={ newEntry.meta.attributes } value={ attribute }> { tEntry("attributeDetails")[attribute] } </Checkbox>
 		{/each}
 	{/if}
 	
@@ -213,8 +208,8 @@
 		<Select bind:value={ newEntry.meta.subject } required>
 			<option value="" disabled selected> { t("submitForm.selectSubject") } </option>
 			
-			{#each Object.entries(subjectMapping.therapist) as [key, value]}
-				<option value={ key }> { value } </option>
+			{#each subjectMapping as subject}
+				<option value={ subject }> { tEntry("subjectMapping")[subject] } </option>
 			{/each}
 		</Select>
 	{/if}

@@ -5,12 +5,13 @@ import { goto } from "$app/navigation"
 // @ts-ignore no such export
 import { popupWarn } from "$components/popup.svelte"
 import { token } from "./store"
+import { t } from "./localization"
 
 axios.interceptors.response.use((res) => res, (err) => {
 	// Axios interceptor (middleware) to redirect unauthorized requests to login page
 	if (err.response.status === 401 && !window.location.pathname.includes("/login")) {
 		goto("/login");	
-		popupWarn("Bitte melde dich erneut an");
+		popupWarn(t("warns.reLogin"));
 		token.set("");
 		return;
 	}

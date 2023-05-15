@@ -17,12 +17,12 @@
 		"howToHelp": "How can I help?"
 	},
 	"footer": {
-		"aboutUs": "About Us",
 		"imprint": "Imprint",
 		"privacy": "Privacy",
-		"discordPlaceholder": "Join our discord server",
-		"githubPlaceholder": "Visit us on GitHub",
+		"aboutUs": "About Us",
 		"instagramPlaceholder": "Follow us on Instagram",
+		"githubPlaceholder": "Visit us on GitHub",
+		"discordPlaceholder": "Join our discord server",
 		"openCollectivePlaceholder": "Support us on Open Collective"
 	},
 	"openCollectiveButton": {
@@ -32,12 +32,12 @@
 	"submitted": {
 		"title": "Thank you for your submission - Trans*DB"
 	},
+	"reported": {
+		"title": "Thank you for your report - Trans*DB"
+	},
 	"privacy": {
 		"title": "Privacy - Trans*DB",
 		"description": "Our privacy policy"
-	},
-	"reported": {
-		"title": "Thank you for your report - Trans*DB"
 	},
 	"about": {
 		"title": "About Us - Trans*DB",
@@ -64,7 +64,8 @@
 			"Not recommendable",
 			"Other"
 		],
-		"submit": "Report"
+		"submit": "Report",
+		"successPopup": "Report successful sent"
 	},
 	"entryMapping": {
 		"academicTitleMapping": {
@@ -97,146 +98,100 @@
 			"gynecologist": "Name of the doctor's office",
 			"GP": "Name of the doctor's office"
 		},
+		"typeDetails": {
+			"group": "LGBT+ or trans* groups, clubs and regulars' tables",
+			"therapist": "Therapist with trans* specific experience",
+			"surveyor": "TSG surveyors",
+			"endocrinologist": "Endocrinology medical clinic for hormone therapy",
+			"surgeon": "Surgeons for trans-related surgeries",
+			"logopedics": "Speech therapists / Speech therapy offices for voice training",
+			"hairremoval": "Hair removal studios and clinics",
+			"urologist": "Urological medical clinic",
+			"gynecologist": "Gynecological medical clinic",
+			"GP": "General Practitioner"
+		},
 		"attributeMapping": {
-			"group": {
-				"trans": "Trans-Focused",
-				"regularMeetings": "Regular meetings",
-				"consulting": "Consulting services",
-				"activities": "Hobby activities",
-				"remote": "Remote sessions"
-			},
-			"hairremoval": {
-				"insurancePay": "Insurance coverage",
-				"transfriendly": "Trans-friendly",
-				"hasDoctor": "Medical"
-			},
-			"surveyor": {
-				"enby": "NB assessment",
-				"remote": "Remote sessions"
-			},
-			"surgeon": {
-				"selfPayedOnly": "Self pay only",
-				"remote": "Remote sessions"
-			},
-			"endocrinologist": {
-				"treatsNB": "Treats NB people",
-				"remote": "Remote sessions"
-			},
-			"therapist": {
-				"selfPayedOnly": "Self pay only",
-				"treatsNB": "Treats NB people",
-				"youthOnly": "Children and youth",
-				"remote": "Remote sessions"
-			},
-			"logopedics": {
-				"remote": "Remote sessions"
-			},
-			"urologist": {
-				"treatsNB": "Treats NB people",
-				"transFem": "Trans*feminine friendly",
-				"transMasc": "Trans*masculine friendly",
-				"remote": "Remote sessions"
-			},
-			"gynecologist": {
-				"treatsNB": "Treats NB people",
-				"transFem": "Trans*feminine friendly",
-				"transMasc": "Trans*masculine friendly",
-				"remote": "Remote sessions"
-			},
-			"GP": {
-				"treatsNB": "Treats NB people",
-				"remote": "Remote sessions"
-			}
+			"trans": "Trans-Focused",
+			"regularMeetings": "Regular meetings",
+			"consulting": "Consulting services",
+			"activities": "Hobby activities",
+			"remote": "Remote sessions",
+			"insurancePay": "Insurance coverage",
+			"transfriendly": "Trans-friendly",
+			"hasDoctor": "Medical",
+			"enby": "NB assessment",
+			"treatsNB": "Treats NB people",
+			"selfPayedOnly": "Self pay only",
+			"youthOnly": "Children and youth",
+			"transFem": "Trans*feminine friendly",
+			"transMasc": "Trans*masculine friendly"
 		},
 		"attributeDetails": {
-			"hairremoval": {
-				"insurancePay": "Have health insurances covered costs here?",
-				"transfriendly": "Is the studio trans* friendly?",
-				"hasDoctor": "Is the studio run or assisted by a doctor?"
-			},
-			"endocrinologist": {
-				"treatsNB": "Treats non-binary people",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"surveyor": {
-				"enby": "Provides assessments for non-binary people",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"surgeon": {
-				"selfPayedOnly": "No insurance coverage, only treats private patients",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"therapist": {
-				"selfPayedOnly": "No insurance coverage, only treats private patients",
-				"treatsNB": "Treats non-binary people",
-				"youthOnly": "Therapist for children and adolescents",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"logopedics": {
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"urologist": {
-				"treatsNB": "Treats non-binary people",
-				"transFem": "Trans*feminine friendly",
-				"transMasc": "Trans*masculine friendly",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"gynecologist": {
-				"treatsNB": "Treats non-binary people",
-				"transFem": "Trans*feminine friendly",
-				"transMasc": "Trans*masculine friendly",
-				"remote": "Offers online / telephone (preliminary)calls"
-			},
-			"GP": {
-				"treatsNB": "Treats non-binary people",
-				"remote": "Offers online / telephone (preliminary)calls"
-			}
+			"trans": "A group/club primarily for trans people",
+			"regularMeetings": "Meet regularly",
+			"consulting": "Offers counseling for trans* people",
+			"activities": "Offers hobby/free-time activities",
+			"remote": "Offers online/telephone appointments",
+			"insurancePay": "Health insurance have approved cost coverage here before",
+			"transfriendly": "Good and respectful treatment of trans* people",
+			"hasDoctor": "Is accompanied, or connected to a doctor",
+			"treatsNB": "Treats non-binary people",
+			"enby": "Provides TSG assessment for non-binary people",
+			"selfPayedOnly": "No health insurance coverage. Treats only self-pay patients",
+			"youthOnly": "Exclusively for children and adolescents",
+			"transFem": "Friendly and respectful towards trans*feminine people",
+			"transMasc": "Friendly and respectful towards trans*masculine people"
 		},
 		"offerMapping": {
-			"therapist": {
-				"indication": "Referrals",
-				"therapy": "Therapy"
-			},
-			"surgeon": {
-				"mastectomy": "Mastectomy",
-				"vaginPI": "Vaginoplasty (penile inversion)",
-				"vaginCombined": "Vaginoplasty (combined method)",
-				"ffs": "Facial feminization surgery",
-				"penoid": "Penoid buildup",
-				"breast": "Breast augmentation",
-				"hyst": "Hysterectomy",
-				"orch": "Orchiectomy",
-				"clitPI": "Clitoris penoid / metoidioplasty",
-				"bodyfem": "Body feminization surgeries",
-				"glottoplasty": "Vocal cord surgeries",
-				"fms": "Facial masculinization surgery"
-			},
-			"hairremoval": {
-				"laser": "Laser epilation",
-				"ipl": "IPL",
-				"electro": "Electroepilation",
-				"electroAE": "Electroepilation with local anesthesia"
-			},
-			"urologist": {
-				"hrt": "Accompanies hormone therapy",
-				"medication": "Prescribes hormone medication"
-			},
-			"gynecologist": {
-				"hrt": "Accompanies hormone therapy",
-				"medication": "Prescribes hormone medication"
-			},
-			"GP": {
-				"hrt": "Accompanies hormone therapy",
-				"medication": "Prescribes hormone medication"
-			}
+			"indication": "Referrals",
+			"therapy": "Therapy",
+			"mastectomy": "Mastectomy",
+			"vaginPI": "Vaginoplasty (penile inversion)",
+			"vaginCombined": "Vaginoplasty (combined method)",
+			"ffs": "Facial feminization surgery",
+			"penoid": "Penoid buildup",
+			"breast": "Breast augmentation",
+			"hyst": "Hysterectomy",
+			"orch": "Orchiectomy",
+			"clitPI": "Clitoris penoid / metoidioplasty",
+			"bodyfem": "Body feminization surgeries",
+			"glottoplasty": "Vocal cord surgeries",
+			"fms": "Facial masculinization surgery",
+			"laser": "Laser epilation",
+			"ipl": "IPL",
+			"electro": "Electroepilation",
+			"electroAE": "Electroepilation with local anesthesia",
+			"hrt": "Accompanies hormone therapy",
+			"medication": "Prescribes hormone medication"
+		},
+		"offerDetails": {
+			"indication": "Writes referrals (for e.g. hormone therapy)",
+			"therapy": "Provides therapy for trans* individuals",
+			"youthOnly": "Exclusively for children and teenagers",
+			"mastectomy": "Mastectomy",
+			"vaginPI": "Vaginoplasty using penile inversion method",
+			"vaginCombined": "Vaginoplasty using the combined method",
+			"ffs": "Facial feminizing surgery (abbreviation: FFS).",
+			"penoid": "Penoid buildup",
+			"breast": "Breast augmentation",
+			"hyst": "Hysterektomy",
+			"orch": "Orchiectomy",
+			"clitPI": "Clitoris penoid / metoidioplasty",
+			"bodyfem": "Body feminizing surgery",
+			"glottoplasty": "Vocal cord surgery, such as voice feminization",
+			"fms": "Facial Masculinizing Surgeries (Abbreviation: FMS)",
+			"laser": "Epilation with the help of a laser",
+			"ipl": "Epliation by strong light pulses. Not permanent.",
+			"electro": "Permanent epilation by electricity",
+			"electroAE": "Electroepilation with local anesthesia",
+			"hrt": "Medical monitoring of hormone therapy",
+			"medication": "Prescribes medications needed for ongoing hormone therapy"
 		},
 		"subjectMapping": {
-			"therapist": {
-				"therapist": "Psychological Psychotherapist",
-				"psychologist": "Psychiatrist (doctor of psychiatry)",
-				"naturopath": "Alternative practitioner",
-				"other": "Other specialty"
-			}
+			"therapist": "Psychological Psychotherapist",
+			"psychologist": "Psychiatrist (doctor of psychiatry)",
+			"naturopath": "Alternative practitioner",
+			"other": "Other specialty"
 		},
 		"accessibleMapping": {
 			"unknown": "Unknown",
@@ -245,58 +200,23 @@
 		}
 	},
 	"searchFilter": {
-		"categories": "Categories",
-		"delete": "delete",
-		"filter": "Filter",
-		"location": "Location",
-		"more": "More infos",
-		"offers": "Offers",
-		"textSearch": "Text search",
 		"title": "Specific filters",
+		"location": "Location",
+		"delete": "delete",
+		"categories": "Categories",
+		"offers": "Offers",
+		"more": "More infos",
+		"textSearch": "Text search",
+		"filter": "Filter",
 		"textSearchPlaceholder": "Search for names or people"
 	},
 	"entry": {
-		"attributes": "Attributes",
-		"minage": "Minimum age",
 		"offers": "Offers",
-		"specials": "Specials"
+		"attributes": "Attributes",
+		"specials": "Specials",
+		"minage": "Minimum age"
 	},
 	"mouseOverTexts": {
-		"": "All categories of entries",
-		"group": "LGBT+ or trans* groups, associations and Stammtische",
-		"therapist": "Therapists with trans* specific experience",
-		"surveyor": "TSG appraiser",
-		"endocrinologist": "Endocrinologist for hormone therapy",
-		"surgeon": "Surgeons for trans-related surgeries",
-		"logopedics": "Logopedist / speech therapist for voice training",
-		"hairremoval": "Hair removal studios and doctor's offices",
-		"trans": "A group/club primarily for trans people",
-		"regularMeetings": "Meet regularly",
-		"consulting": "Offers counseling for trans* people",
-		"activities": "Offers hobby/free-time activities",
-		"insurancePay": "Health insurance have approved cost coverage here before",
-		"transfriendly": "Good and respectful treatment of trans* people",
-		"hasDoctor": "Is accompanied, or connected to a doctor",
-		"enby": "Provides TSG assessment for non-binary people",
-		"treatsNB": "Treats non-binary people",
-		"remote": "Offers online/telephone appointments",
-		"indication": "Writes referrals (for e.g. hormone therapy)",
-		"therapy": "Provides therapy for trans* individuals",
-		"mastectomy": "Mastectomy",
-		"vaginPI": "Vaginoplasty using penile inversion method",
-		"vaginCombined": "Vaginoplasty using the combined method",
-		"ffs": "Facial feminizing surgery (abbreviation: FFS).",
-		"penoid": "Penoid buildup",
-		"breast": "Breast augmentation",
-		"orch": "Orchiectomy",
-		"clitPI": "Clitoris penoid / metoidioplasty",
-		"bodyfem": "Body feminizing surgery",
-		"glottoplasty": "Vocal cord surgery, such as voice feminization",
-		"fms": "Facial Masculinizing Surgeries (Abbreviation: FMS)",
-		"laser": "Epilation with the help of a laser",
-		"ipl": "Epliation by strong light pulses. Not permanent.",
-		"electro": "Permanent epilation by electricity",
-		"electroAE": "Electroepilation with local anesthesia",
 		"applyFilter": "Appy filter",
 		"proximitySearch": "Locate position",
 		"locationSearchButton": "Search",
@@ -324,17 +244,21 @@
 		"backup": "Download backup file of the database",
 		"deleteUser": "Delete user",
 		"resetPassword": "Reset password",
-		"GP": "General practitioner doctor's office",
-		"gynecologist": "Gynecological doctor's office",
-		"hrt": "Medical monitoring of hormone therapy",
-		"medication": "Prescribes medications needed for ongoing hormone therapy",
-		"transFem": "Friendly and respectful towards trans*feminine people",
-		"transMasc": "Friendly and respectful towards trans*masculine people",
-		"urologist": "Urological doctor's office",
-		"youthOnly": "Exclusively for children and adolescents",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Druckversion mit Abschnittrand und Farbprofil (PDF)",
-		"selfPayedOnly": "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler"
+		"flyerPrint": "Print-ready version with cut-off margin and color profile (PDF)"
+	},
+	"submit": {
+		"title": "New entry - Trans*DB"
+	},
+	"search": {
+		"title": "Search - Trans*DB"
+	},
+	"report": {
+		"title": "Report entry - Trans*DB"
+	},
+	"imprint": {
+		"description": "Imprint address for Trans*DB",
+		"title": "Imprint - Trans*DB"
 	},
 	"faq": {
 		"description": "Answers to frequently asked questions about our website"
@@ -366,30 +290,28 @@
 		"accessibilityUnknown": "Accessibility unknown",
 		"accessible": "Accessible",
 		"notAccessible": "Not accessible",
-		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
-		"submit": "Submit",
 		"specialsInfo": [
 			"This text area is meant for information, which does not fit into any of the other form fields.",
 			"Please do not use it to share opinions or reviews."
-		]
+		],
+		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
+		"submit": "Submit"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",
 		"tooMany": "Too many submissions. Please wait a few minuets before trying again",
-		"unknown": "Unkown Error"
+		"unknown": "Unkown Error",
+		"failedToLoad": "Failed to load",
+		"invalidFilter": "Invalid filter",
+		"entryNotFound": "Entry not found",
+		"reportFailed": "Failed to send report"
 	},
-	"imprint": {
-		"description": "Imprint address for Trans*DB",
-		"title": "Imprint - Trans*DB"
+	"warns": {
+		"reLogin": "Please log in again"
 	},
-	"report": {
-		"title": "Report entry - Trans*DB"
-	},
-	"search": {
-		"title": "Search - Trans*DB"
-	},
-	"submit": {
-		"title": "New entry - Trans*DB"
+	"infos": {
+		"copiedToClipboard": "Text copied to clipboard!",
+		"copiedLinktToClipboard": "Link copied to clipboard!"
 	},
 	"altTexts": {
 		"contribute": "Several hands writing a sheet of paper",

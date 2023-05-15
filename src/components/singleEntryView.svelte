@@ -19,11 +19,11 @@
 		} catch (e) {
 			switch(e.response.status) {
 				case 404: {
-					popupError("Eintrag nicht gefunden");
+					popupError(t("errors.entryNotFound"));
 					break;
 				}
 				default: {
-					popupError(`Unbekannter Fehler (${e.response.status})`)
+					popupError(`${t("errors.unknown")} (${e.response.status})`)
 					break;
 				}	
 			}

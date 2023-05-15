@@ -8,7 +8,8 @@ type EntryMapping = {
 };
 
 const { typeMapping, offerMapping, attributeMapping, academicTitleMapping, subjectMapping } = t("entryMapping") as EntryMapping;
-const {"": _deletedKey, ...typeMappingData} = typeMapping as Record<string, string>;
+const {"": _deletedKey, ..._typeMappingData} = typeMapping as Record<string, string>;
+const typeMappingData = _typeMappingData;
 
 function flipDictionary(dict: Record<string, string>): Record<string, string> {
 	let newDict: Record<string, string> = {};
@@ -58,7 +59,7 @@ const langDef: filterLang.LanguageDefinition = [
 	},
 	
 	{
-		name: "ist",
+		name: "fachgebiet",
 		negationSuffix: "nicht",
 		type: "text",
 		field: "meta.subject",
