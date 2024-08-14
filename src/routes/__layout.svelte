@@ -26,8 +26,7 @@
 		let noTrack = ["/manage", "/login"].includes(path) || Boolean(get(token));
 		
 		if (!noTrack && browser && config.umami_src) {
-			const res = await umami.track();
-			console.log(res)
+			await umami.track();
 		}
 		
 		return {

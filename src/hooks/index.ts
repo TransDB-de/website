@@ -5,7 +5,7 @@ const secret = process.env["CSRF_TOKEN_SECRET"] as string ?? "";
 const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
 
 const prod = process.env["NODE_ENV"] === "production";
-const umamiURL = process.env["UMAMI_SRC"] ? new URL(process.env["UMAMI_SRC"]).host : "";
+const umamiURL = process.env["UMAMI_SRC"] ? new URL(process.env["UMAMI_SRC"]).origin : "";
 const cspConnectSrc = `connect-src 'self' ${process.env["AXIOS_BASE_URL"]} ${umamiURL}`;
 
 const config = {
@@ -30,7 +30,7 @@ export const getSession: GetSession = (request) => {
 			{ expiresIn: secretExpires }
 		);
 	}
-	console.log(config);
+
 	return {
 		csrfToken: csrfToken,
 		...config
