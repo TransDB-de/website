@@ -4,14 +4,12 @@
  * You can also use a `.env.production` file to overwrite the defaults only for production environments.
  */
 let config = {
-	ackee_server: "",
-	ackee_domainId: "",
-	ackee_eventId_distanceSearchCoordinates: "",
-	ackee_eventId_distanceSearchText: "",
-	ackee_eventId_newEntry: "",
-	ackee_eventId_social: "",
-	ackee_ignoreLocalhost: true,
-	ackee_detailed: true,
+	umami_src: "",
+	umami_website_id: "",
+	umami_event_social: "",
+	umami_event_search_text: "",
+	umami_event_search_coords: "",
+	umami_event_new_entry: "",
 	axios_baseURL: "http://localhost:1300",
 	client_filterApplyTimeout: 0.6 * 1000,
 	client_popupLinger: 4.0 * 1000

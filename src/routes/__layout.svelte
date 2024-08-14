@@ -2,10 +2,10 @@
 	import type { Load } from "@sveltejs/kit"
 	
 	import { get } from "svelte/store"
+	import { browser } from "$app/env";
 	
-	import ackee from "$lib/ackee"
 	import { injectSession } from "$lib/axios"
-	import { populateConfig } from "$lib/config"
+	import config, { populateConfig } from "$lib/config"
 	import { token } from "$lib/store"
 	
 	let configLoaded = false;
@@ -25,8 +25,9 @@
 		// also don't track team members
 		let noTrack = ["/manage", "/login"].includes(path) || Boolean(get(token));
 		
-		if (!noTrack) {
-			ackee(path);
+		if (!noTrack && browser && config.umami_src) {
+			const res = await umami.track();
+			console.log(res)
 		}
 		
 		return {
@@ -41,10 +42,22 @@
 	import Header from "$components/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
+	import { dev } from "$app/env";
 	
 	// key which triggers fade transition between pages
 	export let path: string;
+
+	if (dev && browser) {
+		localStorage.setItem("umami.disabled", "1");
+	}
 </script>
+
+<svelte:head>
+	{#if config.umami_src}
+		<script defer src={config.umami_src} data-website-id={config.umami_website_id} data-auto-track="false">
+		</script>
+	{/if}
+</svelte:head>
 
 <div class="app">
 	<Header />

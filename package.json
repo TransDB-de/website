@@ -13,8 +13,8 @@
     "@sveltejs/adapter-auto": "^1.0.0-next.18",
     "@sveltejs/adapter-node": "^1.0.0-next.67",
     "@sveltejs/kit": "^1.0.0-next.260",
-    "@types/ackee-tracker": "^5.0.2",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/umami": "^2.10.0",
     "dotenv": "^10.0.0",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
@@ -29,7 +29,6 @@
   "type": "module",
   "dependencies": {
     "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
-    "ackee-tracker": "^5.1.0",
     "axios": "^0.24.0",
     "jsonwebtoken": "^8.5.1",
     "rehype-external-links": "^1.0.1"

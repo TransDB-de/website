@@ -10,7 +10,7 @@ While this projects source code is public, it is not open source, as it does not
 ## Dependencies
 
 - [SvelteKit](https://kit.svelte.dev/) Front-End Framework for Svelte
-- [Ackee](https://github.com/electerious/ackee-tracker) Privacy conscious tracking software
+- [Umami](https://github.com/umami-software/umami) Privacy conscious tracking software
 - [Axios](https://github.com/axios/axios) HTTP client for Node.js
 - [Sass](https://sass-lang.com/) CSS Preprocessor for DRY css
 - [Pug](https://pugjs.org/) HTML template engine

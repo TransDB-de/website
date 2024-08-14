@@ -4,7 +4,6 @@
 	import DiscordBrandIcon from "$brandIcons/discordBrandIcon.svelte"
 	import WebIcon from "lucide-icons-svelte/globe.svelte"
 	
-	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	
 	import { tick } from "svelte";
@@ -55,7 +54,7 @@
 		
 		console.dir(event.currentTarget)
 		
-		ackee.logEvent(config.ackee_eventId_social, key);
+		umami.track(config.umami_event_social, { link: key });
 	}
 	
 	async function copyToClipboard(e: MouseEvent, string?: string) {

@@ -10,7 +10,6 @@
 	
 	import { typeMappingData, attributeMapping, offerMapping, typeDescriptions, attributeDetails, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
 	import type { Entry } from "$models/entry.model"
-	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	import axios from "axios"
 	import { goto } from "$app/navigation"
@@ -114,7 +113,7 @@
 		loading = false;
 		formElement.reset();
 		
-		ackee.logEvent(config.ackee_eventId_newEntry);
+		umami.track(config.umami_event_new_entry);
 		
 		goto("/submitted");
 	}

@@ -20,16 +20,17 @@ Beachtet auch [Cloudsflares GDPR Compliance](https://www.cloudflare.com/de-de/gd
 
 ## Nutzerstatistiken
 
-Wir verwenden [Ackee](https://ackee.electerious.com/) für Anonyme Nutzerstatistiken.
+Wir verwenden [Umami](https://github.com/umami-software/umami) für Anonyme Nutzerstatistiken.
 Diese Software läuft direkt auf unserem Server und wird nicht extern gehostet.
 
-Ackee speichert unter anderem folgende Daten:
+Umami speichert unter anderem folgende Daten:
 
 * Welchen Browser ihr verwendet
+* Aus welchem Land ihr die Webseite aufruft
 * Referral Link (von wo aus ihr auf unsere Website gekommen seid)
-* Art eures Gerätes
+* Art und Betriebssystem eures Gerätes
 
-Die Daten, welche von Ackee gespeichert werden, sind nicht personenbezogen.  
+Die Daten, welche von Umami gespeichert werden, sind nicht personenbezogen.  
 Sie werden ausschließlich verwendet, um unsere Seite nutzerfreundlicher gestalten zu können.
 
 Es wird keine IP Adresse gespeichert.

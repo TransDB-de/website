@@ -7,8 +7,7 @@
 	import externalLinks from "$content/external-links.json"
 	
 	import NavLink from "$components/elements/navLink.svelte"
-	
-	import * as ackee from "$lib/ackee"
+
 	import config from "$lib/config"
 	
 	const linkOptions = {
@@ -19,7 +18,8 @@
 	}
 	
 	function linkClicked(event: MouseEvent) {
-		ackee.logEvent(config.ackee_eventId_social, (event.currentTarget as HTMLLinkElement).href);
+		const link = (event.currentTarget as HTMLLinkElement).href;
+		umami.track(config.umami_event_social, { link });
 	}
 </script>
 
