@@ -54,7 +54,7 @@ const config = {
 				"default-src": ["none"],
 				"font-src": ["self"],
 				"img-src": ["self"],
-				"script-src": ["self"],
+				"script-src": ["self", process.env["UMAMI_SRC"] ? new URL(process.env["UMAMI_SRC"]).host : ""],
 				"style-src": ["self", "unsafe-inline"]
 			} : {}
 		}
