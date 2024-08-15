@@ -26,7 +26,8 @@
 		let noTrack = ["/manage", "/login"].includes(path) || Boolean(get(token));
 		
 		if (!noTrack && browser && config.umami_src) {
-			await umami.track();
+			// use custom url beacuse we only want path name without query params
+			await umami.track((props) => ({...props, url: path}));
 		}
 		
 		return {
