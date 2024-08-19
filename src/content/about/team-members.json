@@ -21,7 +21,7 @@
 			},
 			{
 				"type": "web",
-				"link": "https://hamsterlabs.de"
+				"link": "https://lmke.dev"
 			},
 			{
 				"type": "instagram",
@@ -50,22 +50,6 @@
 			{
 				"type": "instagram",
 				"link": "https://www.instagram.com/electronicblueberry/"
-			}
-		]
-	},
-	{
-		"name": "Lola",
-		"title": "Content-Moderator*in",
-		"imageURL": "/img/team/lola.png",
-		"socials": [
-			{
-				"type": "discord",
-				"link": null,
-				"text": "Nekolumbus#6673"
-			},
-			{
-				"type": "instagram",
-				"link": "https://www.instagram.com/panikisnotavailable2/"
 			}
 		]
 	}
