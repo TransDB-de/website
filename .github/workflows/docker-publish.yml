@@ -4,7 +4,7 @@ on:
   push:
     # Publish `main` as Docker `latest` image.
     branches:
-      - main
+      - master
 
 jobs:
   # Push image to GitHub Packages.
