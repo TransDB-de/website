@@ -47,6 +47,15 @@ For these cases, the entry exists once for each appropriate category.
 The information of the entries is submitted by the users and translation of dynamic user generated data is currently not possible.  
 Also, since Trans*DB is currently primarily designed for entries and users from Germany, corresponding information is also from Germany and thus mostly in German.
 
+## Do you make the data available for download or provide an API?
+
+No, we have deliberately decided against this. 
+Automated processing by third parties has great potential for abuse. There is a risk that the institutions would then want to have their entries removed due to misuse, automated processing and/or spam. This would not help anyone.
+
+## Do you establish contacts to facilities?
+
+Please do not send us any requests that you are looking for a therapy place, for example. You can find the right facilities for you on our website and contact them yourself. We do not contact them for you.
+
 ## Do you accept donations?
 
 With pleasure. We manage our donations transparently via [Open Collective](https://opencollective.com/transdb).
