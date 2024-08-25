@@ -19,7 +19,8 @@ const config = {
 	umami_event_new_entry: process.env["UMAMI_EVENT_NEW_ENTRY"],
 	axios_baseURL: process.env["AXIOS_BASE_URL"],
 	client_filterApplyTimeout: process.env["FILTER_APPLY_TIMEOUT"] ? parseFloat(process.env["FILTER_APPLY_TIMEOUT"]) * 1000: undefined,
-	client_popupLinger: process.env["POPUP_LINGER"] ? parseFloat(process.env["POPUP_LINGER"]) * 1000 : undefined
+	client_popupLinger: process.env["POPUP_LINGER"] ? parseFloat(process.env["POPUP_LINGER"]) * 1000 : undefined,
+	cms_url: process.env["CMS_URL"]
 }
 
 export const getSession: GetSession = (request) => {

@@ -12,7 +12,8 @@ let config = {
 	umami_event_new_entry: "",
 	axios_baseURL: "http://localhost:1300",
 	client_filterApplyTimeout: 0.6 * 1000,
-	client_popupLinger: 4.0 * 1000
+	client_popupLinger: 4.0 * 1000,
+	cms_url: ""
 };
 
 export default config;
