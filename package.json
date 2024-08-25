@@ -15,9 +15,9 @@
     "@sveltejs/adapter-node": "1.0.0-next.78",
     "@sveltejs/kit": "1.0.0-next.350",
     "@sveltejs/vite-plugin-svelte": "1.0.0-next.49",
-    "@types/ackee-tracker": "^5.0.2",
     "@types/cookie": "^0.5.1",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/umami": "^2.10.0",
     "dotenv": "^10.0.0",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
@@ -32,7 +32,6 @@
   "dependencies": {
     "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
     "accept-language-parser": "^1.5.0",
-    "ackee-tracker": "^5.1.0",
     "axios": "^0.24.0",
     "cookie": "^0.5.0",
     "jsonwebtoken": "^8.5.1",

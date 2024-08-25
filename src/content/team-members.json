@@ -52,21 +52,5 @@
 				"link": "https://www.instagram.com/electronicblueberry/"
 			}
 		]
-	},
-	{
-		"name": "Lola",
-		"title": "contentMod",
-		"imageURL": "/img/team/lola.png",
-		"socials": [
-			{
-				"type": "discord",
-				"link": null,
-				"text": "Nekolumbus#6673"
-			},
-			{
-				"type": "instagram",
-				"link": "https://www.instagram.com/panikisnotavailable2/"
-			}
-		]
 	}
 ]

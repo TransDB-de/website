@@ -10,7 +10,6 @@
 	import { page, navigating } from "$app/stores"
 	import { goto } from "$app/navigation"
 	
-	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	
 	import { isKey, getGeoLocation } from "$lib/utils"
@@ -68,7 +67,7 @@
 				$page.url.searchParams.delete("lat");
 				$page.url.searchParams.delete("long");
 				
-				ackee.logEvent(config.ackee_eventId_distanceSearchText);
+				umami.track(config.umami_event_search_text);
 				
 				break;
 			}
@@ -88,7 +87,7 @@
 					return;
 				}
 				
-				ackee.logEvent(config.ackee_eventId_distanceSearchCoordinates);
+				umami.track(config.umami_event_search_coords);
 				
 				break;
 			}

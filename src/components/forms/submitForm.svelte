@@ -9,7 +9,6 @@
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte"
 	
 	import type { Entry } from "$models/entry.model"
-	import * as ackee from "$lib/ackee"
 	import config from "$lib/config"
 	import { t, tEntry } from "$lib/localization"
 	import axios from "axios"
@@ -114,7 +113,7 @@
 		loading = false;
 		formElement.reset();
 		
-		ackee.logEvent(config.ackee_eventId_newEntry);
+		umami.track(config.umami_event_new_entry);
 		
 		goto("/submitted");
 	}

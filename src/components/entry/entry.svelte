@@ -30,7 +30,7 @@
 	$: isWithSubject = subjectMapping[entry.type];
 	$: subjectName = isWithSubject ? tEntry("subjectMapping")[entry.meta.subject] : null;
 	$: website = entry.website ? new URL(entry.website).host : null;
-	$: possibleDuplicateLink = entry.possibleDuplicate && $userdata.admin ? "/manage/database?id=" + entry.possibleDuplicate : "/entry/" + entry.possibleDuplicate
+	$: possibleDuplicateLink = entry.possibleDuplicate && $userdata?.admin ? "/manage/database?id=" + entry.possibleDuplicate : "/entry/" + entry.possibleDuplicate
 	
 	let addressText = "";
 	$: {
