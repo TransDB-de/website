@@ -196,7 +196,7 @@
 		</p>
 	{/if}
 
-	<Input bind:value={ newEntry.meta.specials } on:focus={() => specialsFocus(true)} on:blur={() => specialsFocus(false)} type="text" placeholder="Besondere Angebote / Besonderheiten" maxlength="280" />
+	<Input bind:value={ newEntry.meta.specials } on:focus={() => specialsFocus(true)} on:blur={() => specialsFocus(false)} type="text" placeholder={ t("submitForm.specials") } maxlength="280" />
 	
 	{#if newEntry.type === "group"}
 		

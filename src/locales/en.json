@@ -295,7 +295,8 @@
 			"Please do not use it to share opinions or reviews."
 		],
 		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
-		"submit": "Submit"
+		"submit": "Submit",
+		"specials": "Additional offers / special features"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",

@@ -295,7 +295,8 @@
 			"Bitte keine Meinungen oder Erfahrungsberichte hier eintragen."
 		],
 		"info": "Bitte beachte, dass dein Eintrag von unserem Team überprüft wird bevor er auf der Seite zu finden ist.",
-		"submit": "Abschicken"
+		"submit": "Abschicken",
+		"specials": "Besondere Angebote / Besonderheiten"
 	},
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",
