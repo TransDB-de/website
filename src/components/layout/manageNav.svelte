@@ -9,6 +9,7 @@
 	
 	import { userdata, token } from "$lib/store"
 	import { browser } from "$app/env"
+	import config from "$lib/config";
 	
 	const linkOptions = {
 		shadow: false,
@@ -19,10 +20,12 @@
 	
 	let username: string = "Account";
 	let admin: boolean = false;
+	let userId: string = "";
 	$: {
 		if (browser && $userdata) {
 			username = $userdata.username;
 			admin = $userdata.admin;
+			userId = $userdata.id;
 		}
 	}
 	
@@ -46,10 +49,10 @@
 		{/if}
 	</nav>
 	<span class="account">
-		<Button light on:click={ () => goto("/manage/account") }>
+		<a class="light" href={config.cms_url + "/admin/users/" + userId} target="_blank">
 			<SettingsIcon class="settings-icon" size="28px"/>
 			{ username }
-		</Button>
+		</a>
 		
 		<Button iconOnly light color="red" on:click={ logout }>
 			<LogOutIcon class="logout-icon"/>
@@ -59,6 +62,7 @@
 
 <style lang="scss">
 	@import "../../scss/mixins";
+	@import "../../scss/button";
 	@import "../../scss/shadows";
 	
 	.manage-nav {
@@ -90,6 +94,11 @@
 			
 			@include media-mobile {
 				justify-content: center;
+			}
+
+			a {
+				@include button;
+				text-decoration: none;
 			}
 		}
 		

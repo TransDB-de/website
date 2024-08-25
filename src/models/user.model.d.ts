@@ -1,14 +1,10 @@
-export interface User {
-	_id ?: string;
-	username: string,
-	email ?: string,
-	registerDate: string,
-	lastLogin: null | Date,
-	admin: boolean,
-	password ?: string,
+export interface CMSUser {
+	id: string;
+	username: string;
+	admin: boolean;
 }
 
 export interface LoginResponse {
-	user: User,
+	user: CMSUser,
 	token: string
 }

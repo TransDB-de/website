@@ -1,12 +1,12 @@
 import { readable, writable } from "svelte/store"
 import { browser } from '$app/env'
-import type { User } from "$models/user.model"
+import type { CMSUser } from "$models/user.model"
 import axios from "axios";
 
 let defaultUserData = browser ? JSON.parse(localStorage.getItem("userdata")) : null;
 let defaultToken = browser ? localStorage.getItem("token") : null;
 
-export let userdata = writable<User>(defaultUserData);
+export let userdata = writable<CMSUser>(defaultUserData);
 export let token = writable<string>(defaultToken);
 
 if (browser) {

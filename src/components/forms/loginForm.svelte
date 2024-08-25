@@ -22,7 +22,7 @@
 		loading = true;
 		
 		try {
-			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("users/me/login", login)).data;
+			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("access/login", login)).data;
 			
 			$token = loginResponse.token;
 			$userdata = loginResponse.user;
@@ -57,7 +57,7 @@
 <Form on:submit={ submit } bind:this={ formElement }>
 	<h1> Anmeldung für Teammitglieder </h1>
 	
-	<Input bind:value={ login.username } placeholder="Benutzername" required minlength="4" maxlength="16" />
+	<Input bind:value={ login.username } placeholder="E-Mail" required minlength="4" maxlength="16" />
 	<Input bind:value={ login.password } type="password" placeholder="Passwort" required minlength="8" maxlength="1024" />
 	
 	<Button { loading }> Anmelden </Button>
