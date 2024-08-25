@@ -1,6 +1,12 @@
 import { getValueByPath } from "./utils"
-import type translationMapping from "../locales/de.json"
+import translationMapping from "../locales/de.json"
+import translationEN from "../locales/en.json"
 import type { FlattenObjectKeys, NestedDict } from "./utils"
+
+const availableTranslations = {
+	de: translationMapping,
+	en: translationEN
+}
 
 export const localeMappings = {
 	de: "Deutsch",
@@ -10,7 +16,7 @@ export const localeMappings = {
 export let currentLocale = "de";
 export const locales: string[] = Object.keys(localeMappings);
 
-let translation: any = null;
+let translation: any = availableTranslations.de;
 
 /**
  * Init localization with preferred language and dynamically import locale file
@@ -23,7 +29,7 @@ export async function initLocalization(session: any) {
 		currentLocale = preferredLang;
 	}
 	
-	translation = await import(`../locales/${preferredLang}.json`);
+	translation = availableTranslations[currentLocale];
 }
 
 export function setLocale(newLocale: string) {
