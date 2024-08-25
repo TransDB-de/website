@@ -208,7 +208,7 @@
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
 					             value={ attribute }
-					             title={ tEntry("attributeDetails")[selectedType][attribute] }>
+					             title={ tEntry("attributeDetails")[attribute] }>
 						{ tEntry("attributeMapping")[attribute] }
 					</TagCheckbox>
 				{/each}

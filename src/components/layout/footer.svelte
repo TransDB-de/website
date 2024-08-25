@@ -25,18 +25,20 @@
 	}
 </script>
 
-<div class="footer">
+<footer>
 	
-	<LocaleSwitcher />
+	<section>
+		<LocaleSwitcher />
+	</section>
 
-	<div>
+	<nav>
 		<NavLink {...linkOptions} href="/imprint">{ t("footer.imprint") }</NavLink>
 		<NavLink {...linkOptions} href="/privacy">{ t("footer.privacy") }</NavLink>
 		<NavLink {...linkOptions} href="/about">{ t("footer.aboutUs") }</NavLink>
 		<NavLink {...linkOptions} href="/faq">FAQ</NavLink>
-	</div>
+	</nav>
 	
-	<div class="low-hover-bar">
+	<section>
 		<a href={externalLinks.social.instagram} target="_blank" rel="noopener" title={ t("footer.instagramPlaceholder") } on:click={ linkClicked }>
 			<InstagramBrandIcon />
 		</a>
@@ -49,59 +51,66 @@
 		<a href={externalLinks.donation} target="_blank" rel="noopener" title={ t("footer.openCollectivePlaceholder") }>
 			<OpenCollectiveBrandIcon />
 		</a>
-	</div>
+	</section>
 	
-</div>
+</footer>
 
 <style lang="scss">
 	@import "../../scss/mixins";
 	
-	.footer {
-		display: flex;
-		justify-content: space-around;
+	footer {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
 		padding: 20px;
 		margin-top: auto;
 		background-color: var(--color-background-dimmed);
 		width: 100%;
 		text-align: center;
 		
-		div {
+		nav, section {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			gap: 10px;
-			
-			&.low-hover-bar {
-				a:after {
-					bottom: -6px;
-				}
+		}
+
+		nav {
+			justify-content: center;
+		}
+
+		section {
+			a:after {
+				bottom: -6px;
+			}
+
+			&:last-child {
+				justify-content: end;
 			}
 		}
 	}
 	
 	@include media-mobile {
-		.footer {
-			flex-direction: column;
+		footer {
+			grid-template-columns: 1fr;
 			gap: 20px;
 			
-			div {
-				flex-wrap: wrap;
-				
-				&:first-child {
-					flex-wrap: wrap;
-					justify-content: center;
-				}
-				
+			section, nav {
+				justify-content: center;
+
 				&:last-child {
 					justify-content: center;
 				}
+			}
+
+			nav {
+				flex-wrap: wrap;
 			}
 		}
 	}
 	
 	@include media-mobile-small {
-		div {
-			&:first-child {
+		footer {
+			nav {
 				flex-direction: column;
 			}
 		}

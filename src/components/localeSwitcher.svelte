@@ -29,6 +29,7 @@
 		align-items: center;
 		position: relative;
 		border: none;
+		user-select: none;
 
 		select {
 			all: unset;
