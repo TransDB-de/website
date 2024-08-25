@@ -45,7 +45,6 @@
 		
 		{#if admin}
 			<NavLink {...linkOptions} href="/manage/database"> Datenbank </NavLink>
-			<NavLink {...linkOptions} href="/manage/users"> Benutzer </NavLink>
 		{/if}
 	</nav>
 	<span class="account">
