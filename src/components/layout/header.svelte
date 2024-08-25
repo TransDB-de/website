@@ -7,6 +7,7 @@
 	import { page } from "$app/stores"
 	
 	import { token } from "$lib/store"
+	import { t } from "$lib/localization"
 	
 	let expand = false;
 	let navbar;
@@ -53,15 +54,15 @@
 		<h1 class="title-mobile" on:click={() => goto("/")} > TransDB.de </h1>
 		
 		<nav on:click={ toggleNav }>
-			<NavLink href="/" exact={ true }> Startseite </NavLink>
-			<NavLink href="/search"> Suche </NavLink>
+			<NavLink href="/" exact={ true }> { t("header.homepage") } </NavLink>
+			<NavLink href="/search"> { t("header.search") } </NavLink>
 			<NavLink href="/faq"> FAQ </NavLink>
 			
 			{#if $token}
 				<NavLink href="/manage"> Management </NavLink>
 			{/if}
 			
-			<NavLink href="/submit"> Neuer Eintrag </NavLink>
+			<NavLink href="/submit"> { t("header.newEntry") } </NavLink>
 		</nav>
 		
 		<span on:click={ toggleNav } class="mobileNav">
@@ -71,16 +72,16 @@
 	
 	<h1 class="title" on:click={() => goto("/search")} style="--opacity: { opacity }"> Trans*DB </h1>
 	
-	<h2 class="subtitle" style="--opacity: { opacity }"> Die Suchmaschine für trans* relevante Angebote </h2>
+	<h2 class="subtitle" style="--opacity: { opacity }"> { t("header.subtitle") } </h2>
 	
 	<SearchBar style="--opacity: { opacity }"/>
 	
 </div>
 
 <style lang="scss">
-	@import "../scss/shadows";
-	@import "../scss/lengths";
-	@import "../scss/mixins";
+	@import "../../scss/shadows";
+	@import "../../scss/lengths";
+	@import "../../scss/mixins";
 	
 	$background-img-width: 1625px;
 	$header-height-expanded: 325px;

@@ -4,7 +4,7 @@
 	import { popupOk, popupError } from "$components/popup.svelte"
 	import type { Entry } from "$models/entry.model"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { t } from "$lib/localization"
 	import { createEventDispatcher } from "svelte"
 
 	import axios from "axios"
@@ -28,6 +28,6 @@
 	}
 </script>
 
-<Button light iconOnly color="edge-highlight" title={ mouseOverTexts["approveEntry"] } on:click={ approve } { loading }>
+<Button light iconOnly color="edge-highlight" title={ t("mouseOverTexts.approveEntry") } on:click={ approve } { loading }>
 	<CheckCircleIcon />
 </Button>

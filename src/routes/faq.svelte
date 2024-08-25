@@ -1,16 +1,29 @@
+<script lang="ts" context="module">
+	import { loadContents } from "$lib/loadContents";
+	
+	export async function load() {
+		const props = await loadContents({
+			name: "FAQContent",
+			path: "faq"
+		});
+		
+		return { props };
+	}
+</script>
+
 <script lang="ts">
-	import FAQContent from "$content/faq.md";
+	export let FAQContent;
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>
 	<title>FAQ - Trans*DB</title>
-	<meta name="description" content="Antworten auf häufig gestellte Fragen rund um unsere Website.">
+	<meta name="description" content={ t("faq.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		FAQContent
-</template>
+<div class="content">
+	<svelte:component this={FAQContent} />
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

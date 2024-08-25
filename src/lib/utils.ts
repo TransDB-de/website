@@ -53,19 +53,6 @@ export function parseValidationErrors(errors: ApiValidationError[]): ValidationE
 }
 
 /**
- * Wrapper for Object.entries, which can accept undefined objects
- * @param obj object to parse
- * @returns key, value pair array
- */
-export function getEntries<T = any>(obj?: Object): [string, T][] {
-	if (obj) {
-		return Object.entries(obj);
-	} else {
-		return [];
-	}
-}
-
-/**
  * Clamps a value to specified ran
  * @param val value to clamp
  * @param min lower clamp
@@ -179,3 +166,22 @@ export function random(): number {
 	var x = Math.sin(_s++) * 10000;
 	return x - Math.floor(x);
 }
+
+/**
+ * Get a value from a nested object by path
+ * @param object Source object
+ * @param path Path to desired value
+ * @returns selected value
+ */
+export function getValueByPath(object: any, path: string): any {
+	return path.split(".").reduce((a, b) => a[b], object);
+}
+
+export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> = Key extends string
+	? T[Key] extends Record<string, unknown>
+		? `${Key}.${FlattenObjectKeys<T[Key]>}` : `${Key}`
+	: never;
+
+export type NestedDict = {
+	[key: string]: string | NestedDict;
+};

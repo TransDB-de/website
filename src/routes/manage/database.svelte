@@ -4,12 +4,11 @@
 	import EntryCollection from "$components/entryCollection.svelte"
 </script>
 
-<template lang="pug">
-	div.database
-		DatabaseFilter
-		DatabaseHelpAndDownload
-		EntryCollection(type="database")
-</template>
+<div class="database">
+	<DatabaseFilter />
+	<DatabaseHelpAndDownload />
+	<EntryCollection type="database" />
+</div>
 
 <style lang="scss">
 	@import "../../scss/lengths";

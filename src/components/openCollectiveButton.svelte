@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { t } from "$lib/localization"
+
 	export let href = "";
 </script>
 
 <a {href} target="_blank" rel="noopener">
-	<img src="/img/open-collective.svg" alt="open collective logo" /> Unterstütze uns auf Open Collective
+	<img src="/img/open-collective.svg" alt={ t("openCollectiveButton.alt") } /> { t("openCollectiveButton.text") }
 </a>
 
 <style lang="scss">

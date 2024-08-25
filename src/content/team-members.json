@@ -1,13 +1,13 @@
 [
 	{
 		"name": "Malin",
-		"title": "Projektmanager*in",
+		"title": "projectManager",
 		"imageURL": "/img/team/malin.png",
 		"socials": []
 	},
 	{
 		"name": "Lena",
-		"title": "Software-Entwickler*in",
+		"title": "developer",
 		"imageURL": "/img/team/lena.png",
 		"socials": [
 			{
@@ -31,7 +31,7 @@
 	},
 	{
 		"name": "Laila",
-		"title": "Software-Entwickler*in",
+		"title": "developer",
 		"imageURL": "/img/team/laila.png",
 		"socials": [
 			{

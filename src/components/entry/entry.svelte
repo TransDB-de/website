@@ -1,10 +1,10 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
-	import { subjectMapping, typeMapping, offerMapping, attributeMapping, academicTitleMapping } from "$lib/entryMappings"
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { academicTitleMapping } from "$lib/entryMappings"
 	
 	import { goto } from "$app/navigation"
 	import { userdata } from "$lib/store"
+	import { t, tEntry } from "$lib/localization"
 	
 	import Tag from "$components/elements/tag.svelte"
 	import EdgeButton from "$components/elements/edgeButton.svelte"
@@ -24,9 +24,11 @@
 	import AlertTriangleIcon from "lucide-icons-svelte/alertTriangle.svelte"
 	
 	export let entry: Entry = null;
-	
+
+	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings"
+
 	$: isWithSubject = subjectMapping[entry.type];
-	$: subjectName = isWithSubject ? subjectMapping[entry.type][entry.meta.subject] : null;
+	$: subjectName = isWithSubject ? tEntry("subjectMapping")[entry.meta.subject] : null;
 	$: website = entry.website ? new URL(entry.website).host : null;
 	$: possibleDuplicateLink = entry.possibleDuplicate && $userdata?.admin ? "/manage/database?id=" + entry.possibleDuplicate : "/entry/" + entry.possibleDuplicate
 	
@@ -48,7 +50,7 @@
 			navigator.share({ url });
 		} else {
 			navigator.clipboard.writeText(window.location.origin + url);
-			popupOk("Link in die Zwischenablage kopiert!");
+			popupOk(t("errors.copiedLinktToClipboard"));
 		}
 	}
 </script>
@@ -59,9 +61,9 @@
 			<h1> { entry.name } </h1>
 			
 			{#if entry.accessible === "yes"}
-				<span class="special-tag green" title={ mouseOverTexts["barrierFree"] }> Barrierefrei </span>
+				<span class="special-tag green" title={ t("mouseOverTexts.barrierFree") }> { t("entryMapping.accessibleMapping.yes") } </span>
 			{:else if entry.accessible === "no"}
-				<span class="special-tag orange" title={ mouseOverTexts["notBarrierFree"] }> Nicht Barrierefrei </span>
+				<span class="special-tag orange" title={ t("mouseOverTexts.notBarrierFree") }> { t("entryMapping.accessibleMapping.no") } </span>
 			{/if}
 		</div>
 		
@@ -69,11 +71,11 @@
 			{#if isWithSubject}
 				<b> { subjectName } </b>
 			{:else}
-				<b title={ mouseOverTexts[entry.type] }> { typeMapping[entry.type] } </b>
+				<b> { tEntry("typeMapping")[entry.type] } </b>
 			{/if}
 			
 			{#if entry.firstName || entry.lastName}
-				<span> { academicTitleMapping[entry.academicTitle] ?? "" } { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
+				<span> { tEntry("academicTitleMapping")[entry.academicTitle] ?? "" } { entry.firstName ?? "" } { entry.lastName ?? "" } </span>
 			{/if}
 		</p>
 		
@@ -104,40 +106,36 @@
 		
 		{#if entry.meta.offers && entry.meta.offers.length > 0 && entry.type in offerMapping}
 			<p class="small-gap small-margin">
-				<b> Angebote: </b>
+				<b> { t("entry.offers") }: </b>
 				{#each entry.meta.offers as offer}
-					{#if offer in offerMapping[entry.type]}
-						<Tag title={ mouseOverTexts[offer] }> { offerMapping[entry.type][offer] } </Tag>
-					{/if}
+					<Tag title={ tEntry("offerDetails")[offer] }> { tEntry("offerMapping")[offer] } </Tag>
 				{/each}
 			</p>
 		{/if}
 		
 		{#if entry.meta.attributes && entry.meta.attributes.length > 0 && entry.type in attributeMapping}
 			<p class="small-gap small-margin">
-				<b> Eigenschaften: </b>
+				<b> { t("entry.attributes") }: </b>
 				{#each entry.meta.attributes as attribute}
-					{#if attribute in attributeMapping[entry.type]}
-						<Tag title={ mouseOverTexts[attribute] }> { attributeMapping[entry.type][attribute] } </Tag>
-					{/if}
+					<Tag title={ tEntry("attributeDetails")[attribute] }> { tEntry("attributeMapping")[attribute] } </Tag>
 				{/each}
 			</p>
 		{/if}
 		
 		{#if entry.meta.specials}
 			<p class="small-gap small-margin">
-				<b> Besonderheiten: </b> { entry.meta.specials }
+				<b> { t("entry.specials") }: </b> { entry.meta.specials }
 			</p>
 		{/if}
 		
 		{#if entry.meta.minAge}
 			<p class="small-gap small-margin">
-				<b> Mindestalter: </b> { entry.meta.minAge }
+				<b> { t("entry.minage") }: </b> { entry.meta.minAge }
 			</p>
 		{/if}
 		
 		{#if entry.distance}
-			<p class="small-gap distance" title={ mouseOverTexts["distance"] }>
+			<p class="small-gap distance" title={ t("mouseOverTexts.distance") }>
 				<NavigationIcon /> <b> { entry.distance.toFixed(1) } km - { entry.address.city } </b> 
 			</p>
 		{/if}
@@ -158,11 +156,11 @@
 				<BlocklistEntryButton on:remove { entry } />
 				<DeleteEntryButton on:remove { entry } />
 			{:else}
-				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ mouseOverTexts["report"] }>
+				<EdgeButton on:click={() => goto("/report?id=" + entry._id)} title={ t("mouseOverTexts.report") }>
 					<EditIcon />
 				</EdgeButton>
 				
-				<EdgeButton on:click={share} title={ mouseOverTexts["share"] }>
+				<EdgeButton on:click={share} title={ t("mouseOverTexts.share") }>
 					<Share2Icon />
 				</EdgeButton>
 			{/if}

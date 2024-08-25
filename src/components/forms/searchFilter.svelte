@@ -10,21 +10,21 @@
 	
 	import Button from "$components/elements/button.svelte"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
-	import { attributeMapping, offerMapping, typeMapping } from "$lib/entryMappings"
-	import { getEntries, clamp, timeout } from "$lib/utils"
+	import { clamp, timeout } from "$lib/utils"
 	import { isMobile, currentLocation } from "$lib/store"
 	import config from "$lib/config"
+	import { t, tEntry } from "$lib/localization"
 	
 	import { browser } from "$app/env"
 	import { navigating, page } from "$app/stores"
 	import { goto } from "$app/navigation"
 	import { onDestroy } from "svelte"
+
+	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 	
 	let scrollY = 0;
 	let expand = true;
 	
-	let location = null;
 	let selectedType = $page.url.searchParams.get("type") ?? "";
 	let selectedOffers = $page.url.searchParams.getAll("offers");
 	let selectedAttributes = $page.url.searchParams.getAll("attributes");
@@ -36,9 +36,9 @@
 	
 	// change counter
 	let changeId = 0;
-	
+
 	// Automatic filter change handler
-	// Applies filters after a short delay, so that the changes don't stack
+	// Applies filters after a short delay, so that the changes don"t stack
 	async function filtersUpdated() {
 		// mobile changes are applied manually to save data
 		if ($isMobile) {
@@ -149,89 +149,86 @@
 	<div class="bar mobile" class:expand on:click={ toggleExpand }>
 		<ChevronRightIcon class="chevron" size="24px" />
 		
-		<span class="title"> Spezifische Filter </span>
+		<span class="title"> { t("searchFilter.title") } </span>
 	</div>
 	
 	<div class="filter" class:expand>
 		{#if $currentLocation}
 			<p class="sub-title">
-				Standort
-				<Button light class="reset-location" on:click={resetLocation}> löschen </Button>
+				{ t("searchFilter.location") }
+				<Button light class="reset-location" on:click={resetLocation}> { t("searchFilter.delete") } </Button>
 			</p>
 			
-			<p class="location" title={ mouseOverTexts[location] }>
+			<p class="location" title={ t("mouseOverTexts.location") }>
 				<MapPinIcon />
 				<span> { $currentLocation } </span>
 			</p>
 		{/if}
 		
-		<p class="sub-title"> Kategorien </p>
+		<p class="sub-title"> { t("searchFilter.categories") } </p>
 		
-		<Select class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
-			{#each Object.entries(typeMapping) as [key, value]}
-				<option name="type"
-				        value={ key }
-				        title={ mouseOverTexts[key] }>
-					{ value }
+		<Select name="type" class="mobile" bind:value={ selectedType } on:change={ typeUpdated }>
+			{#each typeMapping as type}
+				<option value={ type }>
+					{ tEntry("typeMapping")[type] }
 				</option>
 			{/each}
 		</Select>
 		
 		<fieldset class="desktop radio-buttons" on:input={ typeUpdated }>
-			{#each Object.entries(typeMapping) as [key, value]}
+			{#each typeMapping as type}
 				<RadioButton name="type"
 				             bind:group={ selectedType }
-				             value={ key }
-				             title={ mouseOverTexts[key] }>
-					{ value }
+				             value={ type } >
+					{ tEntry("typeMapping")[type] }
 				</RadioButton>
 			{/each}
 		</fieldset>
 		
 		{#if offerMapping[selectedType]}
-			<p class="sub-title"> Angebote </p>
+			<p class="sub-title"> { t("searchFilter.offers") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
-				{#each getEntries(offerMapping[selectedType]) as [key, value]}
+				{#each offerMapping[selectedType] as offer}
 					<TagCheckbox name="offers"
 					             bind:group={ selectedOffers }
-					             value={ key }
-					             title={ mouseOverTexts[key] }>
-						{ value }
+					             value={ offer }
+					             title={ tEntry("offerDetails")[offer] }>
+						{ tEntry("offerMapping")[offer] }
 					</TagCheckbox>
 				{/each}
 			</fieldset>
 		{/if}
 		
 		{#if attributeMapping[selectedType]}
-			<p class="sub-title"> Weitere Infos </p>
+			<p class="sub-title"> { t("searchFilter.more") } </p>
 			
 			<fieldset class="tags" on:input={ filtersUpdated }>
-				{#each getEntries(attributeMapping[selectedType]) as [key, value]}
+				{#each attributeMapping[selectedType] as attribute}
 					<TagCheckbox name="attributes"
 					             bind:group={ selectedAttributes }
-					             value={ key }
-					             title={ mouseOverTexts[key] }>
-						{ value }
+					             value={ attribute }
+					             title={ tEntry("attributeDetails")[attribute] }>
+						{ tEntry("attributeMapping")[attribute] }
 					</TagCheckbox>
 				{/each}
 			</fieldset>
 		{/if}
 		
-		<p class="sub-title"> Textsuche </p>
+		<p class="sub-title"> { t("searchFilter.textSearch") } </p>
 		
 		<div class="text-filter">
 			<Input type="text"
 			       bind:value={ textFilter }
 			       on:change={ filtersUpdated }
-			       placeholder="Suche Namen oder Personen"
+			       placeholder={ t("searchFilter.textSearchPlaceholder") }
 			       class="text-input { textFilter ? "has-text" : "" }"
 			       maxlength="120"/>
 			
 			<Button light
 			        iconOnly
 			        on:click={ applyFilters }
-			        title={ mouseOverTexts.filter }
+			        title={ t("mouseOverTexts.filter") }
 			        class="search-button { textFilter ? "" : "collapsed"}">
 				
 				<SearchIcon />
@@ -240,8 +237,8 @@
 		
 		<Button class="mobile filter-button"
 		        on:click={ applyFilters }
-		        title={ mouseOverTexts.filter }>
-			Filtern
+		        title={ t("mouseOverTexts.filter") }>
+			{ t("searchFilter.filter") }
 		</Button>
 		
 	</div>
@@ -341,7 +338,7 @@
 		
 		.sub-title {
 			font-weight: 500;
-			font-family: 'Poppins', sans-serif;
+			font-family: "Poppins", sans-serif;
 			margin: 10px 0 10px 0;
 			font-size: 1.1em;
 			display: flex;

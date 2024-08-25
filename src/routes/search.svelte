@@ -1,20 +1,21 @@
 <script lang="ts">
 	import SearchFilter from "$components/forms/searchFilter.svelte"
 	import EntryCollection from "$components/entryCollection.svelte"
+	import { t } from "$lib/localization"
 </script>
 
 <svelte:head>
-	<title>Suche - Trans*DB</title>
+	<title>{ t("search.title") }</title>
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.search-page
-		SearchFilter.filter
-		
-		div.entries
-			EntryCollection(type="search")
-</template>
+<div class="search-page">
+	<SearchFilter />
+	
+	<div class="entries">
+		<EntryCollection type="search"/>
+	</div>
+</div>
 
 <style lang="scss">
 	@import "../scss/mixins";

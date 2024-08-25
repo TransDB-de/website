@@ -9,7 +9,7 @@
 	import { browser } from "$app/env"
 	
 	import { currentLocation } from "$lib/store"
-	import { filters } from "$lib/filterLang"
+	import { filters } from "$lib/filterLang.client"
 	import { removeFromArray, timeout } from "$lib/utils"
 	import type { EntriesResponse, Entry } from "$models/entry.model"
 	
@@ -17,6 +17,7 @@
 	import EditableEntry from "$components/database/editableEntry.svelte"
 	import LoadMore from "$components/elements/loadMore.svelte"
 	import { popupError } from "$components/popup.svelte"
+    import { t } from "$lib/localization";
 	
 	/** Type of EntryCollection */
 	export let type: "search" | "unapproved" | "database" | "blocklist" = "search";
@@ -120,9 +121,9 @@
 			res = await fetchFunction(url);
 		} catch(e) {
 			if (e.response) {
-				popupError(`Fehler beim Laden (${e.response.status})`);
+				popupError(`${t("errors.failedToLoad")} (${e.response.status})`);
 			} else {
-				popupError(`Unbekannter Fehler`);
+				popupError(t("errors.unknown"));
 				console.error(e);
 			}
 			
@@ -152,12 +153,12 @@
 		} catch(e) {
 			switch(e.response.status) {
 				case 422: {
-					popupError(`Ungültige Filter`);
+					popupError(t("errors.invalidFilter"));
 					break;
 				}
 				
 				default: {
-					popupError(`Fehler beim Laden (${e.response.status})`);
+					popupError(`${t("errors.failedToLoad")} (${e.response.status})`);
 					break;
 				}
 			}

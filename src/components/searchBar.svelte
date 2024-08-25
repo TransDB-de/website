@@ -2,7 +2,6 @@
 	import { onDestroy } from "svelte"
 	
 	import Button from "$components/elements/button.svelte"
-	import mouseOverTexts from "$lib/mouseOverTexts"
 	
 	import SearchIcon from "lucide-icons-svelte/search.svelte"
 	import MapPinIcon from "lucide-icons-svelte/mapPin.svelte"
@@ -14,11 +13,15 @@
 	import config from "$lib/config"
 	
 	import { isKey, getGeoLocation } from "$lib/utils"
+	import { t } from "$lib/localization"
+  import { popupError } from "./popup.svelte";
 	
 	export let hide = false;
 	let locationText = $page.url.searchParams.get("location") ?? "";
 	
-	$: isTextSearch = locationText.trim().length > 0
+	$: isTextSearch = locationText.trim().length > 0;
+
+	let loading = false;
 	
 	// React on navigating. Delete locationText if query is empty (resetted by user)
 	const unsubscribeNav = navigating.subscribe((nav) => {
@@ -51,6 +54,8 @@
 	}
 	
 	async function search(type) {
+		loading = true;
+
 		switch(type) {
 			case "text": {
 				if (locationText.length < 2) {
@@ -77,6 +82,8 @@
 				} catch(e) {
 					console.log(e);
 					resetLocaction();
+					loading = false;
+					popupError(t("errors.locationAccessDenied"))
 					return;
 				}
 				
@@ -86,6 +93,9 @@
 			}
 		}
 		
+
+		loading = false;
+
 		await goto("/search?" + $page.url.searchParams.toString(), { keepfocus: true });
 	}
 </script>
@@ -93,27 +103,28 @@
 <div class="search-bar" class:hide class:isTextSearch {...$$props}>
 	
 	<input type=text
-	       title={ mouseOverTexts.locationSearch }
-	       placeholder={ $isMobile ? "Suche nach PLZ oder Ort" : "Suche nach Postleitzahl oder Ort" }
-	       on:keydown={ isKey("Enter", () => search("text")) }
-	       bind:value={ locationText }
+			title={ t("mouseOverTexts.locationSearch") }
+			placeholder={ $isMobile ? t("header.searchBar.placeholderMobile") : t("header.searchBar.placeholder") }
+			on:keydown={ isKey("Enter", () => search("text")) }
+			bind:value={ locationText }
 	/>
 	
 	<Button light
-	        on:click={ () => search("distance") }
-	        title={ mouseOverTexts.proximitySearch }
-	        class="proximity-button">
-		
+			on:click={ () => search("distance") }
+			title={ t("mouseOverTexts.proximitySearch") }
+			class="proximity-button"
+			{loading}
+	>
 		<MapPinIcon />
-		<span class="hide-on-mobile">Umgebungssuche</span>
+		<span class="hide-on-mobile">{ t("header.searchBar.areaSearch") }</span>
 	</Button>
 	
 	<Button light
-	        iconOnly
-	        on:click={ () => search("text") }
-	        title={ mouseOverTexts.locationSearchButton }
-	        class="search-button {isTextSearch ? "" : "collapsed"}">
-		
+			iconOnly
+			on:click={ () => search("text") }
+			title={ t("mouseOverTexts.locationSearchButton") }
+			class="search-button {isTextSearch ? "" : "collapsed"}"
+	>	
 		<SearchIcon />
 	</Button>
 	

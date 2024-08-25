@@ -58,8 +58,8 @@
 </div>
 
 <style lang="scss">
-	@import "../scss/mixins";
-	@import "../scss/shadows";
+	@import "../../scss/mixins";
+	@import "../../scss/shadows";
 	
 	.manage-nav {
 		background-color: var(--color-background-bright);

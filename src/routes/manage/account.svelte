@@ -4,15 +4,16 @@
 	import UpdateEmailForm from "$components/forms/updateEmailForm.svelte"
 	
 	import { userdata } from "$lib/store"
+	import { t } from "$lib/localization"
 </script>
 
-<template lang="pug">
-	div.content
-		h1 Account Einstellungen
-		UpdatePasswordForm
-		UpdateUsernameForm(username="{$userdata?.username}")
-		UpdateEmailForm(email="{$userdata?.email}")
-</template>
+<div class="content">
+	<h1>{ t("manage.accountSettings") }</h1>
+	
+	<UpdatePasswordForm />
+	<UpdateUsernameForm username={$userdata?.username} />
+	<UpdateEmailForm email={$userdata?.email} />
+</div>
 
 <style lang="scss">
 	@import "../../scss/content-small";

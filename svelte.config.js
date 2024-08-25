@@ -4,6 +4,7 @@ import preprocess from "svelte-preprocess"
 import { resolve } from "path"
 import adapter from "@sveltejs/adapter-node"
 import dotenv from "dotenv"
+import dynamicImportVars from "@rollup/plugin-dynamic-import-vars"
 
 await dotenv.config();
 const prod = process.env["NODE_ENV"] === "production";
@@ -21,17 +22,16 @@ const config = {
 			out: "build"
 		}),
 		
+		alias: {
+			$assets: "./src/assets",
+					$content: './src/content',
+					$components: './src/components',
+					$models: './src/models',
+					$formElements: './src/components/forms/elements',
+					$brandIcons: './src/components/icons/brands'
+		},
+
 		vite: {
-			resolve: {
-				alias: {
-					$assets: resolve("./src/assets"),
-					$content: resolve('./src/content'),
-					$components: resolve('./src/components'),
-					$models: resolve('./src/models'),
-					$formElements: resolve('./src/components/forms/elements'),
-					$brandIcons: resolve('./src/components/icons/brands')
-				},
-			},
 			envPrefix: "CLIENT_",
 			plugins: [
 				// Source: https://github.com/sveltejs/kit/issues/3030
@@ -42,7 +42,12 @@ const config = {
 							;(await import('dotenv')).config()
 						}
 					}
-				})()
+				})(),
+				dynamicImportVars({
+					include: [
+						"./src/lib/loadContents.js"
+					]
+				})
 			]
 		},
 		

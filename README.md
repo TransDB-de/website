@@ -13,7 +13,6 @@ While this projects source code is public, it is not open source, as it does not
 - [Umami](https://github.com/umami-software/umami) Privacy conscious tracking software
 - [Axios](https://github.com/axios/axios) HTTP client for Node.js
 - [Sass](https://sass-lang.com/) CSS Preprocessor for DRY css
-- [Pug](https://pugjs.org/) HTML template engine
 - [LucideIconsSvelte](https://www.npmjs.com/package/lucide-icons-svelte) Svelte Port of Lucide Icons
 - [FilterLang](https://github.com/TransDB-de/filter-lang) Domain specific filter language
 

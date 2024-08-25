@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	
-	import { typeMapping, offerMapping, attributeMapping, accessibleMapping, subjectMapping, academicTitleMapping } from "$lib/entryMappings"
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { academicTitleMapping } from "$lib/entryMappings"
 	
 	import axios from "axios"
 	import { getObjChanges, replaceFields } from "$lib/utils"
+	import { t } from "$lib/localization"
 	import { popupOk, popupError } from "$components/popup.svelte"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
@@ -21,6 +21,8 @@
 	import XIcon from "lucide-icons-svelte/x.svelte"
 	import LinkIcon from "lucide-icons-svelte/link.svelte"
 	
+	const { subjectMapping, typeMapping, offerMapping, attributeMapping, accessibleMapping } = t("entryMapping");
+
 	let edit: boolean = false;
 	export let entry: Entry = null;
 	
@@ -156,7 +158,7 @@
 					<AlertTriangleIcon /> <span>Keine Geo-Daten vorhanden!</span>
 				
 					{#if edit && geoNotRefetched}
-						<Button light title={mouseOverTexts["reloadGeo"]} on:click={ refetchGeo }>Erneut versuchen</Button>
+						<Button light title={ t("mouseOverTexts.reloadGeo") } on:click={ refetchGeo }>Erneut versuchen</Button>
 					{/if}
 				</span>
 			{/if}
@@ -207,12 +209,12 @@
 	
 	<div class="controls">
 		{#if edit}
-			<Button light iconOnly on:click={ saveChanges }  title={ mouseOverTexts["saveChanges"] }> <SaveIcon /> </Button>
-			<Button light iconOnly on:click={ cancelEdit } title={ mouseOverTexts["discardChanges"] }> <XIcon /> </Button>
+			<Button light iconOnly on:click={ saveChanges }  title={ t("mouseOverTexts.saveChanges") }> <SaveIcon /> </Button>
+			<Button light iconOnly on:click={ cancelEdit } title={ t("mouseOverTexts.discardChanges") }> <XIcon /> </Button>
 			<DeleteEntryButton on:remove { entry } />
 		{:else}
-			<Button light iconOnly on:click={ editEntry } title={ mouseOverTexts["editEntry"] }> <EditIcon /> </Button>
-			<Button light iconOnly on:click={ copyLink } title={ mouseOverTexts["copyLink"] }> <LinkIcon /> </Button>
+			<Button light iconOnly on:click={ editEntry } title={ t("mouseOverTexts.editEntry") }> <EditIcon /> </Button>
+			<Button light iconOnly on:click={ copyLink } title={ t("mouseOverTexts.copyLink") }> <LinkIcon /> </Button>
 		{/if}
 	</div>
 </div>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ManageNav from "$components/manageNav.svelte";
+	import ManageNav from "$components/layout/manageNav.svelte";
 </script>
 
 <svelte:head>

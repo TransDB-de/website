@@ -6,6 +6,7 @@
 	
 	import { injectSession } from "$lib/axios"
 	import config, { populateConfig } from "$lib/config"
+	import { initLocalization } from "$lib/localization"
 	import { token } from "$lib/store"
 	
 	let configLoaded = false;
@@ -14,10 +15,11 @@
 	export const load: Load = async ({ url, session }) => {
 		if (!configLoaded) {
 			populateConfig(session);
-			injectSession(session);
-			
 			configLoaded = true;
 		}
+		
+		injectSession(session);
+		await initLocalization(session);
 		
 		let path = url.pathname.startsWith("/manage") ? "/manage" : url.pathname;
 		
@@ -38,8 +40,8 @@
 
 <script lang="ts">
 	import { fade } from "svelte/transition"
-	import Footer from "$components/footer.svelte"
-	import Header from "$components/header.svelte"
+	import Footer from "$components/layout/footer.svelte"
+	import Header from "$components/layout/header.svelte"
 	import Popup from "$components/popup.svelte"
 	import Confirm from "$components/confirm.svelte"
 	import { dev } from "$app/env";

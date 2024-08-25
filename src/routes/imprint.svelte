@@ -1,20 +1,40 @@
+<script lang="ts" context="module">
+	import { loadContents } from "$lib/loadContents";
+	
+	export async function load() {
+		const props = await loadContents({
+			name: "ImprintContent",
+			path: "imprint"
+		}, {
+			name: "DisclaimerContent",
+			path: "disclaimer"
+		}, {
+			name: "EntryRemovalContent",
+			path: "entry-removal-policy"
+		});
+		
+		return { props };
+	}
+</script>
+
 <script lang="ts">
-	import ImprintContent from "$content/imprint.md"
-	import DisclaimerContent from "$content/disclaimer.md"
-	import EntryRemovalContent from "$content/entry-removal-policy.md"
+	import { t } from "$lib/localization"
+
+	export let ImprintContent;
+	export let DisclaimerContent;
+	export let EntryRemovalContent;
 </script>
 
 <svelte:head>
-	<title>Impressum - Trans*DB</title>
-	<meta name="description" content="Impressumsanschrift für Trans*DB.">
+	<title>{ t("imprint.title") }</title>
+	<meta name="description" content={ t("imprint.description") }>
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		ImprintContent
-		DisclaimerContent
-		EntryRemovalContent
-</template>
+<div class="content">
+	<svelte:component this={ImprintContent}/>
+	<svelte:component this={DisclaimerContent}/>
+	<svelte:component this={EntryRemovalContent}/>
+</div>
 
 <style lang="scss">
 	@import "../scss/content";

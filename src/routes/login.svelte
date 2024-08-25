@@ -7,10 +7,9 @@
 	<meta name="robots" content="noindex">
 </svelte:head>
 
-<template lang="pug">
-	div.content
-		LoginForm
-</template>
+<div class="content">
+	<LoginForm />
+</div>
 
 <style lang="scss">
 	@import "../scss/content-small";

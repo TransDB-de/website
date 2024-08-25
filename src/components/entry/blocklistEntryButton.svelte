@@ -5,7 +5,7 @@
 	import { confirm } from "$components/confirm.svelte"
 	import type { Entry } from "$models/entry.model"
 	
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { t } from "$lib/localization"
 	import { createEventDispatcher } from "svelte"
 
 	import axios from "axios"
@@ -32,6 +32,6 @@
 	}
 </script>
 
-<Button light iconOnly title={ mouseOverTexts["blocklistEntry"] } on:click={ blocklist } { loading }>
+<Button light iconOnly title={ t("mouseOverTexts.blocklistEntry") } on:click={ blocklist } { loading }>
 	<FlagIcon />
 </Button>

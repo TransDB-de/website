@@ -1,11 +1,10 @@
 <script lang="ts">
-	import DatabaseHelpContent from "$content/database-help.md"
+	import DatabaseHelpContent from "$content/de/database-help.md"
 </script>
 
-<template lang="pug">
-	div.content
-		DatabaseHelpContent
-</template>
+<div class="content">
+	<DatabaseHelpContent />
+</div>
 
 <style lang="scss">
 	@import "../../scss/content";

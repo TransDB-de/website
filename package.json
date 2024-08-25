@@ -10,26 +10,30 @@
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
-    "@sveltejs/adapter-auto": "^1.0.0-next.18",
-    "@sveltejs/adapter-node": "^1.0.0-next.67",
-    "@sveltejs/kit": "^1.0.0-next.260",
+    "@rollup/plugin-dynamic-import-vars": "2.0.1",
+    "@sveltejs/adapter-auto": "1.0.0-next.50",
+    "@sveltejs/adapter-node": "1.0.0-next.78",
+    "@sveltejs/kit": "1.0.0-next.350",
+    "@sveltejs/vite-plugin-svelte": "1.0.0-next.49",
+    "@types/cookie": "^0.5.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/umami": "^2.10.0",
     "dotenv": "^10.0.0",
     "lucide-icons-svelte": "^0.1.0",
     "mdsvex": "^0.9.8",
-    "pug": "^3.0.2",
     "sass": "^1.49.7",
-    "svelte": "^3.46.4",
-    "svelte-check": "^2.4.3",
-    "svelte-preprocess": "^4.10.2",
+    "svelte": "3.46.4",
+    "svelte-check": "2.4.3",
+    "svelte-preprocess": "4.10.2",
     "tslib": "^2.3.1",
     "typescript": "^4.5.5"
   },
   "type": "module",
   "dependencies": {
     "@transdb-de/filter-lang": "github:transdb-de/filter-lang",
+    "accept-language-parser": "^1.5.0",
     "axios": "^0.24.0",
+    "cookie": "^0.5.0",
     "jsonwebtoken": "^8.5.1",
     "rehype-external-links": "^1.0.1"
   }

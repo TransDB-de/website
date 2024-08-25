@@ -1,7 +1,7 @@
 <script lang="ts">
 	import HelpCircleIcon from "lucide-icons-svelte/helpCircle.svelte"
 	import DownloadIcon from "lucide-icons-svelte/download.svelte"
-	import mouseOverTexts from "$lib/mouseOverTexts"
+	import { t } from "$lib/localization"
 	
 	import Button from "$components/elements/button.svelte"
 	import { popupError } from "$components/popup.svelte";
@@ -34,11 +34,11 @@
 </script>
 
 <div>
-	<a class="light" title={ mouseOverTexts["databaseHelp"] } href="/manage/help">
+	<a class="light" title={ t("mouseOverTexts.databaseHelp") } href="/manage/help">
 		<HelpCircleIcon /> Hilfe
 	</a>
 	
-	<Button light title={ mouseOverTexts["backup"] } on:click={ downloadBackup }>
+	<Button light title={ t("mouseOverTexts.backup") } on:click={ downloadBackup }>
 		<DownloadIcon /> Backup herunterladen
 	</Button>
 </div>
