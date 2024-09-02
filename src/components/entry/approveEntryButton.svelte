@@ -1,19 +1,19 @@
 <script lang="ts">
-	import Button from "$components/elements/button.svelte"
-	import CheckCircleIcon from "lucide-icons-svelte/checkCircle.svelte"
-	import { popupOk, popupError } from "$components/popup.svelte"
-	import type { Entry } from "$models/entry.model"
-	
-	import { t } from "$lib/localization"
-	import { createEventDispatcher } from "svelte"
+	import Button from "$components/elements/button.svelte";
+	import CheckCircleIcon from "lucide-icons-svelte/checkCircle.svelte";
+	import { popupOk, popupError } from "$components/popup.svelte";
+	import type { Entry } from "$models/entry.model";
 
-	import axios from "axios"
-	
+	import { t } from "$lib/localization";
+	import { createEventDispatcher } from "svelte";
+
+	import axios from "axios";
+
 	const dispatch = createEventDispatcher();
 
 	export let entry: Entry;
 	let loading = false;
-	
+
 	async function approve() {
 		loading = true;
 		try {
@@ -23,11 +23,18 @@
 		} catch (e) {
 			popupError("Fehler beim Freischalten");
 		}
-		
+
 		loading = false;
 	}
 </script>
 
-<Button light iconOnly color="edge-highlight" title={ t("mouseOverTexts.approveEntry") } on:click={ approve } { loading }>
+<Button
+	light
+	iconOnly
+	color="edge-highlight"
+	title={t("mouseOverTexts.approveEntry")}
+	on:click={approve}
+	{loading}
+>
 	<CheckCircleIcon />
 </Button>

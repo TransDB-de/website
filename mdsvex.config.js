@@ -1,16 +1,14 @@
-import rehypeExternalLinks from "rehype-external-links"
+import rehypeExternalLinks from "rehype-external-links";
 
 const config = {
 	extensions: [".svelte.md", ".md", ".svx"],
 
 	smartypants: {
-		dashes: "oldschool",
+		dashes: "oldschool"
 	},
 
 	remarkPlugins: [],
-	rehypePlugins: [
-		[rehypeExternalLinks, { rel: ["noopener"] }]
-	],
+	rehypePlugins: [[rehypeExternalLinks, { rel: ["noopener"] }]]
 };
 
 export default config;

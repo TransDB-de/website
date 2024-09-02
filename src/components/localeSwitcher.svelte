@@ -1,9 +1,9 @@
 <script lang="ts">
-	import TranslateIcon from "lucide-icons-svelte/languages.svelte"
-	import {locales, currentLocale, localeMappings, setLocale} from "$lib/localization"
-	
+	import TranslateIcon from "lucide-icons-svelte/languages.svelte";
+	import { locales, currentLocale, localeMappings, setLocale } from "$lib/localization";
+
 	function onSelectChanged(event: Event) {
-		const target = event.target as HTMLSelectElement
+		const target = event.target as HTMLSelectElement;
 		setLocale(target.value);
 	}
 </script>
@@ -14,7 +14,7 @@
 	<select value={currentLocale} on:change={onSelectChanged}>
 		{#each locales as locale}
 			<option value={locale} selected={currentLocale === locale}>
-				{ localeMappings[locale] }
+				{localeMappings[locale]}
 			</option>
 		{/each}
 	</select>

@@ -11,8 +11,8 @@ To make this possible, all requests to our website go through Cloudflare.
 Cloudflare logs data in this process to verify if an attack is taking place.
 This data includes but is not limited to:
 
-* Your IP address
-* Type of your browser and device
+- Your IP address
+- Type of your browser and device
 
 You can find out exactly what data is collected and stored in the [Cloudflare "Privacy Policy"](https://www.cloudflare.com/de-de/privacypolicy/).
 
@@ -25,9 +25,9 @@ This software runs directly on our server and is not hosted externally.
 
 Ackee stores the following data among others:
 
-* What browser you are using
-* Referral link (from where you came to our website)
-* Type of your device
+- What browser you are using
+- Referral link (from where you came to our website)
+- Type of your device
 
 The data stored by Ackee is not personally identifiable.  
 It is only used to make our site more user friendly.

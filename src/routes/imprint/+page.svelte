@@ -1,8 +1,10 @@
 <script lang="ts" context="module">
-	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+	throw new Error(
+		"@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)"
+	);
 
 	// import { loadContents } from "$lib/loadContents";
-	// 
+	//
 	// export async function load() {
 	// 	const props = await loadContents({
 	// 		name: "ImprintContent",
@@ -14,15 +16,17 @@
 	// 		name: "EntryRemovalContent",
 	// 		path: "entry-removal-policy"
 	// 	});
-	// 	
+	//
 	// 	return { props };
 	// }
 </script>
 
 <script lang="ts">
-	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+	throw new Error(
+		"@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)"
+	);
 
-	import { t } from "$lib/localization"
+	import { t } from "$lib/localization";
 
 	export let ImprintContent;
 	export let DisclaimerContent;
@@ -30,14 +34,14 @@
 </script>
 
 <svelte:head>
-	<title>{ t("imprint.title") }</title>
-	<meta name="description" content={ t("imprint.description") }>
+	<title>{t("imprint.title")}</title>
+	<meta name="description" content={t("imprint.description")} />
 </svelte:head>
 
 <div class="content">
-	<svelte:component this={ImprintContent}/>
-	<svelte:component this={DisclaimerContent}/>
-	<svelte:component this={EntryRemovalContent}/>
+	<svelte:component this={ImprintContent} />
+	<svelte:component this={DisclaimerContent} />
+	<svelte:component this={EntryRemovalContent} />
 </div>
 
 <style lang="scss">

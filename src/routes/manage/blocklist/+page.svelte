@@ -1,6 +1,6 @@
 <script lang="ts">
-	import DatabaseFilter from "$components/database/databaseFilter.svelte"
-	import EntryCollection from "$components/entryCollection.svelte"
+	import DatabaseFilter from "$components/database/databaseFilter.svelte";
+	import EntryCollection from "$components/entryCollection.svelte";
 </script>
 
 <div>
@@ -10,7 +10,7 @@
 
 <style lang="scss">
 	@import "../../scss/lengths";
-	
+
 	div {
 		display: flex;
 		flex-direction: column;

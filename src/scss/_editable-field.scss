@@ -1,7 +1,7 @@
 @import "input";
 
 @mixin editable-field($element) {
-	font-family: 'Fira Sans', sans-serif;
+	font-family: "Fira Sans", sans-serif;
 	font-weight: 400;
 	font-size: 0.8em;
 	color: var(--color-edge-dimmed);
@@ -11,7 +11,7 @@
 	gap: 2px;
 	line-height: 0.95em;
 	width: 100%;
-	
+
 	* {
 		font-size: 1.25em;
 		font-weight: 500;
@@ -25,12 +25,12 @@
 		display: inline-flex;
 		align-items: center;
 	}
-	
+
 	#{$element} {
 		@include input-box;
 		padding: 0 2px;
 	}
-	
+
 	span {
 		padding: 0 5px;
 		overflow: hidden;

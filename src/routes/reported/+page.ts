@@ -1,4 +1,3 @@
-
 import { loadContents } from "$lib/loadContents";
 
 export async function load() {
@@ -6,6 +5,6 @@ export async function load() {
 		name: "ReportedContent",
 		path: "reported"
 	});
-	
+
 	return props;
 }

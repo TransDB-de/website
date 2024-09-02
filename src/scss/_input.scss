@@ -6,20 +6,20 @@
 	border: 2px solid var(--color-rim);
 	padding: 6px 12px;
 	transition: 0.2s ease border;
-	
-	&:hover{
+
+	&:hover {
 		border: 2px solid var(--color-rim-hover);
 	}
-	
+
 	&:focus {
 		border: 2px solid var(--color-rim-active);
 	}
 }
 
 @mixin input-font {
-	font-family: 'Poppins', sans-serif;
+	font-family: "Poppins", sans-serif;
 	font-size: 18px;
-	
+
 	&::placeholder {
 		color: var(--color-edge-dimmed);
 		font-weight: 500;
@@ -43,7 +43,7 @@
 	width: 28px;
 	background-color: var(--color-background-bright);
 	transition: 0.2s ease border;
-	
+
 	&:after {
 		content: "";
 		position: absolute;
@@ -56,12 +56,13 @@
 		border-width: 0 3px 3px 0;
 		transform: scale(0) rotate(20deg);
 	}
-	
+
 	label:hover input ~ & {
 		border: 2px solid var(--color-rim-hover);
 	}
-	
-	input:checked ~ &:after, &.selected:after {
+
+	input:checked ~ &:after,
+	&.selected:after {
 		transform: scale(1) rotate(45deg);
 	}
 }

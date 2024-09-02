@@ -11,8 +11,8 @@ Um dies zu ermöglichen, gehen alle Anfragen an unsere Website durch Cloudflare.
 Cloudflare loggt hierbei Daten, um zu überprüfen ob ein Angriff stattfindet.
 Diese Daten beinhalten unter anderem:
 
-* Eure IP Adresse
-* Art eures Browsers und Geräts
+- Eure IP Adresse
+- Art eures Browsers und Geräts
 
 Welche Daten genau erhoben und gespeichert werden, könnt ihr der [Cloudflare "Privacy Policy"](https://www.cloudflare.com/de-de/privacypolicy/) entnehmen.
 
@@ -25,10 +25,10 @@ Diese Software läuft direkt auf unserem Server und wird nicht extern gehostet.
 
 Umami speichert unter anderem folgende Daten:
 
-* Welchen Browser ihr verwendet
-* Aus welchem Land ihr die Webseite aufruft
-* Referral Link (von wo aus ihr auf unsere Website gekommen seid)
-* Art und Betriebssystem eures Gerätes
+- Welchen Browser ihr verwendet
+- Aus welchem Land ihr die Webseite aufruft
+- Referral Link (von wo aus ihr auf unsere Website gekommen seid)
+- Art und Betriebssystem eures Gerätes
 
 Die Daten, welche von Umami gespeichert werden, sind nicht personenbezogen.  
 Sie werden ausschließlich verwendet, um unsere Seite nutzerfreundlicher gestalten zu können.
@@ -37,7 +37,7 @@ Es wird keine IP Adresse gespeichert.
 
 ## Logging
 
-Es ist im Falle einer Störung möglich, dass das Error-Logging unseres Servers die IP Adresse, die Art des Browsers, und die Art des Gerätes von Besucher*innen vorübergehend speichert.
+Es ist im Falle einer Störung möglich, dass das Error-Logging unseres Servers die IP Adresse, die Art des Browsers, und die Art des Gerätes von Besucher\*innen vorübergehend speichert.
 Diese Daten werden nicht öffentlich gemacht.
 
 Sie werden ausschließlich verwendet, um besser nachvollziehen zu können wie es zu den Störungen kam und werden gelöscht sobald die Störung behoben wurde.
@@ -55,7 +55,7 @@ Es wird also keine Verbindung zu den Google Servern hergestellt und keine Daten 
 ## Standort
 
 TransDB.de verwendet eine Standort-Suche, bei welcher ihr euren Standort entweder manuell eingeben oder eure Koordinaten vom Browser erfassen lassen könnt.
-Dieses Feature ist optional und wird nicht ohne Zustimmung der Benutzer*innen ausgeführt.
+Dieses Feature ist optional und wird nicht ohne Zustimmung der Benutzer\*innen ausgeführt.
 
 Die Standort-Suche erfolgt über unseren eigenen Server. Euer Standort wird also nicht mit Drittanbietern geteilt.
 Unsere Standort-Suche speichert den gesuchten Standort nicht ab.

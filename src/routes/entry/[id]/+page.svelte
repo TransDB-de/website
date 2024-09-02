@@ -1,12 +1,12 @@
 <script lang="ts">
 	import SingleEntryView from "$components/singleEntryView.svelte";
-	
-	import { page } from "$app/stores"
+
+	import { page } from "$app/stores";
 </script>
 
 <svelte:head>
 	<title>Trans*DB</title>
-	<meta name="robots" content="noindex">
+	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <div class="content">

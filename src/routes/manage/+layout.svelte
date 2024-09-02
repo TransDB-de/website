@@ -4,11 +4,9 @@
 
 <svelte:head>
 	<title>Management - Trans*DB</title>
-	<meta name="robots" content="noindex">
+	<meta name="robots" content="noindex" />
 </svelte:head>
-
 
 <ManageNav />
 
 <slot />
-

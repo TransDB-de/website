@@ -26,14 +26,16 @@
 
 @mixin underline($width: 0, $height: 3px, $offset: 0, $color: white, $shadow: none, $opacity: 0) {
 	position: relative;
-	
+
 	&:after {
 		width: $width;
 		border-bottom: $height solid $color;
 		bottom: $offset;
 		box-shadow: $shadow;
-		
-		transition: 0.2s ease width, 0.2s ease opacity;
+
+		transition:
+			0.2s ease width,
+			0.2s ease opacity;
 		display: inline-block;
 		content: "";
 		opacity: 0;

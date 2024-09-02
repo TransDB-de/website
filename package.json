@@ -25,6 +25,8 @@
 	"type": "module",
 	"dependencies": {
 		"@sveltejs/adapter-node": "^5.2.2",
+		"@transdb-de/filter-lang": "github:transdb-de/filter-lang",
+		"axios": "^1.7.7",
 		"mdsvex": "^0.12.3",
 		"rehype-external-links": "^3.0.0"
 	}
