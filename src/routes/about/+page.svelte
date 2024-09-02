@@ -1,32 +1,36 @@
 <script lang="ts" context="module">
-	import { loadContents } from "$lib/loadContents";
-	
-	export async function load() {
-		const props = await loadContents({
-			name: "DonationContent",
-			path: "about/donation"
-		}, {
-			name: "TechStackContent",
-			path: "about/tech-stack"
-		}, {
-			name: "NonCommercial",
-			path: "about/non-commercial"
-		}, {
-			name: "SocialMedia",
-			path: "about/social-media"
-		}, {
-			name: "MotivationContent",
-			path: "about/motivation"
-		}, {
-			name: "FlyerContent",
-			path: "about/flyer"
-		});
-		
-		return { props };
-	}
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+
+	// import { loadContents } from "$lib/loadContents";
+	// 
+	// export async function load() {
+	// 	const props = await loadContents({
+	// 		name: "DonationContent",
+	// 		path: "about/donation"
+	// 	}, {
+	// 		name: "TechStackContent",
+	// 		path: "about/tech-stack"
+	// 	}, {
+	// 		name: "NonCommercial",
+	// 		path: "about/non-commercial"
+	// 	}, {
+	// 		name: "SocialMedia",
+	// 		path: "about/social-media"
+	// 	}, {
+	// 		name: "MotivationContent",
+	// 		path: "about/motivation"
+	// 	}, {
+	// 		name: "FlyerContent",
+	// 		path: "about/flyer"
+	// 	});
+	// 	
+	// 	return { props };
+	// }
 </script>
 
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import MemberCardCollection from "$components/memberCardCollection.svelte"
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte"
 	import TechStack from "$components/techStack.svelte"

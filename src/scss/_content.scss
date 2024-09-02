@@ -1,0 +1,77 @@
+@import "lengths";
+@import "mixins";
+
+.content {
+	max-width: $conent-max-width;
+	display: flex;
+	flex-direction: column;
+	
+	padding: 30px;
+	width: 100%;
+	
+	@include media-mobile {
+		padding: 20px;
+	}
+	
+	@include media-mobile-small {
+		padding: 10px;
+	}
+	
+	& > :global(p),
+	& > :global(form > p) {
+		margin: 0 0 20px 15px;
+		line-height: 1.3;
+		
+		@include media-mobile {
+			margin: 0 0 20px 8px;
+		}
+	}
+	
+	@mixin heading($tag) {
+		& > :global( #{$tag} ), & > :global(form > #{$tag}) {
+			margin: 20px 0 20px 0;
+			@content;
+		}
+	}
+	
+	@include heading(h1) {
+		font-size: 1.8em;
+		border-bottom: 2px solid var(--color-edge-light);
+	}
+	
+	@include heading(h2) {
+		font-size: 1.5em;
+		border-bottom: 2px solid var(--color-edge-light);
+	}
+	
+	@include heading(h3) {
+		font-size: 1.2em;
+		margin-top: 0;
+	}
+	
+	& > :global(a),
+	& > :global(p > a) ,
+	& > :global(form > p > a) {
+		color: var(--color-edge-highlight);
+		text-decoration: none;
+		border-bottom: 2px solid var(--color-edge-highlight);
+	}
+	
+	& > :global(ul) {
+		margin: 0 0 20px;
+	}
+	
+	& > :global(p > code) {
+		padding: 2px 4px;
+		border-radius: 4px;
+		background-color: var(--color-background-important-text);
+	}
+
+	:global(.info) {
+		margin: 0 0 10px 0;
+		background-color: var(--color-special-warn)!important;
+		border-radius: 3px;
+		padding: 5px 10px;
+		font-size: 0.9em;
+	}
+}

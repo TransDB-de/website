@@ -1,23 +1,27 @@
 <script lang="ts" context="module">
-	import { loadContents } from "$lib/loadContents";
-	
-	export async function load() {
-		const props = await loadContents({
-			name: "Section1",
-			path: "index/section-1"
-		}, {
-			name: "Section2",
-			path: "index/section-2"
-		}, {
-			name: "Section3",
-			path: "index/section-3"
-		});
-		
-		return { props };
-	}
+	throw new Error("@migration task: Check code was safely removed (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292722)");
+
+	// import { loadContents } from "$lib/loadContents";
+	// 
+	// export async function load() {
+	// 	const props = await loadContents({
+	// 		name: "Section1",
+	// 		path: "index/section-1"
+	// 	}, {
+	// 		name: "Section2",
+	// 		path: "index/section-2"
+	// 	}, {
+	// 		name: "Section3",
+	// 		path: "index/section-3"
+	// 	});
+	// 	
+	// 	return { props };
+	// }
 </script>
 
 <script lang="ts">
+	throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
 	import SkylineLeft from "$assets/skyline_left.svg"
 	import SkylineRight from "$assets/skyline_right.svg"
 	import ContributeLarge from "$assets/contribute_large.svg"

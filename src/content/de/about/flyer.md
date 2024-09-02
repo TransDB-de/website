@@ -1,0 +1,2 @@
+Wir haben einen eigenen Flyer gestaltet, damit möglichst viele Menschen von Trans\*DB erfahren und so das Angebot nutzen können.
+Den Flyer stellen wir euch druckfertig zum Download bereit, verteilt ihn gerne in euren Gruppen oder fragt eure Arztpraxis, ob ihr ihn auslegen dürft.
