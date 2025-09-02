@@ -56,7 +56,7 @@
 
 <svelte:head>
 	{#if config.umami_src}
-		<script defer src={config.umami_src} data-website-id={config.umami_website_id} data-auto-track="false" nonce="2nIfswceidNic9zS">
+		<script defer src={config.umami_src} data-website-id={config.umami_website_id} data-auto-track="false">
 		</script>
 	{/if}
 </svelte:head>

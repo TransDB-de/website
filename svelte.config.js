@@ -59,7 +59,7 @@ const config = {
 				"default-src": ["none"],
 				"font-src": ["self"],
 				"img-src": ["self"],
-				"script-src": ["self", "https://umami.transdb.de", "2nIfswceidNic9zS"],
+				"script-src": ["self", "https://umami.transdb.de", "unsafe-inline"],
 				"style-src": ["self", "unsafe-inline"]
 			} : {}
 		}
