@@ -12,23 +12,23 @@ const prod = process.env["NODE_ENV"] === "production";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	extensions: [".svelte", ...mdsvexConfig.extensions],
-	
+
 	// Consult https://github.com/sveltejs/svelte-preprocess
 	// for more information about preprocessors
 	preprocess: [preprocess(), mdsvex(mdsvexConfig)],
-	
+
 	kit: {
 		adapter: adapter({
 			out: "build"
 		}),
-		
+
 		alias: {
 			$assets: "./src/assets",
-					$content: './src/content',
-					$components: './src/components',
-					$models: './src/models',
-					$formElements: './src/components/forms/elements',
-					$brandIcons: './src/components/icons/brands'
+			$content: './src/content',
+			$components: './src/components',
+			$models: './src/models',
+			$formElements: './src/components/forms/elements',
+			$brandIcons: './src/components/icons/brands'
 		},
 
 		vite: {
@@ -39,7 +39,7 @@ const config = {
 					return {
 						name: "load-secrets",
 						configureServer: async () => {
-							;(await import('dotenv')).config()
+							; (await import('dotenv')).config()
 						}
 					}
 				})(),
@@ -50,24 +50,24 @@ const config = {
 				})
 			]
 		},
-		
+
 		csp: {
-			
-			
+
+
 			/** @see hooks `src/hooks/index.ts` for additional directives */
 			directives: prod ? {
 				"default-src": ["none"],
 				"font-src": ["self"],
 				"img-src": ["self"],
-				"script-src": ["self", "https://umami.transdb.de"],
+				"script-src": ["self", "https://umami.transdb.de", "2nIfswceidNic9zS"],
 				"style-src": ["self", "unsafe-inline"]
 			} : {}
 		}
 	},
-	
+
 	onwarn: (warning, handler) => {
 		const { code, message } = warning;
-		
+
 		if (code === "css-unused-selector") {
 			// ignores this warning
 			return;
