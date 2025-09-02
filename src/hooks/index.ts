@@ -8,7 +8,6 @@ const secretExpires = process.env["CSRF_TOKEN_EXPIRES_IN"] as string ?? "";
 
 const prod = process.env["NODE_ENV"] === "production";
 const umamiURL = process.env["UMAMI_SRC"] ? new URL(process.env["UMAMI_SRC"]).origin : "";
-const cspConnectSrc = `connect-src 'self' ${process.env["AXIOS_BASE_URL"]} ${umamiURL}`;
 
 const config = {
 	umami_src: process.env["UMAMI_SRC"],
@@ -50,19 +49,4 @@ export const getSession: GetSession = (request) => {
 		preferredLang,
 		...config,
 	}
-}
-
-export const handle: Handle = async ({ event, resolve }) => {
-	const response = await resolve(event);
-	
-	if (prod) {
-		let csp = response.headers.get("Content-Security-Policy");
-		
-		csp += "; " + cspConnectSrc;
-		
-		// add connect-src to csp header
-		response.headers.set("Content-Security-Policy", csp);
-	}
-	
-	return response;
 }

@@ -50,19 +50,6 @@ const config = {
 				})
 			]
 		},
-
-		csp: {
-
-
-			/** @see hooks `src/hooks/index.ts` for additional directives */
-			directives: prod ? {
-				"default-src": ["none"],
-				"font-src": ["self"],
-				"img-src": ["self"],
-				"script-src": ["self", "https://umami.transdb.de", "unsafe-inline"],
-				"style-src": ["self", "unsafe-inline"]
-			} : {}
-		}
 	},
 
 	onwarn: (warning, handler) => {
