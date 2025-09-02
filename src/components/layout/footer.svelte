@@ -21,7 +21,7 @@
 	
 	function linkClicked(event: MouseEvent) {
 		const link = (event.currentTarget as HTMLLinkElement).href;
-		umami.track(config.umami_event_social, { link });
+		if (umami) umami.track(config.umami_event_social, { link });
 	}
 </script>
 

@@ -56,7 +56,7 @@
 		
 		console.dir(event.currentTarget)
 		
-		umami.track(config.umami_event_social, { link: key });
+		if (umami) umami.track(config.umami_event_social, { link: key });
 	}
 	
 	async function copyToClipboard(e: MouseEvent, string?: string) {

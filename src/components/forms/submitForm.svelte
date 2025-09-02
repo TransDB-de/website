@@ -113,7 +113,7 @@
 		loading = false;
 		formElement.reset();
 		
-		umami.track(config.umami_event_new_entry);
+		if (umami) umami.track(config.umami_event_new_entry);
 		
 		goto("/submitted");
 	}

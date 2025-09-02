@@ -67,7 +67,7 @@
 				$page.url.searchParams.delete("lat");
 				$page.url.searchParams.delete("long");
 				
-				umami.track(config.umami_event_search_text);
+				if (umami) umami.track(config.umami_event_search_text);
 				
 				break;
 			}
@@ -87,7 +87,7 @@
 					return;
 				}
 				
-				umami.track(config.umami_event_search_coords);
+				if (umami) umami.track(config.umami_event_search_coords);
 				
 				break;
 			}
