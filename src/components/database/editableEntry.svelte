@@ -58,7 +58,7 @@
 				return false;
 			}
 			
-			if (field in mapping[type]) {
+			if (mapping[type].includes(field)) {
 				return true;
 			} else {
 				return false;

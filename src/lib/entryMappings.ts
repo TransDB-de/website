@@ -171,10 +171,7 @@ export const academicTitleMapping = [
 
 export function makeTranslatedMapping(mapping: string[] = [], translation: Record<string, string>) {
 	let m = {};
-
-	console.log(mapping);
-	console.log(translation);
-
+	
 	for (const key of mapping) {
 		m[key] = translation[key];
 	}
