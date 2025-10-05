@@ -148,21 +148,33 @@ export const offerMapping = {
 	]
 } as const;
 
-export const subjectMapping = [
-	"therapist",
-	"psychologist",
-	"naturopath",
-	"other"
-] as const;
+export const subjectMapping = {
+	therapist: [
+		"therapist",
+		"psychologist",
+		"naturopath",
+		"other"
+	]
+};
 
 export const accessibleMapping = [
 	"unknown",
 	"yes",
 	"no"
-] as const;
+];
 
 export const academicTitleMapping = [
 	"dr",
 	"prof",
 	"prof_dr"
 ]
+
+export function makeTranslatedMapping(mapping: string[], translation: Record<string, string>) {
+	let m = {};
+
+	for (const key of mapping) {
+		m[key] = translation[key];
+	}
+
+	return m;
+}

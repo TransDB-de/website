@@ -313,7 +313,7 @@
 	},
 	"infos": {
 		"copiedToClipboard": "Text copied to clipboard!",
-		"copiedLinktToClipboard": "Link copied to clipboard!"
+		"copiedLinkToClipboard": "Link copied to clipboard!"
 	},
 	"altTexts": {
 		"contribute": "Several hands writing a sheet of paper",

@@ -50,7 +50,7 @@
 			navigator.share({ url });
 		} else {
 			navigator.clipboard.writeText(window.location.origin + url);
-			popupOk(t("errors.copiedLinktToClipboard"));
+			popupOk(t("infos.copiedLinkToClipboard"));
 		}
 	}
 </script>

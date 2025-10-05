@@ -313,7 +313,7 @@
 	},
 	"infos": {
 		"copiedToClipboard": "Text in die Zwischenablage kopiert!",
-		"copiedLinktToClipboard": "Link in die Zwischenablage kopiert!"
+		"copiedLinkToClipboard": "Link in die Zwischenablage kopiert!"
 	},
 	"altTexts": {
 		"contribute": "Mehrere Hände beschriften einen Papierbogen",

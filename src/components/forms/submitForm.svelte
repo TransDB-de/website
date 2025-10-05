@@ -207,7 +207,7 @@
 		<Select bind:value={ newEntry.meta.subject } required>
 			<option value="" disabled selected> { t("submitForm.selectSubject") } </option>
 			
-			{#each subjectMapping as subject}
+			{#each subjectMapping[newEntry.type] as subject}
 				<option value={ subject }> { tEntry("subjectMapping")[subject] } </option>
 			{/each}
 		</Select>

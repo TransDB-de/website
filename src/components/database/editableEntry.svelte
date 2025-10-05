@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { Entry } from "$models/entry.model"
 	
-	import { academicTitleMapping } from "$lib/entryMappings"
+	import { academicTitleMapping, makeTranslatedMapping, subjectMapping, offerMapping, attributeMapping, accessibleMapping, typeMapping } from "$lib/entryMappings"
 	
 	import axios from "axios"
 	import { getObjChanges, replaceFields } from "$lib/utils"
-	import { t } from "$lib/localization"
+	import { t, tEntry } from "$lib/localization"
 	import { popupOk, popupError } from "$components/popup.svelte"
 	
 	import EditableInputField from "$components/database/editableInputField.svelte"
@@ -21,8 +21,6 @@
 	import XIcon from "lucide-icons-svelte/x.svelte"
 	import LinkIcon from "lucide-icons-svelte/link.svelte"
 	
-	const { subjectMapping, typeMapping, offerMapping, attributeMapping, accessibleMapping } = t("entryMapping");
-
 	let edit: boolean = false;
 	export let entry: Entry = null;
 	
@@ -139,7 +137,7 @@
 	<div class="auto-grid">
 		<div class="header">
 			<EditableInputField label="Name des Eintrags" bind:value={ _entry.name } { edit } />
-			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ typeMapping } { edit } />
+			<EditableSelectField label="Kategorie" bind:value={ _entry.type } mapping={ makeTranslatedMapping(typeMapping, tEntry("typeMapping")) } { edit } />
 			<EditableCheckbox label="Blockiert" bind:checked={ _entry.blocked } { edit } class="narrow"/>
 			<EditableCheckbox label="Freigeschaltet" bind:checked={ _entry.approved } { edit } class="narrow"/>
 		</div>
@@ -168,7 +166,7 @@
 			<span class="group-title"> Kontaktdaten </span>
 			
 			<div class="sub-grid">
-				<EditableSelectField label="Titel" bind:value={ _entry.academicTitle } mapping={ academicTitleMapping } nullMapping="Kein Titel" { edit } />
+				<EditableSelectField label="Titel" bind:value={ _entry.academicTitle } mapping={ makeTranslatedMapping(academicTitleMapping, tEntry("academicTitleMapping")) } nullMapping="Kein Titel" { edit } />
 				<EditableInputField label="Vorname" bind:value={ _entry.firstName } { edit } />
 				<EditableInputField label="Nachname" bind:value={ _entry.lastName } { edit } />
 				
@@ -185,8 +183,8 @@
 		</div>
 		
 		<div class="sub-grid">
-			<EditableRadioList label="Angebote" bind:value={ _entry.meta.offers } mapping={ offerMapping[_entry.type] } { edit } />
-			<EditableRadioList label="Attribute" bind:value={ _entry.meta.attributes } mapping={ attributeMapping[_entry.type] } { edit } />
+			<EditableRadioList label="Angebote" bind:value={ _entry.meta.offers } mapping={ makeTranslatedMapping(offerMapping[_entry.type], tEntry("offerMapping")) } { edit } />
+			<EditableRadioList label="Attribute" bind:value={ _entry.meta.attributes } mapping={ makeTranslatedMapping(attributeMapping[_entry.type], tEntry("attributeMapping")) } { edit } />
 		</div>
 		
 		<div class="sub-grid">
@@ -194,10 +192,10 @@
 			<EditableInputField label="Mindestalter" number bind:value={ _entry.meta.minAge } { edit } />
 			
 			{#if subjectMapping[_entry.type]}
-				<EditableSelectField label="Fachrichtung" bind:value={ _entry.meta.subject } mapping={ subjectMapping[_entry.type] } { edit } />
+				<EditableSelectField label="Fachrichtung" bind:value={ _entry.meta.subject } mapping={ makeTranslatedMapping(subjectMapping[_entry.type], tEntry("subjectMapping")) } { edit } />
 			{/if}
 			
-			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ accessibleMapping } { edit } />
+			<EditableSelectField label="Barrierefrei" bind:value={ _entry.accessible } mapping={ makeTranslatedMapping(accessibleMapping, tEntry("accessibleMapping")) } { edit } />
 		</div>
 		
 		<div class="sub-grid grid-full-width">
