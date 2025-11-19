@@ -84,7 +84,8 @@
 			"hairremoval": "Hair-Removal",
 			"urologist": "Urology",
 			"gynecologist": "Gynecology",
-			"GP": "General Practitioner"
+			"GP": "General Practitioner",
+			"pharmacy": "Pharmacy"
 		},
 		"typeDescriptions": {
 			"group": "Name of the group",
@@ -96,7 +97,8 @@
 			"logopedics": "Name of the office",
 			"urologist": "Name of the doctor's office",
 			"gynecologist": "Name of the doctor's office",
-			"GP": "Name of the doctor's office"
+			"GP": "Name of the doctor's office",
+			"pharmacy": "Name of the pharmacy"
 		},
 		"typeDetails": {
 			"group": "LGBT+ or trans* groups, clubs and regulars' tables",
@@ -124,7 +126,11 @@
 			"selfPayedOnly": "Self pay only",
 			"youthOnly": "Children and youth",
 			"transFem": "Trans*feminine friendly",
-			"transMasc": "Trans*masculine friendly"
+			"transMasc": "Trans*masculine friendly",
+			"prefilled": "Pre-filled syringe",
+			"reuseVial": "Reusable vial",
+			"shipping": "Shipping available",
+			"singleUseVials": "Single-use vials"
 		},
 		"attributeDetails": {
 			"trans": "A group/club primarily for trans people",
@@ -140,7 +146,11 @@
 			"selfPayedOnly": "No health insurance coverage. Treats only self-pay patients",
 			"youthOnly": "Exclusively for children and adolescents",
 			"transFem": "Friendly and respectful towards trans*feminine people",
-			"transMasc": "Friendly and respectful towards trans*masculine people"
+			"transMasc": "Friendly and respectful towards trans*masculine people",
+			"prefilled": "Medication as pre-filled syringe",
+			"reuseVial": "Medication as reusable vial",
+			"shipping": "Offers shipping the medication",
+			"singleUseVials": "Medication as single use vial"
 		},
 		"offerMapping": {
 			"indication": "(HRT) Indication",
@@ -162,7 +172,9 @@
 			"electro": "Electroepilation",
 			"electroAE": "Electroepilation with local anesthesia",
 			"hrt": "Accompanies hormone therapy",
-			"medication": "Prescribes hormone medication"
+			"medication": "Prescribes hormone medication",
+			"cpa": "Cypro (Androcur)",
+			"eInjection": "Estradiol injections"
 		},
 		"offerDetails": {
 			"indication": "Writes referrals (for e.g. hormone therapy)",
@@ -185,7 +197,9 @@
 			"electro": "Permanent epilation by electricity",
 			"electroAE": "Electroepilation with local anesthesia",
 			"hrt": "Medical monitoring of hormone therapy",
-			"medication": "Prescribes medications needed for ongoing hormone therapy"
+			"medication": "Prescribes medications needed for ongoing hormone therapy",
+			"cpa": "Manufactures Cyproteronacetate (Androcur)",
+			"eInjection": "Manufactures estradiol injections"
 		},
 		"subjectMapping": {
 			"therapist": "Psychological Psychotherapist",

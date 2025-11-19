@@ -9,7 +9,8 @@ export const typeMapping = [
 	"hairremoval",
 	"urologist",
 	"gynecologist",
-	"GP"
+	"GP",
+	"pharmacy"
 ];
 
 export const attributeMapping = {
@@ -61,7 +62,13 @@ export const attributeMapping = {
 	GP: [
 		"treatsNB",
 		"remote"
-	]
+	],
+	pharmacy: [
+		"shipping",
+		"singleUseVials",
+		"reuseVial",
+		"prefilled"
+	],
 } as const;
 
 export const attributeDetails = {
@@ -106,6 +113,12 @@ export const attributeDetails = {
 	GP: [
 		"treatsNB",
 		"remote"
+	],
+	pharmacy: [
+		"shipping",
+		"singleUseVials",
+		"reuseVial",
+		"prefilled"
 	]
 } as const;
 
@@ -145,7 +158,11 @@ export const offerMapping = {
 	GP: [
 		"hrt",
 		"medication"
-	]
+	],
+	pharmacy: [
+		"eInjection",
+		"cpa"
+	],
 } as const;
 
 export const subjectMapping = {
