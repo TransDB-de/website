@@ -84,7 +84,8 @@
 			"hairremoval": "Haarentfernung",
 			"urologist": "Urologie",
 			"gynecologist": "Gynäkologie",
-			"GP": "Allgemeinmediziner*in/Hausärzt*in"
+			"GP": "Allgemeinmediziner*in/Hausärzt*in",
+			"pharmacy": "Apotheke"
 		},
 		"typeDescriptions": {
 			"group": "Name der Gruppe",
@@ -96,7 +97,8 @@
 			"logopedics": "Name der Praxis",
 			"urologist": "Name der Praxis",
 			"gynecologist": "Name der Praxis",
-			"GP": "Name der Praxis"
+			"GP": "Name der Praxis",
+			"pharmacy": "Name der Apotheke"
 		},
 		"typeDetails": {
 			"group": "LGBT+ oder trans* Gruppen, Vereine und Stammtische",
@@ -124,7 +126,10 @@
 			"selfPayedOnly": "Nur Selbstzahler",
 			"youthOnly": "Kinder- und Jugend",
 			"transFem": "Trans*feminin freundlich",
-			"transMasc": "Trans*maskulin freundlich"
+			"transMasc": "Trans*maskulin freundlich",
+			"shipping": "Versand möglich",
+			"singleUseVials": "Einweg-Ampullen",
+			"reuseVial": "Wiederverwendbare Ampullen"
 		},
 		"attributeDetails": {
 			"trans": "Primär eine Trans Gruppe / Verein, im Gegensatz zu allgemeinen LGBT+ Gruppen",
@@ -140,7 +145,10 @@
 			"selfPayedOnly": "Kein Kassensitz oder Kostenerstattung. Behandlet nur Selbstzahler",
 			"youthOnly": "Kinder- und Jugendtherapeut*in",
 			"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
-			"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen"
+			"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
+			"shipping": "Versand der Medikation möglich",
+			"singleUseVials": "Einweg-Ampullen zum aufbrechen",
+			"reuseVial": "Wiederverwendbare Ampullen"
 		},
 		"offerMapping": {
 			"indication": "Indikationen",
@@ -162,7 +170,8 @@
 			"electro": "Elektroepilation",
 			"electroAE": "Elektroepilation mit Lokalanästhesie",
 			"hrt": "Begleitet Hormontherapie",
-			"medication": "Verschreibt Hormonmedikation"
+			"medication": "Verschreibt Hormonmedikation",
+			"eInjection": "Estradiol Injektionen"
 		},
 		"offerDetails": {
 			"indication": "Schreibt Indikationen (für z.B. Hormon Therapie)",
@@ -185,7 +194,8 @@
 			"electro": "Dauerhafte Epilation durch Strom",
 			"electroAE": "Elektroepilation mit lokaler Betäubung",
 			"hrt": "Medizinische Begleitung einer Hormontherapie",
-			"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente"
+			"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente",
+			"eInjections": "Stellt estradiol Injektionen her"
 		},
 		"subjectMapping": {
 			"therapist": "Psychologische*r Psychotherapeut*in",
