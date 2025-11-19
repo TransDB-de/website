@@ -129,7 +129,8 @@
 			"transMasc": "Trans*maskulin freundlich",
 			"shipping": "Versand möglich",
 			"singleUseVials": "Einweg-Ampullen",
-			"reuseVial": "Wiederverwendbare Ampullen"
+			"reuseVial": "Wiederverwendbare Ampullen",
+			"prefilled": "Vorgefüllte Spritzen"
 		},
 		"attributeDetails": {
 			"trans": "Primär eine Trans Gruppe / Verein, im Gegensatz zu allgemeinen LGBT+ Gruppen",
@@ -147,8 +148,9 @@
 			"transFem": "Freundlich und respektvoll gegenüber Trans*femininen Menschen",
 			"transMasc": "Freundlich und respektvoll gegenüber Trans*maskulinen Menschen",
 			"shipping": "Versand der Medikation möglich",
-			"singleUseVials": "Einweg-Ampullen zum aufbrechen",
-			"reuseVial": "Wiederverwendbare Ampullen"
+			"singleUseVials": "Medikation als Einweg-Ampullen zum aufbrechen",
+			"reuseVial": "Medikation als wiederverwendbare Ampullen",
+			"prefilled": "Medikation als vorbefüllte Spritzen"
 		},
 		"offerMapping": {
 			"indication": "Indikationen",
@@ -171,7 +173,8 @@
 			"electroAE": "Elektroepilation mit Lokalanästhesie",
 			"hrt": "Begleitet Hormontherapie",
 			"medication": "Verschreibt Hormonmedikation",
-			"eInjection": "Estradiol Injektionen"
+			"eInjection": "Estradiol-Injektionen",
+			"cpa": "Cypro (Androcur)"
 		},
 		"offerDetails": {
 			"indication": "Schreibt Indikationen (für z.B. Hormon Therapie)",
@@ -195,7 +198,8 @@
 			"electroAE": "Elektroepilation mit lokaler Betäubung",
 			"hrt": "Medizinische Begleitung einer Hormontherapie",
 			"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente",
-			"eInjections": "Stellt estradiol Injektionen her"
+			"eInjection": "Stellt Estradiol-Injektionen her",
+			"cpa": "Fertigt Cyproteronacetat (Androcur) an"
 		},
 		"subjectMapping": {
 			"therapist": "Psychologische*r Psychotherapeut*in",
