@@ -70,7 +70,7 @@ export const attributeMapping = {
 		"reuseVial",
 		"prefilled"
 	],
-	cryoconservation: [
+	cryo: [
 		// "selfPayedOnly", // I assume each category should only have one
 		"insurancePay",
 	],
@@ -125,7 +125,7 @@ export const attributeDetails = {
 		"reuseVial",
 		"prefilled"
 	],
-	cryoconservation: [
+	cryo: [
 		"insurancePay",
 	],
 } as const;
@@ -171,7 +171,7 @@ export const offerMapping = {
 		"eInjection",
 		"cpa"
 	],
-	cryoconservation: [
+	cryo: [
 		"freezesSperm", 	// could also use treatsFem/Masc
 		"freezesEggs"		// but I think it helps to be explicit about what they do
 	],
