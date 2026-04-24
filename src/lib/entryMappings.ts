@@ -10,7 +10,8 @@ export const typeMapping = [
 	"urologist",
 	"gynecologist",
 	"GP",
-	"pharmacy"
+	"pharmacy",
+	"cryo"
 ];
 
 export const attributeMapping = {
@@ -69,6 +70,10 @@ export const attributeMapping = {
 		"reuseVial",
 		"prefilled"
 	],
+	cryo: [
+		// "selfPayedOnly", // I assume each category should only have one
+		"insurancePay",
+	],
 } as const;
 
 export const attributeDetails = {
@@ -119,7 +124,10 @@ export const attributeDetails = {
 		"singleUseVials",
 		"reuseVial",
 		"prefilled"
-	]
+	],
+	cryo: [
+		"insurancePay",
+	],
 } as const;
 
 export const offerMapping = {
@@ -162,6 +170,10 @@ export const offerMapping = {
 	pharmacy: [
 		"eInjection",
 		"cpa"
+	],
+	cryo: [
+		"freezesSperm", 	// could also use treatsFem/Masc
+		"freezesEggs"		// but I think it helps to be explicit about what they do
 	],
 } as const;
 
