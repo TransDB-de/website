@@ -33,6 +33,11 @@
 
 	initLocalization(data);
 
+	// Set synchronously so the header is present before any child onMount fires
+	if (browser && data.apiToken) {
+		axios.defaults.headers.common["X-CSRF-Token"] = data.apiToken;
+	}
+
 	$effect(() => {
 		if (data.apiToken) {
 			axios.defaults.headers.common["X-CSRF-Token"] = data.apiToken;
