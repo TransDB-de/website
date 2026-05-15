@@ -229,7 +229,10 @@
 		"offers": "Offers",
 		"attributes": "Attributes",
 		"specials": "Specials",
-		"minage": "Minimum age"
+		"minage": "Minimum age",
+		"possibleDuplicate": "Possible duplicate",
+		"from": "from",
+		"nearbyOffers": "More offers in this area"
 	},
 	"mouseOverTexts": {
 		"applyFilter": "Appy filter",

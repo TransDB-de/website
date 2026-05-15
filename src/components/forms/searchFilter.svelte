@@ -16,7 +16,7 @@
 	import { browser } from "$app/environment";
 	import { navigating, page } from "$app/stores";
 	import { goto } from "$app/navigation";
-	import { onDestroy } from "svelte";
+	import { onDestroy, untrack } from "svelte";
 
 	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 
@@ -137,14 +137,16 @@
 	let prevY = $state(0);
 
 	$effect(() => {
-		if (browser && element) {
-			const scrollDist = scrollY - prevY;
-			const offsetHeight = element.offsetHeight;
-
-			let botOffset = Math.min(window.innerHeight - offsetHeight, topOffset);
-			top = clamp(top - scrollDist, botOffset, topOffset);
-
-			prevY = scrollY;
+		const el = element;
+		if (browser && el) {
+			const currentY = scrollY;
+			untrack(() => {
+				const scrollDist = currentY - prevY;
+				const offsetHeight = el.offsetHeight;
+				let botOffset = Math.min(window.innerHeight - offsetHeight, topOffset);
+				top = clamp(top - scrollDist, botOffset, topOffset);
+				prevY = currentY;
+			});
 		}
 	});
 </script>
@@ -177,16 +179,15 @@
 		<p class="sub-title">{t("searchFilter.categories")}</p>
 
 		<Select name="type" class="mobile" bind:value={selectedType} onchange={typeUpdated}>
-			{#each typeMapping as type}
+			{#each typeMapping as type (type)}
 				<option value={type}>
 					{tEntry("typeMapping")[type]}
 				</option>
 			{/each}
 		</Select>
 
-		<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 		<fieldset class="desktop radio-buttons" oninput={typeUpdated}>
-			{#each typeMapping as type}
+			{#each typeMapping as type (type)}
 				<RadioButton name="type" bind:group={selectedType} value={type}>
 					{tEntry("typeMapping")[type]}
 				</RadioButton>
@@ -196,9 +197,8 @@
 		{#if offerMapping[selectedType]}
 			<p class="sub-title">{t("searchFilter.offers")}</p>
 
-			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 			<fieldset class="tags" oninput={filtersUpdated}>
-				{#each offerMapping[selectedType] as offer}
+				{#each offerMapping[selectedType] as offer (offer)}
 					<TagCheckbox
 						name="offers"
 						bind:group={selectedOffers}
@@ -214,9 +214,8 @@
 		{#if attributeMapping[selectedType]}
 			<p class="sub-title">{t("searchFilter.more")}</p>
 
-			<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 			<fieldset class="tags" oninput={filtersUpdated}>
-				{#each attributeMapping[selectedType] as attribute}
+				{#each attributeMapping[selectedType] as attribute (attribute)}
 					<TagCheckbox
 						name="attributes"
 						bind:group={selectedAttributes}

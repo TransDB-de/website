@@ -22,6 +22,10 @@
 			let res = await axios.get<Entry>("/entries/" + props.id);
 			entry = res.data;
 		} catch (e: any) {
+			if (!e.response) {
+				popupError(t("errors.unknown"));
+				return;
+			}
 			switch (e.response.status) {
 				case 404: {
 					popupError(t("errors.entryNotFound"));
@@ -47,7 +51,7 @@
 {#if entry}
 	<h1>
 		<span> {entry.name} </span>
-		<span> - aus {entry.address.city} </span>
+		<span> - {t("entry.from")} {entry.address.city} </span>
 	</h1>
 
 	<EntryComponent {entry} />
@@ -57,7 +61,7 @@
 		onclick={click}
 		title={t("mouseOverTexts.searchNearbyButton")}
 	>
-		Mehr Angebote in dieser Gegend
+		{t("entry.nearbyOffers")}
 	</Button>
 {:else}
 	<Loader class="single-entry-view-loader" dark big />

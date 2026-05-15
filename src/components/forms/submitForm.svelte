@@ -109,6 +109,11 @@
 			await axios.post("entries", newEntry);
 			popupOk(t("submitForm.submittedPopup"));
 		} catch (e: any) {
+			if (!e.response) {
+				popupError(t("errors.unknown"));
+				loading = false;
+				return;
+			}
 			switch (e.response.status) {
 				case 422: {
 					errors = parseValidationErrors(e.response.data.problems);
@@ -126,7 +131,6 @@
 			}
 
 			loading = false;
-			console.log(errors);
 			return;
 		}
 
@@ -145,7 +149,7 @@
 	<Select bind:value={newEntry.type} onchange={resetMeta}>
 		<option value="" disabled selected> {t("submitForm.selectCategory")} </option>
 
-		{#each sanitizedTypeMapping as type}
+		{#each sanitizedTypeMapping as type (type)}
 			<option value={type}> {tEntry("typeMapping")[type]} </option>
 		{/each}
 	</Select>
@@ -204,7 +208,7 @@
 		<Select bind:value={newEntry.academicTitle} onchange={resetMeta}>
 			<option value={null} selected> {t("submitForm.noTitle")} </option>
 
-			{#each academicTitleMapping as title}
+			{#each academicTitleMapping as title (title)}
 				<option value={title}> {tEntry("academicTitleMapping")[title]} </option>
 			{/each}
 		</Select>
@@ -258,7 +262,7 @@
 		<h3>{t("submitForm.offers")}</h3>
 
 		<ErrorBox error={errors["meta.offers"]}>
-			{#each offerMapping[newEntry.type] as offer}
+			{#each offerMapping[newEntry.type] as offer (offer)}
 				<Checkbox bind:group={newEntry.meta.offers} value={offer}>
 					{tEntry("offerDetails")[offer]}
 				</Checkbox>
@@ -271,7 +275,7 @@
 			<h3>{t("submitForm.attributes")}</h3>
 		{/if}
 
-		{#each attributeMapping[newEntry.type] as attribute}
+		{#each attributeMapping[newEntry.type] as attribute (attribute)}
 			<Checkbox bind:group={newEntry.meta.attributes} value={attribute}>
 				{tEntry("attributeDetails")[attribute]}
 			</Checkbox>
@@ -302,7 +306,7 @@
 		<Select bind:value={newEntry.meta.subject} required>
 			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
 
-			{#each subjectMapping[newEntry.type] as subject}
+			{#each subjectMapping[newEntry.type] as subject (subject)}
 				<option value={subject}> {tEntry("subjectMapping")[subject]} </option>
 			{/each}
 		</Select>

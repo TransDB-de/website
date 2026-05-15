@@ -30,6 +30,7 @@
 	// how and where to fetch data — type prop is fixed at construction time, read once
 	let fetchFunction: (url: URL, pageCount?: number) => Promise<AxiosResponse<EntriesResponse>>;
 
+	untrack(() => {
 	switch (collectionType ?? "search") {
 		case "search": {
 			fetchFunction = async (url, pageCount = 0) => {
@@ -81,23 +82,24 @@
 			console.error(`No such type for EntryCollection: "${collectionType}"`);
 		}
 	}
+	});
 
 	let more: boolean = $state(true);
 	let pageCount: number = $state(0);
 	let loading: boolean = $state(true);
 
 	onMount(() => {
-		loadInitalEntries($page.url);
+		loadInitialEntries($page.url);
 	});
 
 	let unsubscribeFilters = filters.subscribe((fil) => {
-		loadInitalEntries($page.url);
+		loadInitialEntries($page.url);
 	});
 
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	const unsubscribeNav = navigating.subscribe((nav) => {
 		if (nav && nav.to?.url.pathname === "/search" && nav.from?.url.pathname === "/search") {
-			loadInitalEntries(nav.to.url);
+			loadInitialEntries(nav.to.url);
 		}
 	});
 
@@ -107,7 +109,7 @@
 		unsubscribeFilters();
 	});
 
-	async function loadInitalEntries(url: URL) {
+	async function loadInitialEntries(url: URL) {
 		if (!browser) return;
 
 		let res: AxiosResponse<EntriesResponse>;
@@ -147,6 +149,11 @@
 		try {
 			res = await fetchFunction($page.url, params.page as number);
 		} catch (e: any) {
+			if (!e.response) {
+				popupError(t("errors.unknown"));
+				loading = false;
+				return;
+			}
 			switch (e.response.status) {
 				case 422: {
 					popupError(t("errors.invalidFilter"));

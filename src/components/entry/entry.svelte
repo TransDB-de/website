@@ -115,7 +115,7 @@
 		{#if props.entry.meta.offers && props.entry.meta.offers.length > 0 && props.entry.type in offerMapping}
 			<p class="small-gap small-margin">
 				<b> {t("entry.offers")}: </b>
-				{#each props.entry.meta.offers as offer}
+				{#each props.entry.meta.offers as offer (offer)}
 					<Tag title={tEntry("offerDetails")[offer]}>{tEntry("offerMapping")[offer]}</Tag>
 				{/each}
 			</p>
@@ -124,7 +124,7 @@
 		{#if props.entry.meta.attributes && props.entry.meta.attributes.length > 0 && props.entry.type in attributeMapping}
 			<p class="small-gap small-margin">
 				<b> {t("entry.attributes")}: </b>
-				{#each props.entry.meta.attributes as attribute}
+				{#each props.entry.meta.attributes as attribute (attribute)}
 					<Tag title={tEntry("attributeDetails")[attribute]}>
 						{tEntry("attributeMapping")[attribute]}
 					</Tag>
@@ -155,7 +155,7 @@
 		{#if !props.entry.approved && props.entry.possibleDuplicate}
 			<p class="small-gap">
 				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
-					<AlertTriangle /> Mögliches Duplikat
+					<AlertTriangle /> {t("entry.possibleDuplicate")}
 				</a>
 			</p>
 		{/if}

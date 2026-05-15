@@ -11,6 +11,7 @@
 		typeMapping
 	} from "$lib/entryMappings";
 
+	import { untrack } from "svelte";
 	import axios from "axios";
 	import { getObjChanges, replaceFields } from "$lib/utils";
 	import { t, tEntry } from "$lib/localization";
@@ -52,9 +53,9 @@
 		};
 	}
 
-	// Working copy and last-saved reference
-	let savedEntry = $state<NormalizedEntry>(normalizeEntry(JSON.parse(JSON.stringify(entry))));
-	let _entry = $state<NormalizedEntry>(normalizeEntry(JSON.parse(JSON.stringify(entry))));
+	// Working copy and last-saved reference — intentional one-time snapshot of the prop
+	let savedEntry = $state<NormalizedEntry>(untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry)))));
+	let _entry = $state<NormalizedEntry>(untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry)))));
 
 	let noGeoData = $derived(_entry.approved && !_entry.location);
 

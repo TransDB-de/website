@@ -7,7 +7,7 @@ import { errorMappings } from "./errorMappings";
  * @param callback function to call
  * @returns key event handler
  */
-export function isKey(key: string, callback: Function) {
+export function isKey(key: string, callback: () => void) {
 	return (e: KeyboardEvent) => {
 		if (e.key === key) callback();
 	};

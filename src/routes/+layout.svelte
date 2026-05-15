@@ -11,7 +11,6 @@
 	import "$lib/axios";
 	import { env } from "$env/dynamic/public";
 	import axios from "axios";
-	import { get } from "svelte/store";
 	import { token } from "$lib/store";
 	import { afterNavigate } from "$app/navigation";
 
@@ -32,7 +31,9 @@
 
 	let { data, children }: Props = $props();
 
-	initLocalization(data);
+	$effect(() => {
+		initLocalization(data);
+	});
 
 	$effect(() => {
 		if (data.apiToken) {
@@ -50,7 +51,7 @@
 
 	afterNavigate(({ to }) => {
 		const navPath = to?.url.pathname.startsWith("/manage") ? "/manage" : to?.url.pathname;
-		const noTrack = !navPath || noTrackPaths.includes(navPath) || Boolean(get(token));
+		const noTrack = !navPath || noTrackPaths.includes(navPath) || Boolean($token);
 
 		if (!noTrack && env.PUBLIC_UMAMI_SRC && typeof umami !== "undefined") {
 			umami.track((props) => ({ ...props, url: navPath }));
@@ -100,7 +101,6 @@
 		flex-direction: column;
 		font-family: "Fira Sans", sans-serif;
 		min-height: 100vh;
-		overflow: -moz-scrollbars-vertical;
 		overflow-y: scroll;
 	}
 

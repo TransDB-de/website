@@ -158,7 +158,7 @@
 			color: #fff;
 			font-size: 56px;
 			font-weight: 700;
-			text-shadow: $edge-shaodw-large;
+			text-shadow: $edge-shadow-large;
 			margin: 20px 0;
 			cursor: pointer;
 			user-select: none;
@@ -168,7 +168,7 @@
 		.subtitle {
 			margin: 0 0 40px;
 			color: white;
-			text-shadow: $edge-sahdow-medium;
+			text-shadow: $edge-shadow-medium;
 			text-align: center;
 			opacity: var(--opacity);
 

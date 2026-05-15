@@ -8,8 +8,8 @@ const storedToken = browser ? localStorage.getItem("token") : null;
 let defaultUserData = storedUserData ? JSON.parse(storedUserData) : null;
 let defaultToken = storedToken ?? null;
 
-export let userdata = writable<CMSUser | null>(defaultUserData);
-export let token = writable<string | null>(defaultToken);
+export const userdata = writable<CMSUser | null>(defaultUserData);
+export const token = writable<string | null>(defaultToken);
 
 if (browser) {
 	userdata.subscribe((user) => {
@@ -30,7 +30,7 @@ if (browser) {
 	});
 }
 
-export let currentLocation = writable<string>("");
+export const currentLocation = writable<string>("");
 
 /**
  * Media query driven value for mobile screen-width breakpoint

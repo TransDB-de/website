@@ -43,6 +43,10 @@
 			let res = await axios.get<Entry>("/entries/" + $page.url.searchParams.get("id"));
 			entry = res.data;
 		} catch (e: any) {
+			if (!e.response) {
+				popupError(t("errors.unknown"));
+				return;
+			}
 			switch (e.response.status) {
 				case 404: {
 					popupError(t("errors.entryNotFound"));
@@ -62,6 +66,11 @@
 		try {
 			await axios.post<Entry>("/report", report);
 		} catch (e: any) {
+			if (!e.response) {
+				popupError(t("errors.unknown"));
+				loading = false;
+				return;
+			}
 			switch (e.response.status) {
 				case 422: {
 					errors = parseValidationErrors(e.response.data.problems);
