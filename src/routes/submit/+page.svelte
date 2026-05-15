@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SubmitForm from "$components/forms/submitForm.svelte";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 </script>
 
 <svelte:head>

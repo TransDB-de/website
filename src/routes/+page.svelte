@@ -11,7 +11,7 @@
 
 	import externalLinks from "$content/external-links.json";
 
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	interface Props {
 		data: PageData;

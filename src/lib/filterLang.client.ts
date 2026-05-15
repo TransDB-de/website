@@ -1,7 +1,7 @@
 import * as filterLang from "@transdb-de/filter-lang";
 import type { Subscriber, Updater, Writable } from "svelte/store";
 import { removeFromArray } from "./utils";
-import { t } from "$lib/localization";
+import { t } from "$lib/localization.svelte";
 
 type EntryMapping = {
 	[key: string]: Record<string, string>;

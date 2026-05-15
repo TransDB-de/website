@@ -1,4 +1,3 @@
-import { currentLocale } from "./localization";
 import type { Component } from "svelte";
 
 export interface Content {
@@ -6,13 +5,11 @@ export interface Content {
 	path: string;
 }
 
-/**
- * Loads Markdown Components in the current langauge
- * @param contents
- * @returns
- */
-export async function loadContents(...contents: Content[]): Promise<Record<string, Component>> {
-	const l = currentLocale;
+export async function loadContents(
+	locale: string,
+	...contents: Content[]
+): Promise<Record<string, Component>> {
+	const l = locale;
 
 	let props: Record<string, Component> = {};
 	let componentPromises: Array<Promise<{ default: Component }>> = [];
