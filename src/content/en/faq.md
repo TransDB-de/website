@@ -4,11 +4,11 @@ We cannot guarantee the quality of the offers and do not make direct recommendat
 
 # Frequently asked questions
 
-## What does the "DB" in "Trans*DB" mean?
+## What does the "DB" in "Trans\*DB" mean?
 
 DB stands for DataBase.
 
-## Does Trans*DB also work in other countries?
+## Does Trans\*DB also work in other countries?
 
 It is possible to submit a new entry whose location is not in Germany.  
 However, the area search currently only works in Germany.
@@ -45,11 +45,11 @@ For these cases, the entry exists once for each appropriate category.
 ## Why is the information of the entries still in german?
 
 The information of the entries is submitted by the users and translation of dynamic user generated data is currently not possible.  
-Also, since Trans*DB is currently primarily designed for entries and users from Germany, corresponding information is also from Germany and thus mostly in German.
+Also, since Trans\*DB is currently primarily designed for entries and users from Germany, corresponding information is also from Germany and thus mostly in German.
 
 ## Do you make the data available for download or provide an API?
 
-No, we have deliberately decided against this. 
+No, we have deliberately decided against this.
 Automated processing by third parties has great potential for abuse. There is a risk that the institutions would then want to have their entries removed due to misuse, automated processing and/or spam. This would not help anyone.
 
 ## Do you establish contacts to facilities?

@@ -17,6 +17,8 @@
 		"@sveltejs/adapter-auto": "^7.0.1",
 		"@sveltejs/kit": "^2.57.0",
 		"@sveltejs/vite-plugin-svelte": "^7.0.0",
+		"@types/accept-language-parser": "^1.5.6",
+		"@types/jsonwebtoken": "^9.0.9",
 		"mdsvex": "^0.12.7",
 		"prettier": "^3.8.1",
 		"prettier-plugin-svelte": "^3.5.1",
@@ -24,5 +26,16 @@
 		"svelte-check": "^4.4.6",
 		"typescript": "^6.0.2",
 		"vite": "^8.0.7"
+	},
+	"dependencies": {
+		"@fontsource/fira-sans": "^5.2.7",
+		"@fontsource/poppins": "^5.2.7",
+		"@lucide/svelte": "next",
+		"@transdb-de/filter-lang": "github:transdb-de/filter-lang",
+		"accept-language-parser": "^1.5.0",
+		"axios": "^1.7.9",
+		"cookie": "^0.7.2",
+		"jsonwebtoken": "^9.0.2",
+		"sass-embedded": "^1.99.0"
 	}
 }

@@ -85,7 +85,8 @@
 			"urologist": "Urologie",
 			"gynecologist": "Gynäkologie",
 			"GP": "Allgemeinmediziner*in/Hausärzt*in",
-			"pharmacy": "Apotheke"
+			"pharmacy": "Apotheke",
+			"cryo": "Kryokonservierung"
 		},
 		"typeDescriptions": {
 			"group": "Name der Gruppe",
@@ -98,7 +99,8 @@
 			"urologist": "Name der Praxis",
 			"gynecologist": "Name der Praxis",
 			"GP": "Name der Praxis",
-			"pharmacy": "Name der Apotheke"
+			"pharmacy": "Name der Apotheke",
+			"cryo": "Name der Kinderwunschklinik"
 		},
 		"typeDetails": {
 			"group": "LGBT+ oder trans* Gruppen, Vereine und Stammtische",
@@ -174,7 +176,9 @@
 			"hrt": "Begleitet Hormontherapie",
 			"medication": "Verschreibt Hormonmedikation",
 			"eInjection": "Estradiol-Injektionen",
-			"cpa": "Cypro (Androcur)"
+			"cpa": "Cypro (Androcur)",
+			"freezesSperm": "Einfrieren von Spermien",
+			"freezesEggs": "Einfrieren von Eizellen"
 		},
 		"offerDetails": {
 			"indication": "Schreibt Indikationen (für z.B. Hormon Therapie)",
@@ -199,7 +203,9 @@
 			"hrt": "Medizinische Begleitung einer Hormontherapie",
 			"medication": "Verschreibt die für die laufende Hormontherapie benötigten Medikamente",
 			"eInjection": "Stellt Estradiol-Injektionen her",
-			"cpa": "Fertigt Cyproteronacetat (Androcur) an"
+			"cpa": "Fertigt Cyproteronacetat (Androcur) an",
+			"freezesSperm": "Kryokonservierung von Samenzellen",
+			"freezesEggs": "Kryokonservierung von Eizellen"
 		},
 		"subjectMapping": {
 			"therapist": "Psychologische*r Psychotherapeut*in",

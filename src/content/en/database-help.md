@@ -54,7 +54,7 @@ Um das zu tun, kannst du den gleichen Filter mehrere male verwenden, oder ein Ko
 Falls du nach Phrasen oder anderen Dingen, welche Lücken beinhalten, filtern möchtest, kannst du diese in Anführungszeichen (`"Suchbegriff mit Lücke"`) setzen.
 Alles zwischen den Anführungszeichen wird dann wie ein einzelnes Wort behandelt.
 
-__Filter lassen sich beliebig miteinander, und mit Freitext kombinieren.__
+**Filter lassen sich beliebig miteinander, und mit Freitext kombinieren.**
 
 Folgende Filter sind möglich:
 
@@ -83,9 +83,9 @@ Beispiele:
 
 `ist: Gruppe/Verein, freigeschaltet` _zeige alle freigeschalteten Gruppen / Vereinen_
 
-`ist-nicht: freigeschaltet ist: Logopäd*in` _zeige alle nicht freigeschalteten Logopäd*innen_
+`ist-nicht: freigeschaltet ist: Logopäd*in` _zeige alle nicht freigeschalteten Logopäd\*innen_
 
-`ist: Gruppe/Verein, Logopäd*in` _zeige alle Gruppen / Vereinen, und alle Logopäd*innen_
+`ist: Gruppe/Verein, Logopäd*in` _zeige alle Gruppen / Vereinen, und alle Logopäd\*innen_
 
 #### hat: Feld
 

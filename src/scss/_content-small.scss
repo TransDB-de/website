@@ -1,5 +1,5 @@
-@import "content";
-@import "lengths";
+@use "content" as *;
+@use "lengths" as *;
 
 .content {
 	max-width: $conent-max-width-small;
