@@ -1,34 +1,46 @@
 <script lang="ts">
-	export let value = "";
-	export let mapping: {[key: string]: string} = {};
-	export let edit = false;
-	export let label = "";
-	export let nullMapping = "";
+	interface Props {
+		value?: string;
+		mapping?: { [key: string]: string };
+		edit?: boolean;
+		label?: string;
+		nullMapping?: string;
+		[key: string]: unknown;
+	}
+
+	let {
+		value = $bindable(""),
+		mapping = {} as { [key: string]: string },
+		edit = false,
+		label = "",
+		nullMapping = "",
+		...rest
+	}: Props = $props();
 </script>
 
-<div class="editable-select-field" {...$$props}>
-	{ label }
+<div class="editable-select-field" {...rest}>
+	{label}
 	{#if edit}
-		<select bind:value={ value }>
+		<select bind:value>
 			{#if nullMapping !== ""}
-				<option value={ null }> { nullMapping } </option>
+				<option value={null}> {nullMapping} </option>
 			{/if}
-			
+
 			{#each Object.entries(mapping) as [key, val]}
-				<option value={ key }> { val } </option> 
+				<option value={key}> {val} </option>
 			{/each}
 		</select>
 	{:else}
-		<span> { mapping[value] ?? "" } </span>
+		<span> {mapping[value] ?? ""} </span>
 	{/if}
 </div>
 
 <style lang="scss">
-	@import "../../scss/editable-field";
-	
+	@use "../../scss/editable-field" as *;
+
 	.editable-select-field {
 		@include editable-field(select);
-		
+
 		select {
 			background-color: var(--color-background-bright);
 			padding: 0;

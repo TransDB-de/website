@@ -1,6 +1,5 @@
-import { currentLocale } from "./localization"
-import { get } from "svelte/store"
-import type { SvelteComponent } from "svelte"
+import { currentLocale } from "./localization";
+import type { Component } from "svelte";
 
 export interface Content {
 	name: string;
@@ -9,17 +8,16 @@ export interface Content {
 
 /**
  * Loads Markdown Components in the current langauge
- * @param contents 
- * @returns 
+ * @param contents
+ * @returns
  */
-export async function loadContents(...contents: Content[]) {
+export async function loadContents(...contents: Content[]): Promise<Record<string, Component>> {
 	const l = currentLocale;
-	
-	let props = {};
-	let componentPromises: Array<Promise<SvelteComponent>> = [];
-	
-	contents.forEach(content => {
 
+	let props: Record<string, Component> = {};
+	let componentPromises: Array<Promise<{ default: Component }>> = [];
+
+	contents.forEach((content) => {
 		// Workaround for @rollup/plugin-dynamic-import-vars to recognize subdirectories
 		if (content.path.includes("/")) {
 			const path = content.path.split("/");
@@ -27,14 +25,13 @@ export async function loadContents(...contents: Content[]) {
 		} else {
 			componentPromises.push(import(`../content/${l}/${content.path}.md`));
 		}
-		
 	});
-	
+
 	const components = await Promise.all(componentPromises);
-	
+
 	contents.forEach((content, i) => {
 		props[content.name] = components[i].default;
 	});
-	
+
 	return props;
 }

@@ -1,35 +1,35 @@
 <script lang="ts">
-	import Form from "$formElements/form.svelte"
-	import Input from "$formElements/input.svelte"
-	import Button from "$components/elements/button.svelte"
+	import Form from "$formElements/form.svelte";
+	import Input from "$formElements/input.svelte";
+	import Button from "$components/elements/button.svelte";
 
-	import axios from "axios"
-	import { goto } from "$app/navigation"
-	import type { LoginResponse } from "$models/user.model"
-	
-	import { token, userdata } from "$lib/store"
-	import { popupError, popupOk } from "$components/popup.svelte"
-	
-	let loading = false;
-	let formElement;
-	
-	let login = {
+	import axios from "axios";
+	import { goto } from "$app/navigation";
+	import type { LoginResponse } from "$models/user.model";
+
+	import { token, userdata } from "$lib/store";
+	import { popupError, popupOk } from "$components/popup.svelte";
+
+	let loading = $state(false);
+
+	let login = $state({
 		username: "",
 		password: ""
-	}
-	
+	});
+
 	async function submit() {
 		loading = true;
-		
+
 		try {
-			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("access/login", login)).data;
-			
+			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("access/login", login))
+				.data;
+
 			$token = loginResponse.token;
 			$userdata = loginResponse.user;
-			
+
 			popupOk("Angemeldet");
-		} catch(e) {
-			switch(e.response.status) {
+		} catch (e: any) {
+			switch (e.response.status) {
 				case 401: {
 					popupError("Ungültige Anmeldedaten");
 					break;
@@ -43,22 +43,29 @@
 					break;
 				}
 			}
-			
+
 			loading = false;
 			return;
 		}
-		
+
 		loading = false;
-		formElement.reset();
+		login = { username: "", password: "" };
 		goto("/manage");
 	}
 </script>
 
-<Form on:submit={ submit } bind:this={ formElement }>
-	<h1> Anmeldung für Teammitglieder </h1>
-	
-	<Input bind:value={ login.username } placeholder="E-Mail" required minlength="4" maxlength="256" />
-	<Input bind:value={ login.password } type="password" placeholder="Passwort" required minlength="8" maxlength="2024" />
-	
-	<Button { loading }> Anmelden </Button>
+<Form onsubmit={submit}>
+	<h1>Anmeldung für Teammitglieder</h1>
+
+	<Input bind:value={login.username} placeholder="E-Mail" required minlength="4" maxlength="256" />
+	<Input
+		bind:value={login.password}
+		type="password"
+		placeholder="Passwort"
+		required
+		minlength="8"
+		maxlength="2024"
+	/>
+
+	<Button {loading}>Anmelden</Button>
 </Form>

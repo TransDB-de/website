@@ -58,12 +58,7 @@
 		"heading": "Eintrag melden",
 		"note": "Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.",
 		"placeholder": "Beschreibe dein Anliegen / deine Änderungsvorschläge",
-		"categories": [
-			"Kategorie wählen",
-			"Änderung vorschlagen",
-			"Nicht empfehlenswert",
-			"Sonstiges"
-		],
+		"categories": ["Kategorie wählen", "Änderung vorschlagen", "Nicht empfehlenswert", "Sonstiges"],
 		"submit": "Melden",
 		"successPopup": "Meldung erfolgreich abgesendet"
 	},
@@ -234,7 +229,10 @@
 		"offers": "Angebote",
 		"attributes": "Eigenschaften",
 		"specials": "Besonderheiten",
-		"minage": "Mindestalter"
+		"minage": "Mindestalter",
+		"possibleDuplicate": "Mögliches Duplikat",
+		"from": "aus",
+		"nearbyOffers": "Mehr Angebote in dieser Gegend"
 	},
 	"mouseOverTexts": {
 		"applyFilter": "Suchfilter anwenden",

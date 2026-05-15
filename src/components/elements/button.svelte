@@ -1,23 +1,39 @@
 <script lang="ts">
-	import Loader from "$components/elements/loader.svelte"
-	
-	export let color: string = "";
-	export let loading = false;
-	export let light = false;
-	export let iconOnly = false;
+	import type { Snippet } from "svelte";
+	import Loader from "$components/elements/loader.svelte";
+
+	interface Props {
+		color?: string;
+		loading?: boolean;
+		light?: boolean;
+		iconOnly?: boolean;
+		children?: Snippet;
+		onclick?: (e: MouseEvent) => void;
+		[key: string]: unknown;
+	}
+
+	let {
+		color = "",
+		loading = false,
+		light = false,
+		iconOnly = false,
+		children,
+		onclick,
+		...rest
+	}: Props = $props();
 </script>
 
-<button on:click class={ color } class:light class:iconOnly {...$$props}>
+<button {onclick} class={color} class:light class:iconOnly {...rest}>
 	{#if loading}
-		<Loader dark={ light } />
-	{:else}
-		<slot></slot>
+		<Loader dark={light} />
+	{:else if children}
+		{@render children()}
 	{/if}
 </button>
 
 <style lang="scss">
-	@import "../../scss/button";
-	
+	@use "../../scss/button" as *;
+
 	button {
 		@include button;
 	}

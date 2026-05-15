@@ -5,6 +5,6 @@ export interface CMSUser {
 }
 
 export interface LoginResponse {
-	user: CMSUser,
-	token: string
+	user: CMSUser;
+	token: string;
 }

@@ -1,16 +1,21 @@
 <script lang="ts">
-	import { t } from "$lib/localization"
+	import { t } from "$lib/localization";
 
-	export let href = "";
+	interface Props {
+		href?: string;
+	}
+
+	const props: Props = $props();
 </script>
 
-<a {href} target="_blank" rel="noopener">
-	<img src="/img/open-collective.svg" alt={ t("openCollectiveButton.alt") } /> { t("openCollectiveButton.text") }
+<a href={props.href ?? ""} target="_blank" rel="noopener">
+	<img src="/img/open-collective.svg" alt={t("openCollectiveButton.alt")} />
+	{t("openCollectiveButton.text")}
 </a>
 
 <style lang="scss">
-	@import "../scss/shadows";
-	
+	@use "../scss/shadows" as *;
+
 	a {
 		display: flex;
 		align-items: center;
@@ -23,14 +28,15 @@
 		padding: 6px 8px;
 		font-family: "Poppins", sans-serif;
 		box-shadow: $surface-shadow-soft;
-		
+
 		transition: 0.2s background-color;
-		
+
 		img {
 			height: 44px;
 		}
-		
-		&:hover, &:focus {
+
+		&:hover,
+		&:focus {
 			box-shadow: $surface-shadow-strong;
 		}
 	}

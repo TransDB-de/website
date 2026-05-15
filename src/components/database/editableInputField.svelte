@@ -1,26 +1,37 @@
 <script lang="ts">
-	export let label = "";
-	export let value: string | number = "";
-	export let edit = false;
-	export let number = false;
+	interface Props {
+		label?: string;
+		value?: string | number;
+		edit?: boolean;
+		number?: boolean;
+		[key: string]: unknown;
+	}
+
+	let {
+		label = "",
+		value = $bindable<string | number>(""),
+		edit = false,
+		number = false,
+		...rest
+	}: Props = $props();
 </script>
 
-<div class="editable-input-field" {...$$props}>
-	{ label }
+<div class="editable-input-field" {...rest}>
+	{label}
 	{#if edit}
 		{#if number}
-			<input type="number" bind:value={ value } />
+			<input type="number" bind:value />
 		{:else}
-			<input type="text" bind:value={ value } />
+			<input type="text" bind:value />
 		{/if}
 	{:else}
-		<span title={ `${value}` }> { value ?? "" } </span>
+		<span title={`${value}`}> {value ?? ""} </span>
 	{/if}
 </div>
 
 <style lang="scss">
-	@import "../../scss/editable-field";
-	
+	@use "../../scss/editable-field" as *;
+
 	.editable-input-field {
 		@include editable-field(input);
 	}

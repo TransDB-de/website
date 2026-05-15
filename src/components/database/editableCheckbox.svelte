@@ -1,48 +1,50 @@
 <script lang="ts">
-	export let checked = false;
-	export let edit = false;
-	export let label = "";
-	
-	let customClass = "";
-	export {customClass as class};
+	interface Props {
+		checked: boolean;
+		edit?: boolean;
+		label?: string;
+		class?: string;
+	}
+
+	let { checked = $bindable(false), ...props }: Props = $props();
 </script>
 
-<div class="editable-checkbox {customClass}">
-	{ label }
-	<!-- svelte-ignore a11y-label-has-associated-control -->
-	<label class="checkbox" class:edit>
-		{#if edit}
-			<input type="checkbox" bind:checked={ checked } />
+<div class="editable-checkbox {props.class ?? ''}">
+	{props.label}
+	<!-- svelte-ignore a11y_label_has_associated_control -->
+	<label class="checkbox" class:edit={props.edit}>
+		{#if props.edit}
+			<input type="checkbox" bind:checked />
 		{/if}
-		<span class="mark { checked ? "selected" : "" }" class:edit></span>
+		<span class="mark {checked ? 'selected' : ''}" class:edit={props.edit}></span>
 	</label>
 </div>
 
 <style lang="scss">
-	@import "../../scss/editable-field";
-	@import "../../scss/input";
-	
+	@use "../../scss/editable-field" as *;
+	@use "../../scss/input" as *;
+
 	.editable-checkbox {
 		@include editable-field(input);
 		position: relative;
-		
+
 		label {
 			&.edit {
 				cursor: pointer;
 			}
 		}
-		
+
 		input {
 			@include hide-checkmark;
 		}
-		
+
 		.mark {
 			@include input-checkbox;
-			
+
 			&:not(.edit) {
 				border-color: transparent;
 			}
-			
+
 			&:before {
 				content: "";
 				position: absolute;
@@ -54,12 +56,12 @@
 				background-color: var(--color-edge-error);
 				transform: translate(-50%, -50%) scale(0) rotate(45deg);
 			}
-			
+
 			&:not(.selected) {
 				&:before {
 					transform: translate(-50%, -50%) scale(1) rotate(-45deg);
 				}
-				
+
 				&:after {
 					transform: translate(-50%, -50%) rotate(-45deg);
 					background-color: var(--color-edge-error);

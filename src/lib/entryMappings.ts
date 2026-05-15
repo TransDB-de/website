@@ -14,127 +14,26 @@ export const typeMapping = [
 	"cryo"
 ];
 
-export const attributeMapping = {
-	group: [
-		"trans",
-		"regularMeetings",
-		"consulting",
-		"activities",
-		"remote"
-	],
-	hairremoval: [
-		"insurancePay",
-		"transfriendly",
-		"hasDoctor"
-	],
-	surveyor: [
-		"enby",
-		"remote"
-	],
-	surgeon: [
-		"selfPayedOnly",
-		"remote"
-	],
-	endocrinologist: [
-		"treatsNB",
-		"remote"
-	],
-	therapist: [
-		"selfPayedOnly",
-		"treatsNB",
-		"youthOnly",
-		"remote"
-	],
-	logopedics: [
-		"remote"
-	],
-	urologist: [
-		"treatsNB",
-		"transFem",
-		"transMasc",
-		"remote"
-	],
-	gynecologist: [
-		"treatsNB",
-		"transFem",
-		"transMasc",
-		"remote"
-	],
-	GP: [
-		"treatsNB",
-		"remote"
-	],
-	pharmacy: [
-		"shipping",
-		"singleUseVials",
-		"reuseVial",
-		"prefilled"
-	],
+export const attributeMapping: Record<string, string[]> = {
+	group: ["trans", "regularMeetings", "consulting", "activities", "remote"],
+	hairremoval: ["insurancePay", "transfriendly", "hasDoctor"],
+	surveyor: ["enby", "remote"],
+	surgeon: ["selfPayedOnly", "remote"],
+	endocrinologist: ["treatsNB", "remote"],
+	therapist: ["selfPayedOnly", "treatsNB", "youthOnly", "remote"],
+	logopedics: ["remote"],
+	urologist: ["treatsNB", "transFem", "transMasc", "remote"],
+	gynecologist: ["treatsNB", "transFem", "transMasc", "remote"],
+	GP: ["treatsNB", "remote"],
+	pharmacy: ["shipping", "singleUseVials", "reuseVial", "prefilled"],
 	cryo: [
 		// "selfPayedOnly", // I assume each category should only have one
-		"insurancePay",
-	],
-} as const;
+		"insurancePay"
+	]
+};
 
-export const attributeDetails = {
-	hairremoval: [
-		"insurancePay",
-		"transfriendly",
-		"hasDoctor"
-	],
-	endocrinologist: [
-		"treatsNB",
-		"remote"
-	],
-	surveyor: [
-		"enby",
-		"remote"
-	],
-	surgeon: [
-		"selfPayedOnly",
-		"remote"
-	],
-	therapist: [
-		"selfPayedOnly",
-		"treatsNB",
-		"youthOnly",
-		"remote"
-	],
-	logopedics: [
-		"remote"
-	],
-	urologist: [
-		"treatsNB",
-		"transFem",
-		"transMasc",
-		"remote"
-	],
-	gynecologist: [
-		"treatsNB",
-		"transFem",
-		"transMasc",
-		"remote"
-	],
-	GP: [
-		"treatsNB",
-		"remote"
-	],
-	pharmacy: [
-		"shipping",
-		"singleUseVials",
-		"reuseVial",
-		"prefilled"
-	],
-	cryo: [
-		"insurancePay",
-	],
-} as const;
-
-export const offerMapping = {
-	therapist: [
-		"indication",
-		"therapy"
-	],
+export const offerMapping: Record<string, string[]> = {
+	therapist: ["indication", "therapy"],
 	surgeon: [
 		"mastectomy",
 		"vaginPI",
@@ -149,58 +48,28 @@ export const offerMapping = {
 		"glottoplasty",
 		"fms"
 	],
-	hairremoval: [
-		"laser",
-		"ipl",
-		"electro",
-		"electroAE"
-	],
-	urologist: [
-		"hrt",
-		"medication"
-	],
-	gynecologist: [
-		"hrt",
-		"medication"
-	],
-	GP: [
-		"hrt",
-		"medication"
-	],
-	pharmacy: [
-		"eInjection",
-		"cpa"
-	],
+	hairremoval: ["laser", "ipl", "electro", "electroAE"],
+	urologist: ["hrt", "medication"],
+	gynecologist: ["hrt", "medication"],
+	GP: ["hrt", "medication"],
+	pharmacy: ["eInjection", "cpa"],
 	cryo: [
-		"freezesSperm", 	// could also use treatsFem/Masc
-		"freezesEggs"		// but I think it helps to be explicit about what they do
-	],
-} as const;
-
-export const subjectMapping = {
-	therapist: [
-		"therapist",
-		"psychologist",
-		"naturopath",
-		"other"
+		"freezesSperm", // could also use treatsFem/Masc
+		"freezesEggs" // but I think it helps to be explicit about what they do
 	]
 };
 
-export const accessibleMapping = [
-	"unknown",
-	"yes",
-	"no"
-];
+export const subjectMapping: Record<string, string[]> = {
+	therapist: ["therapist", "psychologist", "naturopath", "other"]
+};
 
-export const academicTitleMapping = [
-	"dr",
-	"prof",
-	"prof_dr"
-]
+export const accessibleMapping = ["unknown", "yes", "no"];
+
+export const academicTitleMapping = ["dr", "prof", "prof_dr"];
 
 export function makeTranslatedMapping(mapping: string[] = [], translation: Record<string, string>) {
-	let m = {};
-	
+	let m: Record<string, string> = {};
+
 	for (const key of mapping) {
 		m[key] = translation[key];
 	}

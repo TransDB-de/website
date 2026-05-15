@@ -1,5 +1,5 @@
-import type { ApiValidationError, ValidationErrorMap } from "$models/error"
-import { errorMappings } from "./errorMappings"
+import type { ApiValidationError, ValidationErrorMap } from "$models/error";
+import { errorMappings } from "./errorMappings";
 
 /**
  * Exectues a callback on a key event, if the key identifier matches
@@ -7,15 +7,15 @@ import { errorMappings } from "./errorMappings"
  * @param callback function to call
  * @returns key event handler
  */
-export function isKey(key: string, callback: Function) {
+export function isKey(key: string, callback: () => void) {
 	return (e: KeyboardEvent) => {
-		if (e.code === key) callback();
-	}
+		if (e.key === key) callback();
+	};
 }
 
 /**
  * Async wrapper for geolocation.getCurrentPosition
- * @param options 
+ * @param options
  * @returns position object
  */
 export async function getGeoLocation(options?: PositionOptions): Promise<GeolocationPosition> {
@@ -30,25 +30,24 @@ export async function getGeoLocation(options?: PositionOptions): Promise<Geoloca
  */
 export function parseValidationErrors(errors: ApiValidationError[]): ValidationErrorMap {
 	let err: ValidationErrorMap = {};
-	
+
 	for (let error of errors) {
-		let constraintName: string;
-		
+		let constraintName: string | undefined;
+
 		if (error.constraints) {
 			constraintName = Object.keys(error.constraints)[0];
-		} else if (error.children.length > 0) {
+		} else if (error.children && error.children.length > 0) {
 			let childErrors: ValidationErrorMap = parseValidationErrors(error.children);
 			for (let childConstraintName in childErrors) {
 				err[error.property + "." + childConstraintName] = childErrors[childConstraintName];
 			}
 		}
-		
-		//TODO: in order to add multi-lang support, the final mapping has to be applied in-component
-		if (constraintName in errorMappings) {
-			err[error.property] = errorMappings[constraintName];
+
+		if (constraintName && constraintName in (errorMappings as Record<string, string>)) {
+			err[error.property] = (errorMappings as Record<string, string>)[constraintName];
 		}
 	}
-	
+
 	return err;
 }
 
@@ -80,19 +79,22 @@ export async function timeout(delay: number): Promise<void> {
  * @param changed modified object
  * @return object containing the changes
  */
-export function getObjChanges(original: object, changed: object): object {
-	let changes = {};
-	
+export function getObjChanges(
+	original: Record<string, unknown>,
+	changed: Record<string, unknown>
+): Record<string, unknown> {
+	let changes: Record<string, unknown> = {};
+
 	for (const [key, val] of Object.entries(changed)) {
 		if (key in original) {
 			if (JSON.stringify(val) !== JSON.stringify(original[key])) {
-				changes[key] = changed[key]
+				changes[key] = changed[key];
 			}
 		} else {
-			changes[key] = changed[key]
+			changes[key] = changed[key];
 		}
 	}
-	
+
 	return changes;
 }
 
@@ -103,17 +105,21 @@ export function getObjChanges(original: object, changed: object): object {
  * @param replace replacement value
  * @returns modified object
  */
-export function replaceFields<S, R>(object: object, search: S, replace: R): object {
+export function replaceFields<S, R>(
+	object: Record<string, unknown>,
+	search: S,
+	replace: R
+): Record<string, unknown> {
 	for (let key in object) {
 		let val = object[key];
-		
+
 		if (val === search) {
 			object[key] = replace;
 		} else if (typeof val === "object" && !Array.isArray(val)) {
-			object[key] = replaceFields(val, search, replace);
+			object[key] = replaceFields(val as Record<string, unknown>, search, replace);
 		}
 	}
-	
+
 	return object;
 }
 
@@ -125,11 +131,11 @@ export function replaceFields<S, R>(object: object, search: S, replace: R): obje
  */
 export function removeFromArray<T>(array: Array<T>, element: T): Array<T> {
 	const index = array.indexOf(element);
-	
+
 	if (index > -1) {
 		array.splice(index, 1);
 	}
-	
+
 	return array;
 }
 
@@ -137,22 +143,21 @@ export function removeFromArray<T>(array: Array<T>, element: T): Array<T> {
 export function shuffleArray<T>(array: Array<T>): Array<T> {
 	let j, x, i;
 	let a = [...array];
-	
+
 	for (i = array.length - 1; i > 0; i--) {
 		j = Math.floor(random() * (i + 1));
 		x = a[i];
 		a[i] = a[j];
 		a[j] = x;
 	}
-	
+
 	return a;
 }
-
 
 let _s = Math.random() * 1000;
 /**
  * Set seet for seedable random number generator
- * @param seed 
+ * @param seed
  */
 export function seed(seed: number): void {
 	_s = seed;
@@ -163,7 +168,7 @@ export function seed(seed: number): void {
  * @see seed()
  */
 export function random(): number {
-	var x = Math.sin(_s++) * 10000;
+	const x = Math.sin(_s++) * 10000;
 	return x - Math.floor(x);
 }
 
@@ -173,13 +178,14 @@ export function random(): number {
  * @param path Path to desired value
  * @returns selected value
  */
-export function getValueByPath(object: any, path: string): any {
-	return path.split(".").reduce((a, b) => a[b], object);
+export function getValueByPath<T = any>(object: unknown, path: string): T {
+	return path.split(".").reduce((a: any, b) => a?.[b], object) as T;
 }
 
 export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> = Key extends string
 	? T[Key] extends Record<string, unknown>
-		? `${Key}.${FlattenObjectKeys<T[Key]>}` : `${Key}`
+		? `${Key}.${FlattenObjectKeys<T[Key]>}`
+		: `${Key}`
 	: never;
 
 export type NestedDict = {

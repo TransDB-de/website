@@ -1,13 +1,12 @@
 <script lang="ts">
-	import HelpCircleIcon from "lucide-icons-svelte/helpCircle.svelte"
-	import DownloadIcon from "lucide-icons-svelte/download.svelte"
-	import { t } from "$lib/localization"
-	
-	import Button from "$components/elements/button.svelte"
+	import { HelpCircle, Download } from "@lucide/svelte";
+	import { t } from "$lib/localization";
+
+	import Button from "$components/elements/button.svelte";
 	import { popupError } from "$components/popup.svelte";
-	
-	import axios from "axios"
-	
+
+	import axios from "axios";
+
 	async function downloadBackup() {
 		try {
 			const res = await axios.get(`entries/backup`);
@@ -17,15 +16,17 @@
 			const date = new Date();
 			const fileStr = `transdb_backup_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}h${date.getMinutes()}.json`;
 			link.href = url;
-			link.setAttribute("download", fileStr);	
-			
+			link.setAttribute("download", fileStr);
+
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
-		} catch(e) {
+		} catch (e: any) {
 			console.error(e);
 			if (e.response) {
-				popupError(`Unbekannter Fehler! Datenbank konnte nicht heruntergeladen werden (${e.response.status})`);
+				popupError(
+					`Unbekannter Fehler! Datenbank konnte nicht heruntergeladen werden (${e.response.status})`
+				);
 			} else {
 				popupError(`Unbekannter Fehler! Bitte Developer kontaktieren`);
 			}
@@ -34,28 +35,27 @@
 </script>
 
 <div>
-	<a class="light" title={ t("mouseOverTexts.databaseHelp") } href="/manage/help">
-		<HelpCircleIcon /> Hilfe
+	<a class="light" title={t("mouseOverTexts.databaseHelp")} href="/manage/help">
+		<HelpCircle /> Hilfe
 	</a>
-	
-	<Button light title={ t("mouseOverTexts.backup") } on:click={ downloadBackup }>
-		<DownloadIcon /> Backup herunterladen
+
+	<Button light title={t("mouseOverTexts.backup")} onclick={downloadBackup}>
+		<Download /> Backup herunterladen
 	</Button>
 </div>
 
 <style lang="scss">
-	@import "../../scss/button";
-	
+	@use "../../scss/button" as *;
+
 	div {
 		display: flex;
 		gap: 20px;
 		justify-content: center;
 		flex-wrap: wrap;
-		
+
 		a {
 			@include button;
 			text-decoration: none;
 		}
 	}
-	
 </style>

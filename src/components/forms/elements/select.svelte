@@ -1,27 +1,37 @@
-<script lang="ts" context="module">
-	import { writable } from "svelte/store"
-	let uid = writable<number>(0);
+<script module lang="ts">
+	let uid = 0;
 </script>
 
 <script lang="ts">
-	import InputWrapper from "./inputWrapper.svelte"
-	import ChevronDownIcon from "lucide-icons-svelte/chevronDown.svelte"
-	
-	export let error = "";
-	export let value = "";
-	
-	let customClass = "";
-	export { customClass as class };
-	
-	$uid += 1;
-	let id = "select" + $uid;
+	import InputWrapper from "./inputWrapper.svelte";
+	import { ChevronDown } from "@lucide/svelte";
+	import type { Snippet } from "svelte";
+
+	interface Props {
+		error?: string;
+		value?: string;
+		class?: string;
+		children?: Snippet;
+		[key: string]: unknown;
+	}
+
+	let {
+		error = "",
+		value = $bindable(""),
+		class: customClass = "",
+		children,
+		...rest
+	}: Props = $props();
+
+	uid += 1;
+	const id = "select" + uid;
 </script>
 
-<InputWrapper { error } class={ customClass } for={ id }>
-	<select bind:value {...$$props} on:change id={ id }>
-		<slot></slot>
+<InputWrapper {error} class={customClass} for={id}>
+	<select bind:value {...rest} {id}>
+		{#if children}{@render children()}{/if}
 	</select>
-	<ChevronDownIcon />
+	<ChevronDown />
 </InputWrapper>
 
 <style lang="scss">
@@ -31,12 +41,13 @@
 		cursor: pointer;
 		padding-right: 28px;
 	}
-	
+
 	select ~ :global(.lucide) {
 		position: absolute;
 		color: var(--color-edge-dimmed);
 		pointer-events: none;
-		right: 5px;
+		right: 6px;
 		width: 24px;
+		top: 8px;
 	}
 </style>
