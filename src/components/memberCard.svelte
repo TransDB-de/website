@@ -43,18 +43,6 @@
 		}
 	}
 
-	function logSocials(event: MouseEvent) {
-		let key = (event.currentTarget as HTMLLinkElement).href;
-
-		if (key === "") {
-			key = "Discord Tag";
-		}
-
-		console.dir(event.currentTarget);
-
-		if (umami) umami.track(env.PUBLIC_UMAMI_EVENT_SOCIAL, { link: key });
-	}
-
 	async function copyToClipboard(e: MouseEvent, string?: string) {
 		if (!string) return;
 
@@ -80,7 +68,6 @@
 				href={social.link ?? ""}
 				target={social.link ? "_blank" : "_self"}
 				onclick={(e) => {
-					logSocials(e);
 					copyToClipboard(e, social.text);
 				}}
 				rel="noopener"

@@ -11,6 +11,9 @@
 	import "$lib/axios";
 	import { env } from "$env/dynamic/public";
 	import axios from "axios";
+	import { get } from "svelte/store";
+	import { token } from "$lib/store";
+	import { afterNavigate } from "$app/navigation";
 
 	import "@fontsource/poppins/500.css";
 	import "@fontsource/poppins/600.css";
@@ -42,6 +45,17 @@
 	if (dev && browser) {
 		localStorage.setItem("umami.disabled", "1");
 	}
+
+	const noTrackPaths = ["/manage", "/login"];
+
+	afterNavigate(({ to }) => {
+		const navPath = to?.url.pathname.startsWith("/manage") ? "/manage" : to?.url.pathname;
+		const noTrack = !navPath || noTrackPaths.includes(navPath) || Boolean(get(token));
+
+		if (!noTrack && env.PUBLIC_UMAMI_SRC && typeof umami !== "undefined") {
+			umami.track((props) => ({ ...props, url: navPath }));
+		}
+	});
 </script>
 
 <svelte:head>

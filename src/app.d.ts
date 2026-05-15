@@ -5,10 +5,6 @@ declare module "*.md" {
 }
 
 declare global {
-	const umami: {
-		track: (eventName: string, data?: Record<string, unknown>) => void;
-	};
-
 	namespace App {
 		interface Locals {
 			preferredLang: string;

@@ -18,11 +18,6 @@
 		shadow: false,
 		color: "var(--color-edge)"
 	};
-
-	function linkClicked(event: MouseEvent) {
-		const link = (event.currentTarget as HTMLLinkElement).href;
-		if (umami) umami.track(env.PUBLIC_UMAMI_EVENT_SOCIAL, { link });
-	}
 </script>
 
 <footer>
@@ -43,7 +38,6 @@
 			target="_blank"
 			rel="noopener"
 			title={t("footer.instagramPlaceholder")}
-			onclick={linkClicked}
 		>
 			<InstagramBrandIcon />
 		</a>
@@ -52,7 +46,6 @@
 			target="_blank"
 			rel="noopener"
 			title={t("footer.githubPlaceholder")}
-			onclick={linkClicked}
 		>
 			<GitHubBrandIcon />
 		</a>
@@ -62,7 +55,6 @@
 			rel="noopener"
 			class="l-icon"
 			title={t("footer.discordPlaceholder")}
-			onclick={linkClicked}
 		>
 			<DiscordBrandIcon />
 		</a>
