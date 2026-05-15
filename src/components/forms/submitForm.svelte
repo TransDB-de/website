@@ -10,7 +10,7 @@
 
 	import type { Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
-	import { t, tEntry } from "$lib/localization";
+	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
 	import { parseValidationErrors, type NestedDict } from "$lib/utils";

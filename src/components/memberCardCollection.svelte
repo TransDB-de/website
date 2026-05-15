@@ -2,7 +2,7 @@
 	import MemberCard from "./memberCard.svelte";
 	import members from "$content/team-members.json";
 	import { shuffleArray, seed } from "$lib/utils";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	seed(Math.floor(Date.now() / 1000 / 60));
 </script>

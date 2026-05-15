@@ -5,7 +5,7 @@
 	import TechStack from "$components/techStack.svelte";
 	import { Download } from "@lucide/svelte";
 	import externalLinks from "$content/external-links.json";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	interface Props {
 		data: PageData;

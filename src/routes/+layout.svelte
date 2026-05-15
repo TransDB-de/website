@@ -7,7 +7,7 @@
 	import Popup from "$components/popup.svelte";
 	import Confirm from "$components/confirm.svelte";
 
-	import { initLocalization } from "$lib/localization";
+	import { initLocalization } from "$lib/localization.svelte";
 	import "$lib/axios";
 	import { env } from "$env/dynamic/public";
 	import axios from "axios";
@@ -31,9 +31,7 @@
 
 	let { data, children }: Props = $props();
 
-	$effect(() => {
-		initLocalization(data);
-	});
+	initLocalization(data);
 
 	$effect(() => {
 		if (data.apiToken) {

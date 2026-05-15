@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { HelpCircle, Download } from "@lucide/svelte";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	import Button from "$components/elements/button.svelte";
 	import { popupError } from "$components/popup.svelte";

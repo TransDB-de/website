@@ -9,7 +9,7 @@
 	import NavLink from "$components/elements/navLink.svelte";
 
 	import { env } from "$env/dynamic/public";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 	import LocaleSwitcher from "$components/localeSwitcher.svelte";
 
 	const linkOptions = {
