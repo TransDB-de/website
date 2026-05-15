@@ -17,6 +17,11 @@ axios.interceptors.response.use(
 			return;
 		}
 
+		if (err.response?.status === 403 && err.response?.data.error === "invalid_csrf_token") {
+			window.location.reload();
+			return;
+		}
+
 		return Promise.reject(err);
 	}
 );
