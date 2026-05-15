@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 
 	interface Props {
 		href?: string;

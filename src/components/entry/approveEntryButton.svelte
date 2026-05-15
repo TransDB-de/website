@@ -4,7 +4,7 @@
 	import { popupOk, popupError } from "$components/popup.svelte";
 	import type { Entry } from "$models/entry.model";
 
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 	import axios from "axios";
 
 	interface Props {

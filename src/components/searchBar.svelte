@@ -10,7 +10,7 @@
 	import { env } from "$env/dynamic/public";
 
 	import { isKey, getGeoLocation } from "$lib/utils";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 	import { popupError } from "./popup.svelte";
 
 	interface Props {

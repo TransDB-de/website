@@ -11,7 +11,7 @@
 	import { clamp, timeout } from "$lib/utils";
 	import { isMobile, currentLocation } from "$lib/store";
 	import { env } from "$env/dynamic/public";
-	import { t, tEntry } from "$lib/localization.svelte";
+	import { t, tEntry } from "$lib/localization";
 
 	import { browser } from "$app/environment";
 	import { navigating, page } from "$app/stores";

@@ -16,7 +16,7 @@
 	import { onMount } from "svelte";
 	import axios from "axios";
 	import type { Report } from "$models/report.model";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 	import { parseValidationErrors } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
 

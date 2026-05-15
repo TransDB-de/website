@@ -3,7 +3,7 @@
 
 	import { goto } from "$app/navigation";
 	import { userdata } from "$lib/store";
-	import { t, tEntry } from "$lib/localization.svelte";
+	import { t, tEntry } from "$lib/localization";
 
 	import Tag from "$components/elements/tag.svelte";
 	import EdgeButton from "$components/elements/edgeButton.svelte";
@@ -155,8 +155,7 @@
 		{#if !props.entry.approved && props.entry.possibleDuplicate}
 			<p class="small-gap">
 				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
-					<AlertTriangle />
-					{t("entry.possibleDuplicate")}
+					<AlertTriangle /> {t("entry.possibleDuplicate")}
 				</a>
 			</p>
 		{/if}

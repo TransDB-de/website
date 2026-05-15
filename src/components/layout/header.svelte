@@ -6,7 +6,7 @@
 	import MenuIcon from "$components/icons/menuIcon.svelte";
 	import SearchBar from "$components/searchBar.svelte";
 	import { token } from "$lib/store";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 
 	let expand = $state(false);
 	let navbar: HTMLElement | undefined = $state();

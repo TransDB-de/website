@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SearchFilter from "$components/forms/searchFilter.svelte";
 	import EntryCollection from "$components/entryCollection.svelte";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 </script>
 
 <svelte:head>

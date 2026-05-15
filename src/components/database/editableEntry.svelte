@@ -14,7 +14,7 @@
 	import { untrack } from "svelte";
 	import axios from "axios";
 	import { getObjChanges, replaceFields } from "$lib/utils";
-	import { t, tEntry } from "$lib/localization.svelte";
+	import { t, tEntry } from "$lib/localization";
 	import { popupOk, popupError } from "$components/popup.svelte";
 
 	import EditableInputField from "$components/database/editableInputField.svelte";
@@ -54,12 +54,8 @@
 	}
 
 	// Working copy and last-saved reference — intentional one-time snapshot of the prop
-	let savedEntry = $state<NormalizedEntry>(
-		untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry))))
-	);
-	let _entry = $state<NormalizedEntry>(
-		untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry))))
-	);
+	let savedEntry = $state<NormalizedEntry>(untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry)))));
+	let _entry = $state<NormalizedEntry>(untrack(() => normalizeEntry(JSON.parse(JSON.stringify(entry)))));
 
 	let noGeoData = $derived(_entry.approved && !_entry.location);
 

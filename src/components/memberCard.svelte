@@ -6,7 +6,7 @@
 
 	import type { Component } from "svelte";
 	import { env } from "$env/dynamic/public";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 
 	import { tick } from "svelte";
 	import { popupOk } from "$components/popup.svelte";

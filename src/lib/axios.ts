@@ -3,7 +3,7 @@ import axios from "axios";
 import { goto } from "$app/navigation";
 import { popupWarn } from "$components/popup.svelte";
 import { token } from "./store";
-import { t } from "./localization.svelte";
+import { t } from "./localization";
 
 axios.defaults.baseURL = env.PUBLIC_AXIOS_BASE_URL ?? "http://localhost:1300";
 

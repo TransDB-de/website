@@ -17,7 +17,7 @@
 	import EditableEntry from "$components/database/editableEntry.svelte";
 	import LoadMore from "$components/elements/loadMore.svelte";
 	import { popupError } from "$components/popup.svelte";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 
 	interface Props {
 		type?: "search" | "unapproved" | "database" | "blocklist";
@@ -31,57 +31,57 @@
 	let fetchFunction: (url: URL, pageCount?: number) => Promise<AxiosResponse<EntriesResponse>>;
 
 	untrack(() => {
-		switch (collectionType ?? "search") {
-			case "search": {
-				fetchFunction = async (url, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(url.searchParams.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries", { params });
-				};
-				break;
-			}
-
-			case "unapproved": {
-				fetchFunction = async (url, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(url.searchParams.entries());
-					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries/unapproved", { params });
-				};
-				break;
-			}
-
-			case "database": {
-				fetchFunction = async (_url, pageCount = 0) => {
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: filters.filters
-					});
-				};
-				break;
-			}
-
-			case "blocklist": {
-				fetchFunction = async (_url, pageCount = 0) => {
-					let _filters = { ...$filters };
-
-					if (!("boolTrue" in _filters)) {
-						_filters["boolTrue"] = [];
-					}
-
-					(_filters["boolTrue"] as string[]).push("blocked");
-
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: _filters
-					});
-				};
-				break;
-			}
-
-			default: {
-				console.error(`No such type for EntryCollection: "${collectionType}"`);
-			}
+	switch (collectionType ?? "search") {
+		case "search": {
+			fetchFunction = async (url, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(url.searchParams.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries", { params });
+			};
+			break;
 		}
+
+		case "unapproved": {
+			fetchFunction = async (url, pageCount = 0) => {
+				let params = Object.fromEntries<string | number>(url.searchParams.entries());
+				params.page = pageCount;
+				return await axios.get<EntriesResponse>("entries/unapproved", { params });
+			};
+			break;
+		}
+
+		case "database": {
+			fetchFunction = async (_url, pageCount = 0) => {
+				return axios.post<EntriesResponse>("entries/full", {
+					page: pageCount,
+					filter: filters.filters
+				});
+			};
+			break;
+		}
+
+		case "blocklist": {
+			fetchFunction = async (_url, pageCount = 0) => {
+				let _filters = { ...$filters };
+
+				if (!("boolTrue" in _filters)) {
+					_filters["boolTrue"] = [];
+				}
+
+				(_filters["boolTrue"] as string[]).push("blocked");
+
+				return axios.post<EntriesResponse>("entries/full", {
+					page: pageCount,
+					filter: _filters
+				});
+			};
+			break;
+		}
+
+		default: {
+			console.error(`No such type for EntryCollection: "${collectionType}"`);
+		}
+	}
 	});
 
 	let more: boolean = $state(true);

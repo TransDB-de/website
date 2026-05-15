@@ -5,7 +5,7 @@
 	import { popupError } from "$components/popup.svelte";
 	import EntryComponent from "$components/entry/entry.svelte";
 	import Button from "$components/elements/button.svelte";
-	import { t } from "$lib/localization.svelte";
+	import { t } from "$lib/localization";
 	import Loader from "$components/elements/loader.svelte";
 	import { goto } from "$app/navigation";
 

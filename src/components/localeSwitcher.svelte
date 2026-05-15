@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Languages } from "@lucide/svelte";
-	import { locales, currentLocale, localeMappings, setLocale } from "$lib/localization.svelte";
+	import { locales, currentLocale, localeMappings, setLocale } from "$lib/localization";
 
 	function onSelectChanged(event: Event) {
 		const target = event.target as HTMLSelectElement;
