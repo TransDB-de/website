@@ -30,7 +30,10 @@
 		onremove?: (entry: Entry) => void;
 	}
 
-	type NormalizedEntry = Omit<Entry, "blocked" | "approved"> & { blocked: boolean; approved: boolean };
+	type NormalizedEntry = Omit<Entry, "blocked" | "approved"> & {
+		blocked: boolean;
+		approved: boolean;
+	};
 
 	let { entry, onremove }: Props = $props();
 
@@ -44,8 +47,8 @@
 			meta: {
 				...e.meta,
 				offers: e.meta?.offers ?? [],
-				attributes: e.meta?.attributes ?? [],
-			},
+				attributes: e.meta?.attributes ?? []
+			}
 		};
 	}
 
@@ -75,11 +78,7 @@
 	}
 
 	/** Filters a string array with a type and a mapping */
-	function filterWithMapping(
-		fields: string[],
-		type: string,
-		mapping: Record<string, string[]>
-	) {
+	function filterWithMapping(fields: string[], type: string, mapping: Record<string, string[]>) {
 		return fields.filter((field) => {
 			if (!(type in mapping)) {
 				return false;
@@ -112,7 +111,10 @@
 			}
 		}
 
-		let changes = getObjChanges(savedEntry as unknown as Record<string, unknown>, _entry as unknown as Record<string, unknown>);
+		let changes = getObjChanges(
+			savedEntry as unknown as Record<string, unknown>,
+			_entry as unknown as Record<string, unknown>
+		);
 		changes = replaceFields(changes, "", null);
 
 		if (Object.keys(changes).length < 1) return;

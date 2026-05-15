@@ -12,8 +12,15 @@
 		[key: string]: unknown;
 	}
 
-	let { color = "", loading = false, light = false, iconOnly = false, children, onclick, ...rest }: Props =
-		$props();
+	let {
+		color = "",
+		loading = false,
+		light = false,
+		iconOnly = false,
+		children,
+		onclick,
+		...rest
+	}: Props = $props();
 </script>
 
 <button {onclick} class={color} class:light class:iconOnly {...rest}>

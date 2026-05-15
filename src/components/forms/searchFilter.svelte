@@ -52,10 +52,8 @@
 			let thisChange = changeId;
 
 			await timeout(
-					env.PUBLIC_FILTER_APPLY_TIMEOUT
-						? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000
-						: 600
-				);
+				env.PUBLIC_FILTER_APPLY_TIMEOUT ? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000 : 600
+			);
 
 			// if another change occured since the timer was started, do nothing
 			if (changeId === thisChange) {

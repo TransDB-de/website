@@ -7,8 +7,13 @@
 		[key: string]: unknown;
 	}
 
-	let { label = "", value = $bindable<string | number>(""), edit = false, number = false, ...rest }: Props =
-		$props();
+	let {
+		label = "",
+		value = $bindable<string | number>(""),
+		edit = false,
+		number = false,
+		...rest
+	}: Props = $props();
 </script>
 
 <div class="editable-input-field" {...rest}>

@@ -31,6 +31,7 @@
 		"@fontsource/fira-sans": "^5.2.7",
 		"@fontsource/poppins": "^5.2.7",
 		"@lucide/svelte": "next",
+		"@sveltejs/adapter-node": "^5.5.4",
 		"@transdb-de/filter-lang": "github:transdb-de/filter-lang",
 		"accept-language-parser": "^1.5.0",
 		"axios": "^1.7.9",
