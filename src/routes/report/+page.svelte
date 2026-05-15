@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
 	import ReportForm from "$components/forms/reportForm.svelte";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	interface Props {
 		data: PageData;

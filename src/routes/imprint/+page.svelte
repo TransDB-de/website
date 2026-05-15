@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 
 	interface Props {
 		data: PageData;

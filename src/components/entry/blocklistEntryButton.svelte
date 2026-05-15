@@ -5,7 +5,7 @@
 	import { confirm } from "$components/confirm.svelte";
 	import type { Entry } from "$models/entry.model";
 
-	import { t } from "$lib/localization";
+	import { t } from "$lib/localization.svelte";
 	import axios from "axios";
 
 	interface Props {
