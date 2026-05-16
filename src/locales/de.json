@@ -58,7 +58,12 @@
 		"heading": "Eintrag melden",
 		"note": "Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.",
 		"placeholder": "Beschreibe dein Anliegen / deine Änderungsvorschläge",
-		"categories": ["Kategorie wählen", "Änderung vorschlagen", "Nicht empfehlenswert", "Sonstiges"],
+		"categories": [
+			"Kategorie wählen",
+			"Änderung vorschlagen",
+			"Nicht empfehlenswert",
+			"Sonstiges"
+		],
 		"submit": "Melden",
 		"successPopup": "Meldung erfolgreich abgesendet"
 	},
@@ -316,7 +321,8 @@
 		"submit": "Abschicken",
 		"specials": "Besondere Angebote / Besonderheiten",
 		"categoryLabel": "Kategorie",
-		"academicTitle": "Titel"
+		"academicTitle": "Titel",
+		"contactDescription": "Gibt es eine spezifische Person in dieser Einrichtung, die hier empfohlen wird oder die verantwortlich für entsprechende Angebote ist?"
 	},
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",

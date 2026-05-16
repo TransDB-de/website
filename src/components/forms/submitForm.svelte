@@ -189,6 +189,10 @@
 
 	<h2>{t("submitForm.contact")}</h2>
 
+	<p>
+		{t("submitForm.contactDescription")}
+	</p>
+
 	<section>
 		<Select
 			bind:value={newEntry.academicTitle}
@@ -301,8 +305,6 @@
 			placeholder={t("submitForm.minAge") + "..."}
 		/>
 	{:else if newEntry.type === "therapist"}
-		<h3>{t("submitForm.subject")}</h3>
-
 		<Select bind:value={newEntry.meta.subject} required label={t("submitForm.subject")}>
 			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
 
