@@ -49,11 +49,19 @@
 <Form onsubmit={submit}>
 	<h1>Anmeldung für Teammitglieder</h1>
 
-	<Input bind:value={login.username} placeholder="E-Mail" required minlength="4" maxlength="256" />
+	<Input
+		bind:value={login.username}
+		label="E-Mail"
+		placeholder="CMS E-Mail..."
+		required
+		minlength="4"
+		maxlength="256"
+	/>
 	<Input
 		bind:value={login.password}
 		type="password"
-		placeholder="Passwort"
+		label="Passwort"
+		placeholder="CMS Passwort..."
 		required
 		minlength="8"
 		maxlength="2024"

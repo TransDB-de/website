@@ -9,6 +9,8 @@
 </svelte:head>
 
 <div class="content">
+	<h1>{t("submitForm.header")}</h1>
+
 	<SubmitForm />
 </div>
 

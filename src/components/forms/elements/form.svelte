@@ -34,7 +34,7 @@
 		display: flex;
 		flex-direction: column;
 
-		:global(div) {
+		:global(section) {
 			display: flex;
 			justify-content: space-between;
 			width: 100%;

@@ -88,8 +88,8 @@
 {/if}
 
 <Form onsubmit={submit} bind:this={formElement} class="report-form">
-	<Select required bind:value={report.type}>
-		<option value="" disabled selected>{t("reportForm.categories")[0]}</option>
+	<Select required bind:value={report.type} label={t("reportForm.categories")[0]}>
+		<option value="" disabled selected>{t("reportForm.categories")[0] + "..."}</option>
 		<option value="edit">{t("reportForm.categories")[1]}</option>
 		<option value="report">{t("reportForm.categories")[2]}</option>
 		<option value="other">{t("reportForm.categories")[3]}</option>
@@ -103,7 +103,8 @@
 
 	<Textarea
 		bind:value={report.message}
-		placeholder={t("reportForm.placeholder")}
+		label={t("reportForm.placeholder")}
+		placeholder={t("reportForm.placeholder") + "..."}
 		requried
 		minlength="10"
 		maxlength={1200}

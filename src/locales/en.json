@@ -314,7 +314,9 @@
 		],
 		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
 		"submit": "Submit",
-		"specials": "Additional offers / special features"
+		"specials": "Additional offers / special features",
+		"academicTitle": "Title",
+		"categoryLabel": "Category"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",

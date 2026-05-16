@@ -3,22 +3,33 @@
 
 	interface Props {
 		error?: string;
+		label: string | null;
 		for?: string;
 		children?: Snippet;
 		class?: string;
 	}
 
-	let { error = "", for: forElement = "", children, class: customClass = "" }: Props = $props();
+	let {
+		error = "",
+		for: forElement = "",
+		children,
+		class: customClass = "",
+		label
+	}: Props = $props();
 
 	let isError = $derived(!!error && error.length > 0);
 </script>
 
 <label class:isError class={customClass} for={forElement}>
+	{#if label !== null}
+		<b>
+			{label}
+		</b>
+	{/if}
+	{#if children}{@render children()}{/if}
 	{#if isError}
 		<span class="error">{error}</span>
 	{/if}
-
-	{#if children}{@render children()}{/if}
 </label>
 
 <style lang="scss">
@@ -38,6 +49,12 @@
 		display: flex;
 		flex-direction: column;
 		width: 100%;
+		gap: 0.4rem;
+
+		b {
+			margin-left: 2px;
+			font-weight: 500;
+		}
 
 		@include inputs {
 			@include input-box;
@@ -54,8 +71,7 @@
 	}
 
 	span.error {
-		position: absolute;
-		top: -18px;
+		margin-left: 2px;
 		font-size: 14px;
 		font-weight: 500;
 		color: var(--color-edge-error);

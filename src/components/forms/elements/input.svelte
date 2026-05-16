@@ -9,6 +9,7 @@
 		error?: string;
 		value?: string | number;
 		type?: string;
+		label: string | null;
 		[key: string]: unknown;
 	}
 
@@ -16,6 +17,7 @@
 		error = "",
 		value = $bindable<string | number | undefined>(),
 		type = "",
+		label,
 		...rest
 	}: Props = $props();
 
@@ -23,7 +25,7 @@
 	const id = "input" + uid;
 </script>
 
-<InputWrapper {error} for={id}>
+<InputWrapper {error} for={id} {label}>
 	{#if type == "number"}
 		<input bind:value type="number" {...rest} {id} />
 	{:else}
