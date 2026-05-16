@@ -6,31 +6,26 @@
 	import { popupError } from "$components/popup.svelte";
 
 	import axios from "axios";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	async function downloadBackup() {
-		try {
-			const res = await axios.get(`entries/backup`);
-			const data = new Blob([JSON.stringify(res.data)], { type: "application/json" });
-			const url = window.URL.createObjectURL(data);
-			const link = document.createElement("a");
-			const date = new Date();
-			const fileStr = `transdb_backup_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}h${date.getMinutes()}.json`;
-			link.href = url;
-			link.setAttribute("download", fileStr);
+		const result = await apiRequestHandler(axios.get(`entries/backup`));
 
-			document.body.appendChild(link);
-			link.click();
-			document.body.removeChild(link);
-		} catch (e: any) {
-			console.error(e);
-			if (e.response) {
-				popupError(
-					`Unbekannter Fehler! Datenbank konnte nicht heruntergeladen werden (${e.response.status})`
-				);
-			} else {
-				popupError(`Unbekannter Fehler! Bitte Developer kontaktieren`);
-			}
-		}
+		result.handleErrors({
+			default: () => popupError(`Unbekannter Fehler! Datenbank konnte nicht heruntergeladen werden`)
+		});
+
+		const data = new Blob([JSON.stringify(result.data)], { type: "application/json" });
+		const url = window.URL.createObjectURL(data);
+		const link = document.createElement("a");
+		const date = new Date();
+		const fileStr = `transdb_backup_${date.getFullYear()}_${date.getMonth() + 1}_${date.getDate()}_${date.getHours()}h${date.getMinutes()}.json`;
+		link.href = url;
+		link.setAttribute("download", fileStr);
+
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	}
 </script>
 
