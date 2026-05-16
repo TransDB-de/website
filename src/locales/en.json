@@ -58,12 +58,7 @@
 		"heading": "Report entry",
 		"note": "When proposing a change, please provide the new data.",
 		"placeholder": "Describe your propsed change / details about your report",
-		"categories": [
-			"Select category",
-			"Propose modification",
-			"Not recommendable",
-			"Other"
-		],
+		"categories": ["Select category", "Propose modification", "Not recommendable", "Other"],
 		"submit": "Report",
 		"successPopup": "Report successful sent"
 	},

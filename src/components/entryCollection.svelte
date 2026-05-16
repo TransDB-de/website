@@ -5,12 +5,12 @@
 	import { onMount, onDestroy, untrack } from "svelte";
 	import { fade } from "svelte/transition";
 	import { flip } from "svelte/animate";
-	import { page, navigating } from "$app/stores";
+	import { page } from "$app/stores";
 	import { browser } from "$app/environment";
 
 	import { currentLocation } from "$lib/store";
 	import { filters } from "$lib/filterLang.client";
-	import { removeFromArray, timeout } from "$lib/utils";
+	import { removeFromArray } from "$lib/utils";
 	import type { EntriesResponse, Entry } from "$models/entry.model";
 
 	import EntryComponent from "$components/entry/entry.svelte";

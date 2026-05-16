@@ -6,14 +6,13 @@
 
 	import Button from "$components/elements/button.svelte";
 	import ErrorBox from "$components/elements/errorBox.svelte";
-	import { popupOk, popupError, popupWarn } from "$components/popup.svelte";
+	import { popupError, popupWarn } from "$components/popup.svelte";
 
 	import type { Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
-	import axios, { type AxiosResponse } from "axios";
+	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import { parseValidationErrors, type NestedDict } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
 	import { slide } from "svelte/transition";
 

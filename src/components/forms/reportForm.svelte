@@ -5,7 +5,7 @@
 	import Button from "$components/elements/button.svelte";
 	import Loader from "$components/elements/loader.svelte";
 	import Select from "$formElements/select.svelte";
-	import { popupError, popupOk, popupWarn } from "$components/popup.svelte";
+	import { popupError, popupOk } from "$components/popup.svelte";
 
 	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
