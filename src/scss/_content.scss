@@ -19,11 +19,11 @@
 
 	& > :global(p),
 	& > :global(form > p) {
-		margin: 0 0 20px 15px;
+		margin: 0 0 20px 10px;
 		line-height: 1.3;
 
 		@include media-mobile {
-			margin: 0 0 20px 8px;
+			margin: 0 0 20px 4px;
 		}
 	}
 

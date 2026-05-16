@@ -314,7 +314,10 @@
 		],
 		"info": "Please note your entry is first manually checked by our team, before it will be visible on the site.",
 		"submit": "Submit",
-		"specials": "Additional offers / special features"
+		"specials": "Additional offers / special features",
+		"academicTitle": "Title",
+		"categoryLabel": "Category",
+		"contactDescription": "Is there a specific person in this facility who is recommended here or who is responsible for corresponding offers?"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",

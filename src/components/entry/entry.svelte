@@ -15,7 +15,7 @@
 
 	import { Phone, Map, Mail, Globe, Edit, Share2, Navigation, AlertTriangle } from "@lucide/svelte";
 
-	import { subjectMapping, typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
+	import { subjectMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 
 	interface Props {
 		entry: Entry;

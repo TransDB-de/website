@@ -5,12 +5,12 @@
 	import { onMount, onDestroy, untrack } from "svelte";
 	import { fade } from "svelte/transition";
 	import { flip } from "svelte/animate";
-	import { page, navigating } from "$app/stores";
+	import { page } from "$app/stores";
 	import { browser } from "$app/environment";
 
 	import { currentLocation } from "$lib/store";
 	import { filters } from "$lib/filterLang.client";
-	import { removeFromArray, timeout } from "$lib/utils";
+	import { removeFromArray } from "$lib/utils";
 	import type { EntriesResponse, Entry } from "$models/entry.model";
 
 	import EntryComponent from "$components/entry/entry.svelte";
@@ -18,6 +18,8 @@
 	import LoadMore from "$components/elements/loadMore.svelte";
 	import { popupError } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
+	import { afterNavigate } from "$app/navigation";
 
 	interface Props {
 		type?: "search" | "unapproved" | "database" | "blocklist";
@@ -33,25 +35,25 @@
 	untrack(() => {
 		switch (collectionType ?? "search") {
 			case "search": {
-				fetchFunction = async (url, pageCount = 0) => {
+				fetchFunction = (url, pageCount = 0) => {
 					let params = Object.fromEntries<string | number>(url.searchParams.entries());
 					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries", { params });
+					return axios.get<EntriesResponse>("entries", { params });
 				};
 				break;
 			}
 
 			case "unapproved": {
-				fetchFunction = async (url, pageCount = 0) => {
+				fetchFunction = (url, pageCount = 0) => {
 					let params = Object.fromEntries<string | number>(url.searchParams.entries());
 					params.page = pageCount;
-					return await axios.get<EntriesResponse>("entries/unapproved", { params });
+					return axios.get<EntriesResponse>("entries/unapproved", { params });
 				};
 				break;
 			}
 
 			case "database": {
-				fetchFunction = async (_url, pageCount = 0) => {
+				fetchFunction = (_url, pageCount = 0) => {
 					return axios.post<EntriesResponse>("entries/full", {
 						page: pageCount,
 						filter: filters.filters
@@ -61,7 +63,7 @@
 			}
 
 			case "blocklist": {
-				fetchFunction = async (_url, pageCount = 0) => {
+				fetchFunction = (_url, pageCount = 0) => {
 					let _filters = { ...$filters };
 
 					if (!("boolTrue" in _filters)) {
@@ -97,7 +99,7 @@
 	});
 
 	// React on navigating eg. route and query changes to reload the entries with new filters
-	const unsubscribeNav = navigating.subscribe((nav) => {
+	afterNavigate((nav) => {
 		if (nav && nav.to?.url.pathname === "/search" && nav.from?.url.pathname === "/search") {
 			loadInitialEntries(nav.to.url);
 		}
@@ -105,36 +107,28 @@
 
 	onDestroy(() => {
 		$currentLocation = "";
-		unsubscribeNav();
 		unsubscribeFilters();
 	});
 
 	async function loadInitialEntries(url: URL) {
 		if (!browser) return;
 
-		let res: AxiosResponse<EntriesResponse>;
 		loading = true;
 
-		try {
-			res = await fetchFunction(url);
-		} catch (e: any) {
-			if (e.response) {
-				popupError(`${t("errors.failedToLoad")} (${e.response.status})`);
-			} else {
-				popupError(t("errors.unknown"));
-				console.error(e);
-			}
+		const result = await apiRequestHandler(fetchFunction(url));
 
-			loading = false;
-			return;
-		}
-
-		entries = res.data.entries;
-		$currentLocation = res.data.locationName ?? "";
-		more = res.data.more;
+		result.handleErrors({
+			default: (status) => popupError(`${t("errors.failedToLoad")} (${status})`)
+		});
 
 		loading = false;
-		pageCount = 0;
+
+		if (result.success && result.data) {
+			entries = result.data.entries;
+			$currentLocation = result.data.locationName ?? "";
+			more = result.data.more;
+			pageCount = 0;
+		}
 	}
 
 	async function loadNextPage() {
@@ -144,36 +138,22 @@
 		let params = Object.fromEntries<string | number>($page.url.searchParams.entries());
 		params.page = pageCount + 1;
 
-		let res: AxiosResponse<EntriesResponse>;
-
-		try {
-			res = await fetchFunction($page.url, params.page as number);
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				loading = false;
-				return;
-			}
-			switch (e.response.status) {
-				case 422: {
-					popupError(t("errors.invalidFilter"));
-					break;
-				}
-
-				default: {
-					popupError(`${t("errors.failedToLoad")} (${e.response.status})`);
-					break;
-				}
-			}
-			loading = false;
-			return;
-		}
-
-		entries = [...entries, ...res.data.entries];
-		more = res.data.more;
-		pageCount = params.page as number;
+		const result = await apiRequestHandler(fetchFunction($page.url, params.page));
 
 		loading = false;
+
+		if (result.success && result.data) {
+			entries = [...entries, ...result.data.entries];
+			more = result.data.more;
+			pageCount = params.page as number;
+		}
+
+		if (result.handleErrors) {
+			result.handleErrors({
+				422: () => popupError(t("errors.invalidFilter")),
+				default: (status) => popupError(`${t("errors.failedToLoad")} (${status})`)
+			});
+		}
 	}
 
 	function removeEntry(entry: Entry) {

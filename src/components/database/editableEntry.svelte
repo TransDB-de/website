@@ -25,6 +25,7 @@
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte";
 
 	import { AlertTriangle, Save, Edit, X, Link } from "@lucide/svelte";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		entry: Entry;
@@ -130,33 +131,29 @@
 
 		edit = false;
 
-		try {
-			await axios.patch(`entries/${_entry._id}/edit`, changes);
+		const result = await apiRequestHandler(axios.patch(`entries/${_entry._id}/edit`, changes));
 
+		result.handleErrors({
+			default: () => popupError("Fehler beim Speichern")
+		});
+
+		if (result.success) {
 			savedEntry = JSON.parse(JSON.stringify(_entry));
-
 			popupOk("Änderungen gespeichert");
-		} catch (e: any) {
-			if (e.response) {
-				popupError(`Fehler beim Speichern (${e.response.status})`);
-			} else {
-				popupError("Unbekannter Fehler beim Speichern");
-			}
 		}
 	}
 
 	async function refetchGeo() {
 		geoNotRefetched = false;
 
-		try {
-			await axios.patch(`entries/${entry._id}/updateGeo`);
+		const result = await apiRequestHandler(axios.patch(`entries/${_entry._id}/updateGeo`));
+
+		result.handleErrors({
+			default: () => popupError("Fehler beim Aktualisieren der Geodaten")
+		});
+
+		if (result.success) {
 			popupOk("Geodaten-Update angefragt. Bitte warte ein wenig und lade die Seite dann neu");
-		} catch (e: any) {
-			if (e.response) {
-				popupError(`Fehler (${e.response.status})`);
-			} else {
-				popupError("Unbekannter Fehler");
-			}
 		}
 	}
 

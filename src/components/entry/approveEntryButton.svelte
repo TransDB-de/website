@@ -6,6 +6,7 @@
 
 	import { t } from "$lib/localization.svelte";
 	import axios from "axios";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		entry: Entry;
@@ -18,15 +19,18 @@
 
 	async function approve() {
 		loading = true;
-		try {
-			await axios.patch(`/entries/${props.entry._id}/approve`);
-			popupOk("Eintrag freigeschaltet");
-			props.onremove?.(props.entry);
-		} catch (e) {
-			popupError("Fehler beim Freischalten");
-		}
+
+		const result = await apiRequestHandler(axios.patch(`/entries/${props.entry._id}/approve`));
+		result.handleErrors({
+			default: () => popupError("Fehler beim Freischalten")
+		});
 
 		loading = false;
+
+		if (result.success) {
+			popupOk("Eintrag freigeschaltet");
+			props.onremove?.(props.entry);
+		}
 	}
 </script>
 

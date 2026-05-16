@@ -12,11 +12,10 @@
 </script>
 
 <span class:isError>
+	{#if props.children}{@render props.children()}{/if}
 	{#if isError}
 		<span class="error">{props.error}</span>
 	{/if}
-
-	{#if props.children}{@render props.children()}{/if}
 </span>
 
 <style lang="scss">
@@ -40,9 +39,7 @@
 			font-size: 14px;
 			font-weight: 500;
 			color: var(--color-edge-error);
-			position: absolute;
-			left: 0;
-			top: -18px;
+			margin-left: 2px;
 		}
 	}
 </style>

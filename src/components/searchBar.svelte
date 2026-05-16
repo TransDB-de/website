@@ -3,7 +3,7 @@
 
 	import { Search, MapPin } from "@lucide/svelte";
 
-	import { isMobile, currentLocation } from "$lib/store";
+	import { isMobile } from "$lib/store";
 	import { page } from "$app/state";
 	import { afterNavigate, goto } from "$app/navigation";
 

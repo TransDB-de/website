@@ -6,21 +6,22 @@
 	import InputWrapper from "./inputWrapper.svelte";
 
 	interface Props {
+		label: string;
 		error?: string;
 		value?: string;
 		maxlength?: number;
 		[key: string]: unknown;
 	}
 
-	let { error = "", value = $bindable(""), maxlength = 1200, ...rest }: Props = $props();
+	let { error = "", value = $bindable(""), maxlength = 1200, label, ...rest }: Props = $props();
 
 	uid += 1;
 	const id = "textarea" + uid;
 </script>
 
-<InputWrapper {error} for={id}>
+<InputWrapper {error} for={id} {label}>
 	<textarea rows="4" bind:value {maxlength} {...rest} {id}></textarea>
-	{#if value.length > maxlength - 50}
+	{#if value && value.length > maxlength - 50}
 		<span> {value.length} / {maxlength} </span>
 	{/if}
 </InputWrapper>

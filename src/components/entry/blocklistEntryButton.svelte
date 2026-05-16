@@ -7,6 +7,7 @@
 
 	import { t } from "$lib/localization.svelte";
 	import axios from "axios";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		entry: Entry;
@@ -22,15 +23,18 @@
 		if (!confirmed) return;
 
 		loading = true;
-		try {
-			await axios.patch(`/entries/${props.entry._id}/blocklist`);
-			popupWarn("Der Eintrag wurde auf die Blocklist gesetzt");
-			props.onremove?.(props.entry);
-		} catch (e) {
-			popupError("Fehler beim Blocklisten des Eintrags");
-		}
+
+		const result = await apiRequestHandler(axios.patch(`/entries/${props.entry._id}/blocklist`));
+		result.handleErrors({
+			default: () => popupError("Fehler beim Blocklisten des Eintrags")
+		});
 
 		loading = false;
+
+		if (result.success) {
+			popupWarn("Der Eintrag wurde auf die Blocklist gesetzt");
+			props.onremove?.(props.entry);
+		}
 	}
 </script>
 

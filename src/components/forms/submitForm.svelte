@@ -6,14 +6,13 @@
 
 	import Button from "$components/elements/button.svelte";
 	import ErrorBox from "$components/elements/errorBox.svelte";
-	import { popupOk, popupError, popupWarn } from "$components/popup.svelte";
+	import { popupError, popupWarn } from "$components/popup.svelte";
 
 	import type { Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import { parseValidationErrors, type NestedDict } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
 	import { slide } from "svelte/transition";
 
@@ -25,6 +24,8 @@
 		academicTitleMapping
 	} from "$lib/entryMappings";
 	import { onMount } from "svelte";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
+	import Textarea from "./elements/textarea.svelte";
 
 	let loading = $state(false);
 	let errors: ValidationErrorMap = $state({});
@@ -105,49 +106,27 @@
 	async function submit() {
 		loading = true;
 
-		try {
-			await axios.post("entries", newEntry);
-			popupOk(t("submitForm.submittedPopup"));
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				loading = false;
-				return;
-			}
-			switch (e.response.status) {
-				case 422: {
-					errors = parseValidationErrors(e.response.data.problems);
-					popupWarn(t("errors.checkInput"));
-					break;
-				}
-				case 429: {
-					popupError(t("errors.tooMany"));
-					break;
-				}
-				default: {
-					popupError(`${t("errors.unknown")} (${e.response.status})`);
-					break;
-				}
-			}
+		const result = await apiRequestHandler(axios.post("entries", newEntry));
 
-			loading = false;
-			return;
-		}
+		errors = result.handleErrors({
+			422: () => popupWarn(t("errors.checkInput")),
+			429: () => popupError(t("errors.tooMany")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
 
 		loading = false;
-		formElement.reset();
 
-		if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
-
-		goto("/submitted");
+		if (result.success) {
+			formElement.reset();
+			if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
+			goto("/submitted");
+		}
 	}
 </script>
 
 <Form onsubmit={submit} bind:this={formElement}>
-	<h1>{t("submitForm.header")}</h1>
-
-	<Select bind:value={newEntry.type} onchange={resetMeta}>
-		<option value="" disabled selected> {t("submitForm.selectCategory")} </option>
+	<Select bind:value={newEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
+		<option value="" disabled selected> {t("submitForm.selectCategory") + "..."} </option>
 
 		{#each sanitizedTypeMapping as type (type)}
 			<option value={type}> {tEntry("typeMapping")[type]} </option>
@@ -157,7 +136,8 @@
 	{#if newEntry.type}
 		<Input
 			bind:value={newEntry.name}
-			placeholder={typePlaceholder}
+			label={typePlaceholder}
+			placeholder={typePlaceholder + "..."}
 			required
 			minlength="1"
 			maxlength="160"
@@ -167,27 +147,30 @@
 
 	<h2>{t("submitForm.address")}</h2>
 
-	<div>
+	<section>
 		<Input
 			bind:value={newEntry.address.street}
-			placeholder={t("submitForm.street")}
+			label={t("submitForm.street")}
+			placeholder={t("submitForm.street") + "..."}
 			minlength="0"
 			maxlength="50"
 			error={errors["address.street"]}
 		/>
 		<Input
 			bind:value={newEntry.address.house}
-			placeholder={t("submitForm.house")}
+			label={t("submitForm.house")}
+			placeholder={t("submitForm.house") + "..."}
 			minlength="0"
 			maxlength="10"
 			error={errors["address.house"]}
 		/>
-	</div>
+	</section>
 
-	<div>
+	<section>
 		<Input
 			bind:value={newEntry.address.city}
-			placeholder={t("submitForm.city")}
+			label={t("submitForm.city")}
+			placeholder={t("submitForm.city") + "..."}
 			required
 			minlength="2"
 			maxlength="50"
@@ -195,17 +178,26 @@
 		/>
 		<Input
 			bind:value={newEntry.address.plz}
-			placeholder={t("submitForm.plz")}
+			label={t("submitForm.plz")}
+			placeholder={t("submitForm.plz") + "..."}
 			minlength="0"
 			maxlength="10"
 			error={errors["address.plz"]}
 		/>
-	</div>
+	</section>
 
 	<h2>{t("submitForm.contact")}</h2>
 
-	<div>
-		<Select bind:value={newEntry.academicTitle} onchange={resetMeta}>
+	<p>
+		{t("submitForm.contactDescription")}
+	</p>
+
+	<section>
+		<Select
+			bind:value={newEntry.academicTitle}
+			onchange={resetMeta}
+			label={t("submitForm.academicTitle")}
+		>
 			<option value={null} selected> {t("submitForm.noTitle")} </option>
 
 			{#each academicTitleMapping as title (title)}
@@ -214,26 +206,29 @@
 		</Select>
 		<Input
 			bind:value={newEntry.firstName}
-			placeholder={t("submitForm.firstName")}
+			label={t("submitForm.firstName")}
+			placeholder={t("submitForm.firstName") + "..."}
 			minlength="2"
 			maxlength="30"
 			error={errors["firstName"]}
 		/>
 		<Input
 			bind:value={newEntry.lastName}
-			placeholder={t("submitForm.lastName")}
+			label={t("submitForm.lastName")}
+			placeholder={t("submitForm.lastName") + "..."}
 			minlength="2"
 			maxlength="30"
 			error={errors["lastName"]}
 		/>
-	</div>
+	</section>
 
 	<h2>{t("submitForm.contactDetails")}</h2>
 
 	<Input
 		bind:value={newEntry.email}
 		type="email"
-		placeholder={t("submitForm.email")}
+		label={t("submitForm.email")}
+		placeholder={t("submitForm.email") + "..."}
 		minlength="5"
 		maxlength="320"
 		error={errors["email"]}
@@ -241,7 +236,8 @@
 	<Input
 		bind:value={newEntry.telephone}
 		type="text"
-		placeholder={t("submitForm.tel")}
+		label={t("submitForm.tel")}
+		placeholder={t("submitForm.tel") + "..."}
 		minlength="5"
 		maxlength="30"
 		error={errors["telephone"]}
@@ -249,7 +245,8 @@
 	<Input
 		bind:value={newEntry.website}
 		type="url"
-		placeholder={t("submitForm.website")}
+		label={t("submitForm.website")}
+		placeholder={t("submitForm.website") + "..."}
 		minlength="3"
 		maxlength="500"
 		error={errors["website"]}
@@ -289,21 +286,25 @@
 		</p>
 	{/if}
 
-	<Input
+	<Textarea
 		bind:value={newEntry.meta.specials}
 		onfocus={() => specialsFocus(true)}
 		onblur={() => specialsFocus(false)}
 		type="text"
-		placeholder={t("submitForm.specials")}
-		maxlength="280"
+		label={t("submitForm.specials")}
+		placeholder={t("submitForm.specials") + "..."}
+		maxlength={280}
 	/>
 
 	{#if newEntry.type === "group"}
-		<Input bind:value={newEntry.meta.minAge} type="number" placeholder={t("submitForm.minAge")} />
+		<Input
+			bind:value={newEntry.meta.minAge}
+			type="number"
+			label={t("submitForm.minAge")}
+			placeholder={t("submitForm.minAge") + "..."}
+		/>
 	{:else if newEntry.type === "therapist"}
-		<h3>{t("submitForm.subject")}</h3>
-
-		<Select bind:value={newEntry.meta.subject} required>
+		<Select bind:value={newEntry.meta.subject} required label={t("submitForm.subject")}>
 			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
 
 			{#each subjectMapping[newEntry.type] as subject (subject)}
@@ -312,9 +313,7 @@
 		</Select>
 	{/if}
 
-	<h3>{t("submitForm.accessibility")}</h3>
-
-	<Select bind:value={newEntry.accessible}>
+	<Select bind:value={newEntry.accessible} required label={t("submitForm.accessibility")}>
 		<option value="unknown" selected> {t("submitForm.accessibilityUnknown")} </option>
 		<option value="yes"> {t("submitForm.accessible")} </option>
 		<option value="no"> {t("submitForm.notAccessible")} </option>

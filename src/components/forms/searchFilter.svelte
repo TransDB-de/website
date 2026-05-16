@@ -178,7 +178,13 @@
 
 		<p class="sub-title">{t("searchFilter.categories")}</p>
 
-		<Select name="type" class="mobile" bind:value={selectedType} onchange={typeUpdated}>
+		<Select
+			name="type"
+			class="mobile"
+			bind:value={selectedType}
+			onchange={typeUpdated}
+			label={null}
+		>
 			{#each typeMapping as type (type)}
 				<option value={type}>
 					{tEntry("typeMapping")[type]}
@@ -235,6 +241,7 @@
 				type="text"
 				bind:value={textFilter}
 				onchange={filtersUpdated}
+				label={null}
 				placeholder={t("searchFilter.textSearchPlaceholder")}
 				class="text-input {textFilter ? 'has-text' : ''}"
 				maxlength="120"

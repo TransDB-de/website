@@ -4,10 +4,10 @@
 
 <script lang="ts">
 	import InputWrapper from "./inputWrapper.svelte";
-	import { ChevronDown } from "@lucide/svelte";
 	import type { Snippet } from "svelte";
 
 	interface Props {
+		label: string | null;
 		error?: string;
 		value?: string;
 		class?: string;
@@ -20,6 +20,7 @@
 		value = $bindable(""),
 		class: customClass = "",
 		children,
+		label,
 		...rest
 	}: Props = $props();
 
@@ -27,27 +28,15 @@
 	const id = "select" + uid;
 </script>
 
-<InputWrapper {error} class={customClass} for={id}>
+<InputWrapper {error} class={customClass} for={id} {label}>
 	<select bind:value {...rest} {id}>
 		{#if children}{@render children()}{/if}
 	</select>
-	<ChevronDown />
 </InputWrapper>
 
 <style lang="scss">
 	select {
-		-moz-appearance: none;
-		-webkit-appearance: none;
 		cursor: pointer;
 		padding-right: 28px;
-	}
-
-	select ~ :global(.lucide) {
-		position: absolute;
-		color: var(--color-edge-dimmed);
-		pointer-events: none;
-		right: 6px;
-		width: 24px;
-		top: 8px;
 	}
 </style>
