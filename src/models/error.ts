@@ -9,3 +9,5 @@ export interface ApiValidationError {
 export interface ValidationErrorMap {
 	[key: string]: string;
 }
+
+export class AuthFailedError extends Error {}

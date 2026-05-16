@@ -6,6 +6,7 @@ import { page } from "$app/stores";
 import { popupWarn } from "$components/popup.svelte";
 import { token } from "./store";
 import { t } from "./localization.svelte";
+import { AuthFailedError } from "$models/error";
 
 axios.defaults.baseURL = env.PUBLIC_AXIOS_BASE_URL ?? "http://localhost:1300";
 
@@ -19,7 +20,7 @@ axios.interceptors.response.use(
 			goto("/login");
 			popupWarn(t("warns.reLogin"));
 			token.set("");
-			return Promise.reject(err);
+			return Promise.reject(new AuthFailedError());
 		}
 
 		if (err.response?.status === 403 && err.response?.data.error === "invalid_csrf_token") {

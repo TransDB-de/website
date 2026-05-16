@@ -19,6 +19,7 @@
 	import { t } from "$lib/localization.svelte";
 	import { parseValidationErrors } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		ReportNote: Component;
@@ -39,66 +40,40 @@
 	let errors: ValidationErrorMap = $state({});
 
 	onMount(async () => {
-		try {
-			let res = await axios.get<Entry>("/entries/" + $page.url.searchParams.get("id"));
-			entry = res.data;
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				return;
-			}
-			switch (e.response.status) {
-				case 404: {
-					popupError(t("errors.entryNotFound"));
-					break;
-				}
-				default: {
-					popupError(`${t("errors.unknown")} (${e.response.status})`);
-					break;
-				}
-			}
+		const result = await apiRequestHandler<Entry>(
+			axios.get("/entries/" + $page.url.searchParams.get("id"))
+		);
+
+		errors = result.handleErrors({
+			404: () => popupError(t("errors.entryNotFound")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		if (result.success && result.data) {
+			entry = result.data;
 		}
 	});
 
 	async function submit() {
 		loading = true;
 
-		try {
-			await axios.post<Entry>("/report", report);
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				loading = false;
-				return;
-			}
-			switch (e.response.status) {
-				case 422: {
-					errors = parseValidationErrors(e.response.data.problems);
-					popupWarn(t("errors.checkInput"));
-					break;
-				}
-				case 500: {
-					popupError(t("errors.reportFailed"));
-					break;
-				}
-				case 429: {
-					popupError(t("errors.tooMany"));
-					break;
-				}
-				default: {
-					popupError(`${t("errors.unknown")} (${e.response.status})`);
-					break;
-				}
-			}
-
-			loading = false;
-			return;
-		}
+		const result = await apiRequestHandler(axios.post("/report", report));
 
 		loading = false;
-		formElement.reset();
-		popupOk(t("reportForm.successPopup"));
-		goto("/reported");
+
+		if (result.success) {
+			formElement.reset();
+			popupOk(t("reportForm.successPopup"));
+			goto("/reported");
+		}
+
+		if (result.handleErrors) {
+			errors = result.handleErrors({
+				500: () => popupError(t("errors.reportFailed")),
+				429: () => popupError(t("errors.tooMany")),
+				default: () => popupError(`${t("errors.unknown")}`)
+			});
+		}
 	}
 </script>
 

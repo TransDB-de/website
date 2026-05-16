@@ -11,7 +11,7 @@
 	import type { Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
-	import axios from "axios";
+	import axios, { type AxiosResponse } from "axios";
 	import { goto } from "$app/navigation";
 	import { parseValidationErrors, type NestedDict } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
@@ -25,6 +25,7 @@
 		academicTitleMapping
 	} from "$lib/entryMappings";
 	import { onMount } from "svelte";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	let loading = $state(false);
 	let errors: ValidationErrorMap = $state({});
@@ -105,41 +106,21 @@
 	async function submit() {
 		loading = true;
 
-		try {
-			await axios.post("entries", newEntry);
-			popupOk(t("submitForm.submittedPopup"));
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				loading = false;
-				return;
-			}
-			switch (e.response.status) {
-				case 422: {
-					errors = parseValidationErrors(e.response.data.problems);
-					popupWarn(t("errors.checkInput"));
-					break;
-				}
-				case 429: {
-					popupError(t("errors.tooMany"));
-					break;
-				}
-				default: {
-					popupError(`${t("errors.unknown")} (${e.response.status})`);
-					break;
-				}
-			}
+		const result = await apiRequestHandler(axios.post("entries", newEntry));
 
-			loading = false;
-			return;
-		}
+		errors = result.handleErrors({
+			422: () => popupWarn(t("errors.checkInput")),
+			429: () => popupError(t("errors.tooMany")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
 
 		loading = false;
-		formElement.reset();
 
-		if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
-
-		goto("/submitted");
+		if (result.success) {
+			formElement.reset();
+			if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
+			goto("/submitted");
+		}
 	}
 </script>
 

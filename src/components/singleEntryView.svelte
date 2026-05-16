@@ -8,6 +8,7 @@
 	import { t } from "$lib/localization.svelte";
 	import Loader from "$components/elements/loader.svelte";
 	import { goto } from "$app/navigation";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		id: string;
@@ -18,24 +19,16 @@
 	let entry: Entry | null = $state(null);
 
 	onMount(async () => {
-		try {
-			let res = await axios.get<Entry>("/entries/" + props.id);
-			entry = res.data;
-		} catch (e: any) {
-			if (!e.response) {
-				popupError(t("errors.unknown"));
-				return;
-			}
-			switch (e.response.status) {
-				case 404: {
-					popupError(t("errors.entryNotFound"));
-					break;
-				}
-				default: {
-					popupError(`${t("errors.unknown")} (${e.response.status})`);
-					break;
-				}
-			}
+		const result = await apiRequestHandler(axios.get<Entry>("/entries/" + props.id));
+
+		result.handleErrors({
+			404: () => popupError(t("errors.entryNotFound")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		if (result.success && result.data) {
+			entry = result.data;
+			return;
 		}
 	});
 

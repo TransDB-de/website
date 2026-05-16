@@ -7,6 +7,7 @@
 
 	import { t } from "$lib/localization.svelte";
 	import axios from "axios";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 
 	interface Props {
 		entry: Entry;
@@ -23,15 +24,18 @@
 		if (!success) return;
 		loading = true;
 
-		try {
-			await axios.delete(`entries/${props.entry._id}`);
-			popupOk("Eintrag gelöscht");
-			props.onremove?.(props.entry);
-		} catch (e) {
-			popupError("Unbekannter fehler beim Löschen");
-		}
+		const result = await apiRequestHandler(axios.delete(`entries/${props.entry._id}`));
 
 		loading = false;
+
+		result.handleErrors({
+			default: () => popupError("Fehler beim Löschen des Eintrags")
+		});
+
+		if (result.success) {
+			popupOk("Eintrag gelöscht");
+			props.onremove?.(props.entry);
+		}
 	}
 </script>
 

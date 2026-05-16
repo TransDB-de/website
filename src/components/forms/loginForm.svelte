@@ -9,6 +9,8 @@
 
 	import { token, userdata } from "$lib/store";
 	import { popupError, popupOk } from "$components/popup.svelte";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
+	import { tick } from "svelte";
 
 	let loading = $state(false);
 
@@ -20,37 +22,27 @@
 	async function submit() {
 		loading = true;
 
-		try {
-			let loginResponse: LoginResponse = (await axios.post<LoginResponse>("access/login", login))
-				.data;
+		const result = await apiRequestHandler(axios.post<LoginResponse>("access/login", login));
 
-			$token = loginResponse.token;
-			$userdata = loginResponse.user;
-
-			popupOk("Angemeldet");
-		} catch (e: any) {
-			switch (e.response.status) {
-				case 401: {
-					popupError("Ungültige Anmeldedaten");
-					break;
-				}
-				case 429: {
-					popupError("Zu viele Versuche");
-					break;
-				}
-				default: {
-					popupError(`Unbekannter Fehler (${e.response.status})`);
-					break;
-				}
-			}
-
-			loading = false;
-			return;
-		}
+		result.handleErrors({
+			401: () => popupError("Ungültige Anmeldedaten"),
+			429: () => popupError("Zu viele Versuche"),
+			default: () => popupError(`Unbekannter Fehler`)
+		});
 
 		loading = false;
+
+		if (result.success && result.data) {
+			$token = result.data.token;
+			$userdata = result.data.user;
+
+			await tick();
+
+			goto("/manage");
+			popupOk("Angemeldet");
+		}
+
 		login = { username: "", password: "" };
-		goto("/manage");
 	}
 </script>
 
