@@ -317,7 +317,13 @@
 		"specials": "Additional offers / special features",
 		"academicTitle": "Title",
 		"categoryLabel": "Category",
-		"contactDescription": "Is there a specific person in this facility who is recommended here or who is responsible for corresponding offers?"
+		"contactDescription": "Is there a specific person in this facility who is recommended here or who is responsible for corresponding offers?",
+		"editHeader": "Edit Entry",
+		"save": "Save",
+		"savedPopup": "Changes saved",
+		"adminSection": "Administration",
+		"blocked": "Blocked",
+		"approved": "Approved"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",

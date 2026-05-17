@@ -3,17 +3,20 @@
 	import Input from "$formElements/input.svelte";
 	import Select from "$formElements/select.svelte";
 	import Checkbox from "$formElements/checkbox.svelte";
+	import Textarea from "./elements/textarea.svelte";
 
 	import Button from "$components/elements/button.svelte";
 	import ErrorBox from "$components/elements/errorBox.svelte";
-	import { popupError, popupWarn } from "$components/popup.svelte";
+	import { popupOk, popupError, popupWarn } from "$components/popup.svelte";
 
 	import type { Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
+	import { getObjChanges, replaceFields } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import { slide } from "svelte/transition";
 
 	import {
@@ -23,9 +26,16 @@
 		subjectMapping,
 		academicTitleMapping
 	} from "$lib/entryMappings";
-	import { onMount } from "svelte";
-	import { apiRequestHandler } from "$lib/apiRequestHandler";
-	import Textarea from "./elements/textarea.svelte";
+
+	interface Props {
+		entry?: Entry;
+		mode?: "create" | "edit";
+		onSuccess?: () => void;
+	}
+
+	let { entry, mode = "create", onSuccess }: Props = $props();
+
+	let isEdit = $derived(mode === "edit");
 
 	let loading = $state(false);
 	let errors: ValidationErrorMap = $state({});
@@ -34,43 +44,56 @@
 
 	const sanitizedTypeMapping = $derived(typeMapping.filter((v) => v));
 
-	const props: { entry?: Entry } = $props();
+	function blankEntry(): Entry {
+		return {
+			type: "",
+			name: null,
+			academicTitle: null,
+			firstName: null,
+			lastName: null,
+			telephone: null,
+			email: null,
+			website: null,
+			accessible: "unknown",
+			blocked: false,
+			approved: false,
+			address: {
+				city: null,
+				plz: null,
+				street: null,
+				house: null
+			},
+			meta: {
+				attributes: [],
+				offers: [],
+				specials: null,
+				subject: null,
+				minAge: undefined
+			}
+		} as unknown as Entry;
+	}
 
-	let newEntry: Entry = $state({
-		type: "",
-		name: null,
-		academicTitle: null,
-		firstName: null,
-		lastName: null,
-		telephone: null,
-		email: null,
-		website: null,
-		accessible: "unknown",
-		address: {
-			city: null,
-			plz: null,
-			street: null,
-			house: null
-		},
-		meta: {
-			attributes: [],
-			offers: [],
-			specials: null,
-			subject: null,
-			minAge: undefined
-		}
-	} as unknown as Entry);
+	let workingEntry: Entry = $state(blankEntry());
+	let savedEntry: Entry | null = null;
 
-	onMount(() => {
-		if (props.entry) {
-			newEntry = props.entry;
+	$effect(() => {
+		if (entry) {
+			const clone = JSON.parse(JSON.stringify(entry)) as Entry;
+			clone.blocked = clone.blocked ?? false;
+			clone.approved = clone.approved ?? false;
+			clone.meta.offers = clone.meta?.offers ?? [];
+			clone.meta.attributes = clone.meta?.attributes ?? [];
+			workingEntry = clone;
+			savedEntry = JSON.parse(JSON.stringify(clone));
 		}
 	});
 
-	let typePlaceholder = $derived(newEntry.type ? tEntry("typeDescriptions")[newEntry.type] : "");
+	let typePlaceholder = $derived(
+		workingEntry.type ? tEntry("typeDescriptions")[workingEntry.type] : ""
+	);
 
 	function resetMeta() {
-		newEntry.meta = {
+		workingEntry.meta = {
 			attributes: [],
 			offers: [],
 			specials: "",
@@ -83,30 +106,26 @@
 		isSpecialsFocused = value;
 	}
 
-	// Check and correct the contents of the Website field
 	function checkWebsite() {
 		const httpRegex = /^https?:\/\//gm;
 		const removePrefixRegex = /^[a-z]*:?\/?\//gim;
 
-		if (!newEntry.website) {
+		if (!workingEntry.website) {
 			return;
 		}
 
-		if (newEntry.website.match(httpRegex)) {
+		if (workingEntry.website.match(httpRegex)) {
 			return;
 		}
 
-		// clear possibly faulty website prefix
-		newEntry.website = newEntry.website.replace(removePrefixRegex, "");
-
-		// prefix https://
-		newEntry.website = "https://" + newEntry.website;
+		workingEntry.website = workingEntry.website.replace(removePrefixRegex, "");
+		workingEntry.website = "https://" + workingEntry.website;
 	}
 
-	async function submit() {
+	async function submitCreate() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.post("entries", newEntry));
+		const result = await apiRequestHandler(axios.post("entries", workingEntry));
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -119,13 +138,78 @@
 		if (result.success) {
 			formElement.reset();
 			if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
-			goto("/submitted");
+
+			if (onSuccess) {
+				onSuccess();
+			} else {
+				goto("/submitted");
+			}
+		}
+	}
+
+	async function submitEdit() {
+		if (!savedEntry) return;
+
+		// When type changes, strip offers/attributes/subject that no longer apply
+		if (workingEntry.type !== savedEntry.type) {
+			workingEntry.meta.offers = workingEntry.meta.offers.filter((o) =>
+				offerMapping[workingEntry.type]?.includes(o)
+			);
+			workingEntry.meta.attributes = workingEntry.meta.attributes.filter((a) =>
+				attributeMapping[workingEntry.type]?.includes(a)
+			);
+			if (!(workingEntry.type in subjectMapping)) {
+				workingEntry.meta.subject = "";
+			}
+		}
+
+		let changes = getObjChanges(
+			savedEntry as unknown as Record<string, unknown>,
+			workingEntry as unknown as Record<string, unknown>
+		);
+		changes = replaceFields(changes, "", null);
+
+		if (Object.keys(changes).length < 1) {
+			onSuccess?.();
+			return;
+		}
+
+		// API requires type to always be present when sending a PATCH
+		if (!changes["type"]) {
+			changes["type"] = workingEntry.type;
+		}
+
+		loading = true;
+
+		const result = await apiRequestHandler(
+			axios.patch(`entries/${workingEntry._id}/edit`, changes)
+		);
+
+		errors = result.handleErrors({
+			422: () => popupWarn(t("errors.checkInput")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		loading = false;
+
+		if (result.success) {
+			savedEntry = JSON.parse(JSON.stringify(workingEntry));
+			popupOk(t("submitForm.savedPopup"));
+			onSuccess?.();
+		}
+	}
+
+	async function submit() {
+		if (isEdit) {
+			await submitEdit();
+		} else {
+			await submitCreate();
 		}
 	}
 </script>
 
 <Form onsubmit={submit} bind:this={formElement}>
-	<Select bind:value={newEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
+	<Select bind:value={workingEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
 		<option value="" disabled selected> {t("submitForm.selectCategory") + "..."} </option>
 
 		{#each sanitizedTypeMapping as type (type)}
@@ -133,9 +217,9 @@
 		{/each}
 	</Select>
 
-	{#if newEntry.type}
+	{#if workingEntry.type}
 		<Input
-			bind:value={newEntry.name}
+			bind:value={workingEntry.name}
 			label={typePlaceholder}
 			placeholder={typePlaceholder + "..."}
 			required
@@ -149,7 +233,7 @@
 
 	<section>
 		<Input
-			bind:value={newEntry.address.street}
+			bind:value={workingEntry.address.street}
 			label={t("submitForm.street")}
 			placeholder={t("submitForm.street") + "..."}
 			minlength="0"
@@ -157,7 +241,7 @@
 			error={errors["address.street"]}
 		/>
 		<Input
-			bind:value={newEntry.address.house}
+			bind:value={workingEntry.address.house}
 			label={t("submitForm.house")}
 			placeholder={t("submitForm.house") + "..."}
 			minlength="0"
@@ -168,7 +252,7 @@
 
 	<section>
 		<Input
-			bind:value={newEntry.address.city}
+			bind:value={workingEntry.address.city}
 			label={t("submitForm.city")}
 			placeholder={t("submitForm.city") + "..."}
 			required
@@ -177,7 +261,7 @@
 			error={errors["address.city"]}
 		/>
 		<Input
-			bind:value={newEntry.address.plz}
+			bind:value={workingEntry.address.plz}
 			label={t("submitForm.plz")}
 			placeholder={t("submitForm.plz") + "..."}
 			minlength="0"
@@ -194,7 +278,7 @@
 
 	<section>
 		<Select
-			bind:value={newEntry.academicTitle}
+			bind:value={workingEntry.academicTitle}
 			onchange={resetMeta}
 			label={t("submitForm.academicTitle")}
 		>
@@ -205,7 +289,7 @@
 			{/each}
 		</Select>
 		<Input
-			bind:value={newEntry.firstName}
+			bind:value={workingEntry.firstName}
 			label={t("submitForm.firstName")}
 			placeholder={t("submitForm.firstName") + "..."}
 			minlength="2"
@@ -213,7 +297,7 @@
 			error={errors["firstName"]}
 		/>
 		<Input
-			bind:value={newEntry.lastName}
+			bind:value={workingEntry.lastName}
 			label={t("submitForm.lastName")}
 			placeholder={t("submitForm.lastName") + "..."}
 			minlength="2"
@@ -225,7 +309,7 @@
 	<h2>{t("submitForm.contactDetails")}</h2>
 
 	<Input
-		bind:value={newEntry.email}
+		bind:value={workingEntry.email}
 		type="email"
 		label={t("submitForm.email")}
 		placeholder={t("submitForm.email") + "..."}
@@ -234,7 +318,7 @@
 		error={errors["email"]}
 	/>
 	<Input
-		bind:value={newEntry.telephone}
+		bind:value={workingEntry.telephone}
 		type="text"
 		label={t("submitForm.tel")}
 		placeholder={t("submitForm.tel") + "..."}
@@ -243,7 +327,7 @@
 		error={errors["telephone"]}
 	/>
 	<Input
-		bind:value={newEntry.website}
+		bind:value={workingEntry.website}
 		type="url"
 		label={t("submitForm.website")}
 		placeholder={t("submitForm.website") + "..."}
@@ -255,25 +339,25 @@
 
 	<h2>{t("submitForm.specifics")}</h2>
 
-	{#if offerMapping[newEntry.type]}
+	{#if offerMapping[workingEntry.type]}
 		<h3>{t("submitForm.offers")}</h3>
 
 		<ErrorBox error={errors["meta.offers"]}>
-			{#each offerMapping[newEntry.type] as offer (offer)}
-				<Checkbox bind:group={newEntry.meta.offers} value={offer}>
+			{#each offerMapping[workingEntry.type] as offer (offer)}
+				<Checkbox bind:group={workingEntry.meta.offers} value={offer}>
 					{tEntry("offerDetails")[offer]}
 				</Checkbox>
 			{/each}
 		</ErrorBox>
 	{/if}
 
-	{#if attributeMapping[newEntry.type]}
-		{#if offerMapping[newEntry.type]}
+	{#if attributeMapping[workingEntry.type]}
+		{#if offerMapping[workingEntry.type]}
 			<h3>{t("submitForm.attributes")}</h3>
 		{/if}
 
-		{#each attributeMapping[newEntry.type] as attribute (attribute)}
-			<Checkbox bind:group={newEntry.meta.attributes} value={attribute}>
+		{#each attributeMapping[workingEntry.type] as attribute (attribute)}
+			<Checkbox bind:group={workingEntry.meta.attributes} value={attribute}>
 				{tEntry("attributeDetails")[attribute]}
 			</Checkbox>
 		{/each}
@@ -287,43 +371,53 @@
 	{/if}
 
 	<Textarea
-		bind:value={newEntry.meta.specials}
+		bind:value={workingEntry.meta.specials}
 		onfocus={() => specialsFocus(true)}
 		onblur={() => specialsFocus(false)}
-		type="text"
 		label={t("submitForm.specials")}
 		placeholder={t("submitForm.specials") + "..."}
 		maxlength={280}
 	/>
 
-	{#if newEntry.type === "group"}
+	{#if workingEntry.type === "group"}
 		<Input
-			bind:value={newEntry.meta.minAge}
+			bind:value={workingEntry.meta.minAge}
 			type="number"
 			label={t("submitForm.minAge")}
 			placeholder={t("submitForm.minAge") + "..."}
 		/>
-	{:else if newEntry.type === "therapist"}
-		<Select bind:value={newEntry.meta.subject} required label={t("submitForm.subject")}>
+	{:else if workingEntry.type === "therapist"}
+		<Select bind:value={workingEntry.meta.subject} required label={t("submitForm.subject")}>
 			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
 
-			{#each subjectMapping[newEntry.type] as subject (subject)}
+			{#each subjectMapping[workingEntry.type] as subject (subject)}
 				<option value={subject}> {tEntry("subjectMapping")[subject]} </option>
 			{/each}
 		</Select>
 	{/if}
 
-	<Select bind:value={newEntry.accessible} required label={t("submitForm.accessibility")}>
+	<Select bind:value={workingEntry.accessible} required label={t("submitForm.accessibility")}>
 		<option value="unknown" selected> {t("submitForm.accessibilityUnknown")} </option>
 		<option value="yes"> {t("submitForm.accessible")} </option>
 		<option value="no"> {t("submitForm.notAccessible")} </option>
 	</Select>
 
-	<p>
-		{t("submitForm.info")}
-	</p>
+	{#if isEdit}
+		<h2>{t("submitForm.adminSection")}</h2>
 
-	<Button {loading}>{t("submitForm.submit")}</Button>
+		<Checkbox bind:checked={workingEntry.blocked} single>
+			{t("submitForm.blocked")}
+		</Checkbox>
+		<Checkbox bind:checked={workingEntry.approved} single>
+			{t("submitForm.approved")}
+		</Checkbox>
+	{:else}
+		<p>
+			{t("submitForm.info")}
+		</p>
+	{/if}
+
+	<Button {loading}>{isEdit ? t("submitForm.save") : t("submitForm.submit")}</Button>
 </Form>
 
 <style lang="scss">
