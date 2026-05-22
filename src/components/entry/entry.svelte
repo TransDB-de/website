@@ -59,7 +59,7 @@
 <div class="entry">
 	<div class="data">
 		<div class="heading">
-			<h1>{props.entry.name}</h1>
+			<h2>{props.entry.name}</h2>
 
 			{#if props.entry.accessible === "yes"}
 				<span class="special-tag green" title={t("mouseOverTexts.barrierFree")}>
@@ -259,7 +259,7 @@
 				align-items: center;
 				gap: 0 10px;
 
-				h1 {
+				h2 {
 					font-size: 1.4em;
 					font-weight: 600;
 					margin: -4px 0 6px 0;

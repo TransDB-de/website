@@ -26,6 +26,10 @@
 		subjectMapping,
 		academicTitleMapping
 	} from "$lib/entryMappings";
+	import SecondaryHeading from "$components/typography/SecondaryHeading.svelte";
+	import Paragraph from "$components/typography/Paragraph.svelte";
+	import InfoWarning from "$components/typography/InfoWarning.svelte";
+	import SubHeading from "$components/typography/SubHeading.svelte";
 
 	interface Props {
 		entry?: Entry;
@@ -229,9 +233,11 @@
 		/>
 	{/if}
 
-	<h2>{t("submitForm.address")}</h2>
+	<br />
 
-	<section>
+	<SecondaryHeading underline>{t("submitForm.address")}</SecondaryHeading>
+
+	<section class="address-grid">
 		<Input
 			bind:value={workingEntry.address.street}
 			label={t("submitForm.street")}
@@ -248,9 +254,6 @@
 			maxlength="10"
 			error={errors["address.house"]}
 		/>
-	</section>
-
-	<section>
 		<Input
 			bind:value={workingEntry.address.city}
 			label={t("submitForm.city")}
@@ -270,11 +273,13 @@
 		/>
 	</section>
 
-	<h2>{t("submitForm.contact")}</h2>
+	<br />
 
-	<p>
+	<SecondaryHeading underline>{t("submitForm.contact")}</SecondaryHeading>
+
+	<Paragraph>
 		{t("submitForm.contactDescription")}
-	</p>
+	</Paragraph>
 
 	<section>
 		<Select
@@ -306,7 +311,9 @@
 		/>
 	</section>
 
-	<h2>{t("submitForm.contactDetails")}</h2>
+	<br />
+
+	<SecondaryHeading underline>{t("submitForm.contactDetails")}</SecondaryHeading>
 
 	<Input
 		bind:value={workingEntry.email}
@@ -337,47 +344,9 @@
 		onchange={checkWebsite}
 	/>
 
-	<h2>{t("submitForm.specifics")}</h2>
+	<br />
 
-	{#if offerMapping[workingEntry.type]}
-		<h3>{t("submitForm.offers")}</h3>
-
-		<ErrorBox error={errors["meta.offers"]}>
-			{#each offerMapping[workingEntry.type] as offer (offer)}
-				<Checkbox bind:group={workingEntry.meta.offers} value={offer}>
-					{tEntry("offerDetails")[offer]}
-				</Checkbox>
-			{/each}
-		</ErrorBox>
-	{/if}
-
-	{#if attributeMapping[workingEntry.type]}
-		{#if offerMapping[workingEntry.type]}
-			<h3>{t("submitForm.attributes")}</h3>
-		{/if}
-
-		{#each attributeMapping[workingEntry.type] as attribute (attribute)}
-			<Checkbox bind:group={workingEntry.meta.attributes} value={attribute}>
-				{tEntry("attributeDetails")[attribute]}
-			</Checkbox>
-		{/each}
-	{/if}
-
-	{#if isSpecialsFocused}
-		<p class="info" transition:slide>
-			{t("submitForm.specialsInfo")[0]}<br />
-			{t("submitForm.specialsInfo")[1]}
-		</p>
-	{/if}
-
-	<Textarea
-		bind:value={workingEntry.meta.specials}
-		onfocus={() => specialsFocus(true)}
-		onblur={() => specialsFocus(false)}
-		label={t("submitForm.specials")}
-		placeholder={t("submitForm.specials") + "..."}
-		maxlength={280}
-	/>
+	<SecondaryHeading underline>{t("submitForm.specifics")}</SecondaryHeading>
 
 	{#if workingEntry.type === "group"}
 		<Input
@@ -396,6 +365,53 @@
 		</Select>
 	{/if}
 
+	{#if offerMapping[workingEntry.type]}
+		<SubHeading>{t("submitForm.offers")}:</SubHeading>
+
+		<ErrorBox error={errors["meta.offers"]}>
+			<fieldset>
+				{#each offerMapping[workingEntry.type] as offer (offer)}
+					<Checkbox bind:group={workingEntry.meta.offers} value={offer}>
+						{tEntry("offerDetails")[offer]}
+					</Checkbox>
+				{/each}
+			</fieldset>
+		</ErrorBox>
+
+		<br />
+	{/if}
+
+	{#if attributeMapping[workingEntry.type]}
+		{#if offerMapping[workingEntry.type]}
+			<SubHeading>{t("submitForm.attributes")}:</SubHeading>
+		{/if}
+
+		<fieldset>
+			{#each attributeMapping[workingEntry.type] as attribute (attribute)}
+				<Checkbox bind:group={workingEntry.meta.attributes} value={attribute}>
+					{tEntry("attributeDetails")[attribute]}
+				</Checkbox>
+			{/each}
+		</fieldset>
+		<br />
+	{/if}
+
+	{#if isSpecialsFocused}
+		<InfoWarning>
+			{t("submitForm.specialsInfo")[0]}<br />
+			{t("submitForm.specialsInfo")[1]}
+		</InfoWarning>
+	{/if}
+
+	<Textarea
+		bind:value={workingEntry.meta.specials}
+		onfocus={() => specialsFocus(true)}
+		onblur={() => specialsFocus(false)}
+		label={t("submitForm.specials")}
+		placeholder={t("submitForm.specials") + "..."}
+		maxlength={280}
+	/>
+
 	<Select bind:value={workingEntry.accessible} required label={t("submitForm.accessibility")}>
 		<option value="unknown" selected> {t("submitForm.accessibilityUnknown")} </option>
 		<option value="yes"> {t("submitForm.accessible")} </option>
@@ -403,7 +419,7 @@
 	</Select>
 
 	{#if isEdit}
-		<h2>{t("submitForm.adminSection")}</h2>
+		<SecondaryHeading underline>{t("submitForm.adminSection")}</SecondaryHeading>
 
 		<Checkbox bind:checked={workingEntry.blocked} single>
 			{t("submitForm.blocked")}
@@ -412,15 +428,43 @@
 			{t("submitForm.approved")}
 		</Checkbox>
 	{:else}
-		<p>
+		<Paragraph>
 			{t("submitForm.info")}
-		</p>
+		</Paragraph>
 	{/if}
 
 	<Button {loading}>{isEdit ? t("submitForm.save") : t("submitForm.submit")}</Button>
 </Form>
 
 <style lang="scss">
+	@use "../../scss/mixins" as *;
+
+	.address-grid {
+		display: grid;
+		grid-template-rows: 2;
+		grid-template-columns: 6fr 4fr;
+
+		@include media-mobile {
+			grid-template-columns: 1fr;
+			grid-template-rows: repeat(1, 1fr);
+		}
+	}
+
+	section {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	fieldset {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
 	h3::after {
 		content: ":";
 	}

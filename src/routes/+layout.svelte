@@ -74,19 +74,17 @@
 	{/if}
 </svelte:head>
 
-<div class="app">
-	<Header />
+<Header />
 
-	{#key path}
-		<div in:fade={{ duration: 200 }} class="page">
-			{@render children()}
-		</div>
-	{/key}
+{#key path}
+	<div in:fade={{ duration: 200 }} class="page">
+		{@render children()}
+	</div>
+{/key}
 
-	<Footer />
-	<Popup />
-	<Confirm />
-</div>
+<Footer />
+<Popup />
+<Confirm />
 
 <style lang="scss">
 	@use "../scss/colors" as *;
@@ -95,21 +93,26 @@
 		box-sizing: border-box;
 	}
 
+	:global(html) {
+		font-family: "Fira Sans", sans-serif;
+		color: var(--color-edge);
+		font-size: 18px;
+	}
+
+	:global(h1, h2, h3) {
+		font-family: "Poppins", sans-serif;
+		font-weight: 600;
+	}
+
 	:global(body) {
 		margin: 0;
 		background-color: var(--color-background);
-		color: var(--color-edge);
-		font-size: 18px;
+
 		display: flex;
 		flex-direction: column;
-		font-family: "Fira Sans", sans-serif;
+
 		min-height: 100vh;
 		overflow-y: scroll;
-	}
-
-	:global(h1, h2, h3, h4, h5, h6) {
-		font-family: "Poppins", sans-serif;
-		font-weight: 600;
 	}
 
 	.app {

@@ -58,7 +58,6 @@
 		display: flex;
 		align-items: center;
 		position: relative;
-		margin-bottom: 15px;
 		cursor: pointer;
 		text-align: left;
 		font-size: 18px;
@@ -66,6 +65,10 @@
 		user-select: none;
 		min-height: 28px;
 		-webkit-tap-highlight-color: transparent;
+
+		&:has(input:checked) {
+			font-weight: 500;
+		}
 
 		input {
 			@include hide-checkmark;

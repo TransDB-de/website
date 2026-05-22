@@ -14,7 +14,7 @@
 	<meta name="description" content={t("privacy.description")} />
 </svelte:head>
 
-<div class="content">
+<div class="content md">
 	<props.data.PrivacyContent />
 	<props.data.DisclaimerContent />
 	<props.data.EntryRemovalContent />

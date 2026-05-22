@@ -18,7 +18,7 @@
 	}
 
 	&:focus {
-		border: 2px solid var(--color-rim-active);
+		border: 2px solid var(--color-edge);
 	}
 }
 
@@ -66,7 +66,7 @@
 	label:hover input ~ & {
 		border: 2px solid var(--color-rim-hover);
 	}
-
+	
 	input:checked ~ &:after,
 	&.selected:after {
 		transform: scale(1) rotate(45deg);
