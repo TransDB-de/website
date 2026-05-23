@@ -213,6 +213,10 @@
 </script>
 
 <Form onsubmit={submit} bind:this={formElement}>
+	{#if isEdit}
+		<Input label="ID" value={workingEntry._id} readonly />
+	{/if}
+
 	<Select bind:value={workingEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
 		<option value="" disabled selected> {t("submitForm.selectCategory") + "..."} </option>
 
@@ -396,7 +400,7 @@
 		<br />
 	{/if}
 
-	{#if isSpecialsFocused}
+	{#if isSpecialsFocused && !isEdit}
 		<InfoWarning>
 			{t("submitForm.specialsInfo")[0]}<br />
 			{t("submitForm.specialsInfo")[1]}
@@ -419,6 +423,7 @@
 	</Select>
 
 	{#if isEdit}
+		<br />
 		<SecondaryHeading underline>{t("submitForm.adminSection")}</SecondaryHeading>
 
 		<Checkbox bind:checked={workingEntry.blocked} single>
@@ -427,6 +432,7 @@
 		<Checkbox bind:checked={workingEntry.approved} single>
 			{t("submitForm.approved")}
 		</Checkbox>
+		<br />
 	{:else}
 		<Paragraph>
 			{t("submitForm.info")}

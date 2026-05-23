@@ -14,7 +14,6 @@
 	import type { EntriesResponse, Entry } from "$models/entry.model";
 
 	import EntryComponent from "$components/entry/entry.svelte";
-	import EditableEntry from "$components/database/editableEntry.svelte";
 	import LoadMore from "$components/elements/loadMore.svelte";
 	import { popupError } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
@@ -28,6 +27,8 @@
 	let { type: collectionType }: Props = $props();
 
 	let entries: Entry[] = $state([]);
+
+	let entryActions: "approve" | "edit" | undefined = $state(undefined);
 
 	// how and where to fetch data — type prop is fixed at construction time, read once
 	let fetchFunction: (url: URL, pageCount?: number) => Promise<AxiosResponse<EntriesResponse>>;
@@ -49,6 +50,7 @@
 					params.page = pageCount;
 					return axios.get<EntriesResponse>("entries/unapproved", { params });
 				};
+				entryActions = "approve";
 				break;
 			}
 
@@ -59,6 +61,7 @@
 						filter: filters.filters
 					});
 				};
+				entryActions = "edit";
 				break;
 			}
 
@@ -77,6 +80,7 @@
 						filter: _filters
 					});
 				};
+				entryActions = "edit";
 				break;
 			}
 
@@ -164,11 +168,7 @@
 <div class="entries-collection">
 	{#each entries as entry (entry._id)}
 		<div animate:flip={{ duration: 400 }} transition:fade={{ duration: 200 }}>
-			{#if collectionType === "database"}
-				<EditableEntry {entry} onremove={removeEntry} />
-			{:else}
-				<EntryComponent {entry} onremove={removeEntry} />
-			{/if}
+			<EntryComponent {entry} onremove={removeEntry} actions={entryActions} />
 		</div>
 	{/each}
 

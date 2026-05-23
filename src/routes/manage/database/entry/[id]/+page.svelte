@@ -12,6 +12,8 @@
 	import { goto } from "$app/navigation";
 	import type { PageProps } from "./$types";
 	import { Link, RefreshCw } from "@lucide/svelte";
+	import PrimaryHeading from "$components/typography/PrimaryHeading.svelte";
+	import SecondaryHeading from "$components/typography/SecondaryHeading.svelte";
 
 	let { params }: PageProps = $props();
 
@@ -32,7 +34,7 @@
 	});
 
 	function copyLink() {
-		navigator.clipboard.writeText(`${window.location.origin}/manage/database?id=${entry!._id}`);
+		navigator.clipboard.writeText(`${window.location.origin}/manage/database/entry/${entry!._id}`);
 		popupOk(t("infos.copiedLinkToClipboard"));
 	}
 
@@ -55,11 +57,15 @@
 
 <div class="content">
 	{#if entry}
-		<h1>{entry.name}</h1>
+		<PrimaryHeading underline>Eintrag bearbeiten</PrimaryHeading>
 
 		<SubmitForm mode="edit" {entry} />
 
-		<div class="action-buttons">
+		<br />
+
+		<SecondaryHeading underline>Aktionen</SecondaryHeading>
+
+		<section class="action-buttons">
 			<Button light onclick={copyLink} title={t("mouseOverTexts.copyLink")}>
 				<Link />
 				Link kopieren
@@ -70,8 +76,8 @@
 				Geodaten neu laden
 			</Button>
 
-			<DeleteEntryButton {entry} onremove={() => goto("/manage/database")} />
-		</div>
+			<DeleteEntryButton withText {entry} onremove={() => goto("/manage/database")} />
+		</section>
 	{:else}
 		<Loader dark big />
 	{/if}
@@ -83,8 +89,7 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		gap: 16px;
-		padding: 20px;
+		gap: 1rem;
 	}
 
 	.action-buttons {
