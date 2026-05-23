@@ -58,7 +58,12 @@
 		"heading": "Eintrag melden",
 		"note": "Bitte gebe bei einem Änderungsvorschlag immer an, wie die neuen Daten lauten.",
 		"placeholder": "Beschreibe dein Anliegen / deine Änderungsvorschläge",
-		"categories": ["Kategorie wählen", "Änderung vorschlagen", "Nicht empfehlenswert", "Sonstiges"],
+		"categories": [
+			"Kategorie wählen",
+			"Änderung vorschlagen",
+			"Nicht empfehlenswert",
+			"Sonstiges"
+		],
 		"submit": "Melden",
 		"successPopup": "Meldung erfolgreich abgesendet"
 	},
@@ -357,5 +362,8 @@
 		"accountSettings": "Account Einstellungen",
 		"addUser": "Benutzer hinzufügen",
 		"userList": "Benutzerliste"
+	},
+	"common": {
+		"loadMore": "Mehr laden"
 	}
 }

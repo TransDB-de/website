@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
+	import { t } from "$lib/localization.svelte";
 	import { isMobile } from "$lib/store";
 
 	import Button from "./button.svelte";
@@ -23,11 +24,14 @@
 
 			let scrolledHeight = Math.ceil(scrollY + window.innerHeight);
 
+			let calculatedPage = Math.round(scrolledHeight / loadOffset);
+
 			// Check if user has scrolled to the bottom of the page
 			if (
 				scrolledHeight >= document.body.offsetHeight - loadOffset &&
 				scrollY > 0 &&
-				aboveThreshold
+				aboveThreshold &&
+				calculatedPage < 12
 			) {
 				aboveThreshold = false;
 				props.onclick?.();
@@ -41,7 +45,7 @@
 <svelte:window bind:scrollY />
 
 <div class="load-more">
-	<Button light onclick={props.onclick} loading={props.loading}>Mehr anzeigen</Button>
+	<Button light onclick={props.onclick} loading={props.loading}>{t("common.loadMore")}</Button>
 </div>
 
 <style lang="scss">
