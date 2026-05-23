@@ -47,8 +47,6 @@
 </script>
 
 <Form onsubmit={submit}>
-	<h1>Anmeldung für Teammitglieder</h1>
-
 	<Input
 		bind:value={login.username}
 		label="E-Mail"

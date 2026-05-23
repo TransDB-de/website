@@ -317,7 +317,13 @@
 		"specials": "Besondere Angebote / Besonderheiten",
 		"categoryLabel": "Kategorie",
 		"academicTitle": "Titel",
-		"contactDescription": "Gibt es eine spezifische Person in dieser Einrichtung, die hier empfohlen wird oder die verantwortlich für entsprechende Angebote ist?"
+		"contactDescription": "Gibt es eine spezifische Person in dieser Einrichtung, die hier empfohlen wird oder die verantwortlich für entsprechende Angebote ist?",
+		"editHeader": "Eintrag bearbeiten",
+		"save": "Speichern",
+		"savedPopup": "Änderungen gespeichert",
+		"adminSection": "Administration",
+		"blocked": "Blockiert",
+		"approved": "Freigeschaltet"
 	},
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",

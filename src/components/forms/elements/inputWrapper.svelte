@@ -45,7 +45,6 @@
 
 	label {
 		position: relative;
-		margin-bottom: 15px;
 		display: flex;
 		flex-direction: column;
 		width: 100%;

@@ -42,7 +42,9 @@
 <div class="header" class:hide bind:this={component}>
 	<div class="navbar" class:expand class:collapsed bind:this={navbar}>
 		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-		<h1 class="title-mobile" onclick={() => goto("/")}>TransDB.de</h1>
+		<h2 class="title-mobile">
+			<a href="/">TransDB.de</a>
+		</h2>
 
 		<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
 		<nav onclick={toggleNav}>
@@ -62,7 +64,9 @@
 	</div>
 
 	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-	<h1 class="title" onclick={() => goto("/search")} style="--opacity: {opacity}">Trans*DB</h1>
+	<h2 class="title" style="--opacity: {opacity}">
+		<a href="search">Trans*DB</a>
+	</h2>
 
 	<h2 class="subtitle" style="--opacity: {opacity}">{t("header.subtitle")}</h2>
 
@@ -93,8 +97,14 @@
 			0s ease box-shadow;
 		font-family: "Poppins", sans-serif;
 
-		h1 {
+		h2 {
 			padding-right: 0 !important;
+			font-weight: 600;
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
 		}
 
 		&:after {

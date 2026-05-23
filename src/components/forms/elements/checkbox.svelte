@@ -23,11 +23,20 @@
 	 * Group bindings on custom components with checkboxes has to be done manually
 	 * https://github.com/sveltejs/svelte/issues/2308
 	 */
-	function onChange(event: Event) {
-		if (single) return;
 
+	// In group mode, derive checked from whether value is in the group array so
+	// pre-populated groups (e.g. when editing an existing entry) render correctly.
+	let inputChecked = $derived(single ? checked : group.includes(value));
+
+	function onChange(event: Event) {
 		const target = event.target as HTMLInputElement;
 		const { value: val, checked: isChecked } = target;
+
+		if (single) {
+			checked = isChecked;
+			return;
+		}
+
 		if (isChecked) {
 			group = [...group, val];
 		} else {
@@ -38,7 +47,7 @@
 
 <label class="checkbox-container">
 	{#if children}{@render children()}{/if}
-	<input type="checkbox" {...rest} {value} bind:checked onchange={onChange} />
+	<input type="checkbox" {...rest} {value} checked={inputChecked} onchange={onChange} />
 	<span class="checkmark"></span>
 </label>
 
@@ -49,7 +58,6 @@
 		display: flex;
 		align-items: center;
 		position: relative;
-		margin-bottom: 15px;
 		cursor: pointer;
 		text-align: left;
 		font-size: 18px;
@@ -57,6 +65,10 @@
 		user-select: none;
 		min-height: 28px;
 		-webkit-tap-highlight-color: transparent;
+
+		&:has(input:checked) {
+			font-weight: 500;
+		}
 
 		input {
 			@include hide-checkmark;

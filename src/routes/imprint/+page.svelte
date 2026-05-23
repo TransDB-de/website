@@ -14,7 +14,7 @@
 	<meta name="description" content={t("imprint.description")} />
 </svelte:head>
 
-<div class="content">
+<div class="content md">
 	<props.data.ImprintContent />
 	<props.data.DisclaimerContent />
 	<props.data.EntryRemovalContent />

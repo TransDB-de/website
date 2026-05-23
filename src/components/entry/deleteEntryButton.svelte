@@ -12,6 +12,7 @@
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
+		withText?: boolean;
 	}
 
 	const props: Props = $props();
@@ -41,11 +42,14 @@
 
 <Button
 	light
-	iconOnly
+	iconOnly={!props.withText}
 	color="edge-error"
 	onclick={deleteEntry}
 	title={t("mouseOverTexts.deleteEntry")}
 	{loading}
 >
 	<Trash />
+	{#if props.withText}
+		Löschen
+	{/if}
 </Button>

@@ -13,13 +13,24 @@
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte";
 	import BlocklistEntryButton from "$components/entry/blocklistEntryButton.svelte";
 
-	import { Phone, Map, Mail, Globe, Edit, Share2, Navigation, AlertTriangle } from "@lucide/svelte";
+	import {
+		Phone,
+		Map,
+		Mail,
+		Globe,
+		Share2,
+		Navigation,
+		AlertTriangle,
+		FilePen
+	} from "@lucide/svelte";
 
 	import { subjectMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
+	import LinkButton from "$components/elements/LinkButton.svelte";
 
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
+		actions?: "approve" | "edit";
 	}
 
 	const props: Props = $props();
@@ -59,7 +70,7 @@
 <div class="entry">
 	<div class="data">
 		<div class="heading">
-			<h1>{props.entry.name}</h1>
+			<h2>{props.entry.name}</h2>
 
 			{#if props.entry.accessible === "yes"}
 				<span class="special-tag green" title={t("mouseOverTexts.barrierFree")}>
@@ -69,6 +80,10 @@
 				<span class="special-tag orange" title={t("mouseOverTexts.notBarrierFree")}>
 					{t("entryMapping.accessibleMapping.no")}
 				</span>
+			{/if}
+
+			{#if props.actions === "edit" && props.entry.blocked}
+				<span class="special-tag red"> Blockiert </span>
 			{/if}
 		</div>
 
@@ -162,26 +177,34 @@
 		{/if}
 	</div>
 
-	{#if !props.entry.blocked}
-		<div class="controls">
-			{#if !props.entry.approved}
-				<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
-				<BlocklistEntryButton onremove={props.onremove} entry={props.entry} />
-				<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
-			{:else}
-				<EdgeButton
-					onclick={() => goto("/report?id=" + props.entry._id)}
-					title={t("mouseOverTexts.report")}
-				>
-					<Edit />
-				</EdgeButton>
+	<div class="controls">
+		{#if props.actions === "approve"}
+			<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
+			<BlocklistEntryButton onremove={props.onremove} entry={props.entry} />
+			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
+		{:else if props.actions === "edit"}
+			<LinkButton
+				light
+				iconOnly
+				href={"/manage/database/entry/" + props.entry._id}
+				title={t("mouseOverTexts.editEntry")}
+			>
+				<FilePen />
+			</LinkButton>
+			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
+		{:else}
+			<EdgeButton
+				onclick={() => goto("/report?id=" + props.entry._id)}
+				title={t("mouseOverTexts.report")}
+			>
+				<FilePen />
+			</EdgeButton>
 
-				<EdgeButton onclick={share} title={t("mouseOverTexts.share")}>
-					<Share2 />
-				</EdgeButton>
-			{/if}
-		</div>
-	{/if}
+			<EdgeButton onclick={share} title={t("mouseOverTexts.share")}>
+				<Share2 />
+			</EdgeButton>
+		{/if}
+	</div>
 </div>
 
 <style lang="scss">
@@ -259,7 +282,7 @@
 				align-items: center;
 				gap: 0 10px;
 
-				h1 {
+				h2 {
 					font-size: 1.4em;
 					font-weight: 600;
 					margin: -4px 0 6px 0;
@@ -282,6 +305,14 @@
 
 					&.orange {
 						background-color: var(--color-special-warn);
+					}
+
+					&.orange {
+						background-color: var(--color-special-warn);
+					}
+
+					&.red {
+						background-color: var(--color-special-error);
 					}
 				}
 			}
