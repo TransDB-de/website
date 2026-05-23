@@ -7,7 +7,7 @@ COPY package.json ./
 COPY package-lock.json ./
 
 RUN apk add --no-cache git
-RUN npm install
+RUN npm ci
 
 COPY . .
 
@@ -25,7 +25,7 @@ COPY --from=build tmp/package.json ./
 
 RUN apk add --no-cache git
 
-RUN npm install
+RUN npm ci
 
 RUN apk del git
 

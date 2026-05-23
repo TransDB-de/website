@@ -17,9 +17,9 @@
 	import axios from "axios";
 	import type { Report } from "$models/report.model";
 	import { t } from "$lib/localization.svelte";
-	import { parseValidationErrors } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
+	import InfoWarning from "$components/typography/InfoWarning.svelte";
 
 	interface Props {
 		ReportNote: Component;
@@ -77,8 +77,6 @@
 	}
 </script>
 
-<h1>{t("reportForm.heading")}</h1>
-
 {#if entry}
 	<EntryComponent {entry} />
 {:else}
@@ -96,9 +94,9 @@
 	</Select>
 
 	{#if report.type === "edit"}
-		<p class="info" transition:slide>
+		<InfoWarning>
 			{t("reportForm.note")}
-		</p>
+		</InfoWarning>
 	{/if}
 
 	<Textarea
@@ -111,12 +109,15 @@
 		error={errors["message"]}
 	/>
 
-	<props.ReportNote />
+	<section class="md">
+		<props.ReportNote />
+	</section>
 
 	<Button {loading}>{t("reportForm.submit")}</Button>
 </Form>
 
 <style lang="scss">
+	@use "../../scss/content" as *;
 	:global(.report-form) {
 		margin-top: 20px;
 	}
@@ -125,5 +126,10 @@
 		display: flex;
 		justify-content: center;
 		margin-bottom: 20px;
+	}
+
+	section.md {
+		display: flex;
+		flex-direction: column;
 	}
 </style>
