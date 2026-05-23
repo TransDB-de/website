@@ -447,12 +447,10 @@
 
 	.address-grid {
 		display: grid;
-		grid-template-rows: 2;
 		grid-template-columns: 6fr 4fr;
 
 		@include media-mobile {
 			grid-template-columns: 1fr;
-			grid-template-rows: repeat(1, 1fr);
 		}
 	}
 
