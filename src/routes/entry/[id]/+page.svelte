@@ -1,5 +1,4 @@
 <script lang="ts">
-	import SingleEntryView from "$components/singleEntryView.svelte";
 	import { onMount } from "svelte";
 	import type { PageProps } from "./$types";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
