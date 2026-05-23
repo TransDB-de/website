@@ -22,6 +22,7 @@ ENV NODE_ENV=production
 
 COPY --from=build tmp/build/ ./build/
 COPY --from=build tmp/package.json ./
+COPY --from=build tmp/package-lock.json ./
 
 RUN apk add --no-cache git
 
