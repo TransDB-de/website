@@ -1,0 +1,369 @@
+{
+	"header": {
+		"subtitle": "Le moteur de recherche pour les soins de santé transgenres",
+		"homepage": "Accueil",
+		"search": "Recherche",
+		"newEntry": "Nouvel entrée",
+		"searchBar": {
+			"areaSearch": "Recherche par zone",
+			"placeholder": "Recherche par code postal ou ville",
+			"placeholderMobile": "Recherche CP ou ville"
+		}
+	},
+	"index": {
+		"addNewEntry": "Ajouter une nouvelle entrée",
+		"thankYou": "Merci !",
+		"description": "Une liste publique et un moteur de recherche pour les services médicaux et offres communautaires liés aux personnes trans*. Trouvez des médecins, des thérapeutes et d'autres ressources.",
+		"howToHelp": "Comment puis-je aider ?"
+	},
+	"footer": {
+		"imprint": "Mentions légales",
+		"privacy": "Confidentialité",
+		"aboutUs": "À propos de nous",
+		"instagramPlaceholder": "Suivez-nous sur Instagram",
+		"githubPlaceholder": "Visitez-nous sur GitHub",
+		"discordPlaceholder": "Rejoignez notre serveur Discord",
+		"openCollectivePlaceholder": "Soutenez-nous sur Open Collective"
+	},
+	"openCollectiveButton": {
+		"text": "Soutenez-nous sur Open Collective",
+		"alt": "Logo Open Collective"
+	},
+	"submitted": {
+		"title": "Merci pour votre soumission - Trans*DB"
+	},
+	"reported": {
+		"title": "Merci pour votre signalement - Trans*DB"
+	},
+	"privacy": {
+		"title": "Confidentialité - Trans*DB",
+		"description": "Notre politique de confidentialité"
+	},
+	"about": {
+		"title": "À propos de nous - Trans*DB",
+		"meta": {
+			"description": "Découvrez l'équipe derrière Trans*DB, pourquoi nous l'avons créé et où vous pouvez en savoir plus sur le projet."
+		},
+		"team": "L'équipe Trans*DB",
+		"donation": "Soutenez-nous avec un don",
+		"techStack": "Notre stack technique",
+		"flyer": "Le flyer officiel Trans*DB",
+		"downloadFlyer": "Télécharger le flyer",
+		"downloadFlyerProfessional": "Données d'impression avancées",
+		"motivation": "Motivation",
+		"socialMedia": "Réseaux sociaux",
+		"nonProfit": "Sans but lucratif"
+	},
+	"reportForm": {
+		"heading": "Signaler une entrée",
+		"note": "Lorsque vous proposez une modification, veuillez fournir les nouvelles données.",
+		"placeholder": "Décrivez votre modification proposée / les détails de votre signalement",
+		"categories": [
+			"Sélectionner une catégorie",
+			"Proposer une modification",
+			"Non recommandable",
+			"Autre"
+		],
+		"submit": "Signaler",
+		"successPopup": "Signalement envoyé avec succès"
+	},
+	"entryMapping": {
+		"academicTitleMapping": {
+			"dr": "Dr.",
+			"prof": "Prof.",
+			"prof_dr": "Prof. Dr."
+		},
+		"typeMapping": {
+			"": "Toutes les catégories",
+			"group": "Groupe",
+			"therapist": "Thérapeute/Psychiatre",
+			"surveyor": "Évaluateur",
+			"endocrinologist": "Endocrinologue",
+			"surgeon": "Chirurgien",
+			"logopedics": "Orthophoniste",
+			"hairremoval": "Épilation",
+			"urologist": "Urologie",
+			"gynecologist": "Gynécologie",
+			"GP": "Médecin généraliste",
+			"pharmacy": "Pharmacie",
+			"cryo": "Cryoconservation"
+		},
+		"typeDescriptions": {
+			"group": "Nom du groupe",
+			"therapist": "Nom du cabinet",
+			"surveyor": "Nom du cabinet / de l'évaluateur",
+			"endocrinologist": "Nom du cabinet médical",
+			"surgeon": "Nom du médecin / de la clinique",
+			"hairremoval": "Nom du studio",
+			"logopedics": "Nom du cabinet",
+			"urologist": "Nom du cabinet médical",
+			"gynecologist": "Nom du cabinet médical",
+			"GP": "Nom du cabinet médical",
+			"pharmacy": "Nom de la pharmacie",
+			"cryo": "Nom de la clinique de fertilité"
+		},
+		"typeDetails": {
+			"group": "Groupes, associations et tables rondes LGBT+ ou trans*",
+			"therapist": "Thérapeute avec une expérience spécifique trans*",
+			"surveyor": "Évaluateurs TSG",
+			"endocrinologist": "Cabinet d'endocrinologie pour la thérapie hormonale",
+			"surgeon": "Chirurgiens pour les opérations liées aux personnes trans",
+			"logopedics": "Orthophonistes / cabinets d'orthophonie pour l'entraînement vocal",
+			"hairremoval": "Studios et cliniques d'épilation",
+			"urologist": "Cabinet médical d'urologie",
+			"gynecologist": "Cabinet médical de gynécologie",
+			"GP": "Cabinet de médecine générale"
+		},
+		"attributeMapping": {
+			"trans": "Axé trans",
+			"regularMeetings": "Réunions régulières",
+			"consulting": "Services de conseil",
+			"activities": "Activités de loisirs",
+			"remote": "Séances à distance",
+			"insurancePay": "Couverture par l'assurance",
+			"transfriendly": "Trans-friendly",
+			"hasDoctor": "Médical",
+			"enby": "Évaluation NB",
+			"treatsNB": "Traite les personnes NB",
+			"selfPayedOnly": "Paiement personnel uniquement",
+			"youthOnly": "Enfants et jeunes",
+			"transFem": "Favorable aux trans*féminines",
+			"transMasc": "Favorable aux trans*masculins",
+			"prefilled": "Seringue pré-remplie",
+			"reuseVial": "Flacon réutilisable",
+			"shipping": "Livraison disponible",
+			"singleUseVials": "Flacons à usage unique"
+		},
+		"attributeDetails": {
+			"trans": "Un groupe/association principalement pour les personnes trans",
+			"regularMeetings": "Se réunit régulièrement",
+			"consulting": "Propose des conseils pour les personnes trans*",
+			"activities": "Propose des activités de loisirs",
+			"remote": "Propose des rendez-vous en ligne/par téléphone",
+			"insurancePay": "Des remboursements par l'assurance maladie ont déjà été accordés ici",
+			"transfriendly": "Bon accueil et respectueux envers les personnes trans*",
+			"hasDoctor": "Est accompagné ou connecté à un médecin",
+			"treatsNB": "Traite les personnes non-binaires",
+			"enby": "Fournit des évaluations TSG pour les personnes non-binaires",
+			"selfPayedOnly": "Pas de couverture par l'assurance maladie. Traite uniquement les patients payants",
+			"youthOnly": "Exclusivement pour les enfants et les adolescents",
+			"transFem": "Accueillant et respectueux envers les personnes trans*féminines",
+			"transMasc": "Accueillant et respectueux envers les personnes trans*masculines",
+			"prefilled": "Médicament en seringue pré-remplie",
+			"reuseVial": "Médicament en flacon réutilisable",
+			"shipping": "Propose la livraison du médicament",
+			"singleUseVials": "Médicament en flacon à usage unique"
+		},
+		"offerMapping": {
+			"indication": "Indication (THS)",
+			"therapy": "Thérapie",
+			"mastectomy": "Mastectomie",
+			"vaginPI": "Vaginoplastie (inversion pénienne)",
+			"vaginCombined": "Vaginoplastie (méthode combinée)",
+			"ffs": "Chirurgie de féminisation faciale",
+			"penoid": "Construction pénienne",
+			"breast": "Augmentation mammaire",
+			"hyst": "Hystérectomie",
+			"orch": "Orchidectomie",
+			"clitPI": "Pénoïde clitoridien / métoïdioplastie",
+			"bodyfem": "Chirurgies de féminisation corporelle",
+			"glottoplasty": "Chirurgies des cordes vocales",
+			"fms": "Chirurgie de masculinisation faciale",
+			"laser": "Épilation au laser",
+			"ipl": "IPL",
+			"electro": "Électroépilation",
+			"electroAE": "Électroépilation avec anesthésie locale",
+			"hrt": "Accompagne la thérapie hormonale",
+			"medication": "Prescrit des médicaments hormonaux",
+			"cpa": "Cypro (Androcur)",
+			"eInjection": "Injections d'estradiol",
+			"freezesSperm": "Congélation de spermatozoïdes",
+			"freezesEggs": "Congélation d'ovocytes"
+		},
+		"offerDetails": {
+			"indication": "Rédige des ordonnances (pour p. ex. la thérapie hormonale)",
+			"therapy": "Fournit une thérapie pour les personnes trans*",
+			"youthOnly": "Exclusivement pour les enfants et les adolescents",
+			"mastectomy": "Mastectomie",
+			"vaginPI": "Vaginoplastie par la méthode d'inversion pénienne",
+			"vaginCombined": "Vaginoplastie par la méthode combinée",
+			"ffs": "Chirurgie de féminisation faciale (abréviation : FFS)",
+			"penoid": "Construction pénienne",
+			"breast": "Augmentation mammaire",
+			"hyst": "Hystérectomie",
+			"orch": "Orchidectomie",
+			"clitPI": "Pénoïde clitoridien / métoïdioplastie",
+			"bodyfem": "Chirurgies de féminisation corporelle",
+			"glottoplasty": "Chirurgies des cordes vocales, comme la féminisation vocale",
+			"fms": "Chirurgies de masculinisation faciale (abréviation : FMS)",
+			"laser": "Épilation à l'aide d'un laser",
+			"ipl": "Épilation par impulsions lumineuses intenses. Non permanente.",
+			"electro": "Épilation permanente par électricité",
+			"electroAE": "Électroépilation avec anesthésie locale",
+			"hrt": "Suivi médical de la thérapie hormonale",
+			"medication": "Prescrit les médicaments nécessaires à la thérapie hormonale en cours",
+			"cpa": "Fabrique du cyprotérone acétate (Androcur)",
+			"eInjection": "Fabrique des injections d'estradiol",
+			"freezesSperm": "Cryoconservation de spermatozoïdes",
+			"freezesEggs": "Cryoconservation d'ovocytes"
+		},
+		"subjectMapping": {
+			"therapist": "Psychothérapeute psychologique",
+			"psychologist": "Psychiatre (médecin spécialiste en psychiatrie)",
+			"naturopath": "Praticien de médecine alternative",
+			"other": "Autre spécialité"
+		},
+		"accessibleMapping": {
+			"unknown": "Inconnu",
+			"yes": "Accessible",
+			"no": "Non accessible"
+		}
+	},
+	"searchFilter": {
+		"title": "Filtres spécifiques",
+		"location": "Localisation",
+		"delete": "supprimer",
+		"categories": "Catégories",
+		"offers": "Offres",
+		"more": "Plus d'infos",
+		"textSearch": "Recherche textuelle",
+		"filter": "Filtrer",
+		"textSearchPlaceholder": "Rechercher des noms ou des personnes"
+	},
+	"entry": {
+		"offers": "Offres",
+		"attributes": "Attributs",
+		"specials": "Spécialités",
+		"minage": "Âge minimum",
+		"possibleDuplicate": "Doublon possible",
+		"from": "de",
+		"nearbyOffers": "Plus d'offres dans cette zone"
+	},
+	"mouseOverTexts": {
+		"applyFilter": "Appliquer le filtre",
+		"proximitySearch": "Localiser la position",
+		"locationSearchButton": "Rechercher",
+		"searchNearbyButton": "Rechercher d'autres entrées dans les environs",
+		"report": "Signaler l'entrée ou proposer une modification",
+		"share": "Partager le lien vers cette entrée",
+		"location": "Votre position",
+		"locationSearch": "Entrez une ville ou un code postal et appuyez sur 🔍",
+		"distance": "Distance par rapport à votre position",
+		"barrierFree": "Les locaux sont accessibles/sans barrières",
+		"notBarrierFree": "Les locaux ne sont pas accessibles/sans barrières",
+		"isBarrierFree": "Les locaux sont-ils accessibles/sans barrières ?",
+		"logout": "Se déconnecter",
+		"accountSettings": "Paramètres du compte",
+		"editEntry": "Modifier l'entrée",
+		"deleteEntry": "Supprimer l'entrée",
+		"approveEntry": "Approuver l'entrée",
+		"blocklistEntry": "Mettre l'entrée sur la liste de blocage",
+		"saveChanges": "Enregistrer les modifications",
+		"discardChanges": "Annuler les modifications",
+		"copyLink": "Copier le lien vers l'entrée dans le presse-papiers",
+		"filter": "Filtrer les entrées",
+		"databaseHelp": "Aide pour la gestion de la base de données et le filtrage des entrées",
+		"reloadGeo": "Réessayer de récupérer les données géographiques de l'API",
+		"backup": "Télécharger le fichier de sauvegarde de la base de données",
+		"deleteUser": "Supprimer l'utilisateur",
+		"resetPassword": "Réinitialiser le mot de passe",
+		"flyerA6": "A6 (PDF)",
+		"flyerPrint": "Version prête à imprimer avec marge de coupe et profil de couleur (PDF)"
+	},
+	"submit": {
+		"title": "Nouvelle entrée - Trans*DB"
+	},
+	"search": {
+		"title": "Recherche - Trans*DB"
+	},
+	"report": {
+		"title": "Signaler une entrée - Trans*DB"
+	},
+	"imprint": {
+		"description": "Adresse des mentions légales pour Trans*DB",
+		"title": "Mentions légales - Trans*DB"
+	},
+	"faq": {
+		"description": "Réponses aux questions fréquemment posées sur notre site"
+	},
+	"submitForm": {
+		"submittedPopup": "Entrée soumise",
+		"header": "Soumettre une nouvelle entrée",
+		"selectCategory": "Sélectionner une catégorie",
+		"address": "Adresse",
+		"street": "Rue",
+		"house": "Numéro de maison",
+		"city": "Ville",
+		"plz": "Code postal",
+		"contact": "Personne de contact",
+		"noTitle": "Sans titre",
+		"firstName": "Prénom",
+		"lastName": "Nom de famille",
+		"contactDetails": "Coordonnées",
+		"email": "Adresse e-mail",
+		"tel": "Numéro de téléphone",
+		"website": "Site web",
+		"specifics": "Informations spécifiques",
+		"offers": "Offres",
+		"attributes": "Informations supplémentaires",
+		"minAge": "Âge minimum",
+		"subject": "Spécialisation",
+		"selectSubject": "Sélectionner une spécialisation",
+		"accessibility": "Accessibilité",
+		"accessibilityUnknown": "Accessibilité inconnue",
+		"accessible": "Accessible",
+		"notAccessible": "Non accessible",
+		"specialsInfo": [
+			"Ce champ est destiné aux informations qui ne correspondent à aucun autre champ du formulaire.",
+			"Veuillez ne pas l'utiliser pour partager des opinions ou des avis."
+		],
+		"info": "Veuillez noter que votre entrée sera d'abord vérifiée manuellement par notre équipe avant d'être visible sur le site.",
+		"submit": "Soumettre",
+		"specials": "Offres supplémentaires / caractéristiques spéciales",
+		"academicTitle": "Titre",
+		"categoryLabel": "Catégorie",
+		"contactDescription": "Y a-t-il une personne spécifique dans cet établissement qui est recommandée ici ou qui est responsable des offres correspondantes ?",
+		"editHeader": "Modifier l'entrée",
+		"save": "Enregistrer",
+		"savedPopup": "Modifications enregistrées",
+		"adminSection": "Administration",
+		"blocked": "Bloqué",
+		"approved": "Approuvé"
+	},
+	"errors": {
+		"checkInput": "Veuillez vérifier les saisies",
+		"tooMany": "Trop de soumissions. Veuillez attendre quelques minutes avant de réessayer",
+		"unknown": "Erreur inconnue",
+		"failedToLoad": "Échec du chargement",
+		"invalidFilter": "Filtre invalide",
+		"entryNotFound": "Entrée introuvable",
+		"reportFailed": "Échec de l'envoi du signalement",
+		"locationAccessDenied": "Accès à la localisation refusé"
+	},
+	"warns": {
+		"reLogin": "Veuillez vous reconnecter"
+	},
+	"infos": {
+		"copiedToClipboard": "Texte copié dans le presse-papiers !",
+		"copiedLinkToClipboard": "Lien copié dans le presse-papiers !"
+	},
+	"altTexts": {
+		"contribute": "Plusieurs mains écrivant sur une feuille de papier",
+		"heart": "Un cœur aux couleurs du drapeau trans pride",
+		"flyerFront": "Recto du flyer",
+		"flyerBack": "Verso du flyer"
+	},
+	"memberRoles": {
+		"projectManager": "Chef de projet",
+		"developer": "Développeur logiciel",
+		"contentMod": "Modérateur de contenu"
+	},
+	"manage": {
+		"accountSettings": "Paramètres du compte",
+		"addUser": "Ajouter un utilisateur",
+		"userList": "Liste des utilisateurs"
+	},
+	"common": {
+		"loadMore": "Charger plus"
+	}
+}
