@@ -1,16 +1,22 @@
 import { getValueByPath } from "./utils";
 import translationMapping from "../locales/de.json";
 import translationEN from "../locales/en.json";
+import translationFR from "../locales/fr.json";
+import translationNL from "../locales/nl.json";
 import type { FlattenObjectKeys, NestedDict } from "./utils";
 
 const availableTranslations = {
 	de: translationMapping,
-	en: translationEN
+	en: translationEN,
+	fr: translationFR,
+	nl: translationNL
 };
 
 export const localeMappings = {
 	de: "Deutsch",
-	en: "English"
+	en: "English",
+	fr: "Français",
+	nl: "Nederlands"
 };
 
 export let currentLocale = "de";

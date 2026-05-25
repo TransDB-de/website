@@ -1,0 +1,369 @@
+{
+	"header": {
+		"subtitle": "De zoekmachine voor transgenderzorg",
+		"homepage": "Startpagina",
+		"search": "Zoeken",
+		"newEntry": "Nieuwe vermelding",
+		"searchBar": {
+			"areaSearch": "Omgevingszoekactie",
+			"placeholder": "Zoek op postcode of stad",
+			"placeholderMobile": "Zoek postcode of stad"
+		}
+	},
+	"index": {
+		"addNewEntry": "Een nieuwe vermelding toevoegen",
+		"thankYou": "Dank je wel!",
+		"description": "Een openbare lijst en zoekmachine voor trans*-gerelateerde medische diensten en gemeenschapsaanbod. Vind artsen, therapeuten en andere hulpbronnen.",
+		"howToHelp": "Hoe kan ik helpen?"
+	},
+	"footer": {
+		"imprint": "Colofon",
+		"privacy": "Privacy",
+		"aboutUs": "Over ons",
+		"instagramPlaceholder": "Volg ons op Instagram",
+		"githubPlaceholder": "Bezoek ons op GitHub",
+		"discordPlaceholder": "Sluit je aan bij onze Discord-server",
+		"openCollectivePlaceholder": "Steun ons op Open Collective"
+	},
+	"openCollectiveButton": {
+		"text": "Steun ons op Open Collective",
+		"alt": "Open Collective logo"
+	},
+	"submitted": {
+		"title": "Bedankt voor je inzending - Trans*DB"
+	},
+	"reported": {
+		"title": "Bedankt voor je melding - Trans*DB"
+	},
+	"privacy": {
+		"title": "Privacy - Trans*DB",
+		"description": "Ons privacybeleid"
+	},
+	"about": {
+		"title": "Over ons - Trans*DB",
+		"meta": {
+			"description": "Wie het team achter Trans*DB is, waarom we het hebben gebouwd en waar je meer kunt leren over het project."
+		},
+		"team": "Het Trans*DB Team",
+		"donation": "Steun ons met een donatie",
+		"techStack": "Onze techstack",
+		"flyer": "De officiële Trans*DB Flyer",
+		"downloadFlyer": "Flyer downloaden",
+		"downloadFlyerProfessional": "Geavanceerde drukgegevens",
+		"motivation": "Motivatie",
+		"socialMedia": "Social Media",
+		"nonProfit": "Non-profit"
+	},
+	"reportForm": {
+		"heading": "Vermelding melden",
+		"note": "Geef bij een voorgestelde wijziging altijd de nieuwe gegevens op.",
+		"placeholder": "Beschrijf je voorgestelde wijziging / details van je melding",
+		"categories": [
+			"Selecteer categorie",
+			"Wijziging voorstellen",
+			"Niet aanbevelenswaardig",
+			"Overig"
+		],
+		"submit": "Melden",
+		"successPopup": "Melding succesvol verzonden"
+	},
+	"entryMapping": {
+		"academicTitleMapping": {
+			"dr": "Dr.",
+			"prof": "Prof.",
+			"prof_dr": "Prof. Dr."
+		},
+		"typeMapping": {
+			"": "Alle categorieën",
+			"group": "Groep",
+			"therapist": "Therapeut/Psychiater",
+			"surveyor": "Beoordelaar",
+			"endocrinologist": "Endocrinoloog",
+			"surgeon": "Chirurg",
+			"logopedics": "Logopedist",
+			"hairremoval": "Ontharing",
+			"urologist": "Urologie",
+			"gynecologist": "Gynaecologie",
+			"GP": "Huisarts",
+			"pharmacy": "Apotheek",
+			"cryo": "Cryopreservatie"
+		},
+		"typeDescriptions": {
+			"group": "Naam van de groep",
+			"therapist": "Naam van de praktijk",
+			"surveyor": "Naam van de praktijk / de beoordelaar",
+			"endocrinologist": "Naam van de medische praktijk",
+			"surgeon": "Naam van de arts / kliniek",
+			"hairremoval": "Naam van de studio",
+			"logopedics": "Naam van de praktijk",
+			"urologist": "Naam van de medische praktijk",
+			"gynecologist": "Naam van de medische praktijk",
+			"GP": "Naam van de medische praktijk",
+			"pharmacy": "Naam van de apotheek",
+			"cryo": "Naam van de fertiliteitskliniek"
+		},
+		"typeDetails": {
+			"group": "LGBT+- of trans*-groepen, verenigingen en bijeenkomsten",
+			"therapist": "Therapeut met trans*-specifieke ervaring",
+			"surveyor": "TSG-beoordelaars",
+			"endocrinologist": "Endocrinologische medische kliniek voor hormoontherapie",
+			"surgeon": "Chirurgen voor trans-gerelateerde operaties",
+			"logopedics": "Logopedisten / logopedische praktijken voor stemtraining",
+			"hairremoval": "Ontharingsstudio's en klinieken",
+			"urologist": "Urologische medische kliniek",
+			"gynecologist": "Gynaecologische medische kliniek",
+			"GP": "Huisartspraktijk"
+		},
+		"attributeMapping": {
+			"trans": "Trans-gericht",
+			"regularMeetings": "Regelmatige bijeenkomsten",
+			"consulting": "Adviesdiensten",
+			"activities": "Hobbyactiviteiten",
+			"remote": "Online sessies",
+			"insurancePay": "Verzekeringsdekking",
+			"transfriendly": "Trans-vriendelijk",
+			"hasDoctor": "Medisch",
+			"enby": "NB-beoordeling",
+			"treatsNB": "Behandelt NB-personen",
+			"selfPayedOnly": "Alleen eigen betaling",
+			"youthOnly": "Kinderen en jongeren",
+			"transFem": "Trans*feminien vriendelijk",
+			"transMasc": "Trans*masculien vriendelijk",
+			"prefilled": "Voorgevulde spuit",
+			"reuseVial": "Herbruikbaar injectieflacon",
+			"shipping": "Verzending beschikbaar",
+			"singleUseVials": "Wegwerp-injectieflacon"
+		},
+		"attributeDetails": {
+			"trans": "Een groep/vereniging voornamelijk voor trans*-personen",
+			"regularMeetings": "Komt regelmatig bijeen",
+			"consulting": "Biedt begeleiding voor trans*-personen",
+			"activities": "Biedt hobby-/vrijetijdsactiviteiten",
+			"remote": "Biedt online/telefonische afspraken",
+			"insurancePay": "Zorgverzekeringen hebben hier eerder kosten vergoed",
+			"transfriendly": "Goede en respectvolle behandeling van trans*-personen",
+			"hasDoctor": "Is begeleid door of verbonden met een arts",
+			"treatsNB": "Behandelt non-binaire personen",
+			"enby": "Verstrekt TSG-beoordelingen voor non-binaire personen",
+			"selfPayedOnly": "Geen zorgverzekeringsdekking. Behandelt alleen zelfbetalende patiënten",
+			"youthOnly": "Uitsluitend voor kinderen en jongeren",
+			"transFem": "Vriendelijk en respectvol tegenover trans*feminiene personen",
+			"transMasc": "Vriendelijk en respectvol tegenover trans*masculiene personen",
+			"prefilled": "Medicatie als voorgevulde spuit",
+			"reuseVial": "Medicatie als herbruikbaar injectieflacon",
+			"shipping": "Biedt verzending van medicatie",
+			"singleUseVials": "Medicatie als wegwerp-injectieflacon"
+		},
+		"offerMapping": {
+			"indication": "(HRT) Indicatie",
+			"therapy": "Therapie",
+			"mastectomy": "Mastectomie",
+			"vaginPI": "Vaginoplastiek (penisinversie)",
+			"vaginCombined": "Vaginoplastiek (gecombineerde methode)",
+			"ffs": "Gezichtsfeminiserende chirurgie",
+			"penoid": "Penisopbouw",
+			"breast": "Borstvergroting",
+			"hyst": "Hysterectomie",
+			"orch": "Orchidectomie",
+			"clitPI": "Clitorispenoid / metoidioplastiek",
+			"bodyfem": "Lichaamsfeminiserende chirurgie",
+			"glottoplasty": "Stembandoperaties",
+			"fms": "Gezichtsmasculiniserende chirurgie",
+			"laser": "Laserepilatie",
+			"ipl": "IPL",
+			"electro": "Elektro-epilatie",
+			"electroAE": "Elektro-epilatie met lokale verdoving",
+			"hrt": "Begeleidt hormoontherapie",
+			"medication": "Schrijft hormoonmedicatie voor",
+			"cpa": "Cypro (Androcur)",
+			"eInjection": "Estradiol-injecties",
+			"freezesSperm": "Invriezen van zaadcellen",
+			"freezesEggs": "Invriezen van eicellen"
+		},
+		"offerDetails": {
+			"indication": "Schrijft verwijzingen (bijv. voor hormoontherapie)",
+			"therapy": "Biedt therapie voor trans*-personen",
+			"youthOnly": "Uitsluitend voor kinderen en jongeren",
+			"mastectomy": "Mastectomie",
+			"vaginPI": "Vaginoplastiek met de penisinversiemethode",
+			"vaginCombined": "Vaginoplastiek met de gecombineerde methode",
+			"ffs": "Gezichtsfeminiserende chirurgie (afkorting: FFS)",
+			"penoid": "Penisopbouw",
+			"breast": "Borstvergroting",
+			"hyst": "Hysterectomie",
+			"orch": "Orchidectomie",
+			"clitPI": "Clitorispenoid / metoidioplastiek",
+			"bodyfem": "Lichaamsfeminiserende chirurgie",
+			"glottoplasty": "Stembandoperaties, zoals stemfeminisering",
+			"fms": "Gezichtsmasculiniserende chirurgie (afkorting: FMS)",
+			"laser": "Epilatie met behulp van een laser",
+			"ipl": "Epilatie door sterke lichtimpulsen. Niet permanent.",
+			"electro": "Permanente epilatie door elektriciteit",
+			"electroAE": "Elektro-epilatie met lokale verdoving",
+			"hrt": "Medische begeleiding van hormoontherapie",
+			"medication": "Schrijft de benodigde medicijnen voor lopende hormoontherapie voor",
+			"cpa": "Bereidt cyproteronacetaat (Androcur) voor",
+			"eInjection": "Bereidt estradiol-injecties voor",
+			"freezesSperm": "Cryopreservatie van zaadcellen",
+			"freezesEggs": "Cryopreservatie van eicellen"
+		},
+		"subjectMapping": {
+			"therapist": "Psychologisch psychotherapeut",
+			"psychologist": "Psychiater (arts voor psychiatrie)",
+			"naturopath": "Alternatieve geneeskundige",
+			"other": "Andere specialisatie"
+		},
+		"accessibleMapping": {
+			"unknown": "Onbekend",
+			"yes": "Toegankelijk",
+			"no": "Niet toegankelijk"
+		}
+	},
+	"searchFilter": {
+		"title": "Specifieke filters",
+		"location": "Locatie",
+		"delete": "verwijderen",
+		"categories": "Categorieën",
+		"offers": "Aanbod",
+		"more": "Meer info",
+		"textSearch": "Tekstzoekactie",
+		"filter": "Filteren",
+		"textSearchPlaceholder": "Zoek op naam of personen"
+	},
+	"entry": {
+		"offers": "Aanbod",
+		"attributes": "Kenmerken",
+		"specials": "Bijzonderheden",
+		"minage": "Minimumleeftijd",
+		"possibleDuplicate": "Mogelijk duplicaat",
+		"from": "uit",
+		"nearbyOffers": "Meer aanbod in dit gebied"
+	},
+	"mouseOverTexts": {
+		"applyFilter": "Filter toepassen",
+		"proximitySearch": "Positie bepalen",
+		"locationSearchButton": "Zoeken",
+		"searchNearbyButton": "Zoek naar meer vermeldingen in de omgeving",
+		"report": "Vermelding melden of wijziging voorstellen",
+		"share": "Deel de link naar deze vermelding",
+		"location": "Jouw locatie",
+		"locationSearch": "Voer een stad of postcode in en druk op 🔍",
+		"distance": "Afstand tot jouw locatie",
+		"barrierFree": "De faciliteiten zijn toegankelijk/drempelvrij",
+		"notBarrierFree": "De faciliteiten zijn niet toegankelijk/drempelvrij",
+		"isBarrierFree": "Zijn de faciliteiten toegankelijk/drempelvrij?",
+		"logout": "Uitloggen",
+		"accountSettings": "Accountinstellingen",
+		"editEntry": "Vermelding bewerken",
+		"deleteEntry": "Vermelding verwijderen",
+		"approveEntry": "Vermelding goedkeuren",
+		"blocklistEntry": "Vermelding op de blokkeringslijst zetten",
+		"saveChanges": "Wijzigingen opslaan",
+		"discardChanges": "Wijzigingen verwerpen",
+		"copyLink": "Link naar vermelding naar klembord kopiëren",
+		"filter": "Vermeldingen filteren",
+		"databaseHelp": "Hulp bij databasebeheer en het filteren van vermeldingen",
+		"reloadGeo": "Opnieuw geodata ophalen van de API",
+		"backup": "Back-upbestand van de database downloaden",
+		"deleteUser": "Gebruiker verwijderen",
+		"resetPassword": "Wachtwoord opnieuw instellen",
+		"flyerA6": "A6 (PDF)",
+		"flyerPrint": "Drukklare versie met snijrand en kleurprofiel (PDF)"
+	},
+	"submit": {
+		"title": "Nieuwe vermelding - Trans*DB"
+	},
+	"search": {
+		"title": "Zoeken - Trans*DB"
+	},
+	"report": {
+		"title": "Vermelding melden - Trans*DB"
+	},
+	"imprint": {
+		"description": "Colofon adres voor Trans*DB",
+		"title": "Colofon - Trans*DB"
+	},
+	"faq": {
+		"description": "Antwoorden op veelgestelde vragen over onze website"
+	},
+	"submitForm": {
+		"submittedPopup": "Vermelding ingediend",
+		"header": "Een nieuwe vermelding indienen",
+		"selectCategory": "Selecteer categorie",
+		"address": "Adres",
+		"street": "Straat",
+		"house": "Huisnummer",
+		"city": "Stad",
+		"plz": "Postcode",
+		"contact": "Contactpersoon",
+		"noTitle": "Geen titel",
+		"firstName": "Voornaam",
+		"lastName": "Achternaam",
+		"contactDetails": "Contactgegevens",
+		"email": "E-mailadres",
+		"tel": "Telefoonnummer",
+		"website": "Website",
+		"specifics": "Specifieke informatie",
+		"offers": "Aanbod",
+		"attributes": "Aanvullende informatie",
+		"minAge": "Minimumleeftijd",
+		"subject": "Specialisatie",
+		"selectSubject": "Selecteer specialisatie",
+		"accessibility": "Toegankelijkheid",
+		"accessibilityUnknown": "Toegankelijkheid onbekend",
+		"accessible": "Toegankelijk",
+		"notAccessible": "Niet toegankelijk",
+		"specialsInfo": [
+			"Dit tekstveld is bedoeld voor informatie die niet in de andere formuliervelden past.",
+			"Gebruik het niet om meningen of beoordelingen te delen."
+		],
+		"info": "Let op: je vermelding wordt eerst handmatig gecontroleerd door ons team voordat deze op de site zichtbaar is.",
+		"submit": "Indienen",
+		"specials": "Aanvullend aanbod / bijzondere kenmerken",
+		"academicTitle": "Titel",
+		"categoryLabel": "Categorie",
+		"contactDescription": "Is er een specifieke persoon in deze instelling die hier wordt aanbevolen of verantwoordelijk is voor het betreffende aanbod?",
+		"editHeader": "Vermelding bewerken",
+		"save": "Opslaan",
+		"savedPopup": "Wijzigingen opgeslagen",
+		"adminSection": "Beheer",
+		"blocked": "Geblokkeerd",
+		"approved": "Goedgekeurd"
+	},
+	"errors": {
+		"checkInput": "Controleer de invoer",
+		"tooMany": "Te veel inzendingen. Wacht een paar minuten voordat je het opnieuw probeert",
+		"unknown": "Onbekende fout",
+		"failedToLoad": "Laden mislukt",
+		"invalidFilter": "Ongeldig filter",
+		"entryNotFound": "Vermelding niet gevonden",
+		"reportFailed": "Verzenden van melding mislukt",
+		"locationAccessDenied": "Locatietoegang geweigerd"
+	},
+	"warns": {
+		"reLogin": "Log opnieuw in"
+	},
+	"infos": {
+		"copiedToClipboard": "Tekst gekopieerd naar klembord!",
+		"copiedLinkToClipboard": "Link gekopieerd naar klembord!"
+	},
+	"altTexts": {
+		"contribute": "Meerdere handen die een vel papier beschrijven",
+		"heart": "Een hart in de kleuren van de trans pride vlag",
+		"flyerFront": "Voorkant flyer",
+		"flyerBack": "Achterkant flyer"
+	},
+	"memberRoles": {
+		"projectManager": "Projectmanager",
+		"developer": "Softwareontwikkelaar",
+		"contentMod": "Contentmoderater"
+	},
+	"manage": {
+		"accountSettings": "Accountinstellingen",
+		"addUser": "Gebruiker toevoegen",
+		"userList": "Gebruikerslijst"
+	},
+	"common": {
+		"loadMore": "Meer laden"
+	}
+}
