@@ -1,6 +1,6 @@
 <script lang="ts">
 	import GitHubBrandIcon from "$brandIcons/gitHubBrandIcon.svelte";
-	import InstagramBrandIcon from "$brandIcons/instagramBrandIcon.svelte";
+	import MastodonBrandIcon from "$brandIcons/mastodonBrandIcon.svelte";
 	import DiscordBrandIcon from "$brandIcons/discordBrandIcon.svelte";
 	import OpenCollectiveBrandIcon from "$brandIcons/openCollectiveIcon.svelte";
 
@@ -33,12 +33,12 @@
 
 	<section>
 		<a
-			href={externalLinks.social.instagram}
+			href={externalLinks.social.fediverse}
 			target="_blank"
 			rel="noopener"
-			title={t("footer.instagramPlaceholder")}
+			title={t("footer.fediPlaceholder")}
 		>
-			<InstagramBrandIcon />
+			<MastodonBrandIcon />
 		</a>
 		<a
 			href={externalLinks.social.github}

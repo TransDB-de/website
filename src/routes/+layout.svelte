@@ -14,6 +14,8 @@
 	import { token } from "$lib/store";
 	import { afterNavigate } from "$app/navigation";
 
+	import externalLinks from "$content/external-links.json";
+
 	import "@fontsource/poppins/500.css";
 	import "@fontsource/poppins/600.css";
 	import "@fontsource/poppins/700.css";
@@ -72,6 +74,7 @@
 		>
 		</script>
 	{/if}
+	<link rel="me" href={externalLinks.social.fediverse} />
 </svelte:head>
 
 <Header />
