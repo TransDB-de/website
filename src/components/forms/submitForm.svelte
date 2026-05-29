@@ -129,6 +129,9 @@
 	async function submitCreate() {
 		loading = true;
 
+		delete workingEntry.approved;
+		delete workingEntry.blocked;
+
 		const result = await apiRequestHandler(axios.post("entries", workingEntry));
 
 		errors = result.handleErrors({
