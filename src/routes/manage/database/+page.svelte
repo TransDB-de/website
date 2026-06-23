@@ -1,12 +1,10 @@
 <script lang="ts">
-	import DatabaseFilter from "$components/database/databaseFilter.svelte";
-	import DatabaseHelpAndDownload from "$components/database/databaseHelpAndDownload.svelte";
 	import EntryCollection from "$components/entryCollection.svelte";
+	import DatabaseSearch from "$components/forms/databaseSearch.svelte";
 </script>
 
 <div class="database">
-	<DatabaseFilter />
-	<DatabaseHelpAndDownload />
+	<DatabaseSearch />
 	<EntryCollection type="database" />
 </div>
 

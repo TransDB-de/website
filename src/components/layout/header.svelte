@@ -5,7 +5,7 @@
 	import NavLink from "$components/elements/navLink.svelte";
 	import MenuIcon from "$components/icons/menuIcon.svelte";
 	import SearchBar from "$components/searchBar.svelte";
-	import { token } from "$lib/store";
+	import { userdata } from "$lib/store";
 	import { t } from "$lib/localization.svelte";
 
 	let expand = $state(false);
@@ -51,7 +51,7 @@
 			<NavLink href="/" exact={true}>{t("header.homepage")}</NavLink>
 			<NavLink href="/search">{t("header.search")}</NavLink>
 			<NavLink href="/faq">FAQ</NavLink>
-			{#if $token}
+			{#if $userdata}
 				<NavLink href="/manage">Management</NavLink>
 			{/if}
 			<NavLink href="/submit">{t("header.newEntry")}</NavLink>

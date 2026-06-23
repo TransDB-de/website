@@ -1,10 +1,8 @@
 <script lang="ts">
-	import DatabaseFilter from "$components/database/databaseFilter.svelte";
 	import EntryCollection from "$components/entryCollection.svelte";
 </script>
 
 <div>
-	<DatabaseFilter />
 	<EntryCollection type="blocklist" />
 </div>
 

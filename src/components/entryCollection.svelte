@@ -9,7 +9,6 @@
 	import { browser } from "$app/environment";
 
 	import { currentLocation } from "$lib/store";
-	import { filters } from "$lib/filterLang.client";
 	import { removeFromArray } from "$lib/utils";
 	import type { EntriesResponse, Entry } from "$models/entry.model";
 
@@ -46,20 +45,21 @@
 
 			case "unapproved": {
 				fetchFunction = (url, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(url.searchParams.entries());
+					let params = Object.fromEntries<unknown>(url.searchParams.entries());
 					params.page = pageCount;
-					return axios.get<EntriesResponse>("entries/unapproved", { params });
+					params.approved = false;
+					return axios.get<EntriesResponse>("admin/entries", { params });
 				};
 				entryActions = "approve";
 				break;
 			}
 
 			case "database": {
-				fetchFunction = (_url, pageCount = 0) => {
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: filters.filters
-					});
+				fetchFunction = (url, pageCount = 0) => {
+					let params = Object.fromEntries<string | number>(url.searchParams.entries());
+					params.page = pageCount;
+
+					return axios.get<EntriesResponse>("admin/entries", { params });
 				};
 				entryActions = "edit";
 				break;
@@ -67,17 +67,11 @@
 
 			case "blocklist": {
 				fetchFunction = (_url, pageCount = 0) => {
-					let _filters = { ...$filters };
-
-					if (!("boolTrue" in _filters)) {
-						_filters["boolTrue"] = [];
-					}
-
-					(_filters["boolTrue"] as string[]).push("blocked");
-
-					return axios.post<EntriesResponse>("entries/full", {
-						page: pageCount,
-						filter: _filters
+					return axios.get<EntriesResponse>("admin/entries", {
+						params: {
+							page: pageCount,
+							blocked: true
+						}
 					});
 				};
 				entryActions = "edit";
@@ -98,20 +92,15 @@
 		loadInitialEntries($page.url);
 	});
 
-	let unsubscribeFilters = filters.subscribe((fil) => {
-		loadInitialEntries($page.url);
-	});
-
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	afterNavigate((nav) => {
-		if (nav && nav.to?.url.pathname === "/search" && nav.from?.url.pathname === "/search") {
+		if (nav && nav.to && nav.to?.url.search != nav.from?.url.search) {
 			loadInitialEntries(nav.to.url);
 		}
 	});
 
 	onDestroy(() => {
 		$currentLocation = "";
-		unsubscribeFilters();
 	});
 
 	async function loadInitialEntries(url: URL) {
@@ -166,7 +155,7 @@
 </script>
 
 <div class="entries-collection">
-	{#each entries as entry (entry._id)}
+	{#each entries as entry (entry.id)}
 		<div animate:flip={{ duration: 400 }} transition:fade={{ duration: 200 }}>
 			<EntryComponent {entry} onremove={removeEntry} actions={entryActions} />
 		</div>

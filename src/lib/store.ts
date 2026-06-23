@@ -1,15 +1,11 @@
 import { readable, writable } from "svelte/store";
 import { browser } from "$app/environment";
 import type { CMSUser } from "$models/user.model";
-import axios from "axios";
 
 const storedUserData = browser ? localStorage.getItem("userdata") : null;
-const storedToken = browser ? localStorage.getItem("token") : null;
 let defaultUserData = storedUserData ? JSON.parse(storedUserData) : null;
-let defaultToken = storedToken ?? null;
 
 export const userdata = writable<CMSUser | null>(defaultUserData);
-export const token = writable<string | null>(defaultToken);
 
 if (browser) {
 	userdata.subscribe((user) => {
@@ -17,15 +13,6 @@ if (browser) {
 			localStorage.setItem("userdata", JSON.stringify(user));
 		} else {
 			localStorage.removeItem("userdata");
-		}
-	});
-
-	token.subscribe((token) => {
-		if (token) {
-			localStorage.setItem("token", token);
-			axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-		} else {
-			localStorage.removeItem("token");
 		}
 	});
 }

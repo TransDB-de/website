@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte";
-	import { Trash } from "@lucide/svelte";
+	import { Archive } from "@lucide/svelte";
 	import { popupOk, popupError } from "$components/popup.svelte";
 	import Dialog from "$components/dialog.svelte";
 	import Textarea from "$components/forms/elements/textarea.svelte";
@@ -13,7 +13,6 @@
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
-		withText?: boolean;
 	}
 
 	const props: Props = $props();
@@ -28,16 +27,19 @@
 		loading = true;
 
 		const result = await apiRequestHandler(
-			axios.delete(`/admin/entries/${props.entry.id}`, { data: { comment } })
+			axios.patch(`/admin/entries/${props.entry.id}/status`, {
+				archived: true,
+				comment
+			})
 		);
 		result.handleErrors({
-			default: () => popupError("Fehler beim Löschen des Eintrags")
+			default: () => popupError("Fehler beim Archivieren des Eintrags")
 		});
 
 		loading = false;
 
 		if (result.success) {
-			popupOk("Eintrag gelöscht");
+			popupOk("Eintrag archiviert");
 			props.onremove?.(props.entry);
 		}
 	}
@@ -45,22 +47,24 @@
 
 <Button
 	light
-	iconOnly={!props.withText}
-	color="edge-error"
+	iconOnly
+	color="edge-warn"
+	title={t("mouseOverTexts.archiveEntry")}
 	onclick={() => (open = true)}
-	title={t("mouseOverTexts.deleteEntry")}
 	{loading}
 >
-	<Trash />
-	{#if props.withText}
-		Löschen
-	{/if}
+	<Archive />
 </Button>
 
-<Dialog bind:open title="Eintrag löschen" onclose={handleClose}>
-	<Textarea label="Begründung" name="comment" required placeholder="Warum wird dieser Eintrag gelöscht?" />
+<Dialog bind:open title="Eintrag archivieren" onclose={handleClose}>
+	<Textarea
+		label="Begründung"
+		name="comment"
+		required
+		placeholder="Warum wird dieser Eintrag archiviert?"
+	/>
 	{#snippet actions()}
 		<Button type="submit" value="cancel" formnovalidate>Abbrechen</Button>
-		<Button type="submit" value="confirm" color="red">Löschen</Button>
+		<Button type="submit" value="confirm" color="red">Archivieren</Button>
 	{/snippet}
 </Dialog>

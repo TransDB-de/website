@@ -16,7 +16,7 @@
 
 <svelte:head>
 	<title>{t("about.title")}</title>
-	<meta name="description" content={t("about.meta.description")} />
+	<meta name="description" content={t("about.description")} />
 </svelte:head>
 
 <div class="section">

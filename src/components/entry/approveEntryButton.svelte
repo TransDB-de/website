@@ -20,7 +20,9 @@
 	async function approve() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.patch(`/entries/${props.entry._id}/approve`));
+		const result = await apiRequestHandler(
+			axios.patch(`/admin/entries/${props.entry.id}/status`, { approved: true })
+		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Freischalten")
 		});

@@ -1,71 +1,66 @@
 export const typeMapping = [
 	"",
-	"group",
-	"therapist",
-	"surveyor",
-	"endocrinologist",
-	"surgeon",
-	"logopedics",
-	"hairremoval",
-	"urologist",
-	"gynecologist",
+	"Group",
+	"Therapist",
+	"Endocrinologist",
+	"Surgeon",
+	"Logopedics",
+	"Hairremoval",
+	"Urologist",
+	"Gynecologist",
 	"GP",
-	"pharmacy",
-	"cryo"
+	"Pharmacy",
+	"Cryo"
 ];
 
 export const attributeMapping: Record<string, string[]> = {
-	group: ["trans", "regularMeetings", "consulting", "activities", "remote"],
-	hairremoval: ["insurancePay", "transfriendly", "hasDoctor"],
-	surveyor: ["enby", "remote"],
-	surgeon: ["selfPayedOnly", "remote"],
-	endocrinologist: ["treatsNB", "remote"],
-	therapist: ["selfPayedOnly", "treatsNB", "youthOnly", "remote"],
-	logopedics: ["remote"],
-	urologist: ["treatsNB", "transFem", "transMasc", "remote"],
-	gynecologist: ["treatsNB", "transFem", "transMasc", "remote"],
-	GP: ["treatsNB", "remote"],
-	pharmacy: ["shipping", "singleUseVials", "reuseVial", "prefilled"],
-	cryo: [
-		// "selfPayedOnly", // I assume each category should only have one
-		"insurancePay"
-	]
+	Group: ["Trans", "RegularMeetings", "Consulting", "Activities", "Remote"],
+	Hairremoval: ["InsurancePay", "Transfriendly", "HasDoctor"],
+	Surgeon: ["SelfPayedOnly", "Remote"],
+	Endocrinologist: ["TreatsEnby", "Remote"],
+	Therapist: ["SelfPayedOnly", "TreatsEnby", "YouthOnly", "Remote"],
+	Logopedics: ["Remote"],
+	Urologist: ["TreatsEnby", "TransFem", "TransMasc", "Remote"],
+	Gynecologist: ["TreatsEnby", "TransFem", "TransMasc", "Remote"],
+	GP: ["TreatsEnby", "Remote"],
+	Pharmacy: ["Shipping", "SingleUseVials", "ReuseVial", "Prefilled"],
+	Cryo: ["InsurancePay"]
 };
 
 export const offerMapping: Record<string, string[]> = {
-	therapist: ["indication", "therapy"],
-	surgeon: [
-		"mastectomy",
-		"vaginPI",
-		"vaginCombined",
-		"ffs",
-		"penoid",
-		"breast",
-		"hyst",
-		"orch",
-		"clitPI",
-		"bodyfem",
-		"glottoplasty",
-		"fms"
+	Therapist: ["Indication", "Therapy"],
+	Surgeon: [
+		"Mastectomy",
+		"VaginPI",
+		"VaginCombined",
+		"VaginColon",
+		"PPVagin",
+		"Ffs",
+		"Penoid",
+		"Breast",
+		"Hyst",
+		"Orch",
+		"ClitPI",
+		"Bodyfem",
+		"Glottoplasty",
+		"Fms"
 	],
-	hairremoval: ["laser", "ipl", "electro", "electroAE"],
-	urologist: ["hrt", "medication"],
-	gynecologist: ["hrt", "medication"],
-	GP: ["hrt", "medication"],
-	pharmacy: ["eInjection", "cpa"],
-	cryo: [
-		"freezesSperm", // could also use treatsFem/Masc
-		"freezesEggs" // but I think it helps to be explicit about what they do
-	]
+	Hairremoval: ["Laser", "Ipl", "Electro", "ElectroAE"],
+	Urologist: ["Hrt", "Medication"],
+	Gynecologist: ["Hrt", "Medication"],
+	GP: ["Hrt", "Medication"],
+	Endocrinologist: ["HormoneGel", "HormoneInjections", "HormonePills", "HormonePatches", "Progesterone", "EDPills"],
+	Pharmacy: ["EInjection", "Cpa"],
+	Cryo: ["FreezesSperm", "FreezesEggs"]
 };
 
 export const subjectMapping: Record<string, string[]> = {
-	therapist: ["therapist", "psychologist", "naturopath", "other"]
+	Therapist: ["Therapist", "Psychologist", "Naturopath", "Other"]
 };
 
 export const accessibleMapping = ["unknown", "yes", "no"];
 
-export const academicTitleMapping = ["dr", "prof", "prof_dr"];
+export const academicTitleMapping = ["Dr", "Prof", "ProfDr"];
 
 export function makeTranslatedMapping(mapping: string[] = [], translation: Record<string, string>) {
 	let m: Record<string, string> = {};

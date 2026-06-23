@@ -23,5 +23,6 @@
 
 	a {
 		@include button;
+		text-decoration: none;
 	}
 </style>

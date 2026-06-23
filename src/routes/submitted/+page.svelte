@@ -14,7 +14,7 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="content">
+<div class="content md">
 	<props.data.SubmittedContent />
 </div>
 

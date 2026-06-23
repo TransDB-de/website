@@ -14,7 +14,6 @@
 	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import { getObjChanges, replaceFields } from "$lib/utils";
 	import type { ValidationErrorMap } from "$models/error";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import { slide } from "svelte/transition";
@@ -45,36 +44,44 @@
 	let errors: ValidationErrorMap = $state({});
 	let formElement: Form;
 	let isSpecialsFocused = $state(false);
+	let accessibleStr = $state<"unknown" | "yes" | "no">("unknown");
+	let editComment = $state("");
 
 	const sanitizedTypeMapping = $derived(typeMapping.filter((v) => v));
 
 	function blankEntry(): Entry {
 		return {
 			type: "",
-			name: null,
-			academicTitle: null,
-			firstName: null,
-			lastName: null,
+			name: "",
+			contact: {
+				academicTitle: null,
+				firstName: null,
+				lastName: null
+			},
 			telephone: null,
 			email: null,
 			website: null,
-			accessible: "unknown",
-			blocked: false,
-			approved: false,
+			accessible: null,
+			status: {
+				approved: false,
+				blocked: false,
+				archived: false
+			},
 			address: {
-				city: null,
+				city: "",
 				plz: null,
 				street: null,
 				house: null
 			},
-			meta: {
-				attributes: [],
-				offers: [],
-				specials: null,
-				subject: null,
-				minAge: undefined
-			}
-		} as unknown as Entry;
+			attributes: [],
+			offers: [],
+			specials: null,
+			subject: null,
+			id: null,
+			location: null,
+			distance: null,
+			possibleDuplicate: null
+		};
 	}
 
 	let workingEntry: Entry = $state(blankEntry());
@@ -83,12 +90,16 @@
 	$effect(() => {
 		if (entry) {
 			const clone = JSON.parse(JSON.stringify(entry)) as Entry;
-			clone.blocked = clone.blocked ?? false;
-			clone.approved = clone.approved ?? false;
-			clone.meta.offers = clone.meta?.offers ?? [];
-			clone.meta.attributes = clone.meta?.attributes ?? [];
+			clone.status = clone.status ?? { approved: false, blocked: false, archived: false };
+			clone.contact = clone.contact ?? { academicTitle: null, firstName: null, lastName: null };
+			clone.offers = clone.offers ?? [];
+			clone.attributes = clone.attributes ?? [];
 			workingEntry = clone;
 			savedEntry = JSON.parse(JSON.stringify(clone));
+
+			if (clone.accessible === true) accessibleStr = "yes";
+			else if (clone.accessible === false) accessibleStr = "no";
+			else accessibleStr = "unknown";
 		}
 	});
 
@@ -97,13 +108,10 @@
 	);
 
 	function resetMeta() {
-		workingEntry.meta = {
-			attributes: [],
-			offers: [],
-			specials: "",
-			subject: "",
-			minAge: undefined
-		};
+		workingEntry.attributes = [];
+		workingEntry.offers = [];
+		workingEntry.specials = null;
+		workingEntry.subject = null;
 	}
 
 	function specialsFocus(value: boolean) {
@@ -126,13 +134,21 @@
 		workingEntry.website = "https://" + workingEntry.website;
 	}
 
+	function resolveAccessible(): boolean | null {
+		if (accessibleStr === "yes") return true;
+		if (accessibleStr === "no") return false;
+		return null;
+	}
+
 	async function submitCreate() {
 		loading = true;
 
-		delete workingEntry.approved;
-		delete workingEntry.blocked;
+		const payload = {
+			...workingEntry,
+			accessible: resolveAccessible()
+		};
 
-		const result = await apiRequestHandler(axios.post("entries", workingEntry));
+		const result = await apiRequestHandler(axios.post("entries", payload));
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -155,42 +171,29 @@
 	}
 
 	async function submitEdit() {
-		if (!savedEntry) return;
+		if (!savedEntry || !workingEntry.id) return;
 
-		// When type changes, strip offers/attributes/subject that no longer apply
 		if (workingEntry.type !== savedEntry.type) {
-			workingEntry.meta.offers = workingEntry.meta.offers.filter((o) =>
+			workingEntry.offers = workingEntry.offers.filter((o) =>
 				offerMapping[workingEntry.type]?.includes(o)
 			);
-			workingEntry.meta.attributes = workingEntry.meta.attributes.filter((a) =>
+			workingEntry.attributes = workingEntry.attributes.filter((a) =>
 				attributeMapping[workingEntry.type]?.includes(a)
 			);
 			if (!(workingEntry.type in subjectMapping)) {
-				workingEntry.meta.subject = "";
+				workingEntry.subject = null;
 			}
-		}
-
-		let changes = getObjChanges(
-			savedEntry as unknown as Record<string, unknown>,
-			workingEntry as unknown as Record<string, unknown>
-		);
-		changes = replaceFields(changes, "", null);
-
-		if (Object.keys(changes).length < 1) {
-			onSuccess?.();
-			return;
-		}
-
-		// API requires type to always be present when sending a PATCH
-		if (!changes["type"]) {
-			changes["type"] = workingEntry.type;
 		}
 
 		loading = true;
 
-		const result = await apiRequestHandler(
-			axios.patch(`entries/${workingEntry._id}/edit`, changes)
-		);
+		const payload = {
+			...workingEntry,
+			accessible: resolveAccessible(),
+			comment: editComment
+		};
+
+		const result = await apiRequestHandler(axios.put(`admin/entries/${workingEntry.id}`, payload));
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -217,7 +220,7 @@
 
 <Form onsubmit={submit} bind:this={formElement}>
 	{#if isEdit}
-		<Input label="ID" value={workingEntry._id} readonly />
+		<Input label="ID" value={workingEntry.id} readonly />
 	{/if}
 
 	<Select bind:value={workingEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
@@ -289,11 +292,7 @@
 	</Paragraph>
 
 	<section>
-		<Select
-			bind:value={workingEntry.academicTitle}
-			onchange={resetMeta}
-			label={t("submitForm.academicTitle")}
-		>
+		<Select bind:value={workingEntry.contact.academicTitle} label={t("submitForm.academicTitle")}>
 			<option value={null} selected> {t("submitForm.noTitle")} </option>
 
 			{#each academicTitleMapping as title (title)}
@@ -301,20 +300,20 @@
 			{/each}
 		</Select>
 		<Input
-			bind:value={workingEntry.firstName}
+			bind:value={workingEntry.contact.firstName}
 			label={t("submitForm.firstName")}
 			placeholder={t("submitForm.firstName") + "..."}
 			minlength="2"
-			maxlength="30"
-			error={errors["firstName"]}
+			maxlength="50"
+			error={errors["contact.firstName"]}
 		/>
 		<Input
-			bind:value={workingEntry.lastName}
+			bind:value={workingEntry.contact.lastName}
 			label={t("submitForm.lastName")}
 			placeholder={t("submitForm.lastName") + "..."}
 			minlength="2"
-			maxlength="30"
-			error={errors["lastName"]}
+			maxlength="50"
+			error={errors["contact.lastName"]}
 		/>
 	</section>
 
@@ -355,15 +354,8 @@
 
 	<SecondaryHeading underline>{t("submitForm.specifics")}</SecondaryHeading>
 
-	{#if workingEntry.type === "group"}
-		<Input
-			bind:value={workingEntry.meta.minAge}
-			type="number"
-			label={t("submitForm.minAge")}
-			placeholder={t("submitForm.minAge") + "..."}
-		/>
-	{:else if workingEntry.type === "therapist"}
-		<Select bind:value={workingEntry.meta.subject} required label={t("submitForm.subject")}>
+	{#if workingEntry.type === "Therapist"}
+		<Select bind:value={workingEntry.subject} required label={t("submitForm.subject")}>
 			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
 
 			{#each subjectMapping[workingEntry.type] as subject (subject)}
@@ -375,10 +367,10 @@
 	{#if offerMapping[workingEntry.type]}
 		<SubHeading>{t("submitForm.offers")}:</SubHeading>
 
-		<ErrorBox error={errors["meta.offers"]}>
+		<ErrorBox error={errors["offers"]}>
 			<fieldset>
 				{#each offerMapping[workingEntry.type] as offer (offer)}
-					<Checkbox bind:group={workingEntry.meta.offers} value={offer}>
+					<Checkbox bind:group={workingEntry.offers} value={offer}>
 						{tEntry("offerDetails")[offer]}
 					</Checkbox>
 				{/each}
@@ -395,7 +387,7 @@
 
 		<fieldset>
 			{#each attributeMapping[workingEntry.type] as attribute (attribute)}
-				<Checkbox bind:group={workingEntry.meta.attributes} value={attribute}>
+				<Checkbox bind:group={workingEntry.attributes} value={attribute}>
 					{tEntry("attributeDetails")[attribute]}
 				</Checkbox>
 			{/each}
@@ -411,7 +403,7 @@
 	{/if}
 
 	<Textarea
-		bind:value={workingEntry.meta.specials}
+		bind:value={workingEntry.specials}
 		onfocus={() => specialsFocus(true)}
 		onblur={() => specialsFocus(false)}
 		label={t("submitForm.specials")}
@@ -419,8 +411,8 @@
 		maxlength={280}
 	/>
 
-	<Select bind:value={workingEntry.accessible} required label={t("submitForm.accessibility")}>
-		<option value="unknown" selected> {t("submitForm.accessibilityUnknown")} </option>
+	<Select bind:value={accessibleStr} label={t("submitForm.accessibility")}>
+		<option value="unknown"> {t("submitForm.accessibilityUnknown")} </option>
 		<option value="yes"> {t("submitForm.accessible")} </option>
 		<option value="no"> {t("submitForm.notAccessible")} </option>
 	</Select>
@@ -429,12 +421,26 @@
 		<br />
 		<SecondaryHeading underline>{t("submitForm.adminSection")}</SecondaryHeading>
 
-		<Checkbox bind:checked={workingEntry.blocked} single>
-			{t("submitForm.blocked")}
-		</Checkbox>
-		<Checkbox bind:checked={workingEntry.approved} single>
+		<Checkbox bind:checked={workingEntry.status.approved} single>
 			{t("submitForm.approved")}
 		</Checkbox>
+		<Checkbox bind:checked={workingEntry.status.blocked} single>
+			{t("submitForm.blocked")}
+		</Checkbox>
+		<Checkbox bind:checked={workingEntry.status.archived} single>
+			{t("submitForm.archived")}
+		</Checkbox>
+
+		<br />
+
+		<Textarea
+			bind:value={editComment}
+			label={t("submitForm.comment")}
+			placeholder={t("submitForm.comment") + "..."}
+			required
+			maxlength={2000}
+		/>
+
 		<br />
 	{:else}
 		<Paragraph>

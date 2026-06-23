@@ -2,7 +2,8 @@
 	import Button from "$components/elements/button.svelte";
 	import { Flag } from "@lucide/svelte";
 	import { popupWarn, popupError } from "$components/popup.svelte";
-	import { confirm } from "$components/confirm.svelte";
+	import Dialog from "$components/dialog.svelte";
+	import Textarea from "$components/forms/elements/textarea.svelte";
 	import type { Entry } from "$models/entry.model";
 
 	import { t } from "$lib/localization.svelte";
@@ -16,15 +17,21 @@
 
 	const props: Props = $props();
 
+	let open = $state(false);
 	let loading = $state(false);
 
-	async function blocklist() {
-		let confirmed = await confirm("Möchtest du diesen Eintrag wirklich auf die Blocklist setzen?");
-		if (!confirmed) return;
+	async function handleClose(returnValue: string, formData: FormData | null) {
+		if (returnValue !== "confirm") return;
 
+		const comment = formData?.get("comment") as string;
 		loading = true;
 
-		const result = await apiRequestHandler(axios.patch(`/entries/${props.entry._id}/blocklist`));
+		const result = await apiRequestHandler(
+			axios.patch(`/admin/entries/${props.entry.id}/status`, {
+				blocked: true,
+				comment
+			})
+		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Blocklisten des Eintrags")
 		});
@@ -38,6 +45,14 @@
 	}
 </script>
 
-<Button light iconOnly title={t("mouseOverTexts.blocklistEntry")} onclick={blocklist} {loading}>
+<Button light iconOnly title={t("mouseOverTexts.blocklistEntry")} onclick={() => (open = true)} {loading}>
 	<Flag />
 </Button>
+
+<Dialog bind:open title="Eintrag blocklisten" onclose={handleClose}>
+	<Textarea label="Begründung" name="comment" required placeholder="Warum wird dieser Eintrag geblockt?" />
+	{#snippet actions()}
+		<Button type="submit" value="cancel" formnovalidate>Abbrechen</Button>
+		<Button type="submit" value="confirm" color="red">Blocklisten</Button>
+	{/snippet}
+</Dialog>

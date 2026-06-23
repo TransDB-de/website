@@ -4,7 +4,4 @@ export interface CMSUser {
 	admin: boolean;
 }
 
-export interface LoginResponse {
-	user: CMSUser;
-	token: string;
-}
+export type LoginResponse = CMSUser;
