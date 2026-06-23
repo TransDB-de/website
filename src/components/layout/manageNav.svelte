@@ -51,12 +51,12 @@
 
 <div class="manage-nav">
 	<nav>
-		<NavLink {...linkOptions} exact href="/manage">Freischalten</NavLink>
-		<NavLink {...linkOptions} exact href="/manage/blocklist">Blocklist</NavLink>
-
-		{#if admin}
-			<NavLink {...linkOptions} href="/manage/database">Datenbank</NavLink>
-		{/if}
+		<NavLink {...linkOptions} exact href="/manage">Datenbank</NavLink>
+		<NavLink {...linkOptions} exact href="/manage?approved=false&blocked=false&archived=false"
+			>Freischalten</NavLink
+		>
+		<NavLink {...linkOptions} exact href="/manage?blocked=true">Blocklist</NavLink>
+		<NavLink {...linkOptions} exact href="/manage/activities">Aktivitätenverlauf</NavLink>
 	</nav>
 	<span class="account">
 		<a class="light" href={env.PUBLIC_CMS_URL + "/admin/users/" + userId} target="_blank">

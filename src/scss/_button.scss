@@ -15,7 +15,6 @@
 	outline: 0;
 	transition: 0.12s ease background-color;
 	font-family: "Poppins", sans-serif;
-	height: 40px;
 
 	&:hover,
 	&:focus {
@@ -104,5 +103,29 @@
 
 	&.edge-error {
 		color: var(--color-edge-error);
+	}
+
+	&.edge {
+		background: none;
+		color: var(--color-edge-faded);
+		box-shadow: none;
+		padding: 0;
+		transition: 0.2s color;
+
+		:global(.lucide) {
+			stroke-width: 2;
+			width: 1.6em;
+			height: 1.6em;
+		}
+
+		&:hover {
+			color: var(--color-edge);
+			box-shadow: none;
+		}
+
+		&:focus {
+			border: none;
+			box-shadow: none;
+		}
 	}
 }

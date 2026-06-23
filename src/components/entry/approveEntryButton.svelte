@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte";
-	import { CheckCircle } from "@lucide/svelte";
+	import { BadgeCheck, CheckCircle } from "@lucide/svelte";
 	import { popupOk, popupError } from "$components/popup.svelte";
 	import type { Entry } from "$models/entry.model";
 
@@ -44,5 +44,5 @@
 	onclick={approve}
 	{loading}
 >
-	<CheckCircle />
+	<BadgeCheck />
 </Button>

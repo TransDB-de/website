@@ -52,15 +52,4 @@
 	{loading}
 >
 	<Trash />
-	{#if props.withText}
-		Löschen
-	{/if}
 </Button>
-
-<Dialog bind:open title="Eintrag löschen" onclose={handleClose}>
-	<Textarea label="Begründung" name="comment" required placeholder="Warum wird dieser Eintrag gelöscht?" />
-	{#snippet actions()}
-		<Button type="submit" value="cancel" formnovalidate>Abbrechen</Button>
-		<Button type="submit" value="confirm" color="red">Löschen</Button>
-	{/snippet}
-</Dialog>

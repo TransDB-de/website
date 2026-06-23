@@ -24,14 +24,27 @@
 		...rest
 	}: Props = $props();
 
-	let active = $derived($page.url.pathname.startsWith(href) ? "active" : "");
-	let activeExact = $derived($page.url.pathname === href ? "active" : "");
+	let active = $derived.by(() => {
+		try {
+			const hrefUrl = new URL(href, window.location.origin);
+			const pathMatch = exact
+				? $page.url.href === hrefUrl.href
+				: $page.url.pathname.startsWith(hrefUrl.pathname);
+			if (!pathMatch) return "";
+			for (const [key, val] of hrefUrl.searchParams) {
+				if ($page.url.searchParams.get(key) !== val) return "";
+			}
+			return "active";
+		} catch {
+			return "";
+		}
+	});
 </script>
 
 <a
 	{...rest}
 	{href}
-	class="nav-link {exact ? activeExact : active}"
+	class="nav-link {active}"
 	class:shadow
 	style="--color: {color}; --line-height: {lineHeight}; --line-offset: {lineOffset};"
 >

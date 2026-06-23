@@ -2,7 +2,7 @@
 	import axios from "axios";
 	import type { AxiosResponse } from "axios";
 
-	import { onMount, onDestroy, untrack } from "svelte";
+	import { onMount, onDestroy } from "svelte";
 	import { fade } from "svelte/transition";
 	import { flip } from "svelte/animate";
 	import { page } from "$app/stores";
@@ -20,69 +20,23 @@
 	import { afterNavigate } from "$app/navigation";
 
 	interface Props {
-		type?: "search" | "unapproved" | "database" | "blocklist";
+		type?: "public" | "manage";
 	}
 
-	let { type: collectionType }: Props = $props();
+	let { type = "public" }: Props = $props();
 
 	let entries: Entry[] = $state([]);
 
-	let entryActions: "approve" | "edit" | undefined = $state(undefined);
+	function fetchEntries(url: URL, pageCount = 0) {
+		const params = Object.fromEntries<unknown>(url.searchParams.entries());
+		params.page = pageCount;
 
-	// how and where to fetch data — type prop is fixed at construction time, read once
-	let fetchFunction: (url: URL, pageCount?: number) => Promise<AxiosResponse<EntriesResponse>>;
-
-	untrack(() => {
-		switch (collectionType ?? "search") {
-			case "search": {
-				fetchFunction = (url, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(url.searchParams.entries());
-					params.page = pageCount;
-					return axios.get<EntriesResponse>("entries", { params });
-				};
-				break;
-			}
-
-			case "unapproved": {
-				fetchFunction = (url, pageCount = 0) => {
-					let params = Object.fromEntries<unknown>(url.searchParams.entries());
-					params.page = pageCount;
-					params.approved = false;
-					return axios.get<EntriesResponse>("admin/entries", { params });
-				};
-				entryActions = "approve";
-				break;
-			}
-
-			case "database": {
-				fetchFunction = (url, pageCount = 0) => {
-					let params = Object.fromEntries<string | number>(url.searchParams.entries());
-					params.page = pageCount;
-
-					return axios.get<EntriesResponse>("admin/entries", { params });
-				};
-				entryActions = "edit";
-				break;
-			}
-
-			case "blocklist": {
-				fetchFunction = (_url, pageCount = 0) => {
-					return axios.get<EntriesResponse>("admin/entries", {
-						params: {
-							page: pageCount,
-							blocked: true
-						}
-					});
-				};
-				entryActions = "edit";
-				break;
-			}
-
-			default: {
-				console.error(`No such type for EntryCollection: "${collectionType}"`);
-			}
+		if (type === "manage") {
+			return axios.get<EntriesResponse>("manage/entries", { params });
 		}
-	});
+
+		return axios.get<EntriesResponse>("entries", { params });
+	}
 
 	let more: boolean = $state(true);
 	let pageCount: number = $state(0);
@@ -108,7 +62,7 @@
 
 		loading = true;
 
-		const result = await apiRequestHandler(fetchFunction(url));
+		const result = await apiRequestHandler(fetchEntries(url));
 
 		result.handleErrors({
 			default: (status) => popupError(`${t("errors.failedToLoad")} (${status})`)
@@ -131,7 +85,7 @@
 		let params = Object.fromEntries<string | number>($page.url.searchParams.entries());
 		params.page = pageCount + 1;
 
-		const result = await apiRequestHandler(fetchFunction($page.url, params.page));
+		const result = await apiRequestHandler(fetchEntries($page.url, params.page));
 
 		loading = false;
 
@@ -157,7 +111,7 @@
 <div class="entries-collection">
 	{#each entries as entry (entry.id)}
 		<div animate:flip={{ duration: 400 }} transition:fade={{ duration: 200 }}>
-			<EntryComponent {entry} onremove={removeEntry} actions={entryActions} />
+			<EntryComponent {entry} onremove={removeEntry} manage={type === "manage"} />
 		</div>
 	{/each}
 

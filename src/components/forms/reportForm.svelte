@@ -23,6 +23,7 @@
 
 	interface Props {
 		ReportNote: Component;
+		entryId: string;
 	}
 
 	const props: Props = $props();
@@ -31,8 +32,8 @@
 	let loading = $state(false);
 	let formElement: Form;
 
-	let report: Report = $state({
-		id: $page.url.searchParams.get("id"),
+	let report = $state<Report>({
+		id: props.entryId,
 		type: "",
 		message: ""
 	});
@@ -40,9 +41,7 @@
 	let errors: ValidationErrorMap = $state({});
 
 	onMount(async () => {
-		const result = await apiRequestHandler<Entry>(
-			axios.get("/entries/" + $page.url.searchParams.get("id"))
-		);
+		const result = await apiRequestHandler<Entry>(axios.get("/entries/" + props.entryId));
 
 		errors = result.handleErrors({
 			404: () => popupError(t("errors.entryNotFound")),
@@ -88,12 +87,12 @@
 <Form onsubmit={submit} bind:this={formElement} class="report-form">
 	<Select required bind:value={report.type} label={t("reportForm.categories")[0]}>
 		<option value="" disabled selected>{t("reportForm.categories")[0] + "..."}</option>
-		<option value="edit">{t("reportForm.categories")[1]}</option>
-		<option value="report">{t("reportForm.categories")[2]}</option>
-		<option value="other">{t("reportForm.categories")[3]}</option>
+		<option value="Edit">{t("reportForm.categories")[1]}</option>
+		<option value="Report">{t("reportForm.categories")[2]}</option>
+		<option value="Other">{t("reportForm.categories")[3]}</option>
 	</Select>
 
-	{#if report.type === "edit"}
+	{#if report.type === "Edit"}
 		<InfoWarning>
 			{t("reportForm.note")}
 		</InfoWarning>

@@ -6,11 +6,13 @@
 	let text = $state("");
 
 	async function submit() {
+		const url = new URL(window.location.href);
 		if (text.length > 0) {
-			goto("/manage/database?text=" + encodeURIComponent(text));
+			url.searchParams.set("text", text);
 		} else {
-			goto("/manage/database");
+			url.searchParams.delete("text");
 		}
+		goto(url.toString());
 	}
 </script>
 

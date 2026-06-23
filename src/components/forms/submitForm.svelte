@@ -193,7 +193,7 @@
 			comment: editComment
 		};
 
-		const result = await apiRequestHandler(axios.put(`admin/entries/${workingEntry.id}`, payload));
+		const result = await apiRequestHandler(axios.put(`manage/entries/${workingEntry.id}`, payload));
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -417,35 +417,19 @@
 		<option value="no"> {t("submitForm.notAccessible")} </option>
 	</Select>
 
-	{#if isEdit}
-		<br />
-		<SecondaryHeading underline>{t("submitForm.adminSection")}</SecondaryHeading>
-
-		<Checkbox bind:checked={workingEntry.status.approved} single>
-			{t("submitForm.approved")}
-		</Checkbox>
-		<Checkbox bind:checked={workingEntry.status.blocked} single>
-			{t("submitForm.blocked")}
-		</Checkbox>
-		<Checkbox bind:checked={workingEntry.status.archived} single>
-			{t("submitForm.archived")}
-		</Checkbox>
-
-		<br />
-
-		<Textarea
-			bind:value={editComment}
-			label={t("submitForm.comment")}
-			placeholder={t("submitForm.comment") + "..."}
-			required
-			maxlength={2000}
-		/>
-
-		<br />
-	{:else}
+	{#if !isEdit}
 		<Paragraph>
 			{t("submitForm.info")}
 		</Paragraph>
+	{/if}
+
+	{#if isEdit}
+		<hr />
+		<Textarea
+			label={"Kommentar"}
+			placeholder={"Warum wurde der Eintrag bearbeitet?"}
+			maxlength={2000}
+		/>
 	{/if}
 
 	<Button {loading}>{isEdit ? t("submitForm.save") : t("submitForm.submit")}</Button>
@@ -476,6 +460,14 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
+	}
+
+	hr {
+		margin: 0;
+		border: none;
+		margin-top: 5px;
+		border-bottom: 2px solid var(--color-edge-dimmed);
+		border-bottom-style: dashed;
 	}
 
 	h3::after {

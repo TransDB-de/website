@@ -6,13 +6,10 @@
 	import { t, tEntry } from "$lib/localization.svelte";
 
 	import Tag from "$components/elements/tag.svelte";
-	import EdgeButton from "$components/elements/edgeButton.svelte";
 	import { popupOk } from "$components/popup.svelte";
 
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte";
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte";
-	import BlocklistEntryButton from "$components/entry/blocklistEntryButton.svelte";
-	import ArchiveEntryButton from "$components/entry/archiveEntryButton.svelte";
 
 	import {
 		Phone,
@@ -22,16 +19,18 @@
 		Share2,
 		Navigation,
 		AlertTriangle,
-		FilePen
+		FilePen,
+		TriangleAlert
 	} from "@lucide/svelte";
 
 	import { subjectMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 	import LinkButton from "$components/elements/LinkButton.svelte";
+	import Button from "$components/elements/button.svelte";
 
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
-		actions?: "approve" | "edit";
+		manage?: boolean;
 	}
 
 	const props: Props = $props();
@@ -42,9 +41,7 @@
 	);
 	let website = $derived(props.entry.website ? new URL(props.entry.website).host : null);
 	let possibleDuplicateLink = $derived(
-		props.entry.possibleDuplicate && $userdata?.admin
-			? "/manage/database?id=" + props.entry.possibleDuplicate
-			: "/entry/" + props.entry.possibleDuplicate
+		props.entry.possibleDuplicate && "/manage/" + props.entry.possibleDuplicate.entryId
 	);
 
 	let addressText = $derived.by(() => {
@@ -68,7 +65,10 @@
 	}
 </script>
 
-<article>
+<article
+	class:archived={props.manage && props.entry.status?.archived}
+	class:blocked={props.manage && props.entry.status?.blocked}
+>
 	<div class="data">
 		<div class="heading">
 			<h2>{props.entry.name}</h2>
@@ -83,8 +83,16 @@
 				</span>
 			{/if}
 
-			{#if props.actions === "edit" && props.entry.status?.blocked}
-				<span class="special-tag red"> Blockiert </span>
+			{#if props.manage}
+				{#if props.entry.status?.blocked}
+					<span class="special-tag red"> Gesperrt </span>
+				{/if}
+				{#if props.entry.status?.archived}
+					<span class="special-tag orange"> Archiviert </span>
+				{/if}
+				{#if !props.entry.status?.approved}
+					<span class="special-tag blue"> Wartet auf Freischaltung </span>
+				{/if}
 			{/if}
 		</div>
 
@@ -164,40 +172,38 @@
 		{#if !props.entry.status?.approved && props.entry.possibleDuplicate}
 			<p class="small-gap">
 				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
-					<AlertTriangle />
-					{t("entry.possibleDuplicate")}
+					<TriangleAlert />
+					{t("entry.possibleDuplicate")} ({props.entry.possibleDuplicate.probability * 100}%)
 				</a>
 			</p>
 		{/if}
 	</div>
 
 	<div class="controls">
-		{#if props.actions === "approve"}
-			<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
-			<BlocklistEntryButton onremove={props.onremove} entry={props.entry} />
-			<ArchiveEntryButton onremove={props.onremove} entry={props.entry} />
-			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
-		{:else if props.actions === "edit"}
+		{#if props.manage == true}
+			{#if !props.entry.status?.approved}
+				<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
+			{/if}
 			<LinkButton
 				light
 				iconOnly
-				href={"/manage/database/entry/" + props.entry.id}
+				href={"/manage/" + props.entry.id}
 				title={t("mouseOverTexts.editEntry")}
 			>
 				<FilePen />
 			</LinkButton>
-			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
-		{:else}
-			<EdgeButton
-				onclick={() => goto("/report?id=" + props.entry.id)}
+		{:else if props.manage == false}{:else}
+			<LinkButton
+				href={`/entry/${props.entry.id}/report`}
+				iconOnly
+				edge
 				title={t("mouseOverTexts.report")}
 			>
 				<FilePen />
-			</EdgeButton>
-
-			<EdgeButton onclick={share} title={t("mouseOverTexts.share")}>
+			</LinkButton>
+			<Button iconOnly edge onclick={share} title={t("mouseOverTexts.share")}>
 				<Share2 />
-			</EdgeButton>
+			</Button>
 		{/if}
 	</div>
 </article>
@@ -213,6 +219,14 @@
 		border-radius: 4px;
 		padding: 15px 15px 15px 20px;
 		gap: 5px;
+
+		&.archived {
+			opacity: 0.75;
+		}
+
+		&.blocked {
+			border: 2px dashed var(--color-edge-error);
+		}
 
 		.controls {
 			display: flex;
@@ -329,6 +343,10 @@
 
 					&.red {
 						background-color: var(--color-special-error);
+					}
+
+					&.blue {
+						background-color: var(--color-special-info);
 					}
 				}
 			}

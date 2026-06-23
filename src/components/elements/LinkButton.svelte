@@ -8,13 +8,22 @@
 		iconOnly?: boolean;
 		children: Snippet;
 		href: string;
+		edge?: boolean;
 		[key: string]: unknown;
 	}
 
-	let { color = "", light = false, iconOnly = false, children, href, ...rest }: Props = $props();
+	let {
+		color = "",
+		light = false,
+		iconOnly = false,
+		children,
+		href,
+		edge = false,
+		...rest
+	}: Props = $props();
 </script>
 
-<a {href} class={color} class:light class:iconOnly {...rest}>
+<a {href} class={color} class:light class:iconOnly class:edge {...rest}>
 	{@render children()}
 </a>
 

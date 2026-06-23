@@ -6,6 +6,7 @@
 	import Header from "$components/layout/header.svelte";
 	import Popup from "$components/popup.svelte";
 	import Confirm from "$components/confirm.svelte";
+	import Prompt from "$components/prompt.svelte";
 
 	import { initLocalization } from "$lib/localization.svelte";
 	import "$lib/axios";
@@ -76,6 +77,7 @@
 <Footer />
 <Popup />
 <Confirm />
+<Prompt />
 
 <style lang="scss">
 	@use "../scss/colors" as *;

@@ -20,9 +20,11 @@
 
 	/* Highlighting Colors for important elements. Links, Special Buttons, Checkboxes... */
 
+	--color-edge-success: #40a93b;
+
 	--color-edge-highlight: #4897ec;
 
-	--color-edge-warn: #e29b00;
+	--color-edge-warn: #e56f1d;
 	--color-edge-error: #de506b;
 
 	--color-edge: #334450;
@@ -80,6 +82,7 @@
 	--color-special-highlight: #b7f1b7;
 	--color-special-warn: #ffe8a9;
 	--color-special-error: #f1cadb;
+	--color-special-info: #c6d5f1;
 
 	--color-rim-shadow: rgba(15, 4, 44, 0.1);
 
