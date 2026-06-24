@@ -9,6 +9,7 @@
 	import { onMount } from "svelte";
 	import type { PageProps } from "../$types";
 	import PrimaryHeading from "$components/typography/PrimaryHeading.svelte";
+	import { goto } from "$app/navigation";
 
 	let { params }: PageProps = $props();
 
@@ -26,30 +27,13 @@
 			entry = result.data;
 		}
 	});
-
-	function copyLink() {
-		navigator.clipboard.writeText(`${window.location.origin}/manage/entry/${entry!.id}`);
-		popupOk(t("infos.copiedLinkToClipboard"));
-	}
-
-	async function refetchGeo() {
-		const result = await apiRequestHandler(axios.put(`manage/entries/${entry!.id}/updateGeo`));
-
-		result.handleErrors({
-			default: () => popupError(t("errors.unknown"))
-		});
-
-		if (result.success) {
-			popupOk("Geodaten-Update angefragt. Bitte warte ein wenig und lade die Seite dann neu.");
-		}
-	}
 </script>
 
 <div class="content">
 	{#if entry}
 		<PrimaryHeading underline>Eintrag bearbeiten</PrimaryHeading>
 
-		<SubmitForm mode="edit" {entry} />
+		<SubmitForm mode="edit" {entry} onSuccess={() => goto("/manage/" + params.id)} />
 	{:else}
 		<Loader dark big />
 	{/if}

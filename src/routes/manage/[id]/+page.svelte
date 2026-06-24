@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import type { PageProps } from "./$types";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
-	import { popupError, popupOk } from "$components/popup.svelte";
+	import { popupError, popupOk, popupWarn } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
 	import PrimaryHeading from "$components/typography/PrimaryHeading.svelte";
 	import EntryComponent from "$components/entry/entry.svelte";
@@ -29,10 +29,14 @@
 	import { prompt } from "$components/prompt.svelte";
 	import { goto } from "$app/navigation";
 	import { userdata } from "$lib/store";
+	import RadioToggle from "$components/forms/elements/radioToggle.svelte";
+	import InfoWarning from "$components/typography/InfoWarning.svelte";
 
 	let { params }: PageProps = $props();
 
-	let entry: Entry | null = $state(null);
+	let entry = $state<Entry | null>(null);
+	let loading = $state(false);
+	let activitiesCollectionComponent = $state<ReturnType<typeof ActivityCollection>>();
 
 	onMount(async () => {
 		const result = await apiRequestHandler(axios.get<Entry>("manage/entries/" + params.id));
@@ -50,8 +54,25 @@
 
 	async function changeEntryStatus(
 		status: Partial<EntryStatus & { removeDuplication: boolean }>,
-		comment?: string
+		confirmWithComment?: { text: string; required: boolean; destructive?: boolean }
 	) {
+		let comment: string | null = null;
+
+		if (confirmWithComment) {
+			const confirmed = await prompt(confirmWithComment.text, {
+				label: "Begründung",
+				placeholder: "Warum " + confirmWithComment.text,
+				required: confirmWithComment.required,
+				destructive: confirmWithComment.destructive
+			});
+
+			if (confirmed) {
+				comment = confirmed;
+			} else {
+				return false;
+			}
+		}
+
 		const result = await apiRequestHandler(
 			axios.patch<Entry>(`/manage/entries/${params.id}/status`, { ...status, comment })
 		);
@@ -69,16 +90,28 @@
 		return false;
 	}
 
-	async function unapprove() {
-		const confirmed = await prompt("Freischaltung aufheben?", {
-			label: "Begründung",
-			placeholder: "Warum soll die Freischaltung aufgehoben werden?",
-			required: true
-		});
+	async function approval(value: string | boolean | undefined): Promise<void> {
+		if (value) {
+			const success = await changeEntryStatus({ approved: true });
+			if (success) {
+				popupOk("Eintrag freigeschaltet");
+				activitiesCollectionComponent?.initialLoad();
+			}
+		} else {
+			const success = await changeEntryStatus(
+				{ approved: false },
+				{ text: "Freischaltung entziehen?", required: true }
+			);
 
-		if (!confirmed) return;
-
-		await changeEntryStatus({ approved: false }, confirmed);
+			if (!success) {
+				entry!.status!.approved = !Boolean(value);
+			} else {
+				if (success) {
+					popupWarn("Freischaltung entzogen");
+					activitiesCollectionComponent?.initialLoad();
+				}
+			}
+		}
 	}
 
 	async function deleteEntry() {
@@ -104,62 +137,58 @@
 		popupOk("Eintrag gelöscht");
 	}
 
-	async function blockEntry() {
-		const confirmed = await prompt("Eintrag sperren?", {
-			label: "Begründung",
-			placeholder: "Warum soll der Eintrag gesperrt werden?",
-			required: true,
-			destructive: true
-		});
+	async function ban(value: string | boolean | undefined): Promise<void> {
+		if (value) {
+			const success = await changeEntryStatus(
+				{ blocked: true },
+				{ text: "Eintrag sperren?", required: true, destructive: true }
+			);
+			if (success) {
+				popupWarn("Eintrag gesperrt");
+				activitiesCollectionComponent?.initialLoad();
+			}
+		} else {
+			const success = await changeEntryStatus(
+				{ blocked: false },
+				{ text: "Eintrag entsperren?", required: true }
+			);
 
-		if (!confirmed) return;
-
-		const success = await changeEntryStatus({ blocked: true }, confirmed);
-
-		if (success) popupOk("Eintrag gesperrt");
+			if (!success) {
+				entry!.status!.blocked = !Boolean(value);
+			} else {
+				if (success) {
+					popupOk("Eintrag entsperrt");
+					activitiesCollectionComponent?.initialLoad();
+				}
+			}
+		}
 	}
 
-	async function unblockEntry() {
-		const confirmed = await prompt("Eintrag entsperren?", {
-			label: "Begründung",
-			placeholder: "Warum soll der Eintrag entgesperrt werden?",
-			required: true
-		});
+	async function archive(value: string | boolean | undefined): Promise<void> {
+		if (value) {
+			const success = await changeEntryStatus(
+				{ archived: true },
+				{ text: "Eintrag archivieren?", required: true, destructive: true }
+			);
+			if (success) {
+				popupWarn("Eintrag archiviert");
+				activitiesCollectionComponent?.initialLoad();
+			}
+		} else {
+			const success = await changeEntryStatus(
+				{ archived: false },
+				{ text: "Eintrag wiederherstellen?", required: true }
+			);
 
-		if (!confirmed) return;
-
-		const success = await changeEntryStatus({ blocked: false }, confirmed);
-
-		if (success) popupOk("Eintrag entsperrt");
-	}
-
-	async function archiveEntry() {
-		const confirmed = await prompt("Eintrag archivieren?", {
-			label: "Begründung",
-			placeholder: "Warum soll der Eintrag archiviert werden?",
-			required: true,
-			destructive: true
-		});
-
-		if (!confirmed) return;
-
-		const success = await changeEntryStatus({ archived: true }, confirmed);
-
-		if (success) popupOk("Eintrag archiviert");
-	}
-
-	async function unarchiveEntry() {
-		const confirmed = await prompt("Eintrag wiederherstellen?", {
-			label: "Begründung",
-			placeholder: "Warum soll der Eintrag wiederhergestellt werden?",
-			required: true
-		});
-
-		if (!confirmed) return;
-
-		const success = await changeEntryStatus({ archived: false }, confirmed);
-
-		if (success) popupOk("Eintrag wiederhergestellt");
+			if (!success) {
+				entry!.status!.archived = !Boolean(value);
+			} else {
+				if (success) {
+					popupOk("Eintrag wiederhergestellt");
+					activitiesCollectionComponent?.initialLoad();
+				}
+			}
+		}
 	}
 
 	async function removeDuplicate() {
@@ -181,7 +210,7 @@
 </svelte:head>
 
 <div class="content">
-	{#if entry}
+	{#if !loading && entry}
 		<PrimaryHeading underline>Eintrag verwalten</PrimaryHeading>
 		<EntryComponent {entry} manage={false} />
 
@@ -218,50 +247,50 @@
 		<SecondaryHeading underline>Status verwalten</SecondaryHeading>
 
 		<section>
-			{#if !entry.status?.approved}
-				<Button light color="edge-highlight" onclick={() => changeEntryStatus({ approved: true })}>
-					<BadgeCheck />
-					Freischalten
-				</Button>
-			{:else}
-				<Button href={`${params.id}/edit`} light onclick={unapprove}>
-					<CircleMinus />
-					Freischaltung aufheben
-				</Button>
-			{/if}
-
-			{#if !entry.status?.blocked}
-				<Button light onclick={blockEntry} color="edge-warn">
-					<Ban />
-					Sperren
-				</Button>
-			{:else}
-				<Button href={`${params.id}/edit`} light color="edge-highlight" onclick={unblockEntry}>
-					<LockOpen />
-					Entsperren
-				</Button>
-			{/if}
-
-			{#if !entry.status?.archived}
-				<Button light color="edge-error" onclick={archiveEntry}>
-					<Archive />
-					Archivieren
-				</Button>
-			{:else}
-				<Button light color="edge-highlight" onclick={unarchiveEntry}>
-					<Archive />
-					Wiederherstellen
-				</Button>
-			{/if}
+			<RadioToggle
+				label="Freigeschaltet"
+				icon={BadgeCheck}
+				labelColor="var(--color-edge-highlight)"
+				bind:value={entry.status!.approved}
+				onchange={approval}
+				options={[
+					{ value: true, label: "Ja", color: "var(--color-surface-highlight)" },
+					{ value: false, label: "Nein", color: "var(--color-surface-primary)" }
+				]}
+			/>
+			<RadioToggle
+				label="Gesperrt"
+				icon={Ban}
+				labelColor="var(--color-edge)"
+				bind:value={entry.status!.blocked}
+				onchange={ban}
+				options={[
+					{ value: true, label: "Ja", color: "var(--color-surface-warn)" },
+					{ value: false, label: "Nein", color: "var(--color-surface-primary)" }
+				]}
+			/>
+			<RadioToggle
+				label="Archiviert"
+				icon={Archive}
+				labelColor="var(--color-edge-warn)"
+				bind:value={entry.status!.archived}
+				onchange={archive}
+				options={[
+					{ value: true, label: "Ja", color: "var(--color-surface-warn-alt)" },
+					{ value: false, label: "Nein", color: "var(--color-surface-primary)" }
+				]}
+			/>
 		</section>
 
 		<br />
-
-		<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
-		<ActivityCollection entryId={params.id} />
+	{:else if !loading}
+		<InfoWarning>Eintrag konnte nicht geladen werden</InfoWarning>
 	{:else}
 		<Loader class="single-entry-view-loader" dark big />
 	{/if}
+
+	<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
+	<ActivityCollection bind:this={activitiesCollectionComponent} entryId={params.id} />
 </div>
 
 <style lang="scss">

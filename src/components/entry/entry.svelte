@@ -83,7 +83,7 @@
 				</span>
 			{/if}
 
-			{#if props.manage}
+			{#if props.manage != undefined}
 				{#if props.entry.status?.blocked}
 					<span class="special-tag red"> Gesperrt </span>
 				{/if}
@@ -221,7 +221,13 @@
 		gap: 5px;
 
 		&.archived {
-			opacity: 0.75;
+			background-color: color-mix(in srgb, var(--color-background-bright) 85%, transparent);
+			color: color-mix(in srgb, var(--color-edge) 70%, transparent);
+
+			.data {
+				pointer-events: none;
+				user-select: none;
+			}
 		}
 
 		&.blocked {
@@ -322,31 +328,31 @@
 				}
 
 				.special-tag {
-					padding: 2px 8px;
+					padding: 3px 8px;
 					border-radius: 4px;
 					font-size: 0.8em;
-					font-weight: 400;
+					font-weight: 500;
 					margin: -4px 0 6px 0;
 					cursor: default;
 
 					&.green {
 						background-color: var(--color-special-highlight);
+						color: oklch(from var(--color-special-highlight) calc(l * 0.5) c h);
 					}
 
 					&.orange {
 						background-color: var(--color-special-warn);
-					}
-
-					&.orange {
-						background-color: var(--color-special-warn);
+						color: oklch(from var(--color-special-warn) calc(l * 0.5) c h);
 					}
 
 					&.red {
 						background-color: var(--color-special-error);
+						color: oklch(from var(--color-special-error) calc(l * 0.5) c h);
 					}
 
 					&.blue {
 						background-color: var(--color-special-info);
+						color: oklch(from var(--color-special-info) calc(l * 0.5) c h);
 					}
 				}
 			}
@@ -355,7 +361,7 @@
 				display: inline-flex;
 				align-items: center;
 				gap: 5px;
-				color: var(--color-edge);
+				color: inherit;
 				text-decoration: none;
 
 				&:hover {

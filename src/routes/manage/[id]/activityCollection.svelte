@@ -23,6 +23,10 @@
 	onMount(async () => {
 		if (!browser) return;
 
+		await initialLoad();
+	});
+
+	export async function initialLoad() {
 		loading = true;
 		const result = await apiRequestHandler(
 			axios.get<EntryActivity[]>(entryId ? `activities/entry/${entryId}` : "activities", {
@@ -38,7 +42,7 @@
 			activities = result.data;
 			more = result.data.length > 0;
 		}
-	});
+	}
 
 	async function loadNextPage() {
 		if (!more || loading) return;

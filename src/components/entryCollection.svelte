@@ -111,7 +111,11 @@
 <div class="entries-collection">
 	{#each entries as entry (entry.id)}
 		<div animate:flip={{ duration: 400 }} transition:fade={{ duration: 200 }}>
-			<EntryComponent {entry} onremove={removeEntry} manage={type === "manage"} />
+			<EntryComponent
+				{entry}
+				onremove={removeEntry}
+				manage={type === "manage" ? true : undefined}
+			/>
 		</div>
 	{/each}
 

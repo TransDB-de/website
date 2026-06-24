@@ -426,7 +426,8 @@
 	{#if isEdit}
 		<hr />
 		<Textarea
-			label={"Kommentar"}
+			label={"Bearbeitungskommentar"}
+			bind:value={editComment}
 			placeholder={"Warum wurde der Eintrag bearbeitet?"}
 			maxlength={2000}
 		/>

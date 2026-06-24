@@ -5,9 +5,9 @@
 
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import type { LoginResponse } from "$models/user.model";
+	import type { ApiUserList, LoginResponse } from "$models/user.model";
 
-	import { userdata } from "$lib/store";
+	import { usercache, userdata } from "$lib/store";
 	import { popupError, popupOk } from "$components/popup.svelte";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import { tick } from "svelte";
@@ -30,10 +30,17 @@
 			default: () => popupError(`Unbekannter Fehler`)
 		});
 
+		const usercacheResult = await apiRequestHandler(axios.get<ApiUserList>("users"));
+
+		usercacheResult.handleErrors({
+			default: () => popupError(`Unbekannter Fehler`)
+		});
+
 		loading = false;
 
 		if (result.success && result.data) {
 			$userdata = result.data;
+			$usercache = usercacheResult.data;
 
 			await tick();
 

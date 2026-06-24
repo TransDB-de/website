@@ -22,6 +22,8 @@
 	} from "@lucide/svelte";
 	import { env } from "$env/dynamic/public";
 	import { t } from "$lib/localization.svelte";
+	import { usercache } from "$lib/store";
+	import Button from "$components/elements/button.svelte";
 
 	interface Props {
 		activity: EntryActivity;
@@ -70,7 +72,9 @@
 			: null
 	);
 
-	let shortUserId = $derived(activity.userId ? activity.userId.slice(-8) : null);
+	let username = $derived(
+		activity.userId && $usercache ? $usercache.find((u) => u.id === activity.userId)?.name : null
+	);
 
 	let cmsUrl = $derived(
 		activity.attachments?.CmsTicketId
@@ -92,8 +96,8 @@
 			{label}
 		</h3>
 
-		{#if activity.userId}
-			<span class="user">von <b>{shortUserId}</b></span>
+		{#if username}
+			<span class="user">von <b>{username}</b></span>
 		{/if}
 
 		{#if activity.attachments?.ReportType}
@@ -144,6 +148,15 @@
 		<p>
 			<Link2 size={20} />
 			<a href={duplicateLink} target="_blank" rel="noopener"> Duplikats-Kandidat </a>
+		</p>
+	{/if}
+
+	{#if activity.type === "Deleted"}
+		<p>
+			<Button light>
+				<Undo2 />
+				Wiederherstellen
+			</Button>
 		</p>
 	{/if}
 </article>
