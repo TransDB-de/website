@@ -230,7 +230,7 @@
 			"Therapist": "Psychologische*r Psychotherapeut*in",
 			"Psychologist": "Psychiater (Facharzt für Psychiatrie)",
 			"Naturopath": "Heilpraktiker*in",
-			"Other": "Andere Fachrichtung"
+			"Other": "Anderes psychotherapeutisches Angebot"
 		},
 		"accessibleMapping": {
 			"unknown": "Unbekannt",

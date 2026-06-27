@@ -8,7 +8,7 @@
 	interface Props {
 		label: string;
 		error?: string;
-		value?: string;
+		value?: string | null;
 		maxlength?: number;
 		[key: string]: unknown;
 	}

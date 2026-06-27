@@ -230,7 +230,7 @@
 			"Therapist": "Psychologisch psychotherapeut",
 			"Psychologist": "Psychiater (arts voor psychiatrie)",
 			"Naturopath": "Alternatieve geneeskundige",
-			"Other": "Andere specialisatie"
+			"Other": "Andere psychotherapeutische behandelingen"
 		},
 		"accessibleMapping": {
 			"unknown": "Onbekend",

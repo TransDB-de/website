@@ -44,7 +44,6 @@
 	let errors: ValidationErrorMap = $state({});
 	let formElement: Form;
 	let isSpecialsFocused = $state(false);
-	let accessibleStr = $state<"unknown" | "yes" | "no">("unknown");
 	let editComment = $state("");
 
 	const sanitizedTypeMapping = $derived(typeMapping.filter((v) => v));
@@ -96,10 +95,6 @@
 			clone.attributes = clone.attributes ?? [];
 			workingEntry = clone;
 			savedEntry = JSON.parse(JSON.stringify(clone));
-
-			if (clone.accessible === true) accessibleStr = "yes";
-			else if (clone.accessible === false) accessibleStr = "no";
-			else accessibleStr = "unknown";
 		}
 	});
 
@@ -134,21 +129,12 @@
 		workingEntry.website = "https://" + workingEntry.website;
 	}
 
-	function resolveAccessible(): boolean | null {
-		if (accessibleStr === "yes") return true;
-		if (accessibleStr === "no") return false;
-		return null;
-	}
-
 	async function submitCreate() {
 		loading = true;
 
-		const payload = {
-			...workingEntry,
-			accessible: resolveAccessible()
-		};
-
-		const result = await apiRequestHandler(axios.post<CreateEntryResponse>("entries", payload));
+		const result = await apiRequestHandler(
+			axios.post<CreateEntryResponse>("entries", workingEntry)
+		);
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -196,13 +182,9 @@
 
 		loading = true;
 
-		const payload = {
-			...workingEntry,
-			accessible: resolveAccessible(),
-			comment: editComment
-		};
-
-		const result = await apiRequestHandler(axios.put(`manage/entries/${workingEntry.id}`, payload));
+		const result = await apiRequestHandler(
+			axios.put(`manage/entries/${workingEntry.id}`, { ...workingEntry, comment: editComment })
+		);
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -232,7 +214,12 @@
 		<Input label="ID" value={workingEntry.id} readonly />
 	{/if}
 
-	<Select bind:value={workingEntry.type} onchange={resetMeta} label={t("submitForm.categoryLabel")}>
+	<Select
+		bind:value={workingEntry.type}
+		required
+		onchange={resetMeta}
+		label={t("submitForm.categoryLabel")}
+	>
 		<option value="" disabled selected> {t("submitForm.selectCategory") + "..."} </option>
 
 		{#each sanitizedTypeMapping as type (type)}
@@ -301,7 +288,7 @@
 	</Paragraph>
 
 	<section>
-		<Select bind:value={workingEntry.contact.academicTitle} label={t("submitForm.academicTitle")}>
+		<Select bind:value={workingEntry.contact!.academicTitle} label={t("submitForm.academicTitle")}>
 			<option value={null} selected> {t("submitForm.noTitle")} </option>
 
 			{#each academicTitleMapping as title (title)}
@@ -309,7 +296,7 @@
 			{/each}
 		</Select>
 		<Input
-			bind:value={workingEntry.contact.firstName}
+			bind:value={workingEntry.contact!.firstName}
 			label={t("submitForm.firstName")}
 			placeholder={t("submitForm.firstName") + "..."}
 			minlength="2"
@@ -317,7 +304,7 @@
 			error={errors["contact.firstName"]}
 		/>
 		<Input
-			bind:value={workingEntry.contact.lastName}
+			bind:value={workingEntry.contact!.lastName}
 			label={t("submitForm.lastName")}
 			placeholder={t("submitForm.lastName") + "..."}
 			minlength="2"
@@ -365,7 +352,7 @@
 
 	{#if workingEntry.type === "Therapist"}
 		<Select bind:value={workingEntry.subject} required label={t("submitForm.subject")}>
-			<option value="" disabled selected> {t("submitForm.selectSubject")} </option>
+			<option value={null} disabled selected> {t("submitForm.selectSubject")} </option>
 
 			{#each subjectMapping[workingEntry.type] as subject (subject)}
 				<option value={subject}> {tEntry("subjectMapping")[subject]} </option>
@@ -420,10 +407,10 @@
 		maxlength={280}
 	/>
 
-	<Select bind:value={accessibleStr} label={t("submitForm.accessibility")}>
-		<option value="unknown"> {t("submitForm.accessibilityUnknown")} </option>
-		<option value="yes"> {t("submitForm.accessible")} </option>
-		<option value="no"> {t("submitForm.notAccessible")} </option>
+	<Select bind:value={workingEntry.accessible} label={t("submitForm.accessibility")}>
+		<option value={null}> {t("submitForm.accessibilityUnknown")} </option>
+		<option value={true}> {t("submitForm.accessible")} </option>
+		<option value={false}> {t("submitForm.notAccessible")} </option>
 	</Select>
 
 	{#if !isEdit}

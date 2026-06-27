@@ -7,6 +7,7 @@
 		for?: string;
 		children?: Snippet;
 		class?: string;
+		required?: boolean;
 	}
 
 	let {
@@ -14,7 +15,8 @@
 		for: forElement = "",
 		children,
 		class: customClass = "",
-		label
+		label,
+		required
 	}: Props = $props();
 
 	let isError = $derived(!!error && error.length > 0);
@@ -24,6 +26,9 @@
 	{#if label !== null}
 		<b>
 			{label}
+			{#if required}
+				<span class="required">*</span>
+			{/if}
 		</b>
 	{/if}
 	{#if children}{@render children()}{/if}
@@ -53,6 +58,10 @@
 		b {
 			margin-left: 2px;
 			font-weight: 500;
+
+			.required {
+				color: var(--color-edge-error);
+			}
 		}
 
 		@include inputs {

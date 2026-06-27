@@ -37,18 +37,21 @@
 		}
 	});
 
-	function resetLocation() {
-		if (page.url.pathname.includes("search")) {
-			page.url.searchParams.delete("location");
-			page.url.searchParams.delete("lat");
-			page.url.searchParams.delete("long");
+	function buildParams(overrides: Record<string, string | null> = {}): URLSearchParams {
+		const params = new URLSearchParams(page.url.searchParams);
+		for (const [key, value] of Object.entries(overrides)) {
+			if (value === null) {
+				params.delete(key);
+			} else {
+				params.set(key, value);
+			}
 		}
+		return params;
+	}
 
-		if (page.url.searchParams.toString()) {
-			goto("/search?" + page.url.searchParams.toString());
-		} else {
-			goto("/search");
-		}
+	function resetLocation() {
+		const params = buildParams({ location: null, lat: null, long: null });
+		goto(params.toString() ? "/search?" + params.toString() : "/search");
 	}
 
 	async function search(type: string) {
@@ -62,37 +65,34 @@
 					return;
 				}
 
-				page.url.searchParams.set("location", locationText);
-				page.url.searchParams.delete("lat");
-				page.url.searchParams.delete("long");
-
+				const params = buildParams({ location: locationText, lat: null, long: null });
 				if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_SEARCH_TEXT);
-
-				break;
+				loading = false;
+				await goto("/search?" + params.toString(), { keepFocus: true });
+				return;
 			}
 			case "distance": {
 				try {
-					let pos = await getGeoLocation();
-					page.url.searchParams.set("lat", pos.coords.latitude.toString());
-					page.url.searchParams.set("long", pos.coords.longitude.toString());
-					page.url.searchParams.delete("location");
+					const pos = await getGeoLocation();
+					const params = buildParams({
+						lat: pos.coords.latitude.toString(),
+						long: pos.coords.longitude.toString(),
+						location: null
+					});
 					locationText = "";
+					if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_SEARCH_COORDS);
+					loading = false;
+					await goto("/search?" + params.toString(), { keepFocus: true });
 				} catch (e) {
 					resetLocation();
 					loading = false;
 					popupError(t("errors.locationAccessDenied"));
-					return;
 				}
-
-				if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_SEARCH_COORDS);
-
-				break;
+				return;
 			}
 		}
 
 		loading = false;
-
-		await goto("/search?" + page.url.searchParams.toString(), { keepFocus: true });
 	}
 </script>
 

@@ -230,7 +230,7 @@
 			"Therapist": "Psychological Psychotherapist",
 			"Psychologist": "Psychiatrist (doctor of psychiatry)",
 			"Naturopath": "Alternative practitioner",
-			"Other": "Other specialty"
+			"Other": "Other Psychotherapy Services"
 		},
 		"accessibleMapping": {
 			"unknown": "Unknown",

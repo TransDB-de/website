@@ -15,7 +15,7 @@
 
 	import { browser } from "$app/environment";
 	import { navigating, page } from "$app/stores";
-	import { goto } from "$app/navigation";
+	import { goto, onNavigate } from "$app/navigation";
 	import { onDestroy, untrack } from "svelte";
 
 	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
@@ -69,43 +69,39 @@
 		filtersUpdated();
 	}
 
-	function setQuery(field: string, value: unknown) {
+	function setQuery(params: URLSearchParams, field: string, value: unknown) {
 		if (value) {
 			if (Array.isArray(value)) {
-				$page.url.searchParams.delete(field);
-
+				params.delete(field);
 				for (let e of value) {
-					$page.url.searchParams.append(field, e);
+					params.append(field, e);
 				}
 			} else {
-				$page.url.searchParams.set(field, value as string);
+				params.set(field, value as string);
 			}
 		} else {
-			$page.url.searchParams.delete(field);
+			params.delete(field);
 		}
 	}
 
 	function resetLocation() {
 		$currentLocation = "";
-
-		$page.url.searchParams.delete("lat");
-		$page.url.searchParams.delete("long");
-		$page.url.searchParams.delete("location");
-
-		applyFilters();
+		applyFilters(["lat", "long", "location"]);
 	}
 
-	function applyFilters() {
-		setQuery("type", selectedType);
-		setQuery("offers", selectedOffers);
-		setQuery("attributes", selectedAttributes);
-		setQuery("text", textFilter);
+	function applyFilters(exclude: string[] = []) {
+		const params = new URLSearchParams($page.url.searchParams);
 
-		let searchString = "";
-		if ($page.url.searchParams.toString()) {
-			searchString = "?" + $page.url.searchParams.toString();
+		for (const key of exclude) {
+			params.delete(key);
 		}
 
+		setQuery(params, "type", selectedType);
+		setQuery(params, "offers", selectedOffers);
+		setQuery(params, "attributes", selectedAttributes);
+		setQuery(params, "text", textFilter);
+
+		const searchString = params.toString() ? "?" + params.toString() : "";
 		goto("/search" + searchString, { keepFocus: true, noScroll: true });
 	}
 
@@ -117,7 +113,7 @@
 	}
 
 	// React on navigating eg. reset filters if user navigates to /search without any other parameters
-	const unsubscribe = navigating.subscribe((nav) => {
+	onNavigate((nav) => {
 		if (
 			nav &&
 			nav.to?.url.pathname === "/search" &&
@@ -127,8 +123,6 @@
 			resetFilter();
 		}
 	});
-
-	onDestroy(unsubscribe);
 
 	// scroll edge case
 	// this snippet ensures devices with small screens can scroll the sticky sidebar
