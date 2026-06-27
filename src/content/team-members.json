@@ -1,20 +1,9 @@
 [
 	{
-		"name": "Malin",
-		"title": "projectManager",
-		"imageURL": "/img/team/malin.png",
-		"socials": []
-	},
-	{
 		"name": "Lena",
 		"title": "developer",
 		"imageURL": "/img/team/lena.png",
 		"socials": [
-			{
-				"type": "discord",
-				"link": null,
-				"text": "Feuerhamster#8828"
-			},
 			{
 				"type": "github",
 				"link": "https://github.com/Feuerhamster"
@@ -22,12 +11,14 @@
 			{
 				"type": "web",
 				"link": "https://lmke.dev"
-			},
-			{
-				"type": "instagram",
-				"link": "https://www.instagram.com/derfeuerhamster/"
 			}
 		]
+	},
+	{
+		"name": "Malin",
+		"title": "projectManager",
+		"imageURL": "/img/team/malin.png",
+		"socials": []
 	},
 	{
 		"name": "Laila",
