@@ -26,6 +26,7 @@ export interface EntryActivityAttachments {
 export interface EntryActivity {
 	id: string;
 	entryId: string;
+	entryName?: string | null;
 	type: EntryActivityType;
 	timestamp?: string;
 	userId?: string;

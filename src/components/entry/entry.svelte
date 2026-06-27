@@ -10,6 +10,7 @@
 
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte";
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte";
+	import ArchiveEntryButton from "$components/entry/archiveEntryButton.svelte";
 
 	import {
 		Phone,
@@ -30,6 +31,7 @@
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
+		onchange?: (entry: Entry) => void;
 		manage?: boolean;
 	}
 
@@ -192,6 +194,7 @@
 			>
 				<FilePen />
 			</LinkButton>
+			<ArchiveEntryButton entry={props.entry} onchange={props.onchange} />
 		{:else if props.manage == false}{:else}
 			<LinkButton
 				href={`/entry/${props.entry.id}/report`}

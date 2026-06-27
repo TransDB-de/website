@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Settings, LogOut } from "@lucide/svelte";
+	import { Settings, LogOut, BadgeCheck, UserCog, UserCog2 } from "@lucide/svelte";
 	import Button from "$components/elements/button.svelte";
 	import NavLink from "$components/elements/navLink.svelte";
 
@@ -56,11 +56,13 @@
 			>Freischalten</NavLink
 		>
 		<NavLink {...linkOptions} exact href="/manage?blocked=true">Blocklist</NavLink>
-		<NavLink {...linkOptions} exact href="/manage/activities">Aktivitätenverlauf</NavLink>
+		{#if $userdata?.admin}
+			<NavLink {...linkOptions} exact href="/manage/activities">Aktivitätenverlauf</NavLink>
+		{/if}
 	</nav>
 	<span class="account">
 		<a class="light" href={env.PUBLIC_CMS_URL + "/admin/users/" + userId} target="_blank">
-			<Settings class="settings-icon" size={28} />
+			<UserCog class="settings-icon" size={28} />
 			{username}
 		</a>
 

@@ -2,8 +2,8 @@
 	import { fade } from "svelte/transition";
 	import { page } from "$app/stores";
 	import { browser, dev } from "$app/environment";
-	import Footer from "$components/layout/footer.svelte";
-	import Header from "$components/layout/header.svelte";
+	import Footer from "./footer.svelte";
+	import Header from "./header.svelte";
 	import Popup from "$components/popup.svelte";
 	import Confirm from "$components/confirm.svelte";
 	import Prompt from "$components/prompt.svelte";

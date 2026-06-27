@@ -46,9 +46,9 @@ export interface Entry {
 }
 
 export interface PaginatedEntryResponse<T = Entry> {
-	entries: T[];
+	items: T[];
 	more: boolean;
-	locationName: string | null;
+	locationName?: string | null;
 }
 
 export type EntriesResponse = PaginatedEntryResponse;

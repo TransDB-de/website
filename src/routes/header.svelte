@@ -74,9 +74,9 @@
 </div>
 
 <style lang="scss">
-	@use "../../scss/shadows" as *;
-	@use "../../scss/lengths" as *;
-	@use "../../scss/mixins" as *;
+	@use "../scss/shadows" as *;
+	@use "../scss/lengths" as *;
+	@use "../scss/mixins" as *;
 
 	$background-img-width: 1625px;
 	$header-height-expanded: 325px;

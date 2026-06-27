@@ -112,27 +112,39 @@
 	</header>
 
 	{#if showEntry}
-		<p>
+		<p title="Der Eintrag, zu dem diese Aktivität gehört">
 			<FileText size={20} />
-			<a href={`/manage/${activity.entryId}`} target="_blank" rel="noopener"> Eintrag öffnen </a>
-		</p>
-	{/if}
 
-	{#if activity.comment}
-		<p>
-			<MessageSquareQuote size={20} />
-			<span>
-				{activity.comment}
-			</span>
+			<a
+				href={`/manage/${activity.entryId}`}
+				target="_blank"
+				rel="noopener"
+				class="local-entry-link"
+			>
+				{#if activity.entryName}
+					{activity.entryName}
+				{:else}
+					Eintrag öffnen
+				{/if}
+			</a>
 		</p>
 	{/if}
 
 	{#if activity.attachments?.CmsTicketId}
-		<p>
+		<p title="Link zum CMS Ticket">
 			<Tags size={20} />
 			<a href={cmsUrl} target="_blank" rel="noopener">
-				Ticket #{activity.attachments.CmsTicketId}
+				CMS-Ticket #{activity.attachments.CmsTicketId}
 			</a>
+		</p>
+	{/if}
+
+	{#if activity.comment}
+		<p title="Kommentar/Grund">
+			<MessageSquareQuote size={20} />
+			<span>
+				{activity.comment}
+			</span>
 		</p>
 	{/if}
 
@@ -145,9 +157,9 @@
 			</span>
 		</p>
 
-		<p>
+		<p title="Dieser Eintrag ist ein Duplikat von der Duplikats-Grundlage">
 			<Link2 size={20} />
-			<a href={duplicateLink} target="_blank" rel="noopener"> Duplikats-Kandidat </a>
+			<a href={duplicateLink} target="_blank" rel="noopener"> Duplikats-Grundlage </a>
 		</p>
 	{/if}
 
@@ -162,17 +174,22 @@
 </article>
 
 <style lang="scss">
+	@use "../../../scss/shadows" as *;
+
 	article.activity-item {
 		display: flex;
 		flex-direction: column;
-		border-bottom: 2px dotted var(--color-edge-light);
-		padding-bottom: 10px;
-		gap: 0.4rem;
+		gap: 7px;
+		border-radius: 4px;
+		background-color: var(--color-background-bright);
+		box-shadow: $surface-shadow-soft;
 
 		header {
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
+			border-radius: 4px 4px 0 0;
+			padding: 7px 12px;
 
 			h3 {
 				margin: 0;
@@ -191,12 +208,25 @@
 			}
 		}
 
+		&:has(p) header {
+			border-bottom: 2px dotted var(--color-edge-light);
+		}
+
 		p {
 			display: grid;
 			grid-template-columns: auto 1fr;
 			gap: 0.3rem;
 			margin: 0;
-			padding-left: 1.75rem;
+			padding-left: 12px;
+			padding-right: 7px;
+
+			&:first-of-type {
+				padding-top: 0px;
+			}
+
+			&:last-of-type {
+				padding-bottom: 10px;
+			}
 
 			span {
 				display: inline-flex;
@@ -208,9 +238,18 @@
 				width: 20px;
 			}
 
+			b {
+				font-weight: 600;
+			}
+
 			a {
 				color: var(--color-edge-highlight);
 				font-weight: 500;
+				justify-self: start;
+
+				&.local-entry-link {
+					color: inherit;
+				}
 			}
 		}
 	}
@@ -250,8 +289,9 @@
 	}
 
 	.timestamp {
-		color: var(--color-edge);
-		font-weight: 400;
+		opacity: 0.65;
+		font-weight: 500;
+		font-size: 0.92rem;
 		margin-left: auto;
 	}
 

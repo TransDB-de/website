@@ -35,7 +35,7 @@
 	let { params }: PageProps = $props();
 
 	let entry = $state<Entry | null>(null);
-	let loading = $state(false);
+	let loading = $state(true);
 	let activitiesCollectionComponent = $state<ReturnType<typeof ActivityCollection>>();
 
 	onMount(async () => {
@@ -48,6 +48,7 @@
 
 		if (result.success && result.data) {
 			entry = result.data;
+			loading = false;
 			return;
 		}
 	});

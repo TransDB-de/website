@@ -71,7 +71,7 @@
 		loading = false;
 
 		if (result.success && result.data) {
-			entries = result.data.entries;
+			entries = result.data.items;
 			$currentLocation = result.data.locationName ?? "";
 			more = result.data.more;
 			pageCount = 0;
@@ -90,7 +90,7 @@
 		loading = false;
 
 		if (result.success && result.data) {
-			entries = [...entries, ...result.data.entries];
+			entries = [...entries, ...result.data.items];
 			more = result.data.more;
 			pageCount = params.page as number;
 		}
@@ -106,6 +106,13 @@
 	function removeEntry(entry: Entry) {
 		entries = removeFromArray(entries, entry);
 	}
+
+	function changeEntry(entry: Entry) {
+		const i = entries.findIndex((e) => e.id == entry.id);
+		const tmp = entries;
+		tmp[i] = entry;
+		entries = tmp;
+	}
 </script>
 
 <div class="entries-collection">
@@ -114,6 +121,7 @@
 			<EntryComponent
 				{entry}
 				onremove={removeEntry}
+				onchange={changeEntry}
 				manage={type === "manage" ? true : undefined}
 			/>
 		</div>
