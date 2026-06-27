@@ -78,7 +78,7 @@
 
 	let cmsUrl = $derived(
 		activity.attachments?.CmsTicketId
-			? `${env.PUBLIC_CMS_URL}/admin/content/transdb_tickets/${activity.attachments.CmsTicketId}`
+			? `${env.PUBLIC_CMS_URL}/admin/content/${env.PUBLIC_CMS_TICKET_COLLECTION}/${activity.attachments.CmsTicketId}`
 			: null
 	);
 
