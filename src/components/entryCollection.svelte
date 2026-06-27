@@ -109,9 +109,7 @@
 
 	function changeEntry(entry: Entry) {
 		const i = entries.findIndex((e) => e.id == entry.id);
-		const tmp = entries;
-		tmp[i] = entry;
-		entries = tmp;
+		entries[i] = entry;
 	}
 </script>
 

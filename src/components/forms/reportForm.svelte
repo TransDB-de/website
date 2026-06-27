@@ -7,7 +7,6 @@
 	import Select from "$formElements/select.svelte";
 	import { popupError, popupOk } from "$components/popup.svelte";
 
-	import { page } from "$app/stores";
 	import { goto } from "$app/navigation";
 	import { slide } from "svelte/transition";
 
@@ -64,9 +63,7 @@
 			formElement.reset();
 			popupOk(t("reportForm.successPopup"));
 			goto("/reported");
-		}
-
-		if (result.handleErrors) {
+		} else {
 			errors = result.handleErrors({
 				500: () => popupError(t("errors.reportFailed")),
 				429: () => popupError(t("errors.tooMany")),
@@ -102,7 +99,7 @@
 		bind:value={report.message}
 		label={t("reportForm.placeholder")}
 		placeholder={t("reportForm.placeholder") + "..."}
-		requried
+		required
 		minlength="10"
 		maxlength={1200}
 		error={errors["message"]}

@@ -28,7 +28,7 @@
 		loading = true;
 
 		const result = await apiRequestHandler(
-			axios.delete(`/admin/entries/${props.entry.id}`, { data: { comment } })
+			axios.delete(`/manage/entries/${props.entry.id}`, { data: { comment } })
 		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Löschen des Eintrags")

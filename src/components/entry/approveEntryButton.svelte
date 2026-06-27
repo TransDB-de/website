@@ -21,7 +21,7 @@
 		loading = true;
 
 		const result = await apiRequestHandler(
-			axios.patch(`/admin/entries/${props.entry.id}/status`, { approved: true })
+			axios.patch(`/manage/entries/${props.entry.id}/status`, { approved: true })
 		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Freischalten")
