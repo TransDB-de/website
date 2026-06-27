@@ -9,7 +9,7 @@
 	import ErrorBox from "$components/elements/errorBox.svelte";
 	import { popupOk, popupError, popupWarn } from "$components/popup.svelte";
 
-	import type { Entry } from "$models/entry.model";
+	import type { CreateEntryResponse, Entry } from "$models/entry.model";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
@@ -148,7 +148,7 @@
 			accessible: resolveAccessible()
 		};
 
-		const result = await apiRequestHandler(axios.post("entries", payload));
+		const result = await apiRequestHandler(axios.post<CreateEntryResponse>("entries", payload));
 
 		errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -165,7 +165,16 @@
 			if (onSuccess) {
 				onSuccess();
 			} else {
-				goto("/submitted");
+				const redirect = new URL("/submitted", window.location.origin);
+
+				redirect.searchParams.append("entryId", result.data!.entry.id!);
+				redirect.searchParams.append("revocationToken", result.data!.revocationToken);
+
+				if (result.data!.possibleDuplicate) {
+					redirect.searchParams.append("duplicate", result.data!.possibleDuplicate.entryId);
+				}
+
+				goto(redirect);
 			}
 		}
 	}

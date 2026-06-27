@@ -31,7 +31,15 @@
 		"alt": "Logo Open Collective"
 	},
 	"submitted": {
-		"title": "Merci pour votre soumission - Trans*DB"
+		"title": "Merci pour votre soumission - Trans*DB",
+		"heading": "Entrée soumise avec succès",
+		"description": "Veuillez noter qu'il peut s'écouler un certain temps avant que notre équipe examine et approuve votre entrée. Vous avez également la possibilité de retirer votre entrée soumise pendant une période limitée.",
+		"duplicationWarning": "Nous avons détecté que votre entrée pourrait être un doublon d'une entrée déjà existante. Si l'entrée affichée ci-dessous est bien la même, vous pouvez retirer la vôtre. Si votre entrée contient des informations différentes (par ex. nouvelles offres, nouveau numéro de téléphone, ...) veuillez le signaler comme une modification de l'entrée affichée.",
+		"actions": {
+			"revoke": "Retirer l'entrée",
+			"startpage": "Retour à la page d'accueil",
+			"revokeSuccessPopup": "Participation retirée avec succès"
+		}
 	},
 	"reported": {
 		"title": "Merci pour votre signalement - Trans*DB"
@@ -352,7 +360,8 @@
 		"invalidFilter": "Filtre invalide",
 		"entryNotFound": "Entrée introuvable",
 		"reportFailed": "Échec de l'envoi du signalement",
-		"locationAccessDenied": "Accès à la localisation refusé"
+		"locationAccessDenied": "Accès à la localisation refusé",
+		"invalidRevocation": "L'entrée ne peut plus être retirée"
 	},
 	"warns": {
 		"reLogin": "Veuillez vous reconnecter"

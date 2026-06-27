@@ -31,7 +31,15 @@
 		"alt": "Open Collective logo"
 	},
 	"submitted": {
-		"title": "Bedankt voor je inzending - Trans*DB"
+		"title": "Bedankt voor je inzending - Trans*DB",
+		"heading": "Inzending succesvol ingediend",
+		"description": "Houd er rekening mee dat het enige tijd kan duren voordat ons team je inzending heeft beoordeeld en goedgekeurd. Je hebt ook voor een beperkte periode de mogelijkheid om je ingediende inzending in te trekken.",
+		"duplicationWarning": "We hebben gedetecteerd dat je inzending mogelijk een duplicaat is van een al bestaande inzending. Als de hieronder weergegeven inzending inderdaad dezelfde is, kun je de jouwe intrekken. Als je inzending andere informatie bevat (bijv. nieuw aanbod, nieuw telefoonnummer, ...) meld dit dan als een wijziging aan de weergegeven inzending.",
+		"actions": {
+			"revoke": "Inzending intrekken",
+			"startpage": "Terug naar de startpagina",
+			"revokeSuccessPopup": "Inzending succesvol ingetrokken"
+		}
 	},
 	"reported": {
 		"title": "Bedankt voor je melding - Trans*DB"
@@ -352,7 +360,8 @@
 		"invalidFilter": "Ongeldig filter",
 		"entryNotFound": "Vermelding niet gevonden",
 		"reportFailed": "Verzenden van melding mislukt",
-		"locationAccessDenied": "Locatietoegang geweigerd"
+		"locationAccessDenied": "Locatietoegang geweigerd",
+		"invalidRevocation": "De inschrijving kon niet meer worden ingetrokken"
 	},
 	"warns": {
 		"reLogin": "Log opnieuw in"

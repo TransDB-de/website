@@ -31,7 +31,15 @@
 		"alt": "open collective logo"
 	},
 	"submitted": {
-		"title": "Danke für deinen Eintrag - Trans*DB"
+		"title": "Danke für deinen Eintrag - Trans*DB",
+		"heading": "Eintrag erfolgreich eingeschickt",
+		"description": "Bitte beachte, dass es einige Zeit dauern kann, bis unser Team deinen Eintrag überprüft und freigeschaltet hat. Du hast außerdem für einen begrenzten Zeitraum die Möglichkeit, den von dir eingeschickten Eitnrag wieder zurückzuziehen.",
+		"duplicationWarning": "Wir haben erkannt, dass dein Eintrag möglicherweise ein Duplikat eines bereits existierenden Eintrags ist. Sollte der unten gezeigte Eintrag tatsächlich der Gleiche sein, kannst du deinen zurückziehen. Wenn dein Eintrag andere Infos erhält (zb. neue Angebote, neue Telefonummer, ...) melde dies bitte als Änderung an dem gezeigten Eintrag.",
+		"actions": {
+			"revoke": "Eintrag zurückziehen",
+			"startpage": "Zurück zur Startseite",
+			"revokeSuccessPopup": "Eintrag erfolgreich zurückgezogen"
+		}
 	},
 	"reported": {
 		"title": "Danke für deine Meldung - Trans*DB"
@@ -352,7 +360,8 @@
 		"invalidFilter": "Ungültige Filter",
 		"entryNotFound": "Eintrag nicht gefunden",
 		"reportFailed": "Meldung konnte nicht gesendet werden",
-		"locationAccessDenied": "Standortzugriff blockiert"
+		"locationAccessDenied": "Standortzugriff blockiert",
+		"invalidRevocation": "Eintrag konnte nicht mehr zurückgezogen werden"
 	},
 	"warns": {
 		"reLogin": "Bitte melde dich erneut an"

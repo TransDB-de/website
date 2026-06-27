@@ -20,5 +20,6 @@
 		border-radius: 3px;
 		padding: 5px 10px;
 		font-size: 0.9em;
+		font-weight: 500;
 	}
 </style>
