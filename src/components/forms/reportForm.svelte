@@ -56,7 +56,7 @@
 	async function submit() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.post("/report", report));
+		const result = await apiRequestHandler(axios.post("/report", report, { captcha: true }));
 
 		loading = false;
 
