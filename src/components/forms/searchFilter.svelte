@@ -8,15 +8,15 @@
 
 	import Button from "$components/elements/button.svelte";
 
-	import { clamp, timeout } from "$lib/utils";
+	import { clamp, debounce } from "$lib/utils";
 	import { isMobile, currentLocation } from "$lib/store";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
 
 	import { browser } from "$app/environment";
-	import { navigating, page } from "$app/stores";
+	import { page } from "$app/stores";
 	import { goto, onNavigate } from "$app/navigation";
-	import { onDestroy, untrack } from "svelte";
+	import { untrack } from "svelte";
 
 	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 
@@ -34,33 +34,13 @@
 		expand = !expand;
 	}
 
-	// change counter
-	let changeId = 0;
-
-	// Automatic filter change handler
-	// Applies filters after a short delay, so that the changes don't stack
-	async function filtersUpdated() {
-		// mobile changes are applied manually to save data
-		if ($isMobile) {
-			return;
-		}
-
-		if (!browser) {
+	const filtersUpdated = debounce(
+		() => {
+			if ($isMobile) return;
 			applyFilters();
-		} else {
-			changeId += 1;
-			let thisChange = changeId;
-
-			await timeout(
-				env.PUBLIC_FILTER_APPLY_TIMEOUT ? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000 : 600
-			);
-
-			// if another change occured since the timer was started, do nothing
-			if (changeId === thisChange) {
-				applyFilters();
-			}
-		}
-	}
+		},
+		env.PUBLIC_FILTER_APPLY_TIMEOUT ? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000 : 600
+	);
 
 	function typeUpdated() {
 		selectedOffers = [];
@@ -149,7 +129,7 @@
 
 <div class="search-filter" style="--scroll-y: {top}px" bind:this={element}>
 	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-	<div class="bar mobile" class:expand onclick={toggleExpand}>
+	<div class="bar mobile" class:expand onclick={toggleExpand} role="button" tabindex="0">
 		<ChevronRight class="chevron" size={24} />
 
 		<span class="title"> {t("searchFilter.title")} </span>
@@ -244,7 +224,7 @@
 			<Button
 				light
 				iconOnly
-				onclick={applyFilters}
+				onclick={() => applyFilters()}
 				title={t("mouseOverTexts.filter")}
 				class="search-button {textFilter ? '' : 'collapsed'}"
 			>
@@ -252,7 +232,11 @@
 			</Button>
 		</div>
 
-		<Button class="mobile filter-button" onclick={applyFilters} title={t("mouseOverTexts.filter")}>
+		<Button
+			class="mobile filter-button"
+			onclick={() => applyFilters()}
+			title={t("mouseOverTexts.filter")}
+		>
 			{t("searchFilter.filter")}
 		</Button>
 	</div>

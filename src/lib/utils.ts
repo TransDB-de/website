@@ -191,3 +191,15 @@ export type FlattenObjectKeys<T extends Record<string, unknown>, Key = keyof T> 
 export type NestedDict = {
 	[key: string]: string | NestedDict;
 };
+
+export function debounce<T extends unknown[]>(callback: (...args: T) => void, delay: number) {
+	let timeoutTimer: ReturnType<typeof setTimeout>;
+
+	return (...args: T) => {
+		clearTimeout(timeoutTimer);
+
+		timeoutTimer = setTimeout(() => {
+			callback(...args);
+		}, delay);
+	};
+}

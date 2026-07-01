@@ -118,15 +118,17 @@
 		<span class="hide-on-mobile">{t("header.searchBar.areaSearch")}</span>
 	</Button>
 
-	<Button
-		light
-		iconOnly
-		onclick={() => search("text")}
-		title={t("mouseOverTexts.locationSearchButton")}
-		class="search-button {isTextSearch ? '' : 'collapsed'}"
-	>
-		<Search />
-	</Button>
+	{#if isTextSearch}
+		<Button
+			light
+			iconOnly
+			onclick={() => search("text")}
+			title={t("mouseOverTexts.locationSearchButton")}
+			class="search-button"
+		>
+			<Search />
+		</Button>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -167,20 +169,12 @@
 			font-weight: 500;
 		}
 
-		:global(button) {
+		button {
 			transition: 0.2s ease all;
 			width: fit-content;
 		}
 
-		:global button:not(.collapsed) {
-			margin-left: 4px;
-		}
-
-		:global(.collapsed) {
-			opacity: 0;
-		}
-
-		:global(.proximity-button) {
+		.proximity-button {
 			transition: 0.4s background-color;
 		}
 
@@ -194,7 +188,7 @@
 			}
 		}
 
-		:global .search-button:not(.light) {
+		.search-button:not(.light) {
 			height: 35px;
 		}
 	}
