@@ -35,7 +35,7 @@
 
 	initLocalization(data);
 
-	let path = $derived($page.url.pathname.startsWith("/manage") ? "/manage" : $page.url.pathname);
+	let path = $derived(data.path.startsWith("/manage") ? "/manage" : data.path);
 
 	if (dev && browser) {
 		localStorage.setItem("umami.disabled", "1");
