@@ -22,7 +22,9 @@
 	async function submit() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.post<LoginResponse>("auth/login", login));
+		const result = await apiRequestHandler(
+			axios.post<LoginResponse>("auth/login", login, { captcha: true })
+		);
 
 		result.handleErrors({
 			401: () => popupError("Ungültige Anmeldedaten"),

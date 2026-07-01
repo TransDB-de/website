@@ -8,7 +8,6 @@
 	import { popupError, popupOk } from "$components/popup.svelte";
 
 	import { goto } from "$app/navigation";
-	import { slide } from "svelte/transition";
 
 	import type { Entry } from "$models/entry.model";
 	import type { Component } from "svelte";
@@ -40,7 +39,9 @@
 	let errors: ValidationErrorMap = $state({});
 
 	onMount(async () => {
-		const result = await apiRequestHandler<Entry>(axios.get("/entries/" + props.entryId));
+		const result = await apiRequestHandler<Entry>(
+			axios.get("/entries/" + props.entryId, { captcha: true })
+		);
 
 		errors = result.handleErrors({
 			404: () => popupError(t("errors.entryNotFound")),

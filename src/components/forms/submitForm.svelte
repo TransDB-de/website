@@ -133,7 +133,7 @@
 		loading = true;
 
 		const result = await apiRequestHandler(
-			axios.post<CreateEntryResponse>("entries", workingEntry)
+			axios.post<CreateEntryResponse>("entries", workingEntry, { captcha: true })
 		);
 
 		errors = result.handleErrors({

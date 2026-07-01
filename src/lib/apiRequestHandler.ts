@@ -2,7 +2,7 @@ import { AuthFailedError, type ValidationErrorMap } from "$models/error";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
 import { parseValidationErrors } from "./utils";
-import { popupWarn } from "$components/popup.svelte";
+import { popupError, popupWarn } from "$components/popup.svelte";
 import { t } from "./localization.svelte";
 
 type errorCases = number | "default";
@@ -31,6 +31,11 @@ export function requestErrorHandler(
 
 			const errors = parseValidationErrors(err.response.data.problems);
 			return errors;
+		}
+
+		if (err.response.status === 403) {
+			popupError(t("errors.captchaFailed"));
+			return {};
 		}
 
 		// catch other errors with specific handlers

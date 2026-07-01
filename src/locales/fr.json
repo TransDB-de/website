@@ -361,7 +361,8 @@
 		"entryNotFound": "Entrée introuvable",
 		"reportFailed": "Échec de l'envoi du signalement",
 		"locationAccessDenied": "Accès à la localisation refusé",
-		"invalidRevocation": "L'entrée ne peut plus être retirée"
+		"invalidRevocation": "L'entrée ne peut plus être retirée",
+		"captchaFailed": "Le test de sécurité interne a échoué. Veuillez recharger la page."
 	},
 	"warns": {
 		"reLogin": "Veuillez vous reconnecter"

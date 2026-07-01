@@ -361,7 +361,8 @@
 		"entryNotFound": "Eintrag nicht gefunden",
 		"reportFailed": "Meldung konnte nicht gesendet werden",
 		"locationAccessDenied": "Standortzugriff blockiert",
-		"invalidRevocation": "Eintrag konnte nicht mehr zurückgezogen werden"
+		"invalidRevocation": "Eintrag konnte nicht mehr zurückgezogen werden",
+		"captchaFailed": "Interner Sicherheits-Test fehlgeschlagen. Bitte Seite neu laden."
 	},
 	"warns": {
 		"reLogin": "Bitte melde dich erneut an"

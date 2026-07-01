@@ -35,22 +35,16 @@
 			return axios.get<EntriesResponse>("manage/entries", { params });
 		}
 
-		return axios.get<EntriesResponse>("entries", { params });
+		return axios.get<EntriesResponse>("entries", { params, captcha: true });
 	}
 
 	let more: boolean = $state(true);
 	let pageCount: number = $state(0);
 	let loading: boolean = $state(true);
 
-	onMount(() => {
-		loadInitialEntries($page.url);
-	});
-
 	// React on navigating eg. route and query changes to reload the entries with new filters
 	afterNavigate((nav) => {
-		if (nav && nav.to && nav.to?.url.search != nav.from?.url.search) {
-			loadInitialEntries(nav.to.url);
-		}
+		loadInitialEntries(nav.to!.url);
 	});
 
 	onDestroy(() => {

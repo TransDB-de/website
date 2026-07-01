@@ -361,7 +361,8 @@
 		"entryNotFound": "Entry not found",
 		"reportFailed": "Failed to send report",
 		"locationAccessDenied": "Location access denied",
-		"invalidRevocation": "Entry could no longer be withdrawn"
+		"invalidRevocation": "Entry could no longer be withdrawn",
+		"captchaFailed": "Internal security test failed. Please reload the page."
 	},
 	"warns": {
 		"reLogin": "Please log in again"

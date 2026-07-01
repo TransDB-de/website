@@ -361,7 +361,8 @@
 		"entryNotFound": "Vermelding niet gevonden",
 		"reportFailed": "Verzenden van melding mislukt",
 		"locationAccessDenied": "Locatietoegang geweigerd",
-		"invalidRevocation": "De inschrijving kon niet meer worden ingetrokken"
+		"invalidRevocation": "De inschrijving kon niet meer worden ingetrokken",
+		"captchaFailed": "Interne beveiligingstest mislukt. Laad de pagina opnieuw."
 	},
 	"warns": {
 		"reLogin": "Log opnieuw in"
