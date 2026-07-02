@@ -199,10 +199,26 @@
 
 		const success = await changeEntryStatus({ removeDuplication: true });
 
-		if (success) popupOk("Duplikatsmarkierung entfernt");
+		if (success) {
+			popupOk("Duplikatsmarkierung entfernt");
+			entry!.possibleDuplicate = null;
+		}
 	}
 
-	async function retryGeo() {}
+	async function retryGeo() {
+		const confirmed = await confirm("Geodaten neu laden?");
+
+		if (!confirmed) return;
+
+		const result = await apiRequestHandler(axios.put(`/manage/entries/${params.id}/updateGeo`));
+
+		result.handleErrors({
+			404: () => popupError(t("errors.entryNotFound")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		if (result.success) popupOk("Geodaten werden im Hintergrund neu geladen");
+	}
 </script>
 
 <svelte:head>
@@ -228,7 +244,7 @@
 				</Button>
 			{/if}
 
-			{#if !entry.location}
+			{#if !entry.location && entry.status?.approved}
 				<Button onclick={retryGeo} light>
 					<MapPin />
 					Geodaten neu laden

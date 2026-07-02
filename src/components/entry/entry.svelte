@@ -72,7 +72,7 @@
 	class:blocked={props.manage && props.entry.status?.blocked}
 >
 	<div class="data">
-		<div class="heading">
+		<header>
 			{#if props.manage}
 				<a href={"/manage/" + props.entry.id}>
 					<h2>{props.entry.name}</h2>
@@ -102,7 +102,7 @@
 					<span class="special-tag blue"> Wartet auf Freischaltung </span>
 				{/if}
 			{/if}
-		</div>
+		</header>
 
 		<h3 class="small-gap">
 			{#if isWithSubject}
@@ -178,11 +178,20 @@
 		{/if}
 
 		{#if !props.entry.status?.approved && props.entry.possibleDuplicate}
-			<p class="small-gap">
+			<p class="small-gap small-margin">
 				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
 					<TriangleAlert />
 					{t("entry.possibleDuplicate")} ({props.entry.possibleDuplicate.probability * 100}%)
 				</a>
+			</p>
+		{/if}
+
+		{#if props.manage != undefined && !props.entry.location && props.entry.status?.approved}
+			<p class="small-gap small-margin">
+				<span class="warn-link warn-alt">
+					<TriangleAlert size={18} />
+					Keine Geodaten
+				</span>
 			</p>
 		{/if}
 	</div>
@@ -321,7 +330,7 @@
 				}
 			}
 
-			.heading {
+			header {
 				display: flex;
 				flex-wrap: wrap;
 				align-items: center;
@@ -384,15 +393,21 @@
 			}
 
 			.warn-link {
+				display: inline-flex;
+				align-items: center;
 				font-weight: 500;
 				color: var(--color-edge-warn);
-				gap: 10px;
+				gap: 0.4rem;
 
 				:global(.lucide) {
 					stroke-width: 2.5px;
-					min-height: 22px;
-					min-width: 22px;
+					min-height: 20px;
+					min-width: 20px;
 				}
+			}
+
+			.warn-alt {
+				color: var(--color-edge-warn-alt);
 			}
 
 			:global(.lucide) {

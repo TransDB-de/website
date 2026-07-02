@@ -362,7 +362,19 @@
 		"reportFailed": "Verzenden van melding mislukt",
 		"locationAccessDenied": "Locatietoegang geweigerd",
 		"invalidRevocation": "De inschrijving kon niet meer worden ingetrokken",
-		"captchaFailed": "Interne beveiligingstest mislukt. Laad de pagina opnieuw."
+		"captchaFailed": "Interne beveiligingstest mislukt. Laad de pagina opnieuw.",
+		"validation": {
+			"required": "Verplicht veld",
+			"length": "Ongeldige lengte",
+			"malformed_email": "Geen geldig e-mailadres",
+			"malformed_url": "Geen geldig webadres",
+			"invalid_value": "Ongeldige waarde",
+			"invalid_format": "Ongeldig formaat",
+			"invalid_telephone_number": "Geen geldig telefoonnummer",
+			"value_not_allowed": "Waarde niet toegestaan",
+			"format": "Ongeldig formaat",
+			"unknown": "Ongeldige invoer"
+		}
 	},
 	"warns": {
 		"reLogin": "Log opnieuw in"
