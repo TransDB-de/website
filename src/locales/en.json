@@ -362,7 +362,19 @@
 		"reportFailed": "Failed to send report",
 		"locationAccessDenied": "Location access denied",
 		"invalidRevocation": "Entry could no longer be withdrawn",
-		"captchaFailed": "Internal security test failed. Please reload the page."
+		"captchaFailed": "Internal security test failed. Please reload the page.",
+		"validation": {
+			"required": "Required field",
+			"length": "Invalid length",
+			"malformed_email": "Not a valid email address",
+			"malformed_url": "Not a valid website address",
+			"invalid_value": "Invalid value",
+			"invalid_format": "Invalid format",
+			"invalid_telephone_number": "Not a valid phone number",
+			"value_not_allowed": "Value not allowed",
+			"format": "Invalid format",
+			"unknown": "Invalid input"
+		}
 	},
 	"warns": {
 		"reLogin": "Please log in again"

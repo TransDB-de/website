@@ -362,7 +362,19 @@
 		"reportFailed": "Échec de l'envoi du signalement",
 		"locationAccessDenied": "Accès à la localisation refusé",
 		"invalidRevocation": "L'entrée ne peut plus être retirée",
-		"captchaFailed": "Le test de sécurité interne a échoué. Veuillez recharger la page."
+		"captchaFailed": "Le test de sécurité interne a échoué. Veuillez recharger la page.",
+		"validation": {
+			"required": "Champ obligatoire",
+			"length": "Longueur invalide",
+			"malformed_email": "Adresse e-mail invalide",
+			"malformed_url": "Adresse de site web invalide",
+			"invalid_value": "Valeur invalide",
+			"invalid_format": "Format invalide",
+			"invalid_telephone_number": "Numéro de téléphone invalide",
+			"value_not_allowed": "Valeur non autorisée",
+			"format": "Format invalide",
+			"unknown": "Saisie invalide"
+		}
 	},
 	"warns": {
 		"reLogin": "Veuillez vous reconnecter"

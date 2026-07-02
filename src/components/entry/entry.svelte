@@ -73,7 +73,13 @@
 >
 	<div class="data">
 		<div class="heading">
-			<h2>{props.entry.name}</h2>
+			{#if props.manage}
+				<a href={"/manage/" + props.entry.id}>
+					<h2>{props.entry.name}</h2>
+				</a>
+			{:else}
+				<h2>{props.entry.name}</h2>
+			{/if}
 
 			{#if props.entry.accessible === true}
 				<span class="special-tag green" title={t("mouseOverTexts.barrierFree")}>

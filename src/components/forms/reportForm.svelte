@@ -5,7 +5,7 @@
 	import Button from "$components/elements/button.svelte";
 	import Loader from "$components/elements/loader.svelte";
 	import Select from "$formElements/select.svelte";
-	import { popupError, popupOk } from "$components/popup.svelte";
+	import { popupError, popupOk, popupWarn } from "$components/popup.svelte";
 
 	import { goto } from "$app/navigation";
 
@@ -15,7 +15,6 @@
 	import axios from "axios";
 	import type { Report } from "$models/report.model";
 	import { t } from "$lib/localization.svelte";
-	import type { ValidationErrorMap } from "$models/error";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
 
@@ -36,7 +35,7 @@
 		message: ""
 	});
 
-	let errors: ValidationErrorMap = $state({});
+	let errors: Record<string, string> = $state({});
 
 	onMount(async () => {
 		const result = await apiRequestHandler<Entry>(
@@ -67,6 +66,7 @@
 		} else {
 			errors = result.handleErrors({
 				500: () => popupError(t("errors.reportFailed")),
+				422: () => popupWarn(t("errors.checkInput")),
 				429: () => popupError(t("errors.tooMany")),
 				default: () => popupError(`${t("errors.unknown")}`)
 			});
@@ -83,7 +83,12 @@
 {/if}
 
 <Form onsubmit={submit} bind:this={formElement} class="report-form">
-	<Select required bind:value={report.type} label={t("reportForm.categories")[0]}>
+	<Select
+		required
+		bind:value={report.type}
+		label={t("reportForm.categories")[0]}
+		error={errors["type"]}
+	>
 		<option value="" disabled selected>{t("reportForm.categories")[0] + "..."}</option>
 		<option value="Edit">{t("reportForm.categories")[1]}</option>
 		<option value="Report">{t("reportForm.categories")[2]}</option>
@@ -101,8 +106,8 @@
 		label={t("reportForm.placeholder")}
 		placeholder={t("reportForm.placeholder") + "..."}
 		required
-		minlength="10"
-		maxlength={1200}
+		minlength="5"
+		maxlength={2000}
 		error={errors["message"]}
 	/>
 

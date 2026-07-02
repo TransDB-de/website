@@ -14,9 +14,7 @@
 	import { t, tEntry } from "$lib/localization.svelte";
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import type { ValidationErrorMap } from "$models/error";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
-	import { slide } from "svelte/transition";
 
 	import {
 		typeMapping,
@@ -41,7 +39,7 @@
 	let isEdit = $derived(mode === "edit");
 
 	let loading = $state(false);
-	let errors: ValidationErrorMap = $state({});
+	let errors: Record<string, string> = $state({});
 	let formElement: Form;
 	let isSpecialsFocused = $state(false);
 	let editComment = $state("");

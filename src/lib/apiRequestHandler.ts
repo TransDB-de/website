@@ -1,9 +1,9 @@
-import { AuthFailedError, type ValidationErrorMap } from "$models/error";
+import { AuthFailedError } from "$models/error";
 import type { AxiosError, AxiosResponse } from "axios";
 import axios from "axios";
-import { parseValidationErrors } from "./utils";
 import { popupError, popupWarn } from "$components/popup.svelte";
 import { t } from "./localization.svelte";
+import { parseValidationErrors } from "./validation";
 
 type errorCases = number | "default";
 
@@ -12,7 +12,7 @@ type handlerFunctions = Record<errorCases, (response?: AxiosResponse) => unknown
 export function requestErrorHandler(
 	err: unknown | Error | AxiosError,
 	handlers: handlerFunctions
-): ValidationErrorMap {
+): Record<string, string> {
 	// Catch auth errors
 	if (err instanceof AuthFailedError) {
 		if (handlers[401]) {

@@ -362,7 +362,19 @@
 		"reportFailed": "Meldung konnte nicht gesendet werden",
 		"locationAccessDenied": "Standortzugriff blockiert",
 		"invalidRevocation": "Eintrag konnte nicht mehr zurückgezogen werden",
-		"captchaFailed": "Interner Sicherheits-Test fehlgeschlagen. Bitte Seite neu laden."
+		"captchaFailed": "Interner Sicherheits-Test fehlgeschlagen. Bitte Seite neu laden.",
+		"validation": {
+			"required": "Pflichtfeld",
+			"length": "Ungültige Länge",
+			"malformed_email": "Keine gültige E-Mail-Adresse",
+			"malformed_url": "Keine gültige Webseiten-Adresse",
+			"invalid_value": "Ungültiger Wert",
+			"invalid_format": "Ungültiges Format",
+			"invalid_telephone_number": "Keine gültige Telefonnummer",
+			"value_not_allowed": "Wert nicht erlaubt",
+			"format": "Ungültiges Format",
+			"unknown": "Ungültige Eingabe"
+		}
 	},
 	"warns": {
 		"reLogin": "Bitte melde dich erneut an"
