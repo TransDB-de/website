@@ -188,7 +188,7 @@
 
 		{#if props.manage != undefined && !props.entry.location && props.entry.status?.approved}
 			<p class="small-gap small-margin">
-				<span class="warn-link warn-alt">
+				<span class="warn-link">
 					<TriangleAlert size={18} />
 					Keine Geodaten
 				</span>
@@ -404,10 +404,6 @@
 					min-height: 20px;
 					min-width: 20px;
 				}
-			}
-
-			.warn-alt {
-				color: var(--color-edge-warn-alt);
 			}
 
 			:global(.lucide) {

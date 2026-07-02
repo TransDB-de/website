@@ -28,7 +28,7 @@
 </script>
 
 <InputWrapper {error} for={id} {label} {required}>
-	<textarea rows="4" bind:value {maxlength} {...rest} {id}></textarea>
+	<textarea rows="4" bind:value {maxlength} {...rest} {id} {required}></textarea>
 	{#if value && value.length > maxlength - 50}
 		<span> {value.length} / {maxlength} </span>
 	{/if}

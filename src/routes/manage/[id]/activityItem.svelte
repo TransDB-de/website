@@ -91,20 +91,22 @@
 
 <article class="activity-item">
 	<header>
-		<h3 style="color: {color}">
-			<Icon size={22} />
-			{label}
-		</h3>
+		<div>
+			<h3 style="color: {color}">
+				<Icon size={22} />
+				{label}
+			</h3>
 
-		{#if username}
-			<span class="user">von <b>{username}</b></span>
-		{/if}
+			{#if username}
+				<span class="user">von <b>{username}</b></span>
+			{/if}
 
-		{#if activity.attachments?.ReportType}
-			<span class="report-type">
-				({reportTypeLabels[activity.attachments.ReportType]})
-			</span>
-		{/if}
+			{#if activity.attachments?.ReportType}
+				<span class="report-type">
+					({reportTypeLabels[activity.attachments.ReportType]})
+				</span>
+			{/if}
+		</div>
 
 		{#if timestamp}
 			<span class="timestamp">{timestamp}</span>
@@ -163,7 +165,7 @@
 		</p>
 	{/if}
 
-	{#if activity.type === "Deleted"}
+	{#if activity.type === "Deleted" && false}
 		<p>
 			<Button light>
 				<Undo2 />
@@ -190,6 +192,13 @@
 			gap: 0.5rem;
 			border-radius: 4px 4px 0 0;
 			padding: 7px 12px;
+
+			div {
+				display: flex;
+				gap: 0.5rem;
+				align-items: center;
+				flex-wrap: wrap;
+			}
 
 			h3 {
 				margin: 0;
