@@ -302,6 +302,7 @@
 		font-weight: 500;
 		font-size: 0.92rem;
 		margin-left: auto;
+		text-align: right;
 	}
 
 	.attachments {
