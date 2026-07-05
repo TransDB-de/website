@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ChevronRight, MapPin, Search } from "@lucide/svelte";
+	import { ChevronRight, MapPin, MapPinOff, Search } from "@lucide/svelte";
 
 	import RadioButton from "$formElements/radioButton.svelte";
 	import TagCheckbox from "$formElements/tagCheckbox.svelte";
@@ -140,6 +140,7 @@
 			<p class="sub-title">
 				{t("searchFilter.location")}
 				<Button light class="reset-location" onclick={resetLocation}>
+					<MapPinOff />
 					{t("searchFilter.delete")}
 				</Button>
 			</p>
@@ -346,16 +347,26 @@
 
 		:global(.reset-location) {
 			font-weight: 500;
-			padding: 0 8px;
+			padding: 2px 8px;
 			min-height: unset;
-			font-size: 0.8em;
+			font-size: 0.9rem;
+
+			:global(.lucide) {
+				height: 18px;
+				width: 18px;
+			}
 		}
 
 		.location {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 0.25rem;
 			margin: 0;
+
+			span {
+				color: var(--color-edge-highlight);
+				font-weight: 500;
+			}
 
 			:global(.lucide) {
 				color: var(--color-edge-highlight);

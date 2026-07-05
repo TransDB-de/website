@@ -173,7 +173,8 @@
 
 		{#if props.entry.distance}
 			<p class="small-gap distance" title={t("mouseOverTexts.distance")}>
-				<Navigation /> <b> {props.entry.distance.toFixed(1)} km - {props.entry.address.city} </b>
+				<Navigation strokeWidth={2.5} />
+				<b> {props.entry.distance.toFixed(1)} km - {props.entry.address.city} </b>
 			</p>
 		{/if}
 
