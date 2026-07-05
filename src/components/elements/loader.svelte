@@ -13,8 +13,8 @@
 <style lang="scss">
 	.loader {
 		display: inline;
-		height: 23px;
-		width: 23px;
+		height: 1.34rem;
+		width: 1.34rem;
 		border-radius: 50%;
 		border: 2px solid transparent;
 		border-top: 2px solid var(--color-edge-light);

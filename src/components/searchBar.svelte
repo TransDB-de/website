@@ -174,8 +174,9 @@
 			width: fit-content;
 		}
 
-		.proximity-button {
-			transition: 0.4s background-color;
+		:global(.proximity-button) {
+			height: 35px;
+			min-width: 40px;
 		}
 
 		@include media-mobile {
