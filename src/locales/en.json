@@ -377,7 +377,8 @@
 		}
 	},
 	"warns": {
-		"reLogin": "Please log in again"
+		"reLogin": "Please log in again",
+		"noLocation": "No suitable location found for request"
 	},
 	"infos": {
 		"copiedToClipboard": "Text copied to clipboard!",

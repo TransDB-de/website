@@ -14,7 +14,7 @@
 
 	import EntryComponent from "$components/entry/entry.svelte";
 	import LoadMore from "$components/elements/loadMore.svelte";
-	import { popupError } from "$components/popup.svelte";
+	import { popupError, popupWarn } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import { afterNavigate } from "$app/navigation";
@@ -69,6 +69,10 @@
 			$currentLocation = result.data.locationName ?? "";
 			more = result.data.more;
 			pageCount = 0;
+
+			if (url.searchParams.has("location") && result.data.locationName === null) {
+				popupWarn(t("warns.noLocation"));
+			}
 		}
 	}
 

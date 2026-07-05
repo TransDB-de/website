@@ -377,7 +377,8 @@
 		}
 	},
 	"warns": {
-		"reLogin": "Log opnieuw in"
+		"reLogin": "Log opnieuw in",
+		"noLocation": "Geen geschikte locatie gevonden voor aanvraag"
 	},
 	"infos": {
 		"copiedToClipboard": "Tekst gekopieerd naar klembord!",

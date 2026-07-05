@@ -377,7 +377,8 @@
 		}
 	},
 	"warns": {
-		"reLogin": "Veuillez vous reconnecter"
+		"reLogin": "Veuillez vous reconnecter",
+		"noLocation": "Aucun emplacement approprié trouvé pour la demande"
 	},
 	"infos": {
 		"copiedToClipboard": "Texte copié dans le presse-papiers !",

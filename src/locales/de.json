@@ -377,7 +377,8 @@
 		}
 	},
 	"warns": {
-		"reLogin": "Bitte melde dich erneut an"
+		"reLogin": "Bitte melde dich erneut an",
+		"noLocation": "Kein passender Standort für Anfrage gefunden"
 	},
 	"infos": {
 		"copiedToClipboard": "Text in die Zwischenablage kopiert!",
