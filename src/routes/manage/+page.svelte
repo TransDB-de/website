@@ -1,19 +1,27 @@
 <script lang="ts">
 	import EntryCollection from "$components/entryCollection.svelte";
+	import DatabaseSearch from "$components/forms/databaseSearch.svelte";
 </script>
 
-<div>
-	<EntryCollection type="unapproved" />
+<div class="manage">
+	<DatabaseSearch />
+	<EntryCollection type="manage" />
 </div>
 
 <style lang="scss">
 	@use "../../scss/lengths" as *;
+	@use "../../scss/mixins" as *;
 
-	div {
+	.manage {
+		width: 100%;
+		max-width: 1200px;
 		display: flex;
 		flex-direction: column;
-		max-width: $conent-max-width;
-		width: 100%;
-		padding: 20px 10px;
+		padding: 18px;
+		gap: 20px;
+
+		@include media-mobile-small {
+			padding: 18px 8px;
+		}
 	}
 </style>

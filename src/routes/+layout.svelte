@@ -2,16 +2,16 @@
 	import { fade } from "svelte/transition";
 	import { page } from "$app/stores";
 	import { browser, dev } from "$app/environment";
-	import Footer from "$components/layout/footer.svelte";
-	import Header from "$components/layout/header.svelte";
+	import Footer from "./footer.svelte";
+	import Header from "./header.svelte";
 	import Popup from "$components/popup.svelte";
 	import Confirm from "$components/confirm.svelte";
+	import Prompt from "$components/prompt.svelte";
 
 	import { initLocalization } from "$lib/localization.svelte";
 	import "$lib/axios";
 	import { env } from "$env/dynamic/public";
-	import axios from "axios";
-	import { token } from "$lib/store";
+	import { userdata } from "$lib/store";
 	import { afterNavigate } from "$app/navigation";
 
 	import externalLinks from "$content/external-links.json";
@@ -35,18 +35,7 @@
 
 	initLocalization(data);
 
-	// Set synchronously so the header is present before any child onMount fires
-	if (browser && data.apiToken) {
-		axios.defaults.headers.common["X-CSRF-Token"] = data.apiToken;
-	}
-
-	$effect(() => {
-		if (data.apiToken) {
-			axios.defaults.headers.common["X-CSRF-Token"] = data.apiToken;
-		}
-	});
-
-	let path = $derived($page.url.pathname.startsWith("/manage") ? "/manage" : $page.url.pathname);
+	let path = $derived(data.path.startsWith("/manage") ? "/manage" : data.path);
 
 	if (dev && browser) {
 		localStorage.setItem("umami.disabled", "1");
@@ -56,7 +45,7 @@
 
 	afterNavigate(({ to }) => {
 		const navPath = to?.url.pathname.startsWith("/manage") ? "/manage" : to?.url.pathname;
-		const noTrack = !navPath || noTrackPaths.includes(navPath) || Boolean($token);
+		const noTrack = !navPath || noTrackPaths.includes(navPath) || Boolean($userdata);
 
 		if (!noTrack && env.PUBLIC_UMAMI_SRC && typeof umami !== "undefined") {
 			umami.track((props) => ({ ...props, url: navPath }));
@@ -88,6 +77,7 @@
 <Footer />
 <Popup />
 <Confirm />
+<Prompt />
 
 <style lang="scss">
 	@use "../scss/colors" as *;

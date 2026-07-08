@@ -5,9 +5,9 @@
 
 	import axios from "axios";
 	import { goto } from "$app/navigation";
-	import type { LoginResponse } from "$models/user.model";
+	import type { ApiUserList, LoginResponse } from "$models/user.model";
 
-	import { token, userdata } from "$lib/store";
+	import { usercache, userdata } from "$lib/store";
 	import { popupError, popupOk } from "$components/popup.svelte";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import { tick } from "svelte";
@@ -15,14 +15,16 @@
 	let loading = $state(false);
 
 	let login = $state({
-		username: "",
+		email: "",
 		password: ""
 	});
 
 	async function submit() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.post<LoginResponse>("access/login", login));
+		const result = await apiRequestHandler(
+			axios.post<LoginResponse>("auth/login", login, { captcha: true })
+		);
 
 		result.handleErrors({
 			401: () => popupError("Ungültige Anmeldedaten"),
@@ -30,11 +32,17 @@
 			default: () => popupError(`Unbekannter Fehler`)
 		});
 
+		const usercacheResult = await apiRequestHandler(axios.get<ApiUserList>("users"));
+
+		usercacheResult.handleErrors({
+			default: () => popupError(`Unbekannter Fehler`)
+		});
+
 		loading = false;
 
 		if (result.success && result.data) {
-			$token = result.data.token;
-			$userdata = result.data.user;
+			$userdata = result.data;
+			$usercache = usercacheResult.data;
 
 			await tick();
 
@@ -42,13 +50,13 @@
 			popupOk("Angemeldet");
 		}
 
-		login = { username: "", password: "" };
+		login = { email: "", password: "" };
 	}
 </script>
 
 <Form onsubmit={submit}>
 	<Input
-		bind:value={login.username}
+		bind:value={login.email}
 		label="E-Mail"
 		placeholder="CMS E-Mail..."
 		required

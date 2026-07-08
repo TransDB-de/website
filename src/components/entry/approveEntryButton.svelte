@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from "$components/elements/button.svelte";
-	import { CheckCircle } from "@lucide/svelte";
+	import { BadgeCheck, CheckCircle } from "@lucide/svelte";
 	import { popupOk, popupError } from "$components/popup.svelte";
 	import type { Entry } from "$models/entry.model";
 
@@ -20,7 +20,9 @@
 	async function approve() {
 		loading = true;
 
-		const result = await apiRequestHandler(axios.patch(`/entries/${props.entry._id}/approve`));
+		const result = await apiRequestHandler(
+			axios.patch(`/manage/entries/${props.entry.id}/status`, { approved: true })
+		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Freischalten")
 		});
@@ -42,5 +44,5 @@
 	onclick={approve}
 	{loading}
 >
-	<CheckCircle />
+	<BadgeCheck />
 </Button>

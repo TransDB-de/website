@@ -5,6 +5,7 @@ export const load: PageLoad = async ({ parent }) => {
 	const { preferredLang } = await parent();
 	return await loadContents(
 		preferredLang,
+		{ name: "Team", path: "about/team" },
 		{ name: "DonationContent", path: "about/donation" },
 		{ name: "TechStackContent", path: "about/tech-stack" },
 		{ name: "NonCommercial", path: "about/non-commercial" },

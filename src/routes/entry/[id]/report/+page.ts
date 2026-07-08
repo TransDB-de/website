@@ -1,4 +1,4 @@
-import type { PageLoad } from "./$types";
+import type { PageLoad } from "../../../report/$types";
 import { loadContents } from "$lib/loadContents";
 
 export const load: PageLoad = async ({ parent }) => {

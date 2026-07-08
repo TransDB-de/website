@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageData } from "./$types";
-	import MemberCardCollection from "$components/memberCardCollection.svelte";
 	import OpenCollectiveButton from "$components/openCollectiveButton.svelte";
 	import TechStack from "$components/techStack.svelte";
 	import { Download } from "@lucide/svelte";
@@ -21,7 +20,9 @@
 
 <div class="section">
 	<h2>{t("about.team")}</h2>
-	<div class="inner"><MemberCardCollection /></div>
+	<div class="inner">
+		<props.data.Team />
+	</div>
 </div>
 
 <div class="section">

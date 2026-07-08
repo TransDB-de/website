@@ -44,7 +44,7 @@ export function setLocale(newLocale: string) {
 	window.location.reload();
 }
 
-type TranslationMapping = typeof translationMapping;
+export type TranslationMapping = typeof translationMapping;
 type MappingKey = FlattenObjectKeys<TranslationMapping>;
 
 /**

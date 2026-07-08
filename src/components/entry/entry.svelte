@@ -6,12 +6,11 @@
 	import { t, tEntry } from "$lib/localization.svelte";
 
 	import Tag from "$components/elements/tag.svelte";
-	import EdgeButton from "$components/elements/edgeButton.svelte";
 	import { popupOk } from "$components/popup.svelte";
 
 	import DeleteEntryButton from "$components/entry/deleteEntryButton.svelte";
 	import ApproveEntryButton from "$components/entry/approveEntryButton.svelte";
-	import BlocklistEntryButton from "$components/entry/blocklistEntryButton.svelte";
+	import ArchiveEntryButton from "$components/entry/archiveEntryButton.svelte";
 
 	import {
 		Phone,
@@ -21,29 +20,30 @@
 		Share2,
 		Navigation,
 		AlertTriangle,
-		FilePen
+		FilePen,
+		TriangleAlert
 	} from "@lucide/svelte";
 
 	import { subjectMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 	import LinkButton from "$components/elements/LinkButton.svelte";
+	import Button from "$components/elements/button.svelte";
 
 	interface Props {
 		entry: Entry;
 		onremove?: (entry: Entry) => void;
-		actions?: "approve" | "edit";
+		onchange?: (entry: Entry) => void;
+		manage?: boolean;
 	}
 
 	const props: Props = $props();
 
 	let isWithSubject = $derived(subjectMapping[props.entry.type]);
 	let subjectName = $derived(
-		isWithSubject ? tEntry("subjectMapping")[props.entry.meta.subject ?? ""] : null
+		isWithSubject ? tEntry("subjectMapping")[props.entry.subject ?? ""] : null
 	);
 	let website = $derived(props.entry.website ? new URL(props.entry.website).host : null);
 	let possibleDuplicateLink = $derived(
-		props.entry.possibleDuplicate && $userdata?.admin
-			? "/manage/database?id=" + props.entry.possibleDuplicate
-			: "/entry/" + props.entry.possibleDuplicate
+		props.entry.possibleDuplicate && "/manage/" + props.entry.possibleDuplicate.entryId
 	);
 
 	let addressText = $derived.by(() => {
@@ -56,7 +56,7 @@
 	});
 
 	function share() {
-		let url = "/entry/" + props.entry._id;
+		let url = "/entry/" + props.entry.id;
 
 		if (navigator.share) {
 			navigator.share({ url });
@@ -67,41 +67,58 @@
 	}
 </script>
 
-<div class="entry">
+<article
+	class:archived={props.manage && props.entry.status?.archived}
+	class:blocked={props.manage && props.entry.status?.blocked}
+>
 	<div class="data">
-		<div class="heading">
-			<h2>{props.entry.name}</h2>
+		<header>
+			{#if props.manage}
+				<a href={"/manage/" + props.entry.id}>
+					<h2>{props.entry.name}</h2>
+				</a>
+			{:else}
+				<h2>{props.entry.name}</h2>
+			{/if}
 
-			{#if props.entry.accessible === "yes"}
+			{#if props.entry.accessible === true}
 				<span class="special-tag green" title={t("mouseOverTexts.barrierFree")}>
 					{t("entryMapping.accessibleMapping.yes")}
 				</span>
-			{:else if props.entry.accessible === "no"}
+			{:else if props.entry.accessible === false}
 				<span class="special-tag orange" title={t("mouseOverTexts.notBarrierFree")}>
 					{t("entryMapping.accessibleMapping.no")}
 				</span>
 			{/if}
 
-			{#if props.actions === "edit" && props.entry.blocked}
-				<span class="special-tag red"> Blockiert </span>
+			{#if props.manage != undefined}
+				{#if props.entry.status?.blocked}
+					<span class="special-tag red"> Gesperrt </span>
+				{/if}
+				{#if props.entry.status?.archived}
+					<span class="special-tag orange"> Archiviert </span>
+				{/if}
+				{#if !props.entry.status?.approved}
+					<span class="special-tag blue"> Wartet auf Freischaltung </span>
+				{/if}
 			{/if}
-		</div>
+		</header>
 
-		<p class="small-gap">
+		<h3 class="small-gap">
 			{#if isWithSubject}
 				<b> {subjectName} </b>
 			{:else}
 				<b> {tEntry("typeMapping")[props.entry.type]} </b>
 			{/if}
 
-			{#if props.entry.firstName || props.entry.lastName}
+			{#if props.entry.contact?.firstName || props.entry.contact?.lastName}
 				<span>
-					{tEntry("academicTitleMapping")[props.entry.academicTitle ?? ""] ?? ""}
-					{props.entry.firstName ?? ""}
-					{props.entry.lastName ?? ""}
+					{tEntry("academicTitleMapping")[props.entry.contact?.academicTitle ?? ""] ?? ""}
+					{props.entry.contact?.firstName ?? ""}
+					{props.entry.contact?.lastName ?? ""}
 				</span>
 			{/if}
-		</p>
+		</h3>
 
 		<p>
 			<a href={`https://www.google.de/maps/search/${addressText}`} target="_blank" rel="noopener">
@@ -127,97 +144,114 @@
 			{/if}
 		</p>
 
-		{#if props.entry.meta.offers && props.entry.meta.offers.length > 0 && props.entry.type in offerMapping}
+		{#if props.entry.offers && props.entry.offers.length > 0 && props.entry.type in offerMapping}
 			<p class="small-gap small-margin">
 				<b> {t("entry.offers")}: </b>
-				{#each props.entry.meta.offers as offer (offer)}
+				{#each props.entry.offers as offer (offer)}
 					<Tag title={tEntry("offerDetails")[offer]}>{tEntry("offerMapping")[offer]}</Tag>
 				{/each}
 			</p>
 		{/if}
 
-		{#if props.entry.meta.attributes && props.entry.meta.attributes.length > 0 && props.entry.type in attributeMapping}
-			<p class="small-gap small-margin">
+		{#if props.entry.attributes && props.entry.attributes.length > 0 && props.entry.type in attributeMapping}
+			<section class="small-gap small-margin">
 				<b> {t("entry.attributes")}: </b>
-				{#each props.entry.meta.attributes as attribute (attribute)}
+				{#each props.entry.attributes as attribute (attribute)}
 					<Tag title={tEntry("attributeDetails")[attribute]}>
 						{tEntry("attributeMapping")[attribute]}
 					</Tag>
 				{/each}
-			</p>
+			</section>
 		{/if}
 
-		{#if props.entry.meta.specials}
-			<p class="small-gap small-margin">
+		{#if props.entry.specials}
+			<section class="small-gap small-margin specials">
 				<b> {t("entry.specials")}: </b>
-				{props.entry.meta.specials}
-			</p>
-		{/if}
-
-		{#if props.entry.meta.minAge}
-			<p class="small-gap small-margin">
-				<b> {t("entry.minage")}: </b>
-				{props.entry.meta.minAge}
-			</p>
+				<pre>{props.entry.specials}</pre>
+			</section>
 		{/if}
 
 		{#if props.entry.distance}
 			<p class="small-gap distance" title={t("mouseOverTexts.distance")}>
-				<Navigation /> <b> {props.entry.distance.toFixed(1)} km - {props.entry.address.city} </b>
+				<Navigation strokeWidth={2.5} />
+				<b> {props.entry.distance.toFixed(1)} km - {props.entry.address.city} </b>
 			</p>
 		{/if}
 
-		{#if !props.entry.approved && props.entry.possibleDuplicate}
-			<p class="small-gap">
+		{#if !props.entry.status?.approved && props.entry.possibleDuplicate}
+			<p class="small-gap small-margin">
 				<a class="warn-link" href={possibleDuplicateLink} target="_blank">
-					<AlertTriangle />
-					{t("entry.possibleDuplicate")}
+					<TriangleAlert />
+					{t("entry.possibleDuplicate")} ({props.entry.possibleDuplicate.probability * 100}%)
 				</a>
+			</p>
+		{/if}
+
+		{#if props.manage != undefined && !props.entry.location && props.entry.status?.approved}
+			<p class="small-gap small-margin">
+				<span class="warn-link">
+					<TriangleAlert size={18} />
+					Keine Geodaten
+				</span>
 			</p>
 		{/if}
 	</div>
 
 	<div class="controls">
-		{#if props.actions === "approve"}
-			<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
-			<BlocklistEntryButton onremove={props.onremove} entry={props.entry} />
-			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
-		{:else if props.actions === "edit"}
+		{#if props.manage == true}
+			{#if !props.entry.status?.approved}
+				<ApproveEntryButton onremove={props.onremove} entry={props.entry} />
+			{/if}
 			<LinkButton
 				light
 				iconOnly
-				href={"/manage/database/entry/" + props.entry._id}
+				href={"/manage/" + props.entry.id}
 				title={t("mouseOverTexts.editEntry")}
 			>
 				<FilePen />
 			</LinkButton>
-			<DeleteEntryButton onremove={props.onremove} entry={props.entry} />
-		{:else}
-			<EdgeButton
-				onclick={() => goto("/report?id=" + props.entry._id)}
+			<ArchiveEntryButton entry={props.entry} onchange={props.onchange} />
+		{:else if props.manage == false}{:else}
+			<LinkButton
+				href={`/entry/${props.entry.id}/report`}
+				iconOnly
+				edge
 				title={t("mouseOverTexts.report")}
 			>
 				<FilePen />
-			</EdgeButton>
-
-			<EdgeButton onclick={share} title={t("mouseOverTexts.share")}>
+			</LinkButton>
+			<Button iconOnly edge onclick={share} title={t("mouseOverTexts.share")}>
 				<Share2 />
-			</EdgeButton>
+			</Button>
 		{/if}
 	</div>
-</div>
+</article>
 
 <style lang="scss">
 	@use "../../scss/shadows" as *;
 	@use "../../scss/mixins" as *;
 
-	.entry {
+	article {
 		display: flex;
 		background-color: var(--color-background-bright);
 		box-shadow: $surface-shadow-soft;
 		border-radius: 4px;
 		padding: 15px 15px 15px 20px;
 		gap: 5px;
+
+		&.archived {
+			background-color: color-mix(in srgb, var(--color-background-bright) 85%, transparent);
+			color: color-mix(in srgb, var(--color-edge) 70%, transparent);
+
+			.data {
+				pointer-events: none;
+				user-select: none;
+			}
+		}
+
+		&.blocked {
+			border: 2px dashed var(--color-edge-error);
+		}
 
 		.controls {
 			display: flex;
@@ -242,17 +276,15 @@
 			flex-direction: column;
 			flex: 1;
 
-			p {
+			p,
+			h3,
+			section {
 				display: flex;
 				align-items: center;
 				flex-wrap: wrap;
 				gap: 10px 20px;
 				margin: 0 0 20px 0;
 				font-size: 0.9em;
-
-				&:first-of-type {
-					margin: 0 0 20px 5px;
-				}
 
 				&.small-gap {
 					gap: 5px 10px;
@@ -272,11 +304,34 @@
 				}
 			}
 
+			section.specials {
+				flex-direction: column;
+				align-items: flex-start;
+				pre {
+					margin: 0;
+					font-size: inherit;
+					font-family: inherit;
+					color: inherit;
+					white-space: preserve-breaks;
+				}
+			}
+
 			b {
 				font-weight: 500;
 			}
 
-			.heading {
+			h3 {
+				font-size: 1rem;
+				font-weight: 400;
+				margin: 0 0 20px 2px;
+				font-family: inherit;
+
+				b {
+					font-weight: 600;
+				}
+			}
+
+			header {
 				display: flex;
 				flex-wrap: wrap;
 				align-items: center;
@@ -292,27 +347,31 @@
 				}
 
 				.special-tag {
-					padding: 2px 8px;
+					padding: 3px 8px;
 					border-radius: 4px;
 					font-size: 0.8em;
-					font-weight: 400;
+					font-weight: 500;
 					margin: -4px 0 6px 0;
 					cursor: default;
 
 					&.green {
 						background-color: var(--color-special-highlight);
+						color: oklch(from var(--color-special-highlight) calc(l * 0.5) c h);
 					}
 
 					&.orange {
 						background-color: var(--color-special-warn);
-					}
-
-					&.orange {
-						background-color: var(--color-special-warn);
+						color: oklch(from var(--color-special-warn) calc(l * 0.5) c h);
 					}
 
 					&.red {
 						background-color: var(--color-special-error);
+						color: oklch(from var(--color-special-error) calc(l * 0.5) c h);
+					}
+
+					&.blue {
+						background-color: var(--color-special-info);
+						color: oklch(from var(--color-special-info) calc(l * 0.5) c h);
 					}
 				}
 			}
@@ -321,7 +380,7 @@
 				display: inline-flex;
 				align-items: center;
 				gap: 5px;
-				color: var(--color-edge);
+				color: inherit;
 				text-decoration: none;
 
 				&:hover {
@@ -335,14 +394,16 @@
 			}
 
 			.warn-link {
+				display: inline-flex;
+				align-items: center;
 				font-weight: 500;
 				color: var(--color-edge-warn);
-				gap: 10px;
+				gap: 0.4rem;
 
 				:global(.lucide) {
 					stroke-width: 2.5px;
-					min-height: 22px;
-					min-width: 22px;
+					min-height: 20px;
+					min-width: 20px;
 				}
 			}
 

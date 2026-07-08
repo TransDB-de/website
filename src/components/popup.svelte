@@ -74,7 +74,9 @@
 		color: var(--color-edge-bright);
 		box-shadow: $surface-shadow-soft;
 		font-family: "Fira Sans", sans-serif;
-		font-size: 18px;
+		font-size: 1rem;
+		font-weight: 500;
+		text-shadow: $edge-shadow-tiny;
 		pointer-events: none;
 		visibility: hidden;
 		opacity: 0;
@@ -107,6 +109,7 @@
 		}
 
 		:global(.lucide) {
+			stroke-width: 2.5px;
 			min-width: 22px;
 			min-height: 22px;
 		}

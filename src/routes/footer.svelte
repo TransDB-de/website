@@ -69,7 +69,7 @@
 </footer>
 
 <style lang="scss">
-	@use "../../scss/mixins" as *;
+	@use "../scss/mixins" as *;
 
 	footer {
 		display: grid;

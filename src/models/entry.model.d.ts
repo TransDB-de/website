@@ -1,30 +1,12 @@
-import type * as FilterLang from "@transdb-de/filter-lang";
+export interface EntryStatus {
+	approved: boolean;
+	blocked: boolean;
+	archived: boolean;
+}
 
-export interface Entry {
-	_id?: string;
-	type: string;
-	name: string;
-	approved?: boolean;
-	blocked?: boolean;
-	academicTitle?: string;
-	firstName?: string;
-	lastName?: string;
-	email?: string;
-	website?: string;
-	telephone?: string;
-	accessible?: string;
-
-	address: Address;
-	meta: Meta;
-
-	location?: GeoJsonPoint;
-	distance?: number;
-
-	possibleDuplicate?: string;
-
-	submittedTimestamp?: number;
-	approvedTimestamp?: number;
-	approvedBy?: string;
+export interface DuplicateMatch {
+	entryId: string;
+	probability: number;
 }
 
 export interface GeoJsonPoint {
@@ -34,26 +16,45 @@ export interface GeoJsonPoint {
 
 export interface Address {
 	city: string;
-	plz?: string;
-	street?: string;
-	house?: string;
+	plz: string | null;
+	street: string | null;
+	house: string | null;
 }
 
-export interface Meta {
+export interface Entry {
+	id: string | null;
+	type: string;
+	name: string;
+	status: EntryStatus | null;
+	contact: {
+		academicTitle: string | null;
+		firstName: string | null;
+		lastName: string | null;
+	} | null;
+	email: string | null;
+	website: string | null;
+	telephone: string | null;
+	accessible: boolean | null;
+	address: Address;
 	attributes: string[];
 	offers: string[];
-	specials?: string;
-	minAge?: number;
-	subject?: string;
+	specials: string | null;
+	subject: string | null;
+	location: GeoJsonPoint | null;
+	distance: number | null;
+	possibleDuplicate: DuplicateMatch | null;
 }
 
-export interface EntriesResponse {
-	entries: Entry[];
-	locationName?: string;
+export interface PaginatedEntryResponse<T = Entry> {
+	items: T[];
 	more: boolean;
+	locationName?: string | null;
 }
 
-export interface FilterFull {
-	filter: FilterLang.IntermediateFormat.AbstractFilters;
-	page: number;
+export type EntriesResponse = PaginatedEntryResponse;
+
+export interface CreateEntryResponse {
+	entry: Entry;
+	revocationToken: string;
+	possibleDuplicate: DuplicateMatch | null;
 }

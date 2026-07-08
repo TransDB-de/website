@@ -8,7 +8,6 @@ declare global {
 	namespace App {
 		interface Locals {
 			preferredLang: string;
-			apiToken: string;
 		}
 		// interface Error {}
 		// interface PageData {}
@@ -18,3 +17,9 @@ declare global {
 }
 
 export {};
+
+declare module "axios" {
+	interface AxiosRequestConfig {
+		captcha?: boolean;
+	}
+}

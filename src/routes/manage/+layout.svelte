@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ManageNav from "$components/layout/manageNav.svelte";
+	import ManageNav from "./manageNav.svelte";
 
 	import type { Snippet } from "svelte";
 

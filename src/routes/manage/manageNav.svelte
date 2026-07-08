@@ -1,14 +1,16 @@
 <script lang="ts">
-	import { Settings, LogOut } from "@lucide/svelte";
+	import { Settings, LogOut, BadgeCheck, UserCog, UserCog2 } from "@lucide/svelte";
 	import Button from "$components/elements/button.svelte";
 	import NavLink from "$components/elements/navLink.svelte";
 
-	import { popupOk } from "$components/popup.svelte";
+	import { popupError, popupOk } from "$components/popup.svelte";
 	import { goto } from "$app/navigation";
 
-	import { userdata, token } from "$lib/store";
+	import { userdata } from "$lib/store";
 	import { browser } from "$app/environment";
 	import { env } from "$env/dynamic/public";
+	import { apiRequestHandler } from "$lib/apiRequestHandler";
+	import axios from "axios";
 
 	const linkOptions = {
 		shadow: false,
@@ -29,9 +31,18 @@
 		}
 	});
 
-	function logout() {
+	async function logout() {
 		$userdata = null;
-		$token = null;
+		const result = await apiRequestHandler(axios.post("auth/logout"));
+
+		result.handleErrors({
+			default: () => popupError(`Unbekannter Fehler`)
+		});
+
+		if (!result.success) {
+			popupError(`Abmelden Fehlgeschlagen`);
+			return;
+		}
 
 		popupOk("Erfolgreich abgemeldet");
 		goto("/");
@@ -40,16 +51,18 @@
 
 <div class="manage-nav">
 	<nav>
-		<NavLink {...linkOptions} exact href="/manage">Freischalten</NavLink>
-		<NavLink {...linkOptions} exact href="/manage/blocklist">Blocklist</NavLink>
-
-		{#if admin}
-			<NavLink {...linkOptions} href="/manage/database">Datenbank</NavLink>
+		<NavLink {...linkOptions} exact href="/manage">Datenbank</NavLink>
+		<NavLink {...linkOptions} exact href="/manage?approved=false&blocked=false&archived=false"
+			>Freischalten</NavLink
+		>
+		<NavLink {...linkOptions} exact href="/manage?blocked=true">Blocklist</NavLink>
+		{#if $userdata?.admin}
+			<NavLink {...linkOptions} exact href="/manage/activities">Aktivitätenverlauf</NavLink>
 		{/if}
 	</nav>
 	<span class="account">
 		<a class="light" href={env.PUBLIC_CMS_URL + "/admin/users/" + userId} target="_blank">
-			<Settings class="settings-icon" size={28} />
+			<UserCog class="settings-icon" size={28} />
 			{username}
 		</a>
 

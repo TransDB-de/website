@@ -17,7 +17,9 @@
 	let entry: Entry | null = $state(null);
 
 	onMount(async () => {
-		const result = await apiRequestHandler(axios.get<Entry>("/entries/" + params.id));
+		const result = await apiRequestHandler(
+			axios.get<Entry>("/entries/" + params.id, { captcha: true })
+		);
 
 		result.handleErrors({
 			404: () => popupError(t("errors.entryNotFound")),

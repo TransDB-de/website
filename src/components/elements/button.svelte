@@ -7,6 +7,7 @@
 		loading?: boolean;
 		light?: boolean;
 		iconOnly?: boolean;
+		edge?: boolean;
 		children?: Snippet;
 		onclick?: (e: MouseEvent) => void;
 		[key: string]: unknown;
@@ -17,13 +18,14 @@
 		loading = false,
 		light = false,
 		iconOnly = false,
+		edge = false,
 		children,
 		onclick,
 		...rest
 	}: Props = $props();
 </script>
 
-<button {onclick} class={color} class:light class:iconOnly {...rest}>
+<button {onclick} class={color} class:light class:edge class:iconOnly {...rest}>
 	{#if loading}
 		<Loader dark={light} />
 	{:else if children}

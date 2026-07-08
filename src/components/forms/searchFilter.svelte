@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ChevronRight, MapPin, Search } from "@lucide/svelte";
+	import { ChevronRight, MapPin, MapPinOff, Search } from "@lucide/svelte";
 
 	import RadioButton from "$formElements/radioButton.svelte";
 	import TagCheckbox from "$formElements/tagCheckbox.svelte";
@@ -8,15 +8,15 @@
 
 	import Button from "$components/elements/button.svelte";
 
-	import { clamp, timeout } from "$lib/utils";
+	import { clamp, debounce } from "$lib/utils";
 	import { isMobile, currentLocation } from "$lib/store";
 	import { env } from "$env/dynamic/public";
 	import { t, tEntry } from "$lib/localization.svelte";
 
 	import { browser } from "$app/environment";
-	import { navigating, page } from "$app/stores";
-	import { goto } from "$app/navigation";
-	import { onDestroy, untrack } from "svelte";
+	import { page } from "$app/stores";
+	import { goto, onNavigate } from "$app/navigation";
+	import { untrack } from "svelte";
 
 	import { typeMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
 
@@ -34,33 +34,13 @@
 		expand = !expand;
 	}
 
-	// change counter
-	let changeId = 0;
-
-	// Automatic filter change handler
-	// Applies filters after a short delay, so that the changes don't stack
-	async function filtersUpdated() {
-		// mobile changes are applied manually to save data
-		if ($isMobile) {
-			return;
-		}
-
-		if (!browser) {
+	const filtersUpdated = debounce(
+		() => {
+			if ($isMobile) return;
 			applyFilters();
-		} else {
-			changeId += 1;
-			let thisChange = changeId;
-
-			await timeout(
-				env.PUBLIC_FILTER_APPLY_TIMEOUT ? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000 : 600
-			);
-
-			// if another change occured since the timer was started, do nothing
-			if (changeId === thisChange) {
-				applyFilters();
-			}
-		}
-	}
+		},
+		env.PUBLIC_FILTER_APPLY_TIMEOUT ? Number(env.PUBLIC_FILTER_APPLY_TIMEOUT) * 1000 : 600
+	);
 
 	function typeUpdated() {
 		selectedOffers = [];
@@ -69,43 +49,39 @@
 		filtersUpdated();
 	}
 
-	function setQuery(field: string, value: unknown) {
+	function setQuery(params: URLSearchParams, field: string, value: unknown) {
 		if (value) {
 			if (Array.isArray(value)) {
-				$page.url.searchParams.delete(field);
-
+				params.delete(field);
 				for (let e of value) {
-					$page.url.searchParams.append(field, e);
+					params.append(field, e);
 				}
 			} else {
-				$page.url.searchParams.set(field, value as string);
+				params.set(field, value as string);
 			}
 		} else {
-			$page.url.searchParams.delete(field);
+			params.delete(field);
 		}
 	}
 
 	function resetLocation() {
 		$currentLocation = "";
-
-		$page.url.searchParams.delete("lat");
-		$page.url.searchParams.delete("long");
-		$page.url.searchParams.delete("location");
-
-		applyFilters();
+		applyFilters(["lat", "long", "location"]);
 	}
 
-	function applyFilters() {
-		setQuery("type", selectedType);
-		setQuery("offers", selectedOffers);
-		setQuery("attributes", selectedAttributes);
-		setQuery("text", textFilter);
+	function applyFilters(exclude: string[] = []) {
+		const params = new URLSearchParams($page.url.searchParams);
 
-		let searchString = "";
-		if ($page.url.searchParams.toString()) {
-			searchString = "?" + $page.url.searchParams.toString();
+		for (const key of exclude) {
+			params.delete(key);
 		}
 
+		setQuery(params, "type", selectedType);
+		setQuery(params, "offers", selectedOffers);
+		setQuery(params, "attributes", selectedAttributes);
+		setQuery(params, "text", textFilter);
+
+		const searchString = params.toString() ? "?" + params.toString() : "";
 		goto("/search" + searchString, { keepFocus: true, noScroll: true });
 	}
 
@@ -117,7 +93,7 @@
 	}
 
 	// React on navigating eg. reset filters if user navigates to /search without any other parameters
-	const unsubscribe = navigating.subscribe((nav) => {
+	onNavigate((nav) => {
 		if (
 			nav &&
 			nav.to?.url.pathname === "/search" &&
@@ -127,8 +103,6 @@
 			resetFilter();
 		}
 	});
-
-	onDestroy(unsubscribe);
 
 	// scroll edge case
 	// this snippet ensures devices with small screens can scroll the sticky sidebar
@@ -155,7 +129,7 @@
 
 <div class="search-filter" style="--scroll-y: {top}px" bind:this={element}>
 	<!-- svelte-ignore a11y_click_events_have_key_events a11y_no_static_element_interactions -->
-	<div class="bar mobile" class:expand onclick={toggleExpand}>
+	<div class="bar mobile" class:expand onclick={toggleExpand} role="button" tabindex="0">
 		<ChevronRight class="chevron" size={24} />
 
 		<span class="title"> {t("searchFilter.title")} </span>
@@ -166,6 +140,7 @@
 			<p class="sub-title">
 				{t("searchFilter.location")}
 				<Button light class="reset-location" onclick={resetLocation}>
+					<MapPinOff />
 					{t("searchFilter.delete")}
 				</Button>
 			</p>
@@ -250,7 +225,7 @@
 			<Button
 				light
 				iconOnly
-				onclick={applyFilters}
+				onclick={() => applyFilters()}
 				title={t("mouseOverTexts.filter")}
 				class="search-button {textFilter ? '' : 'collapsed'}"
 			>
@@ -258,7 +233,11 @@
 			</Button>
 		</div>
 
-		<Button class="mobile filter-button" onclick={applyFilters} title={t("mouseOverTexts.filter")}>
+		<Button
+			class="mobile filter-button"
+			onclick={() => applyFilters()}
+			title={t("mouseOverTexts.filter")}
+		>
 			{t("searchFilter.filter")}
 		</Button>
 	</div>
@@ -368,16 +347,26 @@
 
 		:global(.reset-location) {
 			font-weight: 500;
-			padding: 0 8px;
+			padding: 2px 8px;
 			min-height: unset;
-			font-size: 0.8em;
+			font-size: 0.9rem;
+
+			:global(.lucide) {
+				height: 18px;
+				width: 18px;
+			}
 		}
 
 		.location {
 			display: flex;
 			align-items: center;
-			gap: 10px;
+			gap: 0.25rem;
 			margin: 0;
+
+			span {
+				color: var(--color-edge-highlight);
+				font-weight: 500;
+			}
 
 			:global(.lucide) {
 				color: var(--color-edge-highlight);

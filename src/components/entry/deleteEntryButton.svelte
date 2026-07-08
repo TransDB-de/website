@@ -2,7 +2,8 @@
 	import Button from "$components/elements/button.svelte";
 	import { Trash } from "@lucide/svelte";
 	import { popupOk, popupError } from "$components/popup.svelte";
-	import { confirm } from "$components/confirm.svelte";
+	import Dialog from "$components/dialog.svelte";
+	import Textarea from "$components/forms/elements/textarea.svelte";
 	import type { Entry } from "$models/entry.model";
 
 	import { t } from "$lib/localization.svelte";
@@ -17,21 +18,23 @@
 
 	const props: Props = $props();
 
+	let open = $state(false);
 	let loading = $state(false);
 
-	async function deleteEntry() {
-		let success: boolean = await confirm("Möchtest du diesen Eintrag wirklich löschen?");
+	async function handleClose(returnValue: string, formData: FormData | null) {
+		if (returnValue !== "confirm") return;
 
-		if (!success) return;
+		const comment = formData?.get("comment") as string;
 		loading = true;
 
-		const result = await apiRequestHandler(axios.delete(`entries/${props.entry._id}`));
-
-		loading = false;
-
+		const result = await apiRequestHandler(
+			axios.delete(`/manage/entries/${props.entry.id}`, { data: { comment } })
+		);
 		result.handleErrors({
 			default: () => popupError("Fehler beim Löschen des Eintrags")
 		});
+
+		loading = false;
 
 		if (result.success) {
 			popupOk("Eintrag gelöscht");
@@ -44,12 +47,9 @@
 	light
 	iconOnly={!props.withText}
 	color="edge-error"
-	onclick={deleteEntry}
+	onclick={() => (open = true)}
 	title={t("mouseOverTexts.deleteEntry")}
 	{loading}
 >
 	<Trash />
-	{#if props.withText}
-		Löschen
-	{/if}
 </Button>

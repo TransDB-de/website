@@ -52,6 +52,7 @@
 			padding: 5px 2px 5px 12px;
 			color: var(--color-edge-highlight);
 			border-left: 3px solid var(--color-edge-highlight);
+			text-shadow: $edge-shadow-tiny;
 			font-weight: 500;
 		}
 	}

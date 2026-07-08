@@ -13,7 +13,7 @@
 	<SearchFilter />
 
 	<div class="entries">
-		<EntryCollection type="search" />
+		<EntryCollection />
 	</div>
 </div>
 

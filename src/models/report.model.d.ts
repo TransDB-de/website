@@ -1,5 +1,5 @@
 export interface Report {
 	id: string | null;
-	type: "edit" | "report" | "other" | "";
+	type: "Report" | "Edit" | "Other" | "";
 	message: string;
 }

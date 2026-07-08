@@ -7,17 +7,19 @@
 
 	interface Props {
 		error?: string;
-		value?: string | number;
+		value?: string | number | null;
 		type?: string;
 		label: string | null;
+		required?: boolean;
 		[key: string]: unknown;
 	}
 
 	let {
 		error = "",
-		value = $bindable<string | number | undefined>(),
+		value = $bindable<string | number | null | undefined>(),
 		type = "",
 		label,
+		required,
 		...rest
 	}: Props = $props();
 
@@ -25,9 +27,9 @@
 	const id = "input" + uid;
 </script>
 
-<InputWrapper {error} for={id} {label}>
+<InputWrapper {error} for={id} {label} {required}>
 	{#if type == "number"}
-		<input bind:value type="number" {...rest} {id} />
+		<input bind:value type="number" {required} {...rest} {id} />
 	{:else}
 		<input bind:value {type} {...rest} {id} />
 	{/if}

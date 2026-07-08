@@ -9,8 +9,9 @@
 	interface Props {
 		label: string | null;
 		error?: string;
-		value?: string;
+		value?: string | boolean | null;
 		class?: string;
+		required?: boolean;
 		children?: Snippet;
 		[key: string]: unknown;
 	}
@@ -21,6 +22,7 @@
 		class: customClass = "",
 		children,
 		label,
+		required,
 		...rest
 	}: Props = $props();
 
@@ -28,8 +30,8 @@
 	const id = "select" + uid;
 </script>
 
-<InputWrapper {error} class={customClass} for={id} {label}>
-	<select bind:value {...rest} {id}>
+<InputWrapper {error} class={customClass} for={id} {label} {required}>
+	<select bind:value {required} {...rest} {id}>
 		{#if children}{@render children()}{/if}
 	</select>
 </InputWrapper>

@@ -8,19 +8,27 @@
 	interface Props {
 		label: string;
 		error?: string;
-		value?: string;
+		value?: string | null;
 		maxlength?: number;
+		required?: boolean;
 		[key: string]: unknown;
 	}
 
-	let { error = "", value = $bindable(""), maxlength = 1200, label, ...rest }: Props = $props();
+	let {
+		error = "",
+		value = $bindable(""),
+		maxlength = 1200,
+		label,
+		required,
+		...rest
+	}: Props = $props();
 
 	uid += 1;
 	const id = "textarea" + uid;
 </script>
 
-<InputWrapper {error} for={id} {label}>
-	<textarea rows="4" bind:value {maxlength} {...rest} {id}></textarea>
+<InputWrapper {error} for={id} {label} {required}>
+	<textarea rows="4" bind:value {maxlength} {...rest} {id} {required}></textarea>
 	{#if value && value.length > maxlength - 50}
 		<span> {value.length} / {maxlength} </span>
 	{/if}

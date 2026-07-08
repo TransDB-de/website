@@ -1,14 +1,10 @@
 <script lang="ts">
-	import type { PageData } from "./$types";
+	import type { PageProps } from "./$types";
 	import ReportForm from "$components/forms/reportForm.svelte";
 	import { t } from "$lib/localization.svelte";
 	import PrimaryHeading from "$components/typography/PrimaryHeading.svelte";
 
-	interface Props {
-		data: PageData;
-	}
-
-	const props: Props = $props();
+	let { params, data }: PageProps = $props();
 </script>
 
 <svelte:head>
@@ -18,11 +14,11 @@
 
 <div class="content">
 	<PrimaryHeading underline>{t("reportForm.heading")}</PrimaryHeading>
-	<ReportForm ReportNote={props.data.ReportNote} />
+	<ReportForm ReportNote={data.ReportNote} entryId={params.id} />
 </div>
 
 <style lang="scss">
-	@use "../../scss/content" as *;
+	@use "../../../../scss/content" as *;
 
 	.content {
 		display: flex;
