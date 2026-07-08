@@ -1,12 +1,16 @@
 # Trans\*DB Website
 
-The offical Trans\*DB Website built with SvelteKit.
+Die offizielle Trans\*DB Website, gebaut mit SvelteKit
 
 ## Copyright Notice
 
-(c) 2026 Trans\*DB. All rights reserved.
+Trans*DB gilt als Source-Available, alle Rechte liegen bei den ursprünglichen Entwicklern.
 
-While this projects source code is public, it is not open source, as it does not have a usage license attached. Hosting, copying or redistributing this code is prohibited, unless explicitly allowed with a written permission from the Trans\*DB development team.
+Der Grundgedanke von Trans*DB ist es, Hilfe möglichst einfach, schnell und zentralisiert zu vermitteln. Früher musste man in Selbsthilfegruppen nach einzelnen Listen fragen oder selbst im Internet recherchieren. Wenn jetzt die Software von anderen einfach wiederverwendet wird, um eigene Seiten zu hosten, sind wir ganz schnell wieder bei dem ursprünglichen Problem, das hiermit zu lösen versucht wurde.
+
+Wir bitten darum, das zu respektieren.
+
+Wenn ihr trotzdem etwas technisches beitragen möchtet, eröffnet gerne ein Issue und wir arbeiten gemeinsam eine sinnvolle Implementierung aus. Bitte nicht einfach ungefragt und unabgesprochen Pull-Requests schicken.
 
 ## Dependencies
 
