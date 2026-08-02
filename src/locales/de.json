@@ -129,7 +129,7 @@
 			"InsurancePay": "Kostenübernahme",
 			"Transfriendly": "Transfreundlich",
 			"HasDoctor": "Ärztlich",
-			"TreatsEnby": "Behandelt NB Personen",
+			"TreatsEnby": "Behandelt Non-Binary",
 			"SelfPayedOnly": "Nur Selbstzahler",
 			"YouthOnly": "Kinder- und Jugend",
 			"TransFem": "Trans*feminin freundlich",
@@ -137,7 +137,8 @@
 			"Shipping": "Versand möglich",
 			"SingleUseVials": "Einweg-Ampullen",
 			"ReuseVial": "Wiederverwendbare Ampullen",
-			"Prefilled": "Vorgefüllte Spritzen"
+			"Prefilled": "Vorgefüllte Spritzen",
+			"TreatsInter": "Behandelt inter*"
 		},
 		"attributeDetails": {
 			"Trans": "Primär eine Trans Gruppe / Verein, im Gegensatz zu allgemeinen LGBT+ Gruppen",
@@ -156,7 +157,8 @@
 			"Shipping": "Versand der Medikation möglich",
 			"SingleUseVials": "Medikation als Einweg-Ampullen zum aufbrechen",
 			"ReuseVial": "Medikation als wiederverwendbare Ampullen",
-			"Prefilled": "Medikation als vorbefüllte Spritzen"
+			"Prefilled": "Medikation als vorbefüllte Spritzen",
+			"TreatsInter": "Behandelt intergeschlechtliche Menschen"
 		},
 		"offerMapping": {
 			"Indication": "Indikationen",

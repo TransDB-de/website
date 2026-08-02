@@ -17,12 +17,12 @@ export const attributeMapping: Record<string, string[]> = {
 	Group: ["Trans", "RegularMeetings", "Consulting", "Activities", "Remote"],
 	Hairremoval: ["InsurancePay", "Transfriendly", "HasDoctor"],
 	Surgeon: ["SelfPayedOnly", "Remote"],
-	Endocrinologist: ["TreatsEnby", "Remote"],
-	Therapist: ["SelfPayedOnly", "TreatsEnby", "YouthOnly", "Remote"],
+	Endocrinologist: ["TreatsEnby", "TreatsInter", "Remote"],
+	Therapist: ["SelfPayedOnly", "TreatsEnby", "TreatsInter", "YouthOnly", "Remote"],
 	Logopedics: ["Remote"],
-	Urologist: ["TreatsEnby", "TransFem", "TransMasc", "Remote"],
-	Gynecologist: ["TreatsEnby", "TransFem", "TransMasc", "Remote"],
-	GP: ["TreatsEnby", "Remote"],
+	Urologist: ["TreatsEnby", "TreatsInter", "TransFem", "TransMasc", "Remote"],
+	Gynecologist: ["TreatsEnby", "TreatsInter", "TransFem", "TransMasc", "Remote"],
+	GP: ["TreatsEnby", "TreatsInter", "Remote"],
 	Pharmacy: ["Shipping", "SingleUseVials", "ReuseVial", "Prefilled"],
 	Cryo: ["InsurancePay"]
 };
@@ -49,7 +49,14 @@ export const offerMapping: Record<string, string[]> = {
 	Urologist: ["Hrt", "Medication"],
 	Gynecologist: ["Hrt", "Medication"],
 	GP: ["Hrt", "Medication"],
-	Endocrinologist: ["HormoneGel", "HormoneInjections", "HormonePills", "HormonePatches", "Progesterone", "EDPills"],
+	Endocrinologist: [
+		"HormoneGel",
+		"HormoneInjections",
+		"HormonePills",
+		"HormonePatches",
+		"Progesterone",
+		"EDPills"
+	],
 	Pharmacy: ["EInjection", "Cpa"],
 	Cryo: ["FreezesSperm", "FreezesEggs"]
 };
