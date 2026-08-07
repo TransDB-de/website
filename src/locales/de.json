@@ -265,7 +265,8 @@
 		"proximitySearch": "Standort ermitteln",
 		"locationSearchButton": "Suchen",
 		"searchNearbyButton": "Weitere Einträge in der Umgebung dieses Eintrags suchen",
-		"report": "Eintrag melden oder Änderung vorschlagen",
+		"report": "Eintrag Melden",
+		"edit": "Änderungen am Eintrag vorschlagen",
 		"share": "Teile den Link zu diesem Eintrag",
 		"location": "Dein Standort",
 		"locationSearch": "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
@@ -300,6 +301,11 @@
 	},
 	"report": {
 		"title": "Eintrag Melden - Trans*DB"
+	},
+	"edit": {
+		"title": "Änderung vorschlagen - Trans*DB",
+		"description": "Hier kannst du eine Änderung an einem Eintrag vorschlagen, die unser Team dann überprüft.",
+		"report": "Stattdessen diesen Eintrag aus einem anderen Grund melden"
 	},
 	"imprint": {
 		"title": "Impressum - Trans*DB",
