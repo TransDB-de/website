@@ -21,7 +21,7 @@
 		border: 2px solid var(--color-edge);
 	}
 
-	&:read-only:not(select):not(fieldset) {
+	&:read-only:not(fieldset):not(select), &:disabled {
 		background-color: var(--color-background-dimmed);
 
 		&:hover, &:focus {

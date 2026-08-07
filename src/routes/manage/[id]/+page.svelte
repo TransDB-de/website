@@ -31,6 +31,7 @@
 	import { userdata } from "$lib/store";
 	import RadioToggle from "$components/forms/elements/radioToggle.svelte";
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
+	import ChangeProposalCollection from "./changeProposalCollection.svelte";
 
 	let { params }: PageProps = $props();
 
@@ -308,6 +309,11 @@
 
 	<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
 	<ActivityCollection bind:this={activitiesCollectionComponent} entryId={params.id} />
+
+	<br />
+
+	<SecondaryHeading underline>Änderungsvorschläge</SecondaryHeading>
+	<ChangeProposalCollection entryId={params.id} />
 </div>
 
 <style lang="scss">

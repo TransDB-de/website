@@ -6,7 +6,7 @@
 	import type { Entry } from "$models/entry.model";
 	import { onMount } from "svelte";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
-	import { popupError } from "$components/popup.svelte";
+	import { popupError, popupOk, popupWarn } from "$components/popup.svelte";
 	import axios from "axios";
 	import SubmitForm from "$components/forms/submitForm.svelte";
 	import Loader from "$components/elements/loader.svelte";
@@ -33,6 +33,22 @@
 			return;
 		}
 	});
+
+	async function submit(data: Entry, comment: string) {
+		const result = await apiRequestHandler(axios.put(`entries/${data.id}`, { ...data, comment }));
+
+		const errors = result.handleErrors({
+			422: () => popupWarn(t("errors.checkInput")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		if (result.success) {
+			popupOk(t("submitForm.savedPopup"));
+			return { reset: true };
+		} else {
+			return { reset: false, errors };
+		}
+	}
 </script>
 
 <svelte:head>
@@ -48,7 +64,7 @@
 	>
 
 	{#if entry}
-		<SubmitForm mode="edit" {entry} onSuccess={() => goto("/manage/" + params.id)} />
+		<SubmitForm mode="edit" {entry} onSubmit={submit} />
 	{:else}
 		<Loader class="single-entry-view-loader" dark big />
 	{/if}

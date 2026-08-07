@@ -28,13 +28,18 @@
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
 	import SubHeading from "$components/typography/SubHeading.svelte";
 
+	export interface ISubmitResponse {
+		errors?: Record<string, string>;
+		reset?: boolean;
+	}
+
 	interface Props {
 		entry?: Entry;
 		mode?: "create" | "edit";
-		onSuccess?: () => void;
+		onSubmit: (data: Entry, comment: string) => Promise<ISubmitResponse>;
 	}
 
-	let { entry, mode = "create", onSuccess }: Props = $props();
+	let { entry, mode = "create", onSubmit }: Props = $props();
 
 	let isEdit = $derived(mode === "edit");
 
@@ -82,17 +87,10 @@
 	}
 
 	let workingEntry: Entry = $state(blankEntry());
-	let savedEntry: Entry | null = null;
 
 	$effect(() => {
 		if (entry) {
-			const clone = JSON.parse(JSON.stringify(entry)) as Entry;
-			clone.status = clone.status ?? { approved: false, blocked: false, archived: false };
-			clone.contact = clone.contact ?? { academicTitle: null, firstName: null, lastName: null };
-			clone.offers = clone.offers ?? [];
-			clone.attributes = clone.attributes ?? [];
-			workingEntry = clone;
-			savedEntry = JSON.parse(JSON.stringify(clone));
+			workingEntry = entry;
 		}
 	});
 
@@ -127,82 +125,17 @@
 		workingEntry.website = "https://" + workingEntry.website;
 	}
 
-	async function submitCreate() {
-		loading = true;
-
-		const result = await apiRequestHandler(
-			axios.post<CreateEntryResponse>("entries", workingEntry, { captcha: true })
-		);
-
-		errors = result.handleErrors({
-			422: () => popupWarn(t("errors.checkInput")),
-			429: () => popupError(t("errors.tooMany")),
-			default: () => popupError(`${t("errors.unknown")}`)
-		});
-
-		loading = false;
-
-		if (result.success) {
-			formElement.reset();
-			if (typeof umami !== "undefined") umami.track(env.PUBLIC_UMAMI_EVENT_NEW_ENTRY);
-
-			if (onSuccess) {
-				onSuccess();
-			} else {
-				const redirect = new URL("/submitted", window.location.origin);
-
-				redirect.searchParams.append("entryId", result.data!.entry.id!);
-				redirect.searchParams.append("revocationToken", result.data!.revocationToken);
-
-				if (result.data!.possibleDuplicate) {
-					redirect.searchParams.append("duplicate", result.data!.possibleDuplicate.entryId);
-				}
-
-				goto(redirect);
-			}
-		}
-	}
-
-	async function submitEdit() {
-		if (!savedEntry || !workingEntry.id) return;
-
-		if (workingEntry.type !== savedEntry.type) {
-			workingEntry.offers = workingEntry.offers.filter((o) =>
-				offerMapping[workingEntry.type]?.includes(o)
-			);
-			workingEntry.attributes = workingEntry.attributes.filter((a) =>
-				attributeMapping[workingEntry.type]?.includes(a)
-			);
-			if (!(workingEntry.type in subjectMapping)) {
-				workingEntry.subject = null;
-			}
-		}
-
-		loading = true;
-
-		const result = await apiRequestHandler(
-			axios.put(`manage/entries/${workingEntry.id}`, { ...workingEntry, comment: editComment })
-		);
-
-		errors = result.handleErrors({
-			422: () => popupWarn(t("errors.checkInput")),
-			default: () => popupError(`${t("errors.unknown")}`)
-		});
-
-		loading = false;
-
-		if (result.success) {
-			savedEntry = JSON.parse(JSON.stringify(workingEntry));
-			popupOk(t("submitForm.savedPopup"));
-			onSuccess?.();
-		}
-	}
-
 	async function submit() {
-		if (isEdit) {
-			await submitEdit();
-		} else {
-			await submitCreate();
+		loading = true;
+		const res = await onSubmit(workingEntry, editComment);
+		loading = false;
+
+		if (res.errors) {
+			errors = res.errors;
+		}
+
+		if (res.reset) {
+			formElement.reset();
 		}
 	}
 </script>
@@ -217,6 +150,7 @@
 		required
 		onchange={resetMeta}
 		label={t("submitForm.categoryLabel")}
+		disabled={isEdit}
 	>
 		<option value="" disabled selected> {t("submitForm.selectCategory") + "..."} </option>
 
@@ -423,6 +357,7 @@
 			label={"Bearbeitungskommentar"}
 			bind:value={editComment}
 			placeholder={"Warum wurde der Eintrag bearbeitet?"}
+			required
 			maxlength={2000}
 		/>
 	{/if}
