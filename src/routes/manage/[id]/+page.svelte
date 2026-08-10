@@ -307,13 +307,13 @@
 		<Loader class="single-entry-view-loader" dark big />
 	{/if}
 
-	<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
-	<ActivityCollection bind:this={activitiesCollectionComponent} entryId={params.id} />
+	<SecondaryHeading underline>Änderungsvorschläge</SecondaryHeading>
+	<ChangeProposalCollection entryId={params.id} />
 
 	<br />
 
-	<SecondaryHeading underline>Änderungsvorschläge</SecondaryHeading>
-	<ChangeProposalCollection entryId={params.id} />
+	<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
+	<ActivityCollection bind:this={activitiesCollectionComponent} entryId={params.id} />
 </div>
 
 <style lang="scss">

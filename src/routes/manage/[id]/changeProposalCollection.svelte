@@ -10,8 +10,16 @@
 	import ActivityItem from "./activityItem.svelte";
 	import SubHeading from "$components/typography/SubHeading.svelte";
 	import { LogsIcon } from "@lucide/svelte";
-	import type { EntryChangeProposal } from "$models/proposal.model";
+	import {
+		EEntryChangeProposalStatus,
+		type EntryChangeProposal,
+		type PublicEntryChangeProposal
+	} from "$models/proposal.model";
 	import ChangeProposal from "./changeProposal.svelte";
+	import Select from "$components/forms/elements/select.svelte";
+	import TabSelect from "$components/forms/elements/TabSelect.svelte";
+	import { flip } from "svelte/animate";
+	import { fade } from "svelte/transition";
 
 	interface Props {
 		entryId?: string;
@@ -19,7 +27,7 @@
 
 	let { entryId }: Props = $props();
 
-	let changesets: EntryChangeProposal[] = $state([]);
+	let changesets: PublicEntryChangeProposal[] = $state([]);
 	let more = $state(false);
 	let pageCount = $state(0);
 	let loading = $state(true);
@@ -29,18 +37,17 @@
 		initialLoad();
 	});
 
-	function fetchActivities(page: number) {
-		return axios.get<PaginatedEntryResponse<EntryChangeProposal>>(
-			`manage/proposals?entryId=${entryId}`,
-			{
-				params: { page }
-			}
-		);
+	let filter = $state(EEntryChangeProposalStatus.Open);
+
+	function fetchActivities(page: number, status: EEntryChangeProposalStatus) {
+		return axios.get<PaginatedEntryResponse<PublicEntryChangeProposal>>("manage/proposals", {
+			params: { page, entryId, status }
+		});
 	}
 
 	export async function initialLoad() {
 		loading = true;
-		const result = await apiRequestHandler(fetchActivities(0));
+		const result = await apiRequestHandler(fetchActivities(0, filter));
 		result.handleErrors({
 			default: (status) => popupError(`${t("errors.failedToLoad")} (${status})`)
 		});
@@ -58,7 +65,7 @@
 		loading = true;
 		const nextPage = pageCount + 1;
 
-		const result = await apiRequestHandler(fetchActivities(nextPage));
+		const result = await apiRequestHandler(fetchActivities(nextPage, filter));
 		loading = false;
 
 		if (result.success && result.data) {
@@ -69,17 +76,25 @@
 	}
 </script>
 
+<TabSelect
+	options={[
+		{ value: EEntryChangeProposalStatus.Open, label: "Offen" },
+		{ value: null, label: "Gesamt" }
+	]}
+	bind:value={filter}
+/>
+
 <div class="activity-collection">
 	{#if changesets.length > 0}
 		<section>
 			{#each changesets as changeset (changeset.id)}
-				<ChangeProposal changeProposal={changeset} />
+				<ChangeProposal proposal={changeset} />
 			{/each}
 		</section>
 	{/if}
 
 	{#if more}
-		<LoadMore onclick={loadNextPage} {loading} />
+		<LoadMore disableInfiniteScroll onclick={loadNextPage} {loading} />
 	{/if}
 
 	{#if changesets.length === 0 && !loading}
@@ -121,6 +136,6 @@
 	}
 	.empty {
 		color: var(--color-edge-dimmed);
-		text-align: center;
+		margin: 0;
 	}
 </style>

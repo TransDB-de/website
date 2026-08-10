@@ -24,6 +24,7 @@
 	import { t } from "$lib/localization.svelte";
 	import { usercache } from "$lib/store";
 	import Button from "$components/elements/button.svelte";
+	import { renderTextareaContent } from "$lib/utils";
 
 	interface Props {
 		activity: EntryActivity;
@@ -40,6 +41,26 @@
 		Approved: { label: "Freigeschaltet", color: "var(--color-edge-highlight)", icon: BadgeCheck },
 		Archived: { label: "Archiviert", color: "var(--color-edge-error)", icon: Archive },
 		Edited: { label: "Bearbeitet", color: "var(--color-edge-highlight)", icon: FilePen },
+		ChangeProposal: {
+			label: "Änderungsvorschlag",
+			color: "var(--color-edge-highlight)",
+			icon: FilePen
+		},
+		ChangeAccepted: {
+			label: "Vorschlag angenommen",
+			color: "var(--color-edge-success)",
+			icon: FilePen
+		},
+		ChangeRejected: {
+			label: "Vorschlag abgelehnt",
+			color: "var(--color-edge-warn)",
+			icon: FilePen
+		},
+		ProposalDeleted: {
+			label: "Vorschlag gelöscht",
+			color: "var(--color-edge-error)",
+			icon: FilePen
+		},
 		Blocked: { label: "Gesperrt", color: "var(--color-edge)", icon: Ban },
 		Unblocked: { label: "Entsperrt", color: "var(--color-edge-highlight)", icon: LockOpen },
 		Reported: { label: "Gemeldet", color: "var(--color-edge-warn)", icon: Flag },
@@ -82,11 +103,19 @@
 			: null
 	);
 
+	let proposalUrl = $derived(
+		activity.attachments?.ProposalId
+			? `/manage/${activity.entryId}/proposals/${activity.attachments.ProposalId}`
+			: null
+	);
+
 	let duplicateLink = $derived(
 		activity.attachments?.PossibleDuplicate
 			? `/manage/${activity.attachments.PossibleDuplicate.entryId}`
 			: null
 	);
+
+	let formattedComment = $derived(renderTextareaContent(activity.comment ?? ""));
 </script>
 
 <article class="activity-item">
@@ -144,8 +173,8 @@
 	{#if activity.comment}
 		<p title="Kommentar/Grund">
 			<MessageSquareQuote size={20} />
-			<span>
-				{activity.comment}
+			<span class="raw-text">
+				{@html formattedComment}
 			</span>
 		</p>
 	{/if}
@@ -162,6 +191,18 @@
 		<p title="Dieser Eintrag ist ein Duplikat von der Duplikats-Grundlage">
 			<Link2 size={20} />
 			<a href={duplicateLink} target="_blank" rel="noopener"> Duplikats-Grundlage </a>
+		</p>
+	{/if}
+
+	{#if activity.attachments?.ProposalId}
+		<p title="Link zum Änderungsvorschlag">
+			<FilePen size={20} />
+			<a href={proposalUrl} target="_blank" rel="noopener" class="local-entry-link">
+				Vorschlag
+				{#if activity.attachments?.ProposalSnowflakeId}
+					#{activity.attachments.ProposalSnowflakeId}
+				{/if}
+			</a>
 		</p>
 	{/if}
 
@@ -229,16 +270,21 @@
 			padding-left: 12px;
 			padding-right: 7px;
 
+			span.raw-text {
+				display: block;
+
+				:global(br) {
+					display: block;
+					margin-top: 0.25rem;
+				}
+			}
+
 			&:first-of-type {
 				padding-top: 0px;
 			}
 
 			&:last-of-type {
 				padding-bottom: 10px;
-			}
-
-			span {
-				display: inline-flex;
 			}
 
 			:global(.lucide) {

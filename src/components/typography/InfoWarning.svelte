@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
-	import { fade } from "svelte/transition";
 
 	interface Props {
 		children: Snippet;
@@ -9,7 +8,7 @@
 	const props: Props = $props();
 </script>
 
-<p transition:fade>
+<p>
 	{@render props.children()}
 </p>
 

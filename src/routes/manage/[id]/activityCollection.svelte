@@ -148,8 +148,8 @@
 			gap: 12px;
 		}
 	}
-	.empty {
+	p.empty {
 		color: var(--color-edge-dimmed);
-		text-align: center;
+		margin: 0;
 	}
 </style>

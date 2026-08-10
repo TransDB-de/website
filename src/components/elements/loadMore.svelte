@@ -8,6 +8,7 @@
 	interface Props {
 		loading?: boolean;
 		onclick?: () => void;
+		disableInfiniteScroll?: boolean;
 	}
 
 	const props: Props = $props();
@@ -19,7 +20,7 @@
 	const mobileLoadOffset = 1200;
 
 	$effect(() => {
-		if (browser) {
+		if (browser && !props.disableInfiniteScroll) {
 			const loadOffset = $isMobile ? mobileLoadOffset : desktopLoadOffset;
 
 			let scrolledHeight = Math.ceil(scrollY + window.innerHeight);
