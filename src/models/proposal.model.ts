@@ -13,9 +13,7 @@ export enum EDataOrigin {
 }
 
 /**
- * Just the content fields of an entry, nothing else - no id, status, location or
- * possibleDuplicate. Matches the backend's CreateEntryRequest/EditEntryRequest shape. Used
- * whenever something represents a proposed or past content state, not a live entry.
+ * Just the user generated content fields of an entry, nothing else. Matches the backends CreateEntryRequest/EditEntryRequest.
  */
 export interface EntryContent {
 	type: string;
@@ -45,9 +43,7 @@ export interface EntryChangeProposal {
 	originalEntryState: TChangeProposal;
 	changeProposal: TChangeProposal & { comment: string };
 	status: EEntryChangeProposalStatus;
-	/** What the entry's content looked like right before this proposal was decided. Set once accepted or rejected, empty while still open. */
 	decisionEntryStateBefore?: TChangeProposal;
-	/** What the rebase turned into at decision time. Set once accepted or rejected, empty while still open. */
 	decisionEntryStateAfter?: TChangeProposal;
 	userId: string;
 	origin: EDataOrigin;

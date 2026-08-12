@@ -13,12 +13,6 @@
 		type: "added" | "removed" | "unchanged";
 	};
 
-	/**
-	 * Einfacher Array-Diff: jeder Wert aus `before`, der auch in `after`
-	 * vorkommt, gilt als unverändert (und wird dort "verbraucht", damit
-	 * Duplikate korrekt gezählt werden). Übrige `before`-Werte sind entfernt,
-	 * übrige `after`-Werte sind hinzugefügt.
-	 */
 	function diffArrays(before: string[], after: string[]): DiffEntry[] {
 		const remainingAfter = [...after];
 		const result: DiffEntry[] = [];

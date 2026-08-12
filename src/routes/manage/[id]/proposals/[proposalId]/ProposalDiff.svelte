@@ -37,9 +37,6 @@
 				return props.proposal.originalEntryState;
 			}
 			case ERebaseViewState.Applied: {
-				// This tab only shows up once the proposal is resolved (see rebaseViews below),
-				// so this is always set by then. It's saved from decision time, not recalculated
-				// against the live entry.
 				return props.proposal.decisionEntryStateBefore!;
 			}
 		}
@@ -85,8 +82,6 @@
 			views.push({ label: "Bereinigt (Rebase)", value: ERebaseViewState.Rebase });
 			views.push({ label: "Rohfassung/Überschreiben", value: ERebaseViewState.Unrebased });
 		} else {
-			// Accepted and Rejected both get a saved "what the rebase turned into at decision
-			// time" view. For Rejected this never actually happened, see the InfoWarning below.
 			views.push({ label: "Änderung", value: ERebaseViewState.Applied });
 		}
 		views.push({ label: "Ursprünglich", value: ERebaseViewState.Original });
