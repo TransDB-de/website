@@ -69,7 +69,6 @@
 		"placeholder": "Décrivez votre modification proposée / les détails de votre signalement",
 		"categories": [
 			"Sélectionner une catégorie",
-			"Proposer une modification",
 			"Non recommandable",
 			"Autre"
 		],
