@@ -35,13 +35,14 @@
 
 	interface Props {
 		entry?: Entry;
-		mode?: "create" | "edit";
+		mode?: "create" | "edit" | "public-edit";
 		onSubmit: (data: Entry, comment: string) => Promise<ISubmitResponse>;
 	}
 
 	let { entry, mode = "create", onSubmit }: Props = $props();
 
-	let isEdit = $derived(mode === "edit");
+	let isEdit = $derived(mode !== "create");
+	let isPublicEdit = $derived(mode === "public-edit");
 
 	let loading = $state(false);
 	let errors: Record<string, string> = $state({});
@@ -141,7 +142,7 @@
 </script>
 
 <Form onsubmit={submit} bind:this={formElement}>
-	{#if isEdit}
+	{#if isEdit && !isPublicEdit}
 		<Input label="ID" value={workingEntry.id} readonly />
 	{/if}
 
@@ -354,15 +355,17 @@
 	{#if isEdit}
 		<hr />
 		<Textarea
-			label={"Bearbeitungskommentar"}
+			label={t("submitForm.editComment")}
 			bind:value={editComment}
-			placeholder={"Warum wurde der Eintrag bearbeitet?"}
+			placeholder={t("submitForm.editCommentPlaceholder")}
 			required
 			maxlength={2000}
 		/>
 	{/if}
 
-	<Button {loading}>{isEdit ? t("submitForm.save") : t("submitForm.submit")}</Button>
+	<Button {loading}
+		>{isEdit && !isPublicEdit ? t("submitForm.save") : t("submitForm.submit")}</Button
+	>
 </Form>
 
 <style lang="scss">

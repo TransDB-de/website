@@ -71,12 +71,15 @@
 <div class="content">
 	<PrimaryHeading underline>{t("edit.title")}</PrimaryHeading>
 	<Paragraph>{t("edit.description")}</Paragraph>
-	<LinkButton href={`/entry/${params.id}/report`} light color="edge-error"
-		>{t("edit.report")}</LinkButton
-	>
+
+	<section>
+		<LinkButton href={`/entry/${params.id}/report`} light color="edge-error"
+			>{t("edit.report")}</LinkButton
+		>
+	</section>
 
 	{#if entry}
-		<SubmitForm mode="edit" {entry} onSubmit={submit} />
+		<SubmitForm mode="public-edit" {entry} onSubmit={submit} />
 	{:else}
 		<Loader class="single-entry-view-loader" dark big />
 	{/if}
@@ -84,6 +87,11 @@
 
 <style lang="scss">
 	@use "../../../../scss/content" as *;
+
+	section {
+		display: flex;
+		padding: 5px 0 10px 0;
+	}
 
 	.content {
 		display: flex;

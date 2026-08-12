@@ -353,7 +353,9 @@
 		"blocked": "Bloqué",
 		"approved": "Approuvé",
 		"archived": "Archivé",
-		"comment": "Commentaire / Raison"
+		"comment": "Commentaire / Raison",
+		"editComment": "Raison du traitement",
+		"editCommentPlaceholder": "Pourquoi cette entrée est-elle modifiée ?"
 	},
 	"errors": {
 		"checkInput": "Veuillez vérifier les saisies",
@@ -407,8 +409,8 @@
 		"loadMore": "Charger plus"
 	},
 	"edit": {
-		"description": "Ici, vous pouvez suggérer une modification à une entrée, que notre équipe examinera ensuite.",
-		"report": "Signalez plutôt cette entrée pour une autre raison",
+		"description": "Ici, vous pouvez suggérer une modification des données d'une entrée, que notre équipe examinera ensuite. D'autres messages tels que « Non recommandé » n'ont pas leur place ici.",
+		"report": "Signaler cette entrée pour une autre raison",
 		"title": "Suggérer un changement - Trans*DB"
 	},
 	"proposed": {

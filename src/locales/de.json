@@ -314,8 +314,8 @@
 	},
 	"edit": {
 		"title": "Änderung vorschlagen - Trans*DB",
-		"description": "Hier kannst du eine Änderung an einem Eintrag vorschlagen, die unser Team dann überprüft.",
-		"report": "Stattdessen diesen Eintrag aus einem anderen Grund melden"
+		"description": "Hier kannst du eine Datenänderung an einem Eintrag vorschlagen, die unser Team dann überprüft. Andere Meldungen wie zb. \"nicht empfehlenswert\" gehören nicht hier rein.",
+		"report": "Diesen Eintrag aus einem anderen Grund melden"
 	},
 	"imprint": {
 		"title": "Impressum - Trans*DB",
@@ -368,7 +368,9 @@
 		"blocked": "Blockiert",
 		"approved": "Freigeschaltet",
 		"archived": "Archiviert",
-		"comment": "Kommentar / Begründung"
+		"comment": "Kommentar / Begründung",
+		"editComment": "Bearbeitungsgrund",
+		"editCommentPlaceholder": "Warum wird dieser Eintrag bearbeitet?"
 	},
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",

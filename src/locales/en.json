@@ -353,7 +353,9 @@
 		"blocked": "Blocked",
 		"approved": "Approved",
 		"archived": "Archived",
-		"comment": "Comment / Reason"
+		"comment": "Comment / Reason",
+		"editComment": "Edit reason",
+		"editCommentPlaceholder": "Why is this entry being edited?"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",
@@ -407,8 +409,8 @@
 		"loadMore": "Load more"
 	},
 	"edit": {
-		"description": "Here you can suggest a change to an entry, which our team will then review.",
-		"report": "Instead, report this entry for another reason",
+		"description": "Here you can suggest a data change to an entry, which our team will then review. \nOther messages such as “Not recommended” does not belong here.",
+		"report": "Report this entry for another reason",
 		"title": "Change proposal - Trans*DB"
 	},
 	"proposed": {

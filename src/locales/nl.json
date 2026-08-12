@@ -353,7 +353,9 @@
 		"blocked": "Geblokkeerd",
 		"approved": "Goedgekeurd",
 		"archived": "Gearchiveerd",
-		"comment": "Opmerking / Reden"
+		"comment": "Opmerking / Reden",
+		"editComment": "Reden van verwerking",
+		"editCommentPlaceholder": "Waarom wordt dit bericht bewerkt?"
 	},
 	"errors": {
 		"checkInput": "Controleer de invoer",
@@ -407,8 +409,8 @@
 		"loadMore": "Meer laden"
 	},
 	"edit": {
-		"description": "Hier kunt u een wijziging in een invoer voorstellen, die ons team vervolgens zal beoordelen.",
-		"report": "Rapporteer dit bericht in plaats daarvan om een ​​andere reden",
+		"description": "Hier kunt u een gegevenswijziging voor een invoer voorstellen, die ons team vervolgens zal beoordelen. Andere berichten zoals “Niet aanbevolen” horen hier niet thuis.",
+		"report": "Rapporteer deze bijdrage om een ​​andere reden",
 		"title": "Wijziging voorstellen - Trans*DB"
 	},
 	"proposed": {
