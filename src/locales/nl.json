@@ -290,7 +290,8 @@
 		"deleteUser": "Gebruiker verwijderen",
 		"resetPassword": "Wachtwoord opnieuw instellen",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Drukklare versie met snijrand en kleurprofiel (PDF)"
+		"flyerPrint": "Drukklare versie met snijrand en kleurprofiel (PDF)",
+		"edit": "Wijzigingen in het item voorstellen"
 	},
 	"submit": {
 		"title": "Nieuwe vermelding - Trans*DB"
@@ -404,5 +405,20 @@
 	},
 	"common": {
 		"loadMore": "Meer laden"
+	},
+	"edit": {
+		"description": "Hier kunt u een wijziging in een invoer voorstellen, die ons team vervolgens zal beoordelen.",
+		"report": "Rapporteer dit bericht in plaats daarvan om een ​​andere reden",
+		"title": "Wijziging voorstellen - Trans*DB"
+	},
+	"proposed": {
+		"actions": {
+			"revoke": "voorstel intrekken",
+			"revokeSuccessPopup": "Voorstel succesvol ingetrokken",
+			"startpage": "Terug naar de startpagina"
+		},
+		"description": "Houd er rekening mee dat het enige tijd kan duren voordat ons team uw voorstel heeft beoordeeld en bevestigd. Daarnaast heeft u gedurende een beperkte periode de mogelijkheid om de door u ingediende suggestie in te trekken.",
+		"heading": "Wijzigingssuggestie succesvol ingediend",
+		"title": "Bedankt voor uw voorgestelde wijziging - Trans*DB"
 	}
 }

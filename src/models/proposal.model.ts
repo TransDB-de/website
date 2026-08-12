@@ -42,7 +42,7 @@ export interface EntryChangeProposal {
 	id: string;
 	entryId: string;
 	timestamp: Date;
-	originalEntryState: Entry;
+	originalEntryState: TChangeProposal;
 	changeProposal: TChangeProposal & { comment: string };
 	status: EEntryChangeProposalStatus;
 	/** What the entry's content looked like right before this proposal was decided. Set once accepted or rejected, empty while still open. */
@@ -77,4 +77,9 @@ export interface ChangeProposalWithRebaseResponse {
 	proposal: EntryChangeProposal;
 	currentEntry: Entry;
 	rebasedProposal: TChangeProposal;
+}
+
+export interface ChangeProposalCreatedResponse {
+	revocationToken: string;
+	proposalId: string;
 }

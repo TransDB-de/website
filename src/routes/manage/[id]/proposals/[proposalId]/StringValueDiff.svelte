@@ -19,15 +19,15 @@
 	<dd class:empty={isEmpty}>
 		{#if hasChanged}
 			{#if props.before}
-				<span class="before">
+				<del>
 					{props.before}
-				</span>
+				</del>
 			{/if}
 
 			{#if props.after}
-				<span class="after">
+				<ins>
 					{props.after}
-				</span>
+				</ins>
 			{/if}
 		{:else}
 			<span>{props.before ?? "--"}</span>
@@ -58,14 +58,15 @@
 			}
 		}
 
-		span.before {
+		del {
 			color: var(--color-edge-error);
 			font-weight: 500;
 		}
 
-		span.after {
+		ins {
 			color: var(--color-edge-success);
 			font-weight: 500;
+			text-decoration: none;
 		}
 	}
 </style>

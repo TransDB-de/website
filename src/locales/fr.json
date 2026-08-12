@@ -290,7 +290,8 @@
 		"deleteUser": "Supprimer l'utilisateur",
 		"resetPassword": "Réinitialiser le mot de passe",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Version prête à imprimer avec marge de coupe et profil de couleur (PDF)"
+		"flyerPrint": "Version prête à imprimer avec marge de coupe et profil de couleur (PDF)",
+		"edit": "Proposer des modifications à l'entrée"
 	},
 	"submit": {
 		"title": "Nouvelle entrée - Trans*DB"
@@ -404,5 +405,20 @@
 	},
 	"common": {
 		"loadMore": "Charger plus"
+	},
+	"edit": {
+		"description": "Ici, vous pouvez suggérer une modification à une entrée, que notre équipe examinera ensuite.",
+		"report": "Signalez plutôt cette entrée pour une autre raison",
+		"title": "Suggérer un changement - Trans*DB"
+	},
+	"proposed": {
+		"actions": {
+			"revoke": "retirer la proposition",
+			"revokeSuccessPopup": "Proposition retirée avec succès",
+			"startpage": "Retour à la page d'accueil"
+		},
+		"description": "Veuillez noter que notre équipe peut prendre un certain temps pour examiner et confirmer votre proposition. Vous avez également la possibilité de retirer la suggestion que vous avez soumise pendant une période limitée.",
+		"heading": "Suggestion de modification soumise avec succès",
+		"title": "Merci pour votre modification suggérée - Trans*DB"
 	}
 }

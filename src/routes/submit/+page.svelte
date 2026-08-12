@@ -9,7 +9,7 @@
 	import type { CreateEntryResponse, Entry } from "$models/entry.model";
 	import axios from "axios";
 
-	async function submit(data: Entry, comment: string) {
+	async function submit(data: Entry) {
 		const result = await apiRequestHandler(
 			axios.post<CreateEntryResponse>("entries", data, { captcha: true })
 		);

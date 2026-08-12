@@ -13,6 +13,7 @@
 	import { goto } from "$app/navigation";
 	import Paragraph from "$components/typography/Paragraph.svelte";
 	import LinkButton from "$components/elements/LinkButton.svelte";
+	import type { ChangeProposalCreatedResponse } from "$models/proposal.model";
 
 	let { params, data }: PageProps = $props();
 
@@ -35,7 +36,9 @@
 	});
 
 	async function submit(data: Entry, comment: string) {
-		const result = await apiRequestHandler(axios.put(`entries/${data.id}`, { ...data, comment }));
+		const result = await apiRequestHandler(
+			axios.put<ChangeProposalCreatedResponse>(`entries/${data.id}`, { ...data, comment })
+		);
 
 		const errors = result.handleErrors({
 			422: () => popupWarn(t("errors.checkInput")),
@@ -44,6 +47,15 @@
 
 		if (result.success) {
 			popupOk(t("submitForm.savedPopup"));
+
+			const redirect = new URL("/proposed", window.location.origin);
+
+			redirect.searchParams.append("proposalId", result.data!.proposalId);
+			redirect.searchParams.append("entryId", params.id);
+			redirect.searchParams.append("revocationToken", result.data!.revocationToken);
+
+			goto(redirect);
+
 			return { reset: true };
 		} else {
 			return { reset: false, errors };

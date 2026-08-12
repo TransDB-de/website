@@ -14,15 +14,16 @@
 
 	interface Props {
 		proposal: EntryChangeProposal;
-		entry: Entry;
+		entry: TChangeProposal;
 		rebased: TChangeProposal;
+		simple?: boolean;
 	}
 
 	const props: Props = $props();
 
 	let useRebase = $state<ERebaseViewState>(
 		props.proposal.status !== EEntryChangeProposalStatus.Open
-			? ERebaseViewState.Original
+			? ERebaseViewState.Applied
 			: ERebaseViewState.Rebase
 	);
 
@@ -94,22 +95,25 @@
 	});
 </script>
 
-<TabSelect options={rebaseViews} bind:value={useRebase} />
+{#if !props.simple}
+	<TabSelect options={rebaseViews} bind:value={useRebase} />
 
-<section>
-	{#if useRebase === ERebaseViewState.Unrebased}
-		<b>Ursprünglicher Änderungsvorschlag</b> unverändert angewendet auf den <b>aktuellen Eintrag</b>
-	{:else if useRebase === ERebaseViewState.Original}
-		<b>Eintrag zum Zeitpunkt des Vorschlages</b> mit
-		<b>ursprünglichem Änderungsvorschlag</b>
-	{:else if useRebase === ERebaseViewState.Applied}
-		<b>Eintrag zum Entscheidungszeitpunkt</b> mit
-		<b>den tatsächlich errechneten Änderungen</b>
-	{:else}
-		<b>Aktueller Eintrag</b> mit
-		<b>errechneten, tatsächlich gewollten Änderungen</b>
-	{/if}
-</section>
+	<section>
+		{#if useRebase === ERebaseViewState.Unrebased}
+			<b>Ursprünglicher Änderungsvorschlag</b> unverändert angewendet auf den
+			<b>aktuellen Eintrag</b>
+		{:else if useRebase === ERebaseViewState.Original}
+			<b>Eintrag zum Zeitpunkt des Vorschlages</b> mit
+			<b>ursprünglichem Änderungsvorschlag</b>
+		{:else if useRebase === ERebaseViewState.Applied}
+			<b>Eintrag zum Entscheidungszeitpunkt</b> mit
+			<b>den tatsächlich errechneten Änderungen</b>
+		{:else}
+			<b>Aktueller Eintrag</b> mit
+			<b>errechneten, tatsächlich gewollten Änderungen</b>
+		{/if}
+	</section>
+{/if}
 
 {#if useRebase === ERebaseViewState.Unrebased}
 	<InfoWarning>

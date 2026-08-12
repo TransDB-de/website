@@ -41,6 +41,16 @@
 			"revokeSuccessPopup": "Eintrag erfolgreich zurückgezogen"
 		}
 	},
+	"proposed": {
+		"title": "Danke für deinen Änderungsvorschlag - Trans*DB",
+		"heading": "Änderungsvorschlag erfolgreich eingeschickt",
+		"description": "Bitte beachte, dass es einige Zeit dauern kann, bis unser Team deinen Vorschlag überprüft und bestätigt hat. Du hast außerdem für einen begrenzten Zeitraum die Möglichkeit, den von dir eingeschickten Vorschlag wieder zurückzuziehen.",
+		"actions": {
+			"revoke": "Vorschlag zurückziehen",
+			"startpage": "Zurück zur Startseite",
+			"revokeSuccessPopup": "Vorschlag erfolgreich zurückgezogen"
+		}
+	},
 	"reported": {
 		"title": "Danke für deine Meldung - Trans*DB"
 	},

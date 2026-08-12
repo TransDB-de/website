@@ -290,7 +290,8 @@
 		"deleteUser": "Delete user",
 		"resetPassword": "Reset password",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Print-ready version with cut-off margin and color profile (PDF)"
+		"flyerPrint": "Print-ready version with cut-off margin and color profile (PDF)",
+		"edit": "Suggest changes to the entry"
 	},
 	"submit": {
 		"title": "New entry - Trans*DB"
@@ -404,5 +405,20 @@
 	},
 	"common": {
 		"loadMore": "Load more"
+	},
+	"edit": {
+		"description": "Here you can suggest a change to an entry, which our team will then review.",
+		"report": "Instead, report this entry for another reason",
+		"title": "Change proposal - Trans*DB"
+	},
+	"proposed": {
+		"actions": {
+			"revoke": "Revoke proposal",
+			"revokeSuccessPopup": "Proposal successfully revoked",
+			"startpage": "Back to home page"
+		},
+		"description": "Please note that it may take some time for our team to review and confirm your proposal. \nYou also have the option to withdraw the suggestion you have submitted for a limited period of time.",
+		"heading": "Change proposal submitted successfully",
+		"title": "Thanks for your change proposal - Trans*DB"
 	}
 }
