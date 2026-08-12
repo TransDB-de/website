@@ -91,6 +91,11 @@
 
 	$effect(() => {
 		if (entry) {
+			// contact can be null, workaround:
+			if (entry.contact === null) {
+				var template = blankEntry();
+				entry.contact = template.contact;
+			}
 			workingEntry = entry;
 		}
 	});
