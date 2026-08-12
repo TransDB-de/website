@@ -1,8 +1,9 @@
 # Imprint
 
-**TransDB.de - Malin Kuntz**  
-c/o Block Services  
-Stuttgarter Str. 106  
-70736 Fellbach
+**TransDB.de**  
+Lena Emme  
+c/o Chaos Computer Club Essen - foobar e.V.  
+Sibyllastr. 9  
+45136 Essen  
 
 E-Mail: kontakt@transdb.de
