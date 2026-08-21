@@ -20,6 +20,7 @@
 	import TabSelect from "$components/forms/elements/TabSelect.svelte";
 	import { flip } from "svelte/animate";
 	import { fade } from "svelte/transition";
+	import Loader from "$components/elements/loader.svelte";
 
 	interface Props {
 		entryId?: string;
@@ -88,7 +89,7 @@
 	{#if changesets.length > 0}
 		<section>
 			{#each changesets as changeset (changeset.id)}
-				<ChangeProposal proposal={changeset} />
+				<ChangeProposal proposal={changeset} showEntry={!entryId} />
 			{/each}
 		</section>
 	{/if}
@@ -99,6 +100,10 @@
 
 	{#if changesets.length === 0 && !loading}
 		<p class="empty">Keine Änderungsvorschläge vorhanden</p>
+	{/if}
+
+	{#if loading}
+		<Loader dark big />
 	{/if}
 </div>
 

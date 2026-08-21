@@ -98,6 +98,21 @@
 		</a>
 	</header>
 
+	{#if showEntry}
+		<p class="link" title="Der Eintrag, zu dem diese Aktivität gehört">
+			<FileText size={20} />
+
+			<a
+				href={`/manage/${proposal.entryId}`}
+				target="_blank"
+				rel="noopener"
+				class="local-entry-link"
+			>
+				{proposal.entryName}
+			</a>
+		</p>
+	{/if}
+
 	<p class="raw-text">
 		{@html formattedComment}
 	</p>
@@ -174,6 +189,17 @@
 				:global(br) {
 					display: block;
 					margin-top: 0.25rem;
+				}
+			}
+
+			&.link {
+				display: flex;
+				gap: 5px;
+				margin-bottom: 5px;
+
+				a {
+					color: inherit;
+					font-weight: 500;
 				}
 			}
 

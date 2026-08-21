@@ -59,6 +59,7 @@ export interface PublicEntryChangeProposal {
 	userId: string;
 	origin: EDataOrigin;
 	snowflakeId: string;
+	entryName: string;
 }
 
 export function proposalToPublic({
@@ -66,7 +67,7 @@ export function proposalToPublic({
 	changeProposal: { comment, ...rest },
 	...p
 }: EntryChangeProposal): PublicEntryChangeProposal {
-	return { ...p, comment };
+	return { ...p, comment, entryName: originalEntryState.name };
 }
 
 export interface ChangeProposalWithRebaseResponse {

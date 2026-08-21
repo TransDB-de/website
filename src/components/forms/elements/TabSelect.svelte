@@ -1,7 +1,11 @@
 <script lang="ts">
+	import type { Icon } from "@lucide/svelte";
+	import type { Snippet } from "svelte";
+
 	interface TabOption {
 		value: unknown;
 		label: string;
+		icon?: typeof Icon;
 	}
 
 	interface Props {
@@ -19,6 +23,7 @@
 	{#each options as option (option.value)}
 		<label>
 			<input type="radio" name={groupName} value={option.value} bind:group={value} />
+			<option.icon size="20" strokeWidth="2.5" />
 			{option.label}
 		</label>
 	{/each}
@@ -30,6 +35,7 @@
 
 	fieldset {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 10px;
 		border: none;
 		padding: 0;
@@ -45,6 +51,8 @@
 		@include input-font;
 
 		padding: 2px 8px;
+
+		gap: 5px;
 
 		font-weight: 600;
 		color: color-mix(in srgb, var(--color-edge) 80%, transparent);
