@@ -41,6 +41,16 @@
 			"revokeSuccessPopup": "Eintrag erfolgreich zurückgezogen"
 		}
 	},
+	"proposed": {
+		"title": "Danke für deinen Änderungsvorschlag - Trans*DB",
+		"heading": "Änderungsvorschlag erfolgreich eingeschickt",
+		"description": "Bitte beachte, dass es einige Zeit dauern kann, bis unser Team deinen Vorschlag überprüft und bestätigt hat. Du hast außerdem für einen begrenzten Zeitraum die Möglichkeit, den von dir eingeschickten Vorschlag wieder zurückzuziehen.",
+		"actions": {
+			"revoke": "Vorschlag zurückziehen",
+			"startpage": "Zurück zur Startseite",
+			"revokeSuccessPopup": "Vorschlag erfolgreich zurückgezogen"
+		}
+	},
 	"reported": {
 		"title": "Danke für deine Meldung - Trans*DB"
 	},
@@ -69,7 +79,6 @@
 		"placeholder": "Beschreibe dein Anliegen / deine Änderungsvorschläge",
 		"categories": [
 			"Kategorie wählen",
-			"Änderung vorschlagen",
 			"Nicht empfehlenswert",
 			"Sonstiges"
 		],
@@ -265,7 +274,8 @@
 		"proximitySearch": "Standort ermitteln",
 		"locationSearchButton": "Suchen",
 		"searchNearbyButton": "Weitere Einträge in der Umgebung dieses Eintrags suchen",
-		"report": "Eintrag melden oder Änderung vorschlagen",
+		"report": "Eintrag Melden",
+		"edit": "Änderungen am Eintrag vorschlagen",
 		"share": "Teile den Link zu diesem Eintrag",
 		"location": "Dein Standort",
 		"locationSearch": "Gebe einen Ort oder eine Postleitzahl ein, und drücke auf 🔍",
@@ -300,6 +310,11 @@
 	},
 	"report": {
 		"title": "Eintrag Melden - Trans*DB"
+	},
+	"edit": {
+		"title": "Änderung vorschlagen - Trans*DB",
+		"description": "Hier kannst du eine Datenänderung an einem Eintrag vorschlagen, die unser Team dann überprüft. Andere Meldungen wie zb. \"nicht empfehlenswert\" gehören nicht hier rein.",
+		"report": "Diesen Eintrag aus einem anderen Grund melden"
 	},
 	"imprint": {
 		"title": "Impressum - Trans*DB",
@@ -352,7 +367,9 @@
 		"blocked": "Blockiert",
 		"approved": "Freigeschaltet",
 		"archived": "Archiviert",
-		"comment": "Kommentar / Begründung"
+		"comment": "Kommentar / Begründung",
+		"editComment": "Bearbeitungsgrund",
+		"editCommentPlaceholder": "Warum wird dieser Eintrag bearbeitet?"
 	},
 	"errors": {
 		"checkInput": "Bitte überprüfe deine Angaben",

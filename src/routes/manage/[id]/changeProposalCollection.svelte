@@ -10,6 +10,17 @@
 	import ActivityItem from "./activityItem.svelte";
 	import SubHeading from "$components/typography/SubHeading.svelte";
 	import { LogsIcon } from "@lucide/svelte";
+	import {
+		EEntryChangeProposalStatus,
+		type EntryChangeProposal,
+		type PublicEntryChangeProposal
+	} from "$models/proposal.model";
+	import ChangeProposal from "./changeProposal.svelte";
+	import Select from "$components/forms/elements/select.svelte";
+	import TabSelect from "$components/forms/elements/TabSelect.svelte";
+	import { flip } from "svelte/animate";
+	import { fade } from "svelte/transition";
+	import Loader from "$components/elements/loader.svelte";
 
 	interface Props {
 		entryId?: string;
@@ -17,55 +28,34 @@
 
 	let { entryId }: Props = $props();
 
-	let activities: EntryActivity[] = $state([]);
+	let changesets: PublicEntryChangeProposal[] = $state([]);
 	let more = $state(false);
 	let pageCount = $state(0);
 	let loading = $state(true);
-
-	let groupedActivities = $derived.by(() => {
-		const groups = new Map<string, EntryActivity[]>();
-
-		for (const activity of activities) {
-			const label = activity.timestamp
-				? new Date(activity.timestamp).toLocaleDateString("de-DE", {
-						day: "2-digit",
-						month: "long",
-						year: "numeric"
-					})
-				: "Unbekannt";
-
-			const group = groups.get(label);
-
-			if (!group) {
-				groups.set(label, [activity]);
-			} else {
-				group.push(activity);
-			}
-		}
-
-		return Array.from(groups.entries()).map(([label, items]) => ({ label, items }));
-	});
 
 	$effect(() => {
 		if (!browser) return;
 		initialLoad();
 	});
 
-	function fetchActivities(page: number) {
-		const endpoint = entryId ? `activities/entry/${entryId}` : "activities";
-		return axios.get<PaginatedEntryResponse<EntryActivity>>(endpoint, { params: { page } });
+	let filter = $state(EEntryChangeProposalStatus.Open);
+
+	function fetchActivities(page: number, status: EEntryChangeProposalStatus) {
+		return axios.get<PaginatedEntryResponse<PublicEntryChangeProposal>>("manage/proposals", {
+			params: { page, entryId, status }
+		});
 	}
 
 	export async function initialLoad() {
 		loading = true;
-		const result = await apiRequestHandler(fetchActivities(0));
+		const result = await apiRequestHandler(fetchActivities(0, filter));
 		result.handleErrors({
 			default: (status) => popupError(`${t("errors.failedToLoad")} (${status})`)
 		});
 		loading = false;
 
 		if (result.success && result.data) {
-			activities = result.data.items;
+			changesets = result.data.items;
 			more = result.data.more;
 			pageCount = 0;
 		}
@@ -76,43 +66,44 @@
 		loading = true;
 		const nextPage = pageCount + 1;
 
-		const result = await apiRequestHandler(fetchActivities(nextPage));
+		const result = await apiRequestHandler(fetchActivities(nextPage, filter));
 		loading = false;
 
 		if (result.success && result.data) {
-			activities = [...activities, ...result.data.items];
+			changesets = [...changesets, ...result.data.items];
 			more = result.data.more;
 			pageCount = nextPage;
 		}
 	}
 </script>
 
+<TabSelect
+	options={[
+		{ value: EEntryChangeProposalStatus.Open, label: "Offen" },
+		{ value: null, label: "Gesamt" }
+	]}
+	bind:value={filter}
+/>
+
 <div class="activity-collection">
-	{#if activities.length > 0}
-		{#each groupedActivities as group (group.label)}
-			<header>
-				<SubHeading underline>
-					{group.label}
-				</SubHeading>
-				<span>
-					<LogsIcon size={18} strokeWidth={2.5} />
-					{group.items.length}
-				</span>
-			</header>
-			<section>
-				{#each group.items as activity (activity.id)}
-					<ActivityItem {activity} showEntry={!entryId} />
-				{/each}
-			</section>
-		{/each}
+	{#if changesets.length > 0}
+		<section>
+			{#each changesets as changeset (changeset.id)}
+				<ChangeProposal proposal={changeset} showEntry={!entryId} />
+			{/each}
+		</section>
 	{/if}
 
 	{#if more}
-		<LoadMore onclick={loadNextPage} {loading} />
+		<LoadMore disableInfiniteScroll onclick={loadNextPage} {loading} />
 	{/if}
 
-	{#if activities.length === 0 && !loading}
-		<p class="empty">Keine Aktivitäten vorhanden</p>
+	{#if changesets.length === 0 && !loading}
+		<p class="empty">Keine Änderungsvorschläge vorhanden</p>
+	{/if}
+
+	{#if loading}
+		<Loader dark big />
 	{/if}
 </div>
 
@@ -148,7 +139,7 @@
 			gap: 12px;
 		}
 	}
-	p.empty {
+	.empty {
 		color: var(--color-edge-dimmed);
 		margin: 0;
 	}

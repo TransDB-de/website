@@ -52,10 +52,7 @@
 <div class="manage-nav">
 	<nav>
 		<NavLink {...linkOptions} exact href="/manage">Datenbank</NavLink>
-		<NavLink {...linkOptions} exact href="/manage?approved=false&blocked=false&archived=false"
-			>Freischalten</NavLink
-		>
-		<NavLink {...linkOptions} exact href="/manage?blocked=true">Blocklist</NavLink>
+		<NavLink {...linkOptions} exact href="/manage/proposals">Änderungsvorschläge</NavLink>
 		{#if $userdata?.admin}
 			<NavLink {...linkOptions} exact href="/manage/activities">Aktivitätenverlauf</NavLink>
 		{/if}

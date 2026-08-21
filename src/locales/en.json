@@ -69,7 +69,6 @@
 		"placeholder": "Describe your propsed change / details about your report",
 		"categories": [
 			"Select category",
-			"Propose modification",
 			"Not recommendable",
 			"Other"
 		],
@@ -290,7 +289,8 @@
 		"deleteUser": "Delete user",
 		"resetPassword": "Reset password",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Print-ready version with cut-off margin and color profile (PDF)"
+		"flyerPrint": "Print-ready version with cut-off margin and color profile (PDF)",
+		"edit": "Suggest changes to the entry"
 	},
 	"submit": {
 		"title": "New entry - Trans*DB"
@@ -352,7 +352,9 @@
 		"blocked": "Blocked",
 		"approved": "Approved",
 		"archived": "Archived",
-		"comment": "Comment / Reason"
+		"comment": "Comment / Reason",
+		"editComment": "Edit reason",
+		"editCommentPlaceholder": "Why is this entry being edited?"
 	},
 	"errors": {
 		"checkInput": "Please double check the inputs",
@@ -404,5 +406,20 @@
 	},
 	"common": {
 		"loadMore": "Load more"
+	},
+	"edit": {
+		"description": "Here you can suggest a data change to an entry, which our team will then review. \nOther messages such as “Not recommended” does not belong here.",
+		"report": "Report this entry for another reason",
+		"title": "Change proposal - Trans*DB"
+	},
+	"proposed": {
+		"actions": {
+			"revoke": "Revoke proposal",
+			"revokeSuccessPopup": "Proposal successfully revoked",
+			"startpage": "Back to home page"
+		},
+		"description": "Please note that it may take some time for our team to review and confirm your proposal. \nYou also have the option to withdraw the suggestion you have submitted for a limited period of time.",
+		"heading": "Change proposal submitted successfully",
+		"title": "Thanks for your change proposal - Trans*DB"
 	}
 }

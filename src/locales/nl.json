@@ -69,7 +69,6 @@
 		"placeholder": "Beschrijf je voorgestelde wijziging / details van je melding",
 		"categories": [
 			"Selecteer categorie",
-			"Wijziging voorstellen",
 			"Niet aanbevelenswaardig",
 			"Overig"
 		],
@@ -290,7 +289,8 @@
 		"deleteUser": "Gebruiker verwijderen",
 		"resetPassword": "Wachtwoord opnieuw instellen",
 		"flyerA6": "A6 (PDF)",
-		"flyerPrint": "Drukklare versie met snijrand en kleurprofiel (PDF)"
+		"flyerPrint": "Drukklare versie met snijrand en kleurprofiel (PDF)",
+		"edit": "Wijzigingen in het item voorstellen"
 	},
 	"submit": {
 		"title": "Nieuwe vermelding - Trans*DB"
@@ -352,7 +352,9 @@
 		"blocked": "Geblokkeerd",
 		"approved": "Goedgekeurd",
 		"archived": "Gearchiveerd",
-		"comment": "Opmerking / Reden"
+		"comment": "Opmerking / Reden",
+		"editComment": "Reden van verwerking",
+		"editCommentPlaceholder": "Waarom wordt dit bericht bewerkt?"
 	},
 	"errors": {
 		"checkInput": "Controleer de invoer",
@@ -404,5 +406,20 @@
 	},
 	"common": {
 		"loadMore": "Meer laden"
+	},
+	"edit": {
+		"description": "Hier kunt u een gegevenswijziging voor een invoer voorstellen, die ons team vervolgens zal beoordelen. Andere berichten zoals “Niet aanbevolen” horen hier niet thuis.",
+		"report": "Rapporteer deze bijdrage om een ​​andere reden",
+		"title": "Wijziging voorstellen - Trans*DB"
+	},
+	"proposed": {
+		"actions": {
+			"revoke": "voorstel intrekken",
+			"revokeSuccessPopup": "Voorstel succesvol ingetrokken",
+			"startpage": "Terug naar de startpagina"
+		},
+		"description": "Houd er rekening mee dat het enige tijd kan duren voordat ons team uw voorstel heeft beoordeeld en bevestigd. Daarnaast heeft u gedurende een beperkte periode de mogelijkheid om de door u ingediende suggestie in te trekken.",
+		"heading": "Wijzigingssuggestie succesvol ingediend",
+		"title": "Bedankt voor uw voorgestelde wijziging - Trans*DB"
 	}
 }
