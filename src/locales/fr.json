@@ -299,7 +299,8 @@
 		"title": "Recherche - Trans*DB"
 	},
 	"report": {
-		"title": "Signaler une entrée - Trans*DB"
+		"title": "Signaler une entrée - Trans*DB",
+		"description": "Vous pouvez signaler ici une contribution à l'équipe de modération, par exemple parce qu'elle n'est pas recommandée ou pour toute autre raison. Les suggestions de modification des données n'ont pas leur place ici."
 	},
 	"imprint": {
 		"description": "Adresse des mentions légales pour Trans*DB",

@@ -299,7 +299,8 @@
 		"title": "Zoeken - Trans*DB"
 	},
 	"report": {
-		"title": "Vermelding melden - Trans*DB"
+		"title": "Vermelding melden - Trans*DB",
+		"description": "Hier kun je een bericht melden bij het moderatieteam, bijvoorbeeld omdat het niet aanbevolen is of om een andere reden. Suggesties voor wijzigingen in de gegevens horen hier niet thuis."
 	},
 	"imprint": {
 		"description": "Colofon adres voor Trans*DB",

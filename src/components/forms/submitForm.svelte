@@ -27,6 +27,7 @@
 	import Paragraph from "$components/typography/Paragraph.svelte";
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
 	import SubHeading from "$components/typography/SubHeading.svelte";
+	import DividerRow from "$components/elements/DividerRow.svelte";
 
 	export interface ISubmitResponse {
 		errors?: Record<string, string>;
@@ -358,7 +359,7 @@
 	{/if}
 
 	{#if isEdit}
-		<hr />
+		<DividerRow />
 		<Textarea
 			label={t("submitForm.editComment")}
 			bind:value={editComment}
@@ -398,14 +399,6 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
-	}
-
-	hr {
-		margin: 0;
-		border: none;
-		margin-top: 5px;
-		border-bottom: 2px solid var(--color-edge-dimmed);
-		border-bottom-style: dashed;
 	}
 
 	h3::after {

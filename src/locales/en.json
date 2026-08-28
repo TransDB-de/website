@@ -299,7 +299,8 @@
 		"title": "Search - Trans*DB"
 	},
 	"report": {
-		"title": "Report entry - Trans*DB"
+		"title": "Report entry - Trans*DB",
+		"description": "Here you can report an entry to the moderation team, for example, because it's not recommended or for some other reason. Suggestions for data changes do not belong here."
 	},
 	"imprint": {
 		"description": "Imprint address for Trans*DB",

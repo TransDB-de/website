@@ -30,7 +30,7 @@
 				</ins>
 			{/if}
 		{:else}
-			<span>{props.before ?? "--"}</span>
+			<span>{props.before || "--"}</span>
 		{/if}
 	</dd>
 </div>

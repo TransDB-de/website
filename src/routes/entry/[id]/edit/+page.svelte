@@ -14,6 +14,8 @@
 	import Paragraph from "$components/typography/Paragraph.svelte";
 	import LinkButton from "$components/elements/LinkButton.svelte";
 	import type { ChangeProposalCreatedResponse } from "$models/proposal.model";
+	import { ArrowRight, ExternalLink } from "@lucide/svelte";
+	import DividerRow from "$components/elements/DividerRow.svelte";
 
 	let { params, data }: PageProps = $props();
 
@@ -73,10 +75,13 @@
 	<Paragraph>{t("edit.description")}</Paragraph>
 
 	<section>
-		<LinkButton href={`/entry/${params.id}/report`} light color="edge-error"
-			>{t("edit.report")}</LinkButton
-		>
+		<LinkButton href={`/entry/${params.id}/report`} color="red">
+			<ExternalLink />
+			{t("edit.report")}
+		</LinkButton>
 	</section>
+
+	<DividerRow />
 
 	{#if entry}
 		<SubmitForm mode="public-edit" {entry} onSubmit={submit} />
@@ -90,6 +95,7 @@
 
 	section {
 		display: flex;
+		justify-content: center;
 		padding: 5px 0 10px 0;
 	}
 

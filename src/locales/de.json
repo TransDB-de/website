@@ -309,7 +309,9 @@
 		"title": "Suche - Trans*DB"
 	},
 	"report": {
-		"title": "Eintrag Melden - Trans*DB"
+		"title": "Eintrag Melden - Trans*DB",
+		"description": "Hier kannst du einen Eintrag dem Team melden, zb. weil er nicht empfehlenswert ist oder aus einem anderen Grund. Änderungsvorschläge gehören hier nicht rein.",
+		"edit": "Datenänderungen am Eintrag vorschlagen"
 	},
 	"edit": {
 		"title": "Änderung vorschlagen - Trans*DB",
