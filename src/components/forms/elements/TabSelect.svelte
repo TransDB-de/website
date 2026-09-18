@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { Icon } from "@lucide/svelte";
-	import type { Snippet } from "svelte";
 
 	interface TabOption {
 		value: unknown;
@@ -48,7 +47,6 @@
 		align-items: center;
 		cursor: pointer;
 
-		// @include input-box;
 		@include input-font;
 
 		padding: 2px 8px;
@@ -100,21 +98,11 @@
 		}
 	}
 
-	label:has(input:focus-visible) {
-		outline: 2px solid var(--color-edge-highlight);
-		outline-offset: 2px;
-	}
-
 	input {
 		position: absolute;
 		width: 1px;
 		height: 1px;
 		opacity: 0;
 		pointer-events: none;
-
-		&:focus-visible + label {
-			outline: 2px solid var(--color-edge-highlight);
-			outline-offset: 2px;
-		}
 	}
 </style>
