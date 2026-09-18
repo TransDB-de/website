@@ -32,6 +32,7 @@
 <style lang="scss">
 	@use "../../../scss/shadows" as *;
 	@use "../../../scss/input" as *;
+	@use "../../../scss/mixins" as *;
 
 	fieldset {
 		display: flex;
@@ -47,7 +48,7 @@
 		align-items: center;
 		cursor: pointer;
 
-		@include input-box;
+		// @include input-box;
 		@include input-font;
 
 		padding: 2px 8px;
@@ -55,11 +56,47 @@
 		gap: 5px;
 
 		font-weight: 600;
-		color: color-mix(in srgb, var(--color-edge) 80%, transparent);
+		color: color-mix(in srgb, var(--color-edge) 84%, transparent);
+
+		transition:
+			0.12s ease background-color,
+			0.12s ease color;
+
+		&:hover {
+			background-color: var(--color-surface-bright);
+			color: var(--color-edge);
+		}
+
+		border-radius: 4px;
 
 		&:has(input:checked) {
 			border-color: var(--color-edge);
 			color: var(--color-edge);
+			background-color: var(--color-surface-bright);
+
+			&::after {
+				opacity: 1 !important;
+				width: calc(100% - 20px);
+			}
+		}
+
+		position: relative;
+		justify-content: center;
+
+		&:after {
+			position: absolute;
+			display: inline-block;
+			height: 0;
+			width: 50%;
+			bottom: -6px;
+			border-radius: 32px;
+			border: 2px solid var(--color-surface-highlight);
+			content: "";
+			opacity: 0;
+
+			transition:
+				0.2s ease width,
+				0.2s ease opacity;
 		}
 	}
 
