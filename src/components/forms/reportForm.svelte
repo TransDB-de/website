@@ -90,9 +90,8 @@
 		error={errors["type"]}
 	>
 		<option value="" disabled selected>{t("reportForm.categories")[0] + "..."}</option>
-		<option value="Edit">{t("reportForm.categories")[1]}</option>
-		<option value="Report">{t("reportForm.categories")[2]}</option>
-		<option value="Other">{t("reportForm.categories")[3]}</option>
+		<option value="Report">{t("reportForm.categories")[1]}</option>
+		<option value="Other">{t("reportForm.categories")[2]}</option>
 	</Select>
 
 	{#if report.type === "Edit"}

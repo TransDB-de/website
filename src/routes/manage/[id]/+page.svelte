@@ -31,6 +31,7 @@
 	import { userdata } from "$lib/store";
 	import RadioToggle from "$components/forms/elements/radioToggle.svelte";
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
+	import ChangeProposalCollection from "./changeProposalCollection.svelte";
 
 	let { params }: PageProps = $props();
 
@@ -305,6 +306,11 @@
 	{:else}
 		<Loader class="single-entry-view-loader" dark big />
 	{/if}
+
+	<SecondaryHeading underline>Änderungsvorschläge</SecondaryHeading>
+	<ChangeProposalCollection entryId={params.id} />
+
+	<br />
 
 	<SecondaryHeading underline>Aktivitätenverlauf</SecondaryHeading>
 	<ActivityCollection bind:this={activitiesCollectionComponent} entryId={params.id} />

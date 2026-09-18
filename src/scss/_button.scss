@@ -93,6 +93,10 @@
 		background-color: var(--color-surface-warn-active);
 	}
 
+	&.edge-success {
+		color: var(--color-edge-success);
+	}
+
 	&.edge-highlight {
 		color: var(--color-edge-highlight);
 	}

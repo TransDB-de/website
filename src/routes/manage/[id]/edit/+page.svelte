@@ -1,7 +1,7 @@
 <script lang="ts">
 	import SubmitForm from "$components/forms/submitForm.svelte";
 	import Loader from "$components/elements/loader.svelte";
-	import { popupOk, popupError } from "$components/popup.svelte";
+	import { popupOk, popupError, popupWarn } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
 	import { apiRequestHandler } from "$lib/apiRequestHandler";
 	import type { Entry } from "$models/entry.model";
@@ -27,13 +27,32 @@
 			entry = result.data;
 		}
 	});
+
+	async function submit(data: Entry, comment: string) {
+		const result = await apiRequestHandler(
+			axios.put(`manage/entries/${data.id}`, { ...data, comment })
+		);
+
+		const errors = result.handleErrors({
+			422: () => popupWarn(t("errors.checkInput")),
+			default: () => popupError(`${t("errors.unknown")}`)
+		});
+
+		if (result.success) {
+			popupOk(t("submitForm.savedPopup"));
+			goto("/manage/" + params.id);
+			return { reset: true };
+		} else {
+			return { reset: false, errors };
+		}
+	}
 </script>
 
 <div class="content">
 	{#if entry}
 		<PrimaryHeading underline>Eintrag bearbeiten</PrimaryHeading>
 
-		<SubmitForm mode="edit" {entry} onSuccess={() => goto("/manage/" + params.id)} />
+		<SubmitForm mode="edit" {entry} onSubmit={submit} />
 	{:else}
 		<Loader dark big />
 	{/if}

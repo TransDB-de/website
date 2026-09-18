@@ -14,21 +14,32 @@
 	import EntryComponent from "$components/entry/entry.svelte";
 	import InfoWarning from "$components/typography/InfoWarning.svelte";
 	import Paragraph from "$components/typography/Paragraph.svelte";
+	import {
+		proposalToPublic,
+		type EntryChangeProposal,
+		type PublicEntryChangeProposal
+	} from "$models/proposal.model";
+	import ProposalDiff from "../manage/[id]/proposals/[proposalId]/ProposalDiff.svelte";
+	import Loader from "$components/elements/loader.svelte";
+	import ChangeProposal from "../manage/[id]/changeProposal.svelte";
+	import Blockquote from "$components/typography/Blockquote.svelte";
+	import { renderTextareaContent } from "$lib/utils";
+
+	const revocationToken = page.url.searchParams.get("revocationToken");
+	const entryId = page.url.searchParams.get("entryId");
+	const proposalId = page.url.searchParams.get("proposalId");
 
 	let revokeLoading = $state(false);
 
 	async function revoke() {
-		const revocationToken = page.url.searchParams.get("revocationToken");
-		const entryId = page.url.searchParams.get("entryId");
-
-		const confirmed = await confirm(t("submitted.actions.revoke") + "?");
+		const confirmed = await confirm(t("proposed.actions.revoke") + "?");
 
 		if (!confirmed) return;
 
 		revokeLoading = true;
 
 		const result = await apiRequestHandler(
-			axios.delete(`/entries/${entryId}/revoke/${revocationToken}`)
+			axios.delete(`/entries/${entryId}/proposals/${proposalId}/${revocationToken}`)
 		);
 
 		result.handleErrors({
@@ -40,19 +51,21 @@
 		revokeLoading = false;
 
 		if (result.success) {
-			popupOk(t("submitted.actions.revokeSuccessPopup"));
+			popupOk(t("proposed.actions.revokeSuccessPopup"));
 			return goto("/");
 		}
 	}
 
-	let duplicateEntry = $state<Entry | null>(null);
+	let changeProposal = $state<EntryChangeProposal | null>(null);
 
 	onMount(async () => {
-		const duplicateEntryId = page.url.searchParams.get("duplicate");
+		if (!proposalId) return;
 
-		if (!duplicateEntryId) return;
-
-		const result = await apiRequestHandler(axios.get<Entry>(`/entries/${duplicateEntryId}`));
+		const result = await apiRequestHandler(
+			axios.get<EntryChangeProposal>(
+				`/entries/${entryId}/proposals/${proposalId}/${revocationToken}`
+			)
+		);
 
 		result.handleErrors({
 			404: () => popupError(t("errors.entryNotFound")),
@@ -60,39 +73,46 @@
 		});
 
 		if (result.success) {
-			duplicateEntry = result.data;
+			changeProposal = result.data;
 		}
 	});
 </script>
 
 <svelte:head>
-	<title>{t("submitted.title")}</title>
+	<title>{t("proposed.title")}</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
 <div class="content">
-	<PrimaryHeading underline>{t("submitted.heading")}</PrimaryHeading>
+	<PrimaryHeading underline>{t("proposed.heading")}</PrimaryHeading>
 
 	<Paragraph>
-		{t("submitted.description")}
+		{t("proposed.description")}
 	</Paragraph>
 
-	{#if duplicateEntry}
-		<InfoWarning>
-			{t("submitted.duplicationWarning")}
-		</InfoWarning>
-		<EntryComponent entry={duplicateEntry} />
-	{/if}
-
 	<section>
-		{#if page.url.searchParams.has("revocationToken")}
+		{#if revocationToken}
 			<Button color="red" onclick={revoke} loading={revokeLoading}>
-				{t("submitted.actions.revoke")}
+				{t("proposed.actions.revoke")}
 			</Button>
 		{/if}
 
-		<LinkButton href="/">{t("submitted.actions.startpage")}</LinkButton>
+		<LinkButton href="/">{t("proposed.actions.startpage")}</LinkButton>
 	</section>
+
+	{#if changeProposal}
+		<Blockquote>
+			{@html renderTextareaContent(changeProposal.changeProposal.comment)}
+		</Blockquote>
+		<ProposalDiff
+			entry={changeProposal.originalEntryState}
+			proposal={changeProposal}
+			rebased={changeProposal.changeProposal}
+			simple
+		/>
+	{:else}
+		<Loader dark big />
+	{/if}
 </div>
 
 <style lang="scss">

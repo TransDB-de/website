@@ -9,7 +9,11 @@ export type EntryActivityType =
 	| "Reported"
 	| "Deleted"
 	| "Restored"
-	| "GeoLocationFailed";
+	| "GeoLocationFailed"
+	| "ChangeProposal"
+	| "ChangeAccepted"
+	| "ChangeRejected"
+	| "ProposalDeleted";
 
 export interface DuplicateMatchAttachment {
 	entryId: string;
@@ -21,6 +25,8 @@ export interface EntryActivityAttachments {
 	ReportType?: string;
 	PossibleDuplicate?: DuplicateMatchAttachment;
 	RevertedActivityId?: string;
+	ProposalId?: string;
+	ProposalSnowflakeId?: string;
 }
 
 export interface EntryActivity {

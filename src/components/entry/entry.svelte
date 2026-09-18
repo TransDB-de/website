@@ -21,7 +21,9 @@
 		Navigation,
 		AlertTriangle,
 		FilePen,
-		TriangleAlert
+		TriangleAlert,
+		FileExclamationPoint,
+		MessageCircleWarning
 	} from "@lucide/svelte";
 
 	import { subjectMapping, offerMapping, attributeMapping } from "$lib/entryMappings";
@@ -213,12 +215,20 @@
 			<ArchiveEntryButton entry={props.entry} onchange={props.onchange} />
 		{:else if props.manage == false}{:else}
 			<LinkButton
+				href={`/entry/${props.entry.id}/edit`}
+				iconOnly
+				edge
+				title={t("mouseOverTexts.edit")}
+			>
+				<FilePen />
+			</LinkButton>
+			<LinkButton
 				href={`/entry/${props.entry.id}/report`}
 				iconOnly
 				edge
 				title={t("mouseOverTexts.report")}
 			>
-				<FilePen />
+				<MessageCircleWarning />
 			</LinkButton>
 			<Button iconOnly edge onclick={share} title={t("mouseOverTexts.share")}>
 				<Share2 />
