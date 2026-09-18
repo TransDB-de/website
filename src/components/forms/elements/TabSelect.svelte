@@ -86,7 +86,7 @@
 			display: inline-block;
 			height: 0;
 			width: 50%;
-			bottom: -6px;
+			bottom: -7px;
 			border-radius: 32px;
 			border: 2px solid var(--color-surface-highlight);
 			content: "";
