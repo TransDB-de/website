@@ -7,7 +7,7 @@
 
 	async function submit() {
 		const url = new URL(window.location.href);
-		if (text.length > 0) {
+		if (text) {
 			url.searchParams.set("text", text);
 		} else {
 			url.searchParams.delete("text");

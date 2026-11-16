@@ -25,12 +25,17 @@
 
 	uid += 1;
 	const id = "input" + uid;
+
+	// An emptied input means null
+	function normalize(input: string | number | null) {
+		value = input === "" ? null : input;
+	}
 </script>
 
 <InputWrapper {error} for={id} {label} {required}>
 	{#if type == "number"}
-		<input bind:value type="number" {required} {...rest} {id} />
+		<input bind:value={() => value ?? "", normalize} type="number" {required} {...rest} {id} />
 	{:else}
-		<input bind:value {type} {...rest} {id} />
+		<input bind:value={() => value ?? "", normalize} {type} {...rest} {id} />
 	{/if}
 </InputWrapper>
