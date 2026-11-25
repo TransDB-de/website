@@ -28,7 +28,7 @@
 		try {
 			const hrefUrl = new URL(href, window.location.origin);
 			const pathMatch = exact
-				? $page.url.href === hrefUrl.href
+				? $page.url.pathname === hrefUrl.pathname
 				: $page.url.pathname.startsWith(hrefUrl.pathname);
 			if (!pathMatch) return "";
 			for (const [key, val] of hrefUrl.searchParams) {

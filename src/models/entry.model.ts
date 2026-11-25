@@ -58,3 +58,10 @@ export interface CreateEntryResponse {
 	revocationToken: string;
 	possibleDuplicate: DuplicateMatch | null;
 }
+
+export enum EEntryStatusFilter {
+	All = "All",
+	Approve = "Approve",
+	Blocked = "Blocked",
+	Archived = "Archived"
+}
