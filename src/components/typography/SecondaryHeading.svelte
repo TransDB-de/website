@@ -2,6 +2,7 @@
 	import type { Snippet } from "svelte";
 
 	interface Props {
+		id?: string;
 		underline?: boolean;
 		children: Snippet;
 	}
@@ -9,7 +10,7 @@
 	const props: Props = $props();
 </script>
 
-<h2 class:underline={props.underline}>
+<h2 class:underline={props.underline} id={props.id}>
 	{@render props.children()}
 </h2>
 

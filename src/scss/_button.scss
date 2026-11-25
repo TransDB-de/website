@@ -93,6 +93,19 @@
 		background-color: var(--color-surface-warn-active);
 	}
 
+	&.orange {
+		background-color: var(--color-surface-warn-alt);
+	}
+
+	&.orange:hover,
+	&.orange:focus {
+		background-color: var(--color-surface-warn-alt-hover);
+	}
+
+	&.orange:active {
+		background-color: var(--color-surface-warn-alt-active);
+	}
+
 	&.edge-highlight {
 		color: var(--color-edge-highlight);
 	}

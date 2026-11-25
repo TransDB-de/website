@@ -29,8 +29,17 @@
 		return false;
 	});
 
-	const hiddenRoutes = ["/manage", "/submit", "/imprint", "/privacy", "/login"];
-	let hide = $derived(Boolean(hiddenRoutes.find((e) => $page.url.pathname.startsWith(e))));
+	const hiddenRoutes = [
+		"/manage",
+		"/submit",
+		"/imprint",
+		"/privacy",
+		"/login",
+		"/patch-submitted",
+		"/submitted",
+		/\/entry\/[a-z0-9]+\/.+/
+	];
+	let hide = $derived(Boolean(hiddenRoutes.find((e) => $page.url.pathname.match(e))));
 
 	function toggleNav() {
 		expand = !expand;

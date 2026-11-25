@@ -1,36 +1,19 @@
 <script lang="ts">
-	import { onMount } from "svelte";
 	import type { PageProps } from "./$types";
-	import { apiRequestHandler } from "$lib/apiRequestHandler";
-	import { popupError } from "$components/popup.svelte";
 	import { t } from "$lib/localization.svelte";
 	import { goto } from "$app/navigation";
 	import PrimaryHeading from "$components/typography/PrimaryHeading.svelte";
-	import EntryComponent from "$components/entry/entry.svelte";
 	import Button from "$components/elements/button.svelte";
 	import type { Entry } from "$models/entry.model";
-	import axios from "axios";
-	import Loader from "$components/elements/loader.svelte";
+	import DisplayEntry from "$components/entry/DisplayEntry.svelte";
 
 	let { params }: PageProps = $props();
 
-	let entry: Entry | null = $state(null);
+	var entry: Entry | null = $state(null);
 
-	onMount(async () => {
-		const result = await apiRequestHandler(
-			axios.get<Entry>("/entries/" + params.id, { captcha: true })
-		);
-
-		result.handleErrors({
-			404: () => popupError(t("errors.entryNotFound")),
-			default: () => popupError(`${t("errors.unknown")}`)
-		});
-
-		if (result.success && result.data) {
-			entry = result.data;
-			return;
-		}
-	});
+	function loaded(e: Entry) {
+		entry = e;
+	}
 
 	function click() {
 		if (entry) {
@@ -46,15 +29,17 @@
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
-<div class="content md">
+<div class="content">
 	{#if entry}
 		<PrimaryHeading underline>
 			<span> {entry.name} </span>
 			<span> - {t("entry.from")} {entry.address.city} </span>
 		</PrimaryHeading>
+	{/if}
 
-		<EntryComponent {entry} />
+	<DisplayEntry id={params.id} {loaded} />
 
+	{#if entry}
 		<Button
 			class="single-entry-view-button"
 			onclick={click}
@@ -62,8 +47,6 @@
 		>
 			{t("entry.nearbyOffers")}
 		</Button>
-	{:else}
-		<Loader class="single-entry-view-loader" dark big />
 	{/if}
 </div>
 
@@ -72,14 +55,15 @@
 
 	@use "../../../scss/lengths" as *;
 	@use "../../../scss/mixins" as *;
-
-	:global(.single-entry-view-loader) {
-		align-self: center;
-		margin-top: 2em;
-	}
+	@use "../../../scss/shadows" as *;
 
 	:global(button.single-entry-view-button) {
 		align-self: center;
-		margin-top: 20px;
+	}
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 </style>

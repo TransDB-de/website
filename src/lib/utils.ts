@@ -173,3 +173,7 @@ export function debounce<T extends unknown[]>(callback: (...args: T) => void, de
 		}, delay);
 	};
 }
+
+export function renderTextareaContent(text: string): string {
+	return text.replaceAll("\n", "<br />");
+}

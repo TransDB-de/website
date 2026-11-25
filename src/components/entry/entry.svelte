@@ -213,7 +213,7 @@
 			<ArchiveEntryButton entry={props.entry} onchange={props.onchange} />
 		{:else if props.manage == false}{:else}
 			<LinkButton
-				href={`/entry/${props.entry.id}/report`}
+				href={`/entry/${props.entry.id}/options`}
 				iconOnly
 				edge
 				title={t("mouseOverTexts.report")}
